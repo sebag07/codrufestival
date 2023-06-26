@@ -26,6 +26,9 @@ wp-config.php
 # Example plugin
 /wp-content/plugins/hello.php
 
+/wp-content/ai1wm-backups/
+/wp-content/et-cache/
+
 # Uploads
 /wp-content/uploads/
 
