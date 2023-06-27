@@ -2,6 +2,7 @@
 
 namespace WPForms {
 
+	use AllowDynamicProperties;
 	use stdClass;
 
 	/**
@@ -9,6 +10,7 @@ namespace WPForms {
 	 *
 	 * @since 1.0.0
 	 */
+	#[AllowDynamicProperties]
 	final class WPForms {
 
 		/**
@@ -159,15 +161,15 @@ namespace WPForms {
 
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-db.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/functions.php';
+			require_once WPFORMS_PLUGIN_DIR . 'includes/compat.php';
+			require_once WPFORMS_PLUGIN_DIR . 'includes/fields/class-base.php';
 
 			$this->includes_magic();
 
 			// Global includes.
-			require_once WPFORMS_PLUGIN_DIR . 'includes/functions-list.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-install.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-form.php';
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-fields.php';
-			require_once WPFORMS_PLUGIN_DIR . 'includes/class-frontend.php';
 			// TODO: class-templates.php should be loaded in admin area only.
 			require_once WPFORMS_PLUGIN_DIR . 'includes/class-templates.php';
 			// TODO: class-providers.php should be loaded in admin area only.
@@ -216,12 +218,10 @@ namespace WPForms {
 				]
 			);
 
-			if ( version_compare( phpversion(), '5.5', '>=' ) ) {
-				/*
-				 * Load PHP 5.5 email subsystem.
-				 */
-				add_action( 'wpforms_loaded', [ '\WPForms\Emails\Summaries', 'get_instance' ] );
-			}
+			/*
+			 * Load email subsystem.
+			 */
+			add_action( 'wpforms_loaded', [ '\WPForms\Emails\Summaries', 'get_instance' ] );
 
 			/*
 			 * Load admin components. Exclude from frontend.
@@ -229,11 +229,6 @@ namespace WPForms {
 			if ( is_admin() ) {
 				add_action( 'wpforms_loaded', [ '\WPForms\Admin\Loader', 'get_instance' ] );
 			}
-
-			/*
-			 * Load form components.
-			 */
-			add_action( 'wpforms_loaded', [ '\WPForms\Forms\Loader', 'get_instance' ] );
 
 			/*
 			 * Properly init the providers loader, that will handle all the related logic and further loading.
@@ -254,11 +249,14 @@ namespace WPForms {
 		public function objects() {
 
 			// Global objects.
-			$this->form     = new \WPForms_Form_Handler();
-			$this->frontend = new \WPForms_Frontend();
-			$this->process  = new \WPForms_Process();
+			$this->form    = new \WPForms_Form_Handler();
+			$this->process = new \WPForms_Process();
 
-			// Hook now that all of the WPForms stuff is loaded.
+			/**
+			 * Executes when all the WPForms stuff was loaded.
+			 *
+			 * @since 1.4.0
+			 */
 			do_action( 'wpforms_loaded' );
 		}
 
@@ -286,11 +284,9 @@ namespace WPForms {
 				return;
 			}
 
-			$pattern  = '/[^a-zA-Z0-9_\\\-]/';
 			$id       = isset( $class['id'] ) ? $class['id'] : '';
-			$id       = $id ? preg_replace( $pattern, '', (string) $id ) : $id;
-			$hook     = isset( $class['hook'] ) ? $class['hook'] : 'wpforms_loaded';
-			$hook     = $hook ? preg_replace( $pattern, '', (string) $hook ) : $hook;
+			$id       = $id ? preg_replace( '/[^a-z_]/', '', (string) $id ) : $id;
+			$hook     = isset( $class['hook'] ) ? (string) $class['hook'] : 'wpforms_loaded';
 			$run      = isset( $class['run'] ) ? $class['run'] : 'init';
 			$priority = isset( $class['priority'] ) && is_int( $class['priority'] ) ? $class['priority'] : 10;
 

@@ -272,6 +272,7 @@ class ET_Builder_Block_Editor_Integration {
 				'et_block_layout_preview'             => wp_create_nonce( 'et_block_layout_preview' ),
 				'et_rest_get_layout_content'          => wp_create_nonce( 'et_rest_get_layout_content' ),
 				'et_rest_process_builder_edit_data'   => wp_create_nonce( 'et_rest_process_builder_edit_data' ),
+				'et_fb_shortcode_to_html_nonce'       => wp_create_nonce( 'et_fb_shortcode_to_html_nonce' ),
 			),
 			'urls'          => array(
 				'adminAjax' => admin_url( 'admin-ajax.php' ),
@@ -707,7 +708,7 @@ class ET_Builder_Block_Editor_Integration {
 	public function init_hooks() {
 		global $pagenow;
 
-		$edit_page_names = array( 'post.php', 'post-new.php', 'site-editor.php' );
+		$edit_page_names = array( 'post.php', 'post-new.php' );
 		$is_editing_page = in_array( $pagenow, $edit_page_names, true );
 
 		if ( is_admin() ) {

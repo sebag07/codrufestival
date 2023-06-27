@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-<title>CODRU 2022</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="Coming soon CODRU 2022"/>
-		<meta property="og:title" content="CODRU 2022">
-        <meta property="og:description" content="Coming soon CODRU 2022">
-        <meta property="og:url" content="https://codrufestival.ro">
-		<link rel="icon" href="/wp-content/themes/Divi-child/images/codru_thumbnail.png">
-		<link rel="stylesheet" href="/wp-content/themes/Divi-child/style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
-
+	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 <?php
 	elegant_description();
 	elegant_keywords();

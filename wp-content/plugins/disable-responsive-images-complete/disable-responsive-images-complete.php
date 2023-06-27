@@ -9,9 +9,9 @@
 	Donate link: https://monzillamedia.com/donate.html
 	Contributors: specialk
 	Requires at least: 4.6
-	Tested up to: 6.0
-	Stable tag: 2.4
-	Version: 2.4
+	Tested up to: 6.2
+	Stable tag: 2.5
+	Version: 2.5
 	Requires PHP: 5.6.20
 	License: GPL v2 or later
 
@@ -28,7 +28,7 @@
 	You should have received a copy of the GNU General Public License
 	with this program. If not, visit: https://www.gnu.org/licenses/
 	
-	Copyright 2022 Monzilla Media. All rights reserved.
+	Copyright 2023 Monzilla Media. All rights reserved.
 	
 */
 
@@ -45,9 +45,7 @@ add_filter('max_srcset_image_width', 'disable_wp_responsive_images');
 // disable 768px image generation
 function disable_wp_responsive_image_sizes($sizes) {
 	
-	unset($sizes['medium']);
 	unset($sizes['medium_large']);
-	unset($sizes['large']);
 	
 	return $sizes;
 	

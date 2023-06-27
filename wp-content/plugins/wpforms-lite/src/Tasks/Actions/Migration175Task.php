@@ -149,12 +149,6 @@ class Migration175Task extends Task {
 
 		global $wpdb;
 
-		if ( ! $this->entry_meta_handler->table_exists() ) {
-			$this->entry_meta_handler->create_table();
-
-			return;
-		}
-
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		$wpdb->query( "ALTER TABLE {$this->entry_meta_handler->table_name} MODIFY type VARCHAR(255)" );
 	}
@@ -387,6 +381,11 @@ class Migration175Task extends Task {
 					$entry->date
 				);
 			}
+		}
+
+		// Bail out if there are no found payment meta.
+		if ( empty( $values ) ) {
+			return;
 		}
 
 		$values = implode( ', ', $values );

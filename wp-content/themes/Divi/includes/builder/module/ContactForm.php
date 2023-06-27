@@ -647,7 +647,7 @@ class ET_Builder_Module_Contact_Form extends ET_Builder_Module_Type_WithSpamProt
 				apply_filters( 'et_contact_page_email_to', $et_email_to ),
 				et_get_safe_localization(
 					sprintf(
-						__( 'New Message From ' . $contact_email, 'et_builder' ),
+						__( 'New Message From %1$s%2$s', 'et_builder' ),
 						sanitize_text_field( html_entity_decode( $et_site_name, ENT_QUOTES, 'UTF-8' ) ),
 						( '' !== $title ? sprintf( _x( ' - %s', 'contact form title separator', 'et_builder' ), $title ) : '' )
 					)

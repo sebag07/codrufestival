@@ -74,6 +74,13 @@ class ET_Builder_Library {
 	public $layouts;
 
 	/**
+	 * List of submenu files to heightlight Divi menu when viwwing layout category and tag.
+	 *
+	 * @var array
+	 */
+	public static $submenu_files = array( 'edit-tags.php?taxonomy=layout_category', 'edit-tags.php?taxonomy=layout_tag' );
+
+	/**
 	 * ET_Builder_Library constructor.
 	 */
 	public function __construct() {
@@ -396,6 +403,9 @@ class ET_Builder_Library {
 		add_action( 'wp_footer', array( $this, 'render_session_expired_modal' ) );
 
 		add_filter( 'et_theme_builder_template_settings_options_term_pages', array( $this, 'tb_remove_unsupported_taxonomies' ), 10, 2 );
+		add_filter( 'parent_file', array( $this, 'wp_hook_parent_file' ), 10, 1 );
+		add_filter( 'submenu_file', array( $this, 'wp_hook_submenu_file' ), 10, 1 );
+		add_filter( 'tag_row_actions', array( $this, 'wp_filter_tag_row_actions' ), 10, 2 );
 	}
 
 	/**
@@ -470,14 +480,23 @@ class ET_Builder_Library {
 		$posts = $this->layouts
 			->query()
 			->not()->with_meta( '_et_pb_built_for_post_type', $extra_layout_post_type )
-			->run( array( 'post_status' => array( 'publish', 'trash' ) ) );
+			->run(
+				array(
+					'post_status' => array( 'publish', 'trash' ),
+					'fields'      => 'ids',
+				)
+			);
 
-		$posts = self::$_->array_sort_by( is_array( $posts ) ? $posts : array( $posts ), 'post_name' );
+		$posts = is_array( $posts ) ? $posts : array( $posts );
 
-		foreach ( $posts as $post ) {
+		foreach ( $posts as $post_id ) {
+			$post   = get_post( $post_id );
 			$layout = new stdClass();
 
 			setup_postdata( $post );
+
+			// check if current user can edit library item.
+			$can_edit_post = current_user_can( 'edit_post', $post->ID );
 
 			$layout->id    = $post->ID;
 			$layout->index = $index;
@@ -545,6 +564,7 @@ class ET_Builder_Library {
 			$layout->is_landing   = ! empty( $post->post_excerpt );
 			$layout->description  = '';
 			$layout->isTrash      = 'trash' === $post->post_status; // phpcs:ignore ET.Sniffs.ValidVariableName.UsedPropertyNotSnakeCase -- This is valid format for the property in the Cloud App.
+			$layout->isReadOnly   = ! $can_edit_post; // phpcs:ignore ET.Sniffs.ValidVariableName.UsedPropertyNotSnakeCase -- This is valid format for the property in the Cloud App.
 			$layout->categories   = array();
 			$layout->category_ids = array();
 			$layout->tags         = array();
@@ -919,6 +939,7 @@ class ET_Builder_Library {
 
 						$layout->is_global     = false;
 						$layout->is_landing    = false;
+						$layout->is_favorite   = $this->layouts->is_favorite( $layout->id );
 						$layout->description   = '';
 						$layout->category_slug = $post_type;
 						// $layout_index is the array index, not the $post->ID
@@ -1180,6 +1201,7 @@ class ET_Builder_Library {
 				}
 
 				$result['savedShortcode'] = $post_content;
+				$result['shortcode']      = $post_content;
 				break;
 		}
 
@@ -1226,12 +1248,15 @@ class ET_Builder_Library {
 	 * @return string JSON encoded.
 	 */
 	public function wp_ajax_et_builder_library_update_terms() {
+		if ( ! current_user_can( 'manage_categories' ) ) {
+			wp_send_json_error();
+		}
+
 		et_core_security_check( 'edit_posts', 'et_builder_library_update_terms', 'nonce' );
 		$payload = isset( $_POST['payload'] ) ? (array) $_POST['payload'] : array(); // phpcs:ignore ET.Sniffs.ValidatedSanitizedInput -- $_POST['payload'] is an array, it's value sanitization is done  at the time of accessing value.
 
 		if ( empty( $payload ) ) {
-			wp_send_json_success();
-			return;
+			wp_send_json_error();
 		}
 
 		$new_terms = array();
@@ -1302,13 +1327,38 @@ class ET_Builder_Library {
 		$payload = isset( $_POST['payload'] ) ? (array) $_POST['payload'] : array(); // phpcs:ignore ET.Sniffs.ValidatedSanitizedInput -- $_POST['payload'] is an array, it's value sanitization is done  at the time of accessing value.
 
 		if ( empty( $payload ) ) {
-			wp_send_json_success();
-			return;
+			wp_send_json_error();
 		}
 
-		$item_id = (int) $payload['id'];
+		$post_id = absint( $payload['id'] );
 
-		wp_delete_post( $item_id, true );
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			wp_send_json_error();
+		}
+
+		$unsupported_post_types = array(
+			ET_BUILDER_LAYOUT_POST_TYPE,
+			ET_THEME_BUILDER_TEMPLATE_POST_TYPE,
+			ET_THEME_BUILDER_HEADER_LAYOUT_POST_TYPE,
+			ET_THEME_BUILDER_BODY_LAYOUT_POST_TYPE,
+			ET_THEME_BUILDER_FOOTER_LAYOUT_POST_TYPE,
+			ET_THEME_BUILDER_THEME_BUILDER_POST_TYPE,
+		);
+
+		if ( ! in_array( get_post_type( $post_id ), $unsupported_post_types, true ) ) {
+			wp_send_json_error();
+		}
+
+		wp_delete_post( $post_id, true );
+
+		wp_send_json_success(
+			array(
+				'localLibraryTerms' => [
+					'layout_category' => et_fb_prepare_library_terms(),
+					'layout_tag'      => et_fb_prepare_library_terms( 'layout_tag' ),
+				],
+			)
+		);
 	}
 
 	/**
@@ -1381,14 +1431,26 @@ class ET_Builder_Library {
 				if ( is_array( $draft_posts ) ) {
 					// Several posts were returned.
 					foreach ( $draft_posts as $post ) {
+						if ( ! current_user_can( 'edit_post', $post->ID ) ) {
+							continue;
+						}
+
 						wp_delete_post( $post->ID, true );
 					}
 				} else {
+					if ( ! current_user_can( 'edit_post', $draft_posts->ID ) ) {
+						wp_send_json_error();
+					}
+
 					// Single post was returned.
 					wp_delete_post( $draft_posts->ID, true );
 				}
 			}
 		} else {
+			if ( ! current_user_can( 'edit_post', $post_id ) ) {
+				wp_send_json_error();
+			}
+
 			wp_delete_post( $post_id, true );
 		}
 	}
@@ -1469,8 +1531,7 @@ class ET_Builder_Library {
 		$payload = isset( $_POST['payload'] ) ? (array) $_POST['payload'] : array(); // phpcs:ignore ET.Sniffs.ValidatedSanitizedInput -- $_POST['payload'] is an array, it's value sanitization is done  at the time of accessing value.
 
 		if ( empty( $payload ) ) {
-			wp_send_json_success();
-			return;
+			wp_send_json_error();
 		}
 
 		$update_details = $payload['update_details'];
@@ -1486,7 +1547,9 @@ class ET_Builder_Library {
 			'ID' => $item_id,
 		);
 
-		if ( ! empty( $update_details['newCategoryName'] ) ) {
+		$is_library_post_type = 'et_pb_layout' === get_post_type( $item_id );
+
+		if ( ! empty( $update_details['newCategoryName'] ) && current_user_can( 'manage_categories' ) ) {
 			$new_names_array = explode( ',', $update_details['newCategoryName'] );
 			foreach ( $new_names_array as $new_name ) {
 				if ( '' !== $new_name ) {
@@ -1507,7 +1570,7 @@ class ET_Builder_Library {
 			}
 		}
 
-		if ( ! empty( $update_details['newTagName'] ) ) {
+		if ( ! empty( $update_details['newTagName'] ) && current_user_can( 'manage_categories' ) ) {
 			$new_names_array = explode( ',', $update_details['newTagName'] );
 
 			foreach ( $new_names_array as $new_name ) {
@@ -1533,6 +1596,10 @@ class ET_Builder_Library {
 			case 'duplicate':
 			case 'duplicate_and_delete':
 			case 'duplicate_premade_item':
+			case 'save_existing_page':
+			case 'split_layout':
+			case 'split_section':
+			case 'split_row':
 				$is_item_from_cloud = isset( $update_details['shortcode'] );
 				$title              = sanitize_text_field( $update_details['itemName'] );
 				$meta_input         = array();
@@ -1610,25 +1677,45 @@ class ET_Builder_Library {
 				}
 				break;
 			case 'edit_cats':
+				if ( ! current_user_can( 'manage_categories' ) ) {
+					return;
+				}
+
 				wp_set_object_terms( $item_id, $categories, 'layout_category' );
 				wp_set_object_terms( $item_id, $tags, 'layout_tag' );
 				break;
 			case 'rename':
+				if ( ! current_user_can( 'edit_post', $item_id ) ) {
+					return;
+				}
+
 				$item_update['post_title'] = sanitize_text_field( $update_details['itemName'] );
 				wp_update_post( $item_update );
 				break;
 			case 'toggle_fav':
+				if ( ! current_user_can( 'edit_post', $item_id ) ) {
+					return;
+				}
+
 				$favorite_status = 'on' === sanitize_text_field( $update_details['favoriteStatus'] ) ? 'favorite' : '';
 				update_post_meta( $item_id, 'favorite_status', $favorite_status );
 
 				break;
 			case 'delete':
-				wp_trash_post( $item_id );
+				if ( current_user_can( 'delete_post', $item_id ) && $is_library_post_type ) {
+					wp_trash_post( $item_id );
+				}
 				break;
 			case 'delete_permanently':
-				wp_delete_post( $item_id, true );
+				if ( current_user_can( 'delete_post', $item_id ) && $is_library_post_type ) {
+					wp_delete_post( $item_id, true );
+				}
 				break;
 			case 'restore':
+				if ( ! current_user_can( 'edit_post', $item_id ) || ! $is_library_post_type ) {
+					return;
+				}
+
 				// wp_untrash_post() restores the post to `draft` by default, we have to set `publish` status via filter.
 				add_filter( 'wp_untrash_post_status', array( 'ET_Builder_Library', 'et_builder_set_untrash_status' ) );
 				wp_untrash_post( $item_id );
@@ -1871,6 +1958,47 @@ class ET_Builder_Library {
 		} else {
 			wp_enqueue_script( 'et-builder-failure-notice', ET_BUILDER_URI . '/scripts/failure_notice.js', array( 'jquery' ), ET_BUILDER_PRODUCT_VERSION, false );
 		}
+	}
+
+	/**
+	 * Highlight Divi menu in admin when viewing layout tag.
+	 *
+	 * @param string $parent_file The parent file.
+	 * @return string
+	 */
+	public function wp_hook_parent_file( $parent_file ) {
+		global $submenu_file;
+		if ( 'edit.php' === $parent_file && in_array( $submenu_file, self::$submenu_files, true ) ) {
+			return 'et_divi_options';
+		}
+		return $parent_file;
+	}
+
+	/**
+	 * Highlight Divi Library submenu in admin when viewing layout tag.
+	 *
+	 * @param string $submenu_file The submenu file.
+	 * @return string
+	 */
+	public function wp_hook_submenu_file( $submenu_file ) {
+		global $parent_file;
+		if ( 'et_divi_options' === $parent_file && in_array( $submenu_file, self::$submenu_files, true ) ) {
+			return 'edit.php?post_type=et_pb_layout';
+		}
+		return $submenu_file;
+	}
+
+	/**
+	 * Remove the edit action links displayed for each term in the layout_category and layout_tag list table.
+	 *
+	 * @param string[] $actions An array of action links to be displayed.
+	 * @param WP_Term  $tag     Term object.
+	 */
+	public function wp_filter_tag_row_actions( $actions, $tag ) {
+		if ( in_array( $tag->taxonomy, array( 'layout_category', 'layout_tag' ), true ) ) {
+			unset( $actions['edit'] );
+		}
+		return $actions;
 	}
 }
 

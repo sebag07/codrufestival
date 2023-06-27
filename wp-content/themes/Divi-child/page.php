@@ -5,16 +5,6 @@ get_header();
 $is_page_builder_used = et_pb_is_pagebuilder_used( get_the_ID() );
 
 ?>
-<div class="background-blue loading-container">
-  <div class="wrapper">
-    <div class="circle yellow"></div>
-    <div class="circle orange"></div>
-    <div class="circle green"></div>
-    <div class="shadow"></div>
-    <div class="shadow"></div>
-    <div class="shadow"></div>
-  </div>
-</div>
 <div id="main-content">
 
 <?php if ( ! $is_page_builder_used ) : ?>

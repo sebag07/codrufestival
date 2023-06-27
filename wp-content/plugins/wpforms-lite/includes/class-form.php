@@ -355,6 +355,16 @@ class WPForms_Form_Handler {
 			]
 		);
 
+		/**
+		 * Allow developers to execute some code after changing form status.
+		 *
+		 * @since 1.8.1
+		 *
+		 * @param string $form_id Form ID.
+		 * @param string $status  New form status, `publish` or `trash`.
+		 */
+		do_action( 'wpforms_form_handler_update_status', $form_id, $status );
+
 		return $result !== 0;
 	}
 
@@ -788,7 +798,7 @@ class WPForms_Form_Handler {
 	 *
 	 * @return mixed int or false
 	 */
-	public function next_field_id( $form_id, $args = [] ) {
+	public function next_field_id( $form_id, $args = [] ) { // phpcs:ignore WPForms.PHP.HooksMethod.InvalidPlaceForAddingHooks
 
 		if ( empty( $form_id ) ) {
 			return false;
@@ -808,20 +818,23 @@ class WPForms_Form_Handler {
 			return false;
 		}
 
-		if ( ! empty( $form['field_id'] ) ) {
+		$field_id     = 0;
+		$max_field_id = ! empty( $form['fields'] ) ? max( array_keys( $form['fields'] ) ) : 0;
+
+		// We pass the `field_id` after duplicating the Layout field that contains a bunch of fields.
+		// This is needed to avoid multiple AJAX calls after duplicating each field in the Layout.
+		if ( isset( $args['field_id'] ) ) {
+
+			$set_field_id = absint( $args['field_id'] ) - 1;
+			$field_id     = $set_field_id > $max_field_id ? $set_field_id : $max_field_id + 1;
+
+		} elseif ( ! empty( $form['field_id'] ) ) {
 
 			$field_id = absint( $form['field_id'] );
-
-			if ( ! empty( $form['fields'] ) && max( array_keys( $form['fields'] ) ) > $field_id ) {
-				$field_id = max( array_keys( $form['fields'] ) ) + 1;
-			}
-
-			$form['field_id'] = $field_id + 1;
-
-		} else {
-			$field_id         = '0';
-			$form['field_id'] = '1';
+			$field_id = $max_field_id > $field_id ? $max_field_id + 1 : $field_id;
 		}
+
+		$form['field_id'] = $field_id + 1;
 
 		// Skip creating a revision for this action.
 		remove_action( 'post_updated', 'wp_save_post_revision' );

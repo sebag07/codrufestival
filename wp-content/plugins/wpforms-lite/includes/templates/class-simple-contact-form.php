@@ -20,8 +20,9 @@ class WPForms_Template_Simple_Contact_Form extends WPForms_Template {
 		$this->categories  = 'all';
 		$this->core        = true;
 		$this->slug        = 'simple-contact-form-template';
-		$this->url         = 'https:\/\/wpforms.com\/templates\/simple-contact-form-template\/';
+		$this->url         = 'https://wpforms.com/templates/simple-contact-form-template/';
 		$this->description = esc_html__( 'Collect the names, emails, and messages from site visitors that need to talk to you.', 'wpforms-lite' );
+		$this->thumbnail   = esc_url( WPFORMS_PLUGIN_URL . 'assets/images/thumbnail-simple-contact-form-template.jpg' );
 		$this->data        = [
 			'fields'   => [
 				'0' => [
@@ -57,10 +58,9 @@ class WPForms_Template_Simple_Contact_Form extends WPForms_Template {
 				'notification_enable'    => '1',
 				'notifications'          => [
 					'1' => [
-						'email'          => '{admin_email}',
-						'sender_address' => '{admin_email}',
-						'replyto'        => '{field_id="1"}',
-						'message'        => '{all_fields}',
+						'email'   => '{admin_email}',
+						'replyto' => '{field_id="1"}',
+						'message' => '{all_fields}',
 					],
 				],
 				'confirmations'          => [

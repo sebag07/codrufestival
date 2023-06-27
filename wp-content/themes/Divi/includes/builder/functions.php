@@ -8,7 +8,7 @@
 
 if ( ! defined( 'ET_BUILDER_PRODUCT_VERSION' ) ) {
 	// Note, this will be updated automatically during grunt release task.
-	define( 'ET_BUILDER_PRODUCT_VERSION', '4.17.4' );
+	define( 'ET_BUILDER_PRODUCT_VERSION', '4.21.0' );
 }
 
 if ( ! defined( 'ET_BUILDER_VERSION' ) ) {
@@ -2562,6 +2562,29 @@ function et_fb_get_shortcode_from_fb_object() {
 add_action( 'wp_ajax_et_fb_get_shortcode_from_fb_object', 'et_fb_get_shortcode_from_fb_object' );
 
 /**
+ * Ajax Callback :: Convert shortcode into HTML.
+ */
+function et_fb_get_html_from_shortcode() {
+	if ( ! et_core_security_check( 'edit_posts', 'et_fb_shortcode_to_html_nonce', 'et_fb_shortcode_to_html_nonce', '_POST', false ) ) {
+		wp_send_json_error();
+	}
+
+	// phpcs:ignore ET.Sniffs.ValidatedSanitizedInput -- $_POST['modules'] will not be stored in db.
+	$post_content = isset( $_POST['content'] ) ? stripslashes( $_POST['content'] ) : '';
+
+	// Get rendered post content by shortcode.
+	$rendered_post_content = do_shortcode( $post_content );
+
+	wp_send_json_success(
+		array(
+			'rendered_content' => $rendered_post_content,
+		)
+	);
+}
+
+add_action( 'wp_ajax_et_fb_get_html_from_shortcode', 'et_fb_get_html_from_shortcode' );
+
+/**
  * Ajax Callback :: Save library modules.
  */
 function et_fb_save_layout() {
@@ -2804,7 +2827,8 @@ if ( ! function_exists( 'et_fb_disable_product_tour' ) ) :
 		}
 
 		$user_id                          = (int) get_current_user_id();
-		$all_product_settings             = et_get_option( 'product_tour_status', array() );
+		$product_tour_status              = et_get_option( 'product_tour_status', [] );
+		$all_product_settings             = is_array( $product_tour_status ) ? $product_tour_status : [];
 		$all_product_settings[ $user_id ] = 'off';
 
 		et_update_option( 'product_tour_status', $all_product_settings );
@@ -3651,9 +3675,8 @@ function et_builder_print_font() {
 			'display' => 'swap',
 		);
 
-		$google_fonts_url = add_query_arg( $google_fonts_url_args, 'https://fonts.googleapis.com/css' );
-		$google_fonts_url = esc_url_raw( $google_fonts_url );
 		$feature_manager  = ET_Builder_Google_Fonts_Feature::instance();
+		$google_fonts_url = $feature_manager->get_google_fonts_url( $google_fonts_url_args );
 		$output_inline    = $feature_manager->is_option_enabled( 'google_fonts_inline' );
 
 		if ( $output_inline ) {
@@ -3754,9 +3777,8 @@ function et_builder_preprint_font() {
 		'display' => 'swap',
 	);
 
-	$google_fonts_url = add_query_arg( $google_fonts_url_args, 'https://fonts.googleapis.com/css' );
-	$google_fonts_url = esc_url_raw( $google_fonts_url );
 	$feature_manager  = ET_Builder_Google_Fonts_Feature::instance();
+	$google_fonts_url = $feature_manager->get_google_fonts_url( $google_fonts_url_args );
 	$output_inline    = $feature_manager->is_option_enabled( 'google_fonts_inline' );
 
 	if ( $output_inline ) {
@@ -9225,7 +9247,7 @@ if ( ! function_exists( 'et_delete_post_audio' ) ) :
 	 * Removes the audio shortcode of the first attached (NOT embedded) audio from content on single pages since
 	 * it is displayed at the top of the page. This will also remove the audio shortcode url from archive pages content
 	 *
-	 * @see https://www.elegantthemes.com/gallery/divi/documentation/post-formats/
+	 * @see https://www.elegantthemes.com/documentation/divi/post-formats/
 	 *
 	 * @param string $content post content.
 	 */
@@ -11653,6 +11675,7 @@ if ( ! function_exists( 'et_strip_shortcodes' ) ) :
 		$strip_content_shortcodes = array(
 			'et_pb_code',
 			'et_pb_fullwidth_code',
+			'et_pb_social_media_follow_network',
 		);
 
 		// list of post-based shortcodes.
@@ -12280,7 +12303,7 @@ if ( ! function_exists( 'et_pb_get_value_unit' ) ) :
 
 		if ( substr( $value, ( 0 - $important_length ), $important_length ) === $important ) {
 			$value_length = $value_length - $important_length;
-			$value        = substr( $value, 0, $value_length ) . trim();
+			$value        = trim( substr( $value, 0, $value_length ) );
 		}
 
 		if ( in_array( substr( $value, -3, 3 ), $valid_three_chars_units, true ) ) {
@@ -13246,6 +13269,21 @@ function et_builder_get_all_global_colors() {
 	return et_get_option( 'et_global_colors' );
 }
 
+if ( ! function_exists( 'et_builder_global_colors_ajax_get_handler' ) ) :
+	/**
+	 * Global colors AJAX get handler.
+	 *
+	 * @since 4.19.2
+	 */
+	function et_builder_global_colors_ajax_get_handler() {
+		// Get nonce from $_GET.
+		et_core_security_check( 'edit_posts', 'et_builder_global_colors_get', 'et_builder_global_colors_get_nonce', '_GET' );
+		wp_send_json_success( [ 'global_colors' => et_builder_get_all_global_colors() ] );
+	}
+endif;
+
+add_action( 'wp_ajax_et_builder_global_colors_get', 'et_builder_global_colors_ajax_get_handler' );
+
 /**
  * Get a global color info by id.
  *
@@ -13290,3 +13328,112 @@ function et_process_border_radii_options_overflow( $overflow_enabled, $function_
 	return $overflow_enabled;
 }
 add_filter( 'et_builder_process_advanced_borders_options_radii_overflow_enabled', 'et_process_border_radii_options_overflow', 10, 3 );
+
+/**
+ * Adds `fitvidsignore` class to vimeo videos parent tags which have unusual aspect ratios.
+ *
+ * WordPress adds extra `div` tag as a parent on vimeo videos with unusual aspect ratios so
+ * videos would have proper aspect ratio responsively. That causes issues with jQuery `fitvids()`.
+ * Ref: https://github.com/elegantthemes/Divi/issues/16116
+ *
+ * @since 4.17.5
+ */
+add_filter(
+	'oembed_dataparse',
+	function( $html, $data ) {
+		if ( ! class_exists( 'DOMDocument' ) ) {
+			return $html;
+		}
+
+		if ( 'Vimeo' !== $data->provider_name ) {
+			return $html;
+		}
+
+		$doc                 = new DOMDocument();
+		$doc_load_html_state = $doc->loadHTML( $html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD );
+
+		if ( false === $doc_load_html_state ) {
+			return $html;
+		}
+
+		$extra_div_nodes = $doc->getElementsByTagName( 'div' );
+
+		if ( 0 === $extra_div_nodes->length ) {
+			return $html;
+		}
+
+		$extra_div_node = $extra_div_nodes[0];
+		$extra_div_node->setAttribute( 'class', 'fitvidsignore' );
+
+		$output = $doc->saveHTML();
+		$output = false === $output ? $html : $output;
+
+		return $output;
+	},
+	10,
+	2
+);
+
+if ( ! function_exists( 'et_pb_get_youtube_url_regex' ) ) :
+	/**
+	 * Regex to match a YouTube URL from any known/common YouTube URL format.
+	 *
+	 * Expected YouTube URL Formats.
+	 * - https://www.youtube.com/watch?v=XXXX.
+	 * - https://www.youtube.com/embed/XXXX.
+	 * - https://youtu.be/XXXX.
+	 *
+	 * To check regex, see: https://regex101.com/r/4FbeMZ/1.
+	 *
+	 * @since 4.18.1
+	 *
+	 * @return string YouTube video URL regex.
+	 */
+	function et_pb_get_youtube_url_regex() {
+		return '/^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/i';
+	}
+endif;
+
+if ( ! function_exists( 'et_pb_normalize_youtube_url' ) ) :
+	/**
+	 * Normalize a YouTube URL from any known/common YouTube URL format.
+	 *
+	 * Convert YouTube URL into normalized form: https://www.youtube.com/watch?v=XXXX.
+	 * For https://www.youtube.com/watch?v=XXXX to check regex is https://regex101.com/r/B2qLJy/1.
+	 * For https://www.youtube.com/embed/XXXX to check regex is https://regex101.com/r/oZ3iNP/1.
+	 * For https://youtu.be/XXXX to check regex is https://regex101.com/r/5nqmhF/1.
+	 *
+	 * @param string $url youtube video url.
+	 *
+	 * @since 4.18.1
+	 *
+	 * @return string Normalized YouTube URL.
+	 */
+	function et_pb_normalize_youtube_url( $url ) {
+		preg_match( et_pb_get_youtube_url_regex(), esc_url( $url ), $youtube_embed_video );
+
+		return 'https://www.youtube.com/watch?v=' . $youtube_embed_video[1];
+	}
+endif;
+
+if ( ! function_exists( 'et_pb_validate_youtube_url' ) ) :
+	/**
+	 * Validate a YouTube URL from any known/common YouTube URL format.
+	 *
+	 * For https://www.youtube.com/watch?v=XXXX to check regex is https://regex101.com/r/B2qLJy/1.
+	 * For https://www.youtube.com/embed/XXXX to check regex is https://regex101.com/r/oZ3iNP/1.
+	 * For https://youtu.be/XXXX to check regex is https://regex101.com/r/5nqmhF/1.
+	 *
+	 * @param string $url youtube video url.
+	 *
+	 * @since 4.18.1
+	 *
+	 * @return bool Whether provided URL is a valid YouTube URL or not.
+	 */
+	function et_pb_validate_youtube_url( $url ) {
+		preg_match( et_pb_get_youtube_url_regex(), $url, $youtube_embed_video );
+
+		return is_array( $youtube_embed_video ) && ! empty( $youtube_embed_video );
+	}
+endif;
+

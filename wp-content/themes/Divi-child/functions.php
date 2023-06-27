@@ -14,7 +14,7 @@ function my_theme_enqueue_styles() {
 add_action( 'wp_enqueue_scripts', 'my_theme_enqueue_styles' );
 
 function load_child_scripts(){
-    wp_register_script('main', get_template_directory_uri() . "-child" . '/js/main.js', array('jquery'), '4123', true);
+    wp_register_script('main', get_template_directory_uri() . "-child" . '/js/main.js', array('jquery'), '4123312', true);
     wp_enqueue_script('main');
     wp_register_script('play-song', get_template_directory_uri() . "-child" . '/js/playsong.js', array('jquery'), true);
     wp_enqueue_script('play-song');
@@ -41,7 +41,7 @@ add_action('wp_footer', 'load_footer_scripts');
 
 
 
-    function get_menu_with_children($menu_name){
+function get_menu_with_children($menu_name){
     $navbar_items = wp_get_nav_menu_items($menu_name);
     $menu_with_children = array();
     $child_items = [];
@@ -69,4 +69,16 @@ add_action('wp_footer', 'load_footer_scripts');
     }
 
     return $navbar_items;
-    }
+}
+
+if( function_exists('acf_add_options_page') ) {
+    
+    acf_add_options_page(array(
+        'page_title'    => 'Options',
+        'menu_title'    => 'Options',
+        'menu_slug'     => 'general-options',
+        'capability'    => 'edit_posts',
+        'redirect'      => false
+    ));
+    
+  }

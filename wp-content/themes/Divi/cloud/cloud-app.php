@@ -1,4 +1,9 @@
 <?php
+
+if ( ! defined( 'ET_CLOUD_SERVER_URL' ) ) {
+	define( 'ET_CLOUD_SERVER_URL', 'https://cloud.elegantthemes.com' );
+}
+
 class ET_Cloud_App {
 	/**
 	 * @var ET_Cloud_App
@@ -68,7 +73,7 @@ class ET_Cloud_App {
 		$token_part      = sanitize_text_field( $_POST['et_cloud_refresh_token_part'] );
 		$user_token_data = isset( $saved_tokens[ $user_id ] ) ? $saved_tokens[ $user_id ] : array();
 		$is_refresh      = ! $access_token || '' === $access_token;
-		$url             = 'https://cloud.elegantthemes.com/wp/wp-json/cloud/v1/activate';
+		$url             = ET_CLOUD_SERVER_URL . '/wp/wp-json/cloud/v1/activate';
 
 		$refresh_token = '';
 
@@ -138,6 +143,7 @@ class ET_Cloud_App {
 		$response = wp_remote_post( $url, array(
 			'headers' => array(
 				'Authorization' => 'Bearer ' . $auth_token,
+				'X-ET-ORIGIN'   => site_url(),
 			),
 			'body' => $request_body,
 		) );
@@ -190,7 +196,8 @@ class ET_Cloud_App {
 
 		// We shouldn't save the full token, so user cannot use this token in other browser.
 		if ( ! $save_session ) {
-			$token_parts = str_split( $refresh_token, 400 );
+			$token_length  = (int) strlen( $refresh_token );
+			$token_parts   = str_split( $refresh_token, ceil( $token_length / 2 ) );
 			$token_to_save = $token_parts[0];
 			$token_part    = $token_parts[1];
 		}
@@ -213,7 +220,50 @@ class ET_Cloud_App {
 			'accessToken'      => $decoded_body['access_token'],
 			'refreshTokenPart' => $token_part,
 			'domainToken'      => get_option( 'et_server_domain_token', '' ),
+			'sharedFolders'    => self::normalize_shared_cloud_array( $decoded_body['clouds'] ),
 		) );
+	}
+
+	/**
+	 * Normalize shared cloud array from the server response.
+	 *
+	 * @param array $shared_cloud_array Raw shared clouds array.
+	 *
+	 * @return array
+	 */
+	public static function normalize_shared_cloud_array( $shared_cloud_array ) {
+		if ( empty( $shared_cloud_array ) ) {
+			return null;
+		}
+
+		$normalized_array = array();
+
+		foreach ( $shared_cloud_array as $cloud_id => $shared_cloud ) {
+			$use_permission    = isset( $shared_cloud['permissions']['use_items'] ) ? $shared_cloud['permissions']['use_items'] : false;
+			$add_permission    = isset( $shared_cloud['permissions']['add_items'] ) ? $shared_cloud['permissions']['add_items'] : false;
+			$edit_permission   = isset( $shared_cloud['permissions']['edit_items'] ) ? $shared_cloud['permissions']['edit_items'] : false;
+			$delete_permission = isset( $shared_cloud['permissions']['delete_items'] ) ? $shared_cloud['permissions']['delete_items'] : false;
+
+			// No permission to use this cloud.
+			if ( ! $use_permission && ! $add_permission && ! $edit_permission && ! $delete_permission ) {
+				continue;
+			}
+
+			$normalized_array[] = array(
+				'id'          => $cloud_id,
+				'name'        => $shared_cloud['owner'],
+				'count'       => $shared_cloud['item_counts'],
+				'endpoint'    => $shared_cloud['endpoint'],
+				'permissions' => array(
+					'use'    => $shared_cloud['permissions']['use_items'],
+					'add'    => $shared_cloud['permissions']['add_items'],
+					'edit'   => $shared_cloud['permissions']['edit_items'],
+					'delete' => $shared_cloud['permissions']['delete_items'],
+				),
+			);
+		}
+
+		return $normalized_array;
 	}
 
 	public static function hasRefreshToken() {
@@ -238,19 +288,22 @@ class ET_Cloud_App {
 				'et_cloud_download_item'                           => wp_create_nonce( 'et_cloud_download_item' ),
 				'et_cloud_refresh_token'                           => wp_create_nonce( 'et_cloud_refresh_token' ),
 				'et_cloud_remove_token'                            => wp_create_nonce( 'et_cloud_remove_token' ),
+				'et_builder_split_library_item'          => wp_create_nonce( 'et_builder_split_library_item' ),
 				'et_builder_ajax_save_domain_token'                => wp_create_nonce( 'et_builder_ajax_save_domain_token' ),
 				'et_builder_marketplace_api_get_layouts'           => wp_create_nonce( 'et_builder_marketplace_api_get_layouts' ),
 				'et_builder_marketplace_api_get_layout_categories' => wp_create_nonce( 'et_builder_marketplace_api_get_layout_categories' ),
 			],
-			'ajaxurl'            => is_ssl() ? admin_url( 'admin-ajax.php' ) : admin_url( 'admin-ajax.php', 'http' ),
-			'home_url'           => isset( $home_url['path'] ) ? untrailingslashit( $home_url['path'] ) : '/',
-			'website_url'        => $home_url['host'],
-			'etAccount'          => [
+			'ajaxurl'              => is_ssl() ? admin_url( 'admin-ajax.php' ) : admin_url( 'admin-ajax.php', 'http' ),
+			'home_url'             => isset( $home_url['path'] ) ? untrailingslashit( $home_url['path'] ) : '/',
+			'website_url'          => $home_url['host'],
+			'predefined_items_url' => ET_CLOUD_SERVER_URL . '/wp/wp-json/cloud/v1',
+			'etAccount'            => [
 				'username' => $etAccount['et_username'],
 				'apiKey'   => $etAccount['et_api_key'],
 			],
-			'domainToken'        => get_option( 'et_server_domain_token', '' ),
-			'initialCloudStatus' => ET_Cloud_App::hasRefreshToken() ? 'on' : 'off',
+			'domainToken'         => get_option( 'et_server_domain_token', '' ),
+			'initialCloudStatus'  => self::hasRefreshToken() ? 'on' : 'off',
+			'localCategoriesEdit' => current_user_can( 'manage_categories' ) ? 'allowed' : 'notAllowed',
 		];
 	}
 

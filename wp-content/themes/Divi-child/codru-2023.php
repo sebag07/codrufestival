@@ -2,16 +2,6 @@
 
 <?php get_header();?>
 
-<div class="background-blue loading-container">
-  <div class="wrapper">
-    <div class="circle yellow"></div>
-    <div class="circle orange"></div>
-    <div class="circle green"></div>
-    <div class="shadow"></div>
-    <div class="shadow"></div>
-    <div class="shadow"></div>
-  </div>
-</div>
 
 <div class="container-fluid codru2023HeroSection">
  <?php 

@@ -1,6 +1,7 @@
 <?php
 
 use WPForms\Admin\Forms\Tags;
+use WPForms\Forms\Akismet;
 
 /**
  * Settings management panel.
@@ -38,6 +39,7 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 
 		$sections = [
 			'general'       => esc_html__( 'General', 'wpforms-lite' ),
+			'anti_spam'     => esc_html__( 'Spam Protection and Security', 'wpforms-lite' ),
 			'notifications' => esc_html__( 'Notifications', 'wpforms-lite' ),
 			'confirmation'  => esc_html__( 'Confirmations', 'wpforms-lite' ),
 		];
@@ -165,26 +167,6 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 				]
 			);
 
-			if ( ! empty( $this->form_data['settings']['honeypot'] ) ) {
-				wpforms_panel_field(
-					'toggle',
-					'settings',
-					'honeypot',
-					$this->form_data,
-					esc_html__( 'Enable anti-spam honeypot', 'wpforms-lite' )
-				);
-			}
-
-			wpforms_panel_field(
-				'toggle',
-				'settings',
-				'antispam',
-				$this->form_data,
-				esc_html__( 'Enable anti-spam protection', 'wpforms-lite' )
-			);
-
-			$this->general_setting_captcha();
-
 			$this->general_setting_advanced();
 
 		echo '</div>';
@@ -256,54 +238,6 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 	 *
 	 * @since 1.6.8
 	 */
-	private function general_setting_captcha() {
-
-		$captcha_settings = wpforms_get_captcha_settings();
-
-		if (
-			! empty( $captcha_settings['provider'] ) &&
-			$captcha_settings['provider'] !== 'none' &&
-			! empty( $captcha_settings['site_key'] ) &&
-			! empty( $captcha_settings['secret_key'] )
-		) {
-			$lbl = '';
-
-			switch ( $captcha_settings['recaptcha_type'] ) {
-				case 'v2':
-					$lbl = esc_html__( 'Enable Google Checkbox v2 reCAPTCHA', 'wpforms-lite' );
-					break;
-
-				case 'invisible':
-					$lbl = esc_html__( 'Enable Google Invisible v2 reCAPTCHA', 'wpforms-lite' );
-					break;
-
-				case 'v3':
-					$lbl = esc_html__( 'Enable Google v3 reCAPTCHA', 'wpforms-lite' );
-					break;
-			}
-
-			$lbl = $captcha_settings['provider'] === 'hcaptcha' ? esc_html__( 'Enable hCaptcha', 'wpforms-lite' ) : $lbl;
-
-			wpforms_panel_field(
-				'toggle',
-				'settings',
-				'recaptcha',
-				$this->form_data,
-				$lbl,
-				[
-					'data' => [
-						'provider' => $captcha_settings['provider'],
-					],
-				]
-			);
-		}
-	}
-
-	/**
-	 * Output the *CAPTCHA settings.
-	 *
-	 * @since 1.6.8
-	 */
 	private function general_setting_advanced() {
 
 		ob_start();
@@ -337,7 +271,11 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 			$this->form_data,
 			esc_html__( 'Enable Prefill by URL', 'wpforms-lite' ),
 			[
-				'tooltip' => '<a href="https://wpforms.com/developers/how-to-enable-dynamic-field-population/" target="_blank" rel="noopener noreferrer">' . esc_html__( 'How to use Prefill by URL', 'wpforms-lite' ) . '</a>',
+				'tooltip' => sprintf(
+					'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
+					wpforms_utm_link( 'https://wpforms.com/developers/how-to-enable-dynamic-field-population/', 'Builder Settings', 'Prefill by URL Tooltip' ),
+					esc_html__( 'How to use Prefill by URL', 'wpforms-lite' )
+				),
 			]
 		);
 
@@ -358,6 +296,7 @@ class WPForms_Builder_Panel_Settings extends WPForms_Builder_Panel {
 		wpforms_panel_fields_group(
 			ob_get_clean(),
 			[
+				'borders'    => [ 'top' ],
 				'unfoldable' => true,
 				'group'      => 'settings_advanced',
 				'title'      => esc_html__( 'Advanced', 'wpforms-lite' ),

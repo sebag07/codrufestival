@@ -1583,7 +1583,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #569d88;
+    background-color: #1e4b3a;
 }
 
 .singlePostContainer h1 {
@@ -1627,10 +1627,6 @@ hr {
 .singlePostInnerContent p {
     color: #fff;
     font-size: 20px;
-}
-
-.singlePostInnerContent figure img {
-    border-radius: 10px !important;
 }
 
 .paddingBottom {

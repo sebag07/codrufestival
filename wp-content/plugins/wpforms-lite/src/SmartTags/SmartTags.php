@@ -46,8 +46,8 @@ class SmartTags {
 	 */
 	public function get( $return = 'array' ) {
 
-		_deprecated_argument( __METHOD__, '1.6.7' );
-		_deprecated_function( __METHOD__, '1.6.7', __CLASS__ . '::get_smart_tags()' );
+		_deprecated_argument( __METHOD__, '1.6.7 of the WPForms plugin' );
+		_deprecated_function( __METHOD__, '1.6.7 of the WPForms plugin', __CLASS__ . '::get_smart_tags()' );
 
 		$tags = $this->get_smart_tags();
 
@@ -225,7 +225,7 @@ class SmartTags {
 				$smart_tag_object
 			);
 
-			if ( ! is_null( $value ) ) {
+			if ( $value !== null ) {
 				$content = $this->replace( $smart_tag, $value, $content );
 			}
 
@@ -396,7 +396,7 @@ class SmartTags {
 	 */
 	public function parse( $tag, $value, $content ) {
 
-		_deprecated_function( __METHOD__, '1.6.7' );
+		_deprecated_function( __METHOD__, '1.6.7 of the WPForms plugin' );
 
 		return $this->replace( $tag, $value, $content );
 	}

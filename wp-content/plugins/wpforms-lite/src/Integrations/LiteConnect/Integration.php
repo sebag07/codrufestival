@@ -34,6 +34,15 @@ class Integration extends API {
 	const LITE_CONNECT_ENTRIES_COUNT_OPTION = 'wpforms_lite_connect_entries_count';
 
 	/**
+	 * Post meta name to store the total count of Lite Connect form entries.
+	 *
+	 * @since 1.7.9
+	 *
+	 * @var string
+	 */
+	const LITE_CONNECT_FORM_ENTRIES_COUNT_META = 'wpforms_lite_connect_form_entries_count';
+
+	/**
 	 * Integration constructor.
 	 *
 	 * @since 1.7.4
@@ -52,6 +61,7 @@ class Integration extends API {
 			( is_admin() && ! wp_doing_ajax() ) &&
 			( ( wpforms()->is_pro() && self::get_enabled_since() ) || LiteConnect::is_enabled() )
 		) {
+			$this->maybe_update_access_token();
 			$this->update_keys();
 			$updated = true;
 		}
@@ -84,7 +94,6 @@ class Integration extends API {
 			'site_key'     => $site_key,
 			'access_token' => $this->get_access_token( $site_key ),
 		];
-
 	}
 
 	/**
@@ -212,6 +221,20 @@ class Integration extends API {
 	public static function get_entries_count() {
 
 		return (int) get_option( self::LITE_CONNECT_ENTRIES_COUNT_OPTION, 0 );
+	}
+
+	/**
+	 * Get the Lite Connect form entries count.
+	 *
+	 * @since 1.7.9
+	 *
+	 * @param int $form_id The form ID.
+	 *
+	 * @return int The form entries count.
+	 */
+	public static function get_form_entries_count( $form_id ) {
+
+		return (int) get_post_meta( $form_id, self::LITE_CONNECT_FORM_ENTRIES_COUNT_META, true );
 	}
 
 	/**
@@ -361,5 +384,22 @@ class Integration extends API {
 				]
 			);
 		}
+	}
+
+	/**
+	 * Maybe update access token.
+	 *
+	 * @since 1.7.6
+	 */
+	public function maybe_update_access_token() {
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$action = isset( $_GET['wpforms_lite_connect_action'] ) ? sanitize_key( $_GET['wpforms_lite_connect_action'] ) : '';
+
+		if ( $action !== 'update-access-token' || ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		$this->get_access_token( $this->get_site_key(), true );
 	}
 }

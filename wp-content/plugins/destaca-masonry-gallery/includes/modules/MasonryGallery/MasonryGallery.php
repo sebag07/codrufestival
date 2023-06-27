@@ -21,7 +21,7 @@ class DMG_MasonryGallery extends ET_Builder_Module {
 		"MeltingDice" => "https://open.spotify.com/artist/2E8ii8YO178DnjVuJVQyEC",
 		"GojiraandPlanetHfeatPsihotrop" => "https://open.spotify.com/artist/6BJaN208lSPd4Rpp3mHdjK",
 		"Jurjak" => "https://open.spotify.com/artist/1I4LbpsQvyH3eDSnBiGRzB",
-		"DJSHIVER" => "https://open.spotify.com/artist/1mrcAnxaMjzTeusSQMswFU",
+		"ALEXSUPERBEATS" => "https://open.spotify.com/artist/1mrcAnxaMjzTeusSQMswFU",
 		"MirceaBaniciu" => "https://open.spotify.com/artist/4zwL4BofWKSFXMsat7gZjj",
 		"DucuBertzi" => "https://open.spotify.com/artist/6M0A6t14k0DICSbcYBvyqf",
 		"PragudeSus" => "https://open.spotify.com/artist/6aaD2VIn1eiM600OYWYNjR",

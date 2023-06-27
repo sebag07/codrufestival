@@ -24,9 +24,10 @@ function et_fb_prepare_library_terms( $taxonomy = 'layout_category' ) {
 	if ( is_array( $raw_terms_array ) && ! empty( $raw_terms_array ) ) {
 		foreach ( $raw_terms_array as $term ) {
 			$clean_terms_array[] = array(
-				'name' => html_entity_decode( $term->name ),
-				'id'   => $term->term_id,
-				'slug' => $term->slug,
+				'name'  => html_entity_decode( $term->name ),
+				'id'    => $term->term_id,
+				'slug'  => $term->slug,
+				'count' => $term->count,
 			);
 		}
 	}
@@ -241,7 +242,8 @@ function et_fb_get_dynamic_backend_helpers() {
 		? get_post( get_post_thumbnail_id()->post_title )
 		: false;
 
-	$request_type = $post_type;
+	$request_type  = $post_type;
+	$user_cloud_id = 0;
 
 	// Set request_type on 404 pages.
 	if ( is_404() ) {
@@ -268,6 +270,8 @@ function et_fb_get_dynamic_backend_helpers() {
 		if ( ! empty( $_GET['cloudItem'] ) && get_post_status( $post_id ) ) { // phpcs:ignore WordPress.Security.NonceVerification -- This function does not change any state, and is therefore not susceptible to CSRF.
 			$remote_item_id  = (int) sanitize_text_field( $_GET['cloudItem'] ); // phpcs:ignore WordPress.Security.NonceVerification -- This function does not change any state, and is therefore not susceptible to CSRF.
 			$layout_location = 'cloud';
+
+			$user_cloud_id = isset( $_GET['userCloudId'] ) ? sanitize_text_field( $_GET['userCloudId'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification -- This function does not change any state, and is therefore not susceptible to CSRF.
 		}
 	}
 
@@ -304,6 +308,9 @@ function et_fb_get_dynamic_backend_helpers() {
 
 	$home_url = wp_parse_url( get_site_url() );
 
+	$library_capability   = et_core_portability_cap( 'et_builder_layouts' );
+	$local_import_support = current_user_can( $library_capability );
+
 	$helpers = array(
 		'site_url'                     => get_site_url(),
 		'site_domain'                  => isset( $home_url['host'] ) ? untrailingslashit( $home_url['host'] ) : '/',
@@ -325,10 +332,12 @@ function et_fb_get_dynamic_backend_helpers() {
 		'layoutBuiltFor'               => $layout_built_for,
 		'hasPredefinedContent'         => $has_predefined_content,
 		'remoteItemId'                 => $remote_item_id,
+		'userCloudId'                  => $user_cloud_id,
 		'publishCapability'            => ( is_page() && ! current_user_can( 'publish_pages' ) ) || ( ! is_page() && ! current_user_can( 'publish_posts' ) ) ? 'no_publish' : 'publish',
 		'ajaxUrl'                      => is_ssl() ? admin_url( 'admin-ajax.php' ) : admin_url( 'admin-ajax.php', 'http' ),
 		'et_account'                   => et_core_get_et_account(),
 		'productTourStatus'            => et_builder_is_product_tour_enabled() ? 'on' : 'off',
+		'localLibraryImportSupport'    => $local_import_support ? 'yes' : 'no',
 		'gutterWidth'                  => (string) et_get_option( 'gutter_width', '3' ),
 		'sectionPadding'               => et_get_option( 'section_padding', 4 ),
 		'cookie_path'                  => SITECOOKIEPATH,
@@ -337,7 +346,8 @@ function et_fb_get_dynamic_backend_helpers() {
 		'currentUserDisplayName'       => $current_user->display_name,
 		'currentRole'                  => et_pb_get_current_user_role(),
 		'currentUserCapabilities'      => array(
-			'manageOptions' => current_user_can( 'manage_options' ),
+			'manageOptions'    => current_user_can( 'manage_options' ),
+			'manageCategories' => current_user_can( 'manage_categories' ),
 		),
 		'exportUrl'                    => et_fb_get_portability_export_url(),
 		'nonces'                       => et_fb_get_nonces(),
@@ -414,32 +424,7 @@ function et_fb_get_dynamic_backend_helpers() {
 					'loginAs' => sprintf( esc_html__( 'Login as %s', 'et_builder' ), $current_user->display_name ),
 				),
 				'postContent' => array(
-					'placeholder' =>
-						'<div class="et_pb_section et_section_transparent"><div class="et_pb_row"><div class="et_pb_column et_pb_column_4_4"><div class="et_pb_text">
-						<h1>Post Content Heading 1</h1>
-						<p>Post Content Paragraph Text. Lorem ipsum dolor sit amet, <a href="#">consectetur adipiscing elit</a>. Ut vitae congue libero, nec finibus purus. Vestibulum egestas orci vel ornare venenatis. Sed et ultricies turpis. Donec sit amet rhoncus erat. Phasellus volutpat vitae mi eu aliquam.</p>
-						<h2>Post Content Heading 2</h2>
-						<p>Curabitur a commodo sapien, at pellentesque velit. Vestibulum ornare vulputate. Mauris tempus massa orci, vitae lacinia tortor maximus sit amet. In hac habitasse platea dictumst. Praesent id tincidunt dolor. Morbi gravida sapien convallis sapien tempus consequat. </p>
-						<h3>Post Content Heading 3</h3>
-						<blockquote>
-						<p>Post Content Block Quote. Vehicula velit ut felis semper, non convallis dolor fermentum. Sed sapien nisl, tempus ut semper sed, congue quis leo. Integer nec suscipit lacus. Duis luctus eros dui, nec finibus lectus tempor nec. Pellentesque at tincidunt turpis.</p>
-						</blockquote>
-						<img src="' . ET_BUILDER_PLACEHOLDER_LANDSCAPE_IMAGE_DATA . '" alt="" />
-						<h4>Post Content Heading 4</h4>
-						<ul>
-						<li>Vestibulum posuere</li>
-						<li>Mi interdum nunc dignissim auctor</li>
-						<li>Cras non dignissim quam, at volutpat massa</li>
-						</ul>
-						<h5>Post Content Heading 5</h5>
-						<ol>
-						<li>Ut mattis orci in scelerisque tempus</li>
-						<li>Velit urna sagittis arcu</li>
-						<li>Mon ultrices risus lectus non nisl</li>
-						</ol>
-						<h6>Post Content Heading 6</h6>
-						<p>posuere nec lectus sit amet, pulvinar dapibus sapien. Donec placerat erat ac fermentum accumsan. Nunc in scelerisque dui. Etiam vitae purus velit. Proin dictum auctor mi, eu congue odio tempus et. Curabitur ac semper ligula. Praesent purus ligula, ultricies vel porta ac, elementum et lacus. Nullam vitae augue aliquet, condimentum est ut, vehicula sapien. Donec euismod, sem et elementum finibus, lacus mauris pulvinar enim, nec faucibus sapien neque quis sem. Vivamus suscipit tortor eget felis porttitor volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-						</div></div></div></div>',
+					'placeholder' => et_theme_builder_get_post_content_placeholder(),
 				),
 			),
 			'modals'  => array(
@@ -458,6 +443,14 @@ function et_fb_get_dynamic_backend_helpers() {
 		'globalPresets'                => ET_Builder_Element::get_global_presets(),
 		'module_cache_filename_id'     => ET_Builder_Element::get_cache_filename_id( $post_type ),
 		'registeredPostTypeOptions'    => et_get_registered_post_type_options(),
+		'codeSnippets'                 => [
+			'config' => [
+				'api'    => admin_url( 'admin-ajax.php' ),
+				'nonces' => [
+					'et_code_snippets_library_get_items' => wp_create_nonce( 'et_code_snippets_library_get_items' ),
+				],
+			],
+		],
 	);
 
 	// `class_exists` check avoids https://github.com/elegantthemes/Divi/issues/23662 error.
@@ -1881,6 +1874,7 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 		ET_Builder_Element::get_help_videos()
 	);
 
+	// phpcs:disable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned -- Invalid warning.
 	// Internationalization.
 	$helpers['i18n'] = array(
 		'modules'                   => array_merge( $modules_i10n, $additional_i10n ),
@@ -2109,7 +2103,7 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			'layoutName'           => esc_html__( 'Layout Name', 'et_builder' ),
 			'replaceLayout'        => esc_html__( 'Replace Existing Content', 'et_builder' ),
 			'search'               => esc_html__( 'Search', 'et_builder' ) . '...',
-			'portability'          => esc_html__( 'Portability', 'et_builder' ),
+			'portability'          => esc_html__( 'Import & Export Page Content', 'et_builder' ),
 			'export'               => esc_html__( 'Export', 'et_builder' ),
 			'import'               => esc_html__( 'Import', 'et_builder' ),
 			'exportText'           => esc_html__( 'Exporting your Divi Builder Layout will create a JSON file that can be imported into a different website.', 'et_builder' ),
@@ -2121,10 +2115,16 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			'importButton'         => esc_html__( 'Import Divi Builder Layout', 'et_builder' ),
 			'noFile'               => esc_html__( 'No File Selected', 'et_builder' ),
 			'chooseFile'           => esc_html__( 'Choose File', 'et_builder' ),
+			'chooseFiles'           => esc_html__( 'Choose Files', 'et_builder' ),
 			'portabilityOptions'   => esc_html__( 'Options', 'et_builder' ),
 			'includeGlobalPresets' => esc_html__( 'Include Presets', 'et_builder' ),
 			'applyGlobalPresets'   => esc_html__( 'Apply To Exported Layout', 'et_builder' ),
 			'importContextFail'    => esc_html__( 'This file should not be imported in this context.', 'et_builder' ),
+			'bulkImportContextFail'    => esc_html__( 'These files should not be imported in this context.', 'et_builder' ),
+			'closeWindow'              => esc_html__( 'Close Window', 'et_builder' ),
+			'no'                       => esc_html__( 'No', 'et_builder' ),
+			'yes'                      => esc_html__( 'Yes', 'et_builder' ),
+			'closelibraryConfirmation' => esc_html__( 'Are you sure you want to cancel current request(s) and close the window?', 'et_builder' ),
 			'globalPresets'        => array(
 				'title'            => esc_html__( 'Are You Sure?', 'et_builder' ),
 				'text'             => array(
@@ -2163,6 +2163,9 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 					'includeGlobalPresets' => esc_html__( 'Import Presets', 'et_builder' ),
 					'imported'             => esc_html__( 'imported', 'et_builder' ),
 					'ImportToCloud'        => esc_html__( 'Import To Cloud', 'et_builder' ),
+					'selectedFiles'        => esc_html__( 'Selected Files:', 'et_builder' ),
+					'drageFiles'           => esc_html__( 'Drag Files Here', 'et_builder' ),
+					'selectFiles'          => esc_html__( 'Select Files To Import', 'et_builder' ),
 				),
 				'export' => array(
 					'applyGlobalPresets' => esc_html__( 'Apply Presets To Exported Layout' ),
@@ -2170,6 +2173,12 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			),
 			'favoritesAdd'         => esc_html__( 'Add To Favorites', 'et_builder' ),
 			'favoritesRemove'      => esc_html__( 'Remove From Favorites', 'et_builder' ),
+		),
+		'prompts'                   => array(
+			'importWithLabel'   => esc_html__( 'Import Design Presets?', 'et_builder' ),
+			'importWithContent' => esc_html__( 'This layout contains global design presets. Check the box below to import these styles as presets, or leave it unchecked to bring them in as static styles.', 'et_builder' ),
+			'import'            => esc_html__( 'Import', 'et_builder' ),
+			'importPresets'     => esc_html__( 'Import Presets', 'et_builder' ),
 		),
 		'saveModuleLibraryAttrs'    => array(
 			'cancel'                 => et_builder_i18n( 'Cancel' ),
@@ -2224,6 +2233,7 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			'show_only'             => esc_html__( 'Show Only', 'et_builder' ),
 			'filterNotice'          => esc_html__( 'No options exist for this search query. <span>Click here</span> to clear your search filters.', 'et_builder' ),
 			'filterNoticeClickable' => esc_html__( 'Click here', 'et_builder' ),
+			'exploreDiviModules'    => esc_html__( 'Explore More Divi Modules', 'et_builder' ),
 			'extend_styles'         => array(
 				'title'   => esc_html__( 'Extend Styles', 'et_builder' ),
 				'button'  => esc_html__( 'Extend', 'et_builder' ),
@@ -2779,6 +2789,7 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			'preset_custom'  => esc_html__( 'Custom View', 'et_builder' ),
 		),
 	);
+	// phpcs:enable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned
 
 	$helpers['i18n'] = array_merge(
 		$helpers['i18n'],
