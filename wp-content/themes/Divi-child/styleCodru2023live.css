@@ -971,7 +971,13 @@ a:hover {
   text-align: center;
   height: 80vh;
   padding-left: 10%;
-  margin-top: 70px;
+  margin-top: 170px;
+}
+
+@media screen and (max-height: 1000px){
+  .heroContentDiv {
+    height: initial;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -985,6 +991,7 @@ a:hover {
   .heroContentDiv {
     height: 100%;
     margin: 50px auto;
+    margin-top: 100px;
   }
 }
 
@@ -1014,17 +1021,17 @@ a:hover {
 }
 
 .heroDescription h2 {
-  font-size: 36px;
+  font-size: 30px;
   color: white;
   font-weight: 600;
-  padding-bottom: 1em;
+  padding-bottom: 15px;
 }
 
 .heroDescription h3 {
   color: white;
   font-size: 24px;
   font-weight: 600;
-  padding-bottom: 1em;
+  padding-bottom: 15px;
 }
 
 .heroDescription p {
@@ -1780,6 +1787,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   --swiper-mobile-inactive-scale: 0.95;
 }
 
+@media screen and (max-width: 500px){
+  .mySwiper.container {
+    width: 100%;
+  }
+}
+
 .headlinersContainer {
   position: relative;
   background: #1e4b3a;
@@ -2111,8 +2124,17 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* Brand's Culture */
 
 .brandCultureContainer {
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.brandCultureContainer:hover,
+.brandCultureContainer:focus {
+  opacity: 0.7;
+}
+
+.brandCultureContainer > div {
+  height: 100%;
 }
 
 @media screen and (min-width: 1200px) {
@@ -2121,11 +2143,49 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   }
 }
 
+@media screen and (max-width: 500px){
+  #brandCultureAnchor .container {
+    width: 100%;
+  }
+}
+
+.lightboxBrandCultureBox {
+    margin: 0 auto;
+    max-width: 800px;
+    color: white;
+    background-color: black;
+    padding: 50px;
+    border: 1px solid white;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.lightboxBrandCultureBox h4,
+.lightboxBrandCultureBox h5,
+.lightboxBrandCultureBox p {
+  color: white;
+}
+
+.lightboxBrandCultureBox h4 {
+  font-size: 26px;
+  font-weight: 900;
+}
+
+.lightboxBrandCultureBox h5 {
+  font-size: 20px;
+  font-weight: 900;
+  padding-bottom: 25px;
+}
+
+.lightboxBrandCultureBox p {
+  font-weight: 600;
+}
+
 .brandCultureContainer .brandCultureTitle {
   position: absolute;
   color: white;
   font-size: 24px;
-  bottom: 30px;
+  bottom: 35px;
   left: 30px;
   font-weight: 900;
 }
@@ -2135,12 +2195,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   color: white;
   font-size: 12px;
   left: 30px;
-  bottom: 15px;
+  bottom: 20px;
   font-weight: 600;
 }
 
-.brandCultureContainer.text-black .brandCultureTitle,
-.brandCultureContainer.text-black .brandCultureValues {
+.brandCultureContainer .text-black .brandCultureTitle,
+.brandCultureContainer .text-black .brandCultureValues {
   color: #000000;
 }
 

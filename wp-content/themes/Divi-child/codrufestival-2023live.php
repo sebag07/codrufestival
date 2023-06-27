@@ -7,7 +7,7 @@
     <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/R-Leaves.png" alt="">
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
-        <div class="heroContentDiv col-xl-6 col-lg-7 col-md-10 col-10">
+        <div class="heroContentDiv col-xl-6 col-lg-8 col-md-10 col-10">
             <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/logo.svg"
                 alt="">
             <img class="heroContentImage anim heroContentPadureaBistra"
@@ -168,10 +168,21 @@
             foreach($options as $option): 
             $white = $option['black_text'] == '1' ? 'text-black' : 'text-white';
             ?>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 brandCultureContainer <?php echo $white; ?>">
-                <img class="brandCultureImage" src="<?php echo $option['image']; ?>">
-                <h4 class="brandCultureTitle"><?php echo $option['title']; ?></h4>
-                <h5 class="brandCultureValues"><?php echo $option['keywords']; ?></h5>
+            <a class="col-xl-4 col-lg-6 col-md-6 col-sm-12 brandCultureContainer" data-fslightbox="custom-text" data-class="d-block" href="#<?php echo $option['title']; ?>" class="col right-col">
+              <div class=" <?php echo $white; ?>">
+                  <img class="brandCultureImage" src="<?php echo $option['image']; ?>">
+                  <h4 class="brandCultureTitle"><?php echo $option['title']; ?></h4>
+                  <h5 class="brandCultureValues"><?php echo $option['keywords']; ?></h5>
+              </div>
+            </a>
+            <div id="<?php echo $option['title']; ?>" class="d-none">
+              <div class="lightboxBrandCultureBox">
+                  <h4 class="csh">
+                      <?php echo $option['title']; ?>
+                  </h4>
+                  <h5 class="brandCultureValues"><?php echo $option['keywords']; ?></h5>
+                  <p><?php echo $option['description']; ?></p>
+              </div>
             </div>
             <?php endforeach; ?>
         </div>
@@ -219,5 +230,5 @@
     </div>
 </div>
 
-
+<script src="/wp-content/themes/Divi-child/js/fslightbox.js"></script>
 <?php get_footer('codru2023'); ?>
