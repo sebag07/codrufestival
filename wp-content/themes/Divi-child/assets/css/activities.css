@@ -1,0 +1,271 @@
+#activitati .widget_activities {
+    width: 100%;
+    margin: 0;
+}
+
+.activities-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.activities-container .activities {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	overflow: hidden;
+	min-width: 600px;
+	max-width: 900px;
+	width: calc(100% - 100px);
+	height: 300px;
+}
+
+/* @media screen and (max-width: 718px) {
+	.activities-container .activities {
+		min-width: 520px;
+   }
+	.activities-container .activities .activity:nth-child(5) {
+		display: none;
+   }
+}
+@media screen and (max-width: 638px) {
+	.activities-container .activities {
+		min-width: 440px;
+   }
+	.activities-container .activities .activity:nth-child(4) {
+		display: none;
+   }
+}
+@media screen and (max-width: 558px) {
+	.activities-container .activities {
+		min-width: 360px;
+   }
+	.activities-container .activities .activity:nth-child(3) {
+		display: none;
+   }
+}
+@media screen and (max-width: 478px) {
+	.activities-container .activities {
+		min-width: 280px;
+   }
+	.activities-container .activities .activity:nth-child(2) {
+		display: none;
+   }
+} */
+.activities-container .activities .activity {
+	position: relative;
+	overflow: hidden;
+	min-width: 60px;
+	margin: 10px;
+	/* background: var(--activityBackground, var(--defaultBackground, #e6e9ed)); */
+	/* background-color: #569d88; */
+	background-size: auto 120%;
+	background-position: center;
+	cursor: pointer;
+	transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+
+.activities-container .activities .activity:nth-child(1){
+	background-color: rgba(86, 157, 136, 0.5);
+}
+.activities-container .activities .activity.active:nth-child(1){
+	background-color: rgba(86, 157, 136, 0.8);
+}
+.activities-container .activities .activity:nth-child(2){
+	background-color: rgba(252, 202, 70, 0.5);
+}
+.activities-container .activities .activity.active:nth-child(2){
+	background-color: rgba(252, 202, 70, 0.8);
+}
+.activities-container .activities .activity:nth-child(3){
+	background-color: rgba(86, 157, 136, 0.5);
+}
+.activities-container .activities .activity.active:nth-child(3){
+	background-color: rgba(86, 157, 136, 0.8);
+}
+.activities-container .activities .activity:nth-child(4){
+	background-color: rgba(252, 202, 70, 0.5);
+}
+.activities-container .activities .activity.active:nth-child(4){
+	background-color: rgba(252, 202, 70, 0.8);
+}
+
+.activities-container .activities .activity:nth-child(5) {
+	background-color: rgba(254, 133, 0, 0.5);
+}
+
+.activities-container .activities .activity.active:nth-child(5) {
+	background-color: rgba(254, 133, 0, 0.8);
+}
+
+.activities-container .activities .activity:nth-child(6) {
+	background-color: rgba(86, 157, 136, 0.5);
+}
+
+.activities-container .activities .activity.active:nth-child(6) {
+	background-color: rgba(86, 157, 136, 0.8);
+}
+
+.activities-container .activities .activity:nth-child(7) {
+	background-color: rgba(252, 110, 81, 0.5);
+}
+
+.activities-container .activities .activity.active:nth-child(7) {
+	background-color: rgba(252, 110, 81, 0.8);
+}
+
+.activities-container .activities .activity:nth-child(8) {
+	background-color: rgba(254, 133, 0, 0.5);
+}
+
+.activities-container .activities .activity.active:nth-child(8) {
+	background-color: rgba(254, 133, 0, 0.8);
+}
+
+.activities-container .activities .activity.active {
+	flex-grow: 10000;
+	transform: scale(1);
+	max-width: 600px;
+	margin: 0px;
+	border-radius: 40px;
+	background-size: auto 100%;
+}
+
+.activities-container .activities .activity .activity-info {
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.activities-container .activities .activity .activity-info {
+	opacity: 0;
+	max-width: 0;
+	width: 0;
+	transition: all 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95)
+}
+
+.activities-container .activities .activity.active .activity-info {
+	opacity: 1;
+	max-width: 280px;
+	color: white;
+	width: 100%;
+	transition: all 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+
+.activities-container .activities .activity.active .label {
+	bottom: 20px;
+	left: 20px;
+}
+.activities-container .activities .activity.active .label .info div {
+	left: 0px;
+	opacity: 1;
+}
+.activities-container .activities .activity:not(.active) {
+	flex-grow: 1;
+	border-radius: 30px;
+}
+.activities-container .activities .activity:not(.active) .label {
+	bottom: 10px;
+	left: 10px;
+}
+.activities-container .activities .activity:not(.active) .label .info div {
+	left: 20px;
+	opacity: 0;
+}
+.activities-container .activities .activity .label {
+	display: flex;
+	position: absolute;
+	right: 0px;
+	height: 40px;
+	transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+.activities-container .activities .activity .label .icon {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	min-width: 40px;
+	max-width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	/* background-color: white; */
+	color: var(--defaultBackground);
+}
+.activities-container .activities .activity .label .info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-left: 10px;
+	color: white;
+	white-space: pre;
+}
+.activities-container .activities .activity .label .info div {
+	position: relative;
+	transition: 0.5s cubic-bezier(0.05, 0.61, 0.41, 0.95), opacity 0.5s ease-out;
+}
+.activities-container .activities .activity .label .info .main {
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+.activities-container .activities .activity .label .info .sub {
+	transition-delay: 0.1s;
+}
+
+@media screen and (max-width: 991px){
+	.activities-container .activities {
+		width: auto;
+		min-width: 500px;
+		max-width: 500px;
+		height: 800px;
+		flex-direction: column;
+	}
+
+	.activities-container .activities .activity.active {
+		margin: 10px;
+		margin-left: 0px;
+		margin-right: 0px;
+		border-radius: 10px;
+	}
+
+	.activities-container .activities .activity:not(.active) {
+		height: 60px;
+		margin-left: 0px;
+		margin-right: 0px;
+		border-radius: 10px;
+	}
+
+	.activities-container .activities .activity.active .activity-info {
+		max-width: 500px;
+	}
+
+	.activity-info p {
+		margin-top: 0px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.activities-container .activities {
+		min-width: 100%;
+	}
+
+	.activities-container .activities .activity.active {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+
+	.activities-container .activities .activity:not(.active) {
+		margin-left: 15px;
+		margin-right: 15px;
+	}
+
+	.activity-info p {
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+}
