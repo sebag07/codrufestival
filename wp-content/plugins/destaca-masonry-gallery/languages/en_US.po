@@ -1,0 +1,476 @@
+# Copyright (C) 2021 Destaca Imagen
+# This file is distributed under the GPL2.
+msgid ""
+msgstr ""
+"Project-Id-Version: Divi Masonry Gallery 1.4.2\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/destaca-masonry-gallery\n"
+"POT-Creation-Date: 2021-07-12 13:40:27+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2021-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Country: United States\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: "
+"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
+"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-Bookmarks: \n"
+"X-Textdomain-Support: yes\n"
+"X-Generator: grunt-wp-i18n1.0.2\n"
+
+#: destaca-masonry-gallery.php:110
+msgid "Search Categories"
+msgstr ""
+
+#: destaca-masonry-gallery.php:111
+msgid "All Categories"
+msgstr ""
+
+#: destaca-masonry-gallery.php:112
+msgid "Parent Category"
+msgstr ""
+
+#: destaca-masonry-gallery.php:113
+msgid "Parent Category:"
+msgstr ""
+
+#: destaca-masonry-gallery.php:114
+msgid "Edit Category"
+msgstr ""
+
+#: destaca-masonry-gallery.php:115
+msgid "Update Category"
+msgstr ""
+
+#: destaca-masonry-gallery.php:116
+msgid "Add New Media Category"
+msgstr ""
+
+#: destaca-masonry-gallery.php:117
+msgid "New Media Category Name"
+msgstr ""
+
+#: destaca-masonry-gallery.php:118
+msgid "Media Categories"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:15
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:15
+msgid "Masonry Gallery"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:20
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:20
+msgid "Gallery Settings"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:25
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:25
+msgid "Overlay"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:27
+#: includes/modules/MasonryGallery/MasonryGallery.php:56
+#: includes/modules/MasonryGallery/MasonryGallery.php:114
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:27
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:50
+msgid "Image"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:30
+msgid "Gallery Filter"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:33
+msgid "Gallery Pagination"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:67
+#: includes/modules/MasonryGallery/MasonryGallery.php:68
+#: includes/modules/MasonryGallery/MasonryGallery.php:169
+msgid "Filter Buttons"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:79
+#: includes/modules/MasonryGallery/MasonryGallery.php:80
+#: includes/modules/MasonryGallery/MasonryGallery.php:180
+msgid "Active Filter Button"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:91
+#: includes/modules/MasonryGallery/MasonryGallery.php:92
+#: includes/modules/MasonryGallery/MasonryGallery.php:191
+msgid "Pagination Buttons"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:103
+#: includes/modules/MasonryGallery/MasonryGallery.php:104
+#: includes/modules/MasonryGallery/MasonryGallery.php:202
+msgid "Active Pagination Button"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:113
+msgid "Filter buttons box shadow"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:127
+msgid "Pagination buttons box shadow"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:213
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:84
+msgid "Images"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:219
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:90
+msgid "Number of columns"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:233
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:104
+msgid "Space between images"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:247
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:118
+msgid "Images size"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:251
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:122
+msgid "Small"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:252
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:123
+msgid "Medium"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:253
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:124
+msgid "Large"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:254
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:125
+msgid "Extra Large"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:261
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:132
+msgid "Image onclick action."
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:265
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:136
+msgid "Open lightbox gallery"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:266
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:137
+msgid "Link to other pages"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:267
+#: includes/modules/MasonryGallery/MasonryGallery.php:493
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:138
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:362
+msgid "None"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:273
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:144
+msgid "Popup image background color"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:283
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:154
+msgid "Image links"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:284
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:155
+msgid ""
+"Enter the links of the images in the same order separated by the separator "
+"{{link}}. Do not use line-breaks"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:295
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:166
+msgid "Images link target"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:296
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:167
+msgid "Here you can choose whether or not your link opens in a new window"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:298
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:169
+msgid "In The Same Window"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:299
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:170
+msgid "In The New Tab"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:308
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:179
+msgid "Show image title/caption in popup?"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:312
+#: includes/modules/MasonryGallery/MasonryGallery.php:393
+#: includes/modules/MasonryGallery/MasonryGallery.php:440
+#: includes/modules/MasonryGallery/MasonryGallery.php:517
+#: includes/modules/MasonryGallery/MasonryGallery.php:582
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:183
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:264
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:311
+msgid "No"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:313
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:184
+msgid "Show Image title outside image"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:314
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:185
+msgid "Show Image title + caption outside image"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:315
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:186
+msgid "Show Image title inside image"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:316
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:187
+msgid "Show Image title + caption inside image"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:325
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:196
+msgid "Image popup legend color"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:336
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:207
+msgid "Overlay content"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:339
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:210
+msgid "Overlay icon"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:340
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:211
+msgid "Overlay image title/caption"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:341
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:212
+msgid "Nothing"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:348
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:219
+msgid "Overlay Icon Color"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:349
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:220
+msgid "Here you can define a custom color for the zoom icon."
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:362
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:233
+msgid "Overlay Background Color"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:363
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:234
+msgid "Here you can define a custom color for the overlay"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:376
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:247
+msgid "Overlay Icon"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:377
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:248
+msgid "Here you can define a custom icon for the overlay"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:389
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:260
+msgid "Show image overlay title?"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:394
+#: includes/modules/MasonryGallery/MasonryGallery.php:441
+#: includes/modules/MasonryGallery/MasonryGallery.php:518
+#: includes/modules/MasonryGallery/MasonryGallery.php:583
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:265
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:312
+msgid "Yes"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:404
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:275
+msgid "Image title size"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:423
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:294
+msgid "Image title color"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:436
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:307
+msgid "Show image overlay caption?"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:451
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:322
+msgid "Image caption size"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:470
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:341
+msgid "Image caption color"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:483
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:354
+msgid "Overlay content animation"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:486
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:357
+msgid "Fade In"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:487
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:358
+msgid "Right to Left"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:488
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:359
+msgid "Left to Right"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:489
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:360
+msgid "Top to bottom"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:490
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:361
+msgid "Bottom to top"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:491
+msgid "Visible always at top"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:492
+msgid "Visble always at bottom"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:513
+msgid "Show categories filter?"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:524
+msgid "Included categories"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:537
+msgid "All categories button text"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:547
+#: includes/modules/MasonryGallery/MasonryGallery.php:606
+msgid "Filter buttons background"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:556
+#: includes/modules/MasonryGallery/MasonryGallery.php:615
+msgid "Active filter button background"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:565
+#: includes/modules/MasonryGallery/MasonryGallery.php:624
+msgid "Filter alignment"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:568
+#: includes/modules/MasonryGallery/MasonryGallery.php:627
+msgid "Left"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:569
+#: includes/modules/MasonryGallery/MasonryGallery.php:628
+msgid "Center"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:570
+#: includes/modules/MasonryGallery/MasonryGallery.php:629
+msgid "Right"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:578
+msgid "Paginate gallery?"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:589
+msgid "Page size"
+msgstr ""
+
+#: includes/modules/MasonryGallery/MasonryGallery.php:776
+msgid "%1$s"
+msgstr ""
+
+#: tmp/destaca-masonry-gallery/includes/modules/MasonryGallery/MasonryGallery.php:59
+msgid "Image Box Shadow"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Divi Masonry Gallery"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Masonry Gallery for Divi"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Destaca Imagen"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.destacaimagen.com"
+msgstr ""
+
+#: destaca-masonry-gallery.php:108
+msgctxt "taxonomy general name"
+msgid "Media Categories"
+msgstr ""
+
+#: destaca-masonry-gallery.php:109
+msgctxt "taxonomy singular name"
+msgid "Media Category"
+msgstr ""
