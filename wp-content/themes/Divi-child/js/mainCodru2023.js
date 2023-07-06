@@ -131,7 +131,7 @@ jQuery('[data-category]').on('click', function () {
 });
 
 
-jQuery(document).ready(function(){
+jQuery(".heroContentDiv").ready(function(){
 
   masterTL = gsap.timeline()
       .from('.heroContentCodruLogo', {duration: 1, opacity: 0, scale: 1, ease: "in"})
