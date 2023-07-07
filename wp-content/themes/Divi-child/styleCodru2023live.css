@@ -1337,7 +1337,7 @@ footer .row {
   align-items: center;
 }
 
-#wpforms-26912 {
+#wpforms-26912, #wpforms-27465 {
   width: 100%;
 }
 
@@ -1348,17 +1348,17 @@ footer .row {
   align-items: center;
 }
 
-#wpforms-form-26912 .wpforms-field-container {
+#wpforms-form-26912 .wpforms-field-container, #wpforms-form-27465 .wpforms-field-container {
   width: 50%;
   margin: auto;
   padding: 30px 0px 0px 0px;
 }
 
-#wpforms-26912-field_0-container {
+#wpforms-26912-field_0-container, #wpforms-27465-field_0-container {
   width: 100%;
 }
 
-#wpforms-form-26912 {
+#wpforms-form-26912, #wpforms-form-27465 {
   padding-bottom: 150px;
   position: relative;
   z-index: 2;
@@ -1368,16 +1368,21 @@ footer .row {
 #wpforms-26912-field_1,
 #wpforms-26912-field_2,
 #wpforms-26912-field_3,
-#wpforms-26912-field_3-container {
+#wpforms-26912-field_3-container,
+#wpforms-27465-field_0,
+#wpforms-27465-field_1,
+#wpforms-27465-field_2,
+#wpforms-27465-field_3,
+#wpforms-27465-field_3-container {
   max-width: 100%;
 }
 
-#wpforms-form-26912 .wpforms-field-container {
+#wpforms-form-26912 .wpforms-field-container, #wpforms-form-27465 .wpforms-field-container {
   margin: auto;
   padding: 30px 0px 0px 0px;
 }
 
-#wpforms-26912-field_0-container {
+#wpforms-26912-field_0-container, #wpforms-27465-field_0-container {
   width: 100%;
 }
 
@@ -1386,7 +1391,14 @@ footer .row {
 #wpforms-26912-field_2,
 #wpforms-26912-field_3,
 #wpforms-26912-field_6,
-#wpforms-26912-field_3-container {
+#wpforms-26912-field_3-container,
+#wpforms-27465-field_0,
+#wpforms-27465-field_1,
+#wpforms-27465-field_2,
+#wpforms-27465-field_3,
+#wpforms-27465-field_6,
+#wpforms-27465-field_3-container,
+#wpforms-27465-field_7 {
   max-width: 100%;
   width: 100%;
 }
@@ -1426,17 +1438,20 @@ footer .row {
   margin-bottom: 50px;
 }
 
-#wpforms-form-26912 .wpforms-field-container {
+#wpforms-form-26912 .wpforms-field-container, #wpforms-form-27465 .wpforms-field-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 #wpforms-26912-field_0-container,
-#wpforms-26912-field_6-container {
+#wpforms-26912-field_6-container,
+#wpforms-27465-field_0-container,
+#wpforms-27465-field_6-container,
+#wpforms-27465-field_7-container {
   grid-column: 1 / -1;
 }
 
-#wpforms-26912-field_1-container {
+#wpforms-26912-field_1-container, #wpforms-27465-field_1-container  {
   width: 95%;
 }
 
@@ -1445,7 +1460,7 @@ footer .row {
   margin-left: auto;
 }
 
-#wpforms-submit-26912 {
+#wpforms-submit-26912, #wpforms-submit-27465 {
   background: #efaa13;
   color: #fff !important;
   box-sizing: border-box !important;
@@ -1459,11 +1474,11 @@ footer .row {
   width: 100%;
 }
 
-#wpforms-submit-26912:hover {
+#wpforms-submit-26912:hover, #wpforms-submit-27465:hover {
   background-color: #569d88 !important;
 }
 
-#wpforms-26912 .wpforms-submit-container {
+#wpforms-26912 .wpforms-submit-container, #wpforms-27465 .wpforms-submit-container {
   width: 50%;
   margin: auto;
   text-align: right;
@@ -1473,7 +1488,13 @@ footer .row {
 #wpforms-26912-field_1,
 #wpforms-26912-field_3,
 #wpforms-26912-field_2,
-#wpforms-26912-field_6 {
+#wpforms-26912-field_6,
+#wpforms-27465-field_0,
+#wpforms-27465-field_1,
+#wpforms-27465-field_3,
+#wpforms-27465-field_2,
+#wpforms-27465-field_6,
+#wpforms-27465-field_7 {
   border-radius: 20px;
   padding: 10px 15px;
   border: 1px solid #143729;
@@ -1528,25 +1549,24 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 @media (max-width: 991px) {
-  #wpforms-26912 .wpforms-submit-container {
+  #wpforms-26912 .wpforms-submit-container, #wpforms-27465 .wpforms-submit-container {
     width: 70%;
   }
-  #wpforms-form-26912 .wpforms-field-container {
+  #wpforms-form-26912 .wpforms-field-container, #wpforms-form-27465 .wpforms-field-container {
     width: 70%;
   }
 }
 
 @media (max-width: 767px) {
-  #wpforms-form-26912 .wpforms-field-container {
+  #wpforms-form-26912 .wpforms-field-container, #wpforms-form-27465 .wpforms-field-container {
     width: 100%;
     padding: 30px 15px;
   }
   .contactSectionLeftSide h2,
   .contactSectionLeftSide p {
     width: 100%;
-    padding: 30px 15px;
   }
-  #wpforms-26912 .wpforms-submit-container {
+  #wpforms-26912 .wpforms-submit-container, #wpforms-27465 .wpforms-submit-container {
     width: 100%;
     padding: 0px 15px;
   }
@@ -1958,7 +1978,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .homepageNewsImage img {
   width: 100%;
-  max-height: 300px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -2405,5 +2425,97 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
   .singlePostContainer {
     min-height: 30vh;
+  }
+}
+
+
+.sectionPaddingHero {
+  padding:130px 0px 50px 0px !important;
+}
+
+.heroRightImg img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.secondPage h2 {
+  color: #fff;
+}
+
+.secondPage p {
+  color: #fff;
+}
+
+.textRepeater {
+  display: flex;
+  gap: 15px;
+  margin: 15px 0px;
+}
+
+.textRepeater img {
+  width: 40px;
+  max-height: 35px;
+  margin-top: 5px;
+}
+
+@media (max-width:767px) {
+  .sectionPaddingHero {
+    padding: 50px 4vw !important;
+  }
+  .sectionPaddingHero {
+    width: 100% !important;
+  }
+}
+
+.wpforms-confirmation-container-full {
+  width: 100% !important;
+  text-align: center;
+}
+
+/* FAQ */
+
+.accordion {
+  margin-top: 40px;
+}
+.accordion .card {
+  border: none;
+  margin-bottom: 20px;
+  background: none;
+  border-bottom: 1px solid #fff !important;
+}
+.accordion .card h2 {
+  background: url(https://cdn0.iconfinder.com/data/icons/entypo/91/arrow56-512.png) no-repeat calc(100% - 10px) center;
+  background-size: 20px;
+  cursor: pointer;
+  font-size: 28px;
+  padding-bottom: 20px;
+  color: #000;
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(73deg) brightness(102%) contrast(101%);
+}
+.accordion .card h2.collapsed {
+  background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png);
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(73deg) brightness(102%) contrast(101%);
+}
+.accordion .card-body {
+  padding-left: 0;
+  padding-right: 0;
+  color: #fff;
+  font-size: 18px;
+}
+
+.accordion > .card:last-of-type {
+  border-radius: 0px;
+}
+
+.accordion .card .card-head h2 {
+  display: flex;
+  min-height: 50px;
+  align-items: center;
+}
+
+@media (max-width:767px) {
+  .faq .container {
+    width: 100% !important;
   }
 }

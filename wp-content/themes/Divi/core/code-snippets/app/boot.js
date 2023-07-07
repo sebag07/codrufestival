@@ -65,13 +65,6 @@ $(window).on('et_code_snippets_container_ready', (event, preferences, container 
 
   const containerId = preferences.containerId;
 
-  const domNode = container.getElementById(containerId);
-  if ('' === modalType) {
-    unmountComponentAtNode(domNode);
-
-    return;
-  }
-
   render(
     <Container app={app}>
       <CodeSnippetsApp
@@ -81,7 +74,7 @@ $(window).on('et_code_snippets_container_ready', (event, preferences, container 
         container={container}
       />
     </Container>,
-    domNode
+    container.getElementById(containerId)
   );
 
   // Disable main body scrolling.

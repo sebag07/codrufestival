@@ -2,7 +2,6 @@
 
 namespace WPForms\Admin\Payments;
 
-use WPForms\Admin\Payments\Views\Coupons\Education;
 use WPForms\Admin\Payments\Views\Overview\BulkActions;
 use WPForms\Admin\Payments\Views\Single;
 use WPForms\Admin\Payments\Views\Overview\Page;
@@ -108,10 +107,6 @@ class Payments {
 			return $this->views;
 		}
 
-		$views = [
-			'coupons' => new Education(),
-		];
-
 		/**
 		 * Allow to extend payment views.
 		 *
@@ -119,23 +114,18 @@ class Payments {
 		 *
 		 * @param array $views Array of views where key is slug.
 		 */
-		$this->views = (array) apply_filters( 'wpforms_admin_payments_payments_get_views', $views );
+		$this->views = (array) apply_filters( 'wpforms_admin_payments_payments_get_views', [] );
 
 		$this->views['overview'] = new Page();
 		$this->views['single']   = new Single();
 
-		// Overview view should be the first one.
-		$this->views = array_merge( [ 'overview' => $this->views['overview'] ], $this->views );
-
-		$this->views = array_filter(
+		return array_filter(
 			$this->views,
 			static function ( $view ) {
 
 				return $view->current_user_can();
 			}
 		);
-
-		return $this->views;
 	}
 
 	/**
@@ -168,70 +158,11 @@ class Payments {
 				<?php $this->view->heading(); ?>
 			</h1>
 
-			<?php if ( ! empty( $this->view->get_tab_label() ) ) : ?>
-				<div class="wpforms-tabs-wrapper">
-					<?php $this->display_tabs(); ?>
-				</div>
-			<?php endif; ?>
-
 			<div class="wpforms-admin-content">
 				<?php $this->view->display(); ?>
 			</div>
 		</div>
 		<?php
-	}
-
-	/**
-	 * Display tabs.
-	 *
-	 * @since 1.8.2.2
-	 */
-	private function display_tabs() {
-
-		$views = $this->get_views();
-
-		// Remove views that should not be displayed.
-		$views = array_filter(
-			$views,
-			static function ( $view ) {
-
-				return ! empty( $view->get_tab_label() );
-			}
-		);
-
-		// If there is only one view - no need to display tabs.
-		if ( count( $views ) === 1 ) {
-			return;
-		}
-		?>
-		<nav class="nav-tab-wrapper">
-			<?php foreach ( $views as $slug => $view ) : ?>
-				<a href="<?php echo esc_url( $this->get_tab_url( $slug ) ); ?>" class="nav-tab <?php echo $slug === $this->active_view_slug ? 'nav-tab-active' : ''; ?>">
-					<?php echo esc_html( $view->get_tab_label() ); ?>
-				</a>
-			<?php endforeach; ?>
-		</nav>
-		<?php
-	}
-
-	/**
-	 * Get tab URL.
-	 *
-	 * @since 1.8.2.2
-	 *
-	 * @param string $tab Tab slug.
-	 *
-	 * @return string
-	 */
-	private function get_tab_url( $tab ) {
-
-		return add_query_arg(
-			[
-				'page' => self::SLUG,
-				'view' => $tab,
-			],
-			admin_url( 'admin.php' )
-		);
 	}
 
 	/**

@@ -611,7 +611,7 @@ final class Assets {
 				'googlesitekit-settings',
 				array(
 					'src'          => $base_url . 'js/googlesitekit-settings.js',
-					'dependencies' => $this->get_asset_dependencies( 'dashboard-sharing' ),
+					'dependencies' => $this->get_asset_dependencies( 'dashboard' ),
 				)
 			),
 			new Script(

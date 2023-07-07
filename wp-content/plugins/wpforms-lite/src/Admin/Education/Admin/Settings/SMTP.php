@@ -33,12 +33,7 @@ class SMTP implements EducationInterface {
 
 		$active_plugins = get_option( 'active_plugins', [] );
 
-		$allowed_plugins = [
-			'wp-mail-smtp/wp_mail_smtp.php',
-			'wp-mail-smtp-pro/wp_mail_smtp.php',
-		];
-
-		return ! array_intersect( $active_plugins, $allowed_plugins );
+		return ! in_array( 'wp-mail-smtp/wp_mail_smtp.php', $active_plugins, true );
 	}
 
 	/**

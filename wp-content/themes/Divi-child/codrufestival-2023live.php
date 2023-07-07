@@ -1,4 +1,4 @@
-<?php /*  Template Name: Codrufestival 2023 LIVE  */ ?>
+<?php /*  Template Name: Codrufestival 2023  */ ?>
 <?php get_header('codru2023live'); ?>
 
 <div class="container-fluid heroContainer p-0 m-0">
@@ -12,25 +12,16 @@
                 alt="">
             <img class="heroContentImage anim heroContentPadureaBistra"
                 src="/wp-content/themes/Divi-child/images/locatie.svg" alt="">
-            <h1 class="underLocDate">25 - 27 AUGUST</h1>
+            <h1 class="underLocDate"><?php echo get_field('hero_section_date')?></h1>
             <div class="heroDescription">
                 <a class="heroContentButton desktopButton desktopContentButton anim"
-                    href="https://bilete.codrufestival.ro/">Get Tickets</a>
-                <h2 class="heroFocusedText heroDescription">Get ready for an unforgettable
-                    experience!</h2>
+                    href="https://bilete.codrufestival.ro/"><?php echo get_field('hero_button_text')?></a>
+                <h2 class="heroFocusedText heroDescription"><?php echo get_field('hero_section_title')?></h2>
                 <p class="anim">
-                    After being ranked in the <strong>Top 10 Medium Festivals in Europe</strong>, CODRU Festival is
-                    returning in 2023, and
-                    it's more determined than ever to create an amazing experience that you don't want to miss. <br>
-                    With more stages, international headliners and national artists, immersive art installation, a
-                    breathtaking location in the BISTRA Forest, and unique surprises, CODRU Festival is set to be even
-                    greater than before!</p>
-                <h3>Are you ready to experience the most stunning sunset with your favorite
-                    beats pumping?</h3>
-                <h3>Grab your Tickets NOW.</h3>
+                <?php echo get_field('hero_section_text')?>
                 </p>
                 <a class="heroContentButton mobileButton mobileContentButton anim"
-                    href="https://bilete.codrufestival.ro/">Get Tickets</a>
+                    href="https://bilete.codrufestival.ro/"><?php echo get_field('hero_button_text')?></a>
             </div>
         </div>
     </div>
@@ -190,7 +181,7 @@
 </div>
 
 <div id="galerieAnchor" class="masonryContainer container-fluid sectionPadding">
-    <h2 class="text-center sectionPadding sectionTitle">GALLERY</h2>
+    <h2 class="text-center sectionPadding sectionTitle">GALERIE</h2>
     <div class="gallery-items gallery-masonry">
         <?php if ( have_rows( 'masonry_section' , 26897 ) ): ?>
 
@@ -210,10 +201,10 @@
 </div>
 
 <div id="noutatiAnchor" class="container-fluid sectionPadding">
-    <h2 class="sectionTitle">NEWS</h2>
+    <h2 class="sectionTitle">NOUTĂȚI</h2>
     <div class="newsContainer row">
         <?php
-            $args = array('posts_per_page' => 3, 'orderby' => 'post_date');
+            $args = array('posts_per_page' => 3, 'orderby' => 'post_date', 'category_name' => 'noutati');
             $postslist = get_posts($args);
             foreach ($postslist as $post) : {
               $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
@@ -230,5 +221,50 @@
     </div>
 </div>
 
+<div class="container-fluid faq p-relative sectionPadding">
+<h2 class="sectionTitle">FAQ's</h2>
+<div class="container">
+  <div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-head" id="headingOne">
+      <h2 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Question 1
+      </h2>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head" id="headingTwo">
+      <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Question 2
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-head" id="headingThree">
+      <h2 class="mb-0 collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Question 3
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
 <script src="/wp-content/themes/Divi-child/js/fslightbox.js"></script>
-<?php get_footer('codru2023'); ?>
+<?php get_footer('codru2023live'); ?>

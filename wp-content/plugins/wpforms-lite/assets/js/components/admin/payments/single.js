@@ -55,7 +55,7 @@ var WPFormsPaymentsSingle = window.WPFormsPaymentsSingle || ( function( document
 				contentCloning: true,
 				theme: 'borderless',
 				contentAsHTML: true,
-				position: 'top',
+				position: 'right',
 				maxWidth: 500,
 				multiple: true,
 				interactive: true,

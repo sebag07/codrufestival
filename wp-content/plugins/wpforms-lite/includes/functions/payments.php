@@ -253,15 +253,7 @@ function wpforms_sanitize_amount( $amount, $currency = '' ) { // phpcs:ignore Ge
 		$amount = str_replace( $thousands_sep, '', $amount );
 	}
 
-	/**
-	 * Remove any characters that are not a digit, a decimal point, or a minus sign.
-	 *
-	 * E is exponent notation. Float number can be written in the form 2E-13, which means 2 * 10^-13.
-	 * 0-9 is digits.
-	 * . is decimal point.
-	 * - is minus sign.
-	 */
-	$amount = (string) preg_replace( '/[^E0-9.-]/', '', $amount );
+	$amount = preg_replace( '/[^0-9.-]/', '', $amount );
 
 	/**
 	 * Set correct currency decimals.
@@ -519,7 +511,6 @@ function wpforms_has_payment_gateway( $form_data ) {
  * Get payment total amount from entry.
  *
  * @since 1.0.0
- * @since 1.8.2.2 Added PHP max() function before returning a total.
  *
  * @param array $fields List of fields.
  *
@@ -540,8 +531,6 @@ function wpforms_get_total_payment( $fields ) {
 			$total += $amount;
 		}
 	}
-
-	$total = max( 0, $total );
 
 	return wpforms_sanitize_amount( $total );
 }

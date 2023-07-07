@@ -178,7 +178,7 @@
                     <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                             src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
                 </span>
-                <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Get Tickets</a>
+                <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Cumpără bilete</a>
             </ul>
         </div>
     </div> <!-- .site-mobile-menu -->
@@ -248,7 +248,7 @@
                         <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                                 src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
                     </span>
-                    <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Get Tickets</a>
+                    <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Cumpără bilete</a>
                 </ul>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>

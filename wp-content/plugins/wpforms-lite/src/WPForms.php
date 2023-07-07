@@ -90,12 +90,6 @@ namespace WPForms {
 			}
 
 			if ( $name === 'pro' ) {
-				_deprecated_argument(
-					'wpforms()->pro',
-					'1.8.2.2 of the WPForms plugin',
-					'Please use `wpforms()->is_pro()` instead.'
-				);
-
 				return wpforms()->is_pro();
 			}
 
