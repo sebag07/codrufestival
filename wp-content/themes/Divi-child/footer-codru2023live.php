@@ -8,7 +8,7 @@
     <div class="contactSectionLeftSide container">
     <?php
     if (is_page_template('codrufestival-partners-template.php')) { 
-        echo "<p class='pt-5 mt-5'>Dacă dorești să afli mai multe detalii sau să discutăm despre colaborarea noastră, te rugăm să ne trimiți detaliile tale sau să ne suni la numărul de telefon.</p>";
+        echo "<p class='pt-5 mt-5 partnersContactText'>Dacă dorești să afli mai multe detalii sau să discutăm despre colaborarea noastră, te rugăm să ne trimiți detaliile tale sau să ne suni la numărul de telefon.</p>";
         echo do_shortcode('[wpforms id="27465" title="false"]'); 
     } else {
         echo "<h2>Cu ce te putem ajuta?</h2>";

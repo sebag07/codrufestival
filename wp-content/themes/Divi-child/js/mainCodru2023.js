@@ -140,3 +140,39 @@ jQuery(".heroContentDiv").ready(function(){
       .from('.heroDescription', {duration: 1, opacity: 0, ease: "in"})
 
 });
+
+jQuery(document).ready(function(){
+  var masterTL = gsap.timeline();
+
+  jQuery(".valueRepeater").each(function(i) {
+    var repeaterTL = gsap.timeline().from(this, {duration: 1, opacity: 0, scale: 1, ease: "in"});
+    masterTL.add(repeaterTL);
+  });
+
+  // var ctrl = new ScrollMagic.Controller();
+
+  // // Create scenes in jQuery each() loop
+  // $(".valueRepeater").each(function(i) {
+  //   var inner = $(this).find(".value-step");
+  //   var outer = $(this).find(".value-text");
+  //   var tl = new TimelineMax();
+    
+  //   tl.from(outer, 0.25, { scaleX: 0 });
+  //   tl.from(inner, 0.65, { yPercent: 100, ease: Back.easeOut });
+    
+  //   new ScrollMagic.Scene({
+  //     triggerElement: this,
+  //     triggerHook: 0.15
+  //   })
+  //     .setTween(tl)
+  //     .addIndicators({
+  //       colorTrigger: "white",
+  //       colorStart: "white",
+  //       colorEnd: "white",
+  //       indent: 40
+  //     })
+  //     .addTo(ctrl);
+  // });
+  
+
+})

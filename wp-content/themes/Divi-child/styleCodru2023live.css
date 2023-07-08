@@ -2429,31 +2429,111 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 
-.sectionPaddingHero {
-  padding:130px 0px 50px 0px !important;
+.partnersPage {
+  padding-top: 130px;
+  padding-bottom: 50px;
+  max-width: 1400px;
 }
 
-.heroRightImg img {
+@media screen and (max-width: 1400px){
+  .partnersPage {
+    max-width: 1080px;
+  }
+}
+
+.partnersPage .partnersTitle {
+  padding-top: 80px;
+}
+
+@media screen and (max-width: 1200px){
+  .partnersPage .partnersTitle {
+    padding-top: 50px;
+  }
+}
+
+.partnersPage .contactSectionLeftSide p {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.partnerImage img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  overflow: visible;
+  position: relative;
+  z-index: 1;
 }
 
-.secondPage h2 {
+.partnersPage .valuesImage img {
+  overflow: hidden;
+  width: auto;
+  border-radius: 8px;
+}
+
+.partnersPage .valueTextContainer {
+  padding-top: 25px;
+  padding-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.partnersPage .valueTextContainer p {
+  font-size: 20px;
+} 
+
+@media screen and (max-width: 1400px){
+  .partnersPage .valueTextContainer p {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 991px){
+  .partnersPage .valueTextContainer p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .partnersPage .valueTextContainer p {
+    font-size: 16px;
+  }
+}
+
+.partnersPage h2 {
+  color: #ebab20;
+  font-weight: 900;
+  font-size: 36px;
+}
+
+.partnersPage p {
   color: #fff;
+  position: relative;
+  z-index: 10;
+  font-weight: 500;
+  font-size: 16px;
 }
 
-.secondPage p {
-  color: #fff;
+.partnersPage .value-step {
+  font-size: 24px;
+  font-weight: 900;
+  color: #ebab20;
+
 }
 
-.textRepeater {
+.valueRepeater {
   display: flex;
   gap: 15px;
   margin: 15px 0px;
 }
+.valueRepeater h3 {
+  color: #ebab20;
+  font-weight: 600;
+  font-size: 24px;
+}
 
-.textRepeater img {
+.valueRepeater img {
   width: 40px;
   max-height: 35px;
   margin-top: 5px;
@@ -2471,6 +2551,11 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .wpforms-confirmation-container-full {
   width: 100% !important;
   text-align: center;
+}
+
+.partnersContactText {
+  font-weight: 500;
+  font-size: 20px;
 }
 
 /* FAQ */
@@ -2518,4 +2603,46 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   .faq .container {
     width: 100% !important;
   }
+}
+
+
+
+section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.inner {
+position: relative;
+  
+}
+.outer {
+  border-bottom: solid white 2px;
+  overflow: hidden;
+}
+
+section:nth-child(1) {
+  background-color: #84c186;
+}
+section:nth-child(2) {
+  background-color: #8b6c4c;
+}
+section:nth-child(3) {
+  background-color: #39a3ee;
+}
+section:nth-child(4) {
+  background-color: #ef9144;
+}
+section:nth-child(5) {
+  background-color: #cd58eb;
+}
+section:nth-child(6) {
+  background-color: #b84b4b;
 }

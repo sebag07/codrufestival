@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="icon" href="/wp-content/themes/Divi-child/images/logo.svg">
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/css/owl.carousel.min.css">
     <!-- Bootstrap CSS -->
 
@@ -25,6 +24,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/animation.gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver-98">
     <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver-98"></script>
 
@@ -209,7 +209,7 @@
                 }
                     ?>
                 </ul>
-                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
+                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
             </div>
 
@@ -250,7 +250,7 @@
                     </span>
                     <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Cumpără bilete</a>
                 </ul>
-                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none mt-lg-2 ml-3"><span
+                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
             </div>
 
