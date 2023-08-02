@@ -26,10 +26,10 @@
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver-98">
-    <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver-98"></script>
+    <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=121"></script>
 
     <!-- Style -->
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=98">
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=131">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
         integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -96,6 +96,35 @@
     }(window, document, 'ttq');
     </script>
     <!-- End Meta Pixel Code -->
+    
+    <script data-obct type = "text/javascript">
+      /** DO NOT MODIFY THIS CODE**/
+      !function(_window, _document) {
+        var OB_ADV_ID = '00fb65378bb78ab506c0fe412852ba8f80';
+        if (_window.obApi) {
+          var toArray = function(object) {
+            return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];
+          };
+          _window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));
+          return;
+        }
+        var api = _window.obApi = function() {
+          api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);
+        };
+        api.version = '1.1';
+        api.loaded = true;
+        api.marketerId = OB_ADV_ID;
+        api.queue = [];
+        var tag = _document.createElement('script');
+        tag.async = true;
+        tag.src = '//amplify.outbrain.com/cp/obtp.js';
+        tag.type = 'text/javascript';
+        var script = _document.getElementsByTagName('script')[0];
+        script.parentNode.insertBefore(tag, script);
+      }(window, document);
+    
+      obApi('track', 'PAGE_VIEW');
+    </script>
 
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3a0946ec-6993-4f13-ade5-9f5617027b2a"
         data-blockingmode="auto" type="text/javascript"></script>
@@ -178,7 +207,7 @@
                     <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                             src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
                 </span>
-                <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Cumpără bilete</a>
+                <a class="heroButtonMenu" href="<?php echo get_field('ticket_button_url', 'options'); ?>" target="_blank"><?php echo get_field('ticket_button_text', 'options'); ?></a>
             </ul>
         </div>
     </div> <!-- .site-mobile-menu -->
@@ -189,7 +218,7 @@
         <div class="container-fluid row m-0 justify-content-center">
             <!-- <div class="site-logo col-lg-5 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logocodru.png" alt=""></a></div> -->
             <div
-                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center leftMenu justify-content-left col-lg-4 col-2">
+                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center leftMenu justify-content-left col-lg-5 col-2">
                 <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
                     <?php
                   $menu = get_menu_with_children("Codru2023LeftMenu");
@@ -213,13 +242,13 @@
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
             </div>
 
-            <div class="site-logo col-lg-4 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo.svg"
+            <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo.svg"
                         alt=""></a></div>
 
 
 
             <div
-                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center rightMenu justify-content-right col-lg-4 col-2">
+                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center rightMenu justify-content-right col-lg-6 col-2">
                 <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
                     <?php
                   $menu = get_menu_with_children("Codru2023RightMenu");
@@ -248,7 +277,7 @@
                         <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                                 src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
                     </span>
-                    <a class="heroButtonMenu" href="https://bilete.codrufestival.ro/" target="_blank">Cumpără bilete</a>
+                    <a class="heroButtonMenu" href="<?php echo get_field('ticket_button_url', 'options'); ?>" target="_blank"><?php echo get_field('ticket_button_text', 'options'); ?></a>
                 </ul>
                 <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3"><span
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>

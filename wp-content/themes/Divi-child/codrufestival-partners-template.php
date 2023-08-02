@@ -32,7 +32,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-12 text-center partnersTitle pb-3">
-            <h2>Call Parteneri</h2>
+            <h2>Fii frate cu CODRU!</h2>
         </div>
             <div class="col-lg-6 col-md-12 col-12 order-2 order-md-2 order-lg-1 valuesImage text-center pt-3">
                 <img src="/wp-content/themes/Divi-child/images/values-page/value_1.jpg" alt="">
@@ -49,7 +49,7 @@
             <div class="col-lg-6 col-md-12 col-12 order-3 order-md-3 order-lg-3 valueTextContainer">
                 <p>Dacă răspunsul este DA, cel puțin o dată, atunci te invităm să te alături MISIUNII NOASTRE.</p>
                 <p>CODRU Festival este dedicat inițierii și susținerii proiectelor care au un impact pozitiv asupra mediului
-                    și a proiectelor culturale. Ne dorim să aducem schimbări reale și durabile în aceste domenii, promovând
+                    și evenimentelor culturale. Ne dorim să aducem schimbări reale și durabile în aceste domenii, promovând
                     sustenabilitatea și diversitatea culturală. Încurajăm diferite forme de expresie artistică care aduc
                     bucurie și inspirație comunității noastre.</p>
             </div>
@@ -61,16 +61,15 @@
             </div>
             <div class="col-lg-6 col-md-12 col-12 order-5 order-md-5 order-lg-6 pt-3 valueTextContainer">
                 <p>La CODRU...</p>
-                <p>… ne străduim să creăm o comunitate puternică, în care se creează legături durabile între oameni și
-                    natură</p>
+                <p>… ne străduim să construim o comunitate puternică, în care se creează legături durabile între oameni și natură</p>
                 <p>… inițiem multiple sesiuni de plantare și ecologizare, an de an, alături de sute de voluntari</p>
                 <p>… suntem siguri că proiectele noastre vor aduce o serie de beneficii pentru compania ta precum și
                     expunere și vizibilitate în comunitatea locală și în rândul participanților la evenimentele noastre.</p>
             </div>
             <div class="col-lg-6 col-md-12 col-12 order-7 order-md-7 order-lg-7 valueTextContainer">
-                <p>Ne-am propus să aducem în comunitatea noastră precum și în lumea afacerilor o schimbare pozitivă.</p>
+                <p>Ne-am propus să aducem în comunitatea noastră, precum și în lumea afacerilor, o schimbare pozitivă.</p>
                 <p>Dacă te alături misiunii noastre, compania ta va beneficia de o expunere semnificativă și vizibilitate în
-                    comunitatea locală. Mii de "Oameni din CODRU" s-au alăturat deja acțiunilor și evenimentelor noastre,
+                    comunitatea locală. Mii de participanți s-au alăturat deja acțiunilor și evenimentelor noastre,
                     ceea ce ne oferă oportunitatea de a face cunoscute valorile companiei din care faci parte.</p>
                 <p>Suntem nerăbdători să aflăm cum poate compania din care faci parte să se alăture misiunii CODRU.</p>
             </div>

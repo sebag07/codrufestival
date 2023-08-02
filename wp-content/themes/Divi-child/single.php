@@ -27,6 +27,7 @@ get_header('codru2023live');
             $args = array(
                 'posts_per_page'    => 3, 
                 'orderby'           => 'post_date',
+                'category_name' => 'noutati',
                 'exclude'           => array(get_the_id()));
             $postslist = get_posts($args);
             foreach ($postslist as $post) : {
@@ -46,5 +47,5 @@ get_header('codru2023live');
 
 
 <?php
-get_footer('codru2023');
+get_footer('codru2023live');
 ?>

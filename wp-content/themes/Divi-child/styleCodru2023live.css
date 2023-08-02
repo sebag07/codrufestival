@@ -150,6 +150,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index:4;
 }
 
 @media (max-width: 991px) {
@@ -226,7 +227,7 @@ a:hover {
   color: rgba(255, 255, 255, 1);
   display: inline-block;
   font-size: 18px;
-  margin-right: 60px;
+  margin-right: 20px;
   font-weight: 600;
   text-decoration: none !important;
 }
@@ -666,6 +667,16 @@ a:hover {
 .rightMenu {
   justify-content: right;
   right: 10%;
+  z-index:2 !important;
+}
+
+@media (max-width:1900px) {
+    .rightMenu {
+        right:0;
+    }
+    .leftMenu {
+        left:0;
+    }
 }
 
 .headerHalfCircle {
@@ -676,6 +687,12 @@ a:hover {
   right: 0;
   margin: auto;
   width: 20%;
+}
+
+@media (min-width:2000px) {
+    .headerHalfCircle {
+        width:15%;
+    }
 }
 
 .headerHalfCircle img {
@@ -1574,7 +1591,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 @media (max-width: 500px) {
   .contactSectionLeftSide h2 {
-    font-size: 34px;
+    font-size: 34px !important;
   }
 }
 
@@ -1728,6 +1745,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   width: 25%;
   padding: 5px;
   display: block;
+  position: relative;
 }
 
 .gallery-masonry img {
@@ -2033,18 +2051,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 /* ARTISTI */
 
-#artistsAnchor {
+#lineupAnchor {
   background-color: #1e4b3a;
 }
 
-#artistsAnchor .container {
+
+#lineupAnchor .container {
   flex-direction: column;
 }
 
 .artistsLevel1,
 .artistsLevel2,
 .artistsLevel3,
-.artistsLevel4 {
+.artistsLevel4,
+.artistsLevel5,
+.artistsLevel6{
   display: inline-block;
   text-align: center;
 }
@@ -2052,14 +2073,16 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artistsLevel1 div,
 .artistsLevel2 div,
 .artistsLevel3 div,
-.artistsLevel4 div {
+.artistsLevel4 div,
+.artistsLevel5 div,
+.artistsLevel6 div{
   display: inline-block;
   text-align: center;
 }
 
 .artistsLevel1 div h4 {
   color: #efaa13;
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -2067,7 +2090,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .artistsLevel2 div h4 {
   color: #fff;
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -2075,13 +2098,30 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .artistsLevel3 div h4 {
   color: #efaa13;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
   display: flex;
   align-items: center;
 }
 
 .artistsLevel4 div h4 {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.artistsLevel5 div h4 {
+  color: #efaa13;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+
+.artistsLevel6 div h4 {
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -2105,6 +2145,17 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   .artistsLevel4 div h4 {
     font-size: 12px;
   }
+}
+
+#lineupAnchor .gallery-masonry {
+    margin-top:50px;
+    margin-bottom:50px;
+}
+
+@media screen and (max-width: 991px){
+    #lineupAnchor .line-up-container {
+        width: 95%;
+    }
 }
 
 .artistsLevel1 div img {
@@ -2132,6 +2183,22 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .artistsLevel4 div img {
+  max-width: 4px;
+  max-height: 4px;
+  filter: invert(100%) sepia(1%) saturate(7496%) hue-rotate(249deg)
+    brightness(114%) contrast(105%);
+  margin: 0px 6px;
+}
+
+.artistsLevel5 div img {
+  max-width: 6px;
+  max-height: 6px;
+  filter: invert(84%) sepia(28%) saturate(5079%) hue-rotate(350deg)
+    brightness(96%) contrast(95%);
+  margin: 0px 6px;
+}
+
+.artistsLevel6 div img {
   max-width: 4px;
   max-height: 4px;
   filter: invert(100%) sepia(1%) saturate(7496%) hue-rotate(249deg)
@@ -2170,7 +2237,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   margin: 0 auto;
   max-width: 800px;
   color: white;
-  background-color: black;
+  background-color: #1e4b3a;
   padding: 50px;
   border: 1px solid white;
   margin-left: 15px;
@@ -2202,18 +2269,22 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   position: absolute;
   color: white;
   font-size: 24px;
-  bottom: 35px;
-  left: 30px;
+  bottom: 5px;
+  left: 0px;
   font-weight: 900;
+  width: 100%;
+  text-align: center;
 }
 
 .brandCultureContainer .brandCultureValues {
   position: absolute;
   color: white;
   font-size: 12px;
-  left: 30px;
-  bottom: 20px;
+  left: 0px;
+  bottom: -10px;
   font-weight: 600;
+  width: 100%;
+  text-align: center;
 }
 
 .brandCultureContainer .text-black .brandCultureTitle,
@@ -2249,19 +2320,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .singlePostContainer {
   min-height: 40vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
+  /*justify-content: center;*/
+  /*align-items: center;*/
   background-color: #1e4b3a;
   /* padding-top: 80px; */
   /* margin-bottom: 80px; */
 }
 
 .singlePostContainer h1 {
-  color: #fff;
+  color: #efaa13;
   padding: 50px 5px;
-  text-align: center;
+  text-align: left;
   font-size: 40px;
+  font-style: italic;
+  font-weight:600;
 }
 
 @media screen and (max-width: 767px){
@@ -2362,7 +2435,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   .singlePostAuthor img {
     max-width: 120px !important;
   }
-  #artistsAnchor .container {
+  #lineupAnchor .container {
     width: 100% !important;
   }
 }
@@ -2442,7 +2515,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .partnersPage .partnersTitle {
-  padding-top: 80px;
+  padding-top: 100px;
 }
 
 @media screen and (max-width: 1200px){
@@ -2619,5 +2692,123 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 @media (max-width:767px) {
   .faq .container {
     width: 100% !important;
+  }
+}
+
+/* ARTISTS */
+
+.singleArtistContainer {
+  padding-top: 150px;
+  padding-bottom: 50px;
+}
+
+.singleArtistContainer .singlePostMainImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 600px;
+  border-radius: 20px;
+}
+
+.singleArtistContainer h1 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.spotifyIframeContainer iframe {
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 40vh; 
+  position: absolute; 
+  border: 0;
+}
+
+.artistSocials {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 5px !important;
+  margin-top:20px;
+}
+
+.artistSocials a {
+  background: orange;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  margin: 10px 0px;
+  font-weight: 600;
+}
+
+
+.artistText {
+  color: #fff !important;
+  font-size: 16px;
+}
+
+.artistItem img {
+  position: relative;
+}
+
+.artistItem span {
+  position: absolute;
+    color: #efaa13;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: italic;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+@media (max-width:1200px) {
+    .singleArtistContainer {
+        padding-top:50px;
+    }
+}
+
+.gallery-masonry .artistItem img {
+    opacity:.4;
+}
+
+.artistText h4 {
+  color: #fff;
+}
+
+.artistSocials img {
+  height: 50px;
+  width: 50px;
+  filter: invert(100%) sepia(5%) saturate(7500%) hue-rotate(219deg) brightness(110%) contrast(102%);
+}
+
+.artistSocials img:hover {
+  filter: invert(76%) sepia(77%) saturate(2085%) hue-rotate(352deg) brightness(97%) contrast(93%);
+}
+
+@media (max-width:767px) {
+  .artistText {
+    margin-bottom: 40px;
+  }
+  .artistSocialsSpotify {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top:0px;
+  }
+  .artistSocialsSpotify .row {
+      padding-top:40px;
+      padding-bottom:40px;
   }
 }

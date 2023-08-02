@@ -26,66 +26,18 @@
         </div>
     </div>
 </div>
-<div id="lineupAnchor" class="firstSectionContainer pb-5 position-relative">
+<!--<div id="lineupAnchor" class="firstSectionContainer pb-5 position-relative">-->
+<!--    <h2 class="text-center sectionPadding sectionTitle">LINE-UP</h2>-->
+        
+
+<!--</div>-->
+
+<div id="lineupAnchor" class="container-fluid sectionPadding">
     <h2 class="text-center sectionPadding sectionTitle">LINE-UP</h2>
-    <div class="swiper mySwiper container">
-        <div class="swiper-wrapper">
-            <?php if ( have_rows( 'headliners_repeater' ) ): ?>
-
-            <?php while( have_rows( 'headliners_repeater' ) ) : the_row(); ?>
-
-            <?php if( $headlinersImgUrl = get_sub_field( 'headliners_image' ) ) { 
-
-                        $headlinerName = get_sub_field ('headliners_name');
-
-                        echo "<div class='swiper-slide slide'><img src='$headlinersImgUrl' /><span>$headlinerName</span></div>";
-                        
-                            } ?>
-
-            <?php endwhile; ?>
-
-            <?php endif; ?>
-        </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
-    </div>
-    <div class="swiper-pagination"></div>
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-    var swiper = new Swiper(".mySwiper", {
-        grabCursor: true,
-        centeredSlides: true,
-        breakpoints: {
-            // when window width is >= 320px
-            320: {
-                slidesPerView: 1,
-            },
-            991: {
-                slidesPerView: 3,
-            },
-        },
-        loop: true,
-        navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-        },
-        pagination: {
-            el: ".swiper-pagination",
-        },
-    });
-    </script>
-
-</div>
-
-<div id="artistsAnchor" class="container-fluid sectionPadding">
-    <div class="container d-flex">
+    <div class="container line-up-container d-flex">
         <div class="artistsLevel1 pt-3 pb-3">
             <?php
-              $args = array('posts_per_page' => -1, 'orderby' => array( 'menu_order' => 'ASC' ), 'post_type' => 'artist', 'category_name' => 'level-1');
+              $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-1');
               $postslist = get_posts($args);
               foreach ($postslist as $key => $post) {
                 $artistName = get_the_title();
@@ -117,7 +69,7 @@
         </div>
         <div class="artistsLevel3 pt-3 pb-3">
             <?php
-              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-3');
+              $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-3');
               $postslist = get_posts($args);
               foreach ($postslist as $key => $post) {
                 $artistName = get_the_title();
@@ -133,7 +85,7 @@
         </div>
         <div class="artistsLevel4 pt-3 pb-3">
             <?php
-              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-4');
+              $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-4');
               $postslist = get_posts($args);
               foreach ($postslist as $key => $post) {
                 $artistName = get_the_title();
@@ -147,13 +99,110 @@
             ?>
 
         </div>
+        
+        <div class="artistsLevel5 pt-3 pb-3">
+            <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-5');
+              $postslist = get_posts($args);
+              foreach ($postslist as $key => $post) {
+                $artistName = get_the_title();
+                if($key === array_key_last($postslist)){
+                  echo "<div><h4 class='m-0'>$artistName </h4></div>";
+                } else {
+                  echo "<div><h4 class='m-0'>$artistName <img src='/wp-content/themes/Divi-child/images/black-circle.png' /></h4></div>";
+                }
+
+              }
+            ?>
+
+        </div>
+        
+        <div class="artistsLevel6 pt-3 pb-3">
+            <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-6');
+              $postslist = get_posts($args);
+              foreach ($postslist as $key => $post) {
+                $artistName = get_the_title();
+                if($key === array_key_last($postslist)){
+                  echo "<div><h4 class='m-0'>$artistName </h4></div>";
+                } else {
+                  echo "<div><h4 class='m-0'>$artistName <img src='/wp-content/themes/Divi-child/images/black-circle.png' /></h4></div>";
+                }
+
+              }
+            ?>
+
+        </div>
+        
+    </div>
+        <div class="gallery-items gallery-masonry">
+            <?php
+              $args = array('posts_per_page' => -1, 'orderby' => array( 'post_date' => 'ASC' ), 'post_type' => 'artist', 'category_name' => 'level-1');
+              $postslist = get_posts($args);
+              foreach ($postslist as $post) : {
+              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+              $artistURL = get_the_permalink();
+              $artistTitle = get_the_title();
+              if( !empty(get_the_post_thumbnail()) ) {
+                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+              };
+
+              }
+              endforeach;
+              ?>
+                          <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-2');
+              $postslist = get_posts($args);
+              foreach ($postslist as $post) : {
+              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+              $artistURL = get_the_permalink();
+              $artistTitle = get_the_title();
+              if( !empty(get_the_post_thumbnail()) ) {
+                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+              };
+
+              }
+                endforeach;
+
+              ?>
+                          <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-3');
+              $postslist = get_posts($args);
+              foreach ($postslist as $post) : {
+              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+              $artistURL = get_the_permalink();
+              $artistTitle = get_the_title();
+              if( !empty(get_the_post_thumbnail()) ) {
+                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+              };
+
+              }
+                            endforeach;
+
+              ?>
+            <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-4');
+              $postslist = get_posts($args);
+              foreach ($postslist as $post) : {
+              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+              $artistURL = get_the_permalink();
+              $artistTitle = get_the_title();
+              if( !empty(get_the_post_thumbnail()) ) {
+                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+              };
+
+              }
+                            endforeach;
+
+              ?>
+
     </div>
 </div>
 
 <section id="brandCultureAnchor">
     <div class="container-fluid sectionPadding">
         <div class="container">
-            <h2 class="sectionTitle">BRAND'S CULTURE</h2>
+            <h2 class="sectionTitle"><?php echo get_field('values_section_title', 'options'); ?></h2>
             <div class="row">
                 <?php 
             $options = get_field("brand_culture", "options"); 
@@ -185,7 +234,7 @@
 
 <section id="galerieAnchor">
     <div class="masonryContainer container-fluid sectionPadding">
-        <h2 class="text-center sectionPadding sectionTitle">GALERIE</h2>
+        <h2 class="text-center sectionPadding sectionTitle"><?php echo get_field('gallery_title', 'options'); ?></h2>
         <div class="gallery-items gallery-masonry">
             <?php if ( have_rows( 'masonry_section' , 26897 ) ): ?>
 
@@ -204,6 +253,7 @@
         </div>
     </div>
 </section>
+
 
 <section id="faq">
     <div class="container-fluid faq p-relative sectionPadding">
@@ -239,15 +289,16 @@
 
 <section id="noutatiAnchor">
     <div class="container-fluid sectionPadding">
-        <h2 class="sectionTitle">NOUTĂȚI</h2>
+        <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
         <div class="newsContainer row">
             <?php
             $args = array('posts_per_page' => 3, 'orderby' => 'post_date', 'category_name' => 'noutati');
             $postslist = get_posts($args);
             foreach ($postslist as $post) : {
               $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+              $postURL = get_the_permalink($post->ID);
                 echo "<div class='homepageNews col-lg-4 col-md-6 col-12'>
-            <a href='$post->guid' class='homepageNewsLink'>
+            <a href='$postURL' class='homepageNewsLink'>
             <div class='homepageNewsImage text-center'><img src='$image[0]' alt=''></div>
             <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />READ MORE</span></div>
             </a>
