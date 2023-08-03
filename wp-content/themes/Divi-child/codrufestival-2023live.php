@@ -28,7 +28,7 @@
 </div>
 <!--<div id="lineupAnchor" class="firstSectionContainer pb-5 position-relative">-->
 <!--    <h2 class="text-center sectionPadding sectionTitle">LINE-UP</h2>-->
-        
+
 
 <!--</div>-->
 
@@ -99,7 +99,7 @@
             ?>
 
         </div>
-        
+
         <div class="artistsLevel5 pt-3 pb-3">
             <?php
               $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-5');
@@ -116,7 +116,7 @@
             ?>
 
         </div>
-        
+
         <div class="artistsLevel6 pt-3 pb-3">
             <?php
               $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => 'level-6');
@@ -133,67 +133,66 @@
             ?>
 
         </div>
-        
+
     </div>
-        <div class="gallery-items gallery-masonry">
-            <?php
+    <div class="gallery-items gallery-masonry">
+        <?php
               $args = array('posts_per_page' => -1, 'orderby' => array( 'post_date' => 'ASC' ), 'post_type' => 'artist', 'category_name' => 'level-1');
               $postslist = get_posts($args);
               foreach ($postslist as $post) : {
-              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
-              $artistURL = get_the_permalink();
-              $artistTitle = get_the_title();
-              if( !empty(get_the_post_thumbnail()) ) {
-                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
-              };
+                $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $artistURL = get_the_permalink();
+                $artistTitle = get_the_title();
+                if( !empty(get_the_post_thumbnail()) ) {
+                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                };
 
               }
               endforeach;
               ?>
-                          <?php
+        <?php
               $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-2');
               $postslist = get_posts($args);
               foreach ($postslist as $post) : {
-              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
-              $artistURL = get_the_permalink();
-              $artistTitle = get_the_title();
-              if( !empty(get_the_post_thumbnail()) ) {
-                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
-              };
+                $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $artistURL = get_the_permalink();
+                $artistTitle = get_the_title();
+                if( !empty(get_the_post_thumbnail()) ) {
+                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                };
 
               }
-                endforeach;
+              endforeach;
 
               ?>
-                          <?php
+        <?php
               $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-3');
               $postslist = get_posts($args);
               foreach ($postslist as $post) : {
-              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
-              $artistURL = get_the_permalink();
-              $artistTitle = get_the_title();
-              if( !empty(get_the_post_thumbnail()) ) {
-                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
-              };
+                $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $artistURL = get_the_permalink();
+                $artistTitle = get_the_title();
+                if( !empty(get_the_post_thumbnail()) ) {
+                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                };
 
               }
-                            endforeach;
+              endforeach;
 
               ?>
-            <?php
+        <?php
               $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-4');
               $postslist = get_posts($args);
               foreach ($postslist as $post) : {
-              $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
-              $artistURL = get_the_permalink();
-              $artistTitle = get_the_title();
-              if( !empty(get_the_post_thumbnail()) ) {
-                echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
-              };
+                $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $artistURL = get_the_permalink();
+                $artistTitle = get_the_title();
+                if( !empty(get_the_post_thumbnail()) ) {
+                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                };
 
-              }
-                            endforeach;
-
+                }
+              endforeach;
               ?>
 
     </div>
@@ -207,7 +206,7 @@
                 <?php 
             $options = get_field("brand_culture", "options"); 
             foreach($options as $option): 
-            $white = $option['black_text'] == '1' ? 'text-black' : 'text-white';
+              $white = $option['black_text'] == '1' ? 'text-black' : 'text-white';
             ?>
                 <a class="col-xl-4 col-lg-6 col-md-6 col-sm-12 brandCultureContainer" data-fslightbox="custom-text"
                     data-class="d-block" href="#<?php echo $option['title']; ?>" class="col right-col">
@@ -217,7 +216,7 @@
                         <h5 class="brandCultureValues"><?php echo $option['keywords']; ?></h5>
                     </div>
                 </a>
-                <div id="<?php echo $option['title']; ?>" class="d-none">
+                <div id="<?php echo $option['title']; ?>" style="display: none;">
                     <div class="lightboxBrandCultureBox">
                         <h4 class="csh">
                             <?php echo $option['title']; ?>
@@ -226,7 +225,7 @@
                         <p><?php echo $option['description']; ?></p>
                     </div>
                 </div>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
             </div>
         </div>
     </div>
@@ -264,18 +263,17 @@
             $questions = get_field("faq_repeater", "options"); 
             $index = 1;
             foreach($questions as $question): ?>
-                <div class="card">
-                    <div class="card-head" id="<?php echo "heading" . $index; ?>">
-                        <h2 class="mb-0 collapsed" data-toggle="collapse"
-                            data-target="<?php echo "#collapse" . $index; ?>" aria-expanded="false"
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="<?php echo "heading" . $index; ?>">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="<?php echo "#collapse" . $index; ?>" aria-expanded="false"
                             aria-controls="<?php echo "collapse" . $index; ?>">
                             <?php echo $question['question']; ?>
-                        </h2>
-                    </div>
-
-                    <div id="<?php echo "collapse" . $index; ?>" class="collapse"
-                        aria-labelledby="<?php echo "collapse" . $index; ?>" data-parent="#accordionExample">
-                        <div class="card-body">
+                        </button>
+                    </h2>
+                    <div id="<?php echo "collapse" . $index; ?>" class="accordion-collapse collapse"
+                        aria-labelledby="<?php echo "heading" . $index; ?>" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
                             <?php echo $question['answer']; ?>
                         </div>
                     </div>
@@ -288,7 +286,7 @@
 </section>
 
 <section id="noutatiAnchor">
-    <div class="container-fluid sectionPadding">
+    <div class="container sectionPadding">
         <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
         <div class="newsContainer row">
             <?php
@@ -297,10 +295,11 @@
             foreach ($postslist as $post) : {
               $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
               $postURL = get_the_permalink($post->ID);
+              $read_more = get_field('news_read_more', 'options');
                 echo "<div class='homepageNews col-lg-4 col-md-6 col-12'>
             <a href='$postURL' class='homepageNewsLink'>
             <div class='homepageNewsImage text-center'><img src='$image[0]' alt=''></div>
-            <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />READ MORE</span></div>
+            <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />$read_more</span></div>
             </a>
         </div>";
             }
@@ -311,5 +310,4 @@
     </div>
 </section>
 
-<script src="/wp-content/themes/Divi-child/js/fslightbox.js"></script>
 <?php get_footer('codru2023live'); ?>

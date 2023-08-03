@@ -153,7 +153,7 @@ a:hover {
   z-index:4;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 767px) {
   .site-logo {
     justify-content: start;
   }
@@ -989,6 +989,7 @@ a:hover {
   height: 80vh;
   padding-left: 10%;
   margin-top: 170px;
+  z-index: 10;
 }
 
 @media screen and (max-height: 1000px) {
@@ -2008,10 +2009,25 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   font-style: italic;
 }
 
+@media screen and (max-width: 767px){
+  #noutatiAnchor .container {
+    width: 100%;
+  }
+}
+
+.newsContainer .sectionTitle {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 600;
+  font-style: italic;
+}
+
 .homepageNewsTitle {
   min-height: 150px;
   padding: 20px 10px;
   background: #1e4b3a;
+  position: relative;
 }
 
 .homepageNewsTitle h3 {
@@ -2025,7 +2041,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .homepageNewsTitle span {
   position: absolute;
   bottom: 10px;
-  left: 25px;
+  left: 10px;
   color: #fff;
   font-weight: 600;
   display: flex;
@@ -2037,6 +2053,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   filter: invert(100%) sepia(1%) saturate(7496%) hue-rotate(249deg)
     brightness(114%) contrast(105%);
   max-width: 14px;
+  margin-bottom: 2px;
 }
 
 .homepageNewsTitle i {
@@ -2211,6 +2228,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .brandCultureContainer {
   padding-bottom: 15px;
   padding-top: 15px;
+  position: relative;
 }
 
 .brandCultureContainer:hover {
@@ -2319,13 +2337,36 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* Single post */
 
 .singlePostContainer {
-  min-height: 40vh;
+  min-height: 35vh;
   display: block;
   /*justify-content: center;*/
   /*align-items: center;*/
   background-color: #1e4b3a;
   /* padding-top: 80px; */
   /* margin-bottom: 80px; */
+}
+
+@media screen and (max-width: 1200px){
+  .singlePostContainer {
+    padding-top: 80px;
+    padding-bottom: 100px;
+    min-height: initial;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1100px){
+  .singlePostContainer {
+    padding-bottom: 15px;
+    padding-top: 50px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .singlePostContainer {
+    min-height: initial;
+    padding-top: 50px;
+    padding-bottom: 15px;
+  }
 }
 
 .singlePostContainer h1 {
@@ -2337,11 +2378,13 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   font-weight:600;
 }
 
-@media screen and (max-width: 767px){
+@media screen and (min-width: 1200px){
   .singlePostContainer h1 {
-    font-size: 26px;
-    padding: 25px 0px;
+    padding-top: 200px;
   }
+}
+
+@media screen and (max-width: 767px){
 }
 
 .singlePostTopContainer {
@@ -2495,10 +2538,6 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   .postNewsContainer {
     width: 100% !important;
   }
-
-  .singlePostContainer {
-    min-height: 30vh;
-  }
 }
 
 
@@ -2636,6 +2675,82 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .accordion {
   margin-top: 40px;
 }
+
+.accordion .accordion-item {
+  border: none;
+  background: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.accordion .accordion-item:last-of-type .accordion-button.collapsed {
+  border-radius: unset;
+}
+
+.accordion .accordion-body {
+  padding-left: 0;
+  padding-right: 0;
+  color: #fff;
+  font-size: 18px;
+  padding-bottom: 0;
+}
+
+.accordion .accordion-body p {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.accordion .accordion-body a {
+  color: #efaa13;
+}
+
+.accordion .accordion-body a:hover,
+.accordion .accordion-body a:focus {
+  color: #569d88;
+}
+
+.accordion .accordion-item h2 {
+  margin-bottom: 0;
+  cursor: pointer;
+  font-size: 28px;
+  padding-bottom: 0;
+  color: #000;
+}
+
+.accordion .accordion-button {
+  background: transparent;
+  color: #fff;
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 28px;
+  font-weight: 500;
+  border-bottom: 1px solid #fff;
+}
+
+.accordion .accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion .accordion-button:not(.collapsed) {
+  color: #fff;
+  background-color: transparent;
+}
+
+.accordion .accordion-button:not(.collapsed)::after {
+  background-image: var(--bs-accordion-btn-icon);
+}
+
+.accordion .accordion-button::after {
+  /* background-image: url(https://cdn0.iconfinder.com/data/icons/entypo/91/arrow56-512.png); */
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(73deg) brightness(102%) contrast(101%);
+}
+
+.accordion .accordion-button:not(.collapsed)::after {
+  /* background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png); */
+  filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(73deg) brightness(102%) contrast(101%);
+}
+
 .accordion .card {
   border: none;
   padding-top: 10px;
@@ -2652,6 +2767,13 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   color: #000;
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(73deg) brightness(102%) contrast(101%);
 }
+
+@media screen and (max-width: 767px){
+  .accordion .accordion-button {
+    font-size: 20px;
+  }
+}
+
 .accordion .card h2.collapsed {
   background-image: url(https://cdn0.iconfinder.com/data/icons/arrows-android-l-lollipop-icon-pack/24/expand2-256.png);
   filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(73deg) brightness(102%) contrast(101%);

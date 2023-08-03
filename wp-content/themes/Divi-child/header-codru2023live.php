@@ -16,7 +16,8 @@
 
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/fonts/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/ScrollMagic.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.0/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenLite.min.js"></script>
@@ -126,8 +127,15 @@
       obApi('track', 'PAGE_VIEW');
     </script>
 
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="3a0946ec-6993-4f13-ade5-9f5617027b2a"
-        data-blockingmode="auto" type="text/javascript"></script>
+    <script>!function(C,oo,k,ie,b,o,t){
+    let a=C.scripts[0],c="en",d=C.createElement(ie),
+    e=[/^\/([a-z]{2})([_-][a-z]{2})?(\/.*)?/g.exec(k),/^([a-z]{2})\./.exec(oo),
+    /\.([a-z]{2,})$/.exec(oo)],f={at:"de",au:c,ca:c,cz:"cs",dk:"da",ee:"et",no:"nb",se:
+    "sv",uk:c},g=0;for(g of e){e=g?g[1]:t;if(g)break}e=e.length!=2?t:e;e=f[e]?f[e]:e;d.
+    id=b;d.src="https://consent.cookiebot.com/uc.js";d.dataset.cbid=o;d.dataset.
+    culture=e;d.async=!0;a.parentNode.insertBefore(d,a)}(document,location.hostname,
+    location.pathname,"script","Cookiebot","3a0946ec-6993-4f13-ade5-9f5617027b2a","en")
+    </script>
     <script>
     jQuery(document).ready(function() {
         jQuery(".loading-container").css({

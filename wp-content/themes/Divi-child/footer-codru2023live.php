@@ -57,12 +57,22 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="/wp-content/themes/Divi-child/js/popper.min.js"></script>
     <script src="/wp-content/themes/Divi-child/js/bootstrap.min.js"></script>
     <script src="/wp-content/themes/Divi-child/js/jquery.sticky.js"></script>
+    <script src="/wp-content/themes/Divi-child/js/fslightbox.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>!function(de,cl,ar,at,i,o,n){
+    let a=de.createElement(at),b=[/^\/([a-z]{2})([_-][a-z]{2})?(\/.*)?$/g.exec(cl),
+    /^([a-z]{2})\./.exec(ar),/\.([a-z]{2,})$/.exec(ar)],c={at:"de",au:"en",ca:"en",cz:
+    "cs",dk:"da",ee:"et",no:"nb",se:"sv",uk:"en"},d=de.scripts,e=d[d.length-1],f=0;
+    for(f of b){b=f?f[1]:n;if(f)break}b=b.length!=2?o:b;b=c[b]?c[b]:b;a.id=i;a.dataset.
+    culture=b;a.src=`https://consent.cookiebot.com/${o}/cd.js`;e.parentNode.
+    insertBefore(a,e)}(document,location.pathname,location.hostname,"script",
+    "CookieDeclaration","3a0946ec-6993-4f13-ade5-9f5617027b2a","en");</script>
 
 </footer>
 </body>
