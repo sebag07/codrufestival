@@ -2856,6 +2856,44 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   padding-bottom: 50px;
 }
 
+@media screen and (max-width: 991px){
+  .singleArtistContainer .container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .singleArtistContainer .sectionPadding {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+}
+
+@media screen and (max-width: 991px){
+  .singleArtistContent {
+    width: 100%;
+  }
+}
+
+.spotifyIframeContainer {
+  left: 0; 
+  width: 100%; 
+  min-height: 500px;
+  position: relative;
+}
+
+@media screen and (max-width: 767px){
+  .spotifyIframeContainer {
+    min-height: 300px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .spotifyIframeContainer {
+    min-height: 180px;
+  }
+}
+
 .singleArtistContainer .singlePostMainImg {
   width: 100%;
   height: 100%;
@@ -2864,19 +2902,33 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   border-radius: 20px;
 }
 
-.singleArtistContainer h1 {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
+@media screen and (max-width: 767px) {
+  .singleArtistContainer .singlePostMainImg {
+    max-height: 400px;
+  }
 }
 
-.spotifyIframeContainer iframe {
-  top: 0; 
-  left: 0; 
-  width: 100%; 
-  height: 40vh; 
-  position: absolute; 
-  border: 0;
+@media screen and (max-width: 500px) {
+  .singleArtistContainer .singlePostMainImg {
+    max-height: 250px;
+  }
+}
+
+.singleArtistContainer h1 {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  padding: 0;
+}
+
+@media screen and (max-width: 500px) {
+  .singleArtistContainer h1 {
+    font-size: 26px;
+  }
+}
+
+.singleArtistContainer .artistImageContainer {
+  position: relative;
 }
 
 .artistSocials {
@@ -2928,6 +2980,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     text-align: center;
 }
 
+@media screen and (max-width: 500px) {
+  .artistItem span {
+    font-size: 18px;
+  }
+}
+
 @media (max-width:1200px) {
     .singleArtistContainer {
         padding-top:50px;
@@ -2962,7 +3020,9 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     margin-top:0px;
   }
   .artistSocialsSpotify .row {
-      padding-top:40px;
-      padding-bottom:40px;
+      padding-top:15px;
+      padding-bottom:25px;
+      padding-left: 15px;
+      padding-right: 15px;
   }
 }
