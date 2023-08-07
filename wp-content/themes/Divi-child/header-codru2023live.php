@@ -26,11 +26,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver-120">
-    <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=122"></script>
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver=121">
+    <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=123"></script>
 
     <!-- Style -->
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=132">
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=134">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
         integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -174,6 +174,77 @@
 </head>
 
 <body <?php post_class();?>>
+
+        <?php 
+            $countdown_text = get_field('countdown_text', 'options');
+
+            $days = isset($countdown_text['days']) ? $countdown_text['days']: "Zile";
+            $hours = isset($countdown_text['hours']) ? $countdown_text['hours']: "Ore";
+            $minutes = isset($countdown_text['minutes']) ? $countdown_text['minutes']: "Min";
+            $seconds = isset($countdown_text['seconds']) ? $countdown_text['seconds']: "Sec";
+
+        ?>
+
+        <div class="container-fluid festival-timer">
+            <div class="countdown">
+                <div>
+                    <span id="days" class="days"></span> 
+                    <div class="countdown-text-container">
+                        <span class="countdown-text"><?php echo $days; ?></span>
+                    </div>
+                </div>
+                <div>
+                    <span id="hours" class="hours"></span> 
+                    <div class="countdown-text-container">
+                        <span class="countdown-text"><?php echo $hours; ?></span>
+                    </div>
+                </div>
+                <div>
+                    <span id="minutes" class="minutes"></span> 
+                    <div class="countdown-text-container">
+                        <span class="countdown-text"><?php echo $minutes; ?></span>
+                    </div>
+                </div>
+                <div>
+                    <span id="seconds" class="seconds"></span> 
+                    <div class="countdown-text-container">
+                        <span class="countdown-text"><?php echo $seconds; ?></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+        function updateTimer() {
+            const now = new Date();
+            const targetDate = new Date(now.getFullYear(), 7, 24, 14, 9, 0);
+
+            let delta = targetDate - now;
+
+            const days = Math.floor(delta / (1000 * 60 * 60 * 24));
+            delta -= days * (1000 * 60 * 60 * 24);
+
+            const hours = Math.floor((delta % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            delta -= hours * (1000 * 60 * 60);
+
+            const minutes = Math.floor((delta % (1000 * 60 * 60)) / (1000 * 60));
+            delta -= minutes * (1000 * 60);
+
+            const seconds = Math.floor((delta % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        </script>
+
     <div class="headerHalfCircle">
         <div class="text-center"><img src="/wp-content/themes/Divi-child/images/soare.png" alt=""></div>
     </div>
@@ -219,7 +290,6 @@
             </ul>
         </div>
     </div> <!-- .site-mobile-menu -->
-
 
     <!-- NAVBAR -->
     <header class="site-navbar">

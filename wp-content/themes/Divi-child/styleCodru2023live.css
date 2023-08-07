@@ -143,6 +143,7 @@ a:hover {
   top: 0;
   height: 80px;
   background-color: #1e4b3a;
+  margin-top: 80px;
 }
 
 .site-logo {
@@ -150,7 +151,7 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index:4;
+  z-index:6;
 }
 
 @media (max-width: 767px) {
@@ -488,6 +489,75 @@ a:hover {
   -ms-transform: translateX(0%);
   transform: translateX(0%);
 }
+
+.festival-timer {
+  height: 80px;
+  position: fixed;
+  background-color: #efaa13;
+  z-index: 14;
+}
+
+.countdown {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.countdown > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.countdown .days,
+.countdown .hours,
+.countdown .minutes,
+.countdown .seconds {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 500px){
+  .countdown .days,
+  .countdown .hours,
+  .countdown .minutes,
+  .countdown .seconds {
+    font-size: 30px;
+    font-weight: 600;
+  }
+}
+
+.countdown .countdown-text {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 500px){
+  .countdown .countdown-text {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
+
+.countdown .countdown-text-container {
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+@media screen and (max-width: 500px){
+  .countdown .countdown-text-container {
+    margin-top: 15px;
+  }
+}
+
+.header-divider {
+  height: 80px;
+}
+
 .site-mobile-menu .site-mobile-menu-header {
   width: 100%;
   float: left;
@@ -687,6 +757,7 @@ a:hover {
   right: 0;
   margin: auto;
   width: 320px;
+  margin-top: 80px;
 }
 
 /* @media (min-width:2000px) {
@@ -1193,6 +1264,12 @@ footer .row {
   gap: 20px;
 }
 
+@media screen and (max-width: 991px){
+  .footerSocials {
+    margin-top: 20px;
+  }
+}
+
 .footerSocials a img {
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(241deg)
     brightness(103%) contrast(103%);
@@ -1230,11 +1307,13 @@ footer .row {
 .footerLeftLogo {
   justify-content: end;
   align-items: flex-end;
+  z-index: 2;
 }
 
 .footerRightLogo {
   justify-content: left;
   align-items: flex-start;
+  z-index: 2;
 }
 
 .footerItems a {
@@ -1250,6 +1329,7 @@ footer .row {
   right: 0;
   bottom: 0;
   max-width: 300px;
+  z-index: 1;
 }
 
 .footerLeftImg {
@@ -1257,15 +1337,20 @@ footer .row {
   left: 0;
   bottom: 0;
   max-width: 300px;
+  z-index: 1;
 }
 
 .footerMobileLogo {
   display: none !important;
 }
 
-.footerSocials {
-  display: flex;
-  gap: 20px;
+.footerTerms {
+  flex-direction: column;
+}
+
+.footerTerms span {
+  width: 100%;
+  text-align: center;
 }
 
 .footerTerms a {
@@ -1275,6 +1360,15 @@ footer .row {
 
 .footerTerms a:hover {
   color: #f47e30;
+}
+
+.footerTermsMobile {
+  flex-direction: column;
+}
+
+.footerTermsMobile span {
+  width: 100%;
+  text-align: center;
 }
 
 .footerTermsMobile a {
@@ -2010,6 +2104,28 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   font-style: italic;
 }
 
+#povesteaCodru {
+  background-color: #1e4b3a;
+}
+
+#povesteaCodru h2 {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 600;
+  font-style: italic;
+}
+
+#povesteaCodru .homepageNewsTitle {
+  background: #143729;
+}
+
+@media screen and (max-width: 767px){
+    #povesteaCodru .container {
+        width: 100%;
+    }
+}
+
 @media screen and (max-width: 767px){
   #noutatiAnchor .container {
     width: 100%;
@@ -2341,14 +2457,23 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   color: #fff;
 }
 
+.termsPage div {
+  color: #fff;
+}
+
+.termsPage .CookieDeclarationType {
+  border: none;
+  padding: 0;
+}
+
 .termsPage h1 {
-  margin-top: 70px;
+  margin-top: 150px;
   font-size: 48px;
 }
 
 @media screen and (max-width: 1200px){
   .termsPage h1 {
-    margin-top: 30px;
+    margin-top: 110px;
   }
 }
 
@@ -2380,7 +2505,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 @media screen and (max-width: 1200px){
   .singlePostContainer {
-    padding-top: 80px;
+    padding-top: 160px;
     padding-bottom: 100px;
     min-height: initial;
   }
@@ -2389,14 +2514,14 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 @media screen and (min-width: 767px) and (max-width: 1100px){
   .singlePostContainer {
     padding-bottom: 15px;
-    padding-top: 50px;
+    padding-top: 130px;
   }
 }
 
 @media screen and (max-width: 767px){
   .singlePostContainer {
     min-height: initial;
-    padding-top: 50px;
+    padding-top: 130px;
     padding-bottom: 15px;
   }
 }
@@ -2412,7 +2537,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 @media screen and (min-width: 1200px){
   .singlePostContainer h1 {
-    padding-top: 200px;
+    padding-top: 250px;
   }
 }
 
@@ -2586,12 +2711,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .partnersPage .partnersTitle {
-  padding-top: 100px;
+  padding-top: 180px;
 }
 
 @media screen and (max-width: 1200px){
   .partnersPage .partnersTitle {
-    padding-top: 50px;
+    padding-top: 100px;
   }
 }
 
@@ -2606,7 +2731,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   object-fit: cover;
   overflow: visible;
   position: relative;
-  z-index: 1;
+  z-index: -1;
 }
 
 .partnersPage .valuesImage img {
@@ -2852,8 +2977,20 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* ARTISTS */
 
 .singleArtistContainer {
-  padding-top: 150px;
+  padding-top: 230px;
   padding-bottom: 50px;
+}
+
+@media screen and (max-width:1200px) {
+  .singleArtistContainer {
+      padding-top: 120px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .singleArtistContainer {
+    padding-top: 180px;
+  }
 }
 
 @media screen and (max-width: 991px){
@@ -2878,19 +3015,24 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .spotifyIframeContainer {
   left: 0; 
   width: 100%; 
-  min-height: 500px;
+  height: 500px;
   position: relative;
+}
+
+.spotifyIframeContainer iframe {
+  height: 100%;
+  width: 100%;
 }
 
 @media screen and (max-width: 767px){
   .spotifyIframeContainer {
-    min-height: 300px;
+    height: 400px;
   }
 }
 
 @media screen and (max-width: 500px){
   .spotifyIframeContainer {
-    min-height: 180px;
+    height: 180px;
   }
 }
 
@@ -2919,6 +3061,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   bottom: 30px;
   left: 30px;
   padding: 0;
+  max-width: 90%;
 }
 
 @media screen and (max-width: 500px) {
@@ -2955,6 +3098,22 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   font-size: 16px;
 }
 
+.artistText p {
+  color: #fff !important;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.artistText h1,
+.artistText h2,
+.artistText h3,
+.artistText h4,
+.artistText h5,
+.artistText h6 {
+  color: #fff !important;
+  font-weight: 600;
+}
+
 .artistItem img {
   position: relative;
 }
@@ -2984,12 +3143,6 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   .artistItem span {
     font-size: 18px;
   }
-}
-
-@media (max-width:1200px) {
-    .singleArtistContainer {
-        padding-top:50px;
-    }
 }
 
 .gallery-masonry .artistItem img {

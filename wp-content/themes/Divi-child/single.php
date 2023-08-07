@@ -3,6 +3,10 @@
 get_header('codru2023live');
 ?>
 
+<?php 
+$categories = get_the_category();
+$category = $categories[0]->slug;
+?>
 
 <div class="container-fluid singlePostContainer">
     <div class="container p-0">
@@ -21,13 +25,17 @@ get_header('codru2023live');
 </div>
 
 <div class="container newsContainer postNewsContainer sectionPadding">
-    <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
+    <?php if($category == "povestea-codru"): ?>
+        <h2 class="sectionTitle"><?php echo get_field('codru_story_title', 'options'); ?></h2>
+    <?php else: ?>
+        <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
+    <?php endif; ?>
     <div class="newsContainer row">
         <?php
             $args = array(
                 'posts_per_page'    => 3, 
                 'orderby'           => 'post_date',
-                'category_name' => 'noutati',
+                'category_name' => $category,
                 'exclude'           => array(get_the_id()));
             $postslist = get_posts($args);
             foreach ($postslist as $post) : {

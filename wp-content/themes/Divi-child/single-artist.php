@@ -15,7 +15,7 @@ get_header('codru2023live');
                 <div class="spotifyIframeContainer">
                     <?php echo get_field('spotify_iframe')?>
                 </div>
-                    <span class="row pl-3 pr-3">
+                    <span class="row pl-3 pr-3 m-0">
                     <?php if ( have_rows( 'social_repeater' ) ): ?>
             
                         <?php while( have_rows( 'social_repeater' ) ) : the_row(); ?>
@@ -40,7 +40,7 @@ get_header('codru2023live');
 
     <div class="row">
         <div class="p-0 col-lg-12 col-md-12 col-12 artistText">
-            <?php echo get_the_content(); ?>
+            <?php the_content(); ?>
         </div>
     </div>
 </div>

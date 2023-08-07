@@ -39,7 +39,15 @@
             <img class="footer-logo" src="/wp-content/themes/Divi-child/images/logoteg.png" alt="">
         </div>
         <div class="footerTermsMobile pt-4 d-flex justify-content-center col-md-12 col-12">
-            <span><a href="/termeni-si-conditii">TERMENI ȘI CONDIȚII</a></span>
+            <?php
+            
+            $mobile_menu = get_menu_with_children("footerMenu"); 
+            $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+            foreach ($mobile_menu as $item) {
+                echo "<span><a href='$item->url' target='_blank'>$item->title</a></span>";
+            }
+
+            ?>
         </div>
         <div class="footerMobileLogo col-md-12 col-12 d-flex">
             <img class="footer-logo codruLogoFooter" src="/wp-content/themes/Divi-child/images/logo.svg" alt="">
@@ -50,7 +58,15 @@
         <div class="col-lg-2 col-md-12 col-12 d-flex">
         </div>
         <div class="footerTerms pt-4 d-flex justify-content-center col-lg-8 col-xl-7 col-md-12 col-12">
-            <span><a href="/termeni-si-conditii">TERMENI ȘI CONDIȚII</a></span>
+            <?php
+            
+            $mobile_menu = get_menu_with_children("footerMenu"); 
+            $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+            foreach ($mobile_menu as $item) {
+                echo "<span><a href='$item->url' target='_blank'>$item->title</a></span>";
+            }
+
+            ?>
         </div>
         <div class="col-lg-2 col-md-12 col-12 d-flex">
         </div>
@@ -64,15 +80,6 @@
     <script src="/wp-content/themes/Divi-child/js/fslightbox.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-    <script>!function(de,cl,ar,at,i,o,n){
-    let a=de.createElement(at),b=[/^\/([a-z]{2})([_-][a-z]{2})?(\/.*)?$/g.exec(cl),
-    /^([a-z]{2})\./.exec(ar),/\.([a-z]{2,})$/.exec(ar)],c={at:"de",au:"en",ca:"en",cz:
-    "cs",dk:"da",ee:"et",no:"nb",se:"sv",uk:"en"},d=de.scripts,e=d[d.length-1],f=0;
-    for(f of b){b=f?f[1]:n;if(f)break}b=b.length!=2?o:b;b=c[b]?c[b]:b;a.id=i;a.dataset.
-    culture=b;a.src=`https://consent.cookiebot.com/${o}/cd.js`;e.parentNode.
-    insertBefore(a,e)}(document,location.pathname,location.hostname,"script",
-    "CookieDeclaration","3a0946ec-6993-4f13-ade5-9f5617027b2a","en");</script>
 
 </footer>
 </body>

@@ -1,6 +1,8 @@
 <?php /*  Template Name: Codrufestival 2023  */ ?>
 <?php get_header('codru2023live'); ?>
 
+
+<div class="header-divider" style="height: 80px;"></div>
 <div class="container-fluid heroContainer p-0 m-0">
     <img class="heroBG" src="/wp-content/themes/Divi-child/images/codru2023hero.png" alt="">
     <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/L-Leaves.png" alt="">
@@ -284,6 +286,38 @@
         </div>
     </div>
 </section>
+
+<?php
+
+    $args = array('posts_per_page' => 3, 'orderby' => 'post_date', 'category_name' => 'povestea-codru');
+    $povesticodru = get_posts($args); 
+
+?>
+
+<?php if(!empty($povesticodru)): ?>
+  <section id="povesteaCodru">
+      <div class="container sectionPadding">
+          <h2 class="sectionTitle"><?php echo get_field('codru_story_title', 'options'); ?></h2>
+          <div class="newsContainer row">
+              <?php
+              foreach ($povesticodru as $post) : {
+                $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $postURL = get_the_permalink($post->ID);
+                $read_more = get_field('news_read_more', 'options');
+                  echo "<div class='homepageNews col-lg-4 col-md-6 col-12'>
+              <a href='$postURL' class='homepageNewsLink'>
+              <div class='homepageNewsImage text-center'><img src='$image[0]' alt=''></div>
+              <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />$read_more</span></div>
+              </a>
+          </div>";
+              }
+              endforeach;
+              ?>
+
+          </div>
+      </div>
+  </section>
+<?php endif; ?>
 
 <section id="noutatiAnchor">
     <div class="container sectionPadding">
