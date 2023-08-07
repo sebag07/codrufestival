@@ -218,7 +218,7 @@
 
         function updateTimer() {
             const now = new Date();
-            const targetDate = new Date(now.getFullYear(), 7, 24, 14, 9, 0);
+            const targetDate = new Date(now.getFullYear(), 7, 25, 14, 9, 0);
 
             let delta = targetDate - now;
 
