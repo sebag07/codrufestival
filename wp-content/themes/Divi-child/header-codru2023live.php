@@ -26,11 +26,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver=121">
-    <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=123"></script>
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver=140">
+    <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=140"></script>
 
     <!-- Style -->
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=134">
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=140">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
         integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -176,12 +176,10 @@
 <body <?php post_class();?>>
 
         <?php 
-            $countdown_text = get_field('countdown_text', 'options');
-
-            $days = isset($countdown_text['days']) ? $countdown_text['days']: "Zile";
-            $hours = isset($countdown_text['hours']) ? $countdown_text['hours']: "Ore";
-            $minutes = isset($countdown_text['minutes']) ? $countdown_text['minutes']: "Min";
-            $seconds = isset($countdown_text['seconds']) ? $countdown_text['seconds']: "Sec";
+            $days = get_field('days', 'options');
+            $hours = get_field('hours', 'options');
+            $minutes = get_field('minutes', 'options');
+            $seconds = get_field('seconds', 'options');
 
         ?>
 

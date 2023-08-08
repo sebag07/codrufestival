@@ -42,8 +42,8 @@ jQuery(window).load(function () {
     lightboxFilter();
 
 });
-jQuery("[data-category]").on("click", function () {
-    var category = $(this).data("category");
-    filterIsotope(category);
-    lightboxFilter(category);
-});
+// jQuery("[data-category]").on("click", function () {
+//     var category = $(this).data("category");
+//     filterIsotope(category);
+//     lightboxFilter(category);
+// });

@@ -93,42 +93,48 @@ $(function () {
   });
 });
 
+var gallery;
+var lightbox;
+
+function filterIsotope(filter, gallery) {
+  var filter = filter || '*';
+  gallery.isotope({
+    filter: filter,
+  });
+}
+
+function lightboxFilter(filter, lightbox) {
+  var filter = filter || '*';
+  lightbox.magnificPopup({
+    delegate: filter + '>a',
+    type: 'image',
+    gallery: {
+      enabled: true,
+    }
+  });
+}
+
 
 $(window).load(function () {
 
-  var gallery = $('.gallery-masonry');
-  var category = '.item';
-  function filterIsotope(filter) {
-    var filter = filter || '*';
-    gallery.isotope({
-      filter: filter,
-    });
-  }
+  gallery = $('.artist-gallery');
+  lightbox = $('.image-gallery');
+  image_gallery = $('.image-gallery');
 
-  var lightbox = $('.gallery-masonry');
-  function lightboxFilter(filter) {
-    var filter = filter || '*';
-    lightbox.magnificPopup({
-      delegate: filter + '>a',
-      type: 'image',
-      gallery: {
-        enabled: true,
-      }
-    });
-  }
+  filterIsotope(".all", gallery);
+  filterIsotope(".gallery-image", image_gallery);
+  lightboxFilter("*", lightbox);
 
-  filterIsotope();
-  lightboxFilter();
-
-  // jQuery(gallery).imagesLoaded().progress(function() {
-  // 	filterIsotope();
-  // });
 });
-jQuery('[data-category]').on('click', function () {
-  var category = $(this).data('category');
-  filterIsotope(category);
-  lightboxFilter(category);
-});
+
+jQuery(document).on("click", ".masonry-filter-list li", function(){
+  
+  jQuery(".masonry-filter-list li").removeClass("active");
+  jQuery(this).addClass("active");
+  var category = "." + jQuery(this).data("filter");
+  filterIsotope(category, gallery);
+})
+
 
 
 jQuery(".heroContentDiv").ready(function(){

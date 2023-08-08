@@ -137,7 +137,20 @@
         </div>
 
     </div>
-    <div class="gallery-items gallery-masonry">
+
+    <div class="container">
+      <div class="masonry-filter-container">
+          <ul class="masonry-filter-list">
+              <li data-filter="all" class="active"><?php echo get_field('all_artists', 'options'); ?></li>
+              <li data-filter="ziua-1"><?php echo get_field('day_one', 'options'); ?></li>
+              <li data-filter="ziua-2"><?php echo get_field('day_two', 'options'); ?></li>
+              <li data-filter="ziua-3"><?php echo get_field('day_three', 'options'); ?></li>
+          </ul>
+      </div>
+    </div>
+
+    <div class="gallery-items gallery-masonry artist-gallery">
+
         <?php
               $args = array('posts_per_page' => -1, 'orderby' => array( 'post_date' => 'ASC' ), 'post_type' => 'artist', 'category_name' => 'level-1');
               $postslist = get_posts($args);
@@ -145,8 +158,13 @@
                 $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
+
+                $categories = get_the_category();
+                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
+                $day_category = str_replace("-en", "", $day_category);
+
                 if( !empty(get_the_post_thumbnail()) ) {
-                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
                 };
 
               }
@@ -159,8 +177,13 @@
                 $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
+
+                $categories = get_the_category();
+                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
+                $day_category = str_replace("-en", "", $day_category);
+
                 if( !empty(get_the_post_thumbnail()) ) {
-                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
                 };
 
               }
@@ -174,8 +197,13 @@
                 $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
+
+                $categories = get_the_category();
+                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
+                $day_category = str_replace("-en", "", $day_category);
+
                 if( !empty(get_the_post_thumbnail()) ) {
-                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
                 };
 
               }
@@ -189,8 +217,13 @@
                 $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
+
+                $categories = get_the_category();
+                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
+                $day_category = str_replace("-en", "", $day_category);
+
                 if( !empty(get_the_post_thumbnail()) ) {
-                  echo "<a class='item artistItem' href='$artistURL'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
                 };
 
                 }
@@ -236,14 +269,14 @@
 <section id="galerieAnchor">
     <div class="masonryContainer container-fluid sectionPadding">
         <h2 class="text-center sectionPadding sectionTitle"><?php echo get_field('gallery_title', 'options'); ?></h2>
-        <div class="gallery-items gallery-masonry">
+        <div class="gallery-items gallery-masonry image-gallery">
             <?php if ( have_rows( 'masonry_section' , 26897 ) ): ?>
 
             <?php while( have_rows( 'masonry_section', 26897 ) ) : the_row(); ?>
 
             <?php if( $masonryImage = get_sub_field( 'masonry_image', 26897 ) ) { 
 
-                echo "	<div class='item'><a href='$masonryImage'><img src='$masonryImage'/></a></div>";
+                echo "	<div class='item gallery-image'><a href='$masonryImage'><img src='$masonryImage'/></a></div>";
                 
                     } ?>
 
