@@ -1391,9 +1391,28 @@ hr {
 }
 
 .gallery-masonry .item {
-	width: 25%;
-	padding: 5px;
-	display: block;
+    width: 20%;
+    padding: 5px;
+    display: block;
+    position: relative;
+}
+
+@media screen and (max-width: 1300px){
+    .gallery-masonry .item {
+        width: 25%;
+    }
+}
+  
+@media screen and (max-width: 991px) {
+    .gallery-masonry .item {
+        width: 33.3%;
+    }
+}
+  
+@media screen and (max-width: 480px) {
+    .gallery-masonry .item {
+        width: 50%;
+    }
 }
 
 .gallery-masonry img {
@@ -1443,18 +1462,6 @@ hr {
     }
     .gallery-masonry .masonryImgHeight550 {
         height: 275px;
-    }
-}
-
-@media (max-width: 981px) {
-	.gallery-masonry .item {
-		width: 50%;
-	}
-}
-
-@media (max-width: 480px) {
-	.gallery-masonry .item {
-		width: 50%;
     }
 }
 

@@ -8,7 +8,14 @@ get_header('codru2023live');
     <div class="container p-0">
         <div class="row sectionPadding">
             <div class="col-lg-8 col-md-8 col-12 artistImageContainer">
-                <img class="singlePostMainImg" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
+                <?php
+                if( !empty(get_the_post_thumbnail()) ) {
+                    echo '<img class="singlePostMainImg" src="' . get_the_post_thumbnail_url() . ' " alt="">';
+                } else {
+                  $thumbnailURL = get_template_directory_uri() . "-child/images/codru-2023.png";
+                  echo '<img class="singlePostMainImg" src="' . $thumbnailURL . ' " alt="">';
+                };
+            ?>
                     <h1><?php echo get_the_title(); ?></h1>
             </div>
             <div class="col-lg-4 col-md-4 col-12 artistSocialsSpotify">

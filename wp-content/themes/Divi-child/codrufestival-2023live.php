@@ -184,6 +184,9 @@
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                } else {
+                  $thumbnailURL = get_template_directory_uri() . "-child/images/codru-2023.png";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$thumbnailURL' alt=''><span>$artistTitle</span></a>";
                 };
 
               }
@@ -204,6 +207,9 @@
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                } else {
+                  $thumbnailURL = get_template_directory_uri() . "-child/images/codru-2023.png";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$thumbnailURL' alt=''><span>$artistTitle</span></a>";
                 };
 
               }
@@ -224,6 +230,54 @@
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                } else {
+                  $thumbnailURL = get_template_directory_uri() . "-child/images/codru-2023.png";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$thumbnailURL' alt=''><span>$artistTitle</span></a>";
+                };
+
+                }
+              endforeach;
+              ?>
+                      <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-5');
+              $postslist = get_posts($args);
+              foreach ($postslist as $post) : {
+                $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $artistURL = get_the_permalink();
+                $artistTitle = get_the_title();
+
+                $categories = get_the_category();
+                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
+                $day_category = str_replace("-en", "", $day_category);
+
+                if( !empty(get_the_post_thumbnail()) ) {
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                } else {
+                  $thumbnailURL = get_template_directory_uri() . "-child/images/codru-2023.png";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$thumbnailURL' alt=''><span>$artistTitle</span></a>";
+                };
+
+                }
+              endforeach;
+              ?>
+
+            <?php
+              $args = array('posts_per_page' => -1, 'orderby' => 'post_date', 'post_type' => 'artist', 'category_name' => 'level-6');
+              $postslist = get_posts($args);
+              foreach ($postslist as $post) : {
+                $artistImageURL = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
+                $artistURL = get_the_permalink();
+                $artistTitle = get_the_title();
+
+                $categories = get_the_category();
+                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
+                $day_category = str_replace("-en", "", $day_category);
+
+                if( !empty(get_the_post_thumbnail()) ) {
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
+                } else {
+                  $thumbnailURL = get_template_directory_uri() . "-child/images/codru-2023.png";
+                  echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$thumbnailURL' alt=''><span>$artistTitle</span></a>";
                 };
 
                 }
