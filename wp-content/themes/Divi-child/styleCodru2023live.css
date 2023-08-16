@@ -2495,6 +2495,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .termsPage h1 {
   margin-top: 150px;
   font-size: 48px;
+  font-weight: 600;
 }
 
 @media screen and (max-width: 1200px){
@@ -2707,6 +2708,29 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   }
 }
 
+/* Partners */
+
+.partners {
+  background-color: #1e4b3a;
+}
+
+@media screen and (min-width: 1200px){
+  .partners.container-fluid .container {
+    width: 100%;
+    max-width: 1200px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 991px){
+  .partners.container-fluid .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 
 /* HELPERS */
 
@@ -2722,7 +2746,6 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     width: 100% !important;
   }
 }
-
 
 .partnersPage {
   padding-top: 130px;

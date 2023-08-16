@@ -33,6 +33,7 @@
                 <a href="https://www.instagram.com/codrufestival/" target="_blank"><img src="/wp-content/themes/Divi-child/images/instagramcodru.svg" alt=""></a>
                 <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
                 <a href="https://www.youtube.com/@codrufestival" target="_blank"><img src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
+                <a href="https://spotify.link/mN0Bq5T0dCb" target="_blank"><img src="/wp-content/themes/Divi-child/images/spotify.svg" alt=""></a>
             </span>
         </div>
         <div class="footerRightLogo col-lg-2 col-md-12 col-12 d-flex">

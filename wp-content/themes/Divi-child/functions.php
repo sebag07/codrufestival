@@ -80,6 +80,24 @@ if( function_exists('acf_add_options_page') ) {
         'capability'    => 'edit_posts',
         'redirect'      => false
     ));
+
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Partners',
+        'menu_title'    => 'Partners',
+        'menu_slug'     => 'partners-options',
+        'capability'    => 'edit_posts',
+        'redirect'      => false,
+        'parent_slug'   => 'general-options',
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Program',
+        'menu_title'    => 'Program',
+        'menu_slug'     => 'program-options',
+        'capability'    => 'edit_posts',
+        'redirect'      => false,
+        'parent_slug'   => 'general-options',
+    ));
     
   }
 
