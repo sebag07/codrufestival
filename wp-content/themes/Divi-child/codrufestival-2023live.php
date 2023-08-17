@@ -287,14 +287,14 @@
     </div>
 </div>
 
-<section id="povesteaCodru">
-      <div class="container sectionPadding">
-          <h2 class="sectionTitle">Gașca Zurli <br>Duminică 27.08</h2>
-          <div class="newsContainer row">
-              <img src="<?php echo get_stylesheet_directory_uri() . "/images/gasca-zurli.png"; ?>">
-          </div>
-      </div>
-  </section>
+<section id="gascazurli">
+    <div class="container sectionPadding">
+        <h2 class="sectionTitle">Invitați Speciali Gașca Zurli <br>27 august 16:30</h2>
+        <div class="newsContainer row">
+            <img src="<?php echo get_stylesheet_directory_uri() . "/images/gasca-zurli.png"; ?>">
+        </div>
+    </div>
+</section>
 
 <section id="brandCultureAnchor">
     <div class="container-fluid sectionPadding">

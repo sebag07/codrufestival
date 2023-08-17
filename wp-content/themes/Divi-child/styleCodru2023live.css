@@ -2463,11 +2463,63 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   }
 }
 
+/* Gasca Zurli */
+
+#gascazurli {
+  background-color: #1e4b3a;
+}
+
+#gascazurli .sectionTitle {
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 767px){
+  #gascazurli .sectionTitle {
+    font-size: 30px;
+  }
+}
+
+#gascazurli .sectionPadding {
+  padding-top: 0;
+}
+
+#gascazurli .newsContainer {
+  justify-content: center;
+}
+
+#gascazurli img {
+  max-width: 900px;
+}
+
 /* TERMS AND CONDITIONS */
 
 .termsPage :is(h1, h2, h3, h4, h5, h6) {
   color: #fff;
 }
+
+.termsPage b {
+  font-weight: 600;
+}
+
+.termsPage ul {
+  list-style: unset;
+  padding-left: 15px;
+}
+
+.termsPage a {
+  color: #efaa13;
+}
+
+.termsPage a:hover,
+.termsPage a:focus {
+  color: #569d88 !important;
+}
+
+.termsPage ol ol {
+  list-style: disc;
+  padding-left: 15px;
+}
+
 
 @media screen and (max-width: 767px) {
   .termsPage.container {
@@ -2711,8 +2763,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* Partners */
 
 .partners {
-  background-color: #1e4b3a;
+  background-color: #fff;
 }
+
+.partners .container h1,
+.partners .container h2{
+    color: #000;
+}
+
+/*.partners .partnersContainer img,*/
+/*.partners .partnersMediaContainer img,*/
+/*.partners .partnersCofinanceContainer img,*/
+/*.partners .partnersPartofContainer img*/
+/*{*/
+/*    filter: brightness(0) invert(1);*/
+/*}*/
 
 @media screen and (min-width: 1200px){
   .partners.container-fluid .container {
