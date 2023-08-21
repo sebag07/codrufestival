@@ -81,6 +81,8 @@
     <script src="/wp-content/themes/Divi-child/js/fslightbox.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js" integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/wp-content/themes/Divi-child/js/util.js"></script>
+    <script src="/wp-content/themes/Divi-child/js/schedule.js"></script>
 
 </footer>
 </body>

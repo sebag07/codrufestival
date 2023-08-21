@@ -8,6 +8,7 @@
         <meta property="og:url" content="https://codrufestival.ro">
 		<link rel="icon" href="/wp-content/themes/Divi-child/images/codru_thumbnail.png">
 		<link rel="stylesheet" href="/wp-content/themes/Divi-child/style.css">
+		<link rel="stylesheet" href="/wp-content/themes/Divi-child/assets/css/schedule.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">

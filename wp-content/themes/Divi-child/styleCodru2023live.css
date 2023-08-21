@@ -519,6 +519,7 @@ a:hover {
 .countdown .seconds {
   font-size: 40px;
   font-weight: 600;
+  color: #000;
 }
 
 @media screen and (max-width: 500px){
@@ -534,6 +535,7 @@ a:hover {
 .countdown .countdown-text {
   font-size: 20px;
   font-weight: 600;
+  color: #000;
 }
 
 @media screen and (max-width: 500px){
@@ -2568,7 +2570,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   }
 }
 
+/* Program */
 
+.programPage ul { 
+  list-style: none;
+  padding-left: 0;
+}
 
 /* Single post */
 

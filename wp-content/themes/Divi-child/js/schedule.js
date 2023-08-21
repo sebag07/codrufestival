@@ -1,12 +1,11 @@
-jQuery(document).ready((function() {
+(function() {
 	// Schedule Template - by CodyHouse.co
 	function ScheduleTemplate( element ) {
 		this.element = element;
-		console.log(this.element);
 		this.timelineItems = this.element.getElementsByClassName('cd-schedule__timeline')[0].getElementsByTagName('li');
 		this.timelineStart = getScheduleTimestamp(this.timelineItems[0].textContent);
 		this.timelineUnitDuration = getScheduleTimestamp(this.timelineItems[1].textContent) - getScheduleTimestamp(this.timelineItems[0].textContent);
-
+		
 		this.topInfoElement = this.element.getElementsByClassName('cd-schedule__top-info')[0];
 		this.singleEvents = this.element.getElementsByClassName('cd-schedule__event');
 		
@@ -39,20 +38,14 @@ jQuery(document).ready((function() {
 		var mq = this.mq(),
 			loaded = Util.hasClass(this.element, 'js-schedule-loaded'),
 			modalOpen = Util.hasClass(this.modal, 'cd-schedule-modal--open');
-
-			Util.addClass(this.element, 'js-schedule-loaded');
-			this.placeEvents();
-
 		if( mq == 'desktop' && !loaded ) {
 			Util.addClass(this.element, 'js-schedule-loaded');
 			this.placeEvents();
 			// modalOpen && this.checkEventModal(modalOpen);
 		} else if( mq == 'mobile' && loaded) {
 			//in this case you are on a mobile version (first load or resize from desktop)
-			// Util.removeClass(this.element, 'cd-schedule--loading js-schedule-loaded');
-			Util.addClass(this.element, 'js-schedule-loaded');
-			// this.resetEventsStyle();
-			this.placeEvents();
+			Util.removeClass(this.element, 'cd-schedule--loading js-schedule-loaded');
+			this.resetEventsStyle();
 			// modalOpen && this.checkEventModal();
 		} else if( mq == 'desktop' && modalOpen ) {
 			//on a mobile version with modal open - need to resize/move modal window
@@ -63,12 +56,12 @@ jQuery(document).ready((function() {
 		}
 	};
 
-	// ScheduleTemplate.prototype.resetEventsStyle = function() {
-	// 	// remove js style applied to the single events
-	// 	for(var i = 0; i < this.singleEvents.length; i++) {
-	// 		this.singleEvents[i].removeAttribute('style');
-	// 	}
-	// };
+	ScheduleTemplate.prototype.resetEventsStyle = function() {
+		// remove js style applied to the single events
+		for(var i = 0; i < this.singleEvents.length; i++) {
+			this.singleEvents[i].removeAttribute('style');
+		}
+	};
 
 	ScheduleTemplate.prototype.placeEvents = function() {
 		// on big devices - place events in the template according to their time/day
@@ -79,12 +72,9 @@ jQuery(document).ready((function() {
 			var start = getScheduleTimestamp(anchor.getAttribute('data-start')),
 				duration = getScheduleTimestamp(anchor.getAttribute('data-end')) - start;
 
-			// slotHeight = 50;
 			var eventTop = slotHeight*(start - self.timelineStart)/self.timelineUnitDuration,
 				eventHeight = slotHeight*duration/self.timelineUnitDuration;
-			// console.log(this.singleEvents[i]);
-			// console.log("duration: " + duration + " self.timelineUnitDuration: " + self.timelineUnitDuration);
-			// console.log("i: " + i + " eventHeight: " + eventHeight);
+
 			this.singleEvents[i].setAttribute('style', 'top: '+(eventTop-1)+'px; height: '+(eventHeight +1)+'px');
 		}
 
@@ -109,9 +99,9 @@ jQuery(document).ready((function() {
 			event.preventDefault();
 			if( !self.animating ) self.closeModal();
 		});
-	};
-
-	ScheduleTemplate.prototype.mq = function(){
+    };
+    
+    ScheduleTemplate.prototype.mq = function(){
 		//get MQ value ('desktop' or 'mobile') 
 		var self = this;
 		return window.getComputedStyle(this.element, '::before').getPropertyValue('content').replace(/'|"/g, "");
@@ -135,23 +125,6 @@ jQuery(document).ready((function() {
 			})(i);
 		}
 
-		// window.addEventListener('resize', function(event) { 
-		// 	// on resize - update events position and modal position (if open)
-		// 	if( !resizing ) {
-		// 		resizing = true;
-		// 		(!window.requestAnimationFrame) ? setTimeout(checkResize, 250) : window.requestAnimationFrame(checkResize);
-		// 	}
-		// });
-
-		// window.addEventListener('keyup', function(event){
-		// 	// close event modal when pressing escape key
-		// 	if( event.keyCode && event.keyCode == 27 || event.key && event.key.toLowerCase() == 'escape' ) {
-		// 		for(var i = 0; i < scheduleTemplateArray.length; i++) {
-		// 			scheduleTemplateArray[i].closeModal();
-		// 		}
-		// 	}
-		// });
-
 		function checkResize(){
 			for(var i = 0; i < scheduleTemplateArray.length; i++) {
 				scheduleTemplateArray[i].scheduleReset();
@@ -159,8 +132,7 @@ jQuery(document).ready((function() {
 			resizing = false;
 		};
 	}
-}()));
-
+}());
 
 
 jQuery(document).on("click", ".filterBtn", function(){
@@ -195,11 +167,7 @@ function filterArtists(stage, day, device){
 			});
 
 			jQuery(".day-schedule").each(function(){
-				if(jQuery(this).data("value") == day){
 					jQuery(this).css("display", "block");
-				} else {
-					jQuery(this).css("display", "none");
-				}
 			});
 			break;
 

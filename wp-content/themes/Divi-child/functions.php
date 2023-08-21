@@ -7,7 +7,6 @@ require get_template_directory() . '-child/includes/widgets/partners.php';
 function my_theme_enqueue_styles() { 
     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '144');
     wp_enqueue_style( 'activities', get_template_directory_uri() . '-child' . '/assets/css/activities.css');
-    wp_enqueue_style( 'schedule', get_template_directory_uri() . '-child' . '/assets/css/schedule.css', array(), '1234');
     wp_enqueue_style( 'partners', get_template_directory_uri() . '-child' . '/assets/css/partners.css');
     wp_enqueue_style( 'magnificPopupCss', get_template_directory_uri() . '-child' . '/assets/css/magnific-popup.min.css');
 }
@@ -85,6 +84,15 @@ if( function_exists('acf_add_options_page') ) {
         'page_title'    => 'Partners',
         'menu_title'    => 'Partners',
         'menu_slug'     => 'partners-options',
+        'capability'    => 'edit_posts',
+        'redirect'      => false,
+        'parent_slug'   => 'general-options',
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title'    => 'Stages',
+        'menu_title'    => 'Stages',
+        'menu_slug'     => 'stages-options',
         'capability'    => 'edit_posts',
         'redirect'      => false,
         'parent_slug'   => 'general-options',

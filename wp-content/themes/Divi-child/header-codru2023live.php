@@ -31,6 +31,7 @@
 
     <!-- Style -->
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=143">
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/assets/css/schedule-2023.css?ver=143">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
         integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
