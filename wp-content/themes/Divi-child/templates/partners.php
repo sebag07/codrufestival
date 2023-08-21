@@ -16,11 +16,9 @@
 
             $partner_name = get_sub_field('main_partner_name');
             $partner_image = get_sub_field('main_partner_logo');
-            $partner_link = get_sub_field('main_partner_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :
@@ -42,11 +40,9 @@
 
             $partner_name = get_sub_field('official_partner_name');
             $partner_image = get_sub_field('official_partner_image');
-            $partner_link = get_sub_field('official_partner_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :
@@ -68,11 +64,9 @@
 
             $partner_name = get_sub_field('supporter_name');
             $partner_image = get_sub_field('supporter_image');
-            $partner_link = get_sub_field('supporter_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :
@@ -94,11 +88,9 @@
 
             $partner_name = get_sub_field('hospitality_partner_name');
             $partner_image = get_sub_field('hospitality_partner_image');
-            $partner_link = get_sub_field('hospitality_partner_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :
@@ -111,8 +103,26 @@
         <div class="sectionTitle">
             <h2>Media Partner</h2>
         </div>
-        <div class="partnersMediaContainer">
-            <div class="partnersMedia">
+        <div class="partnersMediaContainer row m-0">
+            <div class="kissFMPartner col-12">
+                <?php 
+
+            if( have_rows('horeca_partners', 'options') ):
+                while( have_rows('horeca_partners', 'options') ) : the_row();
+
+                    $partner_name = get_sub_field('horeca_partner_name');
+                    $partner_image = get_sub_field('horeca_partner_image');
+
+                ?>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
+                <?php
+                endwhile;
+            else :
+                // Do something...
+            endif;
+                ?>
+            </div>
+            <div class="partnersMedia col-12">
                 <?php 
 
     if( have_rows('media_partners', 'options') ):
@@ -120,11 +130,9 @@
 
             $partner_name = get_sub_field('media_partner_name');
             $partner_image = get_sub_field('media_partner_image');
-            $partner_link = get_sub_field('media_partner_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :
@@ -149,8 +157,7 @@
             $partner_link = get_sub_field('co-financed_by_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :
@@ -175,8 +182,7 @@
             $partner_link = get_sub_field('produced_by_link');
 
         ?>
-                <a href="<?php echo $partner_link; ?>"><img src="<?php echo $partner_image; ?>"
-                        alt="<?php echo $partner_name; ?>"></a>
+                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
         endwhile;
     else :

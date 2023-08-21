@@ -2763,21 +2763,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* Partners */
 
 .partners {
-  background-color: #fff;
+  background-color: #1e4b3a;
 }
 
 .partners .container h1,
 .partners .container h2{
-    color: #000;
+    color: #fff;
 }
 
-/*.partners .partnersContainer img,*/
-/*.partners .partnersMediaContainer img,*/
-/*.partners .partnersCofinanceContainer img,*/
-/*.partners .partnersPartofContainer img*/
-/*{*/
-/*    filter: brightness(0) invert(1);*/
-/*}*/
+/* .partners .partnersContainer img,
+.partners .partnersMediaContainer img,
+.partners .partnersCofinanceContainer img,
+.partners .partnersPartofContainer img
+{
+   filter: brightness(0) invert(1);
+} */
 
 @media screen and (min-width: 1200px){
   .partners.container-fluid .container {

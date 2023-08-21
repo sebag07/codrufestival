@@ -102,6 +102,22 @@
     width: 250px;
 }
 
+.kissFMPartner {
+    text-align: center;
+}
+
+.kissFMPartner img {
+    height: 300px;
+    width: 300px;
+}
+
+@media screen and (max-width: 500px){
+    .kissFMPartner img {
+        height: 250px;
+        width: 250px;
+    }
+}
+
 @media screen and (max-width: 500px){
     .partnersMedia img {
         height: 150px;

@@ -159,9 +159,14 @@
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
 
-                $categories = get_the_category();
-                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
-                $day_category = str_replace("-en", "", $day_category);
+                $day_category = "";
+                $term_list = wp_get_post_terms($post->ID, 'category', ['fields' => 'all']);
+                foreach($term_list as $term) {
+                  if( get_post_meta($post->ID, '_yoast_wpseo_primary_category',true) !== $term->term_id ) {
+                    $day_category = $term->slug;
+                    $day_category = str_replace("-en", "", $day_category);
+                  } 
+                }
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
@@ -178,9 +183,14 @@
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
 
-                $categories = get_the_category();
-                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
-                $day_category = str_replace("-en", "", $day_category);
+                $day_category = "";
+                $term_list = wp_get_post_terms($post->ID, 'category', ['fields' => 'all']);
+                foreach($term_list as $term) {
+                  if( get_post_meta($post->ID, '_yoast_wpseo_primary_category',true) !== $term->term_id ) {
+                    $day_category = $term->slug;
+                    $day_category = str_replace("-en", "", $day_category);
+                  } 
+                }
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
@@ -201,9 +211,14 @@
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
 
-                $categories = get_the_category();
-                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
-                $day_category = str_replace("-en", "", $day_category);
+                $day_category = "";
+                $term_list = wp_get_post_terms($post->ID, 'category', ['fields' => 'all']);
+                foreach($term_list as $term) {
+                  if( get_post_meta($post->ID, '_yoast_wpseo_primary_category',true) !== $term->term_id ) {
+                    $day_category = $term->slug;
+                    $day_category = str_replace("-en", "", $day_category);
+                  } 
+                }
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
@@ -224,9 +239,14 @@
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
 
-                $categories = get_the_category();
-                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
-                $day_category = str_replace("-en", "", $day_category);
+                $day_category = "";
+                $term_list = wp_get_post_terms($post->ID, 'category', ['fields' => 'all']);
+                foreach($term_list as $term) {
+                  if( get_post_meta($post->ID, '_yoast_wpseo_primary_category',true) !== $term->term_id ) {
+                    $day_category = $term->slug;
+                    $day_category = str_replace("-en", "", $day_category);
+                  } 
+                }
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
@@ -246,9 +266,14 @@
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
 
-                $categories = get_the_category();
-                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
-                $day_category = str_replace("-en", "", $day_category);
+                $day_category = "";
+                $term_list = wp_get_post_terms($post->ID, 'category', ['fields' => 'all']);
+                foreach($term_list as $term) {
+                  if( get_post_meta($post->ID, '_yoast_wpseo_primary_category',true) !== $term->term_id ) {
+                    $day_category = $term->slug;
+                    $day_category = str_replace("-en", "", $day_category);
+                  } 
+                }
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
@@ -269,9 +294,14 @@
                 $artistURL = get_the_permalink();
                 $artistTitle = get_the_title();
 
-                $categories = get_the_category();
-                $day_category = isset($categories[1]->slug) ? $categories[1]->slug : "";
-                $day_category = str_replace("-en", "", $day_category);
+                $day_category = "";
+                $term_list = wp_get_post_terms($post->ID, 'category', ['fields' => 'all']);
+                foreach($term_list as $term) {
+                  if( get_post_meta($post->ID, '_yoast_wpseo_primary_category',true) !== $term->term_id ) {
+                    $day_category = $term->slug;
+                    $day_category = str_replace("-en", "", $day_category);
+                  } 
+                }
 
                 if( !empty(get_the_post_thumbnail()) ) {
                   echo "<a class='item all artistItem $day_category' href='$artistURL' data-day='$day_category'><img src='$artistImageURL[0]' alt=''><span>$artistTitle</span></a>";
