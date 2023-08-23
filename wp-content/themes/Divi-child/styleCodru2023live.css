@@ -3298,3 +3298,172 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
       padding-right: 15px;
   }
 }
+
+/* General Info */
+
+.generalInfoPage h1 {
+  margin-top: 150px;
+  font-size: 48px;
+  font-weight: 600;
+}
+
+.generalInfoPage h1,
+.generalInfoPage h2,
+.generalInfoPage h3,
+.generalInfoPage h4,
+.generalInfoPage h5,
+.generalInfoPage h6 {
+  color: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+  .generalInfoPage h1 {
+      margin-top: 110px;
+  }
+}
+
+@media screen and (max-width: 991px) {
+  .generalInfoPage h1 {
+      font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .generalInfoPage h1 {
+      font-size: 30px;
+  }
+}
+
+.nav-pills .nav-link {
+  width: 100%;
+  background-color: transparent;
+  padding: 12px 0.5rem;
+  text-align: center;
+  color: #fff;
+  transition: all .3s;
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: inherit;
+  text-decoration: none;
+  border-radius: 30px;
+  border: 2px solid #efaa13;
+  line-height: 20px;
+}
+
+.dropdown-toggle {
+  width: 100%;
+  background-color: transparent;
+  padding: 12px 0.5rem;
+  text-align: center;
+  color: #efaa13;
+  font-weight: 800;
+  font-size: 18px;
+  text-transform: inherit;
+  text-decoration: none;
+  border-radius: 30px;
+  border: 2px solid #efaa13;
+  line-height: 20px;
+  margin-bottom: 40px;
+}
+
+.show .dropdown-toggle {
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-color: #efaa13;
+}
+
+.dropdown-toggle::after {
+  content: '';
+  border: 7px solid transparent;
+  border-top: 7px solid #efaa13;
+  margin-left: 2px;
+  margin-bottom: -2px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.dropdown-toggle:hover {
+  color: #efaa13;
+  border-color: #efaa13;
+}
+
+.dropdown .dropdown-toggle:active {
+  border-color: #efaa13;
+  color: #efaa13;
+}
+
+.dropdown-menu {
+  width: 100%;
+  top: -2px !important;
+  background: #efaa13;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+}
+
+.dropdown-menu a {
+  color: #fff;
+  font-weight: 600;
+}
+
+.dropdown-toggle::after {
+  color: #efaa13;
+}
+
+.nav-pills {
+  flex-direction: column;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  color: #f47e30;
+  background: #fff;
+  border: 2px solid #f47e30;
+}
+
+.nav-pills .nav-link:hover {
+  color: #f47e30;
+  background: #fff;
+  border: 2px solid #f47e30;
+}
+
+.nav-pills {
+  gap: 20px;
+}
+
+.general-info-content img {
+width: 100%;
+max-width: 500px;
+}
+
+.general-info-content h1,
+.general-info-content h2,
+.general-info-content h3,
+.general-info-content h4,
+.general-info-content h5,
+.general-info-content h6 {
+color: #efaa13;
+}
+
+.general-info-content p {
+color: #fff;
+font-size: 16px;
+}
+
+.general-info-content ul {
+list-style: disc;
+padding-left: 20px;
+color: #fff;
+font-weight: 600;
+font-size: 16px;
+}
+
+.general-info-content a {
+color: #f47e30;
+}
+
+.general-info-content a:hover,
+.general-info-content a:active {
+color: #efaa13;
+}
