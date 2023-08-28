@@ -66,8 +66,10 @@
                     $scena_4 = get_field('scena_4', 'option');
                     $scena_5 = get_field('scena_5', 'option');
                     $scena_6 = get_field('scena_6', 'option');
+                    $scena_7 = get_field('scena_7', 'option');
+                    $scena_8 = get_field('scena_8', 'option');
 
-                    $new_program = [$scena_1, $scena_2, $scena_3, $scena_4, $scena_5, $scena_6];
+                    $new_program = [$scena_1, $scena_2, $scena_3, $scena_4, $scena_5, $scena_6, $scena_7, $scena_8];
                     $index = 1;
 
                     $hours = array(

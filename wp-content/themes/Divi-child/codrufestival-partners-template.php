@@ -2,7 +2,7 @@
 <?php get_header('codru2023live'); ?>
 
 
-<div class="container-fluid partnersPage sectionPaddingHero m-auto">
+<div class="container-fluid partnersPage m-auto">
     <div class="row valuesContainer">
         <div class="col-lg-12 col-md-12 col-12 text-center partnersTitle">
             <h2><?php echo get_field('above_repeater_title')?></h2>

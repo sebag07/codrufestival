@@ -295,67 +295,89 @@ a{
 .scena1 .cd-schedule__event [data-event="event-1"],
 .scena1 .cd-schedule__event [data-event="event-2"],
 .scena1 .cd-schedule__event [data-event="event-3"] {
-    background: #efaa13;
+    background: #eeb930;
     color: #fff;
 }
 
 .js .cd-schedule__top-info.scena1 > span {
-    color: #efaa13;
+    color: #eeb930;
 }
 
 .scena2 .cd-schedule__event [data-event="event-1"],
 .scena2 .cd-schedule__event [data-event="event-2"],
 .scena2 .cd-schedule__event [data-event="event-3"] {
-    background: #867aa8;
+    background: #000000;
     color: #fff;
 }
 
 .js .cd-schedule__top-info.scena2 > span {
-    color: #867aa8;
+    color: #000000;
 }
 
 .scena3 .cd-schedule__event [data-event="event-1"],
 .scena3 .cd-schedule__event [data-event="event-2"],
 .scena3 .cd-schedule__event [data-event="event-3"] {
-    background: #487076;
+    background: #6ecbd3;
     color: #fff;
 }
 
 .js .cd-schedule__top-info.scena3 > span {
-    color: #487076;
+    color: #6ecbd3;
 }
 
 .scena4 .cd-schedule__event [data-event="event-1"],
 .scena4 .cd-schedule__event [data-event="event-2"],
 .scena4 .cd-schedule__event [data-event="event-3"] {
-    background: #9c33b3;
+    background: #613190;
     color: #fff;
 }
 
 .js .cd-schedule__top-info.scena4 > span {
-    color: #9c33b3;
+    color: #613190;
 }
 
 .scena5 .cd-schedule__event [data-event="event-1"],
 .scena5 .cd-schedule__event [data-event="event-2"],
 .scena5 .cd-schedule__event [data-event="event-3"] {
-    background: #38c3ca;
+    background: #ec1c31;
     color: #fff;
 }
 
 .js .cd-schedule__top-info.scena5 > span {
-    color: #38c3ca;
+    color: #ec1c31;
 }
 
 .scena6 .cd-schedule__event [data-event="event-1"],
 .scena6 .cd-schedule__event [data-event="event-2"],
 .scena6 .cd-schedule__event [data-event="event-3"] {
-    background: #aca70d;
+    background: #d14097;
     color: #fff;
 }
 
 .js .cd-schedule__top-info.scena6 > span {
-    color: #aca70d;
+    color: #d14097;
+}
+
+.scena7 .cd-schedule__event [data-event="event-1"],
+.scena7 .cd-schedule__event [data-event="event-2"],
+.scena7 .cd-schedule__event [data-event="event-3"] {
+    background: #1c469d;
+    color: #fff;
+}
+
+.js .cd-schedule__top-info.scena7 > span {
+    color: #1c469d;
+}
+
+.scena8 .cd-schedule__event [data-event="event-1"],
+.scena8 .cd-schedule__event [data-event="event-2"],
+.scena8 .cd-schedule__event [data-event="event-3"] {
+    background: #c12026;
+    color: #fff;
+}
+
+.js .cd-schedule__top-info.scena8 > span {
+    color: #c12026;
 }
 
 .cd-schedule__event [data-event="event-1"],.cd-schedule-modal[data-event="event-1"] .cd-schedule-modal__header-bg{

@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 /* @font-face {
@@ -143,7 +144,6 @@ a:hover {
   top: 0;
   height: 80px;
   background-color: #1e4b3a;
-  margin-top: 80px;
 }
 
 .site-logo {
@@ -759,7 +759,6 @@ a:hover {
   right: 0;
   margin: auto;
   width: 320px;
-  margin-top: 80px;
 }
 
 /* @media (min-width:2000px) {
@@ -2547,14 +2546,14 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .termsPage h1 {
-  margin-top: 150px;
+  margin-top: 70px;
   font-size: 48px;
   font-weight: 600;
 }
 
 @media screen and (max-width: 1200px){
   .termsPage h1 {
-    margin-top: 110px;
+    margin-top: 30px;
   }
 }
 
@@ -2572,9 +2571,9 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 /* Program */
 
-.programPage ul { 
-  list-style: none;
-  padding-left: 0;
+.programPage ul {
+    list-style: none;
+    padding-left: 0;
 }
 
 /* Single post */
@@ -2619,6 +2618,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   font-size: 40px;
   font-style: italic;
   font-weight:600;
+  padding-top: 0;
 }
 
 @media screen and (min-width: 1200px){
@@ -2832,12 +2832,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .partnersPage .partnersTitle {
-  padding-top: 180px;
+  margin-top: 100px;
 }
 
 @media screen and (max-width: 1200px){
   .partnersPage .partnersTitle {
-    padding-top: 100px;
+    margin-top: 20px;
   }
 }
 
@@ -3298,6 +3298,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
       padding-right: 15px;
   }
 }
+
 
 /* General Info */
 

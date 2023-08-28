@@ -1,8 +1,6 @@
 <?php /*  Template Name: Codrufestival 2023  */ ?>
 <?php get_header('codru2023live'); ?>
 
-
-<div class="header-divider" style="height: 80px;"></div>
 <div class="container-fluid heroContainer p-0 m-0">
     <img class="heroBG" src="/wp-content/themes/Divi-child/images/codru2023hero.png" alt="">
     <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/L-Leaves.png" alt="">
@@ -134,6 +132,10 @@
               }
             ?>
 
+        </div>
+        
+        <div class="col-lg-12 text-center pt-4">
+          <a class="heroContentButton desktopButton desktopContentButton" href="https://codrufestival.ro/program">Program</a>
         </div>
 
     </div>
