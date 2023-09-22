@@ -8,8 +8,8 @@
             <div class="cd-main-header">
                 <div class="filterContainer">
                     <button class="filterBtn selected" data-value="ziua1">Vineri 25.08</button>
-                    <button class="filterBtn" data-value="ziua2">Sambata 26.08</button>
-                    <button class="filterBtn" data-value="ziua3">Duminica 27.08</button>
+                    <button class="filterBtn" data-value="ziua2">Sâmbătă 26.08</button>
+                    <button class="filterBtn" data-value="ziua3">Duminică 27.08</button>
                 </div>
             </div>
 

@@ -101,7 +101,7 @@
         </div>
 
         <div class="sectionTitle">
-            <h2>Media Partner</h2>
+            <h2>Media Partners</h2>
         </div>
         <div class="partnersMediaContainer row m-0">
             <div class="kissFMPartner col-12">

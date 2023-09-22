@@ -2,7 +2,6 @@ jQuery(document).ready((function() {
 	// Schedule Template - by CodyHouse.co
 	function ScheduleTemplate( element ) {
 		this.element = element;
-		console.log(this.element);
 		this.timelineItems = this.element.getElementsByClassName('cd-schedule__timeline')[0].getElementsByTagName('li');
 		this.timelineStart = getScheduleTimestamp(this.timelineItems[0].textContent);
 		this.timelineUnitDuration = getScheduleTimestamp(this.timelineItems[1].textContent) - getScheduleTimestamp(this.timelineItems[0].textContent);

@@ -182,3 +182,9 @@ jQuery(document).ready(function(){
   
 
 })
+
+
+
+// var offset = jQuery(':target').offset();
+// var scrollto = offset.top - 60; // minus fixed header height
+// jQuery('html, body').animate({scrollTop:scrollto}, 0);
