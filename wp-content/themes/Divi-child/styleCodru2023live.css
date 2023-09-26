@@ -2123,6 +2123,14 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   object-fit: cover;
 }
 
+#apeluriartisti h2 {
+  color: #fff;
+  text-align: center;
+  padding-bottom: 50px;
+  font-weight: 600;
+  font-style: italic;
+}
+
 #noutatiAnchor h2 {
   color: #fff;
   text-align: center;
@@ -2159,6 +2167,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   }
 }
 
+@media screen and (max-width: 767px){
+  #apeluriartisti .container {
+    width: 100%;
+  }
+}
+
 .newsContainer .sectionTitle {
   color: #fff;
   text-align: center;
@@ -2175,7 +2189,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .homepageNewsTitle h3 {
-  color: #efaa13;
+  color: #efaa13 !important;
   min-height: 110px;
   font-size: 20px;
   font-style: italic;
@@ -2767,6 +2781,38 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   }
 }
 
+/* Homepage Partners */
+
+.homePartnersPage.partnersPage .container {
+  width: 100%;
+}
+
+.homePartnersPage.partnersPage h3 {
+  color: #ebab20;
+  font-weight: 900;
+  font-size: 24px; 
+}
+
+.homePartnersPage.partnersPage strong {
+  color: #ebab20;
+  font-weight: 900;
+}
+
+.homePartnersPage.partnersPage a {
+  color: #ebab20;
+  font-weight: 900;
+}
+
+.homePartnersPage.partnersPage a:hover {
+  color: #569d88;
+}
+
+@media screen and (max-width: 991px){
+  .homePartnersPage.partnersPage .valuesImage img {
+    max-width: 500px;
+  }
+}
+
 /* Partners */
 
 .partners {
@@ -2805,6 +2851,27 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 /* HELPERS */
+
+@media (min-width: 992px){
+  .order-lg-1 {
+    order: 1!important;
+  }
+  .order-lg-2 {
+    order: 2!important;
+  }
+  .order-lg-3 {
+    order: 3!important;
+  }
+  .order-lg-4 {
+    order: 4!important;
+  }
+  .order-lg-5 {
+    order: 5!important;
+  }
+  .order-lg-6 {
+    order: 6!important;
+  }
+}
 
 @media screen and (max-width: 767px){
   .singlePostContainer .container {
