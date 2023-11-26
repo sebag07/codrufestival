@@ -1001,11 +1001,14 @@ a:hover {
   min-height: 110vh;
   position: relative;
   padding-top: 80px !important;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 @media screen and (max-width: 500px) {
   .heroContainer {
     background-color: #1e4b3a;
+    min-height: 100vh;
   }
 }
 
@@ -1014,6 +1017,7 @@ a:hover {
   height: 100%;
   opacity: 0.7;
   object-fit: cover;
+  object-position: right;
   position: absolute;
 }
 
@@ -1071,12 +1075,6 @@ a:hover {
   height: 80vh;
   padding-left: 10%;
   z-index: 10;
-}
-
-@media screen and (max-height: 1000px) {
-  .heroContentDiv {
-    height: initial;
-  }
 }
 
 @media screen and (max-width: 991px) {
@@ -1167,6 +1165,7 @@ a:hover {
   position: absolute;
   height: 100%;
   width: 100%;
+  margin-top: -80px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 0%,
