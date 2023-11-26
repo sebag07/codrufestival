@@ -167,6 +167,13 @@ a:hover {
   width: 100%;
   max-height: 50px;
 }
+
+@media screen and (max-width: 500px){
+  .site-logo a img {
+    margin-left: -30px;
+  }
+}
+
 @media (max-width: 767.98px) {
   .site-navbar .site-logo {
     position: relative;
