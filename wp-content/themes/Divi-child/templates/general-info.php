@@ -1,5 +1,5 @@
 <?php /*  Template Name: General Info  */ ?>
-<?php get_header('codru2023live'); ?>
+<?php get_header(); ?>
 
 <?php $filter = isset($_REQUEST['filter']) ? $_REQUEST['filter'] : "program"; ?>
 
@@ -150,4 +150,4 @@ jQuery(document).ready(function() {
     integrity="sha512-fHY2UiQlipUq0dEabSM4s+phmn+bcxSYzXP4vAXItBvBHU7zAM/mkhCZjtBEIJexhOMzZbgFlPLuErlJF2b+0g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<?php get_footer('codru2023live'); ?>
+<?php get_footer(); ?>

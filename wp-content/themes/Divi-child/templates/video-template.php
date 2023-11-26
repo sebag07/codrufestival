@@ -1,5 +1,5 @@
 <?php /*  Template Name: Video template  */ ?>
-<?php get_header('codru2023live'); ?>
+<?php get_header(); ?>
 
 <?php 
 
@@ -28,4 +28,4 @@ $videoTemplateEmbeddedSrc = get_field('video_template_youtube_embedded_src');
     </div>
 </div>
 
-<?php get_footer('codru2023live'); ?>
+<?php get_footer(); ?>

@@ -1,5 +1,5 @@
 <?php /*  Template Name: Parteneri  */ ?>
-<?php get_header('codru2023live'); ?>
+<?php get_header(); ?>
 
 
 <div class="container-fluid partnersPage m-auto">
@@ -33,4 +33,4 @@
 </div>
 
 
-<?php get_footer('codru2023live'); ?>
+<?php get_footer(); ?>

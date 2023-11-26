@@ -1,6 +1,6 @@
 <?php
 
-get_header('codru2023live');
+get_header();
 ?>
 
 <?php 
@@ -60,5 +60,5 @@ echo $category;
 
 
 <?php
-get_footer('codru2023live');
+get_footer();
 ?>

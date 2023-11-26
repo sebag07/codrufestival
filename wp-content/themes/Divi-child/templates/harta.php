@@ -1,5 +1,5 @@
 <?php /*  Template Name: Map  */ ?>
-<?php get_header('codru2023live'); ?>
+<?php get_header(); ?>
 
 <div class="container termsPage pt-5 pb-5">
     <h1 class="pt-5 pb-4 text-center" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
@@ -25,4 +25,4 @@
 </div>
 
 
-<?php get_footer('codru2023live'); ?>
+<?php get_footer(); ?>
