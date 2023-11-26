@@ -1,5 +1,5 @@
 <?php /*  Template Name: Parteneri  */ ?>
-<?php get_header('codru2023live'); ?>
+<?php get_header(); ?>
 
 <div class="container-fluid partners termsPage pt-5 pb-5">
     <div class="container">
@@ -195,4 +195,4 @@
 </div>
 
 
-<?php get_footer('codru2023live'); ?>
+<?php get_footer(); ?>

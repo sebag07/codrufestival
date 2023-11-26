@@ -288,6 +288,7 @@ class Help {
 				'/docs/setup-captcha-wpforms/',
 				'/docs/how-to-install-and-use-custom-captcha-addon-in-wpforms/',
 				'/docs/setting-up-akismet-anti-spam-protection/',
+				'/docs/viewing-and-managing-spam-entries/',
 			],
 			'fields'                    => [
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
@@ -309,24 +310,28 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'paragraph'                 => [
 				'/docs/how-to-limit-words-or-characters-in-a-form-field/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'paragraph text'            => [
 				'/docs/how-to-limit-words-or-characters-in-a-form-field/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'textarea'                  => [
 				'/docs/how-to-limit-words-or-characters-in-a-form-field/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'input mask'                => [
 				'/docs/how-to-use-custom-input-masks/',
@@ -522,6 +527,7 @@ class Help {
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
 				'/docs/how-to-use-smart-tags-in-wpforms/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
+				'/docs/calculations-addon/',
 			],
 			'rating'                    => [
 				'/docs/how-to-add-a-rating-field-to-wpforms/',
@@ -627,6 +633,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'website/url'               => [
 				'/docs/how-to-customize-form-field-options/',
@@ -842,6 +849,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'multiple items'            => [
 				'/docs/viewing-and-managing-payments/',
@@ -990,6 +998,26 @@ class Help {
 			'conditional confirmation'  => [
 				'/docs/setup-form-confirmation-wpforms/',
 				'/docs/how-to-create-conditional-form-confirmations/',
+			],
+			'calculation'               => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
+			],
+			'calculations'              => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
+			],
+			'formula'                   => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
+			],
+			'conditional calculation'   => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
 			],
 			'lead forms'                => [
 				'/docs/lead-forms-addon/',
@@ -1222,12 +1250,15 @@ class Help {
 	 * Get doc id.
 	 *
 	 * @since 1.6.3
+	 * @deprecated 1.8.3
 	 *
 	 * @param string $link Absolute link to the doc without the domain part.
 	 *
 	 * @return array Array with doc id as element.
 	 */
 	public function get_doc_id( $link ) {
+
+		_deprecated_function( __METHOD__, '1.8.3 of the WPForms plugin', __CLASS__ . '::get_doc_id_int()' );
 
 		if ( empty( $this->docs ) ) {
 			return [];
@@ -1245,6 +1276,30 @@ class Help {
 	}
 
 	/**
+	 * Get doc id.
+	 *
+	 * @since 1.8.3
+	 *
+	 * @param string $link Absolute link to the doc without the domain part.
+	 *
+	 * @return int Doc id.
+	 */
+	private function get_doc_id_int( $link ) {
+
+		if ( empty( $this->docs ) ) {
+			return 0;
+		}
+
+		foreach ( $this->docs as $id => $doc ) {
+			if ( ! empty( $doc['url'] ) && $doc['url'] === 'https://wpforms.com' . $link ) {
+				return $id;
+			}
+		}
+
+		return 0;
+	}
+
+	/**
 	 * Get doc ids.
 	 *
 	 * @since 1.6.3
@@ -1255,17 +1310,13 @@ class Help {
 	 */
 	public function get_doc_ids( $links ) {
 
-		if ( empty( $this->docs ) ) {
-			return [];
-		}
-
 		$ids = [];
 
 		foreach ( $links as $link ) {
-			$ids[] = $this->get_doc_id( $link );
+			$ids[] = $this->get_doc_id_int( $link );
 		}
 
-		return array_merge( [], ...$ids );
+		return $ids;
 	}
 
 	/**

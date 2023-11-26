@@ -360,7 +360,7 @@ function cptui_products_sidebar() {
 		}
 		printf(
 			'<p><a href="%s">%s</a></p>',
-			'https://pluginize.com/plugins/custom-post-type-ui-extended/ref/pluginizeaff/?campaign=cptui-sidebar-remove',
+			'https://pluginize.com/plugins/custom-post-type-ui-extended/',
 			esc_html__( 'Remove these ads?', 'custom-post-type-ui' )
 		);
 	}
@@ -429,7 +429,7 @@ function cptui_newsletter_form() {
  * Add our Email Octopus scripts and stylesheet.
  *
  * @author Scott Anderson <scott.anderson@webdevstudios.com>
- * @since  NEXT
+ * @since  1.7.3
  */
 function enqueue_email_octopus_assets() {
 
@@ -1002,3 +1002,31 @@ function cptui_get_add_new_link( $content_type = '' ) {
 
 	return cptui_admin_url( 'admin.php?page=cptui_manage_' . $content_type );
 }
+
+/**
+ * Register theme support for CPTUI based content types, for extra assurance.
+ *
+ * @since 1.14.0
+ */
+function cptui_post_thumbnail_theme_support() {
+	$post_types = cptui_get_post_type_data();
+
+	$supported = [];
+	foreach ( $post_types as $post_type ) {
+		if ( empty( $post_type['supports'] ) ) {
+			continue;
+		}
+		if (
+			// Some way, somehow, null can end up saved in the supports spot.
+			// Lets check for an array first.
+			is_array( $post_type['supports'] ) &&
+			in_array( 'thumbnail', $post_type['supports'] )
+		) {
+			$supported[] = $post_type['name'];
+		}
+	}
+	if ( ! empty( $supported ) ) {
+		add_theme_support( 'post-thumbnails', $supported );
+	}
+}
+add_action( 'after_setup_theme', 'cptui_post_thumbnail_theme_support' );

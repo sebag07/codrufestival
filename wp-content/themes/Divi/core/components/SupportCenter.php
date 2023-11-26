@@ -1385,6 +1385,18 @@ class ET_Core_SupportCenter {
 				'learn_more'     => 'https://wordpress.org/support/article/changing-file-permissions/',
 			),
 			array(
+				'name'           => esc_attr__( 'Writable et-cache Directory', 'et-core' ),
+				'environment'    => 'server',
+				'type'           => 'truthy_falsy',
+				'pass_minus_one' => null,
+				'pass_zero'      => null,
+				'minimum'        => null,
+				'recommended'    => true,
+				'actual'         => wp_is_writable( WP_CONTENT_DIR . '/et-cache' ),
+				'help_text'      => et_core_intentionally_unescaped( __( 'We recommend that the et-cache directory on your server be writable by WordPress in order to ensure the full functionality of Divi Builder themes and plugins.', 'et-core' ), 'html' ),
+				'learn_more'     => 'https://wordpress.org/support/article/changing-file-permissions/',
+			),
+			array(
 				'name'           => esc_attr__( 'PHP: Version', 'et-core' ),
 				'environment'    => 'server',
 				'type'           => 'version',
@@ -2048,6 +2060,7 @@ class ET_Core_SupportCenter {
 			'add_library'                        => true,
 			'disable_module'                     => true,
 			'divi_builder_control'               => true,
+			'divi_ai'                            => true,
 			'divi_library'                       => true,
 			'edit_borders'                       => true,
 			'edit_buttons'                       => true,
@@ -2298,7 +2311,7 @@ class ET_Core_SupportCenter {
 		$support_user_options = array(
 			'timeout'    => 30,
 			'body'       => $send_to_api,
-			'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url( '/' ),
+			'user-agent' => 'WordPress/' . $wp_version . '; Support Center/' . ET_CORE_VERSION . '; ' . home_url( '/' ),
 		);
 
 		$request = wp_remote_post(
@@ -2576,10 +2589,6 @@ class ET_Core_SupportCenter {
 		);
 
 		$request = wp_remote_post( 'https://www.elegantthemes.com/api/token.php', $settings );
-
-		if ( is_wp_error( $request ) ) {
-			wp_remote_post( 'https://cdn.elegantthemes.com/api/token.php', $settings );
-		}
 	}
 
 	function support_user_update_via_ajax() {
@@ -3318,7 +3327,7 @@ class ET_Core_SupportCenter {
 					'username' => $et_username,
 					'api_key'  => $et_api_key,
 				),
-				'user-agent' => 'WordPress/' . $wp_version . '; ' . home_url( '/' ),
+				'user-agent' => 'WordPress/' . $wp_version . '; Support Center/' . ET_CORE_VERSION . '; ' . home_url( '/' ),
 			);
 		}
 

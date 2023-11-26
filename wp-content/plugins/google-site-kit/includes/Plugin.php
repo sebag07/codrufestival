@@ -159,7 +159,7 @@ final class Plugin {
 
 				$user_input = new Core\User_Input\User_Input( $this->context, $options, $user_options, $survey_queue );
 
-				if ( Feature_Flags::enabled( 'userInput' ) ) {
+				if ( Feature_Flags::enabled( 'keyMetrics' ) ) {
 					$user_input->register();
 				}
 
@@ -212,8 +212,8 @@ final class Plugin {
 				( new Core\Util\Migration_1_8_1( $this->context, $options, $user_options, $authentication ) )->register();
 				( new Core\Dashboard_Sharing\Dashboard_Sharing( $this->context, $user_options ) )->register();
 
-				if ( Feature_Flags::enabled( 'userInput' ) ) {
-					( new Core\Key_Metrics\Key_Metrics( $this->context, $user_options ) )->register();
+				if ( Feature_Flags::enabled( 'keyMetrics' ) ) {
+					( new Core\Key_Metrics\Key_Metrics( $this->context, $user_options, $options ) )->register();
 				}
 
 				// If a login is happening (runs after 'init'), update current user in dependency chain.

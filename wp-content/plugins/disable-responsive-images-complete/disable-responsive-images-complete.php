@@ -9,9 +9,9 @@
 	Donate link: https://monzillamedia.com/donate.html
 	Contributors: specialk
 	Requires at least: 4.6
-	Tested up to: 6.2
-	Stable tag: 2.5
-	Version: 2.5
+	Tested up to: 6.4
+	Stable tag: 2.6.1
+	Version: 2.6.1
 	Requires PHP: 5.6.20
 	License: GPL v2 or later
 

@@ -164,11 +164,13 @@ if ( ! function_exists( 'et_builder_load_library' ) ) :
 		require_once ET_BUILDER_DIR . 'feature/Library.php';
 		require_once ET_BUILDER_DIR . 'feature/SplitLibrary.php';
 
-		// Initialize DiviCloud.
+		// Initialize Divi Cloud and AI.
 		if ( defined( 'ET_BUILDER_PLUGIN_ACTIVE' ) ) {
 			require_once ET_BUILDER_PLUGIN_DIR . '/cloud/cloud-app.php';
+			require_once ET_BUILDER_PLUGIN_DIR . '/ai-app/ai-app.php';
 		} else {
 			require_once get_template_directory() . '/cloud/cloud-app.php';
+			require_once get_template_directory() . '/ai-app/ai-app.php';
 		}
 	}
 endif;
@@ -2567,6 +2569,7 @@ function et_fb_get_nonces() {
 		'processImportedData'             => wp_create_nonce( 'et_fb_process_imported_data_nonce' ),
 		'retrieveLibraryModules'          => wp_create_nonce( 'et_fb_retrieve_library_modules_nonce' ),
 		'saveLibraryModules'              => wp_create_nonce( 'et_fb_save_library_modules_nonce' ),
+		'splitLibraryItem'                => wp_create_nonce( 'et_builder_split_library_item' ),
 		'clearTempPresets'                => wp_create_nonce( 'et_fb_clear_temp_presets_nonce' ),
 		'saveCloudItemContent'            => wp_create_nonce( 'et_fb_save_cloud_item_nonce' ),
 		'removeLibraryModules'            => wp_create_nonce( 'et_fb_remove_library_modules_nonce' ),
@@ -2580,6 +2583,7 @@ function et_fb_get_nonces() {
 		'libraryLayoutsData'              => wp_create_nonce( 'et_builder_library_get_layouts_data' ),
 		'libraryGetLayout'                => wp_create_nonce( 'et_builder_library_get_layout' ),
 		'libraryUpdateLayout'             => wp_create_nonce( 'et_builder_library_update_layout' ),
+		'libraryConvertLayout'            => wp_create_nonce( 'et_builder_library_convert_layout' ),
 		'libraryUpdateTerms'              => wp_create_nonce( 'et_builder_library_update_terms' ),
 		'libraryUpdateLocation'           => wp_create_nonce( 'et_builder_library_toggle_item_location' ),
 		'libraryUpdateAccount'            => wp_create_nonce( 'et_builder_library_update_account' ),

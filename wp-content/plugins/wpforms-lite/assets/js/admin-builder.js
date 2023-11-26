@@ -151,9 +151,12 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			elements.$nextFieldId         = $( '#wpforms-field-id' );
 			elements.$fieldOptions        = $( '#wpforms-field-options' );
-			elements.$fieldsPreviewWrap   = $( '#wpforms-panel-fields .wpforms-panel-content-wrap' ),
+			elements.$fieldsPreviewWrap   = $( '#wpforms-panel-fields .wpforms-panel-content-wrap' );
 			elements.$sortableFieldsWrap  = $( '#wpforms-panel-fields .wpforms-field-wrap' );
 			elements.$addFieldsButtons    = $( '.wpforms-add-fields-button' ).not( '.not-draggable' ).not( '.warning-modal' ).not( '.education-modal' );
+			elements.$fieldsSidebar       = $( '#wpforms-panel-fields .wpforms-add-fields' );
+			elements.$searchInput         = $( '#wpforms-search-fields-input' );
+			elements.$sidebarToggle       = $( '.wpforms-panels .wpforms-panel-sidebar-content .wpforms-panel-sidebar-toggle' );
 
 			// Remove Embed button if builder opened in popup.
 			if ( app.isBuilderInPopup() ) {
@@ -609,11 +612,14 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 						isDynamicChoices = app.dropdownField.helpers.isDynamicChoices( fieldId ),
 						instance         = app.dropdownField.helpers.getInstance( $primary );
 
-					// Destroy the instance of Choices.js.
-					instance.destroy();
+					if ( instance && typeof instance.destroy === 'function' ) {
 
-					// Update a placeholder.
-					app.dropdownField.helpers.updatePlaceholderChoice( instance, fieldId );
+						// Destroy the instance of Choices.js.
+						instance.destroy();
+
+						// Update a placeholder.
+						app.dropdownField.helpers.updatePlaceholderChoice( instance, fieldId );
+					}
 
 					// Update choices.
 					if ( ! isDynamicChoices ) {
@@ -675,7 +681,10 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 						// If we had a `Modern` select before, then we need to make re-init - destroy() + init().
 						app.dropdownField.helpers.convertModernToClassic( fieldId );
-						app.dropdownField.events.choicesInit( $primary );
+
+						if ( ! isDynamicChoices ) {
+							app.dropdownField.events.choicesInit( $primary );
+						}
 
 					} else {
 
@@ -1029,6 +1038,9 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				_.debounce( app.changeNumberSliderDefaultValue, 500 )
 			);
 
+			// Trigger input event on default value input to check if it's valid.
+			$builder.find( '.wpforms-number-slider-default-value' ).trigger( 'input' );
+
 			// Change step value.
 			$builder.on(
 				'input',
@@ -1128,23 +1140,20 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 *
 		 * @since 1.5.7
 		 *
-		 * @param {object} event Input event.
+		 * @param {Object} event Input event.
 		 */
-		changeNumberSliderStep: function( event ) {
-
-			var value = parseFloat( event.target.value );
+		changeNumberSliderStep( event ) {
+			const value = parseFloat( event.target.value );
 
 			if ( isNaN( value ) ) {
 				return;
 			}
 
-			var max = parseFloat( event.target.max );
-			var min = parseFloat( event.target.min );
-			var fieldID = $( event.target ).parents( '.wpforms-field-option-row' ).data( 'fieldId' );
-
 			if ( value <= 0 ) {
 				return;
 			}
+
+			const max = parseFloat( event.target.max );
 
 			if ( value > max ) {
 				event.target.value = max;
@@ -1152,14 +1161,77 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 				return;
 			}
 
+			const min = parseFloat( event.target.min );
+
 			if ( value < min ) {
 				event.target.value = min;
 
 				return;
 			}
 
-			app.updateNumberSliderAttr( fieldID, value, 'step' )
+			const fieldID = $( event.target ).parents( '.wpforms-field-option-row' ).data( 'fieldId' );
+			const defaultValue = $( '#wpforms-field-option-' + fieldID + '-default_value' ).val();
+
+			app.checkMultiplicitySliderDefaultValue( fieldID, defaultValue, value )
+				.updateNumberSliderAttr( fieldID, value, 'step' )
 				.updateNumberSliderDefaultValueAttr( fieldID, value, 'step' );
+		},
+
+		/**
+		 * Check multiplicity of a slider default value.
+		 *
+		 * @since 1.8.4
+		 *
+		 * @param {string} fieldId Field ID.
+		 * @param {number} value   Default value.
+		 * @param {number} step    Step value.
+		 *
+		 * @return {Object} App instance.
+		 */
+		checkMultiplicitySliderDefaultValue( fieldId, value, step ) {
+			const $printSelector = $( `#wpforms-field-option-row-${ fieldId }-default_value` );
+
+			if ( value % step !== 0 ) {
+				const message = wpforms_builder.number_slider_error_valid_default_value;
+				const closestSmallerMultiple = Math.floor( value / step ) * step;
+				const closestLargerMultiple = Math.ceil( value / step ) * step;
+
+				const updatedMessage = message.replace( '{from}', closestSmallerMultiple ).replace( '{to}', closestLargerMultiple );
+
+				app.printNotice( updatedMessage, $printSelector );
+			} else {
+				app.removeNotice( $printSelector );
+			}
+
+			return this;
+		},
+
+		/**
+		 * Print a notice.
+		 *
+		 * @since 1.8.4
+		 *
+		 * @param {string} message        Message to print.
+		 * @param {Object} $printSelector jQuery element selector.
+		 */
+		printNotice( message, $printSelector ) {
+			if ( $printSelector.length ) {
+				this.removeNotice( $printSelector );
+				$printSelector.append( `<div class="wpforms-alert-warning wpforms-alert"><p>${ message }</p></div>` );
+			}
+		},
+
+		/**
+		 * Remove a notice.
+		 *
+		 * @since 1.8.4
+		 *
+		 * @param {Object} $printSelector jQuery element selector.
+		 */
+		removeNotice( $printSelector ) {
+			if ( $printSelector.length && $printSelector.find( '.wpforms-alert' ).length ) {
+				$printSelector.find( '.wpforms-alert' ).remove();
+			}
 		},
 
 		/**
@@ -1202,16 +1274,13 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 *
 		 * @since 1.5.7
 		 *
-		 * @param {object} event Input event.
+		 * @param {Object} event Input event.
 		 */
-		changeNumberSliderDefaultValue: function( event ) {
-
-			var value = parseFloat( event.target.value );
+		changeNumberSliderDefaultValue( event ) {
+			const value = parseFloat( event.target.value );
 
 			if ( ! isNaN( value ) ) {
-				var max     = parseFloat( event.target.max );
-				var min     = parseFloat( event.target.min );
-				var fieldID = $( event.target ).parents( '.wpforms-field-option-row-default_value' ).data( 'fieldId' );
+				const max = parseFloat( event.target.max );
 
 				if ( value > max ) {
 					event.target.value = max;
@@ -1219,13 +1288,19 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 					return;
 				}
 
+				const min = parseFloat( event.target.min );
+
 				if ( value < min ) {
 					event.target.value = min;
 
 					return;
 				}
 
-				app.updateNumberSlider( fieldID, value )
+				const step = parseFloat( event.target.step );
+				const fieldID = $( event.target ).parents( '.wpforms-field-option-row-default_value' ).data( 'fieldId' );
+
+				app.checkMultiplicitySliderDefaultValue( fieldID, value, step )
+					.updateNumberSlider( fieldID, value )
 					.updateNumberSliderHint( fieldID, value );
 			}
 		},
@@ -3678,25 +3753,37 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			newFieldOptions = newFieldOptions.replace( regex.referenceID, `data-reference="${newFieldID}"` );
 			newFieldOptions = newFieldOptions.replace( regex.elementID, regex.elementIdReplace );
 
-			// Add new field options panel.
+			// Hide all field options panels.
 			$visibleOptions.hide();
+
+			// Add new field options panel.
 			$fieldOptions.after( `<div class="${fieldOptionsClass}" id="wpforms-field-option-${newFieldID}" data-field-id="${newFieldID}">${newFieldOptions}</div>` );
 
+			// Get new field options panel.
 			const $newFieldOptions = $( `#wpforms-field-option-${newFieldID}` );
 
-			// Maintain the state of the currently active options tab when applicable during duplication.
-			if ( $visibleTab.length ) {
+			// If the user duplicates an active field.
+			if ( $fieldActive.data( 'field-id' ) === id && $visibleTab.length ) {
 
 				// The following will help identify which tab from the sidebar panel settings is currently being viewed. i.e., "General," "Advanced," "Smart Logic," etc.
 				const visibleTabClassName = $visibleTab.attr( 'class' ).match( /wpforms-field-option-group-\S*/i )[0];
 				const $newFieldOptionsTab = $newFieldOptions.find( `>.${visibleTabClassName}` );
 
-				if ( $newFieldOptionsTab.length ) {
+				// Remove any left-over state from previously duplicated options.
+				$newFieldOptions.find( '>' ).removeClass( 'active' );
 
-					// Remove any left-over state from previously duplicated options.
-					$newFieldOptions.find( '>' ).removeClass( 'active' );
-					$newFieldOptionsTab.addClass( 'active' );
-				}
+				// Set active tab to the same tab that was active before the duplication.
+				$newFieldOptionsTab.addClass( 'active' );
+			}
+
+			// If the user duplicates an inactive field.
+			if ( $fieldActive.data( 'field-id' ) !== id && $visibleTab.length ) {
+
+				// Remove active class from current active tab.
+				$newFieldOptions.find( '>' ).removeClass( 'active' );
+
+				// Set active tab to "General".
+				$newFieldOptions.find( '>.wpforms-field-option-group-basic' ).addClass( 'active' );
 			}
 
 			// Copy over values.
@@ -3740,14 +3827,15 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 				const value = $this.val();
 
-				if ( value !== '' ) {
-					$newFieldOptions.find( `[name="${newName}"]` ).val( value );
-				}
-
 				if ( value === '' && $this.hasClass( 'wpforms-money-input' ) ) {
 					$newFieldOptions.find( `[name="${newName}"]` ).val(
 						wpf.numberFormat( '0', wpforms_builder.currency_decimals, wpforms_builder.currency_decimal, wpforms_builder.currency_thousands )
 					);
+				} else {
+
+					// We've removed the empty value check here.
+					// If we are duplicating a field with no value, we should respect that.
+					$newFieldOptions.find( `[name="${newName}"]` ).val( value );
 				}
 			} );
 
@@ -4134,23 +4222,22 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 *
 		 * @since 1.7.7
 		 *
-		 * @param {integer} fieldId Field Id.
+		 * @param {number} fieldId Field Id.
 		 */
-		scrollPreviewToField: function( fieldId ) {
-
-			const $field = $( `#wpforms-field-${fieldId}` ),
+		scrollPreviewToField( fieldId ) {
+			const $field = $( `#wpforms-field-${ fieldId }` ),
 				scrollTop = elements.$fieldsPreviewWrap.scrollTop(),
-				$layerField = $field.closest( '.wpforms-field-layout' );
+				$layoutField = $field.closest( '.wpforms-field-layout' );
 
 			let fieldPosition = $field.position().top;
 
-			if ( $layerField.length ) {
-				fieldPosition = $layerField.position().top + fieldPosition + 20;
+			if ( $layoutField.length ) {
+				fieldPosition = $layoutField.position().top + fieldPosition + 20;
 			}
 
 			const scrollAmount = fieldPosition > scrollTop ? fieldPosition - scrollTop : fieldPosition + scrollTop;
 
-			elements.$fieldsPreviewWrap.animate( { scrollTop: scrollAmount }, 1000 );
+			elements.$fieldsPreviewWrap.scrollTop( scrollAmount );
 		},
 
 		/**
@@ -4158,11 +4245,10 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 *
 		 * @since 1.6.4
 		 *
-		 * @returns {object} jqXHR
+		 * @return {Object} jqXHR.
 		 */
-		captchaUpdate: function() {
-
-			var data = {
+		captchaUpdate() {
+			const data = {
 				action : 'wpforms_update_field_captcha',
 				id     : s.formID,
 				nonce  : wpforms_builder.nonce,
@@ -4645,7 +4731,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 						case 'select':
 
 							if ( ! isModernSelect ) {
-								$choice.prop( 'selected', 'true' );
+								app.setClassicSelectedChoice( $choice );
 							} else {
 								modernSelectChoices[ modernSelectChoices.length - 1 ].selected = true;
 							}
@@ -4659,12 +4745,14 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 			} );
 
 			if ( isModernSelect ) {
-				const placeholderClass = $primary.prop( 'multiple' ) ? 'input.choices__input' : '.choices__inner .choices__placeholder',
-					choicesInstance    = app.dropdownField.helpers.getInstance( $primary ),
-					isDynamicChoices   = $( '#wpforms-field-option-' + id + '-dynamic_choices' ).val();
+				const placeholderClass  = $primary.prop( 'multiple' ) ? 'input.choices__input' : '.choices__inner .choices__placeholder',
+					choicesjsInstance   = app.dropdownField.helpers.getInstance( $primary );
 
-				choicesInstance.removeActiveItems();
-				choicesInstance.setChoices( modernSelectChoices, 'value', 'label', true );
+				if ( ! isDynamicChoices ) {
+					choicesjsInstance.removeActiveItems();
+				}
+
+				choicesjsInstance.setChoices( modernSelectChoices, 'value', 'label', true );
 
 				// Re-initialize modern dropdown to properly determine and update placeholder.
 				app.dropdownField.helpers.update( id, isDynamicChoices );
@@ -4678,9 +4766,27 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		},
 
 		/**
+		 * Set classic selected choice.
+		 *
+		 * @since 1.8.2.3
+		 *
+		 * @param {jQuery|undefined} $choice Choice option.
+		 */
+		setClassicSelectedChoice: function( $choice ) {
+
+			if ( $choice === undefined ) {
+				return;
+			}
+
+			$choice.prop( 'selected', 'true' );
+		},
+
+		/**
 		 * Field choice bulk add toggling.
 		 *
 		 * @since 1.3.7
+		 *
+		 * @param {object} el jQuery object.
 		 */
 		fieldChoiceBulkAddToggle: function( el ) {
 
@@ -6002,7 +6108,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 				if ( $enabled.length === 0 ) {
 					alertText = wpforms_builder.notification_by_status_enable_alert;
-					alertText = alertText.replace( /%s/g, $input.data( 'provider-title' ) );
+					alertText = alertText.replace( /%1\$s/g, $input.data( 'provider-title' ) );
 				} else {
 					alertText = wpforms_builder.notification_by_status_switch_alert;
 					alertText = alertText.replace( /%2\$s/g, $enabled.data( 'provider-title' ) );
@@ -6075,19 +6181,35 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 								$newSettingsBlock.attr( 'data-block-id', nextID );
 								$newSettingsBlock.find( '.wpforms-builder-settings-block-header span' ).text( settingsBlockName );
-								$newSettingsBlock.find( 'input, textarea, select' ).not( '.from-name input' ).not( '.from-email input' ).each( function( index, el ) {
-									var $this = $( this );
-									if ( $this.attr( 'name' ) ) {
-										$this.val( '' ).attr( 'name', $this.attr( 'name' ).replace( /\[(\d+)\]/, '[' + nextID + ']' ) );
-										if ( $this.is( 'select' ) ) {
-											$this.find( 'option' ).prop( 'selected', false ).attr( 'selected', false );
-											$this.find( 'option' ).first().prop( 'selected', true ).attr( 'selected', 'selected' );
-										} else if ( $this.attr( 'type' ) === 'checkbox' ) {
-											$this.prop( 'checked', false ).attr( 'checked', false ).val( '1' );
+
+								/**
+								 * Fires to reset settings block elements on adding new settings block.
+								 *
+								 * @param {jQuery} $element jQuery object of element.
+								 */
+								const resetFormElement = function( $element ) {
+									if ( $element.attr( 'name' ) ) {
+										$element.val( '' ).attr( 'name', $element.attr( 'name' ).replace( /\[(\d+)\]/, '[' + nextID + ']' ) );
+										if ( $element.is( 'select' ) ) {
+											$element.find( 'option' ).prop( 'selected', false ).attr( 'selected', false );
+											$element.find( 'option' ).first().prop( 'selected', true ).attr( 'selected', 'selected' );
+										} else if ( $element.attr( 'type' ) === 'checkbox' ) {
+											$element.prop( 'checked', false ).attr( 'checked', false ).val( '1' );
 										} else {
-											$this.val( '' ).attr( 'value', '' );
+											$element.val( '' ).attr( 'value', '' );
 										}
 									}
+								};
+
+								$newSettingsBlock.find( 'input, textarea, select' ).each( function() {
+									const $this = $( this );
+									const $parent = $this.parent();
+
+									if ( $this.hasClass( 'wpforms-disabled' ) && ( $parent.hasClass( 'from-name' ) || $parent.hasClass( 'from-email' ) ) ) {
+										return;
+									}
+
+									resetFormElement( $this );
 								} );
 
 								// Update elements IDs.
@@ -6937,12 +7059,13 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 */
 		builderInPopupClose: function( action ) {
 
-			var $popup = window.parent.jQuery( '#wpforms-builder-elementor-popup' );
+			const $popup = window.parent.jQuery( '.wpforms-builder-popup' );
+			const $title = $( '.wpforms-center-form-name' ).text();
 
 			$popup.find( '#wpforms-builder-iframe' ).attr( 'src', 'about:blank' );
 			$popup.fadeOut();
 
-			$popup.trigger( 'wpformsBuilderInPopupClose', [ action, s.formID ] );
+			$popup.trigger( 'wpformsBuilderInPopupClose', [ action, s.formID, $title ] );
 		},
 
 		//--------------------------------------------------------------------//
@@ -7173,6 +7296,7 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 			// Validate From Email in Notification settings.
 			$builder.on( 'focusout', '.wpforms-notification .wpforms-panel-field.js-wpforms-from-email-validation input', app.validateFromEmail );
+			$builder.on( 'wpformsPanelSectionSwitch', app.notificationsPanelSectionSwitch );
 
 			// Mobile notice primary button / close icon click.
 			$builder.on( 'click', '#wpforms-builder-mobile-notice .wpforms-fullscreen-notice-button-primary, #wpforms-builder-mobile-notice .close', function() {
@@ -7222,6 +7346,23 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 					} );
 				}
 			} );
+		},
+
+		/**
+		 * Notification section switch event handler.
+		 *
+		 * @since 1.8.2.3
+		 *
+		 * @param {object} e Event object.
+		 * @param {string} panel Panel name.
+		 */
+		notificationsPanelSectionSwitch: function( e, panel ) {
+
+			if ( panel !== 'notifications' ) {
+				return;
+			}
+
+			$( '.wpforms-notification .wpforms-panel-field.js-wpforms-from-email-validation input' ).trigger( 'focusout' );
 		},
 
 		/**
@@ -8480,6 +8621,8 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 		 * Ctrl+S - Save.
 		 * Ctrl+Q - Exit.
 		 * Ctrl+/ - Keyboard Shortcuts modal.
+		 * Ctrl+F - Focus search fields input.
+		 * Ctrl+T - Toggle sidebar.
 		 *
 		 * @since 1.2.4
 		 */
@@ -8518,6 +8661,15 @@ var WPFormsBuilder = window.WPFormsBuilder || ( function( document, window, $ ) 
 
 					case 191: // Keyboard shortcuts modal on Ctrl+/.
 						app.openKeyboardShortcutsModal();
+						break;
+
+					case 84: // Toggle sidebar on Ctrl+T.
+						$( elements.$sidebarToggle, $builder ).trigger( 'click' );
+						break;
+
+					case 70: // Focus search fields input on Ctrl+F.
+						elements.$fieldsSidebar.scrollTop( 0 );
+						elements.$searchInput.focus();
 						break;
 
 					default:

@@ -65,6 +65,13 @@ $(window).on('et_code_snippets_container_ready', (event, preferences, container 
 
   const containerId = preferences.containerId;
 
+  const domNode = container.getElementById(containerId);
+  if ('' === modalType) {
+    unmountComponentAtNode(domNode);
+
+    return;
+  }
+
   render(
     <Container app={app}>
       <CodeSnippetsApp
@@ -74,7 +81,7 @@ $(window).on('et_code_snippets_container_ready', (event, preferences, container 
         container={container}
       />
     </Container>,
-    container.getElementById(containerId)
+    domNode
   );
 
   // Disable main body scrolling.
@@ -84,11 +91,13 @@ $(window).on('et_code_snippets_container_ready', (event, preferences, container 
   $(window).on('et_code_snippets_library_close', () => {
     const appContainer = container.getElementById(containerId);
 
-    if (appContainer) {
-      unmountComponentAtNode(appContainer);
-      appContainer.remove();
-    }
-
-    $('body.et-admin-page').removeClass('et-code-snippets-open');
+    setTimeout(() => {
+      if (appContainer) {
+        unmountComponentAtNode(appContainer);
+        appContainer.remove();
+      }
+  
+      $('body.et-admin-page').removeClass('et-code-snippets-open');
+    });
   });
 });

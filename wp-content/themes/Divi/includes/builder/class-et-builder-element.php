@@ -414,6 +414,13 @@ class ET_Builder_Element {
 	private static $styles = array();
 
 	/**
+	 * Holds module free form styles for the current request.
+	 *
+	 * @var string
+	 */
+	private static $_free_form_styles = '';
+
+	/**
 	 * Holds internal module styles for the current module.
 	 * e.x In the Blog post module, {@see $internal_modules_styles} will hold style of all posts.
 	 *
@@ -744,6 +751,15 @@ class ET_Builder_Element {
 	 * @var boolean
 	 */
 	protected $_use_unique_id = false;
+
+	/**
+	 * Whether WordPress lazy load is disabled or not.
+	 *
+	 * @since 4.21.1
+	 *
+	 * @var boolean
+	 */
+	public static $is_wp_lazy_load_disabled = false;
 
 	/**
 	 * ET_Builder_Element constructor.
@@ -4539,42 +4555,45 @@ class ET_Builder_Element {
 			}
 
 			if ( isset( $option_settings['header_level'] ) ) {
-				$additional_options[ "{$option_name}_level" ] = array(
-					'label'           => sprintf( esc_html__( '%1$s Heading Level', 'et_builder' ), $option_settings['label'] ),
-					'description'     => sprintf( esc_html__( 'Module %1$s are created using HTML headings. You can change the heading level for this module by choosing anything from H1 through H6. Higher heading levels are smaller and less significant.', 'et_builder' ), $option_settings['label'] ),
-					'type'            => 'multiple_buttons',
-					'option_category' => 'font_option',
-					'options'         => array(
-						'h1' => array(
-							'title' => 'H1',
-							'icon'  => 'text-h1',
+				$additional_options[ "{$option_name}_level" ] = wp_parse_args(
+					$option_settings['header_level'],
+					array(
+						'label'           => sprintf( esc_html__( '%1$s Heading Level', 'et_builder' ), $option_settings['label'] ),
+						'description'     => sprintf( esc_html__( 'Module %1$s are created using HTML headings. You can change the heading level for this module by choosing anything from H1 through H6. Higher heading levels are smaller and less significant.', 'et_builder' ), $option_settings['label'] ),
+						'type'            => 'multiple_buttons',
+						'option_category' => 'font_option',
+						'options'         => array(
+							'h1' => array(
+								'title' => 'H1',
+								'icon'  => 'text-h1',
+							),
+							'h2' => array(
+								'title' => 'H2',
+								'icon'  => 'text-h2',
+							),
+							'h3' => array(
+								'title' => 'H3',
+								'icon'  => 'text-h3',
+							),
+							'h4' => array(
+								'title' => 'H4',
+								'icon'  => 'text-h4',
+							),
+							'h5' => array(
+								'title' => 'H5',
+								'icon'  => 'text-h5',
+							),
+							'h6' => array(
+								'title' => 'H6',
+								'icon'  => 'text-h6',
+							),
 						),
-						'h2' => array(
-							'title' => 'H2',
-							'icon'  => 'text-h2',
-						),
-						'h3' => array(
-							'title' => 'H3',
-							'icon'  => 'text-h3',
-						),
-						'h4' => array(
-							'title' => 'H4',
-							'icon'  => 'text-h4',
-						),
-						'h5' => array(
-							'title' => 'H5',
-							'icon'  => 'text-h5',
-						),
-						'h6' => array(
-							'title' => 'H6',
-							'icon'  => 'text-h6',
-						),
-					),
-					'default'         => isset( $option_settings['header_level']['default'] ) ? $option_settings['header_level']['default'] : 'h2',
-					'tab_slug'        => $tab_slug,
-					'toggle_slug'     => $toggle_slug,
-					'sub_toggle'      => $sub_toggle,
-					'advanced_fields' => true,
+						'default'         => isset( $option_settings['header_level']['default'] ) ? $option_settings['header_level']['default'] : 'h2',
+						'tab_slug'        => $tab_slug,
+						'toggle_slug'     => $toggle_slug,
+						'sub_toggle'      => $sub_toggle,
+						'advanced_fields' => true,
+					)
 				);
 
 				if ( isset( $option_settings['header_level']['computed_affects'] ) ) {
@@ -8903,6 +8922,9 @@ class ET_Builder_Element {
 				'label'                    => et_builder_i18n( 'After' ),
 				'selector'                 => ':after',
 				'no_space_before_selector' => true,
+			),
+			'free_form'    => array(
+				'label' => et_builder_i18n( 'CSS' ),
 			),
 		);
 		$custom_css_fields          = apply_filters( 'et_default_custom_css_fields', $custom_css_default_options );
@@ -15622,6 +15644,8 @@ class ET_Builder_Element {
 	 * @param string $function_name Module slug.
 	 */
 	public function process_scroll_effects( $function_name ) {
+		global $wp_version;
+
 		$advanced_fields = self::$_->array_get( $this->advanced_fields, 'scroll_effects', array( 'default' => array() ) );
 
 		if ( ! $advanced_fields ) {
@@ -15655,6 +15679,13 @@ class ET_Builder_Element {
 
 		if ( ! $scroll_effects_enabled ) {
 			return;
+		}
+
+		// Disable WordPress lazy load if it's not already disabled. The wp_lazy_loading_enabled filter is available since WordPress 5.5.0.
+		if ( false === self::$is_wp_lazy_load_disabled && version_compare( $wp_version, '5.5.0', '>=' ) ) {
+			self::$is_wp_lazy_load_disabled = true;
+
+			add_filter( 'wp_lazy_loading_enabled', '__return_false' );
 		}
 
 		foreach ( $options as $id => $option ) {
@@ -17606,6 +17637,36 @@ class ET_Builder_Element {
 	}
 
 	/**
+	 * Apply free form CSS.
+	 *
+	 * @param string $function_name Module slug.
+	 * @param string $element_selector Element selector.
+	 * @param string $css_string CSS string.
+	 *
+	 * @return void
+	 */
+	public function apply_free_form_css( $function_name, $element_selector, $css_string ) {
+		if ( '' === $css_string ) {
+			return;
+		}
+
+		$final_css_string = $css_string;
+		$selectors        = '/selector|\.selector|#selector/';
+		$order_class_name = self::get_module_order_class( $function_name );
+
+		if ( preg_match( $selectors, $css_string ) ) {
+			$final_css_string = preg_replace( $selectors, ".{$order_class_name}", $css_string );
+		}
+
+		if ( '' !== $final_css_string ) {
+			// New lines are saved as || in CSS Custom settings, remove them.
+			$final_css_string = preg_replace( '/(\|\|)/i', '', $final_css_string );
+
+			self::_set_free_form_style( $final_css_string );
+		}
+	}
+
+	/**
 	 * Process custom css fields into CSS style.
 	 *
 	 * @param string $function_name Module slug.
@@ -17672,11 +17733,15 @@ class ET_Builder_Element {
 			} else {
 				// Non responsive mode custom CSS.
 				if ( '' !== $css ) {
-					$el_style = array(
-						'selector'    => $selector,
-						'declaration' => trim( $css ),
-					);
-					self::set_style( $function_name, $el_style );
+					if ( 'free_form' === $slug ) {
+						$this->apply_free_form_css( $function_name, $selector, $css );
+					} else {
+						$el_style = array(
+							'selector'    => $selector,
+							'declaration' => trim( $css ),
+						);
+						self::set_style( $function_name, $el_style );
+					}
 				}
 			}
 
@@ -19571,6 +19636,15 @@ class ET_Builder_Element {
 	}
 
 	/**
+	 * Return style string from {@see self::$_free_form_styles}.
+	 *
+	 * @return string
+	 */
+	public static function get_free_form_styles() {
+		return self::$_free_form_styles;
+	}
+
+	/**
 	 * Intended to be used for unit testing
 	 *
 	 * @intendedForTesting
@@ -19595,7 +19669,9 @@ class ET_Builder_Element {
 		// use appropriate array depending on which styles we need.
 		$styles_array = self::get_style_array( $internal, $key );
 
-		if ( empty( $styles_array ) ) {
+		$free_form_styles_output = self::get_free_form_styles();
+
+		if ( empty( $styles_array ) && empty( $free_form_styles_output ) ) {
 			return '';
 		}
 
@@ -19699,6 +19775,13 @@ class ET_Builder_Element {
 			}
 
 			$output .= $media_query_output;
+		}
+
+		if ( isset( $free_form_styles_output ) && '' !== $free_form_styles_output ) {
+			$output .= wp_strip_all_tags( $free_form_styles_output );
+
+			// Output is already set, we can reset the free form styles to avoid duplicate output.
+			self::_set_free_form_style( '', $reset = true );
 		}
 
 		return $output;
@@ -20272,6 +20355,22 @@ class ET_Builder_Element {
 			self::$internal_modules_styles[ $style_key ] = $styles;
 		} else {
 			self::$styles[ $style_key ] = $styles;
+		}
+	}
+
+	/**
+	 * Set free form module style.
+	 *
+	 * @param string $style Style string.
+	 */
+	protected static function _set_free_form_style( $style, $reset = false ) {
+		if ( $reset ) {
+			self::$_free_form_styles = '';
+			return;
+		}
+
+		if ( '' !== $style ) {
+			self::$_free_form_styles .= $style;
 		}
 	}
 
