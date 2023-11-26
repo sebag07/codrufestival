@@ -998,9 +998,8 @@ a:hover {
 /* HERO */
 
 .heroContainer {
-  min-height: 100vh;
+  min-height: 110vh;
   position: relative;
-  overflow-x: hidden;
   padding-top: 80px !important;
 }
 
@@ -1084,6 +1083,7 @@ a:hover {
   .heroContentDiv {
     padding: 0;
     margin: 170px auto;
+    height: 100%;
   }
 }
 
