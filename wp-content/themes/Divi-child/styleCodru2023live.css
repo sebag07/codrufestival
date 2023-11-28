@@ -998,7 +998,7 @@ a:hover {
 /* HERO */
 
 .heroContainer {
-  min-height: 110vh;
+  min-height: 100vh;
   position: relative;
   padding-top: 80px !important;
   overflow-x: hidden;
@@ -1045,14 +1045,14 @@ a:hover {
 .heroContainer .heroLeftLeaves {
   height: 100%;
   position: absolute;
-  left: -150px;
+  left: 0;
   bottom: 0;
 }
 
 .heroContainer .heroRightLeaves {
   height: 100%;
   position: absolute;
-  right: -200px;
+  right: 0;
   bottom: 0;
 }
 
@@ -1090,6 +1090,7 @@ a:hover {
     height: 100%;
     margin: 50px auto;
     margin-top: 100px;
+    margin-bottom: 30px;
   }
 }
 
