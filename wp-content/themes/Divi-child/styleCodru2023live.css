@@ -2483,11 +2483,13 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .brandCultureContainer .brandCultureImage {
   height: 100%;
+  width: auto;
 }
 
 @media screen and (max-width: 500px){
   .brandCultureContainer .brandCultureImage {
     max-height: 300px;
+    width: auto;
   }
 }
 
