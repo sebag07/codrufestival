@@ -2150,7 +2150,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   font-style: italic;
 }
 
-.apeluriArtisti .newsContainer div {
+.apeluriArtisti .newsContainer > div {
   margin-bottom: 24px;
 }
 
