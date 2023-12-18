@@ -3,13 +3,6 @@
 
 <div class="container apeluriArtisti termsPage pt-5 pb-5">
 
-    <h1 class="pt-5 pb-4 text-center" style="font-weight: 600;"> Achiziție Asociația CODRU Festival </h1>
-    <div class="achizitie row">
-        <div class="col-12">
-            <?php the_content(); ?>
-        </div>
-    </div>
-
     <h1 class="pt-5 pb-4 text-center" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
     <div class="newsContainer row">
         <?php
