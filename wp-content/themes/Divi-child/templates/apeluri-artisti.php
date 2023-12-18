@@ -5,8 +5,7 @@
     <h1 class="pt-5 pb-4 text-center" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
     <div class="newsContainer row">
         <?php
-            $args = array(
-                'posts_per_page'    => 3, 
+            $args = array( 
                 'orderby'           => 'post_date',
                 'order'             => 'ASC',
                 'category_name'     => 'apeluri-artisti',
