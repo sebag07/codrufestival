@@ -6,8 +6,6 @@ get_header();
 <?php 
 $categories = get_the_category();
 $category = $categories[0]->slug;
-
-echo $category;
 ?>
 
 <div class="container-fluid singlePostContainer">
