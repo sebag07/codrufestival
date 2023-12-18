@@ -30,7 +30,7 @@ echo $category;
     <?php if($category == "povestea-codru"): ?>
         <h2 class="sectionTitle"><?php echo get_field('codru_story_title', 'options'); ?></h2>
     <?php elseif($category == "apeluri-artisti"): ?>
-        <h2 class="sectionTitle">APELURI ARTIȘTI</h2>
+        <h2 class="sectionTitle">APELURI</h2>
     <?php else: ?>
         <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
     <?php endif; ?>
