@@ -2154,6 +2154,11 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   margin-bottom: 24px;
 }
 
+.apeluriArtisti .achizitie div > div,
+.apeluriArtisti .achizitie div > p {
+  font-size: 16px;
+}
+
 #povesteaCodru {
   background-color: #1e4b3a;
 }
