@@ -7,7 +7,7 @@
         <?php
             $args = array( 
                 'orderby'           => 'post_date',
-                'order'             => 'ASC',
+                'order'             => 'DESC',
                 'category_name'     => 'apeluri-artisti',
                 'exclude'           => array(get_the_id()));
             $postslist = get_posts($args);
