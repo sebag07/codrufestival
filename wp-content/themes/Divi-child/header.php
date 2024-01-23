@@ -28,7 +28,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver=161">
     <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=161"></script>
-    <script src="/wp-content/themes/Divi-child/snow3d/build/snow3d.js"></script>
 
     <!-- Style -->
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/styleCodru2023live.css?ver=161">
