@@ -15,13 +15,13 @@
             <h1 class="underLocDate"><?php echo get_field('hero_section_date')?></h1>
             <div class="heroDescription">
                 <a class="heroContentButton desktopButton desktopContentButton anim"
-                    href="https://bilete.codrufestival.ro/"><?php echo get_field('hero_button_text')?></a>
+                    href="/#preregister"><?php echo get_field('hero_button_text')?></a>
                 <h2 class="heroFocusedText heroDescription"><?php echo get_field('hero_section_title')?></h2>
                 <p class="anim">
                     <?php echo get_field('hero_section_text')?>
                 </p>
                 <a class="heroContentButton mobileButton mobileContentButton anim"
-                    href="https://bilete.codrufestival.ro/"><?php echo get_field('hero_button_text')?></a>
+                    href="/#preregister"><?php echo get_field('hero_button_text')?></a>
             </div>
         </div>
     </div>
