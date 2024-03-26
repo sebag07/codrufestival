@@ -177,7 +177,7 @@
 <body <?php post_class();?>>
 
     <div class="headerHalfCircle">
-        <div class="text-center"><img src="/wp-content/themes/Divi-child/images/soare.png" alt=""></div>
+        <div class="text-center"><img src="/wp-content/themes/Divi-child/images/soareclean.png" alt=""></div>
     </div>
 
 

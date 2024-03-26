@@ -2,7 +2,7 @@
 <?php get_header(); ?>
 
 <div class="container-fluid heroContainer p-0 m-0">
-    <img class="heroBG" src="/wp-content/themes/Divi-child/images/codru-2024-hero-image-snow.png" alt="">
+    <img class="heroBG" src="/wp-content/themes/Divi-child/images/codru2023hero.png" alt="">
     <!-- <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/L-Leaves-2024.png" alt="">
     <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/R-Leaves-2024.png" alt=""> -->
     <div class="heroOverlayGradient"></div>
