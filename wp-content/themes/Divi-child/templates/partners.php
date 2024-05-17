@@ -1,3 +1,7 @@
+<?php
+header('Location: /');
+exit;
+?>
 <?php /*  Template Name: Parteneri  */ ?>
 <?php get_header(); ?>
 
