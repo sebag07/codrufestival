@@ -8,7 +8,7 @@
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
         <div class="heroContentDiv col-xl-6 col-lg-8 col-md-10 col-10">
-            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/logo.svg"
+            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/logo.png"
                 alt="">
             <img class="heroContentImage anim heroContentPadureaBistra"
                 src="/wp-content/themes/Divi-child/images/locatie.svg" alt="">

@@ -22,7 +22,7 @@
 
     <div class="row m-auto justify-content-center">
         <div class="footerLeftLogo col-lg-2 col-md-12 col-12 d-flex">
-            <img class="footer-logo footer-logo-codru" src="/wp-content/themes/Divi-child/images/logo.svg" alt="">
+            <img class="footer-logo footer-logo-codru" src="/wp-content/themes/Divi-child/images/logo.png" alt="">
         </div>
         <div class="footerItems col-lg-8 col-xl-7 col-md-12 col-12">
             <span><img src="/wp-content/themes/Divi-child/images/mail.svg" alt="">OFFICE@CODRUFESTIVAL.RO</span>
@@ -51,7 +51,7 @@
             ?>
         </div>
         <div class="footerMobileLogo col-md-12 col-12 d-flex">
-            <img class="footer-logo codruLogoFooter" src="/wp-content/themes/Divi-child/images/logo.svg" alt="">
+            <img class="footer-logo codruLogoFooter" src="/wp-content/themes/Divi-child/images/logo.png" alt="">
             <img class="footer-logo" src="/wp-content/themes/Divi-child/images/logoteg.png" alt="">
         </div>
     </div>

@@ -140,9 +140,9 @@ jQuery(document).on("click", ".masonry-filter-list li", function(){
 jQuery(".heroContentDiv").ready(function(){
 
   masterTL = gsap.timeline()
-      .from('.heroContentCodruLogo', {duration: 1, opacity: 0, scale: 1, ease: "in"})
-      .from('.heroContentPadureaBistra', {duration: 1, opacity: 0, scale: 1, ease: "in"})
-      .from(".underLocDate", {duration: 1, opacity: 0, scale: 1, ease: "in"})
+      // .from('.heroContentCodruLogo', {duration: 1, opacity: 0, scale: 1, ease: "in"})
+      // .from('.heroContentPadureaBistra', {duration: 1, opacity: 0, scale: 1, ease: "in"})
+      // .from(".underLocDate", {duration: 1, opacity: 0, scale: 1, ease: "in"})
       .from('.heroDescription', {duration: 1, opacity: 0, ease: "in"})
 
 });

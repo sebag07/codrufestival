@@ -2,17 +2,17 @@
 <?php get_header(); ?>
 
 <div class="container-fluid heroContainer p-0 m-0">
-    <img class="heroBG" src="/wp-content/themes/Divi-child/images/codru2023hero.png" alt="">
-    <!-- <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/L-Leaves-2024.png" alt="">
-    <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/R-Leaves-2024.png" alt=""> -->
+    <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG.png" alt="">
+    <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
+    <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
-        <div class="heroContentDiv col-xl-6 col-lg-8 col-md-10 col-10">
-            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/logo.svg"
+        <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
+            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/heartlocation.png"
                 alt="">
-            <img class="heroContentImage anim heroContentPadureaBistra"
+            <!-- <img class="heroContentImage anim heroContentPadureaBistra"
                 src="/wp-content/themes/Divi-child/images/locatie.svg" alt="">
-            <h1 class="underLocDate"><?php echo get_field('hero_section_date')?></h1>
+            <h1 class="underLocDate"><?php echo get_field('hero_section_date')?></h1> -->
             <div class="heroDescription">
                 <a class="heroContentButton desktopButton desktopContentButton anim"
                     href="/#preregister"><?php echo get_field('hero_button_text')?></a>
@@ -28,12 +28,19 @@
     </div>
 </div>
 
+<section id="lineup">
+    <div class="sectionPadding container">
+    <h2 class="sectionTitle">LINEUP</h2>
+    <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup.png" alt="">
+    </div>
+</section>
+
 <section id="preregister">
     <div class="container">
     <style>
 
     #preregister {
-        background-color: #1e4b3a;
+        background-color: #0a7c0b;
         text-align: center;
     }
 
@@ -73,9 +80,9 @@
         border-radius: 20px;
         padding: 10px 15px;
         margin-bottom: 15px;
-        border: 1px solid #143729;
+        border: 1px solid #1e4b3a;
         text-align: center;
-        background: #143729;
+        background: #1e4b3a;
         color: #fff;
         max-width: 470px;
         height: 25px;

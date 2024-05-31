@@ -177,7 +177,7 @@
 <body <?php post_class();?>>
 
     <div class="headerHalfCircle">
-        <div class="text-center"><img src="/wp-content/themes/Divi-child/images/bulgare.png" alt=""></div>
+        <div class="text-center"><img src="/wp-content/themes/Divi-child/images/soareclean.png" alt=""></div>
     </div>
 
 
@@ -251,7 +251,7 @@
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
             </div>
 
-            <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo.svg"
+            <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo.png"
                         alt=""></a></div>
 
 
