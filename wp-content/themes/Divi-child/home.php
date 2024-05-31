@@ -8,7 +8,7 @@
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
         <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
-            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/heartlocation.png"
+            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/heroheart.png"
                 alt="">
             <!-- <img class="heroContentImage anim heroContentPadureaBistra"
                 src="/wp-content/themes/Divi-child/images/locatie.svg" alt="">
@@ -40,7 +40,7 @@
     <style>
 
     #preregister {
-        background-color: #0a7c0b;
+        background-color: #076708;
         text-align: center;
     }
 
@@ -58,8 +58,8 @@
     }
 
     #preregister .sib-form-block__button {
-        background: #efaa13;
-        color: #fff !important;
+        background: #fff;
+        color: #076708 !important;
         box-sizing: border-box !important;
         border-radius: 20px !important;
         border: none;
@@ -73,17 +73,17 @@
     }
 
     #preregister .sib-form-block__button:hover {
-        background-color: #569d88 !important;
+        color: #f47e30 !important;
     }
 
     #preregister .sib-form .input {
         border-radius: 20px;
         padding: 10px 15px;
         margin-bottom: 15px;
-        border: 1px solid #1e4b3a;
+        border: 1px solid #fff;
         text-align: center;
-        background: #1e4b3a;
-        color: #fff;
+        background: #fff;
+        color: #076708;
         max-width: 470px;
         height: 25px;
     }
@@ -106,6 +106,10 @@
         #preregister .sib-form .entry__field {
             display: flex;
         }
+    }
+
+    #preregister .sib-form .input::placeholder {
+        color: #076708;
     }
 
     #preregister .sib-form-message-panel--active {

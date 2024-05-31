@@ -1,8 +1,8 @@
 <footer>
 
 <div class="container-fluid">
-<img class="footerLeftImg" src="/wp-content/themes/Divi-child/images/footerleft.png" alt="">
-<img class="footerRightImg" src="/wp-content/themes/Divi-child/images/footerright.png" alt="">
+<img class="footerLeftImg" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
+<img class="footerRightImg" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
 
     <div id="contact" class="container-fluid contactFormSection p-0">
     <div class="contactSectionLeftSide container">
