@@ -13,6 +13,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/css/owl.carousel.min.css">
     <!-- Bootstrap CSS -->
+    <link rel="icon" type="image/x-icon" href="/wp-content/themes/Divi-child/images/favicon.png">
 
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/fonts/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
