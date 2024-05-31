@@ -58,8 +58,8 @@
     }
 
     #preregister .sib-form-block__button {
-        background: #fff;
-        color: #076708 !important;
+        background: #6cbf02;
+        color: #fff !important;
         box-sizing: border-box !important;
         border-radius: 20px !important;
         border: none;
@@ -70,10 +70,12 @@
         transition: 0.7s;
         width: 100%;
         max-width: 500px;
+        font-weight: 600;
     }
 
     #preregister .sib-form-block__button:hover {
-        color: #f47e30 !important;
+        color: #6cbf02 !important;
+        background: #fff;
     }
 
     #preregister .sib-form .input {

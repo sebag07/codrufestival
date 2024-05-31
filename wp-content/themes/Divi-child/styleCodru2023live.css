@@ -989,8 +989,8 @@ a:hover {
 }
 
 .heroButtonMenu:hover {
-  color: #f47e30;
-  background: #fff;
+  color: #fff;
+  background: #6cbf02;
 }
 
 /* HERO */
@@ -1005,7 +1005,7 @@ a:hover {
 
 @media screen and (max-width: 500px) {
   .heroContainer {
-    background-color: #1e4b3a;
+    background-color: #0F4615;
     min-height: 100vh;
   }
 }
@@ -1136,7 +1136,7 @@ a:hover {
   background: #fff;
   color: #076708;
   box-sizing: border-box;
-  border-radius: 20px;
+  border-radius: 50px;
   text-align: center;
   transition: all 0.5s;
   padding: 15px 80px;
@@ -1153,8 +1153,8 @@ a:hover {
 }
 
 .heroContentButton:hover {
-  color: #f47e30;
-  background: #fff;
+  color: #fff;
+  background: #076708;
 }
 
 .heroOverlayGradient {
@@ -1238,7 +1238,7 @@ a:hover {
 /* First Section */
 
 .firstSectionContainer {
-  background-color: #1e4b3a;
+  background-color: #0F4615;
   width: 100%;
 }
 
@@ -1588,10 +1588,9 @@ footer .row {
   width: 95%;
   margin-left: auto;
 }
-
 #wpforms-submit-26912, #wpforms-submit-27465 {
-  background: #fff;
-  color: #076708 !important;
+  background: #6cbf02;
+  color: #fff !important;
   box-sizing: border-box !important;
   border-radius: 20px !important;
   border: none;
@@ -1601,10 +1600,13 @@ footer .row {
   padding-left: 30px;
   transition: 0.7s;
   width: 100%;
+  font-weight: 600;
 }
 
+
 #wpforms-submit-26912:hover, #wpforms-submit-27465:hover {
-  color: #f47e30 !important;
+  color: #6cbf02 !important;
+  background: #fff;
 }
 
 #wpforms-26912 .wpforms-submit-container, #wpforms-27465 .wpforms-submit-container {
@@ -1969,7 +1971,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .headlinersContainer {
   position: relative;
-  background: #1e4b3a;
+  background: #0F4615;
 }
 
 .headlinersContainer h2 {
@@ -2178,7 +2180,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 #povesteaCodru .homepageNewsTitle {
-  background: #1e4b3a;
+  background: #0F4615;
 }
 
 @media screen and (max-width: 767px){
@@ -2210,7 +2212,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .homepageNewsTitle {
   min-height: 150px;
   padding: 20px 10px;
-  background: #1e4b3a;
+  background: #0F4615;
   position: relative;
 }
 
@@ -2253,7 +2255,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* ARTISTI */
 
 #lineupAnchor {
-  background-color: #1e4b3a;
+  background-color: #0F4615;
 }
 
 
@@ -2443,7 +2445,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   margin: 0 auto;
   max-width: 800px;
   color: white;
-  background-color: #1e4b3a;
+  background-color: #0F4615;
   padding: 50px;
   border: 1px solid white;
   margin-left: 15px;
@@ -2505,15 +2507,15 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 @media screen and (max-width: 500px){
   .brandCultureContainer .brandCultureImage {
-    max-height: 300px;
-    width: auto;
+    width: 100%;
+    height: auto;
   }
 }
 
 /* Gasca Zurli */
 
 #gascazurli {
-  background-color: #1e4b3a;
+  background-color: #0F4615;
 }
 
 #gascazurli .sectionTitle {
@@ -2779,7 +2781,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .otherNewsPosts {
-  background-color: #1e4b3a !important;
+  background-color: #0F4615 !important;
   border-radius: 10px;
 }
 
@@ -2848,7 +2850,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* Partners */
 
 /* .partners {
-  background-color: #1e4b3a;
+  background-color: #0F4615;
 } */
 
 .partners .container h1,
