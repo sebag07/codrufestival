@@ -8,8 +8,10 @@
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
         <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
-            <img class="heroContentImage anim heroContentCodruLogo" src="/wp-content/themes/Divi-child/images/heroheart.png"
+            <img class="heroContentImage anim heroContentCodruLogo display-desktop" src="/wp-content/themes/Divi-child/images/heroheart.png"
                 alt="">
+            <img class="heroContentImage anim heroContentCodruLogo display-mobile" src="/wp-content/themes/Divi-child/images/heroheart-ing.png"
+                 alt="">
             <!-- <img class="heroContentImage anim heroContentPadureaBistra"
                 src="/wp-content/themes/Divi-child/images/locatie.svg" alt="">
             <h1 class="underLocDate"><?php echo get_field('hero_section_date')?></h1> -->

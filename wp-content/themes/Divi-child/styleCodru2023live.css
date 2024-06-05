@@ -1341,7 +1341,6 @@ footer .row {
   right: 0;
   bottom: 0;
   max-width: 500px;
-  z-index: 1;
   transform: rotate(180deg);
 }
 
@@ -1350,7 +1349,6 @@ footer .row {
   left: 0;
   bottom: 0;
   max-width: 500px;
-  z-index: 1;
   transform: rotate(180deg);
 }
 
@@ -2883,6 +2881,22 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 /* HELPERS */
+
+.display-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 1200px){
+  .display-desktop {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .display-mobile {
+    display: block;
+  }
+}
 
 @media (min-width: 992px){
   .order-lg-1 {
