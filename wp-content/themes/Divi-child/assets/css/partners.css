@@ -71,8 +71,8 @@
 }
 
 .partnersLevel2 img {
-    height: 250px;
-    width: 250px;
+    height: 300px;
+    width: 300px;
 }
 
 @media screen and (max-width: 500px){
@@ -83,8 +83,8 @@
 }
 
 .partnersLevel3 img {
-    height: 175px;
-    width: 175px;
+    height: 200px;
+    width: 200px;
 }
 
 
