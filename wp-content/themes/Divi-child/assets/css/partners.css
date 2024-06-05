@@ -59,26 +59,34 @@
 }
 
 .partnersLevel1 img {
+    height: 400px;
+    width: 400px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel1 img {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+.partnersLevel2 img {
     height: 250px;
     width: 250px;
 }
 
-.partnersLevel2 img {
-    height: 175px;
-    width: 175px;
-}
-
 @media screen and (max-width: 500px){
     .partnersLevel2 img {
-        height: 150px;
-        width: 150px;
+        height: 200px;
+        width: 200px;
     }
 }
 
 .partnersLevel3 img {
-    height: 120px;
-    width: 120px;
+    height: 175px;
+    width: 175px;
 }
+
 
 @media screen and (max-width: 500px){
     .partnersLevel3 img {
