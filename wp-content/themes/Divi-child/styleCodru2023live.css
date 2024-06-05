@@ -2136,6 +2136,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   width: 100%;
   height: 300px;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 #apeluriartisti h2 {
@@ -2210,6 +2211,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   padding: 20px 10px;
   background: #0F4615;
   position: relative;
+  border-radius: 5px;
 }
 
 .homepageNewsTitle h3 {
