@@ -641,13 +641,14 @@ a:hover {
     display: none;
   }
   .site-mobile-menu .site-nav-wrap .heroButtonMenu {
-    color: #fff;
+    color: #6cbf02;
     margin-left: 20px;
     padding: 5px 40px;
   }
 }
 .site-mobile-menu .site-nav-wrap a:hover {
-  color: #89ba16;
+  color: #fff;
+  background-color: #6cbf02;
   text-decoration: none;
 }
 .site-mobile-menu .site-nav-wrap li {
