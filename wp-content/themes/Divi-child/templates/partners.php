@@ -1,7 +1,3 @@
-<?php
-header('Location: /');
-exit;
-?>
 <?php /*  Template Name: Parteneri  */ ?>
 <?php get_header(); ?>
 
@@ -9,7 +5,7 @@ exit;
     <div class="container">
         <!-- <h1 class="pt-5 pb-4 text-center" style="font-weight: 600;"><?php echo get_the_title(); ?></h1> -->
         <div class="sectionTitle pt-5 pb-4 text-center">
-            <h1>Main Partners</h1>
+            <h1>Partners</h1>
         </div>
         <div class="partnersContainer">
             <div class="partnersLevel1">
@@ -30,10 +26,6 @@ exit;
     endif;
         ?>
             </div>
-        </div>
-
-        <div class="sectionTitle">
-            <h2>Official Partners</h2>
         </div>
         <div class="partnersContainer">
             <div class="partnersLevel2">
@@ -56,9 +48,6 @@ exit;
             </div>
         </div>
 
-        <div class="sectionTitle">
-            <h2>Supporters</h2>
-        </div>
         <div class="partnersContainer">
             <div class="partnersLevel3">
                 <?php 
@@ -80,9 +69,6 @@ exit;
             </div>
         </div>
 
-        <div class="sectionTitle">
-            <h2>Hospitality Partners</h2>
-        </div>
         <div class="partnersContainer">
             <div class="partnersLevel4">
                 <?php 
@@ -104,9 +90,6 @@ exit;
             </div>
         </div>
 
-        <div class="sectionTitle">
-            <h2>Media Partners</h2>
-        </div>
         <div class="partnersMediaContainer row m-0">
             <div class="kissFMPartner col-12">
                 <?php 
@@ -146,9 +129,6 @@ exit;
             </div>
         </div>
 
-        <div class="sectionTitle">
-            <h2>Co-financed By</h2>
-        </div>
         <div class="partnersCofinanceContainer">
             <div class="partnersCofinance">
                 <?php 
@@ -171,9 +151,6 @@ exit;
             </div>
         </div>
 
-        <div class="sectionTitle">
-            <h2>Produced By</h2>
-        </div>
         <div class="partnersPartofContainer">
             <div class="partnersPartof">
                 <?php 
