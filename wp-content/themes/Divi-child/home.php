@@ -41,67 +41,67 @@
     </div>
 </section>
 
-<section>
-    <div class="sectionPadding container">
-        <div class="artistCardContainer">
-        <?php
-              $args = array('posts_per_page' => -1, 'orderby' => 'title', 'suppress_filters' => false, 'order' => 'ASC', 'post_type' => 'artist');
-              $postslist = get_posts($args);
-              foreach ($postslist as $post) {
-                $artistName = get_the_title();
-                $artistPage = get_the_permalink();
-                $artistImage = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-                if ($artistImage) {
-                    $imageUrl = $artistImage[0];
-                } else {
-                    $imageUrl = "/wp-content/themes/Divi-child/images/logo.png";
-                }
-                echo "
-                <a href='$artistPage' class='artistInnerContainer'>
-                <div class='artistImageContainer'>
-                    <img class='artistImg' loading='lazy' src='$imageUrl'>
-                    <div class='imageOverlay'></div>
-                </div>
-                <div class='artistContent'>
-                    <div class='artistContentBG'></div>
-                    <div class='artistContentMeta'>
-                        <span class='artistContentName'>
-                            $artistName
-                        </span>
-                            <span class='artistContentDayStage'>
-                                test
-                            </span>
-                    </div>
-                </div>
-                <div class='artistCardHoverOverlay'></div>
-            
-                <div class='artistCardReadMoreBtn'>Read more</div>
-                    
-            </a>
-                ";
-
-              }
-              ?>
-              </div>
-    </div>
-    <script>
-
-jQuery(".artistInnerContainer").hover(
-    function () {
-        jQuery(this).find('.artistCardReadMoreBtn').addClass('readMoreBtnHover');
-        jQuery(this).find('.artistContent').addClass('artistContentTop');
-        jQuery(this).find('.artistCardHoverOverlay').addClass('onHoverOverlayOpacity');
-        jQuery(this).addClass('borderOnHover');
-    },
-    function () {
-        jQuery(this).find('.artistCardReadMoreBtn').removeClass('readMoreBtnHover');
-        jQuery(this).find('.artistContent').removeClass('artistContentTop');
-        jQuery(this).find('.artistCardHoverOverlay').removeClass('onHoverOverlayOpacity');
-        jQuery(this).removeClass('borderOnHover');
-    }
-  );
-    </script>
-</section>
+<!--<section>-->
+<!--    <div class="sectionPadding container">-->
+<!--        <div class="artistCardContainer">-->
+<!--        --><?php
+//              $args = array('posts_per_page' => -1, 'orderby' => 'title', 'suppress_filters' => false, 'order' => 'ASC', 'post_type' => 'artist');
+//              $postslist = get_posts($args);
+//              foreach ($postslist as $post) {
+//                $artistName = get_the_title();
+//                $artistPage = get_the_permalink();
+//                $artistImage = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
+//                if ($artistImage) {
+//                    $imageUrl = $artistImage[0];
+//                } else {
+//                    $imageUrl = "/wp-content/themes/Divi-child/images/logo.png";
+//                }
+//                echo "
+//                <a href='$artistPage' class='artistInnerContainer'>
+//                <div class='artistImageContainer'>
+//                    <img class='artistImg' loading='lazy' src='$imageUrl'>
+//                    <div class='imageOverlay'></div>
+//                </div>
+//                <div class='artistContent'>
+//                    <div class='artistContentBG'></div>
+//                    <div class='artistContentMeta'>
+//                        <span class='artistContentName'>
+//                            $artistName
+//                        </span>
+//                            <span class='artistContentDayStage'>
+//                                test
+//                            </span>
+//                    </div>
+//                </div>
+//                <div class='artistCardHoverOverlay'></div>
+//
+//                <div class='artistCardReadMoreBtn'>Read more</div>
+//
+//            </a>
+//                ";
+//
+//              }
+//              ?>
+<!--              </div>-->
+<!--    </div>-->
+<!--    <script>-->
+<!---->
+<!--jQuery(".artistInnerContainer").hover(-->
+<!--    function () {-->
+<!--        jQuery(this).find('.artistCardReadMoreBtn').addClass('readMoreBtnHover');-->
+<!--        jQuery(this).find('.artistContent').addClass('artistContentTop');-->
+<!--        jQuery(this).find('.artistCardHoverOverlay').addClass('onHoverOverlayOpacity');-->
+<!--        jQuery(this).addClass('borderOnHover');-->
+<!--    },-->
+<!--    function () {-->
+<!--        jQuery(this).find('.artistCardReadMoreBtn').removeClass('readMoreBtnHover');-->
+<!--        jQuery(this).find('.artistContent').removeClass('artistContentTop');-->
+<!--        jQuery(this).find('.artistCardHoverOverlay').removeClass('onHoverOverlayOpacity');-->
+<!--        jQuery(this).removeClass('borderOnHover');-->
+<!--    }-->
+<!--  );-->
+<!--    </script>-->
+<!--</section>-->
 
 
 <section id="brandCultureAnchor">
@@ -109,9 +109,9 @@ jQuery(".artistInnerContainer").hover(
         <div class="container">
             <h2 class="sectionTitle"><?php echo get_field('values_section_title', 'options'); ?></h2>
             <div class="row">
-                <?php 
-            $options = get_field("brand_culture", "options"); 
-            foreach($options as $option): 
+                <?php
+            $options = get_field("brand_culture", "options");
+            foreach($options as $option):
               $white = $option['black_text'] == '1' ? 'text-black' : 'text-white';
             ?>
                 <a class="col-xl-4 col-lg-6 col-md-6 col-sm-12 brandCultureContainer" data-fslightbox="custom-text"
@@ -137,27 +137,27 @@ jQuery(".artistInnerContainer").hover(
     </div>
 </section>
 
-<section id="galerieAnchor">
-    <div class="masonryContainer container-fluid sectionPadding">
-        <h2 class="text-center sectionPadding sectionTitle"><?php echo get_field('gallery_title', 'options'); ?></h2>
-        <div class="gallery-items gallery-masonry image-gallery">
-            <?php if ( have_rows( 'masonry_section' , 26897 ) ): ?>
-
-            <?php while( have_rows( 'masonry_section', 26897 ) ) : the_row(); ?>
-
-            <?php if( $masonryImage = get_sub_field( 'masonry_image', 26897 ) ) { 
-
-                echo "	<div class='item gallery-image'><a href='$masonryImage'><img src='$masonryImage'/></a></div>";
-                
-                    } ?>
-
-            <?php endwhile; ?>
-
-
-            <?php endif; ?>
-        </div>
-    </div>
-</section>
+<!--<section id="galerieAnchor">-->
+<!--    <div class="masonryContainer container-fluid sectionPadding">-->
+<!--        <h2 class="text-center sectionPadding sectionTitle">--><?php //echo get_field('gallery_title', 'options'); ?><!--</h2>-->
+<!--        <div class="gallery-items gallery-masonry image-gallery">-->
+<!--            --><?php //if ( have_rows( 'masonry_section' , 26897 ) ): ?>
+<!---->
+<!--            --><?php //while( have_rows( 'masonry_section', 26897 ) ) : the_row(); ?>
+<!---->
+<!--            --><?php //if( $masonryImage = get_sub_field( 'masonry_image', 26897 ) ) {
+//
+//                echo "	<div class='item gallery-image'><a href='$masonryImage'><img src='$masonryImage'/></a></div>";
+//
+//                    } ?>
+<!---->
+<!--            --><?php //endwhile; ?>
+<!---->
+<!---->
+<!--            --><?php //endif; ?>
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 
 
 <!-- <section id="faq">
@@ -165,8 +165,8 @@ jQuery(".artistInnerContainer").hover(
         <h2 class="sectionTitle">FAQ</h2>
         <div class="container">
             <div class="accordion" id="accordionExample">
-                <?php 
-            $questions = get_field("faq_repeater", "options"); 
+                <?php
+            $questions = get_field("faq_repeater", "options");
             $index = 1;
             foreach($questions as $question): ?>
                 <div class="accordion-item">
@@ -194,7 +194,7 @@ jQuery(".artistInnerContainer").hover(
 <?php
 
     $args = array('posts_per_page' => 3, 'orderby' => 'post_date', 'category_name' => 'apeluri-artisti');
-    $apeluri_artisti = get_posts($args); 
+    $apeluri_artisti = get_posts($args);
 
 ?>
 
@@ -226,7 +226,7 @@ jQuery(".artistInnerContainer").hover(
 <?php
 
     $args = array('posts_per_page' => 3, 'orderby' => 'post_date', 'category_name' => 'povestea-codru');
-    $povesticodru = get_posts($args); 
+    $povesticodru = get_posts($args);
 
 ?>
 
