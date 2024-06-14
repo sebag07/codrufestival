@@ -3645,3 +3645,180 @@ color: #efaa13;
 #lineup {
   background: #6cbf02;
 }
+
+
+/* Artist cards */
+
+.artistInnerContainer {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 22px;
+}
+
+.artistInnerContainer .artistImageContainer {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: 100%;
+}
+
+.artistImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  transition: transform 0.3s ease-in-out;
+  object-fit: cover;
+}
+
+.imageOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background: linear-gradient(transparent, transparent, #000000);
+  transition: background 0.3s ease-in-out;
+}
+
+.artistContent {
+  position: absolute;
+  bottom: 12px;
+  left: 18px;
+  right: 12px;
+  z-index: 1;
+}
+
+.artistContentBG {
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.artistContentMeta {
+  position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0 5px 0;
+    text-align: start;
+}
+
+.artistContentName {
+  font-size: 1.1rem;
+    color: white;
+    margin: 8px 0 4px 0;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.artistContentDayStage {
+  display: none;
+}
+
+.artistCardContainer {
+  display: grid;
+  grid-template-columns: 23% 23% 23% 23%;
+  grid-gap: 24px;
+}
+
+.artistCardHoverOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  background-color: #000;
+  transition: opacity 0.2s ease-in-out;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.artistCardReadMoreBtn {
+  position: absolute;
+  background: #6cbf02;
+  color: #fff;
+    padding: 8px 0px 8px 0px;
+    border-radius: 100px;
+    font-size: 1.1rem;
+    opacity: 0;
+    transition: all 0.5s;
+    text-align: center;
+    z-index: 2;
+    font-weight: 600;
+}
+
+.artistCardReadMoreBtn:hover {
+  background: #fff;
+  color: #6cbf02;
+}
+
+.readMoreBtnHover {
+  left: 16px;
+  right: 16px;
+  bottom: 15px;
+  opacity: 1;
+}
+
+.artistContentTop {
+  top:12px;
+}
+
+.contentOverlay {
+  position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .6;
+}
+
+.borderOnHover {
+  border: 5px solid #efaa13;
+}
+
+.onHoverOverlayOpacity {
+  opacity: .4;
+}
+
+
+@media (max-width:991px) {
+  .artistCardContainer {
+    display: grid;
+    grid-template-columns: 31% 31% 31%;
+    grid-gap: 27px;
+  }
+}
+
+@media (max-width:767px) {
+  .artistCardContainer {
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-gap: 50px;
+  }
+}
+
+@media (max-width:500px) {
+  .artistInnerContainer {
+    max-height: 180px;
+  }
+  .artistCardContainer {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 30px;
+  }
+}
