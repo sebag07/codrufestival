@@ -5,7 +5,6 @@
 
     <h1 class="text-center" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
     <div class="container-fluid faq p-relative sectionPadding">
-        <h2 class="sectionTitle">FAQ</h2>
         <div class="container">
             <div class="accordion" id="accordionExample">
                 <?php

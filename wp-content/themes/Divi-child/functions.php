@@ -101,3 +101,18 @@ if( function_exists('acf_add_options_page') ) {
   }
 
   add_filter( 'the_content', 'wpautop' );
+
+function add_custom_rewrite_rule() {
+    add_rewrite_rule(
+        '^informatii/([^/]*)/?',
+        'index.php?pagename=informatii&filter=$matches[1]',
+        'top'
+    );
+}
+add_action('init', 'add_custom_rewrite_rule');
+
+function register_query_vars( $vars ) {
+    $vars[] = 'filter';
+    return $vars;
+}
+add_filter('query_vars', 'register_query_vars');
