@@ -2,7 +2,7 @@
 <?php get_header('codru2023live'); ?>
 
 <div class="container-fluid container404 p-0 m-0" style="min-height:60vh">
-    <img class="heroBG" src="/wp-content/themes/Divi-child/images/codru2023hero.png" alt="">
+    <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG.png" alt="">
     <div class="heroOverlayGradient heroOverlay404"></div>
     <div class="heroContent row" style="min-height:60vh">
         <div style="min-height:60vh" class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12 align-items-center justify-content-center p-0">
@@ -16,4 +16,4 @@
     </div>
 </div>
 
-<?php get_footer('codru2023live'); ?>
+<?php get_footer('footer-codru-2024'); ?>

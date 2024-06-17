@@ -1159,7 +1159,6 @@ a:hover {
   position: absolute;
   height: 100%;
   width: 100%;
-  margin-top: -80px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0) 0%,
