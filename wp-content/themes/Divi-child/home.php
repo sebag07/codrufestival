@@ -2,29 +2,23 @@
 <?php get_header(); ?>
 
 <div class="container-fluid heroContainer p-0 m-0">
-    <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG.png" alt="">
+    <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG-2.png" alt="">
     <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
     <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
         <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
             <img class="heroContentImage anim heroContentCodruLogo display-desktop" src="/wp-content/themes/Divi-child/images/heroheart.png"
-                alt="">
+                alt="Hero Heart Image">
             <img class="heroContentImage anim heroContentCodruLogo display-mobile" src="/wp-content/themes/Divi-child/images/heroheart-ing.png"
-                 alt="">
-            <!-- <img class="heroContentImage anim heroContentPadureaBistra"
-                src="/wp-content/themes/Divi-child/images/locatie.svg" alt="">
-            <h1 class="underLocDate"><?php echo get_field('hero_section_date')?></h1> -->
+                 alt="Hero Heart Image with ING icon">
             <div class="heroDescription">
                 <a class="heroContentButton desktopButton desktopContentButton anim"
-                    href="https://bilete.codrufestival.ro/"><?php echo get_field('hero_button_text')?></a>
+                    href="https://bilete.codrufestival.ro/" target="_blank"><?php echo get_field('hero_button_text')?></a>
                 <h2 class="heroFocusedText heroDescription"><?php echo get_field('hero_section_title')?></h2>
                 <p class="anim">
                     <?php echo get_field('hero_section_text')?>
                 </p>
-                <!-- <a class="heroContentButton mobileButton mobileContentButton anim"
-                    href="https://www.entertix.ro/bilete/18092/codru-festival-2024-tba-padurea-bistra-timisoara.html"><?php echo get_field('hero_button_text')?>
-                  </a> -->
             </div>
         </div>
     </div>
@@ -35,7 +29,11 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <h2 class="sectionTitle">LINEUP</h2>
-                <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup.png" alt="">
+                <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup-updated.png" alt="Lineup">
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 text-align-center general-button-container">
+                <a class="codru-general-button"
+                   href="<?php echo get_field('see_all_artists_button_link')?>" target="_blank"><?php echo get_field('see_all_artists_button')?></a>
             </div>
         </div>
     </div>
@@ -136,60 +134,6 @@
         </div>
     </div>
 </section>
-
-<!--<section id="galerieAnchor">-->
-<!--    <div class="masonryContainer container-fluid sectionPadding">-->
-<!--        <h2 class="text-center sectionPadding sectionTitle">--><?php //echo get_field('gallery_title', 'options'); ?><!--</h2>-->
-<!--        <div class="gallery-items gallery-masonry image-gallery">-->
-<!--            --><?php //if ( have_rows( 'masonry_section' , 26897 ) ): ?>
-<!---->
-<!--            --><?php //while( have_rows( 'masonry_section', 26897 ) ) : the_row(); ?>
-<!---->
-<!--            --><?php //if( $masonryImage = get_sub_field( 'masonry_image', 26897 ) ) {
-//
-//                echo "	<div class='item gallery-image'><a href='$masonryImage'><img src='$masonryImage'/></a></div>";
-//
-//                    } ?>
-<!---->
-<!--            --><?php //endwhile; ?>
-<!---->
-<!---->
-<!--            --><?php //endif; ?>
-<!--        </div>-->
-<!--    </div>-->
-<!--</section>-->
-
-
-<!-- <section id="faq">
-    <div class="container-fluid faq p-relative sectionPadding">
-        <h2 class="sectionTitle">FAQ</h2>
-        <div class="container">
-            <div class="accordion" id="accordionExample">
-                <?php
-            $questions = get_field("faq_repeater", "options");
-            $index = 1;
-            foreach($questions as $question): ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="<?php echo "heading" . $index; ?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="<?php echo "#collapse" . $index; ?>" aria-expanded="false"
-                            aria-controls="<?php echo "collapse" . $index; ?>">
-                            <?php echo $question['question']; ?>
-                        </button>
-                    </h2>
-                    <div id="<?php echo "collapse" . $index; ?>" class="accordion-collapse collapse"
-                        aria-labelledby="<?php echo "heading" . $index; ?>" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <?php echo $question['answer']; ?>
-                        </div>
-                    </div>
-                </div>
-                <?php $index++; ?>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-</section> -->
 
 <?php
 
