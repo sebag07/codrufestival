@@ -91,7 +91,7 @@
         })
     </script>
 
-    <div class="container-xl generalInfoPage pt-5 pb-5">
+    <div class="container single-page header-padding">
         <h1 class="pt-5 pb-4 text-center"><?php echo get_the_title(); ?></h1>
         <div class="tabs-to-dropdown row pt-3">
             <div class="nav-wrapper col-lg-4 col-md-4 col-12">

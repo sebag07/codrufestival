@@ -3486,7 +3486,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   text-transform: inherit;
   text-decoration: none;
   border-radius: 30px;
-  border: 2px solid #efaa13;
+  border: 2px solid #076708;
   line-height: 20px;
 }
 
@@ -3557,15 +3557,15 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
-  color: #f47e30;
+  color: #076708;
   background: #fff;
-  border: 2px solid #f47e30;
+  border: 2px solid #076708;
 }
 
 .nav-pills .nav-link:hover {
-  color: #f47e30;
+  color: #076708;
   background: #fff;
-  border: 2px solid #f47e30;
+  border: 2px solid #076708;
 }
 
 .nav-pills {
@@ -3583,7 +3583,7 @@ max-width: 500px;
 .general-info-content h4,
 .general-info-content h5,
 .general-info-content h6 {
-color: #efaa13;
+color: #076708;
 }
 
 .general-info-content p {
@@ -3600,12 +3600,12 @@ font-size: 16px;
 }
 
 .general-info-content a {
-color: #f47e30;
+color: #0F4615;
 }
 
 .general-info-content a:hover,
 .general-info-content a:active {
-color: #efaa13;
+color: #076708;
 }
 
 
@@ -3851,6 +3851,10 @@ color: #efaa13;
   font-size: 48px;
   font-weight: 600;
   color: #fff;
+}
+
+.single-page {
+  padding-bottom: 30px;
 }
 
 /* Artists Page */
