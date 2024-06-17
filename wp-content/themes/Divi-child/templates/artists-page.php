@@ -13,7 +13,7 @@
                 foreach ($postslist as $post) :
                     $artistName = get_the_title();
                     $artistPage = get_the_permalink();
-                    $artistImage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'single-post-thumbnail');
+                    $artistImage = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium_large');
                     if ($artistImage) {
                         $imageUrl = $artistImage[0];
                     } else {
@@ -22,7 +22,7 @@
                     ?>
                     <a href='<?php echo $artistPage; ?>' class='artistInnerContainer'>
                         <div class='artistImageContainer'>
-                            <img class='artistImg' loading='lazy' src='<?php echo $imageUrl; ?>'>
+                            <img class='artistImg' loading='lazy' src='<?php echo $imageUrl; ?>' alt="<?php echo $artistName; ?>">
                             <div class='imageOverlay'></div>
                         </div>
                         <div class='artistContent'>

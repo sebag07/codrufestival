@@ -1333,6 +1333,14 @@ footer .row {
 
 .footerItems a:hover {
   color: #f47e30;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
+}
+
+.footerItems a span:hover {
+  color: #f47e30;
+  -webkit-transition: 0.3s all ease;
+  transition: 0.3s all ease;
 }
 
 .footerRightImg {
