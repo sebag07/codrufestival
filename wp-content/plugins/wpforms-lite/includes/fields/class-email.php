@@ -1,5 +1,7 @@
 <?php
 
+use WPForms\Vendor\TrueBV\Punycode;
+
 /**
  * Email text field.
  *
@@ -114,7 +116,7 @@ class WPForms_Field_Email extends WPForms_Field {
 	 */
 	public function confirmation_field_properties( $properties, $field, $form_data ) {
 		$form_id  = absint( $form_data['id'] );
-		$field_id = absint( $field['id'] );
+		$field_id = wpforms_validate_field_id( $field['id'] );
 
 		// Email confirmation setting enabled.
 		$props = [
@@ -569,10 +571,10 @@ class WPForms_Field_Email extends WPForms_Field {
 		$name = ! empty( $form_data['fields'][ $field_id ] ['label'] ) ? $form_data['fields'][ $field_id ]['label'] : '';
 
 		// Set final field details.
-		wpforms()->process->fields[ $field_id ] = [
+		wpforms()->get( 'process' )->fields[ $field_id ] = [
 			'name'  => sanitize_text_field( $name ),
 			'value' => sanitize_text_field( $this->decode_punycode( $value ) ),
-			'id'    => absint( $field_id ),
+			'id'    => wpforms_validate_field_id( $field_id ),
 			'type'  => $this->type,
 		];
 	}
@@ -583,7 +585,7 @@ class WPForms_Field_Email extends WPForms_Field {
 	 * @since 1.0.0
 	 *
 	 * @param int   $field_id     Field ID.
-	 * @param mixed $field_submit Field value that was submitted.
+	 * @param mixed $field_submit Submitted field value (raw data).
 	 * @param array $form_data    Form data and settings.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
@@ -654,13 +656,17 @@ class WPForms_Field_Email extends WPForms_Field {
 
 		$form_id  = filter_input( INPUT_POST, 'form_id', FILTER_SANITIZE_NUMBER_INT );
 		$field_id = filter_input( INPUT_POST, 'field_id', FILTER_SANITIZE_NUMBER_INT );
-		$email    = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS );
+		$email    = filter_input( INPUT_POST, 'email', FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_NO_ENCODE_QUOTES );
+
+		// The valid email can contain such characters: !#$%&'*+/=?^_`{|}~-.
+		// After filtering the email, we need to decode the `&amp;`, otherwise the email with `&` couldn't be properly recognized.
+		$email = str_replace( '&amp;', '&', $email );
 
 		if ( ! $form_id || ! $field_id || ! $email ) {
 			wp_send_json_error();
 		}
 
-		$form_data = wpforms()->form->get(
+		$form_data = wpforms()->get( 'form' )->get(
 			$form_id,
 			[ 'content_only' => true ]
 		);
@@ -995,8 +1001,11 @@ class WPForms_Field_Email extends WPForms_Field {
 	 */
 	private function sanitize_email_pattern( $pattern ) {
 
+		$chars   = [ '.', '*', '/' ];
+		$replace = [ '\.', '.*', '\/' ];
+
 		// Create regex pattern from a string.
-		return '^' . str_replace( [ '.', '*' ], [ '\.', '.*' ], $pattern ) . '$';
+		return '^' . str_replace( $chars, $replace, $pattern ) . '$';
 	}
 
 	/**
@@ -1057,14 +1066,14 @@ class WPForms_Field_Email extends WPForms_Field {
 	 *
 	 * @since 1.6.9
 	 *
-	 * @return \TrueBV\Punycode
+	 * @return WPForms\Vendor\TrueBV\Punycode
 	 */
 	private function get_punycode() {
 
 		static $punycode;
 
 		if ( ! $punycode ) {
-			$punycode = new \TrueBV\Punycode();
+			$punycode = new Punycode();
 		}
 
 		return $punycode;

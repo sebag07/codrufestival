@@ -5,6 +5,7 @@ namespace WPForms\Admin\Payments\Views;
 use WPForms\Admin\Payments\ScreenOptions;
 use WPForms\Admin\Payments\Views\Overview\Helpers;
 use WPForms\Db\Payments\ValueValidator;
+use WPForms_Field_Layout;
 
 /**
  * Payments Overview Page class.
@@ -136,7 +137,7 @@ class Single implements PaymentsViewsInterface {
 
 		wp_enqueue_script(
 			'wpforms-admin-payments-single',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/payments/single{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/admin/payments/single{$min}.js",
 			[ 'tooltipster' ],
 			WPFORMS_VERSION,
 			true
@@ -327,6 +328,8 @@ class Single implements PaymentsViewsInterface {
 		echo wpforms_render(
 			'admin/payments/single/payment-details',
 			[
+				'id'                  => 'wpforms-payment-info',
+				'class'               => 'payment-details',
 				'title'               => __( 'Payment Details', 'wpforms-lite' ),
 				'payment_id'          => "#{$this->payment->id}",
 				'gateway_link'        => $this->get_gateway_transaction_link(),
@@ -396,6 +399,8 @@ class Single implements PaymentsViewsInterface {
 		echo wpforms_render(
 			'admin/payments/single/payment-details',
 			[
+				'id'                  => 'wpforms-subscription-details',
+				'class'               => 'subscription-details',
 				'title'               => __( 'Subscription Details', 'wpforms-lite' ),
 				'gateway_link'        => $this->get_gateway_subscription_link(),
 				'gateway_text'        => sprintf( /* translators: %s - payment gateway name. */
@@ -796,6 +801,7 @@ class Single implements PaymentsViewsInterface {
 
 		$entry_id_title = '';
 		$fields         = '';
+		$entry_status   = '';
 
 		// Grab submitted values from the entry if it exists.
 		if ( ! empty( $this->payment->entry_id ) && wpforms()->is_pro() ) {
@@ -804,6 +810,7 @@ class Single implements PaymentsViewsInterface {
 			if ( $entry ) {
 				$fields          = wpforms_decode( $entry->fields );
 				$entry_id_title .= "#{$this->payment->entry_id}";
+				$entry_status    = $entry->status;
 			}
 		}
 
@@ -817,17 +824,44 @@ class Single implements PaymentsViewsInterface {
 			return;
 		}
 
-		$form_data = wpforms()->get( 'form' )->get( $this->payment->form_id, [ 'content_only' => true ] );
+		/**
+		 * Allow modifying the form data before rendering the entry details.
+		 *
+		 * @since 1.8.9
+		 *
+		 * @param array $form_data Form data.
+		 * @param array $fields    Entry fields.
+		 */
+		$form_data = apply_filters(
+			'wpforms_admin_payments_views_single_form_data',
+			wpforms()->get( 'form' )->get( $this->payment->form_id, [ 'content_only' => true ] ),
+			$fields
+		);
 
 		add_filter( 'wp_kses_allowed_html', [ $this, 'modify_allowed_tags_payment_field_value' ], 10, 2 );
+
+		/**
+		 * Allow modifying the entry fields before rendering the entry details.
+		 *
+		 * @since 1.8.9
+		 *
+		 * @param array $entry_fields Entry fields.
+		 * @param array $form_data    Form data.
+		 */
+		$entry_fields = apply_filters(
+			'wpforms_admin_payments_views_single_fields',
+			$this->prepare_entry_fields( $fields, $form_data ),
+			$form_data
+		);
 
 		$entry_output = wpforms_render(
 			'admin/payments/single/entry-details',
 			[
-				'entry_fields'   => $this->prepare_entry_fields( $fields, $form_data ),
+				'entry_fields'   => $entry_fields,
 				'form_data'      => $form_data,
 				'entry_id_title' => $entry_id_title,
 				'entry_id'       => $this->payment->entry_id,
+				'entry_status'   => $entry_status,
 				'entry_url'      => add_query_arg(
 					[
 						'page'     => 'wpforms-entries',
@@ -858,20 +892,33 @@ class Single implements PaymentsViewsInterface {
 	 */
 	private function prepare_entry_fields( $fields, $form_data ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded, Generic.Metrics.CyclomaticComplexity.TooHigh
 
-		if ( empty( $fields ) ) {
+		if ( empty( $form_data['fields'] ) || empty( $fields ) ) {
 			return [];
 		}
 
 		$prepared_fields = [];
 
 		// Display the fields and their values.
-		foreach ( $fields as $key => $field ) {
+		foreach ( $form_data['fields'] as $key => $field_data ) {
 
-			if ( empty( $field['type'] ) ) {
+			if ( empty( $field_data['type'] ) ) {
 				continue;
 			}
 
-			$field_type = $field['type'];
+			$field_type = $field_data['type'];
+
+			// Add repeater fields as is.
+			if ( $field_type === 'repeater' && wpforms()->is_pro() ) {
+				$prepared_fields[ $key ] = $field_data;
+
+				continue;
+			}
+
+			$field = $fields[ $field_data['id'] ] ?? [];
+
+			if ( empty( $field ) ) {
+				continue;
+			}
 
 			// phpcs:disable WPForms.PHP.ValidateHooks.InvalidHookName
 			/** This filter is documented in /src/Pro/Admin/Entries/Edit.php */
@@ -885,6 +932,8 @@ class Single implements PaymentsViewsInterface {
 			// phpcs:enable WPForms.PHP.ValidateHooks.InvalidHookName
 
 			$prepared_fields[ $key ]['field_class'] = sanitize_html_class( 'wpforms-field-' . $field_type );
+			$prepared_fields[ $key ]['type']        = $field_type;
+			$prepared_fields[ $key ]['id']          = $field_data['id'];
 			$prepared_fields[ $key ]['field_name']  = ! empty( $field['name'] )
 				? $field['name']
 				: sprintf( /* translators: %d - field ID. */
@@ -892,8 +941,14 @@ class Single implements PaymentsViewsInterface {
 					absint( $field['id'] )
 				);
 
-			if ( wpforms_is_empty_string( $field_value ) ) {
+			$is_empty_value    = wpforms_is_empty_string( $field_value );
+			$is_empty_quantity = isset( $field['quantity'] ) && ! $field['quantity'];
+
+			if ( $is_empty_value ) {
 				$prepared_fields[ $key ]['field_value']  = esc_html__( 'Empty', 'wpforms-lite' );
+			}
+
+			if ( $is_empty_value || $is_empty_quantity ) {
 				$prepared_fields[ $key ]['field_class'] .= ' empty';
 			}
 		}
@@ -932,13 +987,12 @@ class Single implements PaymentsViewsInterface {
 	 */
 	private function details() {
 
-		$date = sprintf( /* translators: %1$s - date, %2$s - time when item was created, e.g. "Oct 22 at 11:11am". */
-			__( '%1$s at %2$s', 'wpforms-lite' ),
-			wpforms_datetime_format( $this->payment->date_created_gmt, 'M j, Y', true ),
-			wpforms_datetime_format( $this->payment->date_created_gmt, get_option( 'time_format' ), true )
-		);
-
 		$form_edit_link = $this->get_form_edit_link();
+		$date           = sprintf( /* translators: %1$s - date, %2$s - time when item was created, e.g. "Oct 22, 2022 at 11:11 am". */
+			__( '%1$s at %2$s', 'wpforms-lite' ),
+			wpforms_date_format( $this->payment->date_created_gmt, 'M j, Y', true ),
+			wpforms_time_format( $this->payment->date_created_gmt, '', true )
+		);
 
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 		echo wpforms_render(
@@ -1166,7 +1220,7 @@ class Single implements PaymentsViewsInterface {
 				break;
 
 			case 'square':
-				$link = $is_test_mode ? 'https://squareupsandbox.com/dashboard/' : 'https://squareup.com/dashboard/';
+				$link = $is_test_mode ? 'https://squareupsandbox.com/dashboard/' : 'https://squareup.com/t/cmtp_performance/pr_developers/d_partnerships/p_WPForms/?route=dashboard/';
 				break;
 
 			default:

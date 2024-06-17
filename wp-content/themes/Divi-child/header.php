@@ -26,7 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/js/main.js?ver=161">
+    <script src="/wp-content/themes/Divi-child/js/main.js?ver=161"></script>
     <script src="/wp-content/themes/Divi-child/js/mainCodru2023.js?ver=161"></script>
 
     <!-- Style -->

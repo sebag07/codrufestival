@@ -2,8 +2,7 @@
 
 namespace WPForms\Integrations\Stripe\Api\Webhooks;
 
-use Stripe\Event as StripeEvent;
-use RuntimeException;
+use WPForms\Vendor\Stripe\Event as StripeEvent;
 use WPForms\Integrations\Stripe\Helpers;
 
 /**
@@ -70,8 +69,6 @@ abstract class Base {
 	 * Set payment object from database. If payment not registered yet in DB, throw exception.
 	 *
 	 * @since 1.8.4
-	 *
-	 * @throws RuntimeException If payment intent not found or payment not found.
 	 */
 	protected function set_payment() {
 
@@ -80,20 +77,16 @@ abstract class Base {
 		$is_legacy_api = Helpers::is_pro() && absint( wpforms_setting( 'stripe-api-version' ) ) === 2;
 
 		if ( $is_legacy_api && ! isset( $this->data->id ) ) {
-			throw new RuntimeException( 'Payment id not found' );
+			return; // Payment id not found.
 		}
 
 		if ( ! $is_legacy_api && ! isset( $this->data->payment_intent ) ) {
-			throw new RuntimeException( 'Payment intent not found' );
+			return; // Payment intent not found.
 		}
 
 		$transaction_id = $is_legacy_api ? $this->data->id : $this->data->payment_intent;
 
 		$this->db_payment = wpforms()->get( 'payment' )->get_by( 'transaction_id', $transaction_id );
-
-		if ( ! $this->db_payment ) {
-			throw new RuntimeException( 'Payment not found' );
-		}
 	}
 
 	/**
@@ -136,5 +129,35 @@ abstract class Base {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Update payment method details.
+	 *
+	 * @since 1.8.7
+	 *
+	 * @param int   $payment_id Payment ID.
+	 * @param array $details    Charge details.
+	 *
+	 * @noinspection PhpMissingParamTypeInspection
+	 */
+	protected function update_payment_method_details( $payment_id, $details ) {
+
+		$meta['method_type'] = ! empty( $details->type ) ? sanitize_text_field( $details->type ) : '';
+
+		if ( ! empty( $details->card->last4 ) ) {
+			$meta['method_type']         = $meta['method_type'] ?? 'card';
+			$meta['credit_card_last4']   = $details->card->last4;
+			$meta['credit_card_method']  = $details->card->brand;
+			$meta['credit_card_expires'] = $details->card->exp_month . '/' . $details->card->exp_year;
+		}
+
+		$payment_meta_obj = wpforms()->get( 'payment_meta' );
+
+		if ( ! $payment_meta_obj ) {
+			return;
+		}
+
+		$payment_meta_obj->bulk_add( $payment_id, $meta );
 	}
 }

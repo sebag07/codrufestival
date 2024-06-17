@@ -89,7 +89,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 
 		// Define data.
 		$form_id  = absint( $form_data['id'] );
-		$field_id = absint( $field['id'] );
+		$field_id = wpforms_validate_field_id( $field['id'] );
 		$choices  = $field['choices'];
 		$dynamic  = wpforms_get_field_dynamic_choices( $field, $form_id, $form_data );
 
@@ -397,6 +397,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 		);
 
 			foreach ( $choices as $key => $choice ) {
+				$label = $this->get_choices_label( $choice['label']['text'] ?? '', $key, $field );
 
 				if ( wpforms_is_amp() && ( $using_image_choices || $using_icon_choices ) ) {
 					$choice['container']['attr']['[class]'] = sprintf(
@@ -425,6 +426,10 @@ class WPForms_Field_Radio extends WPForms_Field {
 							$choice['label']['attr']['role'] = 'button';
 						}
 
+						if ( is_array( $choice['label']['class'] ) && wpforms_is_empty_string( $label ) ) {
+							$choice['label']['class'][] = 'wpforms-field-label-inline-empty';
+						}
+
 						// Image choices.
 						printf(
 							'<label %s>',
@@ -437,8 +442,8 @@ class WPForms_Field_Radio extends WPForms_Field {
 								printf(
 									'<img src="%s" alt="%s"%s>',
 									esc_url( $choice['image'] ),
-									esc_attr( $choice['label']['text'] ),
-									! empty( $choice['label']['text'] ) ? ' title="' . esc_attr( $choice['label']['text'] ) . '"' : ''
+									esc_attr( $label ),
+									! empty( $label ) ? ' title="' . esc_attr( $label ) . '"' : ''
 								);
 							}
 
@@ -479,6 +484,8 @@ class WPForms_Field_Radio extends WPForms_Field {
 							$choice['label']['attr']['role'] = 'button';
 						}
 
+						$choice['attr']['autocomplete'] = 'off';
+
 						// Icon Choices.
 						wpforms()->get( 'icon_choices' )->field_display( $field, $choice, 'radio' );
 
@@ -494,7 +501,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 						printf(
 							'<label %s>%s</label>',
 							wpforms_html_attributes( $choice['label']['id'], $choice['label']['class'], $choice['label']['data'], $choice['label']['attr'] ),
-							wp_kses_post( $choice['label']['text'] )
+							wp_kses_post( $label )
 						);
 					}
 
@@ -510,7 +517,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 	 * @since 1.8.2
 	 *
 	 * @param int          $field_id     Field ID.
-	 * @param string|array $field_submit Submitted field value (selected option).
+	 * @param string|array $field_submit Submitted field value (raw data).
 	 * @param array        $form_data    Form data and settings.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) {
@@ -545,7 +552,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 			'name'      => $name,
 			'value'     => '',
 			'value_raw' => $value_raw,
-			'id'        => absint( $field_id ),
+			'id'        => wpforms_validate_field_id( $field_id ),
 			'type'      => $this->type,
 		];
 
@@ -581,7 +588,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 			// the choice key.
 			if ( ! empty( $field['show_values'] ) ) {
 				foreach ( $field['choices'] as $key => $choice ) {
-					if ( $choice['value'] === $field_submit ) {
+					if ( ! empty( $field_submit ) && $choice['value'] === $field_submit ) {
 						$data['value'] = sanitize_text_field( $choice['label'] );
 						$choice_key    = $key;
 						break;
@@ -610,7 +617,7 @@ class WPForms_Field_Radio extends WPForms_Field {
 		}
 
 		// Push field details to be saved.
-		wpforms()->process->fields[ $field_id ] = $data;
+		wpforms()->get( 'process' )->fields[ $field_id ] = $data;
 	}
 }
 

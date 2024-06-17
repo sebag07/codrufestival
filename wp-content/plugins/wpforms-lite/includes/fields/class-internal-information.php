@@ -116,6 +116,8 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 				'markup' => 'close',
 			]
 		);
+
+		$this->field_code( $field );
 	}
 
 	/**
@@ -348,6 +350,29 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	}
 
 	/**
+	 * Add hidden input with code identifier.
+	 *
+	 * @since 1.8.9
+	 *
+	 * @param array $field Field data and settings.
+	 */
+	private function field_code( $field ) {
+
+		$this->field_element(
+			'row',
+			$field,
+			[
+				'slug'    => 'code',
+				'content' => sprintf(
+					'<input type="hidden" name="fields[%1$s][code]" value="%2$s">',
+					$field['id'],
+					! empty( $field['code'] ) ? esc_attr( $field['code'] ) : ''
+				),
+			]
+		);
+	}
+
+	/**
 	 * Add CSS class to hide field settings when field is not editable.
 	 *
 	 * @since 1.7.6
@@ -517,16 +542,17 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	}
 
 	/**
-	 * Hide column from the entries list table.
+	 * Hide column from the entry list table.
 	 *
 	 * @since 1.7.6
 	 *
-	 * @param array $disallowed Table columns.
+	 * @param array|mixed $disallowed Table columns.
 	 *
 	 * @return array
 	 */
-	public function hide_column_in_entries_table( $disallowed ) {
+	public function hide_column_in_entries_table( $disallowed ): array {
 
+		$disallowed   = (array) $disallowed;
 		$disallowed[] = $this->type;
 
 		return $disallowed;
@@ -634,7 +660,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 
 		wp_enqueue_script(
 			'wpforms-internal-information-field',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/fields/internal-information-field{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/fields/internal-information{$min}.js",
 			[ 'wpforms-builder', 'wpforms-md5-hash', 'wpforms-builder-drag-fields' ],
 			WPFORMS_VERSION
 		);
