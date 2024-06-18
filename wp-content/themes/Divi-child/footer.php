@@ -4,6 +4,22 @@
         <img class="footerLeftImg" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
         <img class="footerRightImg" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
 
+        <div id="contact" class="container-fluid contactFormSection p-0">
+            <div class="contactSectionLeftSide container">
+                <?php
+                if (is_page_template('codrufestival-partners-template.php')) {
+                    echo "<p class='pt-5 mt-5 partnersContactText'>Dacă dorești să afli mai multe detalii și să discutăm despre colaborarea noastră, te rugăm să completezi formularul de mai jos și te vom contacta noi.</p>";
+                    echo do_shortcode('[wpforms id="27465" title="false"]');
+                } else {
+                    echo "<h2>" . get_field('contact_title', 'options') . "</h2>";
+                    echo "<p>" . get_field('contact_text', 'options') . "</p>";
+                    echo do_shortcode('[wpforms id="26912" title="false"]');
+                }
+
+                ?>
+            </div>
+        </div>
+
         <section id="newsletter" style="background-color:#076708">
             <div class="sectionPadding container">
                 <!-- Begin Brevo Form -->
@@ -162,22 +178,6 @@
             <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
 
         </section>
-
-        <div id="contact" class="container-fluid contactFormSection p-0">
-            <div class="contactSectionLeftSide container">
-                <?php
-                if (is_page_template('codrufestival-partners-template.php')) {
-                    echo "<p class='pt-5 mt-5 partnersContactText'>Dacă dorești să afli mai multe detalii și să discutăm despre colaborarea noastră, te rugăm să completezi formularul de mai jos și te vom contacta noi.</p>";
-                    echo do_shortcode('[wpforms id="27465" title="false"]');
-                } else {
-                    echo "<h2>" . get_field('contact_title', 'options') . "</h2>";
-                    echo "<p>" . get_field('contact_text', 'options') . "</p>";
-                    echo do_shortcode('[wpforms id="26912" title="false"]');
-                }
-
-                ?>
-            </div>
-        </div>
 
         <div class="row m-auto justify-content-center">
             <div class="footerLeftLogo col-lg-2 col-md-12 col-12 d-flex">
