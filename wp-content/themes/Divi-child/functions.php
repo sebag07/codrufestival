@@ -90,6 +90,15 @@ if( function_exists('acf_add_options_page') ) {
     ));
 
     acf_add_options_sub_page(array(
+        'page_title'    => 'Newsletter',
+        'menu_title'    => 'Newsletter',
+        'menu_slug'     => 'newsletter-options',
+        'capability'    => 'edit_posts',
+        'redirect'      => false,
+        'parent_slug'   => 'general-options',
+    ));
+
+    acf_add_options_sub_page(array(
         'page_title'    => 'Stages',
         'menu_title'    => 'Stages',
         'menu_slug'     => 'stages-options',
