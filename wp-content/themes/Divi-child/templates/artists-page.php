@@ -1,9 +1,8 @@
 <?php /*  Template Name: Artisti  */ ?>
 <?php get_header(); ?>
 
-<div class="container-fluid single-page header-padding">
-
-    <h1 class="text-center" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
+<div class="container-fluid single-page artists-page header-padding">
+    <h1 class="text-center sectionTitle" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
     <section>
         <div class="sectionPadding container">
             <div class="artistCardContainer">

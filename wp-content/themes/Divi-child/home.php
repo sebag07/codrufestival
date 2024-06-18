@@ -8,9 +8,9 @@
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
         <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
-            <img class="heroContentImage anim heroContentCodruLogo display-desktop" src="/wp-content/themes/Divi-child/images/location-to-be-announced-old.png"
+            <img class="heroContentImage anim heroContentCodruLogo display-desktop" src="/wp-content/themes/Divi-child/images/location-to-be-announced.png"
                 alt="Hero Heart Image">
-            <img class="heroContentImage anim heroContentCodruLogo display-mobile" src="/wp-content/themes/Divi-child/images/heroheart-ing-old.png"
+            <img class="heroContentImage anim heroContentCodruLogo display-mobile" src="/wp-content/themes/Divi-child/images/heroheart-ing.png"
                  alt="Hero Heart Image with ING icon">
             <div class="heroDescription">
                 <a class="heroContentButton desktopButton desktopContentButton anim"
@@ -29,78 +29,15 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <h2 class="sectionTitle">LINEUP</h2>
-                <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup.png" alt="Lineup">
+                <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup-updated.png" alt="Lineup">
             </div>
-<!--            <div class="col-lg-12 col-md-12 col-sm-12 text-align-center general-button-container">-->
-<!--                <a class="codru-general-button"-->
-<!--                   href="--><?php //echo get_field('see_all_artists_button_link')?><!--" target="_blank">--><?php //echo get_field('see_all_artists_button')?><!--</a>-->
-<!--            </div>-->
+            <div class="col-lg-12 col-md-12 col-sm-12 text-align-center general-button-container">
+                <a class="codru-general-button"
+                   href="<?php echo get_field('see_all_artists_button_link')?>" target="_blank"><?php echo get_field('see_all_artists_button')?></a>
+            </div>
         </div>
     </div>
 </section>
-
-<!--<section>-->
-<!--    <div class="sectionPadding container">-->
-<!--        <div class="artistCardContainer">-->
-<!--        --><?php
-//              $args = array('posts_per_page' => -1, 'orderby' => 'title', 'suppress_filters' => false, 'order' => 'ASC', 'post_type' => 'artist');
-//              $postslist = get_posts($args);
-//              foreach ($postslist as $post) {
-//                $artistName = get_the_title();
-//                $artistPage = get_the_permalink();
-//                $artistImage = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );
-//                if ($artistImage) {
-//                    $imageUrl = $artistImage[0];
-//                } else {
-//                    $imageUrl = "/wp-content/themes/Divi-child/images/logo.png";
-//                }
-//                echo "
-//                <a href='$artistPage' class='artistInnerContainer'>
-//                <div class='artistImageContainer'>
-//                    <img class='artistImg' loading='lazy' src='$imageUrl'>
-//                    <div class='imageOverlay'></div>
-//                </div>
-//                <div class='artistContent'>
-//                    <div class='artistContentBG'></div>
-//                    <div class='artistContentMeta'>
-//                        <span class='artistContentName'>
-//                            $artistName
-//                        </span>
-//                            <span class='artistContentDayStage'>
-//                                test
-//                            </span>
-//                    </div>
-//                </div>
-//                <div class='artistCardHoverOverlay'></div>
-//
-//                <div class='artistCardReadMoreBtn'>Read more</div>
-//
-//            </a>
-//                ";
-//
-//              }
-//              ?>
-<!--              </div>-->
-<!--    </div>-->
-<!--    <script>-->
-<!---->
-<!--jQuery(".artistInnerContainer").hover(-->
-<!--    function () {-->
-<!--        jQuery(this).find('.artistCardReadMoreBtn').addClass('readMoreBtnHover');-->
-<!--        jQuery(this).find('.artistContent').addClass('artistContentTop');-->
-<!--        jQuery(this).find('.artistCardHoverOverlay').addClass('onHoverOverlayOpacity');-->
-<!--        jQuery(this).addClass('borderOnHover');-->
-<!--    },-->
-<!--    function () {-->
-<!--        jQuery(this).find('.artistCardReadMoreBtn').removeClass('readMoreBtnHover');-->
-<!--        jQuery(this).find('.artistContent').removeClass('artistContentTop');-->
-<!--        jQuery(this).find('.artistCardHoverOverlay').removeClass('onHoverOverlayOpacity');-->
-<!--        jQuery(this).removeClass('borderOnHover');-->
-<!--    }-->
-<!--  );-->
-<!--    </script>-->
-<!--</section>-->
-
 
 <section id="brandCultureAnchor">
     <div class="container-fluid sectionPadding">

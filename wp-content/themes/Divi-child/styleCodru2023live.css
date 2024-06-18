@@ -3760,8 +3760,8 @@ color: #076708;
 
 .artistCardContainer {
   display: grid;
-  grid-template-columns: 23% 23% 23% 23%;
-  grid-gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 15px;
 }
 
 .artistCardHoverOverlay {
@@ -3831,27 +3831,27 @@ color: #076708;
 @media (max-width:991px) {
   .artistCardContainer {
     display: grid;
-    grid-template-columns: 31% 31% 31%;
-    grid-gap: 27px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 15px;
   }
 }
 
 @media (max-width:767px) {
   .artistCardContainer {
     display: grid;
-    grid-template-columns: 45% 45%;
-    grid-gap: 50px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
   }
 }
 
 @media (max-width:500px) {
   .artistInnerContainer {
-    max-height: 180px;
+    max-height: 250px;
   }
   .artistCardContainer {
     display: grid;
     grid-template-columns: 1fr;
-    grid-gap: 30px;
+    grid-gap: 15px;
   }
 }
 
@@ -3921,4 +3921,30 @@ color: #076708;
   color: #fff;
   font-size: 45px;
   text-align: center;
+}
+
+/* Artists Page */
+
+@media screen and (max-width: 991px){
+  .artists-page .container {
+    width: 100%;
+  }
+}
+
+/* Single Page */
+
+.single-page h1 {
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 1200px){
+  .single-page h1 {
+    margin-top: 50px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .single-page.artists-page .container {
+    width: 100%;
+  }
 }
