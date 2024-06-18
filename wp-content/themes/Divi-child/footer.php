@@ -80,8 +80,9 @@
                             <form id="sib-form" method="POST" action="https://13c8d4bf.sibforms.com/serve/MUIFAOJI5kvwapQlT3UBC1EogCB2Yjyyrob0-A2UyWVTkswuGSo6FqKUklFqV-zM1IGPq9sJd1Toj53fVgy-rTMbPHNEq6Yr-I6zdrCi1KtRcXRWJ5mI20uHIot_EPLvvmkkILWvJtvUjy1mMfOS3u67QM35QcOEWll3S-JPq-RM6sOvSH3_oJst5qbYqlo9aaXGfUFXGcHmapqW" data-type="subscription">
                                 <div style="padding: 8px 0;">
                                     <div class="sib-form-block" style="font-size:32px; text-align:left; font-weight:700;color:#3C4858; background-color:transparent; text-align:left">
-                                        <p style="font-weight:600"><?php echo get_field('nl_title', 'options') ?></p>
+                                        <h2><?php echo get_field('nl_title', 'options') ?></h2>
                                     </div>
+
                                 </div>
                                 <div style="padding: 8px 0;">
                                     <div class="sib-form-block" style="font-size:16px; text-align:left;color:#3C4858; background-color:transparent; text-align:left">

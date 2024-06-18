@@ -1495,7 +1495,6 @@ footer .row {
 }
 
 #wpforms-form-26912, #wpforms-form-27465 {
-  padding-bottom: 150px;
   position: relative;
   z-index: 2;
 }
@@ -3866,10 +3865,15 @@ color: #076708;
   border-radius: 20px !important;
   padding: 10px 15px !important;
   border: 1px solid #fff !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 0px !important;
   text-align: center !important;
   background: #fff !important;
   color: #076708 !important;
+  height: auto !important;
+}
+
+.sib-form .entry__field input {
+  height: auto !important;
 }
 
 #sib-container {
@@ -3879,6 +3883,7 @@ color: #076708;
 .sib-form label, .sib-form p {
   color: #fff !important;
   font-family: 'Montserrat';
+  font-weight: 500;
 }
 .entry__error--primary {
   display:none !important;
@@ -3899,10 +3904,7 @@ color: #076708;
     box-sizing: border-box !important;
     border-radius: 20px !important;
     border: none;
-    padding-top: 10px;
-    padding-right: 30px;
-    padding-bottom: 10px;
-    padding-left: 30px;
+    padding: 10px 30px !important;
     transition: 0.7s;
     width: 100%;
     font-weight: 600;
@@ -3911,4 +3913,12 @@ color: #076708;
 .sib-form-block__button-with-loader:hover {
   background: #fff !important;
   color: #6cbf02 !important;
+}
+
+.sib-form-block h2 {
+  font-weight: 600;
+  font-style: italic;
+  color: #fff;
+  font-size: 45px;
+  text-align: center;
 }
