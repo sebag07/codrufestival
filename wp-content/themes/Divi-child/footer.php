@@ -26,7 +26,8 @@
         </div>
         <div class="footerItems col-lg-8 col-xl-7 col-md-12 col-12">
             <a href="mailto:office@codrufestival.ro"><span><img src="/wp-content/themes/Divi-child/images/mail.svg" alt="office@codrufestival.ro">OFFICE@CODRUFESTIVAL.RO</span></a>
-            <a href="https://maps.app.goo.gl/XaJKQ5m6YLw6mVfL7"><span><img src="/wp-content/themes/Divi-child/images/map-pin.svg" alt="Parcul Central Timișoara">PARCUL CENTRAL TIMIȘOARA</span></a>
+<!--            <a href="https://maps.app.goo.gl/XaJKQ5m6YLw6mVfL7"><span><img src="/wp-content/themes/Divi-child/images/map-pin.svg" alt="Parcul Central Timișoara">PARCUL CENTRAL TIMIȘOARA</span></a>-->
+            <span><img src="/wp-content/themes/Divi-child/images/map-pin.svg" alt="">TO BE ANNOUNCED</span>
             <a href="mailto:press@codrufestival.ro"><span><img src="/wp-content/themes/Divi-child/images/camera.svg" alt="">PRESS@CODRUFESTIVAL.RO</span></a>
             <span class="footerSocials">
                 <a href="https://www.facebook.com/codrufestival" target="_blank"><img src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>

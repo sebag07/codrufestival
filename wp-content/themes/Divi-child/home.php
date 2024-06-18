@@ -8,9 +8,9 @@
     <div class="heroOverlayGradient"></div>
     <div class="heroContent row">
         <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
-            <img class="heroContentImage anim heroContentCodruLogo display-desktop" src="/wp-content/themes/Divi-child/images/heroheart.png"
+            <img class="heroContentImage anim heroContentCodruLogo display-desktop" src="/wp-content/themes/Divi-child/images/location-to-be-announced-old.png"
                 alt="Hero Heart Image">
-            <img class="heroContentImage anim heroContentCodruLogo display-mobile" src="/wp-content/themes/Divi-child/images/heroheart-ing.png"
+            <img class="heroContentImage anim heroContentCodruLogo display-mobile" src="/wp-content/themes/Divi-child/images/heroheart-ing-old.png"
                  alt="Hero Heart Image with ING icon">
             <div class="heroDescription">
                 <a class="heroContentButton desktopButton desktopContentButton anim"
@@ -29,12 +29,12 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <h2 class="sectionTitle">LINEUP</h2>
-                <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup-updated.png" alt="Lineup">
+                <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup.png" alt="Lineup">
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 text-align-center general-button-container">
-                <a class="codru-general-button"
-                   href="<?php echo get_field('see_all_artists_button_link')?>" target="_blank"><?php echo get_field('see_all_artists_button')?></a>
-            </div>
+<!--            <div class="col-lg-12 col-md-12 col-sm-12 text-align-center general-button-container">-->
+<!--                <a class="codru-general-button"-->
+<!--                   href="--><?php //echo get_field('see_all_artists_button_link')?><!--" target="_blank">--><?php //echo get_field('see_all_artists_button')?><!--</a>-->
+<!--            </div>-->
         </div>
     </div>
 </section>
