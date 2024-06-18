@@ -229,8 +229,10 @@
                     <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                                 src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
                 </span>
-            <a class="heroButtonMenu"
-               href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+            <div class="site-mobile-menu-button-container">
+                <a class="heroButtonMenu"
+                   href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+            </div>
         </ul>
     </div>
 </div> <!-- .site-mobile-menu -->

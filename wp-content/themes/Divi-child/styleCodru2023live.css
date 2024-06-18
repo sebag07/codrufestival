@@ -642,8 +642,12 @@ a:hover {
   }
   .site-mobile-menu .site-nav-wrap .heroButtonMenu {
     color: #6cbf02;
-    margin-left: 20px;
     padding: 5px 40px;
+    width: 100%;
+  }
+  .site-mobile-menu-button-container {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
 .site-mobile-menu .site-nav-wrap a:hover {
