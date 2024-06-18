@@ -3821,3 +3821,60 @@ color: #efaa13;
     grid-gap: 30px;
   }
 }
+
+/* Newsletter */
+
+.sib-form {
+  text-align: center;
+}
+
+.sib-form .entry__field  {
+  border-radius: 20px !important;
+  padding: 10px 15px !important;
+  border: 1px solid #fff !important;
+  margin-bottom: 20px !important;
+  text-align: center !important;
+  background: #fff !important;
+  color: #076708 !important;
+}
+
+#sib-container {
+  background-color: transparent !important;
+}
+
+.sib-form label, .sib-form p {
+  color: #fff !important;
+  font-family: 'Montserrat';
+}
+.entry__error--primary {
+  display:none !important;
+}
+.sib-form {
+  font-family: 'Montserrat' !important;
+  padding:0px !important;
+}
+.sib-form-block {
+  padding:0px !important;
+}
+.sib-form__declaration {
+  padding:0px !important;
+}
+.sib-form-block__button-with-loader {
+  background: #6cbf02;
+    color: #fff !important;
+    box-sizing: border-box !important;
+    border-radius: 20px !important;
+    border: none;
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    transition: 0.7s;
+    width: 100%;
+    font-weight: 600;
+}
+
+.sib-form-block__button-with-loader:hover {
+  background: #fff !important;
+  color: #6cbf02 !important;
+}
