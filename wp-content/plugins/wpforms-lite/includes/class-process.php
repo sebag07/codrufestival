@@ -288,7 +288,7 @@ class WPForms_Process {
 			 * @since 1.4.0
 			 *
 			 * @param int   $field_id     Field ID.
-			 * @param mixed $field_submit Field submitted value.
+			 * @param mixed $field_submit Submitted field value (raw data).
 			 * @param array $form_data    Form data.
 			 */
 			do_action( "wpforms_process_validate_{$field_type}", $field_id, $field_submit, $this->form_data );
@@ -459,7 +459,6 @@ class WPForms_Process {
 		 * @param array $form_data Form data and settings.
 		 */
 		$this->fields = apply_filters( 'wpforms_process_filter', $this->fields, $entry, $this->form_data );
-
 		/**
 		 * Process form fields.
 		 *
@@ -481,17 +480,6 @@ class WPForms_Process {
 		 * @param array $form_data Form data and settings.
 		 */
 		do_action( "wpforms_process_{$form_id}", $this->fields, $entry, $this->form_data );
-
-		/**
-		 * Filter fields after processing.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $fields    Form fields.
-		 * @param array $entry     Form submission raw data ($_POST).
-		 * @param array $form_data Form data and settings.
-		 */
-		$this->fields = apply_filters( 'wpforms_process_after_filter', $this->fields, $entry, $this->form_data );
 
 		if ( ! $this->is_bypass_spam_check( $entry ) ) {
 			// Check if the form was submitted too quickly.
@@ -516,6 +504,17 @@ class WPForms_Process {
 			$this->errors = $this->spam_errors;
 		}
 
+		/**
+		 * Filter fields after processing.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param array $fields    Form fields.
+		 * @param array $entry     Form submission raw data ($_POST).
+		 * @param array $form_data Form data and settings.
+		 */
+		$this->fields = apply_filters( 'wpforms_process_after_filter', $this->fields, $entry, $this->form_data );
+
 		// One last error check - don't proceed if there are any errors.
 		if ( ! empty( $this->errors[ $form_id ] ) ) {
 
@@ -536,6 +535,16 @@ class WPForms_Process {
 
 		// Add payment to database.
 		$payment_id = $this->payment_save( $entry );
+
+		$this->form_data['entry_meta'] = [
+			'page_url'   => isset( $_POST['page_url'] ) ? esc_url_raw( wp_unslash( $_POST['page_url'] ) ) : '',
+			'page_title' => isset( $_POST['page_title'] ) ? sanitize_text_field( wp_unslash( $_POST['page_title'] ) ) : '',
+			'page_id'    => isset( $_POST['page_id'] ) ? absint( $_POST['page_id'] ) : '',
+			'referer'    => esc_url_raw( (string) wp_get_referer() ),
+		];
+
+		// Save meta data.
+		$this->save_meta( $this->entry_id, $this->form_data['id'] );
 
 		/**
 		 * Runs right after adding entry to the database.
@@ -579,6 +588,37 @@ class WPForms_Process {
 		}
 
 		$this->entry_confirmation_redirect( $this->form_data );
+	}
+
+	/**
+	 * Save entry meta data.
+	 *
+	 * @since 1.8.7
+	 *
+	 * @param int $entry_id Entry ID.
+	 * @param int $form_id  Form ID.
+	 */
+	protected function save_meta( $entry_id, $form_id ) {
+
+		if ( ! wpforms()->is_pro() ) {
+			return;
+		}
+
+		$meta_data  = $this->form_data['entry_meta'];
+		$entry_meta = wpforms()->get( 'entry_meta' );
+
+		foreach ( $meta_data as $type => $value ) {
+			$entry_meta->add(
+				[
+					'entry_id' => $entry_id,
+					'form_id'  => $form_id,
+					'user_id'  => get_current_user_id(),
+					'type'     => $type,
+					'data'     => $value,
+				],
+				'entry_meta'
+			);
+		}
 	}
 
 	/**
@@ -846,14 +886,11 @@ class WPForms_Process {
 			empty( $response_body->success ) ||
 			( $is_recaptcha_v3 && $response_body->score <= wpforms_setting( 'recaptcha-v3-threshold', '0.4' ) )
 		) {
-			if ( $is_recaptcha_v3 ) {
-				if ( isset( $response_body->score ) ) {
-					$error .= ' (' . esc_html( $response_body->score ) . ')';
-				}
-				$this->spam_errors[ $this->form_data['id'] ]['footer'] = $error;
-			} else {
-				$this->spam_errors[ $this->form_data['id'] ]['recaptcha'] = $error;
+			if ( $is_recaptcha_v3 && isset( $response_body->score ) ) {
+				$error .= ' (' . esc_html( $response_body->score ) . ')';
 			}
+
+			$this->spam_errors[ $this->form_data['id'] ]['recaptcha'] = $error;
 
 			$this->log_spam_entry( $entry, $error );
 
@@ -1024,7 +1061,7 @@ class WPForms_Process {
 		}
 
 		// Get lead and verify it is attached to the form we received with it.
-		$entry = wpforms()->entry->get( $output['entry_id'], [ 'cap' => false ] );
+		$entry = wpforms()->get( 'entry' )->get( $output['entry_id'], [ 'cap' => false ] );
 
 		if ( empty( $entry->form_id ) ) {
 			return false;
@@ -1084,7 +1121,7 @@ class WPForms_Process {
 			$this->valid_hash = true;
 			$this->entry_id   = absint( $hash_data['entry_id'] );
 			$this->fields     = json_decode( $hash_data['fields'], true );
-			$this->form_data  = wpforms()->form->get(
+			$this->form_data  = wpforms()->get( 'form' )->get(
 				absint( $hash_data['form_id'] ),
 				[
 					'content_only' => true,
@@ -1197,7 +1234,7 @@ class WPForms_Process {
 			$this->confirmation_message = $confirmations[ $confirmation_id ]['message'];
 
 			if ( ! empty( $confirmations[ $confirmation_id ]['message_scroll'] ) ) {
-				wpforms()->frontend->confirmation_message_scroll = true;
+				wpforms()->get( 'frontend' )->confirmation_message_scroll = true;
 			}
 		}
 	}
@@ -1219,7 +1256,7 @@ class WPForms_Process {
 			return '';
 		}
 
-		$confirmation_message = wpforms_process_smart_tags( $this->confirmation_message, $form_data, $fields, $entry_id );
+		$confirmation_message = wpforms_process_smart_tags( $this->confirmation_message, $form_data, $fields, $entry_id, 'confirmation' );
 		$confirmation_message = apply_filters( 'wpforms_frontend_confirmation_message', wpautop( $confirmation_message ), $form_data, $fields, $entry_id );
 
 		return $confirmation_message;
@@ -1357,7 +1394,8 @@ class WPForms_Process {
 				continue;
 			}
 
-			$email = [];
+			$email                 = [];
+			$is_carboncopy_enabled = wpforms_setting( 'email-carbon-copy', false );
 
 			// Setup email properties.
 			$email['subject']        = ! empty( $notification['subject'] ) ?
@@ -1366,12 +1404,18 @@ class WPForms_Process {
 					esc_html__( 'New %s Entry', 'wpforms-lite' ),
 					$form_data['settings']['form_title']
 				);
-			$email['address']        = explode( ',', wpforms_process_smart_tags( $notification['email'], $form_data, $fields, $this->entry_id ) );
-			$email['address']        = array_map( 'sanitize_email', $email['address'] );
+			$email['address']        = explode( ',', wpforms_process_smart_tags( $notification['email'], $form_data, $fields, $this->entry_id, 'notification-send-to-email' ) );
+			$email['address']        = array_filter( array_map( 'sanitize_email', $email['address'] ) );
 			$email['sender_address'] = ! empty( $notification['sender_address'] ) ? $notification['sender_address'] : get_option( 'admin_email' );
 			$email['sender_name']    = ! empty( $notification['sender_name'] ) ? $notification['sender_name'] : get_bloginfo( 'name' );
 			$email['replyto']        = ! empty( $notification['replyto'] ) ? $notification['replyto'] : false;
 			$email['message']        = ! empty( $notification['message'] ) ? $notification['message'] : '{all_fields}';
+			$email['template']       = ! empty( $notification['template'] ) ? $notification['template'] : '';
+
+			if ( $is_carboncopy_enabled && ! empty( $notification['carboncopy'] ) ) {
+				$email['carboncopy'] = explode( ',', wpforms_process_smart_tags( $notification['carboncopy'], $form_data, $fields, $this->entry_id, 'notification-carboncopy' ) );
+				$email['carboncopy'] = array_filter( array_map( 'sanitize_email', $email['carboncopy'] ) );
+			}
 
 			/**
 			 * Filter entry email notifications attributes.
@@ -1387,7 +1431,7 @@ class WPForms_Process {
 			$email = apply_filters( 'wpforms_entry_email_atts', $email, $fields, $entry, $form_data, $notification_id ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 
 			// Create new email.
-			$emails = new WPForms_WP_Emails();
+			$emails = WPForms\Emails\Notifications::get_instance()->init( $email['template'] );
 
 			$emails->__set( 'form_data', $form_data );
 			$emails->__set( 'fields', $fields );
@@ -1398,8 +1442,8 @@ class WPForms_Process {
 			$emails->__set( 'reply_to', $email['replyto'] );
 
 			// Maybe include CC.
-			if ( ! empty( $notification['carboncopy'] ) && wpforms_setting( 'email-carbon-copy', false ) ) {
-				$emails->__set( 'cc', $notification['carboncopy'] );
+			if ( $is_carboncopy_enabled && ! empty( $email['carboncopy'] ) ) {
+				$emails->__set( 'cc', $email['carboncopy'] );
 			}
 
 			/**
@@ -1432,6 +1476,8 @@ class WPForms_Process {
 	 */
 	public function entry_save( $fields, $entry, $form_id, $form_data = [] ) {
 
+		$fields = $this->remove_raw_data_before_save( $fields );
+
 		/**
 		 * Fires on entry save.
 		 *
@@ -1445,6 +1491,27 @@ class WPForms_Process {
 		do_action( 'wpforms_process_entry_save', $fields, $entry, $form_id, $form_data );
 
 		return $this->entry_id;
+	}
+
+	/**
+	 * Remove raw data from fields before saving.
+	 * This is needed to prevent raw password data from being saved to the database.
+	 *
+	 * @since 1.8.6
+	 *
+	 * @param array $fields List of form fields.
+	 *
+	 * @return array
+	 */
+	private function remove_raw_data_before_save( array $fields ): array {
+
+		foreach ( $fields as $key => $field ) {
+			if ( ! empty( $field['type'] ) && $field['type'] === 'password' ) {
+				unset( $fields[ $key ]['value_raw'] );
+			}
+		}
+
+		return $fields;
 	}
 
 	/**
@@ -1533,7 +1600,7 @@ class WPForms_Process {
 		$form_data = $this->form_data;
 
 		if ( empty( $form_data ) ) {
-			$form_data = wpforms()->form->get( $form_id, [ 'content_only' => true ] );
+			$form_data = wpforms()->get( 'form' )->get( $form_id, [ 'content_only' => true ] );
 			$form_data = apply_filters( 'wpforms_frontend_form_data', $form_data );
 		}
 
@@ -1544,7 +1611,7 @@ class WPForms_Process {
 
 		ob_start();
 
-		wpforms()->frontend->confirmation( $form_data );
+		wpforms()->get( 'frontend' )->confirmation( $form_data );
 
 		$response = apply_filters( 'wpforms_ajax_submit_success_response', [ 'confirmation' => ob_get_clean() ], $form_id, $form_data );
 
@@ -1590,6 +1657,7 @@ class WPForms_Process {
 		foreach ( $field_errors as $key => $error ) {
 
 			$name = $this->ajax_error_field_name( $fields[ $key ], $form_data, $error );
+
 			if ( $name ) {
 				$field_errors[ $name ] = $error;
 			}
@@ -1615,21 +1683,31 @@ class WPForms_Process {
 	}
 
 	/**
-	 * Get field name for ajax error message.
+	 * Get field name for an ajax error message.
 	 *
 	 * @since 1.6.3
 	 *
-	 * @param array  $field     Field settings.
-	 * @param array  $form_data Form data and settings.
-	 * @param string $error     Error message.
+	 * @param array           $field     Field settings.
+	 * @param array           $form_data Form data and settings.
+	 * @param string|string[] $error     Error message.
 	 *
 	 * @return string
 	 */
-	private function ajax_error_field_name( $field, $form_data, $error ) {
+	private function ajax_error_field_name( array $field, array $form_data, $error ): string {
 
-		$props = wpforms()->frontend->get_field_properties( $field, $form_data );
+		$props = wpforms()->get( 'frontend' )->get_field_properties( $field, $form_data );
 
-		return apply_filters( 'wpforms_process_ajax_error_field_name', '', $field, $props, $error );
+		/**
+		 * Filter the field name for an ajax error message.
+		 *
+		 * @since 1.6.3
+		 *
+		 * @param string          $name  Error field name.
+		 * @param array           $field Field.
+		 * @param array           $props Field properties.
+		 * @param string|string[] $error Error message.
+		 */
+		return (string) apply_filters( 'wpforms_process_ajax_error_field_name', '', $field, $props, $error );
 	}
 
 	/**

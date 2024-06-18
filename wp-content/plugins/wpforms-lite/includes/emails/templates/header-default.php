@@ -239,28 +239,106 @@ $text_direction   = is_rtl() ? 'rtl' : 'ltr';
 				width:100% !important;
 			}
 		}
-        /* Rich Text compatibility - image alignment. */
-        .mcnTextContentContainer table tbody,
-        .mcnTextContentContainer table tbody tr,
-        .mcnTextContentContainer table tbody td {
-            display: block;
-        }
-        .mcnTextContentContainer p::after {
-            content: "";
-            clear: both;
-            display: block;
-        }
-        .mcnTextContentContainer p .alignleft {
-            float: left;
-        }
-        .mcnTextContentContainer p .aligncenter {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .mcnTextContentContainer p .alignright {
-            float: right;
-        }
+		/* Rich Text compatibility - image alignment. */
+		.mcnTextContentContainer table tbody,
+		.mcnTextContentContainer table tbody tr,
+		.mcnTextContentContainer table tbody td {
+			display: block;
+		}
+		.mcnTextContentContainer p::after {
+			content: "";
+			clear: both;
+			display: block;
+		}
+		.mcnTextContentContainer p .alignleft, .mcnTextContentContainer li .alignleft {
+			float: left;
+			margin-right: 16px;
+			margin-top: 8px;
+			margin-bottom: 8px;
+		}
+		.mcnTextContentContainer p .aligncenter, .mcnTextContentContainer li .aligncenter {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.mcnTextContentContainer p .alignright, .mcnTextContentContainer li .alignright {
+			float: right;
+			margin-left: 16px;
+			margin-top: 8px;
+			margin-bottom: 8px;
+		}
+		/* styling lists */
+		.mcnTextContentContainer li {
+			list-style-position: inside;
+			mso-text-indent-alt: 0;
+		}
+		/* Order Summary */
+		.wpforms-order-summary-container {
+			display: block;
+			border-width: 1px;
+			border-style: solid;
+			max-width: 100%;
+			border-color: #e2e2e2;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview {
+			width: 100%;
+			border-collapse: collapse;
+			table-layout: fixed;
+			box-sizing: content-box;
+			margin: 0;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tbody {
+			display: contents;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr th,
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr td {
+			text-align: center;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview .wpforms-order-summary-item-label {
+			text-align: start;
+			padding-left: 10px;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview .wpforms-order-summary-item-quantity {
+			width: 8ch;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview .wpforms-order-summary-item-price {
+			width: 6ch;
+			text-align: end;
+			padding-right: 10px;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr.wpforms-order-summary-placeholder td {
+			text-align: start;
+			padding-left: 10px;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr {
+			border-bottom-width: 1px;
+			border-bottom-style: solid;
+			border-color: #e2e2e2;
+			display: table-row;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr th,
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr td {
+			padding: 9px 0;
+			line-height: 20px;
+			background: none;
+			border: none;
+			font-weight: 400;
+			display: table-cell;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr.wpforms-order-summary-preview-subtotal td,
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr.wpforms-order-summary-preview-total td {
+			font-weight: 700;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr.wpforms-order-summary-preview-total {
+			border-bottom: none;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview caption,
+		.wpforms-order-summary-container table.wpforms-order-summary-preview .wpforms-order-summary-placeholder-hidden {
+			display: none;
+		}
+		.wpforms-order-summary-container table.wpforms-order-summary-preview tr.wpforms-order-summary-preview-coupon-total td.wpforms-order-summary-item-price {
+			color: #d63638;
+		}
 	</style>
 </head>
 <body style="height: 100%;margin: 0;padding: 0;width: 100%;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;background-color: <?php echo $background_color; ?>;">

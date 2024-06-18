@@ -2,19 +2,21 @@
 
 namespace WPForms\Integrations\Stripe\Api;
 
-use Stripe\Customer;
-use Stripe\PaymentIntent;
-use Stripe\PaymentMethod;
-use Stripe\Stripe;
-use Stripe\Subscription;
-use Stripe\Refund;
-use Stripe\Exception\ApiErrorException;
+use WPForms\Vendor\Stripe\Mandate;
+use WPForms\Vendor\Stripe\SetupIntent;
+use WPForms\Vendor\Stripe\Customer;
+use WPForms\Vendor\Stripe\PaymentIntent;
+use WPForms\Vendor\Stripe\PaymentMethod;
+use WPForms\Vendor\Stripe\Stripe;
+use WPForms\Vendor\Stripe\Subscription;
+use WPForms\Vendor\Stripe\Refund;
+use WPForms\Vendor\Stripe\Exception\ApiErrorException;
 use WPForms\Integrations\Stripe\Fields\StripeCreditCard;
 use WPForms\Integrations\Stripe\Fields\PaymentElementCreditCard;
 use WPForms\Integrations\Stripe\Helpers;
 use WPForms\Helpers\Crypto;
 use Exception;
-use Stripe\Charge;
+use WPForms\Vendor\Stripe\Charge;
 
 /**
  * Stripe PaymentIntents API.
@@ -108,20 +110,8 @@ class PaymentIntents extends Common implements ApiInterface {
 	 */
 	public function set_config() {
 
-		/**
-		 * This filter allows to overwrite a Style object, which consists of CSS properties nested under objects.
-		 *
-		 * @since 1.8.2
-		 *
-		 * @link https://stripe.com/docs/js/appendix/style
-		 *
-		 * @param array $styles Style object.
-		 */
-		$element_style = (array) apply_filters( 'wpforms_stripe_api_payment_intents_set_config_element_style', [] ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
-
 		$localize_script = [
 			'element_locale' => $this->filter_config_element_locale(),
-			'element_style'  => $element_style,
 		];
 
 		$this->config = [
@@ -148,6 +138,19 @@ class PaymentIntents extends Common implements ApiInterface {
 
 		$min = wpforms_get_min_suffix();
 
+		/**
+		 * This filter allows to overwrite a Payment element appearance object.
+		 *
+		 * @since 1.8.5
+		 *
+		 * @link https://stripe.com/docs/elements/appearance-api
+		 *
+		 * @param array $appearance Appearance object.
+		 */
+		$element_style = (array) apply_filters( 'wpforms_integrations_stripe_api_payment_intents_set_element_appearance', [] );
+
+		$this->config['localize_script']['element_appearance'] = $element_style;
+
 		$this->config['local_js_url']  = WPFORMS_PLUGIN_URL . "assets/js/integrations/stripe/wpforms-stripe-payment-element{$min}.js";
 		$this->config['local_css_url'] = WPFORMS_PLUGIN_URL . "assets/css/integrations/stripe/wpforms-stripe{$min}.css";
 	}
@@ -159,6 +162,18 @@ class PaymentIntents extends Common implements ApiInterface {
 	 */
 	private function set_card_element_config() {
 
+		/**
+		 * This filter allows to overwrite a Style object, which consists of CSS properties nested under objects.
+		 *
+		 * @since 1.8.2
+		 *
+		 * @link https://stripe.com/docs/js/appendix/style
+		 *
+		 * @param array $styles Style object.
+		 */
+		$element_style = (array) apply_filters( 'wpforms_stripe_api_payment_intents_set_config_element_style', [] ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
+
+		$this->config['localize_script']['element_style']   = $element_style;
 		$this->config['localize_script']['element_classes'] = [
 			'base'           => 'wpforms-stripe-element',
 			'complete'       => 'wpforms-stripe-element-complete',
@@ -233,6 +248,7 @@ class PaymentIntents extends Common implements ApiInterface {
 	 * Retrieve PaymentIntent object from Stripe.
 	 *
 	 * @since 1.8.2
+	 * @since 1.8.7 Changed method visibility.
 	 *
 	 * @param string $id   PaymentIntent id.
 	 * @param array  $args Additional arguments (e.g. 'expand').
@@ -241,13 +257,27 @@ class PaymentIntents extends Common implements ApiInterface {
 	 *
 	 * @return PaymentIntent|null
 	 */
-	protected function retrieve_payment_intent( $id, $args = [] ) {
+	public function retrieve_payment_intent( $id, $args = [] ) {
 
-		$defaults = [ 'id' => $id ];
+		try {
 
-		$args = wp_parse_args( $args, $defaults );
+			$defaults = [ 'id' => $id ];
 
-		return PaymentIntent::retrieve( $args, Helpers::get_auth_opts() );
+			if ( isset( $args['mode'] ) ) {
+				$auth_opts = [ 'api_key' => Helpers::get_stripe_key( 'secret', $args['mode'] ) ];
+
+				unset( $args['mode'] );
+			}
+
+			$args = wp_parse_args( $args, $defaults );
+
+			return PaymentIntent::retrieve( $args, $auth_opts ?? Helpers::get_auth_opts() );
+		} catch ( Exception $e ) {
+
+			$this->handle_exception( $e );
+		}
+
+		return null;
 	}
 
 	/**
@@ -277,12 +307,14 @@ class PaymentIntents extends Common implements ApiInterface {
 	 * Refund a payment.
 	 *
 	 * @since 1.8.4
+	 * @since 1.8.8.2 $args param was added.
 	 *
 	 * @param string $payment_intent_id PaymentIntent id.
+	 * @param array  $args              Additional arguments (e.g. 'mode', 'metadata', 'reason' ).
 	 *
 	 * @return bool
 	 */
-	public function refund_payment( $payment_intent_id ) {
+	public function refund_payment( string $payment_intent_id, array $args = [] ): bool {
 
 		try {
 
@@ -292,15 +324,19 @@ class PaymentIntents extends Common implements ApiInterface {
 				return false;
 			}
 
-			$refund = Refund::create(
-				[
-					'payment_intent' => $payment_intent_id,
-					'metadata'       => [
-						'refunded_by' => 'wpforms_dashboard',
-					],
-				],
-				Helpers::get_auth_opts()
-			);
+			$defaults = [
+				'payment_intent' => $payment_intent_id,
+			];
+
+			if ( isset( $args['mode'] ) ) {
+				$auth_opts = [ 'api_key' => Helpers::get_stripe_key( 'secret', $args['mode'] ) ];
+
+				unset( $args['mode'] );
+			}
+
+			$args = wp_parse_args( $args, $defaults );
+
+			$refund = Refund::create( $args, $auth_opts ?? Helpers::get_auth_opts() );
 
 			if ( ! $refund ) {
 				return false;
@@ -422,15 +458,19 @@ class PaymentIntents extends Common implements ApiInterface {
 
 		try {
 
-			if ( isset( $args['customer_email'] ) ) {
+			if ( isset( $args['customer_email'] ) || isset( $args['customer_name'] ) ) {
+				$this->set_customer( $args['customer_email'] ?? '', $args['customer_name'] ?? '', $args['customer_address'] ?? [] );
 
-				$this->set_customer( $args['customer_email'] );
-				$this->attach_customer_to_payment();
+				// Stop payment processing for all.
+				// Otherwise, it might stop for WPForms, but proceed for Stripe.
+				if ( is_null( $this->attach_customer_to_payment() ) ) {
+					return;
+				}
 
 				$args['customer'] = $this->get_customer( 'id' );
-
-				unset( $args['customer_email'] );
 			}
+
+			unset( $args['customer_email'], $args['customer_name'], $args['customer_address'] );
 
 			$this->intent = PaymentIntent::create( $args, Helpers::get_auth_opts() );
 
@@ -511,7 +551,7 @@ class PaymentIntents extends Common implements ApiInterface {
 	 *
 	 * @param array $args Subscription payment arguments.
 	 */
-	protected function charge_subscription( $args ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+	protected function charge_subscription( $args ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
 
 		if ( empty( $this->payment_method_id ) ) {
 			$this->error = esc_html__( 'Stripe subscription stopped, missing PaymentMethod id.', 'wpforms-lite' );
@@ -537,22 +577,35 @@ class PaymentIntents extends Common implements ApiInterface {
 		}
 
 		try {
-
-			$this->set_customer( $args['email'] );
+			$this->set_customer( $args['email'], $args['customer_name'] ?? '', $args['customer_address'] ?? [] );
 			$sub_args['customer'] = $this->get_customer( 'id' );
 
-			$new_payment_method = $this->attach_customer_to_payment();
+			if ( Helpers::is_payment_element_enabled() ) {
 
-			if ( is_null( $new_payment_method ) ) {
-				return;
-			}
+				$sub_args['payment_behavior'] = 'default_incomplete';
+				$sub_args['off_session']      = true;
+				$sub_args['payment_settings'] = [
+					'save_default_payment_method' => 'on_subscription',
+				];
 
-			// Check whether a default PaymentMethod needs to be explicitly set.
-			$selected_payment_method_id = $this->select_subscription_default_payment_method( $new_payment_method );
+				if ( Helpers::is_link_supported() ) {
+					$sub_args['payment_settings']['payment_method_types'] = [ 'card', 'link' ];
+				}
+			} else {
 
-			if ( $selected_payment_method_id ) {
-				// Explicitly set a PaymentMethod for this Subscription because default Customer's PaymentMethod cannot be used.
-				$sub_args['default_payment_method'] = $selected_payment_method_id;
+				$new_payment_method = $this->attach_customer_to_payment();
+
+				if ( is_null( $new_payment_method ) ) {
+					return;
+				}
+
+				// Check whether a default PaymentMethod needs to be explicitly set.
+				$selected_payment_method_id = $this->select_subscription_default_payment_method( $new_payment_method );
+
+				if ( $selected_payment_method_id ) {
+					// Explicitly set a PaymentMethod for this Subscription because default Customer's PaymentMethod cannot be used.
+					$sub_args['default_payment_method'] = $selected_payment_method_id;
+				}
 			}
 
 			// Create the subscription.
@@ -560,7 +613,7 @@ class PaymentIntents extends Common implements ApiInterface {
 
 			$this->intent = $this->subscription->latest_invoice->payment_intent;
 
-			if ( ! $this->intent || ! in_array( $this->intent->status, [ 'succeeded', 'requires_action', 'requires_confirmation' ], true ) ) {
+			if ( ! $this->intent || ! in_array( $this->intent->status, [ 'succeeded', 'requires_action', 'requires_confirmation', 'requires_payment_method' ], true ) ) {
 				$this->error = esc_html__( 'Stripe subscription stopped. invalid PaymentIntent status.', 'wpforms-lite' );
 
 				return;
@@ -572,7 +625,7 @@ class PaymentIntents extends Common implements ApiInterface {
 
 			$this->set_bypass_captcha_3dsecure_token();
 
-			if ( $this->intent->status === 'requires_confirmation' ) {
+			if ( in_array( $this->intent->status , [ 'requires_confirmation', 'requires_payment_method' ], true ) ) {
 				$this->request_confirm_payment_ajax( $this->intent );
 			}
 
@@ -921,5 +974,80 @@ class PaymentIntents extends Common implements ApiInterface {
 		$intent->update( $intent->id, $intent->serializeParameters(), Helpers::get_auth_opts() );
 
 		return true;
+	}
+
+	/**
+	 * Retrieve Mandate object from Stripe.
+	 *
+	 * @since 1.8.7
+	 *
+	 * @param string $id   Mandate id.
+	 * @param array  $args Additional arguments.
+	 *
+	 * @throws ApiErrorException If the request fails.
+	 *
+	 * @return Mandate|null
+	 */
+	public function retrieve_mandate( string $id, array $args = [] ) {
+
+		try {
+
+			$defaults = [ 'id' => $id ];
+
+			if ( isset( $args['mode'] ) ) {
+				$auth_opts = [ 'api_key' => Helpers::get_stripe_key( 'secret', $args['mode'] ) ];
+
+				unset( $args['mode'] );
+			}
+
+			$args = wp_parse_args( $args, $defaults );
+
+			return Mandate::retrieve( $args, $auth_opts ?? Helpers::get_auth_opts() );
+		} catch ( Exception $e ) {
+
+			wpforms_log(
+				'Stripe: Unable to get Mandate.',
+				$e->getMessage(),
+				[
+					'type' => [ 'payment', 'error' ],
+				]
+			);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Create Stripe Setup Intent.
+	 *
+	 * @since 1.8.7
+	 *
+	 * @param array $intent_data Intent data.
+	 * @param array $args        Additional arguments.
+	 *
+	 * @throws ApiErrorException If the request fails.
+	 *
+	 * @return SetupIntent|null
+	 */
+	public function create_setup_intent( array $intent_data, array $args ) {
+
+		try {
+			if ( isset( $args['mode'] ) ) {
+				$auth_opts = [ 'api_key' => Helpers::get_stripe_key( 'secret', $args['mode'] ) ];
+			}
+
+			return SetupIntent::create( $intent_data, $auth_opts ?? Helpers::get_auth_opts() );
+		} catch ( Exception $e ) {
+
+			wpforms_log(
+				'Stripe: Unable to create Setup Intent.',
+				$e->getMessage(),
+				[
+					'type' => [ 'payment', 'error' ],
+				]
+			);
+		}
+
+		return null;
 	}
 }

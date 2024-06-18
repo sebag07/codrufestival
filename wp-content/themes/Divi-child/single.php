@@ -16,7 +16,11 @@ $category = $categories[0]->slug;
 <div class="container singlePostContent">
 
     <div class="singlePostTopContainer">
-        <img class="singlePostMainImg" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <img class="singlePostMainImg" src="<?php echo get_the_post_thumbnail_url(); ?>" alt="">
+            </div>
+        </div>
     </div>
 
     <div class="singlePostInnerContent paddingBottom">

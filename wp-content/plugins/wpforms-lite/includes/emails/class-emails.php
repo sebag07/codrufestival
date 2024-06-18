@@ -11,6 +11,11 @@ use WPForms\Tasks\Actions\EntryEmailsTask;
  * Heavily influenced by the great AffiliateWP plugin by Pippin Williamson.
  * https://github.com/AffiliateWP/AffiliateWP/blob/master/includes/emails/class-affwp-emails.php
  *
+ * Note that this mailer class is no longer in active use and has been replaced with the "WPForms\Emails\Notifications" class.
+ * Please refer to the new mailer wrapper extension to extend or add further customizations.
+ *
+ * @deprecated 1.8.5
+ *
  * @since 1.1.3
  */
 class WPForms_WP_Emails {
@@ -241,6 +246,10 @@ class WPForms_WP_Emails {
 	 */
 	public function get_cc() {
 
+		if ( is_array( $this->cc ) ) {
+			$this->cc = implode( ',', $this->cc );
+		}
+
 		if ( ! empty( $this->cc ) ) {
 
 			$this->cc = $this->process_tag( $this->cc );
@@ -415,11 +424,14 @@ class WPForms_WP_Emails {
 			$this
 		);
 
+		$entry_obj = wpforms()->get( 'entry' );
+
+		// phpcs:ignore WPForms.Comments.PHPDocHooks.RequiredHookDocumentation, WPForms.PHP.ValidateHooks.InvalidHookName
 		$send_same_process = apply_filters(
 			'wpforms_tasks_entry_emails_trigger_send_same_process',
 			false,
 			$this->fields,
-			! empty( wpforms()->entry ) ? wpforms()->entry->get( $this->entry_id ) : [],
+			$entry_obj ? $entry_obj->get( $this->entry_id ) : [],
 			$this->form_data,
 			$this->entry_id,
 			'entry'
@@ -520,7 +532,7 @@ class WPForms_WP_Emails {
 	 */
 	public function process_tag( $string = '' ) {
 
-		return wpforms_process_smart_tags( $string, $this->form_data, $this->fields, $this->entry_id );
+		return wpforms_process_smart_tags( $string, $this->form_data, $this->fields, $this->entry_id, 'email' );
 	}
 
 	/**
@@ -610,14 +622,28 @@ class WPForms_WP_Emails {
 						continue;
 					}
 
-					$field_name = isset( $this->fields[ $field_id ]['name'] ) ? $this->fields[ $field_id ]['name'] : '';
-					$field_val  = empty( $this->fields[ $field_id ]['value'] ) && ! is_numeric( $this->fields[ $field_id ]['value'] ) ? '<em>' . esc_html__( '(empty)', 'wpforms-lite' ) . '</em>' : $this->fields[ $field_id ]['value'];
+					if ( $field['type'] === 'payment-total' ) {
+
+						$field_name = isset( $this->fields[ $field_id ]['name'] ) ? $this->fields[ $field_id ]['name'] : '';
+
+						// Replace the payment total value if an order summary is enabled.
+						// Ideally, it could be done through the `wpforms_html_field_value` filter,
+						// but needed data is missed there, e.g. entry data ($this->fields).
+						if ( ! empty( $field['summary'] ) ) {
+							$field_val = $this->process_tag( '{order_summary}' );
+						} else {
+							$field_val = $this->fields[ $field_id ]['value'];
+						}
+					} else {
+						$field_name = isset( $this->fields[ $field_id ]['name'] ) ? $this->fields[ $field_id ]['name'] : '';
+						$field_val  = empty( $this->fields[ $field_id ]['value'] ) && ! is_numeric( $this->fields[ $field_id ]['value'] ) ? '<em>' . esc_html__( '(empty)', 'wpforms-lite' ) . '</em>' : $this->fields[ $field_id ]['value'];
+					}
 				}
 
 				if ( empty( $field_name ) && null !== $field_name ) {
 					$field_name = sprintf( /* translators: %d - field ID. */
-						esc_html__( 'Field ID #%d', 'wpforms-lite' ),
-						absint( $field['id'] )
+						esc_html__( 'Field ID #%s', 'wpforms-lite' ),
+						wpforms_validate_field_id( $field['id'] )
 					);
 				}
 
@@ -661,8 +687,8 @@ class WPForms_WP_Emails {
 
 				if ( empty( $field_name ) ) {
 					$field_name = sprintf( /* translators: %d - field ID. */
-						esc_html__( 'Field ID #%d', 'wpforms-lite' ),
-						absint( $field['id'] )
+						esc_html__( 'Field ID #%s', 'wpforms-lite' ),
+						wpforms_validate_field_id( $field['id'] )
 					);
 				}
 
