@@ -3099,8 +3099,48 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 /* FAQ */
 
-.accordion {
-  margin-top: 40px;
+a {
+  cursor: pointer;
+}
+
+.sidebar h2:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #efaa13;
+  cursor: pointer;
+}
+
+.sidebar {
+  position: sticky;
+  top: 100px;
+}
+
+.activeSidebarItem {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #efaa13;
+}
+
+.accordionTitle {
+  margin-top: 35px;
+  color: #efaa13;
+  font-weight: 600;
+}
+
+.backToTopMobile {
+  display: none;
+}
+
+.faqTitle {
+  color: #fff;
+}
+
+.sidebar h2 {
+  color: #fff;
+}
+
+.accordionTitleContainer:first-child .accordionTitle {
+  margin-top: 0px;
 }
 
 .accordion .accordion-item {
@@ -3238,10 +3278,32 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
   padding-bottom: 0;
 }
 
+.accordionTitleContainer {
+  position: relative;
+}
+
 @media (max-width:767px) {
   .faq .container {
     width: 100% !important;
   }
+}
+
+@media (max-width:991px) {
+  .accordion {
+    margin-top: 50px;
+  }
+  .backToTopMobile {
+    display: block;
+    color: #fff;
+    font-weight: 600;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .backToTopMobile:hover {
+    color: #efaa13;
+  }
+
 }
 
 /* ARTISTS */
