@@ -3193,6 +3193,7 @@ a {
   font-size: 28px;
   font-weight: 500;
   border-bottom: 1px solid #fff;
+  line-height: 1em;
 }
 
 .accordion .accordion-button:focus {
