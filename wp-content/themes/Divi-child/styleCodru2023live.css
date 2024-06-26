@@ -3281,6 +3281,8 @@ a {
 
 .accordionTitleContainer {
   position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width:767px) {
@@ -3297,9 +3299,6 @@ a {
     display: block;
     color: #fff;
     font-weight: 600;
-    position: absolute;
-    right: 0;
-    top: 0;
   }
   .backToTopMobile:hover {
     color: #efaa13;
