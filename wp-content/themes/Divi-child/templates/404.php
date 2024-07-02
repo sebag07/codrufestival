@@ -1,5 +1,5 @@
 <?php /*  Template Name: 404 page  */ ?>
-<?php get_header('codru2023live'); ?>
+<?php get_header(); ?>
 
     <div class="container-fluid container404 p-0 m-0" style="min-height:60vh">
         <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG-2.png" alt="background-gradient">
@@ -23,4 +23,4 @@
         </div>
     </div>
 
-<?php get_footer('footer-codru-2024'); ?>
+<?php get_footer(); ?>
