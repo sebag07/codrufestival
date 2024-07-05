@@ -4025,3 +4025,52 @@ html {
       width: 100%;
     }
   }
+
+  .homepageTextImageImgContainer {
+    position: relative;
+  }
+
+  .even .homepageTextImageImgBG {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 40px;
+    z-index: -1;
+    transform: rotate(-5deg);
+    left: 35px;
+    top: 30px;
+  }
+
+  .odd .homepageTextImageImgBG {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 40px;
+    z-index: -1;
+    transform: rotate(-5deg);
+    right: 35px;
+    top: 30px;
+  }
+
+  .homepageTextImageSection h2 {
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 56px;
+    color: #efaa13 !important;
+  }
+
+  .homepageTextImageSection p {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: .18px;
+    color: #fff;
+  }
+
+  .homepageTextImageImg {
+    border-radius: 50px;
+  }

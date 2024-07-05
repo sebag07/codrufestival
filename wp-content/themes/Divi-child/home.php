@@ -24,6 +24,49 @@
     </div>
 </div>
 
+<section style="overflow-x:hidden">
+    <div class="sectionPadding container homepageTextImageSection">
+    <?php
+    $count = 0;
+
+            if( have_rows('content-image-repeater') ):
+
+                    while( have_rows('content-image-repeater') ) : the_row();
+                    if($count >= 0 ) {
+                        if($count%2==0) { //ADDED THIS LINE
+                            $class_name = "even"; //ADDED THIS LINE
+                            $col_order = "order-md-0 order-1";
+                        } else {     //ADDED THIS LINE
+                            $class_name = "odd";  //ADDED THIS LINE
+                            $col_order = "order-md-1 order-1";
+                        };
+                    }
+                        $repeaterTitle = get_sub_field('title');
+                        $repeaterContent = get_sub_field('content');
+                        $repeaterButtonURL = get_sub_field('button_url');
+                        $repeaterButtonText = get_sub_field('button_text');
+                        $repeaterImage = get_sub_field('image');
+                        $imageBGColor = get_sub_field('image_background_hex');
+    ?>
+            <div class="row mb-5 <?php echo $class_name ?>">
+            <div class="col-md-6 align-items-start <?php echo $col_order ?> justify-content-center d-flex flex-column">
+                <h2 class="homepageTextImageTitle mb-4"><?php echo $repeaterTitle ?></h2>
+                <span class="homepageTextImageContent mb-4"><?php echo $repeaterContent ?></span>
+                <a class="homepageTextImageButton codru-general-button" href="<?php echo $repeaterButtonURL ?>" target="_blank"><?php echo $repeaterButtonText ?></a>
+            </div>
+            <div class="homepageTextImageImgContainer col-md-6 my-md-auto p-relative z-1 mb-md-0 mb-5">
+                <img class="homepageTextImageImg" src="<?php echo $repeaterImage ?>" alt="Lineup">
+                <div class="homepageTextImageImgBG" style="background-color:<?php echo $imageBGColor ?>"></div>
+            </div>
+        </div>
+        <?php
+        $count++;
+            endwhile;
+            endif;
+        ?>
+    </div>
+</section>
+
 <section id="lineup">
     <div class="sectionPadding container">
         <div class="row">
