@@ -60,41 +60,6 @@
                 </div>
     </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const artistNames = document.querySelectorAll('.artists-name');
-            artistNames.forEach((name, index) => {
-                // Hide bullet for the first artist name in a new row
-                if (index > 0) { // Ensure it's not the first element in the list
-                    const prevNameTop = artistNames[index - 1].getBoundingClientRect().top;
-                    const currentNameTop = name.getBoundingClientRect().top;
-
-                    // If the current name is on a different line (new row), hide the bullet before it
-                    if (currentNameTop !== prevNameTop) {
-                        const prevBullet = artistNames[index - 1].nextElementSibling;
-                        if (prevBullet && prevBullet.classList.contains('artists-bullet')) {
-                            prevBullet.style.display = 'none';
-                        }
-                    }
-                }
-
-                // Hide bullet for the last artist name in a row
-                if (index < artistNames.length - 1) {
-                    const currentNameBottom = name.getBoundingClientRect().bottom;
-                    const nextNameBottom = artistNames[index + 1].getBoundingClientRect().bottom;
-
-                    // If the next name is on a different line, hide the bullet after the current name
-                    if (currentNameBottom !== nextNameBottom) {
-                        const bullet = name.nextElementSibling;
-                        if (bullet && bullet.classList.contains('artists-bullet')) {
-                            bullet.style.display = 'none';
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-
 <?php
 wp_reset_postdata();
 $post_id = get_the_ID(); // Get current post ID
