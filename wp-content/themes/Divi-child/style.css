@@ -2402,6 +2402,14 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     }
 }
 
+@media screen and (max-width: 575px) {
+    .homepageNews {
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
 /* ARTISTI */
 
 #lineupAnchor {
@@ -3254,24 +3262,29 @@ a {
 .sidebar h2:hover {
     text-decoration: underline;
     text-underline-offset: 2px;
-    text-decoration-color: #efaa13;
+    text-decoration-color: #0F4615;
     cursor: pointer;
 }
 
 .sidebar {
     position: sticky;
     top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    padding: 15px;
 }
 
 .activeSidebarItem {
     text-decoration: underline;
     text-underline-offset: 2px;
-    text-decoration-color: #efaa13;
+    text-decoration-color: #0F4615;
 }
 
 .accordionTitle {
-    margin-top: 35px;
-    color: #efaa13;
+    color: #0F4615;
     font-weight: 600;
 }
 
@@ -3289,6 +3302,12 @@ a {
 
 .accordionTitleContainer:first-child .accordionTitle {
     margin-top: 0px;
+}
+
+@media screen and (max-width: 500px) {
+    .accordionTitleContainer:first-child .accordionTitle {
+        max-width: 200px;
+    }
 }
 
 .accordion .accordion-item {
@@ -3435,6 +3454,10 @@ a {
     justify-content: space-between;
 }
 
+.accordionTitleContainer:not(:first-child) {
+    margin-top: 15px;
+}
+
 @media (max-width: 767px) {
     .faq .container {
         width: 100% !important;
@@ -3447,13 +3470,14 @@ a {
     }
 
     .backToTopMobile {
-        display: block;
+        display: flex;
+        align-items: center;
         color: #fff;
         font-weight: 600;
     }
 
     .backToTopMobile:hover {
-        color: #efaa13;
+        color: #0F4615;
     }
 
 }

@@ -95,7 +95,7 @@
                     foreach ($options as $option):
                         $white = $option['black_text'] == '1' ? 'text-black' : 'text-white';
                         ?>
-                        <a class="col-xl-4 col-lg-6 col-md-6 col-sm-12 brandCultureContainer"
+                        <a class="col-xl-4 col-lg-4 col-md-6 col-sm-6 brandCultureContainer"
                            data-fslightbox="custom-text"
                            data-class="d-block" href="#<?php echo $option['title']; ?>" class="col right-col">
                             <div class=" <?php echo $white; ?>">
