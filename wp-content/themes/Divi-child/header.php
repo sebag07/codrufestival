@@ -41,7 +41,7 @@
     <!-- Adobe Font -->
     <link rel="stylesheet" href="https://use.typekit.net/ufx3ngj.css">
 
-    <title>30 August - 1 Septembrie 2024, Parcul Central, Timisoara, Romania</title>
+    <title>CODRU Festival - 30 August - 1 Septembrie 2024</title>
 
     <!-- Meta Pixel Code -->
     <script>
