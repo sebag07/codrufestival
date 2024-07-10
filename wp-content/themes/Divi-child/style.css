@@ -15,11 +15,11 @@
 :root {
     --artist-level-color-primary: #fbd233;
     --artist-level-color-secondary: #fff;
-    --artist-level-font-size-1: 46px;
-    --artist-level-font-size-2: 36px;
-    --artist-level-font-size-3: 28px;
-    --artist-level-font-size-4: 20px;
-    --artist-level-font-size-5: 16px; /* Assuming this is for artistsLevel5 */
+    --artist-level-font-size-1: 60px;
+    --artist-level-font-size-2: 48px;
+    --artist-level-font-size-3: 40px;
+    --artist-level-font-size-4: 32px;
+    --artist-level-font-size-5: 24px; /* Assuming this is for artistsLevel5 */
 }
 
 html {
@@ -2509,32 +2509,32 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 @media screen and (max-width: 991px){
     .artistsLevel1,
     .artistsLevel1 h4 {
-        font-size: 36px;
+        font-size: 48px;
     }
 
     .artistsLevel2,
     .artistsLevel2 h4 {
-        font-size: 26px;
+        font-size: 32px;
     }
 
     .artistsLevel3,
     .artistsLevel3 h4 {
-        font-size: 20px;
+        font-size: 24px;
     }
 
     .artistsLevel4,
     .artistsLevel4 h4 {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     .artistsLevel5,
     .artistsLevel5 h4 {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .artistsLevel6,
     .artistsLevel6 h4 {
-        font-size: 16px;
+        font-size: 18px;
     }
 }
 
@@ -2547,7 +2547,39 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
     .artistsLevel1,
     .artistsLevel1 h4 {
+        font-size: 42px;
+    }
+
+    .artistsLevel2,
+    .artistsLevel2 h4 {
         font-size: 30px;
+    }
+
+    .artistsLevel3,
+    .artistsLevel3 h4 {
+        font-size: 24px;
+    }
+
+    .artistsLevel4,
+    .artistsLevel4 h4 {
+        font-size: 20px;
+    }
+
+    .artistsLevel5,
+    .artistsLevel5 h4 {
+        font-size: 18px;
+    }
+
+    .artistsLevel6,
+    .artistsLevel6 h4 {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 550px){
+    .artistsLevel1,
+    .artistsLevel1 h4 {
+        font-size: 32px;
     }
 
     .artistsLevel2,
@@ -2557,54 +2589,22 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
     .artistsLevel3,
     .artistsLevel3 h4 {
-        font-size: 18px;
-    }
-
-    .artistsLevel4,
-    .artistsLevel4 h4 {
-        font-size: 16px;
-    }
-
-    .artistsLevel5,
-    .artistsLevel5 h4 {
-        font-size: 14px;
-    }
-
-    .artistsLevel6,
-    .artistsLevel6 h4 {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 550px){
-    .artistsLevel1,
-    .artistsLevel1 h4 {
         font-size: 20px;
     }
 
-    .artistsLevel2,
-    .artistsLevel2 h4 {
-        font-size: 16px;
-    }
-
-    .artistsLevel3,
-    .artistsLevel3 h4 {
-        font-size: 14px;
-    }
-
     .artistsLevel4,
     .artistsLevel4 h4 {
-        font-size: 13px;
+        font-size: 16px;
     }
 
     .artistsLevel5,
     .artistsLevel5 h4 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .artistsLevel6,
     .artistsLevel6 h4 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .artists-bullet {
