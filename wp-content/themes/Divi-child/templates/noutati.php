@@ -1,4 +1,4 @@
-<?php /*  Template Name: Povestea Codru  */ ?>
+<?php /*  Template Name: Noutati  */ ?>
 <?php get_header(); ?>
 
 <div class="container termsPage pt-5 pb-5">
@@ -9,7 +9,7 @@
                 'posts_per_page'    => -1, 
                 'orderby'           => 'post_date',
                 'order'             => 'ASC',
-                'category_name'     => 'povestea-codru',
+                'category_name'     => 'noutati',
                 'exclude'           => array(get_the_id()));
             $postslist = get_posts($args);
             foreach ($postslist as $post) : {
