@@ -12,6 +12,15 @@
 /* =Theme customization starts here
 ------------------------------------------------------- */
 
+:root {
+    --artist-level-color-primary: #fbd233;
+    --artist-level-color-secondary: #fff;
+    --artist-level-font-size-1: 46px;
+    --artist-level-font-size-2: 36px;
+    --artist-level-font-size-3: 28px;
+    --artist-level-font-size-4: 20px;
+    --artist-level-font-size-5: 16px; /* Assuming this is for artistsLevel5 */
+}
 
 html {
     scroll-behavior: smooth;
@@ -1281,7 +1290,7 @@ a:hover {
     background: linear-gradient(
             180deg,
             rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0) 60%,
+            rgba(255, 255, 255, 0) 20%,
             rgba(108, 191, 2, 1) 100%
     );
 }
@@ -1384,6 +1393,9 @@ footer {
 
 footer .row {
     align-items: center;
+    /* Needs to be higher than footer absolute images */
+    z-index: 2;
+    position: relative;
 }
 
 .footer-logo {
@@ -1471,6 +1483,7 @@ footer .row {
     bottom: 0;
     max-width: 500px;
     transform: rotate(180deg);
+    z-index: 1;
 }
 
 .footerLeftImg {
@@ -1479,6 +1492,7 @@ footer .row {
     bottom: 0;
     max-width: 500px;
     transform: rotate(180deg);
+    z-index: 1;
 }
 
 .footerMobileLogo {
@@ -2412,13 +2426,13 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 /* ARTISTI */
 
-#lineupAnchor {
-    background-color: #0F4615;
+#lineup .container {
+    flex-direction: column;
+    max-width: 1400px;
 }
 
-
-#lineupAnchor .container {
-    flex-direction: column;
+#lineup .sectionTitle {
+    padding-top: 0;
 }
 
 .artistsLevel1,
@@ -2426,11 +2440,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artistsLevel3,
 .artistsLevel4,
 .artistsLevel5,
-.artistsLevel6 {
-    display: inline-block;
-    text-align: center;
-}
-
+.artistsLevel6,
 .artistsLevel1 div,
 .artistsLevel2 div,
 .artistsLevel3 div,
@@ -2439,82 +2449,175 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artistsLevel6 div {
     display: inline-block;
     text-align: center;
+    color: var(--artist-level-color-secondary);
 }
 
-.artistsLevel1 div h4 {
-    color: #efaa13;
-    font-size: 36px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
+.artists-bullet {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
-.artistsLevel2 div h4 {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
+.artists-bullet span {
+    color: var(--artist-level-color-primary);
+    font-weight: 900;
 }
 
-.artistsLevel3 div h4 {
-    color: #efaa13;
-    font-size: 18px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-}
-
-.artistsLevel4 div h4 {
-    color: #fff;
-    font-size: 16px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-}
-
-.artistsLevel5 div h4 {
-    color: #efaa13;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-}
-
-
+.artistsLevel1 div h4,
+.artistsLevel2 div h4,
+.artistsLevel3 div h4,
+.artistsLevel4 div h4,
+.artistsLevel5 div h4,
 .artistsLevel6 div h4 {
-    color: #fff;
-    font-size: 14px;
-    font-weight: 600;
+    font-weight: 900;
     display: flex;
     align-items: center;
+    letter-spacing: 1px;
 }
 
-@media (max-width: 500px) {
-    .artistsLevel1 div h4 {
-        font-size: 25px;
+.artistsLevel1,
+.artistsLevel1 h4 {
+    font-size: var(--artist-level-font-size-1);
+}
+
+.artistsLevel2,
+.artistsLevel2 h4 {
+    font-size: var(--artist-level-font-size-2);
+}
+
+.artistsLevel3,
+.artistsLevel3 h4 {
+    font-size: var(--artist-level-font-size-3);
+}
+
+.artistsLevel4,
+.artistsLevel4 h4 {
+    font-size: var(--artist-level-font-size-4);
+}
+
+.artistsLevel5,
+.artistsLevel5 h4 {
+    font-size: var(--artist-level-font-size-5);
+}
+
+.artistsLevel6,
+.artistsLevel6 h4 {
+    font-size: var(--artist-level-font-size-5);
+}
+
+@media screen and (max-width: 991px){
+    .artistsLevel1,
+    .artistsLevel1 h4 {
+        font-size: 36px;
     }
 
-    .artistsLevel2 div h4 {
+    .artistsLevel2,
+    .artistsLevel2 h4 {
+        font-size: 26px;
+    }
+
+    .artistsLevel3,
+    .artistsLevel3 h4 {
+        font-size: 20px;
+    }
+
+    .artistsLevel4,
+    .artistsLevel4 h4 {
+        font-size: 18px;
+    }
+
+    .artistsLevel5,
+    .artistsLevel5 h4 {
+        font-size: 16px;
+    }
+
+    .artistsLevel6,
+    .artistsLevel6 h4 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 767px){
+    #lineup .container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .artistsLevel1,
+    .artistsLevel1 h4 {
+        font-size: 30px;
+    }
+
+    .artistsLevel2,
+    .artistsLevel2 h4 {
+        font-size: 24px;
+    }
+
+    .artistsLevel3,
+    .artistsLevel3 h4 {
+        font-size: 18px;
+    }
+
+    .artistsLevel4,
+    .artistsLevel4 h4 {
+        font-size: 16px;
+    }
+
+    .artistsLevel5,
+    .artistsLevel5 h4 {
         font-size: 14px;
     }
 
-    .artistsLevel3 div h4 {
-        font-size: 13px;
-    }
-
-    .artistsLevel4 div h4 {
-        font-size: 12px;
+    .artistsLevel6,
+    .artistsLevel6 h4 {
+        font-size: 14px;
     }
 }
 
-#lineupAnchor .gallery-masonry {
+@media screen and (max-width: 550px){
+    .artistsLevel1,
+    .artistsLevel1 h4 {
+        font-size: 20px;
+    }
+
+    .artistsLevel2,
+    .artistsLevel2 h4 {
+        font-size: 16px;
+    }
+
+    .artistsLevel3,
+    .artistsLevel3 h4 {
+        font-size: 14px;
+    }
+
+    .artistsLevel4,
+    .artistsLevel4 h4 {
+        font-size: 13px;
+    }
+
+    .artistsLevel5,
+    .artistsLevel5 h4 {
+        font-size: 12px;
+    }
+
+    .artistsLevel6,
+    .artistsLevel6 h4 {
+        font-size: 12px;
+    }
+
+    .artists-bullet {
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+#lineup .gallery-masonry {
     margin-top: 20px;
     margin-bottom: 50px;
 }
 
 @media screen and (max-width: 991px) {
-    #lineupAnchor .line-up-container {
+    #lineup .line-up-container {
         width: 95%;
     }
 }
@@ -2914,7 +3017,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
         max-width: 120px !important;
     }
 
-    #lineupAnchor .container {
+    #lineup .container {
         width: 100% !important;
     }
 }
@@ -3031,8 +3134,12 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 /* HELPERS */
 
+.display-flex {
+    display: flex;
+}
+
 .dark-background {
-    background-color: #076708;
+    background-color: #076708 !important;
 }
 
 .codru-general-button {

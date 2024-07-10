@@ -28,62 +28,118 @@
     </div>
 
     <section id="lineup">
-        <div class="sectionPadding container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <h2 class="sectionTitle">LINEUP</h2>
-                    <img class="lineupImage" src="/wp-content/themes/Divi-child/images/lineup-updated.png" alt="Lineup">
+        <div class="container">
+            <div class="container-fluid sectionPadding">
+                <div class="row">
+                    <div class="col-12"><h2 class="text-center sectionPadding sectionTitle">LINEUP</h2></div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 text-align-center general-button-container">
+                <div class="col-12 text-center">
+                    <div class="artistsLevel1 pt-3 pb-3">
+                        <?php display_artists_by_level('level-1'); ?>
+                    </div>
+                    <div class="artistsLevel2 pt-3 pb-3">
+                        <?php display_artists_by_level('level-2'); ?>
+                    </div>
+                    <div class="artistsLevel3 pt-3 pb-3">
+                        <?php display_artists_by_level('level-3'); ?>
+                    </div>
+                    <div class="artistsLevel4 pt-3 pb-3">
+                        <?php display_artists_by_level('level-4'); ?>
+                    </div>
+                    <div class="artistsLevel5 pt-3 pb-3">
+                        <?php display_artists_by_level('level-5'); ?>
+                    </div>
+                    <div class="artistsLevel6 pt-3 pb-3">
+                        <?php display_artists_by_level('level-6'); ?>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 pt-3 text-align-center general-button-container">
                     <a class="codru-general-button"
                        href="<?php echo get_field('see_all_artists_button_link') ?>"
                        target="_blank"><?php echo get_field('see_all_artists_button') ?></a>
                 </div>
-            </div>
-        </div>
     </section>
 
-    <section id="#homepage-info-section" style="overflow-x:hidden" class="dark-background">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const artistNames = document.querySelectorAll('.artists-name');
+            artistNames.forEach((name, index) => {
+                // Hide bullet for the first artist name in a new row
+                if (index > 0) { // Ensure it's not the first element in the list
+                    const prevNameTop = artistNames[index - 1].getBoundingClientRect().top;
+                    const currentNameTop = name.getBoundingClientRect().top;
+
+                    // If the current name is on a different line (new row), hide the bullet before it
+                    if (currentNameTop !== prevNameTop) {
+                        const prevBullet = artistNames[index - 1].nextElementSibling;
+                        if (prevBullet && prevBullet.classList.contains('artists-bullet')) {
+                            prevBullet.style.display = 'none';
+                        }
+                    }
+                }
+
+                // Hide bullet for the last artist name in a row
+                if (index < artistNames.length - 1) {
+                    const currentNameBottom = name.getBoundingClientRect().bottom;
+                    const nextNameBottom = artistNames[index + 1].getBoundingClientRect().bottom;
+
+                    // If the next name is on a different line, hide the bullet after the current name
+                    if (currentNameBottom !== nextNameBottom) {
+                        const bullet = name.nextElementSibling;
+                        if (bullet && bullet.classList.contains('artists-bullet')) {
+                            bullet.style.display = 'none';
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+<?php
+wp_reset_postdata();
+$post_id = get_the_ID(); // Get current post ID
+?>
+
+<?php if (have_rows('content-image-repeater', $post_id)): ?>
+    <section id="homepage-info-section" style="overflow-x:hidden" class="dark-background">
         <div class="sectionPadding container homepage-info-section">
             <?php
             $count = 0;
-
-            if (have_rows('content-image-repeater')):
-                while (have_rows('content-image-repeater')) : the_row();
-                    if ($count % 2 == 0) {
-                        $class_name = "even";
-                        $col_order = "order-md-0 order-1";
-                    } else {
-                        $class_name = "odd";
-                        $col_order = "order-md-1 order-1";
-                    }
-                    $repeaterTitle = get_sub_field('title');
-                    $repeaterContent = get_sub_field('content');
-                    $repeaterButtonURL = get_sub_field('button_url');
-                    $repeaterButtonText = get_sub_field('button_text');
-                    $repeaterImage = get_sub_field('image');
-                    $imageBGColor = get_sub_field('image_background_hex');
-                    ?>
-                    <div class="row pt-5 pb-5 <?php echo $class_name ?>">
-                        <div class="col-md-6 align-items-start <?php echo $col_order ?> justify-content-center d-flex flex-column homepage-info-container">
-                            <h2 class="homepage-info-title mb-4"><?php echo $repeaterTitle ?></h2>
-                            <span class="homepage-info-content mb-4"><?php echo $repeaterContent ?></span>
-                            <a class="homepage-info-button codru-general-button" href="<?php echo $repeaterButtonURL ?>"
-                               target="_blank"><?php echo $repeaterButtonText ?></a>
-                        </div>
-                        <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5">
-                            <img class="homepage-info-section-image" src="<?php echo $repeaterImage ?>" alt="Lineup">
-                            <div class="homepage-info-section-image-underlay"
-                                 style="background-color:<?php echo $imageBGColor ?>"></div>
-                        </div>
+            while (have_rows('content-image-repeater', $post_id)) : the_row();
+                if ($count % 2 == 0) {
+                    $class_name = "even";
+                    $col_order = "order-md-0 order-1";
+                } else {
+                    $class_name = "odd";
+                    $col_order = "order-md-1 order-1";
+                }
+                $repeaterTitle = get_sub_field('title');
+                $repeaterContent = get_sub_field('content');
+                $repeaterButtonURL = get_sub_field('button_url');
+                $repeaterButtonText = get_sub_field('button_text');
+                $repeaterImage = get_sub_field('image');
+                $imageBGColor = get_sub_field('image_background_hex');
+                ?>
+                <div class="row pt-5 pb-5 <?php echo $class_name ?>">
+                    <div class="col-md-6 align-items-start <?php echo $col_order ?> justify-content-center d-flex flex-column homepage-info-container">
+                        <h2 class="homepage-info-title mb-4"><?php echo $repeaterTitle ?></h2>
+                        <span class="homepage-info-content mb-4"><?php echo $repeaterContent ?></span>
+                        <a class="homepage-info-button codru-general-button" href="<?php echo $repeaterButtonURL ?>"
+                           target="_blank"><?php echo $repeaterButtonText ?></a>
                     </div>
-                    <?php
-                    $count++;
-                endwhile;
-            endif;
+                    <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5">
+                        <img class="homepage-info-section-image" src="<?php echo $repeaterImage ?>" alt="Lineup">
+                        <div class="homepage-info-section-image-underlay"
+                             style="background-color:<?php echo $imageBGColor ?>"></div>
+                    </div>
+                </div>
+                <?php
+                $count++;
+            endwhile;
             ?>
         </div>
     </section>
+<?php endif; ?>
 
     <section id="brandCultureAnchor">
         <div class="container-fluid sectionPadding">

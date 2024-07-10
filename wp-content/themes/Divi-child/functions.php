@@ -125,3 +125,18 @@ function register_query_vars( $vars ) {
     return $vars;
 }
 add_filter('query_vars', 'register_query_vars');
+
+function display_artists_by_level($category_name) {
+    $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => $category_name);
+    $postslist = get_posts($args);
+    foreach ($postslist as $key => $post) {
+        setup_postdata($post); // Set up post data for use in the loop (important)
+        $artistName = get_the_title($post->ID);
+        if($key === array_key_last($postslist)){
+            echo "<div class='artists-name'><h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>$artistName </h4></div>";
+        } else {
+            echo "<div class='artists-name'><h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>$artistName</h4></div><div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>";
+        }
+    }
+    wp_reset_postdata(); // Reset the global post object so that the rest of the page works correctly.
+}
