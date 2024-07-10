@@ -27,32 +27,6 @@
         </div>
     </div>
 
-<?php
-function display_artists_by_level($category_name, $exclude_post_id = null)
-{
-    $args = array(
-        'posts_per_page' => -1,
-        'orderby' => 'title',
-        'order' => 'ASC',
-        'post_type' => 'artist',
-        'category_name' => $category_name,
-        'post_status' => 'publish'
-    );
-    $postslist = get_posts($args);
-    foreach ($postslist as $key => $post) {
-        setup_postdata($post); // Set up post data for use in the loop (important)
-        $artistName = get_the_title($post->ID);
-        if ($key === array_key_last($postslist)) {
-            echo "<div class='artists-name'><h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>$artistName </h4></div>";
-        } else {
-            echo "<div class='artists-name'><h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>$artistName</h4></div><div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>";
-        }
-    }
-    wp_reset_postdata(); // Reset the global post object so that the rest of the page works correctly.
-}
-
-?>
-
     <section id="lineup">
         <div class="container">
             <div class="container-fluid sectionPadding">
