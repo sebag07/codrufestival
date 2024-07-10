@@ -32,7 +32,7 @@ html {
 }
 
 body {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    font-family: "eigerdals", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     background-color: #6cbf02 !important;
@@ -78,7 +78,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    font-family: "eigerdals", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -1700,7 +1700,7 @@ footer .row {
     padding-top: 40px;
     font-weight: 500;
     text-align: center;
-    font-family: "Montserrat";
+    font-family: "eigerdals";
     margin-bottom: 50px;
 }
 
@@ -4131,7 +4131,7 @@ a {
 
 .sib-form label, .sib-form p {
     color: #fff !important;
-    font-family: 'Montserrat';
+    font-family: 'eigerdals';
     font-weight: 500;
 }
 
@@ -4140,7 +4140,7 @@ a {
 }
 
 .sib-form {
-    font-family: 'Montserrat' !important;
+    font-family: 'eigerdals' !important;
     padding: 0px !important;
 }
 
