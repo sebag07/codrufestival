@@ -35,22 +35,22 @@
                 </div>
                 <div class="col-12 text-center">
                     <div class="artistsLevel1 pt-3 pb-3">
-                        <?php display_artists_by_level('level-1'); ?>
+                        <?php display_artists_by_level('level-1', get_the_ID()); ?>
                     </div>
                     <div class="artistsLevel2 pt-3 pb-3">
-                        <?php display_artists_by_level('level-2'); ?>
+                        <?php display_artists_by_level('level-2', get_the_ID()); ?>
                     </div>
                     <div class="artistsLevel3 pt-3 pb-3">
-                        <?php display_artists_by_level('level-3'); ?>
+                        <?php display_artists_by_level('level-3', get_the_ID()); ?>
                     </div>
                     <div class="artistsLevel4 pt-3 pb-3">
-                        <?php display_artists_by_level('level-4'); ?>
+                        <?php display_artists_by_level('level-4', get_the_ID()); ?>
                     </div>
                     <div class="artistsLevel5 pt-3 pb-3">
-                        <?php display_artists_by_level('level-5'); ?>
+                        <?php display_artists_by_level('level-5', get_the_ID()); ?>
                     </div>
                     <div class="artistsLevel6 pt-3 pb-3">
-                        <?php display_artists_by_level('level-6'); ?>
+                        <?php display_artists_by_level('level-6', get_the_ID()); ?>
                     </div>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 pt-3 text-align-center general-button-container">

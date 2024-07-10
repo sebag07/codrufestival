@@ -127,8 +127,8 @@ function register_query_vars( $vars ) {
 add_filter('query_vars', 'register_query_vars');
 
 
-function display_artists_by_level($category_name) {
-    $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => $category_name,'post_status' => 'publish');
+function display_artists_by_level($category_name, $exclude_post_id = null) {
+    $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => $category_name,'post_status' => 'publish', 'exclude' => $exclude_post_id );
     $postslist = get_posts($args);
     foreach ($postslist as $key => $post) {
         setup_postdata($post); // Set up post data for use in the loop (important)
