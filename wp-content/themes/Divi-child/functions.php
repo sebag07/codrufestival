@@ -5,7 +5,7 @@ require get_template_directory() . '-child/includes/widgets/schedule.php';
 require get_template_directory() . '-child/includes/widgets/partners.php';
 
 function my_theme_enqueue_styles() { 
-    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '144');
+    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css', array(), '150');
     wp_enqueue_style( 'activities', get_template_directory_uri() . '-child' . '/assets/css/activities.css');
     wp_enqueue_style( 'partners', get_template_directory_uri() . '-child' . '/assets/css/partners.css');
     wp_enqueue_style( 'magnificPopupCss', get_template_directory_uri() . '-child' . '/assets/css/magnific-popup.min.css');
@@ -125,6 +125,7 @@ function register_query_vars( $vars ) {
     return $vars;
 }
 add_filter('query_vars', 'register_query_vars');
+
 
 function display_artists_by_level($category_name) {
     $args = array('posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC', 'post_type' => 'artist', 'category_name' => $category_name,'post_status' => 'publish');
