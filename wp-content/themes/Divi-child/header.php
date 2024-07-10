@@ -26,7 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-    <script src="/wp-content/themes/Divi-child/js/main.js?ver=171"></script>
+    <script src="/wp-content/themes/Divi-child/js/main.js?ver=172"></script>
 
     <!-- Style -->
     <!-- <link rel="stylesheet" href="/wp-content/themes/Divi-child/style.css?ver=173"> -->
@@ -37,6 +37,9 @@
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
           <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+
+    <!-- Adobe Font -->
+    <link rel="stylesheet" href="https://use.typekit.net/ufx3ngj.css">
 
     <title>CODRU Festival 2024</title>
 
