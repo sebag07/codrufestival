@@ -2155,7 +2155,9 @@ html {
     margin: auto;
   }
   
-  
+  .homepageNews {
+    margin-bottom: 30px;
+  }
   
   .homepageNewsImage img {
     width: 100%;
