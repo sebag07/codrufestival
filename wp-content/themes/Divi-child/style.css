@@ -4390,13 +4390,13 @@ a {
 
   .postNewsContainer .swiper-button-next {
     right: -5em !important;
-    color: #efaa13;
+    color: #fbd233;
     font-weight: 900;
   }
 
   .postNewsContainer .swiper-button-prev {
     left: -5em !important;
-    color: #efaa13;
+    color: #fbd233;
     font-weight: 900;
   }
 
@@ -4406,7 +4406,7 @@ a {
   }
 
   .postNewsContainer .swiper-pagination-bullet-active {
-    background: #efaa13 !important;
+    background: #fbd233 !important;
   }
 
   .single-related-swiper {
