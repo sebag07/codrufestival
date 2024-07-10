@@ -39,6 +39,9 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
+    <!-- Adobe Font -->
+    <link rel="stylesheet" href="https://use.typekit.net/ufx3ngj.css">
+
     <title>CODRU Festival 2024</title>
 
     <!-- Meta Pixel Code -->
