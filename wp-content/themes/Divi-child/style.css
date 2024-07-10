@@ -1592,6 +1592,12 @@ footer .row {
     width: 100% !important;
 }
 
+@media screen and (max-width: 767px){
+    #contact .container {
+        max-width: 570px;
+    }
+}
+
 .contactFormSection {
     display: flex;
     justify-content: center;
@@ -4067,6 +4073,14 @@ a {
 }
 
 /* Newsletter */
+
+@media screen and (max-width: 767px) {
+    #newsletter .container {
+        width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
 
 .sib-form {
     text-align: center;
