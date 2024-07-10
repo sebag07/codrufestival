@@ -28,7 +28,7 @@ $category = $categories[0]->slug;
     </div>
 </div>
 
-<div class="container newsContainer postNewsContainer sectionPadding">
+<div class="container postNewsContainer mb-5 sectionPadding">
     <?php if($category == "povestea-codru"): ?>
         <h2 class="sectionTitle"><?php echo get_field('codru_story_title', 'options'); ?></h2>
     <?php elseif($category == "apeluri-artisti"): ?>
@@ -36,10 +36,11 @@ $category = $categories[0]->slug;
     <?php else: ?>
         <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
     <?php endif; ?>
-    <div class="newsContainer row">
+    <div class="swiper single-related-swiper">
+        <div class="swiper-wrapper">
         <?php
             $args = array(
-                'posts_per_page'    => 3, 
+                'posts_per_page'    => -1, 
                 'orderby'           => 'post_date',
                 'category_name' => $category,
                 'exclude'           => array(get_the_id()));
@@ -47,18 +48,49 @@ $category = $categories[0]->slug;
             foreach ($postslist as $post) : {
               $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
               $read_more = get_field('news_read_more', 'options');
-                echo "<div class='homepageNews col-lg-4 col-md-6 col-12'>
-            <a href='$post->guid' class='homepageNewsLink'>
-            <div class='homepageNewsImage text-center'><img src='$image[0]' alt=''></div>
-            <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />$read_more</span></div>
-            </a>
+        echo "<div class='swiper-slide'>
+        <a href='$post->guid' class='homepageNewsLink'>
+        <div class='homepageNewsImage text-center'><img src='$image[0]' alt=''></div>
+        <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />$read_more</span></div>
+        </a>
         </div>";
             }
             endforeach;
             ?>
+      </div>
+      </div>
+      <div class='swiper-pagination'></div>
 
+      <div class='swiper-button-next'></div>
+    <div class='swiper-button-prev'></div>
+
+  <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".single-related-swiper", {
+      slidesPerView: 1,
+      spaceBetween: 30,
+          // Responsive breakpoints
+        breakpoints: {
+        767: {
+            slidesPerView: 2,
+            spaceBetweenSlides: 30,
+        },
+        991: {
+            slidesPerView: 3,
+            spaceBetweenSlides: 30,
+        },
+    },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
     </div>
-</div>
 
 
 <?php

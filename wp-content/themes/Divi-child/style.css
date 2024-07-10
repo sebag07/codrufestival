@@ -1973,13 +1973,12 @@ html {
   
   /* ARTISTI SWIPER */
   
-  :root {
-    --swiper-image-ratio: 56.25%; /* ratio 16:9 = 56.25% */
+  /* :root {
+    --swiper-image-ratio: 56.25%;
   
     --swiper-width: 95%;
-    --swiper-inactive-scale: 0.55; /* makes the other slide smaller */
+    --swiper-inactive-scale: 0.55;
   
-    /* responsive settings */
     --swiper-mobile-width: 90%;
     --swiper-mobile-inactive-scale: 0.95;
   }
@@ -2146,7 +2145,7 @@ html {
       margin: 0 !important;
       width: 30px !important;
     }
-  }
+  } */
   
   /* Homepage News */
   
@@ -4075,4 +4074,45 @@ html {
 
   .homepageTextImageImg {
     border-radius: 50px;
+  }
+
+
+  /* Single latest swiper */
+
+  .postNewsContainer .swiper-button-next {
+    right: -5em !important;
+    color: #efaa13;
+    font-weight: 900;
+  }
+
+  .postNewsContainer .swiper-button-prev {
+    left: -5em !important;
+    color: #efaa13;
+    font-weight: 900;
+  }
+
+  .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    height: 10px;
+    width: 10px;
+  }
+
+  .postNewsContainer .swiper-pagination-bullet-active {
+    background: #efaa13 !important;
+  }
+
+  .single-related-swiper {
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width:767px) {
+    .single-related-swiper {
+        max-width: 70%;
+    }
+    .postNewsContainer .swiper-button-next {
+        right: 10px !important;
+      }
+      .postNewsContainer .swiper-button-prev {
+        left: 10px !important;
+      }
   }
