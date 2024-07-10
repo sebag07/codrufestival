@@ -53,7 +53,7 @@
                         <?php display_artists_by_level('level-6', get_the_ID()); ?>
                     </div>
                 </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 pt-3 text-align-center general-button-container">
+                <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">
                     <a class="codru-general-button"
                        href="<?php echo get_field('see_all_artists_button_link') ?>"
                        target="_blank"><?php echo get_field('see_all_artists_button') ?></a>
