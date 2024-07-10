@@ -30,9 +30,6 @@
     <section id="lineup">
         <div class="container">
             <div class="container-fluid sectionPadding">
-                <div class="row">
-                    <div class="col-12"><h2 class="text-center sectionPadding sectionTitle">LINEUP</h2></div>
-                </div>
                 <div class="col-12 text-center">
                     <div class="artistsLevel1 pt-3 pb-3">
                         <?php display_artists_by_level('level-1', get_the_ID()); ?>
