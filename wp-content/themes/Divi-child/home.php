@@ -35,7 +35,14 @@
                         <?php display_artists_by_level('level-1', get_the_ID()); ?>
                     </div>
                     <div class="artistsLevel2 pt-3 pb-3">
-                        <?php display_artists_by_level('level-2', get_the_ID()); ?>
+                        <?php display_artists_by_level('level-2', get_the_ID(), 'english'); ?>
+                    </div>
+                    <div class="artistsLevel2 pt-3 pb-3">
+                        <div class='artists-name special-show-tag'><h4 class='m-0 pb-0''>SPECIAL SHOW </h4></div>
+                        <?php display_artists_by_level('level-2', get_the_ID(),'roman', 'special'); ?>
+                    </div>
+                    <div class="artistsLevel2 pt-3 pb-3">
+                        <?php display_artists_by_level('level-2', get_the_ID(), 'roman'); ?>
                     </div>
                     <div class="artistsLevel3 pt-3 pb-3">
                         <?php display_artists_by_level('level-3', get_the_ID()); ?>

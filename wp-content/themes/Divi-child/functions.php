@@ -134,17 +134,69 @@ function register_query_vars($vars)
 
 add_filter('query_vars', 'register_query_vars');
 
-function display_artists_by_level($category_name, $exclude_post_id = null)
-{
+function display_artists_by_level($category_name, $exclude_post_id = null, $language_category = '', $special_category = '') {
     $args = array(
         'posts_per_page' => -1,
         'orderby' => 'title',
         'order' => 'ASC',
         'post_type' => 'artist',
-        'category_name' => $category_name,
         'post_status' => 'publish',
         'suppress_filters' => false,
     );
+
+    if ($special_category === 'special') {
+        // If "special" is passed, only include posts from the "special" category
+        $args['tax_query'] = array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => 'special',
+            ),
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => $category_name,
+            ),
+        );
+    } elseif ($language_category !== '') {
+        // If another language_category is passed, include it and exclude "special"
+        $args['tax_query'] = array(
+            'relation' => 'AND',
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => $category_name,
+            ),
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => $language_category,
+            ),
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => 'special',
+                'operator' => 'NOT IN',
+            ),
+        );
+    } else {
+        // If no language_category is passed, exclude "special"
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => $category_name,
+            ),
+            array(
+                'taxonomy' => 'category',
+                'field'    => 'slug',
+                'terms'    => 'special',
+                'operator' => 'NOT IN',
+            ),
+        );
+    }
+
     $postslist = get_posts($args);
     foreach ($postslist as $key => $post) {
         setup_postdata($post); // Set up post data for use in the loop (important)
@@ -157,6 +209,7 @@ function display_artists_by_level($category_name, $exclude_post_id = null)
     }
     wp_reset_postdata(); // Reset the global post object so that the rest of the page works correctly.
 }
+
 
 function get_language_shortcode() {
     return apply_filters( 'wpml_current_language', null );

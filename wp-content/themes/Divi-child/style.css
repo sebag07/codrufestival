@@ -2474,6 +2474,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     display: flex;
     align-items: center;
     letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .artistsLevel1,
@@ -2621,6 +2622,28 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 @media screen and (max-width: 991px) {
     #lineup .line-up-container {
         width: 95%;
+    }
+}
+
+.special-show-tag {
+    display: flex !important;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.special-show-tag h4 {
+    padding: 10px 5px !important;
+    font-size: 24px;
+    margin: 0 auto !important;
+    background-color: var(--artist-level-color-primary);
+    border-radius: 8px;
+    color: #076708;
+}
+
+@media screen and (max-width: 767px) {
+    .special-show-tag h4 {
+        font-size: 16px;
     }
 }
 
