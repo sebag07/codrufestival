@@ -9,10 +9,10 @@
         <div class="heroContent row">
             <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
                 <img class="heroContentImage anim heroContentCodruLogo display-desktop"
-                     src="/wp-content/themes/Divi-child/images/location-to-be-announced.png"
+                     src="/wp-content/themes/Divi-child/images/inima-gradina-zoo.png"
                      alt="Hero Heart Image">
                 <img class="heroContentImage anim heroContentCodruLogo display-mobile"
-                     src="/wp-content/themes/Divi-child/images/heroheart-ing.png"
+                     src="/wp-content/themes/Divi-child/images/inima-gradina-zoo-ing.png"
                      alt="Hero Heart Image with ING icon">
                 <div class="heroDescription">
                     <a class="heroContentButton desktopButton desktopContentButton anim"
