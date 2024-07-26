@@ -69,14 +69,14 @@
         <div class="row">
         <?php
 
-        if( have_rows('ticket_cards_repeater') ):
+        if( have_rows('ticket_cards_repeater', 'options') ):
 
-            while( have_rows('ticket_cards_repeater') ) : the_row();
+            while( have_rows('ticket_cards_repeater', 'options') ) : the_row();
 
-                $cardDescription = get_sub_field('description');
-                $cardPrice = get_sub_field('price');
-                $cardButtonURL = get_sub_field('button_url');
-                $cardButtonText = get_sub_field('button_text');
+                $cardDescription = get_sub_field('description', 'options');
+                $cardPrice = get_sub_field('price', 'options');
+                $cardButtonURL = get_sub_field('button_url', 'options');
+                $cardButtonText = get_sub_field('button_text', 'options');
 
             echo "
             <div class='col-lg-4 col-xl-3 col-md-4 col-12 ticket-card'>

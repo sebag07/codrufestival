@@ -111,6 +111,15 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug' => 'general-options',
     ));
 
+    acf_add_options_sub_page(array(
+        'page_title' => 'Ticket Cards',
+        'menu_title' => 'Ticket Cards',
+        'menu_slug' => 'ticket-options',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+        'parent_slug' => 'general-options',
+    ));
+
 }
 
 add_filter('the_content', 'wpautop');
