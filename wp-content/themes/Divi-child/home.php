@@ -64,12 +64,12 @@
                 </div>
     </section>
 
+
+<?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <section id="tickets-sale-section">
     <div class="sectionPadding container">
         <div class="row">
         <?php
-
-        if( have_rows('ticket_cards_repeater', 'options') ):
 
             while( have_rows('ticket_cards_repeater', 'options') ) : the_row();
 
@@ -100,12 +100,12 @@
 
             endwhile;
 
-        else :
-        endif;
-    ?>
+            ?>
         </div>
     </div>
 </section>
+
+<?php endif; ?>
 
 <?php
 wp_reset_postdata();
