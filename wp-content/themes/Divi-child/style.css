@@ -4448,6 +4448,29 @@ a {
 
   /* Ticket Cards */
 
+    #tickets-sale-section {
+        background-color: #076708;
+    }
+
+    #tickets-sale-section h2 {
+        color: #fff;
+        text-align: center;
+        padding-bottom: 50px;
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    .ticket-card .card-header {
+        gap: 16px;
+    }
+
+    .ticket-card .card-header h3 {
+        padding-bottom: 0;
+        color: #076708;
+        font-size: 22px;
+        font-weight: 600;
+    }
+
   .ticket-card {
     position: relative;
     margin-bottom: 24px;
@@ -4462,12 +4485,17 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 10px;
+  }
+
+  .stroke-price {
+      text-decoration: line-through;
   }
 
   #ticket-image {
     width: 35px;
     height: auto !important;
-    fill: #fff;
+    fill: #076708;
   }
 
   .card-button a {
@@ -4489,17 +4517,18 @@ a {
   }
 
   .card-description p {
-    color: #fff;
-    font-size: 22px;
+    color: #076708;
+    font-size: 16px;
     font-weight: 600;
   }
 
   .card-price-info p {
     padding-bottom: 0px;
+    color: #076708;
   }
 
   .card-price {
-    font-size: 18px;
+    font-size: 22px;
     color: #076708;
     font-weight: 600;
   }
