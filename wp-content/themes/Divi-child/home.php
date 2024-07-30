@@ -166,7 +166,7 @@
                         <p class="card-price"><?php echo $cardPrice; ?></p>
                     </div>
                     <div class="card-button">
-                        <a href="<?php echo $cardButtonURL; ?>"><?php echo $cardButtonText; ?></a>
+                        <a href="<?php echo $cardButtonURL; ?>" target="_blank"><?php echo $cardButtonText; ?></a>
                     </div>
                 </div>
             </div>
