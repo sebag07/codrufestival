@@ -78,7 +78,7 @@
         $cardButtonText = get_sub_field('button_text', 'options');
         $cardTitle = get_sub_field('title', 'options');
         ?>
-        <div class="col-xl-3 col-lg-4 col-md-6 col-12 ticket-card">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12 ticket-card">
             <div class="card-inner">
                 <div class="card-header display-flex flex-direction-row align-items-center justify-content-between">
                     <h3><?php echo $cardTitle; ?></h3>
