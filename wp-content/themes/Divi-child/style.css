@@ -274,7 +274,7 @@ a:hover {
     display: inline-block;
     font-size: 18px;
     margin-right: 20px;
-    font-weight: 600;
+    font-weight: 800;
     text-decoration: none !important;
 }
 
@@ -392,7 +392,7 @@ a:hover {
     display: block;
     background: #efaa13;
     color: #fff;
-    font-weight: 600;
+    font-weight: 800;
     border-radius: 20px;
 }
 
@@ -722,7 +722,9 @@ a:hover {
 
     .site-mobile-menu .site-nav-wrap .heroButtonMenu {
         color: #6cbf02;
-        padding: 5px 40px;
+        padding: 5px 10px;
+        font-size: 16px;
+        font-weight: 800;
         width: 100%;
     }
 
@@ -793,6 +795,7 @@ a:hover {
 .site-mobile-menu .site-nav-wrap > li > a {
     padding-left: 20px;
     font-size: 20px;
+    font-weight: 800;
 }
 
 .site-mobile-menu .site-nav-wrap > li > ul {

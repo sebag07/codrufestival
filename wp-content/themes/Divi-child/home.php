@@ -235,7 +235,7 @@ $post_id = get_the_ID(); // Get current post ID
 
 <?php if (have_rows('content-image-repeater', $post_id)): ?>
     <section id="homepage-info-section" style="overflow-x:hidden;" class="dark-background">
-        <div class="sectionPadding container homepage-info-section" style="padding-top: 0; padding-bottom: 0;">
+        <div class="sectionPadding container homepage-info-section">
             <?php
             $count = 0;
             while (have_rows('content-image-repeater', $post_id)) : the_row();
