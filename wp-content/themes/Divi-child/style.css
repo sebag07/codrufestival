@@ -4448,6 +4448,25 @@ a {
 
   /* Ticket Cards */
 
+    #tickets-sale-section h2 {
+        color: #fff;
+        text-align: center;
+        padding-bottom: 50px;
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    .ticket-card .card-header {
+        gap: 16px;
+    }
+
+    .ticket-card .card-header h3 {
+        padding-bottom: 0;
+        color: #fff;
+        font-size: 30px;
+        font-weight: 800;
+    }
+
   .ticket-card {
     position: relative;
     margin-bottom: 24px;
@@ -4455,13 +4474,21 @@ a {
   }
 
   .card-inner {
-    background-color: #fedf00;
+    background-color: #076708;
     padding: 20px;
     border-radius: 20px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 10px;
+    min-height: 350px;
+  }
+
+  .stroke-price {
+      text-decoration: line-through;
+      font-size: 28px;
+      font-weight: 400;
   }
 
   #ticket-image {
@@ -4471,41 +4498,54 @@ a {
   }
 
   .card-button a {
-    background: #fff;
+    background: #FEDF08;
     color: #076708;
     box-sizing: border-box;
     border-radius: 50px;
     text-align: center;
     transition: all 0.5s;
     padding: 8px 15px;
-    font-size: 14px;
+    font-size: 18px;
     font-weight: 600;
+    width: 100%;
+    display: block;
   }
 
   .info-container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
+      gap: 12px;
   }
 
   .card-description p {
     color: #fff;
-    font-size: 22px;
+    font-size: 16px;
     font-weight: 600;
   }
 
+.card-price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
   .card-price-info p {
     padding-bottom: 0px;
+    color: #fff;
   }
 
   .card-price {
-    font-size: 18px;
+    font-size: 46px;
     color: #076708;
     font-weight: 600;
   }
 
   .card-button {
     margin-top: 10px;
+    width: 100%;
   }
 
   .card-button a:hover {

@@ -115,39 +115,110 @@ var x = setInterval(function() {
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <section id="tickets-sale-section">
     <div class="sectionPadding container">
+        <h2 class="sectionTitle">BILETE</h2>
         <div class="row">
-        <?php
-
-            while( have_rows('ticket_cards_repeater', 'options') ) : the_row();
-
-                $cardDescription = get_sub_field('description', 'options');
-                $cardPrice = get_sub_field('price', 'options');
-                $cardButtonURL = get_sub_field('button_url', 'options');
-                $cardButtonText = get_sub_field('button_text', 'options');
-
-            echo "
-            <div class='col-lg-4 col-xl-3 col-md-4 col-12 ticket-card'>
-                <div class='card-inner'>
-                <svg id='ticket-image' enable-background='new 0 0 128 128' height='512' viewBox='0 0 128 128' width='512' xmlns='http://www.w3.org/2000/svg'><path d='m121.5 64c1 0 1.7-.8 1.8-1.7v-21.8c0-1-.8-1.7-1.8-1.8h-4.8l-2.1-14.3c-.1-1-1-1.6-2-1.5l-27.1 4h-.1l-79.2 11.9s-1.5.3-1.5 1.7v21.7c0 1 .8 1.7 1.7 1.8 4.4 0 7.9 3.5 7.9 7.9s-3.5 7.9-7.9 7.9c-1 0-1.7.8-1.8 1.7v21.7c0 1 .8 1.7 1.8 1.8h115c1 0 1.7-.8 1.8-1.8v-21.6c0-1-.8-1.7-1.7-1.8-4.4 0-7.9-3.5-7.9-7.9s3.5-7.9 7.9-7.9zm-37.3-33.3.7 4.7c.1.9.9 1.5 1.7 1.5h.3c1-.1 1.6-1 1.5-2l-.7-4.7 23.7-3.5 1.8 12.1h-83.1zm35.6 52.5v18.4h-25.9v-4.8c0-1-.8-1.8-1.8-1.8s-1.8.8-1.8 1.8v4.8h-82v-18.4c6.2-1 10.5-6.8 9.5-13-.8-4.9-4.6-8.8-9.5-9.5v-18.4h82.1v4.7c0 1 .8 1.8 1.8 1.8s1.8-.8 1.8-1.8v-4.8h25.9v18.4c-6.2 1-10.5 6.8-9.5 13 .6 5 4.4 8.8 9.4 9.6z'/><path d='m92.1 74.6c-1 0-1.7.8-1.8 1.7v11.6c0 1 .8 1.8 1.8 1.8s1.8-.8 1.8-1.8v-11.5c0-1-.8-1.8-1.8-1.8z'/><path d='m92.1 54.2c-1 0-1.7.8-1.8 1.7v11.6c0 1 .8 1.8 1.8 1.8s1.8-.8 1.8-1.8v-11.6c0-.9-.8-1.7-1.8-1.7z'/><path d='m27.3 57h21.7c1 0 1.8-.8 1.8-1.8s-.8-1.7-1.8-1.7h-21.7c-1 0-1.8.8-1.8 1.8s.8 1.7 1.8 1.7z'/><path d='m70.7 64.6h-43.4c-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8h43.4c1 0 1.8-.8 1.8-1.8s-.8-1.8-1.8-1.8z'/><path d='m70.7 75.7h-43.4c-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8h43.4c1 0 1.8-.8 1.8-1.8s-.8-1.8-1.8-1.8z'/><path d='m70.7 86.8h-43.4c-1 0-1.8.8-1.8 1.8s.8 1.8 1.8 1.8h43.4c1 0 1.8-.8 1.8-1.8s-.8-1.8-1.8-1.8z'/></svg>
-                    <div class='card-description'>
-                        <p>$cardDescription</p>
+    <?php while (have_rows('ticket_cards_repeater', 'options')): the_row();
+        $cardDescription = get_sub_field('description', 'options');
+        $cardPrice = get_sub_field('price', 'options');
+        $cardReducedPrice = get_sub_field('reduced_price', 'options');
+        $cardButtonURL = get_sub_field('button_url', 'options');
+        $cardButtonText = get_sub_field('button_text', 'options');
+        $cardTitle = get_sub_field('title', 'options');
+        ?>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-12 ticket-card">
+            <div class="card-inner">
+                <div class="card-header display-flex flex-direction-row align-items-center justify-content-between">
+                    <h3><?php echo $cardTitle; ?></h3>
+                    <svg id='ticket-image' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 512.005 512.005' style='enable-background:new 0 0 512.005 512.005; color: #076708;' xml:space='preserve'>
+<g>
+    <g>
+        <g>
+            <path d='M511.513,223.904L452.508,42.326c-1.708-5.251-7.348-8.125-12.602-6.42L6.912,176.612
+				c-5.252,1.707-8.126,7.349-6.42,12.602l27.93,85.949c-0.008,0.168-0.025,0.333-0.025,0.503v190.925c0,5.522,4.478,10,10,10
+				H493.68c5.522,0,10-4.478,10-10V275.666c0-5.522-4.478-10-10-10h-78.32l89.734-29.16
+				C510.345,234.799,513.219,229.157,511.513,223.904z M483.679,285.666v170.925H48.396V285.666h55.392v111.408
+				c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10V285.666h228.441H483.679z M350.645,265.666H46.365l-23.762-73.123l52.711-17.129
+				l20.162,61.276c1.385,4.208,5.296,6.877,9.497,6.877c1.036,0,2.09-0.162,3.128-0.504c5.246-1.727,8.1-7.378,6.373-12.625
+				l-20.139-61.206L436.577,58.017l52.825,162.558L350.645,265.666z'></path>
+            <path d='M421.405,101.849c-1.708-5.251-7.349-8.124-12.602-6.42l-260.728,84.727c-5.252,1.707-8.126,7.349-6.42,12.602
+				c1.374,4.226,5.293,6.912,9.509,6.912c1.024,0,2.066-0.159,3.093-0.492l260.728-84.727
+				C420.237,112.744,423.112,107.102,421.405,101.849z'></path>
+            <path d='M377.434,166.804l49.352-16.037c5.252-1.707,8.126-7.349,6.42-12.602c-1.708-5.252-7.349-8.125-12.602-6.42
+				l-49.352,16.037c-5.252,1.707-8.126,7.349-6.42,12.602c1.374,4.226,5.293,6.912,9.509,6.912
+				C375.365,167.296,376.408,167.137,377.434,166.804z'></path>
+            <path d='M419.143,212.741c1.374,4.226,5.293,6.912,9.509,6.912c1.023,0,2.066-0.159,3.093-0.492l15.617-5.075
+				c5.252-1.707,8.127-7.349,6.42-12.602c-1.708-5.252-7.348-8.126-12.602-6.42l-15.617,5.075
+				C420.311,201.846,417.436,207.488,419.143,212.741z'></path>
+            <path d='M390.685,211.473l-15.618,5.075c-5.252,1.707-8.127,7.349-6.42,12.602c1.373,4.226,5.293,6.912,9.509,6.912
+				c1.023,0,2.065-0.159,3.093-0.492l15.618-5.075c5.252-1.707,8.126-7.349,6.42-12.602
+				C401.581,212.641,395.944,209.768,390.685,211.473z'></path>
+            <path d='M251.132,186.817l-91.255,29.654c-5.252,1.707-8.127,7.349-6.42,12.602c1.374,4.226,5.293,6.912,9.509,6.912
+				c1.023,0,2.066-0.159,3.093-0.492l91.255-29.654c5.252-1.707,8.126-7.349,6.42-12.602
+				C262.025,187.985,256.384,185.112,251.132,186.817z'></path>
+            <path d='M113.788,420.364c-5.522,0-10,4.478-10,10v3.916c0,5.522,4.478,10,10,10c5.522,0,10-4.478,10-10v-3.916
+				C123.788,424.842,119.31,420.364,113.788,420.364z'></path>
+            <path d='M161.554,322.663c0,5.522,4.478,10,10,10h274.148c5.522,0,10-4.478,10-10c0-5.522-4.478-10-10-10H171.554
+				C166.032,312.663,161.554,317.14,161.554,322.663z'></path>
+            <path d='M445.703,350.847H393.81c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h51.893c5.522,0,10-4.478,10-10
+				C455.703,355.325,451.225,350.847,445.703,350.847z'></path>
+            <path d='M445.703,417.427h-16.422c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h16.422c5.522,0,10-4.478,10-10
+				C455.703,421.905,451.225,417.427,445.703,417.427z'></path>
+            <path d='M392.608,417.427h-16.421c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h16.421c5.522,0,10-4.478,10-10
+				C402.608,421.905,398.131,417.427,392.608,417.427z'></path>
+            <path d='M267.507,350.847h-95.952c-5.522,0-10,4.478-10,10c0,5.522,4.478,10,10,10h95.952c5.522,0,10-4.478,10-10
+				C277.507,355.325,273.029,350.847,267.507,350.847z'></path>
+        </g>
+    </g>
+</g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+</svg>
+                </div>
+                <div class="card-description">
+                    <p><?php echo $cardDescription; ?></p>
+                </div>
+                <div class="info-container">
+                    <div class="card-price-info">
+                        <?php if ($cardReducedPrice): ?>
+                            <p class="stroke-price"><?php echo $cardReducedPrice; ?></p>
+                        <?php endif; ?>
+                        <p class="card-price"><?php echo $cardPrice; ?></p>
                     </div>
-                    <div class='info-container'>
-                        <div class='card-price-info'>
-                            <p>De la:</p>
-                            <p class='card-price'>$cardPrice</p>
-                        </div>
-                        <div class='card-button'>
-                            <a href='$cardButtonURL'>$cardButtonText</a>
-                        </div>
+                    <div class="card-button">
+                        <a href="<?php echo $cardButtonURL; ?>" target="_blank"><?php echo $cardButtonText; ?></a>
                     </div>
                 </div>
             </div>
-            ";
-
-            endwhile;
-
-            ?>
+        </div>
+    <?php endwhile; ?>
         </div>
     </div>
 </section>
@@ -160,8 +231,8 @@ $post_id = get_the_ID(); // Get current post ID
 ?>
 
 <?php if (have_rows('content-image-repeater', $post_id)): ?>
-    <section id="homepage-info-section" style="overflow-x:hidden" class="dark-background">
-        <div class="sectionPadding container homepage-info-section">
+    <section id="homepage-info-section" style="overflow-x:hidden;" class="dark-background">
+        <div class="sectionPadding container homepage-info-section" style="padding-top: 0; padding-bottom: 0;">
             <?php
             $count = 0;
             while (have_rows('content-image-repeater', $post_id)) : the_row();
