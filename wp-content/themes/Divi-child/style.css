@@ -1275,6 +1275,12 @@ a:hover {
     font-weight: 600;
 }
 
+@media screen and (max-width: 500px){
+    .heroContentButton {
+        margin-top: 0;
+    }
+}
+
 @media screen and (max-height: 800px){
     .heroContentButton {
         font-size: 26px;
