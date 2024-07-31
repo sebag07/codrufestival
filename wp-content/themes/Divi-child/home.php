@@ -118,7 +118,7 @@
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <section id="tickets-sale-section">
     <div class="sectionPadding container">
-        <h2 class="sectionTitle"><?php echo get_sub_field('section_title', 'options') ?>></h2>
+        <h2 class="sectionTitle"><?php echo get_field('section_title', 'options') ?></h2>
         <div class="row">
     <?php while (have_rows('ticket_cards_repeater', 'options')): the_row();
         $cardDescription = get_sub_field('description', 'options');
