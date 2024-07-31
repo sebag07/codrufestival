@@ -4,27 +4,6 @@
         "title": "Countdown",
         "fields": [
             {
-                "key": "field_66a8d7c54bb76",
-                "label": "Date",
-                "name": "date",
-                "aria-label": "",
-                "type": "text",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "wpml_cf_preferences": 2,
-                "default_value": "",
-                "maxlength": "",
-                "placeholder": "",
-                "prepend": "",
-                "append": ""
-            },
-            {
                 "key": "field_66a8d7ef4bb77",
                 "label": "Days text",
                 "name": "days_text",
@@ -149,6 +128,25 @@
                 "placeholder": "",
                 "prepend": "",
                 "append": ""
+            },
+            {
+                "key": "field_66aa263df7dcd",
+                "label": "Countdown End Date",
+                "name": "countdown_end_date",
+                "aria-label": "",
+                "type": "date_time_picker",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "wpml_cf_preferences": 1,
+                "display_format": "d\/m\/Y H:i:s",
+                "return_format": "d-m-Y H:i:s",
+                "first_day": 1
             }
         ],
         "location": [

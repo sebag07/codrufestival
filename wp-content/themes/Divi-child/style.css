@@ -1195,7 +1195,7 @@ a:hover {
 @media screen and (max-width: 991px) {
     .heroContentDiv {
         padding: 0;
-        margin: 170px auto;
+        margin: 100px auto;
         height: 100%;
     }
 }
@@ -1203,7 +1203,7 @@ a:hover {
 @media screen and (max-width: 500px) {
     .heroContentDiv {
         height: calc(100vh - 80px);
-        margin: 80px auto auto auto;
+        margin: 30px auto auto auto;
     }
 
     .heroContainer {
@@ -1232,12 +1232,15 @@ a:hover {
     margin-bottom: 10px;
 }
 
-.heroFocusedText {
-    font-size: 22px;
+@media screen and (max-height: 800px){
+    .heroContentCodruLogo {
+        max-width: 600px;
+    }
+
 }
 
-.heroDescription {
-    margin-top: 40px;
+.heroFocusedText {
+    font-size: 22px;
 }
 
 .heroDescription h2 {
@@ -1270,6 +1273,13 @@ a:hover {
     font-size: 30px;
     margin-top: 20px;
     font-weight: 600;
+}
+
+@media screen and (max-height: 800px){
+    .heroContentButton {
+        font-size: 26px;
+        padding: 10px 50px;
+    }
 }
 
 .underLocDate {
@@ -4556,8 +4566,8 @@ a {
   /* Countdown */
   
   .countdown-container {
-    position: absolute;
-    top: 80px;
+    position: relative;
+    top: 0;
     height: auto;
     padding: 20px 0px;
     width: 100%;
@@ -4567,28 +4577,51 @@ a {
     margin: auto;
   }
 
+  @media (max-width: 500px) {
+    .countdown-container {
+        top: 80px;
+    }
+}
+
   #countdown {
     display:flex;
     align-items: center;
     justify-content: end;
     font-size: 30px;
-    color: #fff;
+    color: #076708;
+    font-weight: 600;
+    gap: 10px;
   }
+
+    @media (max-width: 500px) {
+        #countdown {
+            font-size: 20px;
+        }
+    }
 
   .countdown-text {
     display: flex;
     align-items: center;
     justify-content: start;
     font-size: 30px;
-    color: #fff;
+    color: #076708;
+      font-weight: 600;
+  }
+
+  @media (max-width: 500px){
+      .countdown-text {
+          font-size: 20px;
+      }
   }
 
   @media (max-width:1200px) {
     #countdown {
         justify-content: center;
+        text-align: center;
     }
     .countdown-text {
         justify-content: center;
+        text-align: center;
     }
     .countdown-container {
         gap: 20px;

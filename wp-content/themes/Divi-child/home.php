@@ -27,6 +27,8 @@
             const countdownElement = document.getElementById("countdown");
             const countdownContainer = document.querySelector(".countdown-container");
 
+            const heroDescription = document.querySelector(".heroDescription");
+
             const x = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = countDownDate - now;
@@ -40,8 +42,11 @@
                     clearInterval(x);
                     countdownContainer.style.display = "none";
                 } else {
-                    countdownElement.innerHTML = days + " <?php echo $countdownDaysText; ?> " + hours + " <?php echo $countdownHoursText; ?> " +
-                        minutes + " <?php echo $countdownMinutesText; ?> " + seconds + " <?php echo $countdownSecondsText; ?> ";
+                    heroDescription.style.marginTop = "0";
+                    countdownElement.innerHTML = `<span class="countdown-time-text">${days} <?php echo $countdownDaysText; ?></span> ` +
+                        `<span class="countdown-time-text">${hours} <?php echo $countdownHoursText; ?></span> ` +
+                        `<span class="countdown-time-text">${minutes} <?php echo $countdownMinutesText; ?></span> ` +
+                        `<span class="countdown-time-text">${seconds} <?php echo $countdownSecondsText; ?></span>`;
                 }
             }, 1000);
         });
