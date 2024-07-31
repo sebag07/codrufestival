@@ -120,6 +120,14 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug' => 'general-options',
     ));
 
+    acf_add_options_sub_page(array(
+        'page_title' => 'Countdown',
+        'menu_title' => 'Countdown',
+        'menu_slug' => 'countdown-options',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+        'parent_slug' => 'general-options',
+    ));
 }
 
 add_filter('the_content', 'wpautop');

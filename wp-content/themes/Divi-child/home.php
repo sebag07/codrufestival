@@ -1,7 +1,54 @@
 <?php /*  Template Name: CODRU Festival 2024  */ ?>
 <?php get_header(); ?>
 
-    <div class="container-fluid heroContainer p-0 m-0">
+<div class="container-fluid heroContainer p-0 m-0">
+        <!-- Display the countdown timer in an element -->
+
+<?php
+
+$countdownDate = get_field('date', 'options');
+$countdownDaysText = get_field('days_text', 'options');
+$countdownHoursText = get_field('hours_text', 'options');
+$countdownMinutesText = get_field('minutes_text', 'options');
+$countdownSecondsText = get_field('seconds_text', 'options');
+$countdownText = get_field('target_text', 'options');
+$countdownExpiredText = get_field('expired_text', 'options');
+
+
+?>
+<div class="countdown-container row">
+
+    <div id="countdown" class="col-xl-5 col-lg-12"></div>
+    <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
+
+</div>        
+
+<?php echo'
+<script>
+var countDownDate = new Date("'. $countdownDate .'").getTime();
+
+var x = setInterval(function() {
+
+  var now = new Date().getTime();
+
+  var distance = countDownDate - now;
+
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("countdown").innerHTML = days + " '. $countdownDaysText .' " + hours + " '. $countdownHoursText .' "
+  + minutes + " '. $countdownMinutesText .' " + seconds + " '. $countdownSecondsText .' ";
+
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("countdown").innerHTML = "'. $countdownExpiredText .'";
+  }
+}, 1000);
+</script>
+'; ?>
+
         <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG-2.png" alt="">
         <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
         <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
