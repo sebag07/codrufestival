@@ -3,51 +3,49 @@
 
 <div class="container-fluid heroContainer p-0 m-0">
         <!-- Display the countdown timer in an element -->
+    <?php
 
-<?php
+    $countdownDaysText = get_field('days_text', 'options');
+    $countdownHoursText = get_field('hours_text', 'options');
+    $countdownMinutesText = get_field('minutes_text', 'options');
+    $countdownSecondsText = get_field('seconds_text', 'options');
+    $countdownText = get_field('target_text', 'options');
+    $countdownExpiredText = get_field('expired_text', 'options');
 
-$countdownDate = get_field('date', 'options');
-$countdownDaysText = get_field('days_text', 'options');
-$countdownHoursText = get_field('hours_text', 'options');
-$countdownMinutesText = get_field('minutes_text', 'options');
-$countdownSecondsText = get_field('seconds_text', 'options');
-$countdownText = get_field('target_text', 'options');
-$countdownExpiredText = get_field('expired_text', 'options');
+    $countdown_end_date = get_field('countdown_end_date', 'options');
 
+    ?>
+    <div class="countdown-container row">
+        <div id="countdown" class="col-xl-5 col-lg-12"></div>
+        <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
+    </div>
 
-?>
-<div class="countdown-container row">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const countDownDate = new Date("<?php echo date('Y-m-d\TH:i:s', strtotime($countdown_end_date)); ?>").getTime();
 
-    <div id="countdown" class="col-xl-5 col-lg-12"></div>
-    <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
+            const countdownElement = document.getElementById("countdown");
+            const countdownContainer = document.querySelector(".countdown-container");
 
-</div>        
+            const x = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
 
-<?php echo'
-<script>
-var countDownDate = new Date("'. $countdownDate .'").getTime();
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-var x = setInterval(function() {
-
-  var now = new Date().getTime();
-
-  var distance = countDownDate - now;
-
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("countdown").innerHTML = days + " '. $countdownDaysText .' " + hours + " '. $countdownHoursText .' "
-  + minutes + " '. $countdownMinutesText .' " + seconds + " '. $countdownSecondsText .' ";
-
-  if (distance < 0) {
-    clearInterval(x);
-    document.getElementById("countdown").innerHTML = "'. $countdownExpiredText .'";
-  }
-}, 1000);
-</script>
-'; ?>
+                if (distance < 0) {
+                    clearInterval(x);
+                    countdownContainer.style.display = "none";
+                } else {
+                    countdownElement.innerHTML = days + " <?php echo $countdownDaysText; ?> " + hours + " <?php echo $countdownHoursText; ?> " +
+                        minutes + " <?php echo $countdownMinutesText; ?> " + seconds + " <?php echo $countdownSecondsText; ?> ";
+                }
+            }, 1000);
+        });
+    </script>
 
         <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG-2.png" alt="">
         <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
