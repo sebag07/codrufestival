@@ -4636,3 +4636,13 @@ a {
         gap: 20px;
     }
   }
+
+  #devino-partener {
+    padding-top: 200px;
+  }
+
+  @media (max-width:500px) {
+    #devino-partener {
+        padding-top: 150px;
+    }
+  }
