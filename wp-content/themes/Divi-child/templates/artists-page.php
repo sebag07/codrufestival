@@ -16,7 +16,7 @@
                     if ($artistImage) {
                         $imageUrl = $artistImage[0];
                     } else {
-                        $imageUrl = "/wp-content/themes/Divi-child/images/logo.png";
+                        $imageUrl = "/wp-content/themes/Divi-child/images/artist-placeholder.png";
                     }
                     ?>
                     <a href='<?php echo $artistPage; ?>' class='artistInnerContainer'>
