@@ -7,7 +7,7 @@
         <div class="sectionPadding container">
             <div class="artistCardContainer">
                 <?php
-                $args = array('posts_per_page' => -1, 'orderby' => 'title', 'suppress_filters' => false, 'order' => 'ASC', 'post_type' => 'artist');
+                $args = array('posts_per_page' => -1, 'orderby' => 'desc', 'suppress_filters' => false, 'order' => 'ASC', 'post_type' => 'artist');
                 $postslist = get_posts($args);
                 foreach ($postslist as $post) :
                     $artistName = get_the_title();
