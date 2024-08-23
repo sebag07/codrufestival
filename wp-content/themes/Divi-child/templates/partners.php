@@ -75,10 +75,8 @@
 
     if( have_rows('hospitality_partners', 'options') ):
         while( have_rows('hospitality_partners', 'options') ) : the_row();
-
             $partner_name = get_sub_field('hospitality_partner_name');
             $partner_image = get_sub_field('hospitality_partner_image');
-
         ?>
                 <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
                 <?php
