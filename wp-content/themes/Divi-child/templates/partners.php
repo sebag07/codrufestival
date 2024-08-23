@@ -91,7 +91,7 @@
         </div>
 
         <div class="partnersMediaContainer row m-0">
-            <div class="kissFMPartner col-12">
+            <div class="horecaPartners col-12">
                 <?php 
 
             if( have_rows('horeca_partners', 'options') ):

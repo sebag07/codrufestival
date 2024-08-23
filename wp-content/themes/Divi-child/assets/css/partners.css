@@ -104,8 +104,17 @@
 }
 
 .partnersLevel4 img {
-    height: 150px;
-    width: 150px;
+    height: 175px;
+    width: 175px;
+}
+
+.horecaPartners {
+    text-align: center;
+}
+
+.horecaPartners img {
+    height: 125px;
+    width: 125px;
 }
 
 .partnersLevel5 img {
