@@ -95,13 +95,15 @@
                     jQuery(this).removeClass('borderOnHover');
                 }
             );
-jQuery(document).on("click", ".allcat", function(){
+    jQuery(document).on("click", ".allcat", function(){
     jQuery('.allcat').prop('checked', true);
     jQuery('.catCheckbox').prop('checked', false);
 });
 
 jQuery(document).on("click", ".catCheckbox", function(){
     jQuery('.allcat').prop('checked', false);
+    jQuery('.catCheckbox').prop('checked', false);
+    jQuery(this).prop('checked', true);
 });
 
 jQuery(document).ready(function(){
@@ -140,6 +142,7 @@ jQuery('#category-filter label').find("input").on('change',function(){
 
 });
 
+
 jQuery(".allcat").change(function() {
     if(this.checked) {
         jQuery(this).closest('label').addClass('activeCategory');
@@ -151,8 +154,9 @@ jQuery(".allcat").change(function() {
 
 jQuery(".catCheckbox").change(function() {
     if(this.checked) {
-        jQuery(this).closest('label').addClass('activeCategory');
         jQuery('.allcat').closest('label').removeClass('activeCategory');
+        jQuery('.catCheckbox').closest('label').removeClass('activeCategory');
+        jQuery(this).closest('label').addClass('activeCategory');
     } else {
         jQuery(this).closest('label').removeClass('activeCategory');
     }
