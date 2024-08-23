@@ -5,6 +5,13 @@
     <h1 class="text-center sectionTitle" style="font-weight: 600;"><?php echo get_the_title(); ?></h1>
     <section>
         <div class="sectionPadding container">
+        <span id="category-filter">
+            <label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="checkbox" value="all"><span>Toate</span></label>
+            <label class="activitiesCheckbox" for="ziua1"><input class="ziua1" id="ziua1" type="checkbox" value="ziua1"><span>Ziua 1</span></label>
+            <label class="activitiesCheckbox" for="ziua2"><input class="ziua2" id="ziua2" type="checkbox" value="ziua2"><span>Ziua 2</span></label>
+            <label class="activitiesCheckbox" for="ziua3"><input class="ziua3" id="ziua3" type="checkbox" value="ziua3"><span>Ziua 3</span></label>
+
+        </span>
             <div class="artistCardContainer">
                 <?php
                 $args = array('posts_per_page' => -1, 'orderby' => 'date', 'suppress_filters' => false, 'order' => 'ASC', 'post_type' => 'artist');
@@ -17,9 +24,13 @@
                         $imageUrl = $artistImage[0];
                     } else {
                         $imageUrl = "/wp-content/themes/Divi-child/images/artist-placeholder.png";
-                    }
+                    };
+                    $categories = get_the_category($post->ID);
+
+                    foreach ($categories as $cat) :
+
                     ?>
-                    <a href='<?php echo $artistPage; ?>' class='artistInnerContainer'>
+                    <a href='<?php echo $artistPage; ?>' class='artistInnerContainer' data-category="<?php echo $cat->slug ?>">
                         <div class='artistImageContainer'>
                             <img class='artistImg' loading='lazy' src='<?php echo $imageUrl; ?>' alt="<?php echo $artistName; ?>">
                             <div class='imageOverlay'></div>
@@ -40,6 +51,7 @@
                         <div class='artistCardReadMoreBtn'><?php echo get_field('artists_card_button', 'options'); ?></div>
 
                     </a>
+                    <?php endforeach; ?>
                 <?php endforeach; ?>
             </div>
         </div>
