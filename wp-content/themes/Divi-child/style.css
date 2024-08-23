@@ -4141,6 +4141,10 @@ a {
     font-weight: 600;
 }
 
+.artistContentDayStage {
+    color: #efaa13;
+}
+
 .artistCardContainer {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
