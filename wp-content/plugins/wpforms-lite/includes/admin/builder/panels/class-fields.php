@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Fields management panel.
  *
@@ -22,6 +26,7 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 		$this->sidebar = true;
 
 		if ( $this->form ) {
+			add_action( 'wpforms_builder_fields', [ $this, 'search' ], 5 );
 			add_action( 'wpforms_builder_fields', [ $this, 'fields' ] );
 			add_action( 'wpforms_builder_fields_options', [ $this, 'fields_options' ] );
 			add_action( 'wpforms_builder_preview', [ $this, 'preview' ] );
@@ -45,7 +50,15 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 
 		wp_enqueue_script(
 			'wpforms-builder-drag-fields',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/builder/drag-fields{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/drag-fields{$min}.js",
+			[ 'wpforms-builder' ],
+			WPFORMS_VERSION,
+			true
+		);
+
+		wp_enqueue_script(
+			'wpforms-builder-search-fields',
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/search-fields{$min}.js",
 			[ 'wpforms-builder' ],
 			WPFORMS_VERSION,
 			true
@@ -194,45 +207,7 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 	 */
 	public function fields() {
 
-		$fields = [
-			'standard' => [
-				'group_name' => esc_html__( 'Standard Fields', 'wpforms-lite' ),
-				'fields'     => [],
-			],
-			'fancy'    => [
-				'group_name' => esc_html__( 'Fancy Fields', 'wpforms-lite' ),
-				'fields'     => [],
-			],
-			'payment'  => [
-				'group_name' => esc_html__( 'Payment Fields', 'wpforms-lite' ),
-				'fields'     => [],
-			],
-		];
-
-		/**
-		 * Allows developers to modify content of the the Add Field tab.
-		 *
-		 * With this filter developers can add their own fields or even fields groups.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param array $fields {
-		 *     Fields data multidimensional array.
-		 *
-		 *     @param array $standard Standard fields group.
-		 *         @param string $group_name Group name.
-		 *         @param array  $fields     Fields array.
-		 *
-		 *     @param array $fancy    Fancy fields group.
-		 *         @param string $group_name Group name.
-		 *         @param array  $fields     Fields array.
-		 *
-		 *     @param array $payment  Payment fields group.
-		 *         @param string $group_name Group name.
-		 *         @param array  $fields     Fields array.
-		 * }
-		 */
-		$fields = apply_filters( 'wpforms_builder_fields_buttons', $fields );
+		$fields = wpforms_get_builder_fields();
 
 		// Output the buttons.
 		foreach ( $fields as $id => $group ) {
@@ -274,6 +249,10 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 					$field,
 					$this->form_data
 				);
+
+				if ( ! empty( $field['keywords'] ) ) {
+					$atts['data']['field-keywords'] = $field['keywords'];
+				}
 
 				if ( ! empty( $field['class'] ) ) {
 					$atts['class'][] = $field['class'];
@@ -398,10 +377,10 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 		}
 
 		printf(
-			'<div class="wpforms-field wpforms-field-%1$s %2$s" id="wpforms-field-%3$d" data-field-id="%3$d" data-field-type="%1$s">',
+			'<div class="wpforms-field wpforms-field-%1$s %2$s" id="wpforms-field-%3$s" data-field-id="%3$s" data-field-type="%1$s">',
 			esc_attr( $field['type'] ),
 			esc_attr( $class ),
-			absint( $field['id'] )
+			wpforms_validate_field_id( $field['id'] )
 		);
 
 		/**
@@ -520,8 +499,8 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 		$field_id = isset( $field['id'] ) ? $field['id'] : 0;
 
 		printf(
-			'<div class="wpforms-alert wpforms-alert-warning wpforms-alert-dismissible wpforms-alert-field-not-available" data-field-id="%d" data-field-type="unavailable">',
-			absint( $field_id )
+			'<div class="wpforms-alert wpforms-alert-warning wpforms-alert-dismissible wpforms-alert-field-not-available" data-field-id="%s" data-field-type="unavailable">',
+			wpforms_validate_field_id( $field['id'] )
 		);
 
 		printf(
@@ -530,13 +509,13 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 			</div>
 			<div class="wpforms-alert-buttons">
 				<a href="%2$s" target="_blank" rel="noopener noreferrer" class="wpforms-btn wpforms-btn-md wpforms-btn-light-grey">%3$s</a>
-				<button type="button" class="wpforms-dismiss-button" title="%4$s" data-field-id="%5$d" />
+				<button type="button" class="wpforms-dismiss-button" title="%4$s" data-field-id="%5$s" />
 			</div>',
 			$warning_message, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 			'https://wpforms.com/docs/how-to-import-and-export-wpforms/#field-missing',
 			esc_html__( 'Learn More', 'wpforms-lite' ),
 			esc_attr__( 'Dismiss this message. The field will be deleted as well.', 'wpforms-lite' ),
-			absint( $field_id )
+			wpforms_validate_field_id( $field_id )
 		);
 
 		// Save unavailable fields data in hidden inputs.
@@ -701,6 +680,35 @@ class WPForms_Builder_Panel_Fields extends WPForms_Builder_Panel {
 				{{ data.message }}
 			</div>
 		</script>
+		<?php
+	}
+
+	/**
+	 * Builder fields search.
+	 *
+	 * @since 1.8.3
+	 */
+	public function search() {
+		?>
+		<div class="wpforms-search-fields-wrapper">
+			<div class="wpforms-search-fields-input-wrapper">
+				<label for="wpforms-search-fields-input" class="wpforms-screen-reader-element"><?php esc_html_e( 'Search fields:', 'wpforms-lite' ); ?></label>
+				<input type="search" id="wpforms-search-fields-input" placeholder="<?php echo esc_attr__( 'Search fields...', 'wpforms-lite' ); ?>" autocomplete="off">
+				<i class="fa fa-times wpforms-search-fields-input-close" aria-hidden="true"></i>
+			</div>
+
+			<div class="wpforms-search-fields-list">
+				<div class="wpforms-add-fields-group">
+					<div class="wpforms-add-fields-buttons"></div>
+				</div>
+			</div>
+
+			<div class="wpforms-search-fields-no-results">
+				<p>
+					<?php esc_html_e( 'Sorry, we didn\'t find any fields that match your criteria.', 'wpforms-lite' ); ?>
+				</p>
+			</div>
+		</div>
 		<?php
 	}
 }

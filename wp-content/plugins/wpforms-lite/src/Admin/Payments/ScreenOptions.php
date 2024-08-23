@@ -66,8 +66,12 @@ class ScreenOptions {
 
 		$screen = get_current_screen();
 
+		if ( ! isset( $screen->id ) || $screen->id !== self::SCREEN_ID ) {
+			return;
+		}
+
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( ! isset( $screen->id ) || $screen->id !== self::SCREEN_ID || ! empty( $_GET['view'] ) ) {
+		if ( ! empty( $_GET['view'] ) && $_GET['view'] !== 'payments' ) {
 			return;
 		}
 
@@ -106,7 +110,7 @@ class ScreenOptions {
 	public function single_screen_settings( $status, $args ) {
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( $args->id !== self::SCREEN_ID || empty( $_GET['view'] ) || $_GET['view'] !== 'single' ) {
+		if ( $args->id !== self::SCREEN_ID || empty( $_GET['view'] ) || $_GET['view'] !== 'payment' ) {
 			return $status;
 		}
 

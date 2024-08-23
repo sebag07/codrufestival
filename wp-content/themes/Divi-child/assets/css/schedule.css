@@ -154,7 +154,7 @@ a{
 @media (min-width: 64rem){
     .js .cd-schedule__events{
         width:calc(100% - 60px);
-        margin-left:60px;
+        margin-left:45px;
         height: auto;
         /* max-height: 750px; */
     }
@@ -168,7 +168,7 @@ a{
 @media (min-width: 80rem){
     .js .cd-schedule__events{
         width:calc(100% - 60px);
-        margin-left:60px
+        margin-left:45px
     }
 }
 .cd-schedule__group{
@@ -313,7 +313,8 @@ a{
 }
 .cd-schedule__name,.cd-schedule-modal__name{
     font-size:1.44em;
-    font-size:var(--text-lg)
+    font-size:var(--text-lg);
+    color: #fff;
 }
 @media (min-width: 64rem){
     .cd-schedule__name,.cd-schedule-modal__name{
@@ -893,7 +894,6 @@ a{
 /* .cd-schedule__timeline {
     display: none !important;
 } */
-
 
 
 

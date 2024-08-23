@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Checkbox field.
  *
@@ -16,6 +20,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 
 		// Define field type information.
 		$this->name     = esc_html__( 'Checkboxes', 'wpforms-lite' );
+		$this->keywords = esc_html__( 'choice', 'wpforms-lite' );
 		$this->type     = 'checkbox';
 		$this->icon     = 'fa-check-square-o';
 		$this->order    = 110;
@@ -67,53 +72,6 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 	}
 
 	/**
-	 * Return images, if any, for HTML supported values.
-	 *
-	 * @since 1.4.5
-	 *
-	 * @param string $value     Field value.
-	 * @param array  $field     Field settings.
-	 * @param array  $form_data Form data and settings.
-	 * @param string $context   Value display context.
-	 *
-	 * @return string
-	 */
-	public function field_html_value( $value, $field, $form_data = [], $context = '' ) {
-
-		// Only use HTML formatting for checkbox fields, with image choices
-		// enabled, and exclude the entry table display. Lastly, provides a
-		// filter to disable fancy display.
-		if (
-			! empty( $field['value'] ) &&
-			$this->type === $field['type'] &&
-			! empty( $field['images'] ) &&
-			'entry-table' !== $context &&
-			apply_filters( 'wpforms_checkbox_field_html_value_images', true, $context )
-		) {
-
-			$items  = [];
-			$values = explode( "\n", $field['value'] );
-
-			foreach ( $values as $key => $val ) {
-
-				if ( ! empty( $field['images'][ $key ] ) ) {
-					$items[] = sprintf(
-						'<span style="max-width:200px;display:block;margin:0 0 5px 0;"><img src="%s" style="max-width:100%%;display:block;margin:0;"></span>%s',
-						esc_url( $field['images'][ $key ] ),
-						$val
-					);
-				} else {
-					$items[] = $val;
-				}
-			}
-
-			return implode( '<br><br>', $items );
-		}
-
-		return $value;
-	}
-
-	/**
 	 * Define additional field properties.
 	 *
 	 * @since 1.4.5
@@ -128,7 +86,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 
 		// Define data.
 		$form_id  = absint( $form_data['id'] );
-		$field_id = absint( $field['id'] );
+		$field_id = wpforms_validate_field_id( $field['id'] );
 		$choices  = $field['choices'];
 		$dynamic  = wpforms_get_field_dynamic_choices( $field, $form_id, $form_data );
 
@@ -516,6 +474,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		);
 
 			foreach ( $choices as $key => $choice ) {
+				$label = $this->get_choices_label( $choice['label']['text'] ?? '', $key, $field );
 
 				if ( wpforms_is_amp() && ( $using_image_choices || $using_icon_choices ) ) {
 					$choice['container']['attr']['[class]'] = sprintf(
@@ -558,6 +517,9 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 							);
 							$choice['label']['attr']['role'] = 'button';
 						}
+						if ( is_array( $choice['label']['class'] ) && wpforms_is_empty_string( $label ) ) {
+							$choice['label']['class'][] = 'wpforms-field-label-inline-empty';
+						}
 
 						// Image choices.
 						printf(
@@ -565,14 +527,18 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 							wpforms_html_attributes( $choice['label']['id'], $choice['label']['class'], $choice['label']['data'], $choice['label']['attr'] )
 						);
 
+							echo '<span class="wpforms-image-choices-image">';
+
 							if ( ! empty( $choice['image'] ) ) {
 								printf(
-									'<span class="wpforms-image-choices-image"><img src="%s" alt="%s"%s></span>',
+									'<img src="%s" alt="%s"%s>',
 									esc_url( $choice['image'] ),
-									esc_attr( $choice['label']['text'] ),
-									! empty( $choice['label']['text'] ) ? ' title="' . esc_attr( $choice['label']['text'] ) . '"' : ''
+									esc_attr( $label ),
+									! empty( $label ) ? ' title="' . esc_attr( $label ) . '"' : ''
 								);
 							}
+
+							echo '</span>';
 
 							if ( $field['choices_images_style'] === 'none' ) {
 								echo '<br>';
@@ -595,7 +561,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 								checked( '1', $choice['default'], false )
 							);
 
-							echo '<span class="wpforms-image-choices-label">' . wp_kses_post( $choice['label']['text'] ) . '</span>';
+							echo '<span class="wpforms-image-choices-label">' . wp_kses_post( $label ) . '</span>';
 
 						echo '</label>';
 
@@ -611,6 +577,8 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 							);
 							$choice['label']['attr']['role'] = 'button';
 						}
+
+						$choice['attr']['autocomplete'] = 'off';
 
 						// Icon Choices.
 						wpforms()->get( 'icon_choices' )->field_display( $field, $choice, 'checkbox' );
@@ -628,7 +596,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 						printf(
 							'<label %s>%s%s</label>',
 							wpforms_html_attributes( $choice['label']['id'], $choice['label']['class'], $choice['label']['data'], $choice['label']['attr'] ),
-							wp_kses_post( $choice['label']['text'] ),
+							wp_kses_post( $label ),
 							wp_kses(
 								$required,
 								[
@@ -652,7 +620,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 	 * @since 1.5.2
 	 *
 	 * @param int   $field_id     Field ID.
-	 * @param array $field_submit Submitted field value (selected option).
+	 * @param array $field_submit Submitted field value (raw data).
 	 * @param array $form_data    Form data.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) {
@@ -689,7 +657,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		}
 
 		if ( ! empty( $error ) ) {
-			wpforms()->process->errors[ $form_data['id'] ][ $field_id ] = $error;
+			wpforms()->get( 'process' )->errors[ $form_data['id'] ][ $field_id ] = $error;
 		}
 	}
 
@@ -714,7 +682,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 			'name'      => $name,
 			'value'     => '',
 			'value_raw' => $value_raw,
-			'id'        => absint( $field_id ),
+			'id'        => wpforms_validate_field_id( $field_id ),
 			'type'      => $this->type,
 		];
 
@@ -771,7 +739,9 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 
 				foreach ( $field_submit as $item ) {
 					foreach ( $field['choices'] as $key => $choice ) {
-						if ( $item === $choice['value'] || ( empty( $choice['value'] ) && (int) str_replace( 'Choice ', '', $item ) === $key ) ) {
+						// Check if the submitted value is the same as the choice value or if the value is empty and the key matches.
+						// Skip if the submitted value is empty.
+						if ( ( ! empty( $item ) && $item === $choice['value'] ) || ( empty( $choice['value'] ) && (int) str_replace( 'Choice ', '', $item ) === $key ) ) {
 							$value[]       = $choice['label'];
 							$choice_keys[] = $key;
 
@@ -811,7 +781,7 @@ class WPForms_Field_Checkbox extends WPForms_Field {
 		}
 
 		// Push field details to be saved.
-		wpforms()->process->fields[ $field_id ] = $data;
+		wpforms()->get( 'process' )->fields[ $field_id ] = $data;
 	}
 }
 

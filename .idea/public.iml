@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/acfml/classes" isTestSource="false" packagePrefix="ACFML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/gravityforms-multilingual/classes" isTestSource="false" packagePrefix="GFML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sitepress-multilingual-cms" isTestSource="false" packagePrefix="WPML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sitepress-multilingual-cms/classes" isTestSource="false" packagePrefix="WPML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sitepress-multilingual-cms/classes/API" isTestSource="false" packagePrefix="WPML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sitepress-multilingual-cms/classes/plugins" isTestSource="false" packagePrefix="WPML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/sitepress-multilingual-cms/classes/roles" isTestSource="false" packagePrefix="WPML" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-content/plugins/wpforms-lite/src" isTestSource="false" packagePrefix="WPForms" />
+      <sourceFolder url="file://$MODULE_DIR$/wp-includes" isTestSource="false" packagePrefix="PHPMailer" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

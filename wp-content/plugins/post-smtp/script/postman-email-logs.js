@@ -89,9 +89,14 @@ jQuery(document).ready(function($) {
 				<div class="ps-email-log-resend-container"></div>
 			` );
 
-			if( data['success'] == '<span title="Successful"></span>' ) {
+			if( data['success'] == '<span title="Success">Success</span>' ) {
 
 				jQuery( status ).addClass( 'ps-email-log-status-success' );
+
+			}
+			else if( data['success'] == '<span title="In Queue">In Queue</span>' ) {
+
+				jQuery( status ).addClass( 'ps-email-log-status-queued' );
 
 			}
 			else {
@@ -114,6 +119,7 @@ jQuery(document).ready(function($) {
 		<div class="ps-email-log-date-filter">
 			<label>From <input type="date" class="ps-email-log-from" /></label>
 			<label>To <input type="date" class="ps-email-log-to" /></label>
+			<span class="ps-refresh-logs" title="refresh logs"><span class="dashicons dashicons-image-rotate"></span></span>
 		</div>
 	` );
 
@@ -130,25 +136,58 @@ jQuery(document).ready(function($) {
 
 		var from = jQuery( '.ps-email-log-from' ).val();
 		var to = jQuery( '.ps-email-log-to' ).val();
+		var status = jQuery( '.ps-status-btn.active' ).data( 'status' );
+		status = status === 'all' ? '' : `&status=${status}`;
 
 		if( from && to ) {
 
-			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&from=${from}&to=${to}` ).load();
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&from=${from}&to=${to}${status}` ).load();
 
 		}
 		else if( from ) {
 
-			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&from=${from}` ).load();
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&from=${from}${status}` ).load();
 
 		}
 		else if( to ) {
 
-			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&to=${to}` ).load();
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&to=${to}${status}` ).load();
 
 		}
 		else {
 
-			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}` ).load();
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}${status}` ).load();
+
+		}
+
+	} );
+
+	// Status Buttons
+	jQuery( '#ps-email-log' ).before( `
+		<div class="ps-email-log-status-buttons">
+			<button class="button ps-status-btn active" data-status="all">All logs</button>
+			<button class="button ps-status-btn" data-status="success">Success</button>
+			<button class="button ps-status-btn" data-status="failed">Failed</button>
+		</div>
+	` );
+
+	// Status Filter
+	jQuery( document ).on( 'click', '.ps-status-btn', function() {
+
+		jQuery( '.ps-status-btn' ).removeClass( 'active' );
+		jQuery( this ).addClass( 'active' );
+		var status = jQuery( this ).data( 'status' );
+		var from = jQuery( '.ps-email-log-from' ).val();
+		var to = jQuery( '.ps-email-log-to' ).val();
+	
+		if( status == 'all' ) {
+
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&from=${from}&to=${to}` ).load();
+
+		}
+		else {
+
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&status=${status}&from=${from}&to=${to}` ).load();
 
 		}
 
@@ -166,7 +205,8 @@ jQuery(document).ready(function($) {
 
 			jQuery( '.ps-email-log-export-btn .ps-btn-text' ).text( `Export Selected (${selectedValue})` );
 			jQuery( '.ps-email-log-delete-btn .ps-btn-text' ).text( `Delete Selected (${selectedValue})` );
-			jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn' ).addClass( 'ps-selected' );
+			jQuery( '#ps-aedl-bulk-resend' ).text( `Resend Selected (${selectedValue})` );
+			jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn, #ps-aedl-bulk-resend' ).addClass( 'ps-selected' );
 
 		}
 		else {
@@ -176,7 +216,8 @@ jQuery(document).ready(function($) {
 
 			jQuery( '.ps-email-log-export-btn .ps-btn-text' ).text( `Export All` );
 			jQuery( '.ps-email-log-delete-btn .ps-btn-text' ).text( `Delete All` );
-			jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn' ).removeClass( 'ps-selected' );
+			jQuery( '#ps-aedl-bulk-resend' ).text( `Resend All` );
+			jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn, #ps-aedl-bulk-resend' ).removeClass( 'ps-selected' );
 
 		}
 		
@@ -214,13 +255,15 @@ jQuery(document).ready(function($) {
 
 		jQuery( '.ps-email-log-export-btn .ps-btn-text' ).text( `Export Selected (${checkedCounter})` );
 		jQuery( '.ps-email-log-delete-btn .ps-btn-text' ).text( `Delete Selected (${checkedCounter})` );
-		jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn' ).addClass( 'ps-selected' );
+		jQuery( '#ps-aedl-bulk-resend' ).text( `Resend Selected (${checkedCounter})` );
+		jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn, #ps-aedl-bulk-resend' ).addClass( 'ps-selected' );
 		
 		if( checkedCounter == 0 ) {
 
 			jQuery( '.ps-email-log-export-btn .ps-btn-text' ).text( `Export All` );
 			jQuery( '.ps-email-log-delete-btn .ps-btn-text' ).text( `Delete All` );
-			jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn' ).removeClass( 'ps-selected' );
+			jQuery( '#ps-aedl-bulk-resend' ).text( `Resend All` );
+			jQuery( '.ps-email-log-export-btn, .ps-email-log-delete-btn, #ps-aedl-bulk-resend' ).removeClass( 'ps-selected' );
 
 		}
 
@@ -319,7 +362,7 @@ jQuery(document).ready(function($) {
 
 				if( response.success === true ) {
 
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 				else {
@@ -346,7 +389,7 @@ jQuery(document).ready(function($) {
 		toDo = ( toDo ) ? 'original_message' : 'session_transcript';
 		var heading = ( toDo == 'original_message' ) ? 'Email Message' : 'Session Transcript';
 		jQuery( '.ps-popup-container' ).html( `
-			<h1>${heading}</h1>
+			<h1 style="margin: 0; padding: 0;"></h1>
 			<h4>Loading...</h4>
 		` );
 
@@ -376,6 +419,10 @@ jQuery(document).ready(function($) {
 					else {
 
 						var popupContent;
+						jQuery( '.ps-popup-close' ).before( `
+							<a href="${response.data.log_url}&print=1" target="_blank" class="ps-print-email"><span class="dashicons dashicons-printer"></span></a>
+						` );
+
 						popupContent = `
 						<table>
 							<tr>
@@ -433,9 +480,26 @@ jQuery(document).ready(function($) {
 							</table>
 							<hr />
 							<div>
-								${response.data.original_message}
+								<iframe src="${response.data.log_url}" id="ps-email-body" width="100%" height="310px"></iframe>
 							</div>
 						`;
+
+						//Show Attachments
+						if( response.data.attachments !== undefined ) {
+
+							popupContent += `
+									<hr />
+									<div>`;
+
+							jQuery.each( response.data.attachments, function( i, attachment ) {
+
+								popupContent += `<a href='${response.data.path}${attachment}' target="_blank">${attachment}</a><br />`;
+
+							} );
+
+							popupContent += `</div>`;
+
+						}
 
 						jQuery( '.ps-popup-container' ).find( 'h1' ).after( popupContent );
 
@@ -455,6 +519,14 @@ jQuery(document).ready(function($) {
 
 	} );
 
+	//Refresh Logs
+	jQuery( document ).on( 'click', '.ps-refresh-logs', function( e ) {
+
+		e.preventDefault();
+		logsDT.ajax.reload();
+
+	} );
+
 	//View And Session Transcript Popup
 	jQuery( document ).on( 'click', '.ps-popup-btn', function( e ) {
 
@@ -469,6 +541,7 @@ jQuery(document).ready(function($) {
 
 		jQuery( '.ps-popup-wrap' ).fadeOut( 500 );
 		jQuery( '.ps-popup-box' ).removeClass( 'transform-in' ).addClass( 'transform-out' );
+		jQuery( '.ps-print-email' ).remove();
 	
 		e.preventDefault();
 
@@ -509,7 +582,7 @@ jQuery(document).ready(function($) {
 				else {
 
 					alert( response.message );
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 
@@ -518,6 +591,33 @@ jQuery(document).ready(function($) {
 
 
 	} );
+
+	//MainWP | Lets do somthing on changing site
+	jQuery( document ).on( 'change', '.ps-mainwp-site-selector', function() {
+		
+		var siteID = this.value;
+		logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&site_id=${siteID}` ).load();
+		
+	} );
+	
+	//If site already selected
+	jQuery( document ).on( 'click', '.ps-mainwp-site', function( e ) {
+		
+		e.preventDefault();
+		var href = $(this).attr('href');
+	
+		var siteID = PostSMTPGetParameterByName( 'site_id', href );
+		
+		jQuery( `.ps-mainwp-site-selector option[value="${siteID}"]` ).prop( 'selected', true )
+
+		if( siteID != null && siteID != -1 ) {
+
+			logsDT.ajax.url( `${ajaxurl}?action=ps-get-email-logs&security=${logsDTSecirity}&site_id=${siteID}` ).load();
+
+		}
+		
+	} )
+	
 
 	//Resend
 	jQuery( document ).on( 'click', '.ps-email-log-resend', function( e ) {
@@ -557,19 +657,28 @@ jQuery(document).ready(function($) {
 				if( response.success === true ) {
 
 					alert( response.message );
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 				else {
 
 					alert( response.message );
-					logsDT.ajax.reload();
+					logsDT.ajax.reload( null, false );
 
 				}
 
 			}
 		} );
 
+
+	} );
+
+
+	jQuery( document ).on( 'click', '.ps-status-log', function( e ) {
+
+		e.preventDefault();
+		var _details = jQuery( this ).siblings( 'span' ).attr( 'title' );
+		jQuery( '.ps-popup-container' ).html( `<h1 style="margin: 0; padding: 0;"></h1>${_details}` );
 
 	} );
 

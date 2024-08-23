@@ -18,6 +18,7 @@ class Field extends \WPForms_Field {
 
 		// Define field type information.
 		$this->name     = esc_html__( 'Multiple Items', 'wpforms-lite' );
+		$this->keywords = esc_html__( 'product, store, ecommerce, pay, payment', 'wpforms-lite' );
 		$this->type     = 'payment-multiple';
 		$this->icon     = 'fa-list-ul';
 		$this->order    = 50;
@@ -25,7 +26,7 @@ class Field extends \WPForms_Field {
 		$this->defaults = [
 			1 => [
 				'label'      => esc_html__( 'First Item', 'wpforms-lite' ),
-				'value'      => wpforms_format_amount( '10.00' ),
+				'value'      => '10',
 				'icon'       => '',
 				'icon_style' => '',
 				'image'      => '',
@@ -33,7 +34,7 @@ class Field extends \WPForms_Field {
 			],
 			2 => [
 				'label'      => esc_html__( 'Second Item', 'wpforms-lite' ),
-				'value'      => wpforms_format_amount( '25.00' ),
+				'value'      => '25',
 				'icon'       => '',
 				'icon_style' => '',
 				'image'      => '',
@@ -41,7 +42,7 @@ class Field extends \WPForms_Field {
 			],
 			3 => [
 				'label'      => esc_html__( 'Third Item', 'wpforms-lite' ),
-				'value'      => wpforms_format_amount( '50.00' ),
+				'value'      => '50',
 				'icon'       => '',
 				'icon_style' => '',
 				'image'      => '',
@@ -67,43 +68,6 @@ class Field extends \WPForms_Field {
 
 		// This field requires fieldset+legend instead of the field label.
 		add_filter( "wpforms_frontend_modern_is_field_requires_fieldset_{$this->type}", '__return_true', PHP_INT_MAX, 2 );
-	}
-
-	/**
-	 * Return images, if any, for HTML supported values.
-	 *
-	 * @since 1.8.2
-	 *
-	 * @param string $value     Field value.
-	 * @param array  $field     Field settings.
-	 * @param array  $form_data Form data and settings.
-	 * @param string $context   Value display context.
-	 *
-	 * @return string
-	 */
-	public function field_html_value( $value, $field, $form_data = [], $context = '' ) {
-
-		// Only use HTML formatting for payment multiple fields, with image
-		// choices enabled, and exclude the entry table display. Lastly,
-		// provides a filter to disable fancy display.
-		if (
-			$context !== 'entry-table' &&
-			! empty( $field['type'] ) &&
-			$field['type'] === $this->type &&
-			! empty( $field['value'] ) &&
-			! empty( $field['image'] ) &&
-			$this->filter_field_html_value_images( $context )
-		) {
-			return sprintf(
-				'<span %s><img src="%s" %s></span>%s',
-				'style="max-width:200px;display:block;margin:0 0 5px 0;"',
-				esc_url( $field['image'] ),
-				'style="max-width:100%;display:block;margin:0;"',
-				$value
-			);
-		}
-
-		return $value;
 	}
 
 	/**
@@ -408,7 +372,7 @@ class Field extends \WPForms_Field {
 			foreach ( $choices as $key => $choice ) {
 
 				$label = isset( $choice['label']['text'] ) ? $choice['label']['text'] : '';
-				/* translators: %s - Choice item number. */
+				/* translators: %s - item number. */
 				$label  = $label !== '' ? $label : sprintf( esc_html__( 'Item %s', 'wpforms-lite' ), $key );
 				$label .= ! empty( $field['show_price_after_labels'] ) && isset( $choice['data']['amount'] ) ? ' - ' . wpforms_format_amount( wpforms_sanitize_amount( $choice['data']['amount'] ), true ) : '';
 
@@ -425,14 +389,18 @@ class Field extends \WPForms_Field {
 							wpforms_html_attributes( $choice['label']['id'], $choice['label']['class'], $choice['label']['data'], $choice['label']['attr'] ) // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 						);
 
+							echo '<span class="wpforms-image-choices-image">';
+
 							if ( ! empty( $choice['image'] ) ) {
 								printf(
-									'<span class="wpforms-image-choices-image"><img src="%s" alt="%s"%s></span>',
+									'<img src="%s" alt="%s"%s>',
 									esc_url( $choice['image'] ),
 									esc_attr( $choice['label']['text'] ),
 									! empty( $choice['label']['text'] ) ? ' title="' . esc_attr( $choice['label']['text'] ) . '"' : ''
 								);
 							}
+
+							echo '</span>';
 
 							if ( $field['choices_images_style'] === 'none' ) {
 								echo '<br>';
@@ -450,6 +418,7 @@ class Field extends \WPForms_Field {
 						echo '</label>';
 
 					} elseif ( empty( $field['dynamic_choices'] ) && ! empty( $field['choices_icons'] ) ) {
+						$choice['attr']['autocomplete'] = 'off';
 
 						// Icon Choices.
 						wpforms()->get( 'icon_choices' )->field_display( $field, $choice, 'radio', $label );
@@ -483,7 +452,7 @@ class Field extends \WPForms_Field {
 	 * @since 1.8.2
 	 *
 	 * @param int   $field_id     Field ID.
-	 * @param array $field_submit Submitted form data.
+	 * @param array $field_submit Submitted field value (raw data).
 	 * @param array $form_data    Form data and settings.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) {
@@ -545,27 +514,5 @@ class Field extends \WPForms_Field {
 			'id'           => absint( $field_id ),
 			'type'         => sanitize_key( $this->type ),
 		];
-	}
-
-	/**
-	 * Return boolean determining if field HTML values uses images.
-	 *
-	 * @since 1.8.2
-	 *
-	 * @param string $context Context of the field.
-	 *
-	 * @return bool
-	 */
-	private function filter_field_html_value_images( $context ) {
-
-		/**
-		 * Filters whether to use HTML formatting for a field with image choices enabled.
-		 *
-		 * @since 1.5.1
-		 *
-		 * @param bool   $use_html Whether to use HTML formatting.
-		 * @param string $context  Value display context.
-		 */
-		return (bool) apply_filters( "wpforms_{$this->type}_field_html_value_images", true, $context ); // phpcs:ignore WPForms.PHP.ValidateHooks.InvalidHookName
 	}
 }

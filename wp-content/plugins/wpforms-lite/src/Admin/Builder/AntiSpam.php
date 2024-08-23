@@ -88,6 +88,8 @@ class AntiSpam {
 		}
 
 		$this->akismet_settings();
+		$this->store_spam_entries_settings();
+		$this->time_limit_settings();
 		$this->captcha_settings();
 
 		/**
@@ -167,6 +169,70 @@ class AntiSpam {
 				'description' => __( 'Automated tests that help to prevent bots from submitting your forms.', 'wpforms-lite' ),
 				'title'       => __( 'CAPTCHA', 'wpforms-lite' ),
 				'borders'     => [ 'top' ],
+			]
+		);
+	}
+
+	/**
+	 * Output the Spam Entries Store settings.
+	 *
+	 * @since 1.8.3
+	 */
+	public function store_spam_entries_settings() {
+
+		if ( ! wpforms()->is_pro() ) {
+			return;
+		}
+
+		$disable_entries = $this->form_data['settings']['disable_entries'] ?? 0;
+
+		wpforms_panel_field(
+			'toggle',
+			'settings',
+			'store_spam_entries',
+			$this->form_data,
+			__( 'Store spam entries in the database', 'wpforms-lite' ),
+			[
+				'value' => $this->form_data['settings']['store_spam_entries'] ?? 0,
+				'class' => $disable_entries ? 'wpforms-hidden' : '',
+			]
+		);
+	}
+
+	/**
+	 * Output the Time Limit settings.
+	 *
+	 * @since 1.8.3
+	 */
+	private function time_limit_settings() {
+
+		wpforms_panel_field(
+			'toggle',
+			'anti_spam',
+			'enable',
+			$this->form_data,
+			__( 'Enable minimum time to submit', 'wpforms-lite' ),
+			[
+				'parent'      => 'settings',
+				'subsection'  => 'time_limit',
+				'tooltip'     => __( 'Set a minimum amount of time a user must spend on a form before submitting.', 'wpforms-lite' ),
+				'input_class' => 'wpforms-panel-field-toggle-next-field',
+			]
+		);
+
+		wpforms_panel_field(
+			'text',
+			'anti_spam',
+			'duration',
+			$this->form_data,
+			__( 'Minimum time to submit', 'wpforms-lite' ),
+			[
+				'parent'     => 'settings',
+				'subsection' => 'time_limit',
+				'type'       => 'number',
+				'min'        => 1,
+				'default'    => 3,
+				'after'      => sprintf( '<span class="wpforms-panel-field-after">%s</span>', __( 'seconds', 'wpforms-lite' ) ),
 			]
 		);
 	}

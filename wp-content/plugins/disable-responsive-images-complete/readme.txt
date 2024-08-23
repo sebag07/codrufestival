@@ -9,9 +9,9 @@ Author URI: https://plugin-planet.com/
 Donate link: https://monzillamedia.com/donate.html
 Contributors: specialk
 Requires at least: 4.6
-Tested up to: 6.2
-Stable tag: 2.5
-Version: 2.5
+Tested up to: 6.6
+Stable tag: 2.6.3
+Version:    2.6.3
 Requires PHP: 5.6.20
 License: GPL v2 or later
 
@@ -139,84 +139,9 @@ Send any questions or feedback via my [contact form](https://plugin-planet.com/s
 If you like Disable Responsive Images, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/disable-responsive-images-complete/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
 
-**2.5 (2023/02/26)**
+**2.6.3 (2024/06/20)**
 
-* Tests on WordPress 6.1 + 6.2 (beta)
-* Tests on PHP 8.1 and 8.2
+* Tests on WordPress 6.6 (beta)
 
-**2.4.1 (2022/09/25)**
 
-* Improves plugin documentation
-* Tests on WordPress 6.1
-
-**2.4 (2022/05/15)**
-
-* Tests on WordPress 6.0
-
-**2.3 (2022/01/10)**
-
-* Updates some links to external resources
-* Changes minimum required WP version to 4.6
-* Tests on WordPress 5.9
-
-**2.2 (2021/07/13)**
-
-* Tests on WordPress 5.8
-
-**2.1 (2021/02/08)**
-
-* Tests on PHP 7.4 and 8.0
-* Tests on WordPress 5.7
-
-**2.0 (2020/11/10)**
- 
-* Tests on PHP 7.4 and 8.0
-* Tests on WordPress 5.6
-
-**1.9.1 (2020/08/04)**
-
-* Refines readme/documentation
-
-**1.9 (2020/08/04)**
-
-* Tests on WordPress 5.5
-
-**1.8 (2020/03/13)**
-
-* Tests on WordPress 5.4
-
-**1.7 (2019/10/27)**
-
-* Tests on WordPress 5.3
-
-**1.6 (2019/09/02)**
-
-* Updates some links to https
-* Tests on WordPress 5.3 (alpha)
-
-**1.5 (2019/04/28)**
-
-* Bumps [minimum PHP version](https://codex.wordpress.org/Template:Server_requirements) to 5.6.20
-* Tests on WordPress 5.2
-
-**1.4 (2019/03/06)**
-
-* Tests on WordPress 5.1 and 5.2 (alpha)
-
-**1.3 (2019/02/02)**
-
-* Tests on WordPress 5.1
-
-**1.2 (2018/11/14)**
-
-* Tests on WordPress 5.0
-
-**1.1 (2018/08/16)**
-
-* Updates GDPR blurb and donate link
-* Adds icons for the WP Plugin Directory
-* Further tests on WP versions 4.9 and 5.0 (alpha)
-
-**1.0 (2018/05/18)**
-
-* Initial release
+Full changelog @ [https://plugin-planet.com/wp/changelog/disable-responsive-images-complete.txt](https://plugin-planet.com/wp/changelog/disable-responsive-images-complete.txt)

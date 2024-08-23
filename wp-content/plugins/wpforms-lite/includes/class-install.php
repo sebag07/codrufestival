@@ -1,6 +1,11 @@
 <?php
 
-use WPForms\Tasks\Meta;
+use WPForms\Helpers\DB;
+use WPForms\Helpers\Transient;
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Handle plugin installation upon activation.
@@ -21,7 +26,7 @@ class WPForms_Install {
 		register_deactivation_hook( WPFORMS_PLUGIN_FILE, [ $this, 'deactivate' ] );
 
 		// Watch for new multisite blogs.
-		add_action( 'wpmu_new_blog', [ $this, 'new_multisite_blog' ], 10, 6 );
+		add_action( 'wp_initialize_site', [ $this, 'new_multisite_blog' ], 10, 2 );
 
 		// Watch for delayed admin install.
 		add_action( 'admin_init', [ $this, 'admin' ] );
@@ -98,6 +103,15 @@ class WPForms_Install {
 
 		// Remove plugin cron jobs.
 		wp_clear_scheduled_hook( 'wpforms_email_summaries_cron' );
+
+		// Check if the event is scheduled before attempting to clear it.
+		// This event is only registered for the Lite edition of the plugin.
+		// It's advisable to verify if the CRON event is scheduled using `wp_next_scheduled`.
+		// This precaution ensures that you are not attempting to clear a scheduled
+		// hook that may not exist, which could result in unexpected behavior.
+		if ( wp_next_scheduled( 'wpforms_weekly_entries_count_cron' ) ) {
+			wp_clear_scheduled_hook( 'wpforms_weekly_entries_count_cron' );
+		}
 	}
 
 	/**
@@ -159,18 +173,18 @@ class WPForms_Install {
 	 * and if so run the installer.
 	 *
 	 * @since 1.3.0
+	 * @since 1.8.4 Added $new_site and $args parameters and removed $blog_id, $user_id, $domain, $path, $site_id,
+	 *        $meta parameters.
 	 *
-	 * @param int    $blog_id Blog ID.
-	 * @param int    $user_id User ID.
-	 * @param string $domain  Site domain.
-	 * @param string $path    Site path.
-	 * @param int    $site_id Site ID. Only relevant on multi-network installs.
-	 * @param array  $meta    Meta data. Used to set initial site options.
+	 * @param WP_Site $new_site New site object.
+	 * @param array   $args     Arguments for the initialization.
+	 *
+	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public function new_multisite_blog( $blog_id, $user_id, $domain, $path, $site_id, $meta ) {
+	public function new_multisite_blog( $new_site, $args ) {
 
 		if ( is_plugin_active_for_network( plugin_basename( WPFORMS_PLUGIN_FILE ) ) ) {
-			switch_to_blog( $blog_id );
+			switch_to_blog( $new_site->blog_id );
 			$this->run();
 			restore_current_blog();
 		}
@@ -184,8 +198,10 @@ class WPForms_Install {
 	 */
 	private function maybe_create_tables() {
 
+		Transient::delete( DB::EXISTING_TABLES_TRANSIENT_NAME );
+
 		array_map(
-			static function( $handler ) {
+			static function ( $handler ) {
 
 				if ( ! method_exists( $handler, 'table_exists' ) ) {
 					return;
@@ -201,6 +217,7 @@ class WPForms_Install {
 				wpforms()->get( 'tasks_meta' ),
 				wpforms()->get( 'payment' ),
 				wpforms()->get( 'payment_meta' ),
+				wpforms()->get( 'log' ),
 			]
 		);
 	}

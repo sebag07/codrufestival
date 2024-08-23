@@ -95,7 +95,7 @@ body.post-smtp_page_postman_email_log {
     font-size: 16px;
 }
 
-.ps-main-header.post-smtp-welcome-panel {
+.ps-main-header.post-smtp-welcome-panel h2 {
     padding: 0px 15px;
     font-size: 19px;
 }
@@ -638,11 +638,12 @@ section#delete_settings {
 .ui-state-default, 
 .ui-widget-content .ui-state-default, 
 .ui-widget-header .ui-state-default {
-    background-color: #fff;
+    background-color: #f9f9fa;
 }
 
 .ui-tabs .ui-tabs-nav li {
-    border: 1px solid #e6e6e6;
+    border: none;
+    margin-top: 5px;
 }
 
 .ui-widget-content .ui-state-default a {
@@ -655,27 +656,17 @@ section#delete_settings {
     font-weight: bold;
 }
 
-.ui-tabs .ui-tabs-nav li:first-child {
-    border-top-left-radius: 17px;
-}
-
-.ui-tabs .ui-tabs-nav li:last-child {
-    border-top-right-radius: 17px;
-}
-
-.ui-tabs .ui-tabs-nav li.visited-config-ui-tab {
-    background-color: #4db556;
+.ui-tabs .ui-tabs-nav li a:focus {
+    box-shadow: none;
 }
 
 .ui-tabs .ui-tabs-active,
 .ui-tabs .ui-tabs-nav li.visited-config-ui-tab.ui-tabs-active {
-    background: #466cff;
+    background: #ffffff;
 }
 
-.ui-tabs .ui-tabs-active a,
-.ui-tabs .ui-tabs-nav li.visited-config-ui-tab.ui-tabs-active a,
-.ui-tabs .ui-tabs-nav li.visited-config-ui-tab a {
-    color: #fff;
+.ui-tabs .ui-tabs-active a {
+    color: #375caf;
 }
 .ps-less-secure {
     color: red;
@@ -1247,8 +1238,8 @@ th#date {
 .ps-switch-1 {
     position: relative;
     display: inline-block;
-    width: 34px;
-    height: 21px;
+    width: 30px;
+    height: 17px;
 }
 
 .ps-switch-1 input {
@@ -1290,8 +1281,8 @@ th#date {
 .ps-switch-1 .slider:before {
     position: absolute;
     content: "";
-    height: 17px;
-    width: 16px;
+    height: 13px;
+    width: 12px;
     left: 2px;
     bottom: 2px;
     background-color: #fff;
@@ -1330,17 +1321,16 @@ h5#ps-progress {
 }
 
 .ps-email-log-status-success span, 
-.ps-email-log-status-failed span {
+.ps-email-log-status-failed span,
+.ps-email-log-status-queued span {
     color: #fff;
     font-weight: 600;
-    height: 9px;
-    width: 9px;
-    border-radius: 50px;
+    border-radius: 25px;
     display: inline-block;
     margin-right: 5px;
     cursor: pointer;
+    padding: 2px 10px;
 }
-
 
 .ps-email-log-status-success span {
     background: #3FA500;
@@ -1348,6 +1338,10 @@ h5#ps-progress {
 
 .ps-email-log-status-failed span {
     background: #DC3545;
+}
+
+.ps-email-log-status-queued span {
+    background: #ffa500;
 }
 
 .ps-email-log-view,
@@ -1430,6 +1424,14 @@ div#ps-email-log_length{
     border-radius: 50px!important;
 }
 
+.ps-email-log-resend-to {
+    margin: 3px 0;
+}
+
+.ps-email-log-status-buttons {
+    margin-top: 15px;
+}
+
 /* View And Session Transcript Popup */
 .ps-popup-wrap {
     width: 100%;
@@ -1457,7 +1459,7 @@ div#ps-email-log_length{
     overflow: auto;
 }
   
-.ps-popup-close-btn {
+.ps-popup-close-btn, .ps-print-email {
     text-align: center;
     width: 19px;
     height: 19px;
@@ -1466,11 +1468,28 @@ div#ps-email-log_length{
     top: 10px;
     right: 10px;
     border-radius: 1000px;
-    background: #dc3545;
     font-weight: bold;
     text-decoration: none;
-    color: #fff;
+    color: #000;
     line-height: 190%;
+}
+
+.ps-popup-close-btn {
+    top: 6px;
+}
+
+.ps-popup-close-btn span {
+    font-size: 27px;
+}
+
+.ps-popup-close-btn:hover {
+    color: #000;
+}
+
+.ps-print-email {
+    right: 33px;
+    background: none;
+    color: #000;
 }
 
 .transform-in, .transform-out {
@@ -1542,4 +1561,62 @@ div#ps-email-log_length{
 .ps-status-log {
     display: inline-block;
     font-family: inherit;
+    margin-left: 5px;
+}
+
+.ps-refresh-logs span {
+    vertical-align: middle;
+    background: #f8f9fa;
+    padding: 6px;
+    border-radius: 50px;
+    color: #0086fd;
+}
+
+.ps-refresh-logs span:hover {
+    cursor: pointer;
+}
+#toplevel_page_postman ul li:nth-last-child(3) a {
+    color: #adff2f!important;
+}
+
+.ps-dashboard-pro {
+    background: #eef2f4;
+    color: #1d9ad2;
+    font-size: 11px;
+    padding: 0px 4px;
+    border-radius: 3px;
+    margin-left: 1px;
+}
+
+.ps-dashboard-pro-hide{
+    display: none;
+
+}
+
+.ps-home-middle-left {
+    float: left;
+}
+
+.ps-pro-icon {
+    color: #fed90f;
+}
+
+.button.ps-status-btn {
+    border-radius: 50px;
+}
+
+.ps-status-btn {
+    background-color: #ffffff!important;
+    color: #000000!important;
+    border: 1px solid #4578ea!important;
+}
+
+.ps-status-btn.active {
+    background-color: #4578ea!important;;
+    color: #ffffff!important;
+    border: none;
+}
+
+.ps-status-btn:focus {
+    box-shadow: none!important;
 }

@@ -1,10 +1,10 @@
 === Category Order and Taxonomy Terms Order  ===
 Contributors: nsp-code
 Donate link: http://www.nsp-code.com/donate.php
-Tags: category order,terms order, taxonomy order, admin order, categories sort, order category
+Tags: category order,terms order, taxonomy order, categories sort
 Requires at least: 2.8
-Tested up to: 6.2.2
-Stable tag: 1.7.7
+Tested up to: 6.5.4
+Stable tag: 1.8.2
 
 Order Categories and all custom taxonomies terms (hierarchically) using a Drag and Drop Sortable JavaScript capability. 
 
@@ -60,6 +60,23 @@ Consider upgrading to our advanced version of this plugin at a very resonable pr
 
 == Change Log ==
 
+= 1.8.2 =
+ - Polylang fix - Ignore the 'language' to avoid unnecessarily sorting.
+ - Set-up the Live Preview for the plugin.
+ - WordPress 6.5.4 compatibility check and tag update
+
+= 1.8.1 =
+ - WordPress 6.5 compatibility check and tag update
+
+= 1.8 =
+ - Check if the terms table still includ the custom column, to avoid errors ( mainly when upgrading WordPress )
+ - Code improvements
+ - WordPress 6.4.2 compatibility check and tag update
+
+= 1.7.9 =
+ - Trigger wp_cache_flush when saving the order to clear the internal caches
+ - WordPress 6.3 compatibility tag
+ 
 = 1.7.7 =
  - Use term name for admin queries, when the admin sort is active, to avoid "random" returns on certain servers, when term order are empty.
  - WordPress 6.2.2 compatibility tag

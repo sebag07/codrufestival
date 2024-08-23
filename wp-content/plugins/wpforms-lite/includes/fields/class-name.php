@@ -1,5 +1,9 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 /**
  * Name text field.
  *
@@ -15,10 +19,11 @@ class WPForms_Field_Name extends WPForms_Field {
 	public function init() {
 
 		// Define field type information.
-		$this->name  = esc_html__( 'Name', 'wpforms-lite' );
-		$this->type  = 'name';
-		$this->icon  = 'fa-user';
-		$this->order = 150;
+		$this->name     = esc_html__( 'Name', 'wpforms-lite' );
+		$this->keywords = esc_html__( 'user, first, last', 'wpforms-lite' );
+		$this->type     = 'name';
+		$this->icon     = 'fa-user';
+		$this->order    = 150;
 
 		$this->hooks();
 	}
@@ -68,7 +73,7 @@ class WPForms_Field_Name extends WPForms_Field {
 		unset( $properties['inputs']['primary'] );
 
 		$form_id  = absint( $form_data['id'] );
-		$field_id = absint( $field['id'] );
+		$field_id = wpforms_validate_field_id( $field['id'] );
 
 		$props = [
 			'inputs' => [
@@ -506,31 +511,33 @@ class WPForms_Field_Name extends WPForms_Field {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int   $field_id
-	 * @param array $field_submit
-	 * @param array $form_data
+	 * @param int          $field_id     Field id.
+	 * @param array|string $field_submit Submitted field value (raw data).
+	 * @param array        $form_data    Form data.
 	 */
 	public function validate( $field_id, $field_submit, $form_data ) {
 
-		// Extended validation needed for the different name fields.
-		if ( ! empty( $form_data['fields'][ $field_id ]['required'] ) ) {
-
-			$form_id  = $form_data['id'];
-			$format   = $form_data['fields'][ $field_id ]['format'];
-			$required = wpforms_get_required_label();
-
-			if ( 'simple' === $format && empty( $field_submit ) ) {
-				wpforms()->process->errors[ $form_id ][ $field_id ] = $required;
-			}
-
-			if ( ( 'first-last' === $format || 'first-middle-last' === $format ) && empty( $field_submit['first'] ) ) {
-				wpforms()->process->errors[ $form_id ][ $field_id ]['first'] = $required;
-			}
-
-			if ( ( 'first-last' === $format || 'first-middle-last' === $format ) && empty( $field_submit['last'] ) ) {
-				wpforms()->process->errors[ $form_id ][ $field_id ]['last'] = $required;
-			}
+		if ( empty( $form_data['fields'][ $field_id ]['required'] ) ) {
+			return;
 		}
+
+		// Extended validation needed for the different name fields.
+		$form_id  = $form_data['id'];
+		$format   = $form_data['fields'][ $field_id ]['format'];
+		$required = wpforms_get_required_label();
+		$process  = wpforms()->get( 'process' );
+
+		if ( $format === 'simple' && wpforms_is_empty_string( $field_submit ) ) {
+			$process->errors[ $form_id ][ $field_id ] = $required;
+
+			return;
+		}
+
+		if ( ! ( $format === 'first-last' || $format === 'first-middle-last' ) ) {
+			return;
+		}
+
+		$this->validate_complicated_formats( $process, $form_id, $field_id, $field_submit, $required );
 	}
 
 	/**
@@ -538,17 +545,16 @@ class WPForms_Field_Name extends WPForms_Field {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param int   $field_id
-	 * @param array $field_submit
-	 * @param array $form_data
+	 * @param int   $field_id     Field ID.
+	 * @param mixed $field_submit Field value that was submitted.
+	 * @param array $form_data    Form data and settings.
 	 */
 	public function format( $field_id, $field_submit, $form_data ) {
-
 		// Define data.
-		$name   = ! empty( $form_data['fields'][ $field_id ]['label'] ) ? $form_data['fields'][ $field_id ]['label'] : '';
-		$first  = ! empty( $field_submit['first'] ) ? $field_submit['first'] : '';
-		$middle = ! empty( $field_submit['middle'] ) ? $field_submit['middle'] : '';
-		$last   = ! empty( $field_submit['last'] ) ? $field_submit['last'] : '';
+		$name   = isset( $form_data['fields'][ $field_id ]['label'] ) && ! wpforms_is_empty_string( $form_data['fields'][ $field_id ]['label'] ) ? $form_data['fields'][ $field_id ]['label'] : '';
+		$first  = isset( $field_submit['first'] ) && ! wpforms_is_empty_string( $field_submit['first'] ) ? $field_submit['first'] : '';
+		$middle = isset( $field_submit['middle'] ) && ! wpforms_is_empty_string( $field_submit['middle'] ) ? $field_submit['middle'] : '';
+		$last   = isset( $field_submit['last'] ) && ! wpforms_is_empty_string( $field_submit['last'] ) ? $field_submit['last'] : '';
 
 		if ( is_array( $field_submit ) ) {
 			$value = implode( ' ', array_filter( [ $first, $middle, $last ] ) );
@@ -557,10 +563,10 @@ class WPForms_Field_Name extends WPForms_Field {
 		}
 
 		// Set final field details.
-		wpforms()->process->fields[ $field_id ] = [
+		wpforms()->get( 'process' )->fields[ $field_id ] = [
 			'name'   => sanitize_text_field( $name ),
 			'value'  => sanitize_text_field( $value ),
-			'id'     => absint( $field_id ),
+			'id'     => wpforms_validate_field_id( $field_id ),
 			'type'   => $this->type,
 			'first'  => sanitize_text_field( $first ),
 			'middle' => sanitize_text_field( $middle ),
@@ -583,6 +589,33 @@ class WPForms_Field_Name extends WPForms_Field {
 	public function is_field_requires_fieldset( $requires_fieldset, $field ) {
 
 		return isset( $field['format'] ) && $field['format'] !== 'simple';
+	}
+
+	/**
+	 * Validate complicated formats.
+	 *
+	 * @since 1.8.2.3
+	 *
+	 * @param WPForms_Process $process      Process class instance.
+	 * @param int|string      $form_id      Form id.
+	 * @param int|string      $field_id     Field id.
+	 * @param array           $field_submit Field submit.
+	 * @param string          $required     Required message text.
+	 */
+	private function validate_complicated_formats( $process, $form_id, $field_id, $field_submit, $required ) {
+
+		// Prevent PHP Warning: Illegal string offset ‘first’ or 'last'.
+		if ( isset( $process->errors[ $form_id ][ $field_id ] ) ) {
+			$process->errors[ $form_id ][ $field_id ] = (array) $process->errors[ $form_id ][ $field_id ];
+		}
+
+		if ( isset( $field_submit['first'] ) && wpforms_is_empty_string( $field_submit['first'] ) ) {
+			$process->errors[ $form_id ][ $field_id ]['first'] = $required;
+		}
+
+		if ( isset( $field_submit['last'] ) && wpforms_is_empty_string( $field_submit['last'] ) ) {
+			$process->errors[ $form_id ][ $field_id ]['last'] = $required;
+		}
 	}
 }
 

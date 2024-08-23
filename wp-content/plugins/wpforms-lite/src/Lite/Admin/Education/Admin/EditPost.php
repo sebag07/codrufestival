@@ -34,10 +34,6 @@ class EditPost implements EducationInterface {
 			return false;
 		}
 
-		if ( ! $this->is_supported_version() ) {
-			return false;
-		}
-
 		if ( ! wpforms_current_user_can( 'view_forms' ) ) {
 			return false;
 		}
@@ -112,24 +108,6 @@ class EditPost implements EducationInterface {
 	}
 
 	/**
-	 * We support Classic Editor or Block Editor for WordPress 5.5+.
-	 *
-	 * @since 1.8.1
-	 *
-	 * @return bool
-	 */
-	private function is_supported_version() {
-
-		if ( ! $this->is_gutenberg_editor() ) {
-			return true;
-		}
-
-		global $wp_version;
-
-		return (bool) version_compare( $wp_version, '5.5', '>=' );
-	}
-
-	/**
 	 * Enqueue styles.
 	 *
 	 * @since 1.8.1
@@ -157,7 +135,7 @@ class EditPost implements EducationInterface {
 
 		wp_enqueue_script(
 			'wpforms-edit-post-education',
-			WPFORMS_PLUGIN_URL . "assets/lite/js/admin/edit-post-education.es5{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/lite/js/admin/education/edit-post.es5{$min}.js",
 			[ 'jquery' ],
 			WPFORMS_VERSION,
 			true
@@ -228,7 +206,7 @@ class EditPost implements EducationInterface {
 
 		$message = $this->has_forms
 			? __( 'Don\'t forget to embed your contact form. Simply click the Add Form button below.', 'wpforms-lite' )
-			: sprintf( /* translators: %1$s is link to create a new form. */
+			: sprintf( /* translators: %1$s - link to create a new form. */
 				__( 'Did you know that with <a href="%1$s" target="_blank" rel="noopener noreferrer">WPForms</a>, you can create an easy-to-use contact form in a matter of minutes?', 'wpforms-lite' ),
 				esc_url( add_query_arg( 'page', 'wpforms-overview', admin_url( 'admin.php' ) ) )
 			);
@@ -254,7 +232,7 @@ class EditPost implements EducationInterface {
 
 		$message = $this->has_forms
 			? __( 'You\'ve already created a form, now add it to the page so your customers can get in touch.', 'wpforms-lite' )
-			: sprintf( /* translators: %1$s is link to create a new form. */
+			: sprintf( /* translators: %1$s - link to create a new form. */
 				__( 'Did you know that with <a href="%1$s" target="_blank" rel="noopener noreferrer">WPForms</a>, you can create an easy-to-use contact form in a matter of minutes?', 'wpforms-lite' ),
 				esc_url( add_query_arg( 'page', 'wpforms-overview', admin_url( 'admin.php' ) ) )
 			);

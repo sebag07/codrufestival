@@ -37,6 +37,8 @@ class Loader {
 			'LiteConnect\LiteConnect',
 			'Divi\Divi',
 			'Elementor\Elementor',
+			'WPCode\WPCode',
+			'WPCode\RegisterLibrary',
 			'Gutenberg\FormSelector',
 			'WPMailSMTP\Notifications',
 			'WPorg\Translations',
@@ -44,15 +46,18 @@ class Loader {
 			'UncannyAutomator\UncannyAutomator',
 			'UsageTracking\UsageTracking',
 			'DefaultThemes\DefaultThemes',
-			'TranslationsPress\Translations',
+			'Translations\Translations',
 			'DefaultContent\DefaultContent',
 			'PopupMaker\PopupMaker',
+			'WooCommerce\Notifications',
 		];
 
 		$class_names = (array) apply_filters( 'wpforms_integrations_available', $core_class_names );
 
 		foreach ( $class_names as $class_name ) {
 			$integration = $this->register_class( $class_name );
+
+			wpforms()->register_instance( $class_name, $integration );
 
 			if ( ! empty( $integration ) ) {
 				$this->load_integration( $integration );

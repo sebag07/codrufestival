@@ -58,7 +58,7 @@ class Help {
 
 		wp_enqueue_script(
 			'wpforms-builder-help',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/builder/help{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/help{$min}.js",
 			[ 'wpforms-builder' ],
 			WPFORMS_VERSION,
 			true
@@ -138,21 +138,23 @@ class Help {
 	/**
 	 * Get categories.
 	 *
+	 * @return array Categories data.
 	 * @since 1.6.3
 	 *
-	 * @return array Categories data.
 	 */
 	public function get_categories() {
 
 		return [
-			'getting-started' => esc_html__( 'Getting Started', 'wpforms-lite' ),
-			'functionality'   => esc_html__( 'Functionality', 'wpforms-lite' ),
-			'fields'          => esc_html__( 'Fields', 'wpforms-lite' ),
-			'addons'          => esc_html__( 'Addons', 'wpforms-lite' ),
-			'payments'        => esc_html__( 'Payments', 'wpforms-lite' ),
-			'entries'         => esc_html__( 'Entries', 'wpforms-lite' ),
-			'styling'         => esc_html__( 'Styling', 'wpforms-lite' ),
-			'extending'       => esc_html__( 'Extending', 'wpforms-lite' ),
+			'getting-started'              => esc_html__( 'Getting Started', 'wpforms-lite' ),
+			'form-creation'                => esc_html__( 'Form Creation', 'wpforms-lite' ),
+			'entry-management'             => esc_html__( 'Entry Management', 'wpforms-lite' ),
+			'form-management'              => esc_html__( 'Form Management', 'wpforms-lite' ),
+			'marketing-integrations'       => esc_html__( 'Marketing Integrations', 'wpforms-lite' ),
+			'payment-forms'                => esc_html__( 'Payment Forms', 'wpforms-lite' ),
+			'payment-processing'           => esc_html__( 'Payment Processing', 'wpforms-lite' ),
+			'spam-prevention-and-security' => esc_html__( 'Spam Prevention and Security', 'wpforms-lite' ),
+			'extending-functionality'      => esc_html__( 'Extending Functionality', 'wpforms-lite' ),
+			'troubleshooting-and-support'  => esc_html__( 'Troubleshooting and Support', 'wpforms-lite' ),
 		];
 	}
 
@@ -208,6 +210,8 @@ class Help {
 			'fields/field_options/square'             => 'square credit card',
 			'fields/field_options/signature'          => 'signature',
 			'fields/field_options/net_promoter_score' => 'net promoter score',
+			'fields/field_options/payment-coupon'     => 'coupon',
+			'fields/field_options/repeater'           => 'repeater',
 			'settings/general'                        => 'settings',
 			'settings/anti_spam'                      => 'spam',
 			'settings/notifications'                  => 'notification emails',
@@ -228,6 +232,7 @@ class Help {
 			'providers/activecampaign'                => 'activecampaign',
 			'providers/campaign_monitor'              => 'campaign monitor',
 			'providers/constant_contact'              => 'constant contact',
+			'providers/convertkit'                    => 'convertkit',
 			'providers/drip'                          => 'drip',
 			'providers/getresponse'                   => 'getresponse',
 			'providers/getresponse_v3'                => 'getresponse',
@@ -287,6 +292,7 @@ class Help {
 				'/docs/setup-captcha-wpforms/',
 				'/docs/how-to-install-and-use-custom-captcha-addon-in-wpforms/',
 				'/docs/setting-up-akismet-anti-spam-protection/',
+				'/docs/viewing-and-managing-spam-entries/',
 			],
 			'fields'                    => [
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
@@ -308,24 +314,28 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'paragraph'                 => [
 				'/docs/how-to-limit-words-or-characters-in-a-form-field/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'paragraph text'            => [
 				'/docs/how-to-limit-words-or-characters-in-a-form-field/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'textarea'                  => [
 				'/docs/how-to-limit-words-or-characters-in-a-form-field/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'input mask'                => [
 				'/docs/how-to-use-custom-input-masks/',
@@ -457,6 +467,7 @@ class Help {
 			],
 			'email'                     => [
 				'/docs/setup-form-notification-wpforms/',
+				'/docs/customizing-form-notification-emails/',
 				'/docs/how-to-create-conditional-form-notifications-in-wpforms/',
 				'/docs/troubleshooting-email-notifications/',
 				'/docs/how-to-fix-wordpress-contact-form-not-sending-email-with-smtp/',
@@ -521,6 +532,7 @@ class Help {
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
 				'/docs/how-to-use-smart-tags-in-wpforms/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
+				'/docs/calculations-addon/',
 			],
 			'rating'                    => [
 				'/docs/how-to-add-a-rating-field-to-wpforms/',
@@ -553,18 +565,32 @@ class Help {
 			],
 			'two columns'               => [
 				'/docs/how-to-use-the-layout-field-in-wpforms/',
+				'/docs/using-the-repeater-field/',
 			],
 			'three columns'             => [
 				'/docs/how-to-use-the-layout-field-in-wpforms/',
+				'/docs/using-the-repeater-field/',
 			],
 			'four columns'              => [
 				'/docs/how-to-use-the-layout-field-in-wpforms/',
+				'/docs/using-the-repeater-field/',
 			],
 			'fields horizontally'       => [
 				'/docs/how-to-use-the-layout-field-in-wpforms/',
+				'/docs/using-the-repeater-field/',
 			],
 			'fields in a row'           => [
 				'/docs/how-to-use-the-layout-field-in-wpforms/',
+				'/docs/using-the-repeater-field/',
+			],
+			'repeater'                  => [
+				'/docs/using-the-repeater-field/',
+			],
+			'repeatable'                => [
+				'/docs/using-the-repeater-field/',
+			],
+			'replicate fields'          => [
+				'/docs/using-the-repeater-field/',
 			],
 			'page break'                => [
 				'/docs/how-to-create-multi-page-forms-in-wpforms/',
@@ -626,6 +652,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'website/url'               => [
 				'/docs/how-to-customize-form-field-options/',
@@ -797,6 +824,12 @@ class Help {
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
 			],
+			'coupon'                    => [
+				'/docs/coupons-addon/',
+			],
+			'discount'                  => [
+				'/docs/coupons-addon/',
+			],
 			'payment'                   => [
 				'/docs/viewing-and-managing-payments/',
 				'/docs/how-to-install-and-use-the-stripe-addon-with-wpforms/',
@@ -835,6 +868,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/calculations-addon/',
 			],
 			'multiple items'            => [
 				'/docs/viewing-and-managing-payments/',
@@ -938,24 +972,28 @@ class Help {
 			],
 			'notification'              => [
 				'/docs/setup-form-notification-wpforms/',
+				'/docs/customizing-form-notification-emails/',
 				'/docs/how-to-create-conditional-form-notifications-in-wpforms/',
 				'/docs/troubleshooting-email-notifications/',
 				'/docs/how-to-fix-wordpress-contact-form-not-sending-email-with-smtp/',
 			],
 			'notifications'             => [
 				'/docs/setup-form-notification-wpforms/',
+				'/docs/customizing-form-notification-emails/',
 				'/docs/how-to-create-conditional-form-notifications-in-wpforms/',
 				'/docs/troubleshooting-email-notifications/',
 				'/docs/how-to-fix-wordpress-contact-form-not-sending-email-with-smtp/',
 			],
 			'notification email'        => [
 				'/docs/setup-form-notification-wpforms/',
+				'/docs/customizing-form-notification-emails/',
 				'/docs/how-to-create-conditional-form-notifications-in-wpforms/',
 				'/docs/troubleshooting-email-notifications/',
 				'/docs/how-to-fix-wordpress-contact-form-not-sending-email-with-smtp/',
 			],
 			'notification emails'       => [
 				'/docs/setup-form-notification-wpforms/',
+				'/docs/customizing-form-notification-emails/',
 				'/docs/how-to-create-conditional-form-notifications-in-wpforms/',
 				'/docs/troubleshooting-email-notifications/',
 				'/docs/how-to-fix-wordpress-contact-form-not-sending-email-with-smtp/',
@@ -983,6 +1021,26 @@ class Help {
 			'conditional confirmation'  => [
 				'/docs/setup-form-confirmation-wpforms/',
 				'/docs/how-to-create-conditional-form-confirmations/',
+			],
+			'calculation'               => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
+			],
+			'calculations'              => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
+			],
+			'formula'                   => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
+			],
+			'conditional calculation'   => [
+				'/docs/calculations-addon/',
+				'/docs/building-formulas-with-the-calculations-addon/',
+				'/calculations-formula-cheatsheet/',
 			],
 			'lead forms'                => [
 				'/docs/lead-forms-addon/',
@@ -1111,6 +1169,9 @@ class Help {
 			'constant contact'          => [
 				'/docs/how-to-connect-constant-contact-with-wpforms/',
 			],
+			'convertkit'                => [
+				'/docs/convertkit-addon/',
+			],
 			'drip'                      => [
 				'/docs/how-to-install-and-use-the-drip-addon-in-wpforms/',
 			],
@@ -1215,12 +1276,15 @@ class Help {
 	 * Get doc id.
 	 *
 	 * @since 1.6.3
+	 * @deprecated 1.8.3
 	 *
 	 * @param string $link Absolute link to the doc without the domain part.
 	 *
 	 * @return array Array with doc id as element.
 	 */
 	public function get_doc_id( $link ) {
+
+		_deprecated_function( __METHOD__, '1.8.3 of the WPForms plugin', __CLASS__ . '::get_doc_id_int()' );
 
 		if ( empty( $this->docs ) ) {
 			return [];
@@ -1238,6 +1302,30 @@ class Help {
 	}
 
 	/**
+	 * Get doc id.
+	 *
+	 * @since 1.8.3
+	 *
+	 * @param string $link Absolute link to the doc without the domain part.
+	 *
+	 * @return int Doc id.
+	 */
+	private function get_doc_id_int( $link ) {
+
+		if ( empty( $this->docs ) ) {
+			return 0;
+		}
+
+		foreach ( $this->docs as $id => $doc ) {
+			if ( ! empty( $doc['url'] ) && $doc['url'] === 'https://wpforms.com' . $link ) {
+				return $id;
+			}
+		}
+
+		return 0;
+	}
+
+	/**
 	 * Get doc ids.
 	 *
 	 * @since 1.6.3
@@ -1248,17 +1336,13 @@ class Help {
 	 */
 	public function get_doc_ids( $links ) {
 
-		if ( empty( $this->docs ) ) {
-			return [];
-		}
-
 		$ids = [];
 
 		foreach ( $links as $link ) {
-			$ids[] = $this->get_doc_id( $link );
+			$ids[] = $this->get_doc_id_int( $link );
 		}
 
-		return array_merge( [], ...$ids );
+		return $ids;
 	}
 
 	/**

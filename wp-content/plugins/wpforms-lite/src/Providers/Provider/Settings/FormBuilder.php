@@ -52,7 +52,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 		$this->core = $core;
 
 		if ( ! empty( $_GET['form_id'] ) ) { // phpcs:ignore
-			$this->form_data = \wpforms()->form->get(
+			$this->form_data = wpforms()->get( 'form' )->get(
 				\absint( $_GET['form_id'] ), // phpcs:ignore
 				[
 					'content_only' => true,
@@ -87,6 +87,8 @@ abstract class FormBuilder implements FormBuilderInterface {
 		) {
 			add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_assets' ] );
 		}
+
+		add_filter( 'wpforms_save_form_args', [ $this, 'remove_connection_locks' ], 1, 3 );
 	}
 
 	/**
@@ -267,7 +269,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 
 		\wp_enqueue_script(
 			'wpforms-admin-builder-templates',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/builder/templates{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/templates{$min}.js",
 			[ 'wp-util' ],
 			WPFORMS_VERSION,
 			true
@@ -275,7 +277,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 
 		\wp_enqueue_script(
 			'wpforms-admin-builder-providers',
-			WPFORMS_PLUGIN_URL . "assets/js/components/admin/builder/providers{$min}.js",
+			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/providers{$min}.js",
 			[ 'wpforms-utils', 'wpforms-builder', 'wpforms-admin-builder-templates' ],
 			WPFORMS_VERSION,
 			true
@@ -405,6 +407,8 @@ abstract class FormBuilder implements FormBuilderInterface {
 				$this->core->name,
 				$this->core->icon
 			);
+
+			$this->display_lock_field();
 			?>
 
 			<div class="wpforms-builder-provider-body">
@@ -412,7 +416,6 @@ abstract class FormBuilder implements FormBuilderInterface {
 					<div class="wpforms-builder-provider-connections"></div>
 				</div>
 			</div>
-
 		</div>
 
 		<?php
@@ -446,7 +449,7 @@ abstract class FormBuilder implements FormBuilderInterface {
 				 */
 				echo apply_filters( // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					"wpforms_providers_provider_settings_formbuilder_display_content_default_screen_{$slug}",
-					sprintf( /* translators: %s - Provider name. */
+					sprintf( /* translators: %s - provider name. */
 						'<p>' . esc_html__( 'Get the most out of WPForms &mdash; use it with an active %s account.', 'wpforms-lite' ) . '</p>',
 						esc_html( $name )
 					)
@@ -454,6 +457,21 @@ abstract class FormBuilder implements FormBuilderInterface {
 				?>
 			</div>
 		</div>
+		<?php
+	}
+
+	/**
+	 * Display the lock field.
+	 *
+	 * @since 1.8.9
+	 */
+	protected function display_lock_field() {
+
+		if ( ! $this->is_lock_field_required( $this->core->slug ) ) {
+			return;
+		}
+		?>
+		<input type="hidden" class="wpforms-builder-provider-connections-save-lock" value="1" name="providers[<?php echo esc_attr( $this->core->slug ); ?>][__lock__]">
 		<?php
 	}
 
@@ -490,5 +508,59 @@ abstract class FormBuilder implements FormBuilderInterface {
 		</div>
 
 		<?php
+	}
+
+	/**
+	 * Determine whether the lock field is required.
+	 *
+	 * @WPFormsBackCompat Support Drip v1.7.0 and earlier, support Uncanny Automator.
+	 *
+	 * @since 1.8.9
+	 *
+	 * @param string $provider The provider slug.
+	 *
+	 * @return bool
+	 */
+	protected function is_lock_field_required( string $provider ): bool {
+
+		// Compatibility with the legacy Drip addon versions where the lock field was not needed.
+		// Uncanny Automator do not have lock field.
+		if ( in_array( $provider, [ 'uncanny-automator', 'drip' ], true ) ) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Temporary fix to remove __lock__ field with value 1 from the form post_content.
+	 * In the future, it will be handled in save_form() method in the core for all providers.
+	 *
+	 * @since 1.8.9
+	 *
+	 * @param array $form Form array, usable with wp_update_post.
+	 * @param array $data Data retrieved from $_POST and processed.
+	 * @param array $args Update form arguments.
+	 *
+	 * @return array
+	 */
+	public function remove_connection_locks( $form, $data, $args ) {
+
+		$form_data = json_decode( stripslashes( $form['post_content'] ), true );
+
+		if ( empty( $form_data['providers'][ $this->core->slug ] ) ) {
+			return $form;
+		}
+
+		$provider = $form_data['providers'][ $this->core->slug ];
+		$lock     = '__lock__';
+
+		// Remove the lock field if it's the only one and it's locked.
+		if ( isset( $provider[ $lock ] ) && count( $provider ) === 1 && absint( $provider[ $lock ] ) === 1 ) {
+			unset( $form_data['providers'][ $this->core->slug ]['__lock__'] );
+			$form['post_content'] = wpforms_encode( $form_data );
+		}
+
+		return $form;
 	}
 }
