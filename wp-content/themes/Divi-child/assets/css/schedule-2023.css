@@ -674,14 +674,14 @@ a{
     background-color: transparent;
     padding: 12px 0.5rem;
     text-align: center;
-    color: #fff;
+    color: #076708;
     transition: all .3s;
     font-weight: 800;
     font-size: 18px;
     text-transform: inherit;
     text-decoration: none;
     border-radius: 30px;
-    border: 2px solid #efaa13;
+    border: 3px solid #076708;
     line-height: 15px;
     margin-left: 10px;
     margin-right: 10px;
@@ -694,13 +694,13 @@ a{
 
 .cd-main-header .filterContainer button:hover,
 .cd-main-header .filterContainer button:focus {
-    color: #f47e30;
-    background: #fff;
-    border: 2px solid #f47e30;
+    color: #fff;
+    background: #076708;
+    border: 3px solid #076708;
 }
 
 .cd-main-header .filterContainer button.selected {
-    color: #f47e30;
-    background: #fff;
-    border: 2px solid #f47e30;
+    color: #fff;
+    background: #076708;
+    border: 3px solid #076708;
 }

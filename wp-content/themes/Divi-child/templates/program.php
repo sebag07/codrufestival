@@ -7,9 +7,9 @@
         <div class="js" style="width: 100%; overflow:hidden;">
             <div class="cd-main-header">
                 <div class="filterContainer">
-                    <button class="filterBtn selected" data-value="ziua1">Vineri 25.08</button>
-                    <button class="filterBtn" data-value="ziua2">Sâmbătă 26.08</button>
-                    <button class="filterBtn" data-value="ziua3">Duminică 27.08</button>
+                    <button class="filterBtn selected" data-value="ziua1">30 August</button>
+                    <button class="filterBtn" data-value="ziua2">31 August</button>
+                    <button class="filterBtn" data-value="ziua3">1 September</button>
                 </div>
             </div>
 
@@ -64,12 +64,8 @@
                     $scena_2 = get_field('scena_2', 'option');
                     $scena_3 = get_field('scena_3', 'option');
                     $scena_4 = get_field('scena_4', 'option');
-                    $scena_5 = get_field('scena_5', 'option');
-                    $scena_6 = get_field('scena_6', 'option');
-                    $scena_7 = get_field('scena_7', 'option');
-                    $scena_8 = get_field('scena_8', 'option');
 
-                    $new_program = [$scena_1, $scena_2, $scena_3, $scena_4, $scena_5, $scena_6, $scena_7, $scena_8];
+                    $new_program = [$scena_1, $scena_2, $scena_3, $scena_4];
                     $index = 1;
 
                     $hours = array(

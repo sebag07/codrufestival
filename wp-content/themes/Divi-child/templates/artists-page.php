@@ -6,31 +6,35 @@
     <section>
         <div class="sectionPadding container">
         <span id="category-filter">
-        <?php 
+        <?php
         $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $key = '/en/';
-        if (strpos($url, $key) == false) { 
-            echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="checkbox" name="artistsCheckbox" value="all"><span>Toate</span></label><br>
-            <label class="activitiesCheckbox" for="ziua-1"><input class="catCheckbox" id="ziua-1" type="checkbox" name="artistsCheckbox" value="ziua-1"><span>Vineri</span></label>
-            <label class="activitiesCheckbox" for="ziua-2"><input class="catCheckbox" id="ziua-2" type="checkbox" name="artistsCheckbox" value="ziua-2"><span>Sâmbătă</span></label>
-            <label class="activitiesCheckbox" for="ziua-3"><input class="catCheckbox" id="ziua-3" type="checkbox" name="artistsCheckbox" value="ziua-3"><span>Duminică</span></label><br>
-            <label class="activitiesCheckbox" for="scena-1"><input class="catCheckbox" id="scena-1" type="checkbox" name="artistsCheckbox" value="scena-1"><span>SUB SOARE</span></label>
-            <label class="activitiesCheckbox" for="scena-2"><input class="catCheckbox" id="scena-2" type="checkbox" name="artistsCheckbox" value="scena-2"><span>LUMEA NOUĂ</span></label>
-            <label class="activitiesCheckbox" for="scena-3"><input class="catCheckbox" id="scena-3" type="checkbox" name="artistsCheckbox" value="scena-3"><span>SUB CODRU</span></label>
-            <label class="activitiesCheckbox" for="scena-4"><input class="catCheckbox" id="scena-4" type="checkbox" name="artistsCheckbox" value="scena-4"><span>SUB NORI</span></label>
-'; 
-        } 
-        else { 
-            echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="checkbox" name="artistsCheckbox" value="all"><span>All</span></label><br>
-            <label class="activitiesCheckbox" for="ziua-1-en"><input class="catCheckbox" id="ziua-1-en" type="checkbox" name="artistsCheckbox" value="ziua-1-en"><span>Friday</span></label>
-            <label class="activitiesCheckbox" for="ziua-2-en"><input class="catCheckbox" id="ziua-2-en" type="checkbox" name="artistsCheckbox" value="ziua-2-en"><span>Saturday</span></label>
-            <label class="activitiesCheckbox" for="ziua-3-en"><input class="catCheckbox" id="ziua-3-en" type="checkbox" name="artistsCheckbox" value="ziua-3-en"><span>Sunday</span></label><br>
-            <label class="activitiesCheckbox" for="scena-1"><input class="catCheckbox" id="scena-1" type="checkbox" name="artistsCheckbox" value="scena-1"><span>SUB SOARE</span></label>
-            <label class="activitiesCheckbox" for="scena-2"><input class="catCheckbox" id="scena-2" type="checkbox" name="artistsCheckbox" value="scena-2"><span>LUMEA NOUĂ</span></label>
-            <label class="activitiesCheckbox" for="scena-3"><input class="catCheckbox" id="scena-3" type="checkbox" name="artistsCheckbox" value="scena-3"><span>SUB CODRU</span></label>
-            <label class="activitiesCheckbox" for="scena-4"><input class="catCheckbox" id="scena-4" type="checkbox" name="artistsCheckbox" value="scena-4"><span>SUB NORI</span></label>
-'; 
-        };
+        $is_english = strpos($url, $key) !== false;
+
+        echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="artist-day" value="all" checked><span>' . ($is_english ? 'All' : 'Toate') . '</span></label>';
+
+        $days = [
+            ['id' => 'ziua-1', 'label' => $is_english ? 'Friday' : 'Vineri'],
+            ['id' => 'ziua-2', 'label' => $is_english ? 'Saturday' : 'Sâmbătă'],
+            ['id' => 'ziua-3', 'label' => $is_english ? 'Sunday' : 'Duminică']
+        ];
+
+        $scenes = [
+            ['id' => 'scena-1', 'label' => 'Sub Soare'],
+            ['id' => 'scena-2', 'label' => 'Lumea Noua'],
+            ['id' => 'scena-3', 'label' => 'Sub Codru'],
+            ['id' => 'scena-4', 'label' => 'Sub Nori']
+        ];
+
+        foreach ($days as $day) {
+            echo '<label class="activitiesCheckbox" for="' . $day['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $day['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-day" value="' . $day['id'] . ($is_english ? '-en' : '') . '"><span>' . $day['label'] . '</span></label>';
+        }
+
+        echo '<br>';
+
+        foreach ($scenes as $scene) {
+            echo '<label class="activitiesCheckbox" for="' . $scene['id'] . '"><input class="catCheckbox" id="' . $scene['id'] . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
+        }
         ?>
 
         </span>
@@ -51,13 +55,21 @@
                     $categories = get_categories($args);
                     foreach ($categories as $cat) :
                         $category = get_the_category($post->ID);
-                       
-                       ?>
+
+                        ?>
                     <?php endforeach; ?>
 
-                    <a href='<?php echo $artistPage; ?>' class='artistInnerContainer' data-category="<?php if (!empty ($category[0]))  echo $category[0]->slug; echo" "; if (!empty ($category[1]))  echo $category[1]->slug; echo" "; if (!empty ($category[2]))  echo $category[2]->slug; echo" "; if (!empty ($category[3]))  echo $category[3]->slug;  ?> all">
+                    <a href='<?php echo $artistPage; ?>' class='artistInnerContainer'
+                       data-category="<?php if (!empty ($category[0])) echo $category[0]->slug;
+                       echo " ";
+                       if (!empty ($category[1])) echo $category[1]->slug;
+                       echo " ";
+                       if (!empty ($category[2])) echo $category[2]->slug;
+                       echo " ";
+                       if (!empty ($category[3])) echo $category[3]->slug; ?> all">
                         <div class='artistImageContainer'>
-                            <img class='artistImg' loading='lazy' src='<?php echo $imageUrl; ?>' alt="<?php echo $artistName; ?>">
+                            <img class='artistImg' loading='lazy' src='<?php echo $imageUrl; ?>'
+                                 alt="<?php echo $artistName; ?>">
                             <div class='imageOverlay'></div>
                         </div>
                         <div class='artistContent'>
@@ -95,73 +107,53 @@
                     jQuery(this).removeClass('borderOnHover');
                 }
             );
-    jQuery(document).on("click", ".allcat", function(){
-    jQuery('.allcat').prop('checked', true);
-    jQuery('.catCheckbox').prop('checked', false);
-});
 
-jQuery(document).on("click", ".catCheckbox", function(){
-    jQuery('.allcat').prop('checked', false);
-    jQuery('.catCheckbox').prop('checked', false);
-    jQuery(this).prop('checked', true);
-});
+            jQuery(document).ready(function () {
+                function filterArtists() {
+                    let selectedDays = [];
+                    let selectedScenes = [];
 
-jQuery(document).ready(function(){
-    jQuery('.allcat').prop('checked', true);
+                    jQuery("input[name='artist-day']:checked").each(function () {
+                        selectedDays.push(jQuery(this).val());
+                    });
 
-});
+                    jQuery("input[name='artist-scene']:checked").each(function () {
+                        selectedScenes.push(jQuery(this).val());
+                    });
 
-jQuery(function(){ 
+                    jQuery(".artistInnerContainer").each(function () {
+                        const categories = jQuery(this).attr('data-category').split(' ');
+                        const matchesDay = selectedDays.length === 0 || selectedDays.some(day => categories.includes(day));
+                        const matchesScene = selectedScenes.length === 0 || selectedScenes.some(scene => categories.includes(scene));
 
-jQuery('#category-filter label').find("input").on('change',function(){
-  let selected = []; 
-  jQuery('#category-filter label').find("input").each(function(){
-    if(jQuery(this).is(":checked")){ 
-      selected.push(jQuery(this).val());
-    }
-  })
-  if(!selected.length){
-  jQuery(".artistInnerContainer").show(); 
-  return; 
-  
-  }
-  jQuery(".artistInnerContainer").hide(); 
+                        if (matchesDay && matchesScene) {
+                            jQuery(this).show();
+                        } else {
+                            jQuery(this).hide();
+                        }
+                    });
+                }
 
-  jQuery(".artistInnerContainer").each(function(){ 
-    const category = jQuery(this).attr('data-category');
-    const categorySplitted = category.split(' ');
-    categorySplitted.forEach((cat)=>{
-      if(selected.indexOf(cat) !== -1){
-      jQuery(this).show();
-      }
-    });
+                function setCheckedAttributes() {
+                    jQuery("input[name='artist-day'], input[name='artist-scene']").each(function () {
+                        if (jQuery(this).is(":checked")) {
+                            jQuery(this).prop("checked", true);
+                            jQuery(this).parent().addClass('activeCategory');
+                        } else {
+                            jQuery(this).prop("checked", false);
+                            jQuery(this).parent().removeClass('activeCategory');
+                        }
+                    });
+                }
 
-    
-  });
-});
+                // Attach change event listener to checkboxes
+                jQuery("input[name='artist-day'], input[name='artist-scene']").on('change', function () {
+                    setCheckedAttributes();
+                    filterArtists();
+                });
 
-});
-
-
-jQuery(".allcat").change(function() {
-    if(this.checked) {
-        jQuery(this).closest('label').addClass('activeCategory');
-        jQuery('.catCheckbox').closest('label').removeClass('activeCategory');
-    } else {
-        jQuery(this).closest('label').removeClass('activeCategory');
-    }
-});
-
-jQuery(".catCheckbox").change(function() {
-    if(this.checked) {
-        jQuery('.allcat').closest('label').removeClass('activeCategory');
-        jQuery('.catCheckbox').closest('label').removeClass('activeCategory');
-        jQuery(this).closest('label').addClass('activeCategory');
-    } else {
-        jQuery(this).closest('label').removeClass('activeCategory');
-    }
-
-});
+                filterArtists();
+            });
 
 
         </script>
