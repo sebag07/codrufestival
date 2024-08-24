@@ -41,24 +41,6 @@
     <!-- Adobe Font -->
     <link rel="stylesheet" href="https://use.typekit.net/ufx3ngj.css">
 
-    <?php
-    $postTitle = get_the_title($post->ID);
-    $postThumbnail = get_the_post_thumbnail_url($post->ID, 'thumbnail');
-    $postType = get_post_type($post->ID);
-    $postURL = get_the_permalink($post->ID);
-
-    ?>
-    <!-- FB share -->
-    <html xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:og="http://ogp.me/ns#">
-    <meta property="og:title" content="<?php echo $postTitle ?>" />
-    <meta property="og:image" content="<?php echo $postThumbnail ?>" />
-    <meta property="og:type" content="<?php echo $postType ?>" />
-    <meta property="og:url" content="<?php echo $postURL ?>" />
-    <meta property="og:site_name" content="CODRU Festival" />
-    <meta property="og:description" 
-  content="CODRU, festivalul care plantează, îmbină muzica și artele cu un angajament profund față de mediu. Alătură-te misiunii noastre de a planta un copac pentru fiecare bilet vândut!" />
-
     <title>CODRU Festival - 30 August - 1 Septembrie 2024</title>
 
     <!-- Meta Pixel Code -->
