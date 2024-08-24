@@ -16,10 +16,6 @@
             <div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
                 <div class="cd-schedule__timeline">
                     <ul>
-                        <li><span>12:00</span></li>
-                        <!-- <li><span>12:30</span></li> -->
-                        <li><span>13:00</span></li>
-                        <!-- <li><span>13:30</span></li> -->
                         <li><span>14:00</span></li>
                         <!-- <li><span>14:30</span></li> -->
                         <li><span>15:00</span></li>
