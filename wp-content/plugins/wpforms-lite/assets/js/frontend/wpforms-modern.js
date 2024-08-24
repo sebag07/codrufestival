@@ -28,6 +28,7 @@ WPForms.FrontendModern = WPForms.FrontendModern || ( function( document, window,
 		init() {
 			// Document ready.
 			$( app.ready );
+			app.bindOptinMonster();
 		},
 
 		/**
@@ -60,8 +61,33 @@ WPForms.FrontendModern = WPForms.FrontendModern || ( function( document, window,
 			$( 'form.wpforms-form .wpforms-submit' )
 				.on( 'keydown click', app.disabledButtonPress );
 
+			// Add styling to timepicker dropdown.
 			$( document )
 				.on( 'focus', '.wpforms-render-modern .wpforms-timepicker', app.updateTimepickerDropdown );
+
+			// Reset timepicker dropdown styles.
+			$( document )
+				.on( 'focusout', '.wpforms-render-modern .wpforms-timepicker', app.resetTimepickerDropdown );
+		},
+
+		/**
+		 * OptinMonster compatibility.
+		 *
+		 * Re-initialize after OptinMonster loads to accommodate changes that
+		 * have occurred to the DOM.
+		 *
+		 * @since 1.9.0
+		 */
+		bindOptinMonster() {
+			// OM v5.
+			document.addEventListener( 'om.Campaign.load', function() {
+				app.ready();
+			} );
+
+			// OM Legacy.
+			$( document ).on( 'OptinMonsterOnShow', function() {
+				app.ready();
+			} );
 		},
 
 		/**
@@ -81,6 +107,22 @@ WPForms.FrontendModern = WPForms.FrontendModern || ( function( document, window,
 					$list.find( '.ui-timepicker-selected' )
 						.css( 'background', cssVars[ 'button-background-color' ] )
 						.css( 'color', cssVars[ 'button-text-color' ] );
+				},
+				0
+			);
+		},
+
+		/**
+		 * Reset timepicker dropdown styles.
+		 *
+		 * @since 1.8.9.5
+		 */
+		resetTimepickerDropdown() {
+			setTimeout(
+				function() {
+					const $list = $( '.ui-timepicker-wrapper .ui-timepicker-list' );
+
+					$list.find( ':not(.ui-timepicker-selected)' ).attr( 'style', '' );
 				},
 				0
 			);
