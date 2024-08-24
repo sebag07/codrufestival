@@ -33,7 +33,7 @@
         echo '<br>';
 
         foreach ($scenes as $scene) {
-            echo '<label class="activitiesCheckbox" for="' . $scene['id'] . '"><input class="catCheckbox" id="' . $scene['id'] . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
+            echo '<label class="activitiesCheckbox" for="' . $scene['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $scene['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
         }
         ?>
 
