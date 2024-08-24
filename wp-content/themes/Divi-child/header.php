@@ -26,11 +26,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-    <script src="/wp-content/themes/Divi-child/js/main.js?ver=172"></script>
+    <script src="/wp-content/themes/Divi-child/js/main.js?ver=174"></script>
 
     <!-- Style -->
     <!-- <link rel="stylesheet" href="/wp-content/themes/Divi-child/style.css?ver=173"> -->
-    <link rel="stylesheet" href="/wp-content/themes/Divi-child/assets/css/schedule-2023.css?ver=170">
+    <link rel="stylesheet" href="/wp-content/themes/Divi-child/assets/css/schedule-2023.css?ver=174">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
           integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>

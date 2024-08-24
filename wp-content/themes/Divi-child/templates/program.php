@@ -97,8 +97,8 @@
                                     echo "
                                     <li class='cd-schedule__event ziua1'>
                                         <a data-start='{$artist['ora_inceput']}' data-end='{$artist['ora_final']}'  data-event='event-1' href='#0'>
-                                            <span>$start - $end</span>
                                             <em class='cd-schedule__name'>{$artist['nume']}</em>
+                                            <span>$start - $end</span>
                                         </a>
                                     </li>
                                     ";

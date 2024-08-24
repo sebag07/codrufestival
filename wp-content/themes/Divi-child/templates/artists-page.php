@@ -53,20 +53,28 @@
                         $imageUrl = "/wp-content/themes/Divi-child/images/artist-placeholder.png";
                     };
                     $categories = get_categories($args);
+
+                    $artist_stage = '';
                     foreach ($categories as $cat) :
                         $category = get_the_category($post->ID);
-
+                        foreach($category as $cat) {
+                            if (strpos($cat->slug, 'scena-') === 0) {
+                                $artist_stage = strtoupper($cat->name);
+                            }
+                        }
                         ?>
                     <?php endforeach; ?>
 
                     <a href='<?php echo $artistPage; ?>' class='artistInnerContainer'
-                       data-category="<?php if (!empty ($category[0])) echo $category[0]->slug;
-                       echo " ";
-                       if (!empty ($category[1])) echo $category[1]->slug;
-                       echo " ";
-                       if (!empty ($category[2])) echo $category[2]->slug;
-                       echo " ";
-                       if (!empty ($category[3])) echo $category[3]->slug; ?> all">
+                       data-category="<?php
+                       $category_slugs = '';
+                       foreach ($category as $cat) {
+                           if (!empty($cat)) {
+                               $category_slugs .= $cat->slug . ' ';
+                           }
+                       }
+                       echo trim($category_slugs) . ' all';
+                       ?>">
                         <div class='artistImageContainer'>
                             <img class='artistImg' loading='lazy' src='<?php echo $imageUrl; ?>'
                                  alt="<?php echo $artistName; ?>">
@@ -78,6 +86,9 @@
                             <span class='artistContentName'>
                                 <?php echo $artistName; ?>
                             </span>
+                                <span class='artistContentDayStage'>
+                                    <?php echo $artist_stage ?>
+                                </span>
                                 <span class='artistContentDayStage'>
                                     <?php echo $intervalOrar ?>
                                 </span>
