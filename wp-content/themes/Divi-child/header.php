@@ -184,6 +184,26 @@
     </script>
     <?php wp_head(); ?>
 
+    <!-- FB share -->
+    <html xmlns="http://www.w3.org/1999/xhtml"
+          xmlns:og="http://ogp.me/ns#">
+
+    <?php
+
+    $yoast_description = get_post_meta($post->ID, '_yoast_wpseo_metadesc', true);
+
+    $yoast_opengraph_image = get_post_meta($post->ID, '_yoast_wpseo_opengraph-image', true);
+
+    // Determine if the description and images are present.
+    if (empty($yoast_description)) {
+        echo '<meta property="og:description" content="CODRU, festivalul care plantează, îmbină muzica și artele cu un angajament profund față de mediu. Alătură-te misiunii noastre de a planta un copac pentru fiecare bilet vândut!"/>';
+    }
+
+    if (empty($yoast_opengraph_image)) {
+        echo '<meta property="og:image" content="https://www.codrufestival.ro/wp-content/uploads/2024/07/codrufestival-facebook-thumbnail.png" />';
+    }
+
+    ?>
 
 </head>
 
