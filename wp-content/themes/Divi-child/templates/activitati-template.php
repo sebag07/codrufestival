@@ -58,10 +58,15 @@
                         $shortDescription = get_field('short_description', $post->ID);
                         $date = get_field('date', $post->ID);
                         $type = get_field('type', $post->ID);
-                        $terms = wp_get_post_terms( $post->ID, 'activitati_category');
                         $postURL = get_permalink($post->ID);
+                        $terms = wp_get_post_terms( $post->ID, 'activitati_category');
+                        $activityCategories = array();
                         foreach ($terms as $cat) : {
-                                echo "  <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$cat->slug all'>
+                            $activityCategories[] = $cat->slug;
+                        }
+                        endforeach;
+                        $activityCategoryString = implode(' ', $activityCategories);
+                                echo "  <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
                                     <div class='activitiesPost'>
                                         <div class='imageContainer'><img src='$imageUrl'>
                                         <div class='details'>
@@ -77,8 +82,6 @@
                                     </div>
                                 </div>
                             ";
-                        }
-                        endforeach;
                     }
                     endforeach;
                     ?>
