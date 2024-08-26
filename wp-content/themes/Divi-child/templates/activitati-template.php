@@ -38,7 +38,7 @@
                     if ($image) {
                         $imageUrl = $image[0];
                     } else {
-                        $imageUrl = "/wp-content/themes/Divi-child/images/logo.png";
+                        $imageUrl = "/wp-content/themes/Divi-child/images/artist-placeholder.png";
                     }
                     $title = get_the_title();
                     // $categories = get_the_category($post->ID);
@@ -48,28 +48,27 @@
                     $postURL = get_permalink($post->ID);
                     $terms = wp_get_post_terms($post->ID, 'activitati_category');
                     $activityCategories = array();
-                    foreach ($terms as $cat) : {
+                    foreach ($terms as $cat) {
                         $activityCategories[] = $cat->slug;
                     }
-                    endforeach;
                     $activityCategoryString = implode(' ', $activityCategories);
                     echo " <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
-                                    <div class='activitiesPost'>
-                                        <a href='$postURL' target='_blank'>
-                                            <div class='imageContainer'><img src='$imageUrl' alt=''>
-                                                <div class='details'>
-                                                    <span class='type'>$type</span>
-                                                    <span class='date'>$date</span>
-                                                </div>
-                                            </div>
-                                            <div class='postInfo'>
-                                                <h4 class='mb-1'>$title</h4>
-                                                <p >$shortDescription</p>
-                                                <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
-                                            </div>
-                                        </a>
+                             <a href='$postURL' target='_blank'>
+                                <div class='activitiesPost'>
+                                    <div class='imageContainer'><img src='$imageUrl' alt=''>
+                                        <div class='details'>
+                                            <span class='type'>$type</span>
+                                            <span class='date'>$date</span>
+                                        </div>
                                     </div>
-                            </div>";
+                                    <div class='postInfo'>
+                                        <h4 class='mb-1'>$title</h4>
+                                        <p >$shortDescription</p>
+                                        <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>";
                 }
                 endforeach;
                 ?>
