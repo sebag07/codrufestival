@@ -4683,7 +4683,7 @@ a {
   }
 
   .activitiesPost .imageContainer {
-    height: 200px;
+    height: 250px;
     position: relative;
   }
 
@@ -4718,6 +4718,7 @@ a {
     color: #000;
     padding: 2px 10px;
     width: 100%;
+      border: 1px solid #000;
   }
 
   .activitiesPost .date {
@@ -4725,6 +4726,7 @@ a {
     color: #000;
     padding: 2px 10px;
     width: 115%;
+      border: 1px solid #000;
   }
 
   .postInfo h4, .postInfo p, .postInfo a {
@@ -4746,10 +4748,9 @@ a {
 
   .postInfo {
     background-color: #076708;
-    padding: 10px 0px;
+    padding: 15px 2px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    height: 120px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

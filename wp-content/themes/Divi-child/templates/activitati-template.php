@@ -6,14 +6,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12 categoriesContainer">
                 <span id="category-filter">
-                <label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="activity-day" value="all" checked><span>Toate</span></label>
                         <?php
-
-                    $days = [
-                        ['id' => 'ziua-1', 'label' => 'Vineri'],
-                        ['id' => 'ziua-2', 'label' => 'Sâmbătă'],
-                        ['id' => 'ziua-3', 'label' => 'Duminică']
-                    ];
 
                     $activities = [
                         ['id' => 'adventure', 'label' => 'Adventure'],
@@ -24,12 +17,6 @@
                         ['id' => 'eco-friendly', 'label' => 'EcoFriendly'],
                         ['id' => 'adolescenti-adulti', 'label' => 'Adolescenți & Adulți']
                     ];
-
-                    foreach ($days as $day) {
-                        echo '<label class="activitiesCheckbox" for="' . $day['id'] . '"><input class="catCheckbox" id="' . $day['id'] . '" type="radio" name="activity-day" value="' . $day['id'] . '"><span>' . $day['label'] . '</span></label>';
-                    }
-
-                    echo '<br>';
 
                     foreach ($activities as $activity) {
                         echo '<label class="activitiesCheckbox" for="' . $activity['id'] . '"><input class="catCheckbox" id="' . $activity['id'] . '" type="radio" name="activity-type" value="' . $activity['id'] . '"><span>' . $activity['label'] . '</span></label>';
@@ -66,9 +53,9 @@
                         }
                         endforeach;
                         $activityCategoryString = implode(' ', $activityCategories);
-                                echo "  <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
+                                echo "  <a href='$postURL' target='_blank'><div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
                                     <div class='activitiesPost'>
-                                        <div class='imageContainer'><img src='$imageUrl'>
+                                        <div class='imageContainer'><img src='$imageUrl' alt=''>
                                         <div class='details'>
                                         <span class='type'>$type</span>
                                         <span class='date'>$date</span>
@@ -80,7 +67,7 @@
                                         <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
                                         </div>
                                     </div>
-                                </div>
+                                </div></a>
                             ";
                     }
                     endforeach;
@@ -94,12 +81,7 @@
 
             jQuery(document).ready(function () {
                 function filterArtists() {
-                    let selectedDays = [];
                     let selectedScenes = [];
-
-                    jQuery("input[name='activity-day']:checked").each(function () {
-                        selectedDays.push(jQuery(this).val());
-                    });
 
                     jQuery("input[name='activity-type']:checked").each(function () {
                         selectedScenes.push(jQuery(this).val());
@@ -107,10 +89,9 @@
 
                     jQuery(".activitiesBlurb").each(function () {
                         const categories = jQuery(this).attr('data-category').split(' ');
-                        const matchesDay = selectedDays.length === 0 || selectedDays.some(day => categories.includes(day));
                         const matchesScene = selectedScenes.length === 0 || selectedScenes.some(scene => categories.includes(scene));
 
-                        if (matchesDay && matchesScene) {
+                        if (matchesScene) {
                             jQuery(this).show();
                         } else {
                             jQuery(this).hide();
@@ -119,7 +100,7 @@
                 }
 
                 function setCheckedAttributes() {
-                    jQuery("input[name='activity-day'], input[name='activity-type']").each(function () {
+                    jQuery("input[name='activity-type']").each(function () {
                         if (jQuery(this).is(":checked")) {
                             jQuery(this).prop("checked", true);
                             jQuery(this).parent().addClass('activeCategory');
@@ -131,7 +112,7 @@
                 }
 
                 // Attach change event listener to checkboxes
-                jQuery("input[name='activity-day'], input[name='activity-type']").on('change', function () {
+                jQuery("input[name='activity-type']").on('change', function () {
                     setCheckedAttributes();
                     filterArtists();
                 });
