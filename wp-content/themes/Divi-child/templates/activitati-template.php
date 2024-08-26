@@ -6,6 +6,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-12 categoriesContainer">
                 <span id="category-filter">
+                    <label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="activity-type" value="all" checked><span>Toate</span></label>
                         <?php
 
                         $activities = [
