@@ -54,21 +54,21 @@
                     endforeach;
                     $activityCategoryString = implode(' ', $activityCategories);
                     echo " <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
-                                <a href='$postURL' target='_blank'>
                                     <div class='activitiesPost'>
-                                        <div class='imageContainer'><img src='$imageUrl' alt=''>
-                                            <div class='details'>
-                                                <span class='type'>$type</span>
-                                                <span class='date'>$date</span>
+                                        <a href='$postURL' target='_blank'>
+                                            <div class='imageContainer'><img src='$imageUrl' alt=''>
+                                                <div class='details'>
+                                                    <span class='type'>$type</span>
+                                                    <span class='date'>$date</span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class='postInfo'>
-                                            <h4 class='mb-1'>$title</h4>
-                                            <p >$shortDescription</p>
-                                            <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
-                                        </div>
+                                            <div class='postInfo'>
+                                                <h4 class='mb-1'>$title</h4>
+                                                <p >$shortDescription</p>
+                                                <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
+                                            </div>
+                                        </a>
                                     </div>
-                                </a>
                             </div>";
                 }
                 endforeach;
