@@ -53,7 +53,8 @@
                         }
                         endforeach;
                         $activityCategoryString = implode(' ', $activityCategories);
-                                echo "  <a href='$postURL' target='_blank'><div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
+                                echo " <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
+                                    <a href='$postURL' target='_blank'>
                                     <div class='activitiesPost'>
                                         <div class='imageContainer'><img src='$imageUrl' alt=''>
                                         <div class='details'>
@@ -67,7 +68,8 @@
                                         <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
                                         </div>
                                     </div>
-                                </div></a>
+                                    </a>
+                                </div>
                             ";
                     }
                     endforeach;
