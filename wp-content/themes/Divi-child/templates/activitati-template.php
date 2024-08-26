@@ -10,7 +10,7 @@
 
                         $activities = [
                             ['id' => 'adventure', 'label' => 'Adventure'],
-                            ['id' => 'healty', 'label' => 'Healty'],
+                            ['id' => 'healthy', 'label' => 'Healthy'],
                             ['id' => 'game-on', 'label' => 'Game ON!'],
                             ['id' => 'kids-family', 'label' => 'Kids & Family'],
                             ['id' => 'performance', 'label' => 'Performance'],
@@ -54,21 +54,22 @@
                     endforeach;
                     $activityCategoryString = implode(' ', $activityCategories);
                     echo " <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
-                                        <div class='activitiesPost'>
-                                            <div class='imageContainer'><img src='$imageUrl' alt=''>
-                                                <div class='details'>
-                                                    <span class='type'>$type</span>
-                                                    <span class='date'>$date</span>
-                                                </div>
-                                            </div>
-                                            <div class='postInfo'>
-                                                <h4 class='mb-1'>$title</h4>
-                                                <p >$shortDescription</p>
-                                                <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
+                                <a href='$postURL' target='_blank'>
+                                    <div class='activitiesPost'>
+                                        <div class='imageContainer'><img src='$imageUrl' alt=''>
+                                            <div class='details'>
+                                                <span class='type'>$type</span>
+                                                <span class='date'>$date</span>
                                             </div>
                                         </div>
-                                </div>
-                            ";
+                                        <div class='postInfo'>
+                                            <h4 class='mb-1'>$title</h4>
+                                            <p >$shortDescription</p>
+                                            <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>";
                 }
                 endforeach;
                 ?>
