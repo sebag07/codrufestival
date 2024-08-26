@@ -89,72 +89,54 @@
 
 <script>
 
-jQuery(document).on("click", ".allcat", function(){
-    jQuery('.allcat').prop('checked', true);
-    jQuery('.catCheckbox').prop('checked', false);
-});
+            jQuery(document).ready(function () {
+                function filterArtists() {
+                    let selectedDays = [];
+                    let selectedScenes = [];
 
-jQuery(document).on("click", ".catCheckbox", function(){
-    jQuery('.allcat').prop('checked', false);
-    jQuery('.catCheckbox').prop('checked', false);
-    jQuery(this).prop('checked', true);
-});
+                    jQuery("input[name='activity-day']:checked").each(function () {
+                        selectedDays.push(jQuery(this).val());
+                    });
 
-jQuery(document).ready(function(){
-    jQuery('.allcat').prop('checked', true);
+                    jQuery("input[name='activity-type']:checked").each(function () {
+                        selectedScenes.push(jQuery(this).val());
+                    });
 
-});
+                    jQuery(".activitiesBlurb").each(function () {
+                        const categories = jQuery(this).attr('data-category').split(' ');
+                        const matchesDay = selectedDays.length === 0 || selectedDays.some(day => categories.includes(day));
+                        const matchesScene = selectedScenes.length === 0 || selectedScenes.some(scene => categories.includes(scene));
 
-jQuery(function(){ 
+                        if (matchesDay && matchesScene) {
+                            jQuery(this).show();
+                        } else {
+                            jQuery(this).hide();
+                        }
+                    });
+                }
 
-jQuery('#category-filter label').find("input").on('change',function(){
-  let selected = []; 
-  jQuery('#category-filter label').find("input").each(function(){
-    if(jQuery(this).is(":checked")){ 
-      selected.push(jQuery(this).val());
-    }
-  })
-  if(!selected.length){
-  jQuery(".activitiesBlurb").show(); 
-  return; 
-  
-  }
-  jQuery(".activitiesBlurb").hide(); 
+                function setCheckedAttributes() {
+                    jQuery("input[name='activity-day'], input[name='activity-type']").each(function () {
+                        if (jQuery(this).is(":checked")) {
+                            jQuery(this).prop("checked", true);
+                            jQuery(this).parent().addClass('activeCategory');
+                        } else {
+                            jQuery(this).prop("checked", false);
+                            jQuery(this).parent().removeClass('activeCategory');
+                        }
+                    });
+                }
 
-  jQuery(".activitiesBlurb").each(function(){ 
-    const category = jQuery(this).attr('data-category');
-    const categorySplitted = category.split(' ');
-    categorySplitted.forEach((cat)=>{
-      if(selected.indexOf(cat) !== -1){
-      jQuery(this).show();
-      }
-    });
+                // Attach change event listener to checkboxes
+                jQuery("input[name='activity-day'], input[name='activity-type']").on('change', function () {
+                    setCheckedAttributes();
+                    filterArtists();
+                });
 
-    
-  });
-});
+                filterArtists();
+            });
 
-});
 
-jQuery(".allcat").change(function() {
-    if(this.checked) {
-        jQuery(this).closest('label').addClass('activeCategory');
-        jQuery('.catCheckbox').closest('label').removeClass('activeCategory');
-    } else {
-        jQuery(this).closest('label').removeClass('activeCategory');
-    }
-});
-
-jQuery(".catCheckbox").change(function() {
-    if(this.checked) {
-        jQuery('.allcat').closest('label').removeClass('activeCategory');
-        jQuery('.catCheckbox').closest('label').removeClass('activeCategory');
-        jQuery(this).closest('label').addClass('activeCategory');
-    } else {
-        jQuery(this).closest('label').removeClass('activeCategory');
-    }
-
-});
 
 
     
