@@ -4744,6 +4744,7 @@ a {
   .postInfo h4, .postInfo p {
     color: #EFAA13;
     font-weight: 600;
+      padding: 0;
   }
 
   .postInfo {
