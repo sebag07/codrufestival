@@ -6,42 +6,45 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-12 categoriesContainer">
                 <span id="category-filter">
-            <label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="checkbox" name="teamRadio" value="all"><span>Toate</span></label>
-
+                <label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="activity-day" value="all" checked><span>Toate</span></label>
                         <?php
 
-                        $args = array(
-                            'post_type' => 'activitati',
-                            'post_status' => 'publish',
-                            'posts_per_page' => '-1'
-                        );
-                        
-                        $query = new WP_Query($args);
-                        if ($query->have_posts()) :
-                            while ($query->have_posts()) : $query->the_post();
+                    $days = [
+                        ['id' => 'ziua-1', 'label' => 'Vineri'],
+                        ['id' => 'ziua-2', 'label' => 'Sâmbătă'],
+                        ['id' => 'ziua-3', 'label' => 'Duminică']
+                    ];
 
-                    
-                            $terms = wp_get_post_terms( $post->ID, 'activitati_category');
+                    $activities = [
+                        ['id' => 'adventure', 'label' => 'Adventure'],
+                        ['id' => 'healty', 'label' => 'Healty'],
+                        ['id' => 'game-on', 'label' => 'Game ON!'],
+                        ['id' => 'kids-family', 'label' => 'Kids & Family'],
+                        ['id' => 'performance', 'label' => 'Performance'],
+                        ['id' => 'eco-friendly', 'label' => 'EcoFriendly'],
+                        ['id' => 'adolescenti-adulti', 'label' => 'Adolescenți & Adulți']
+                    ];
 
-                                // $categories = get_the_category($post->ID);
+                    foreach ($days as $day) {
+                        echo '<label class="activitiesCheckbox" for="' . $day['id'] . '"><input class="catCheckbox" id="' . $day['id'] . '" type="radio" name="activity-day" value="' . $day['id'] . '"><span>' . $day['label'] . '</span></label>';
+                    }
 
-                                foreach ($terms as $cat) : ?>
+                    echo '<br>';
 
-                                <label class="activitiesCheckbox" for="<?php echo $cat->slug; ?>"><input
-                                    class="catCheckbox" id="<?php echo $cat->slug; ?>" type="checkbox" name="teamRadio"
-                                    value="<?php echo $cat->slug; ?>"><span><?php echo $cat->name; ?></span>
-                                </label>
-
-                                <?php
-                                endforeach;
-                            endwhile;
-                            wp_reset_postdata();
-                        endif; ?>
+                    foreach ($activities as $activity) {
+                        echo '<label class="activitiesCheckbox" for="' . $activity['id'] . '"><input class="catCheckbox" id="' . $activity['id'] . '" type="radio" name="activity-type" value="' . $activity['id'] . '"><span>' . $activity['label'] . '</span></label>';
+                    }
+                    ?>
             </span>
             </div>
             <div class="activitiesPosts">
                 <div class="row">
                     <?php
+                    $args = array(
+                            'post_type' => 'activitati',
+                            'post_status' => 'publish',
+                            'posts_per_page' => '-1'
+                            );
                     $postslist = get_posts($args);
                     foreach ($postslist as $post) : {
                         $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
