@@ -93,7 +93,7 @@
 
     <div class="container single-page header-padding">
         <h1 class="pt-5 pb-4 text-center"><?php echo get_the_title(); ?></h1>
-        <div class="tabs-to-dropdown row pt-3">
+        <div class="tabs-to-dropdown row pt-3 pb-3">
             <div class="nav-wrapper col-lg-4 col-md-4 col-12">
                 <ul class="nav nav-pills d-none d-md-flex" id="pills-tab" role="tablist">
                     <?php if (have_rows('general_info_repeater', 'options')): ?>

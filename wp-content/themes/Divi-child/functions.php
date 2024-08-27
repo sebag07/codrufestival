@@ -128,6 +128,15 @@ if (function_exists('acf_add_options_page')) {
         'redirect' => false,
         'parent_slug' => 'general-options',
     ));
+
+    acf_add_options_sub_page(array(
+        'page_title' => 'FAQ',
+        'menu_title' => 'FAQ',
+        'menu_slug' => 'faq-options',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+        'parent_slug' => 'general-options',
+    ));
 }
 
 add_filter('the_content', 'wpautop');
