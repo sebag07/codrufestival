@@ -22,8 +22,8 @@
         $scenes = [
             ['id' => 'scena-1', 'label' => 'SUB SOARE'],
             ['id' => 'scena-2', 'label' => 'LUMEA NOUĂ'],
-            ['id' => 'scena-3', 'label' => 'SUB CODRU'],
-            ['id' => 'scena-4', 'label' => 'SUB NORI']
+            ['id' => 'scena-3', 'label' => 'SUB NORI'],
+            ['id' => 'scena-4', 'label' => 'SUB CODRU']
         ];
 
         foreach ($days as $day) {
