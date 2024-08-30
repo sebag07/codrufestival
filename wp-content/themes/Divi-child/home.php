@@ -2,56 +2,6 @@
 <?php get_header(); ?>
 
 <div class="container-fluid heroContainer p-0 m-0">
-        <!-- Display the countdown timer in an element -->
-    <?php
-
-    $countdownDaysText = get_field('days_text', 'options');
-    $countdownHoursText = get_field('hours_text', 'options');
-    $countdownMinutesText = get_field('minutes_text', 'options');
-    $countdownSecondsText = get_field('seconds_text', 'options');
-    $countdownText = get_field('target_text', 'options');
-    $countdownExpiredText = get_field('expired_text', 'options');
-
-    $countdown_end_date = get_field('countdown_end_date', 'options');
-
-    ?>
-    <div class="countdown-container row">
-        <div id="countdown" class="col-xl-5 col-lg-12"></div>
-        <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const countDownDate = new Date("<?php echo date('Y-m-d\TH:i:s', strtotime($countdown_end_date)); ?>").getTime();
-
-            const countdownElement = document.getElementById("countdown");
-            const countdownContainer = document.querySelector(".countdown-container");
-
-            const heroDescription = document.querySelector(".heroDescription");
-
-            const x = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                if (distance < 0) {
-                    clearInterval(x);
-                    countdownContainer.style.display = "none";
-                } else {
-                    heroDescription.style.marginTop = "0";
-                    countdownElement.innerHTML = `<span class="countdown-time-text">${days} <?php echo $countdownDaysText; ?></span> ` +
-                        `<span class="countdown-time-text">${hours} <?php echo $countdownHoursText; ?></span> ` +
-                        `<span class="countdown-time-text">${minutes} <?php echo $countdownMinutesText; ?></span> ` +
-                        `<span class="countdown-time-text">${seconds} <?php echo $countdownSecondsText; ?></span>`;
-                }
-            }, 1000);
-        });
-    </script>
-
         <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG-2.png" alt="">
         <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
         <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
