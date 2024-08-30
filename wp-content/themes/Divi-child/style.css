@@ -8715,7 +8715,7 @@ a {
 .dropdown-toggle::after {
     content: '';
     border: 7px solid transparent;
-    border-top: 7px solid #076708;
+    border-top: 7px solid #efaa13;
     margin-left: 2px;
     margin-bottom: -2px;
     display: inline-block;
