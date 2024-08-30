@@ -91,6 +91,18 @@
         })
     </script>
 
+    <style>
+        @media screen and (max-width: 500px) {
+            h1 {
+                margin-top: 0;
+                font-weight: 600;
+            }
+            .container {
+                width: 100%;
+            }
+        }
+    </style>
+
     <div class="container single-page header-padding">
         <h1 class="pt-5 pb-4 text-center" style="color: #fff;"><?php echo get_the_title(); ?></h1>
         <div class="tabs-to-dropdown row pt-3 pb-3">
