@@ -7859,8 +7859,8 @@ a {
 .dropdown-menu a {
     color: #fff;
     font-weight: 600;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .dropdown-toggle::after {
@@ -8715,7 +8715,7 @@ a {
 .dropdown-toggle::after {
     content: '';
     border: 7px solid transparent;
-    border-top: 7px solid #efaa13;
+    border-top: 7px solid #076708;
     margin-left: 2px;
     margin-bottom: -2px;
     display: inline-block;
@@ -8724,18 +8724,18 @@ a {
 
 .dropdown-toggle:hover {
     color: #efaa13;
-    border-color: #efaa13;
+    border-color: #076708;
 }
 
 .dropdown .dropdown-toggle:active {
-    border-color: #efaa13;
+    border-color: #076708;
     color: #efaa13;
 }
 
 .dropdown-menu {
     width: 100%;
     top: -2px !important;
-    background: #efaa13;
+    background: #076708;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     border-top-left-radius: 0px;
