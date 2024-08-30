@@ -3982,7 +3982,8 @@ a {
 .general-info-content h4,
 .general-info-content h5,
 .general-info-content h6 {
-    color: #076708;
+    color: #fff;
+    font-weight: 600;
 }
 
 .general-info-content p {
