@@ -4786,3 +4786,58 @@ a {
         padding: 0px;
     }
   }
+
+  /* aftermovie hero */
+
+  .after-movie-container {
+    min-height: 80vh;
+    width: 100%;
+    position: relative;
+    padding-top: 80px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .after-movie-container video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    padding-top: 80px;
+  }
+
+  .after-movie-container .video-background {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  .after-movie-container .heroLeftLeaves, .after-movie-container .heroRightLeaves {
+    z-index: 3;
+  }
+
+  .after-movie-container h2, .after-movie-container a {
+    z-index: 4;
+  }
+
+  .background-overlay {
+    background-color: #000;
+    opacity: .3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+  }
+
+  @media (max-width:500px) {
+    .after-movie-container {
+        min-height: 420px;
+    }
+  }

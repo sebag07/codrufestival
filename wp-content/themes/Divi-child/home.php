@@ -1,8 +1,20 @@
 <?php /*  Template Name: CODRU Festival 2024  */ ?>
 <?php get_header(); ?>
 
+<section class="after-movie-container heroContainer container-fluid p-0 m-0">
+            <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
+            <div class="background-overlay"></div>
+            <a class="homepage-info-button codru-general-button" href="#newsletter">NEWSLETTER</a>
+            <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
+            <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
+            <div class="video-background">
+                <video autoplay loop muted playsinline>
+                    <source src="/wp-content/themes/Divi-child/images/placeholdervideo.mp4" type="video/mp4">
+                </video>
+    </div>
+    </section>
+
 <div class="container-fluid heroContainer p-0 m-0">
-        <!-- Display the countdown timer in an element -->
     <?php
 
     $countdownDaysText = get_field('days_text', 'options');
@@ -76,6 +88,8 @@
             </div>
         </div>
     </div>
+
+
 
     <section id="lineup">
         <div class="container">
