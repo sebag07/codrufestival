@@ -7891,6 +7891,7 @@ a {
 .general-info-content img {
     width: 100%;
     max-width: 500px;
+    border-radius: 8px;
 }
 
 .general-info-content h1,
