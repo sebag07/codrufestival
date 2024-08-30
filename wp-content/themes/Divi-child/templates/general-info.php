@@ -93,10 +93,6 @@
 
     <style>
         @media screen and (max-width: 500px) {
-            h1 {
-                margin-top: 0 !important;
-                font-weight: 600 !important;
-            }
             .container {
                 width: 100%;
             }
