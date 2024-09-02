@@ -9648,3 +9648,11 @@ a {
   .galleryContainer {
     background: transparent;
   }
+
+  .grid-sizer {
+    width: 20%;
+  }
+
+  .element-item {
+    width: 20%;
+  }

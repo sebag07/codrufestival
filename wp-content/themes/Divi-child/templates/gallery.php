@@ -22,6 +22,7 @@
                     </div>
                 </div>
                 <div class="galleryContainer grid">
+                <div class="grid-sizer"></div>
                     <?php
                             if (have_rows('days_gallery')) :
                                 while (have_rows('days_gallery')) : the_row();
@@ -53,6 +54,9 @@
                 // options
                 itemSelector: '.element-item',
                 layoutMode: 'masonry',
+                masonry: {
+                    columnWidth: '.grid-sizer',
+                }
             });
             jQuery('.filterBtn').on('click', function() {
                 jQuery('.filterBtn').removeClass('selected');
