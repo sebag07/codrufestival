@@ -30,7 +30,7 @@
                                     if ($gallery) :
                                         foreach ($gallery as $image) :
                                             ?>
-                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
+                                            <img class="element-item" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
                                         <?php
                                         endforeach;
                                     endif;
