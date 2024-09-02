@@ -10028,4 +10028,7 @@ a {
       transition: 0.4s;
   }
 
+  .mfp-fade:hover {
+    transform: scale(1.02);
+  }
   
