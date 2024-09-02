@@ -9650,9 +9650,21 @@ a {
   }
 
   .grid-sizer {
-    width: 20%;
+    width: 25%;
   }
 
   .element-item {
-    width: 20%;
+    width: 25%;
+    padding-right: 2px;
+    padding-bottom: 2px;
+    border-radius: 8px;
+  }
+
+  @media (max-width:991px) {
+    .grid-sizer {
+        width: 50%;
+    }
+    .element-item {
+        width: 50%;
+    }
   }
