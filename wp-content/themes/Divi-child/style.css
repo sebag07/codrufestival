@@ -9858,7 +9858,7 @@ a {
     .mfp-arrow:before {
       border-top-width: 21px;
       border-bottom-width: 21px;
-      opacity: 0.7; }
+      opacity: 1; }
   
   .mfp-arrow-left {
     left: 0; }
@@ -9867,7 +9867,7 @@ a {
       margin-left: 31px; }
     .mfp-arrow-left:before {
       margin-left: 25px;
-      border-right: 27px solid #3F3F3F; }
+      border-right: 27px solid #fff; }
   
   .mfp-arrow-right {
     right: 0; }
@@ -9875,7 +9875,7 @@ a {
       border-left: 17px solid #FFF;
       margin-left: 39px; }
     .mfp-arrow-right:before {
-      border-left: 27px solid #3F3F3F;
+      border-left: 27px solid #fff;
     margin-left: 0px !important; }
   
   .mfp-iframe-holder {
