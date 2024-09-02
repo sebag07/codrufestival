@@ -21,7 +21,7 @@
                         ?>
                     </div>
                 </div>
-                <div class="galleryContainer grid">
+                <div id="gallery-grid" class="galleryContainer grid">
                 <div class="grid-sizer"></div>
                     <?php
                             if (have_rows('days_gallery')) :
@@ -31,7 +31,7 @@
                                     if ($gallery) :
                                         foreach ($gallery as $image) :
                                             ?>
-                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
+                                            <a href="<?php echo esc_url($image['url']); ?>"><img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item mfp-fade <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>"></a>
                                         <?php
                                         endforeach;
                                     endif;
@@ -44,8 +44,10 @@
     </div>
 
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/story-show-gallery@3/dist/ssg.min.css" />
+    <base href="https://roman-flossler.github.io/StoryShowGallery/photos/" target="_blank" />
     <script>
+
         jQuery(document).ready(function($) {
 
             const grid = jQuery('.grid');
@@ -65,8 +67,31 @@
                 var filterValue = $( this ).attr('data-value');
                 grid.isotope({ filter: filterValue });
             });
+         // Define App Namespace
+    var popup = {
+    	// Initializer
+    	init: function() {
+      		popup.popupImage();
+    	},
+	    popupImage : function() {
+			/* Image Popup*/ 
+		 	$('#gallery-grid').magnificPopup({
+		    	delegate: 'a',
+		    	type: 'image',
+		    	mainClass: 'mfp-fade',
+		    	removalDelay: 160,
+		    	preloader: false,
+		    	fixedContentPos: false,
+		    	gallery: {
+		        	enabled:true
+		        }
+		   	});
+	    }
+    };
+  	popup.init($);
+});
 
-        });
-    </script>
+
+</script>
 
 <?php get_footer(); ?>
