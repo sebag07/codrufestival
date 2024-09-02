@@ -1,32 +1,17 @@
-<?php /*  Template Name: CODRU Festival 2024  */ ?>
+<?php /*  Template Name: CODRU Festival 2024 Aftermovie  */ ?>
 <?php get_header(); ?>
-
-<div class="container-fluid heroContainer p-0 m-0">
-        <img class="heroBG" src="/wp-content/themes/Divi-child/images/BG-2.png" alt="">
-        <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
-        <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
-        <div class="heroOverlayGradient"></div>
-        <div class="heroContent row">
-            <div class="heroContentDiv col-xl-12 col-lg-12 col-md-12 col-12">
-                <img class="heroContentImage anim heroContentCodruLogo display-desktop"
-                     src="/wp-content/themes/Divi-child/images/inima-gradina-zoo.png"
-                     alt="Hero Heart Image">
-                <img class="heroContentImage anim heroContentCodruLogo display-mobile"
-                     src="/wp-content/themes/Divi-child/images/inima-gradina-zoo-ing.png"
-                     alt="Hero Heart Image with ING icon">
-                <div class="heroDescription">
-                    <a class="heroContentButton desktopButton desktopContentButton anim"
-                       href="https://bilete.codrufestival.ro/"
-                       target="_blank"><?php echo get_field('hero_button_text') ?></a>
-                    <h2 class="heroFocusedText heroDescription"><?php echo get_field('hero_section_title') ?></h2>
-                    <p class="anim">
-                        <?php echo get_field('hero_section_text') ?>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    </section>
+<section class="after-movie-container heroContainer container-fluid p-0 m-0">
+            <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
+            <div class="background-overlay"></div>
+            <a class="homepage-info-button codru-general-button" href="#newsletter">NEWSLETTER</a>
+            <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
+            <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
+            <div class="video-background">
+                <video autoplay loop muted playsinline>
+                    <source src="/wp-content/themes/Divi-child/images/placeholdervideo.mp4" type="video/mp4">
+                </video>
+</div>
+</section>
 
     <section id="lineup">
         <div class="container">
@@ -350,3 +335,4 @@ $apeluri_artisti = get_posts($args);
 <?php endif; ?>
 
 <?php get_footer(); ?>
+
