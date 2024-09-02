@@ -9644,3 +9644,15 @@ a {
         min-height: 420px;
     }
   }
+
+  .galleryContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background: transparent;
+  }
+
+  .galleryContainer img {
+    height: 250px;
+    object-fit: cover;
+    width: 100%;
+  }

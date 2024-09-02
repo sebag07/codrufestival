@@ -21,7 +21,7 @@
                         ?>
                     </div>
                 </div>
-                <div class="galleryContainer grid">
+                <div class="galleryContainer grid row">
                     <?php
                             if (have_rows('days_gallery')) :
                                 while (have_rows('days_gallery')) : the_row();
@@ -30,7 +30,7 @@
                                     if ($gallery) :
                                         foreach ($gallery as $image) :
                                             ?>
-                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
+                                            <img class="col-lg-3 col-md-4 col-12" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
                                         <?php
                                         endforeach;
                                     endif;
