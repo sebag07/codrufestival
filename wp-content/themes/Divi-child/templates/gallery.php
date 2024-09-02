@@ -14,7 +14,7 @@
                                         $day = get_sub_field('day');
                                         $gallery = get_sub_field('gallery');
                                         ?>
-                                        <button class="filterBtn" data-value=".<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>"><?php echo esc_html($day); ?></button>
+                                        <button class="filterBtn" data-value="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>"><?php echo esc_html($day); ?></button>
                                     <?php
                                     endwhile;
                                 endif;
