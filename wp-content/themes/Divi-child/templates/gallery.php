@@ -14,7 +14,7 @@
                                         $day = get_sub_field('day');
                                         $gallery = get_sub_field('gallery');
                                         ?>
-                                        <button class="filterBtn" data-value="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>"><?php echo esc_html($day); ?></button>
+                                        <button class="filterBtn" data-value=".<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>"><?php echo esc_html($day); ?></button>
                                     <?php
                                     endwhile;
                                 endif;
@@ -30,7 +30,7 @@
                                     if ($gallery) :
                                         foreach ($gallery as $image) :
                                             ?>
-                                            <img class="element-item" src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
+                                            <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" class="element-item <?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>" data-category="<?php echo esc_attr(strtolower(str_replace(' ', '-', $day))); ?>">
                                         <?php
                                         endforeach;
                                     endif;
