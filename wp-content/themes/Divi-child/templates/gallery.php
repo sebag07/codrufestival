@@ -53,10 +53,6 @@
                 // options
                 itemSelector: '.element-item',
                 layoutMode: 'masonry',
-                masonry: {
-                    columnWidth: '.grid-sizer'
-                    gutter: 10
-                }
             });
             jQuery('.filterBtn').on('click', function() {
                 jQuery('.filterBtn').removeClass('selected');
