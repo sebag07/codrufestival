@@ -9656,6 +9656,7 @@ a {
   .element-item {
     width: 25%;
     padding-right: 2px;
+    padding-left: 2px;
     padding-bottom: 2px;
     border-radius: 8px;
   }
