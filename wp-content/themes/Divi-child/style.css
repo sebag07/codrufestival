@@ -10032,3 +10032,7 @@ a {
     transform: scale(1.02);
   }
   
+
+  .after-movie-container h2 {
+    padding: 10px;
+  }
