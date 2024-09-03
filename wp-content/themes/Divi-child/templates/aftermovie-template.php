@@ -1,10 +1,14 @@
 <?php /*  Template Name: CODRU Festival 2024 Aftermovie  */ ?>
 <?php get_header(); ?>
-<?php $video_mp4 = get_field("mp4_video"); ?>
+<?php 
+$video_mp4 = get_field("mp4_video"); 
+$buttonURL = get_field("button_url");
+$buttonText = get_field("button_text");
+?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
             <div class="background-overlay"></div>
-            <a class="homepage-info-button codru-general-button" href="#newsletter">NEWSLETTER</a>
+            <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
             <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
             <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
             <div class="video-background">
