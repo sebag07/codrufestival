@@ -18,43 +18,6 @@ $buttonText = get_field("button_text");
 </div>
 </section>
 
-    <section id="lineup">
-        <div class="container">
-            <div class="container-fluid sectionPadding">
-                <div class="col-12 text-center">
-                    <div class="artistsLevel1 pt-3 pb-3">
-                        <?php display_artists_by_level('level-1', get_the_ID()); ?>
-                    </div>
-                    <div class="artistsLevel2 pt-3 pb-3">
-                        <?php display_artists_by_level('level-2', get_the_ID(), 'english'); ?>
-                    </div>
-                    <div class="artistsLevel2 pt-3 pb-3">
-                        <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>SPECIAL SHOW </h4></div>
-                        <?php display_artists_by_level('level-2', get_the_ID(),'roman', 'special'); ?>
-                    </div>
-                    <div class="artistsLevel2 pt-3 pb-3">
-                        <?php display_artists_by_level('level-2', get_the_ID(), 'roman'); ?>
-                    </div>
-                    <div class="artistsLevel3 pt-3 pb-3">
-                        <?php display_artists_by_level('level-3', get_the_ID()); ?>
-                    </div>
-                    <div class="artistsLevel4 pt-3 pb-3">
-                        <?php display_artists_by_level('level-4', get_the_ID()); ?>
-                    </div>
-                    <div class="artistsLevel5 pt-3 pb-3">
-                        <?php display_artists_by_level('level-5', get_the_ID()); ?>
-                    </div>
-                    <div class="artistsLevel6 pt-3 pb-3">
-                        <?php display_artists_by_level('level-6', get_the_ID()); ?>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">
-                    <a class="codru-general-button"
-                       href="<?php echo get_field('see_all_artists_button_link') ?>"
-                       target="_blank"><?php echo get_field('see_all_artists_button') ?></a>
-                </div>
-    </section>
-
 
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <section id="tickets-sale-section">
