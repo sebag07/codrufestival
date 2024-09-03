@@ -1,5 +1,6 @@
 <?php /*  Template Name: CODRU Festival 2024 Aftermovie  */ ?>
 <?php get_header(); ?>
+<?php $video_mp4 = get_field("mp4_video"); ?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
             <div class="background-overlay"></div>
@@ -8,7 +9,7 @@
             <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
             <div class="video-background">
                 <video autoplay loop muted playsinline>
-                    <source src="/wp-content/themes/Divi-child/images/placeholdervideo.mp4" type="video/mp4">
+                    <source src="<?php echo $video_mp4; ?>" type="video/mp4">
                 </video>
 </div>
 </section>
