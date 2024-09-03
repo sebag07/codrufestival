@@ -45,7 +45,6 @@
 
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/story-show-gallery@3/dist/ssg.min.css" />
-    <base href="https://roman-flossler.github.io/StoryShowGallery/photos/" target="_blank" />
     <script>
 
         jQuery(document).ready(function($) {
