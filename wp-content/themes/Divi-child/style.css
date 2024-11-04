@@ -9611,6 +9611,13 @@ a {
     padding-top: 80px;
   }
 
+  .after-movie-container .hero-image-bg {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    padding-top: 80px;
+  }
+
   .after-movie-container .video-background {
     height: 100%;
     width: 100%;
