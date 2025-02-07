@@ -4,8 +4,9 @@ Template Name: Thank You Page
 */
 
 get_header();
-?>
 
+?>
+<meta name=“robots” content=“noindex”>
 
 
 <style>
@@ -38,7 +39,7 @@ header, .headerHalfCircle {
 }
 
 .content-wrapper {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     text-align: center;
     position: relative;
@@ -51,6 +52,7 @@ header, .headerHalfCircle {
     font-weight: bold;
     margin-bottom: 20px;
     color: #fff;
+    padding-bottom: 0px;
 }
 
 .thank-you-hero h2 {
@@ -83,6 +85,23 @@ header, .headerHalfCircle {
     cursor: pointer;
 }
 
+#thank-you-socials {
+    margin-top: 30px;
+}
+
+#thank-you-socials a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#thank-you-socials a img {
+    max-height: 24px;
+}
+
+.thank-you-logo {
+    max-width: 700px;
+}
 
 </style>
 
@@ -101,12 +120,23 @@ $background_image = get_field('background_image');
 <div id="thank-you-main-content">
     <div class="thank-you-hero" style="background-image: url('<?php echo esc_url($background_image['url']); ?>');">
         <div class="content-wrapper">
+            <img class="thank-you-logo" src="/wp-content/themes/Divi-child/images/logo-2025-anniversary.png" alt="CODRU Festival Logo">
             <h1><?php echo esc_html($hero_title); ?></h1>
             <h2><?php echo esc_html($hero_subtitle); ?></h2>
                 <?php echo wp_kses_post($main_content); ?>
                 <?php if ($cta_text && $cta_link) : ?>
                     <a href="<?php echo esc_url($cta_link); ?>" class="thank-you-button"><?php echo esc_html($cta_text); ?></a>
                 <?php endif; ?>
+                <div class="thank-you-button-container">
+                    <a href="/" class="thank-you-button">Back to Home</a>
+                </div>
+                <span id="thank-you-socials" class="footerSocials justify-content-center">
+                    <a href="https://www.facebook.com/codrufestival" target="_blank"><img src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
+                    <a href="https://www.instagram.com/codrufestival/" target="_blank"><img src="/wp-content/themes/Divi-child/images/instagramcodru.svg" alt=""></a>
+                    <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
+                    <a href="https://www.youtube.com/@codrufestival" target="_blank"><img src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
+                    <a href="https://open.spotify.com/playlist/0vePsGS7Ei7jA5hPUlvbxY?si=a6b26f14a4a94198" target="_blank"><img src="/wp-content/themes/Divi-child/images/spotify.svg" alt=""></a>
+                </span>
         </div>
     </div>
 </div>

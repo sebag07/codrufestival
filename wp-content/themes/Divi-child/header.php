@@ -290,8 +290,8 @@
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
         </div>
 
-        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo.png"
-                                                                alt=""></a></div>
+        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo-2025-anniversary.png"
+                                                                alt="CODRU Festival Logo"></a></div>
 
 
         <div
