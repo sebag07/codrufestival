@@ -4,6 +4,8 @@
 $video_mp4 = get_field("mp4_video"); 
 $buttonURL = get_field("button_url");
 $buttonText = get_field("button_text");
+$image = get_field("image");
+$backgroundType = get_field("hero_background_type");
 ?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
@@ -11,11 +13,19 @@ $buttonText = get_field("button_text");
             <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
             <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
             <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
-            <div class="video-background">
-                <video autoplay loop muted playsinline>
-                    <source src="<?php echo $video_mp4; ?>" type="video/mp4">
-                </video>
-</div>
+                <?php if($backgroundType == "video"): ?>
+                    <div class="video-background">
+                        <video autoplay loop muted playsinline>
+                            <source src="<?php echo $video_mp4; ?>" type="video/mp4">
+                        </video>
+                    </div>          
+                <?php endif; ?>
+                <?php if($backgroundType == "image"): ?>
+                    <div class="video-background">
+                        <img class="hero-image-bg" src="<?php echo $image ?>" alt="">
+                    </div>          
+                <?php endif; ?>
+
 </section>
 
 
