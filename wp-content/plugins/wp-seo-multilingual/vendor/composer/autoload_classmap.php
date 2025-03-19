@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'OTGS_Assets_Handles' => $vendorDir . '/otgs/ui/src/php/OTGS_Assets_Handles.php',
     'OTGS_Assets_Store' => $vendorDir . '/otgs/ui/src/php/OTGS_Assets_Store.php',
     'OTGS_UI_Assets' => $vendorDir . '/otgs/ui/src/php/OTGS_UI_Assets.php',
@@ -18,8 +19,13 @@ return array(
     'WPML\\WPSEO\\RankMathSEO\\Loaders' => $baseDir . '/classes/RankMathSEO/Loaders.php',
     'WPML\\WPSEO\\RankMathSEO\\Sitemap\\Hooks' => $baseDir . '/classes/RankMathSEO/Sitemap/Hooks.php',
     'WPML\\WPSEO\\RankMathSEO\\Sitemap\\LangMode\\DirectoryHooks' => $baseDir . '/classes/RankMathSEO/Sitemap/LangMode/DirectoryHooks.php',
+    'WPML\\WPSEO\\RankMathSEO\\Slugs\\Hooks' => $baseDir . '/classes/RankMathSEO/Slugs/Hooks.php',
+    'WPML\\WPSEO\\RankMathSEO\\Slugs\\HooksFactory' => $baseDir . '/classes/RankMathSEO/Slugs/HooksFactory.php',
+    'WPML\\WPSEO\\RankMathSEO\\TranslationJob\\Hooks' => $baseDir . '/classes/RankMathSEO/TranslationJob/Hooks.php',
+    'WPML\\WPSEO\\Shared\\TranslationJob\\BaseHooks' => $baseDir . '/classes/Shared/TranslationJob/BaseHooks.php',
     'WPML\\WPSEO\\SlugTranslation\\Hooks' => $baseDir . '/classes/SlugTranslation/Hooks.php',
     'WPML\\WPSEO\\Terms\\AdminHooks' => $baseDir . '/classes/Terms/AdminHooks.php',
+    'WPML\\WPSEO\\TranslationJob\\Hooks' => $baseDir . '/classes/TranslationJob/Hooks.php',
     'WPML\\WPSEO\\Utils' => $baseDir . '/classes/Utils.php',
     'WPML_Core_Version_Check' => $vendorDir . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
     'WPML_Dependencies' => $vendorDir . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-dependencies.php',

@@ -144,6 +144,8 @@ class WPML_SEO_HeadLangs {
 		$wpml_queried_object = new WPML_Queried_Object( $this->sitepress );
 
 		$has_languages = is_array( $languages ) && count( $languages ) > 0;
+		// Allow users to add custom post statuses.
+		$post_status = apply_filters( 'wpml_hreflangs_post_status', [ 'publish' ] );
 		if ( $has_languages && ! $this->sitepress->get_wp_api()->is_paged() ) {
 			if ( $wpml_queried_object->has_object() ) {
 				if ( $wpml_queried_object->is_instance_of_post() ) {
@@ -152,7 +154,7 @@ class WPML_SEO_HeadLangs {
 					$is_single_or_page = $this->sitepress->get_wp_api()->is_single() || $this->sitepress->get_wp_api()->is_page();
 					$is_published      = $is_single_or_page
 										 && $post_id
-										 && $this->sitepress->get_wp_api()->get_post_status( $post_id ) === 'publish';
+										 && in_array( $this->sitepress->get_wp_api()->get_post_status( $post_id ), $post_status, true );
 
 					$must_render = $this->sitepress->is_translated_post_type( $wpml_queried_object->get_post_type() )
 								   && ( $is_published || $this->is_home_front_or_archive_page() );

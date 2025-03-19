@@ -279,17 +279,18 @@ class WPML_Config {
 
 	static function parse_wpml_config_files() {
 		$config_all['wpml-config'] = array(
-			'custom-fields'              => array(),
-			'custom-fields-texts'        => array(),
-			'custom-term-fields'         => array(),
-			'custom-types'               => array(),
-			'taxonomies'                 => array(),
-			'admin-texts'                => array(),
-			'language-switcher-settings' => array(),
-			'shortcodes'                 => array(),
-			'shortcode-list'             => array(),
-			'gutenberg-blocks'           => array(),
-			'built-with-page-builder'    => array(),
+			'custom-fields'                 => array(),
+			'custom-fields-texts'           => array(),
+			'custom-term-fields'            => array(),
+			'custom-types'                  => array(),
+			'taxonomies'                    => array(),
+			'admin-texts'                   => array(),
+			'language-switcher-settings'    => array(),
+			'shortcodes'                    => array(),
+			'shortcode-list'                => array(),
+			'gutenberg-blocks'              => array(),
+			'built-with-page-builder'       => array(),
+			'allow-translatable-job-fields' => array(),
 		);
 
 		$config_all_updated = false;
@@ -388,6 +389,7 @@ class WPML_Config {
 			$wpml_config_all = self::parse_config_index( $wpml_config_all, $wpml_config, 'widget', 'beaver-builder-widgets' );
 			$wpml_config_all = self::parse_config_index( $wpml_config_all, $wpml_config, 'widget', 'cornerstone-widgets' );
 			$wpml_config_all = self::parse_config_index( $wpml_config_all, $wpml_config, 'widget', 'siteorigin-widgets' );
+			$wpml_config_all = self::parse_config_index( $wpml_config_all, $wpml_config, 'allow-translatable-job-field', 'allow-translatable-job-fields' );
 
 			// language-switcher-settings
 			if ( isset( $wpml_config['language-switcher-settings']['key'] ) ) {

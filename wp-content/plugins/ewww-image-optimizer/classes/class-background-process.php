@@ -190,7 +190,7 @@ abstract class Background_Process extends Async_Request {
 	public function update( $id, $data = array() ) {
 		if ( ! empty( $id ) ) {
 			global $wpdb;
-			$wpdb->get_row( $wpdb->prepare( "UPDATE $wpdb->ewwwio_queue SET scanned=scanned+1 WHERE attachment_id = %d AND gallery = %s LIMIT 1", $id, $this->active_queue ) );
+			$wpdb->get_row( $wpdb->prepare( "UPDATE $wpdb->ewwwio_queue SET scanned=scanned+1 WHERE id = %d LIMIT 1", $id ) );
 		}
 	}
 
@@ -208,10 +208,9 @@ abstract class Background_Process extends Async_Request {
 		$wpdb->delete(
 			$wpdb->ewwwio_queue,
 			array(
-				'attachment_id' => $key,
-				'gallery'       => $this->active_queue,
+				'id' => $key,
 			),
-			array( '%d', '%s' )
+			array( '%d' )
 		);
 	}
 
@@ -224,21 +223,30 @@ abstract class Background_Process extends Async_Request {
 	public function maybe_handle() {
 		session_write_close();
 
+		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
+		\ewwwio_debug_message( "$this->identifier checking for valid nonce" );
 		\check_ajax_referer( $this->identifier, 'nonce' );
 
 		if ( ! empty( $_REQUEST['lock_key'] ) ) {
 			$this->lock_key = \sanitize_text_field( \wp_unslash( $_REQUEST['lock_key'] ) );
 		}
+		\ewwwio_debug_message( "nonce was valid, lock key is $this->lock_key" );
 
 		if ( $this->is_process_running() && ! $this->is_key_valid() ) {
 			// Background process already running.
+			\ewwwio_debug_message( 'background process already running and the submitted lock key is not the active/valid key' );
 			die;
 		}
 
+		\ewwwio_debug_message( 'not already running, checking queue' );
+
 		if ( $this->is_queue_empty() ) {
 			// No data to process.
+			\ewwwio_debug_message( 'nothing in the queue, bye!' );
 			die;
 		}
+
+		\ewwwio_debug_message( 'queue has items, lets handle them...' );
 
 		$this->handle();
 
@@ -273,6 +281,7 @@ abstract class Background_Process extends Async_Request {
 	 * @return bool
 	 */
 	public function is_process_running() {
+		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
 		if ( $this->get_process_lock() ) {
 			// Process already running.
 			return true;
@@ -300,12 +309,12 @@ abstract class Background_Process extends Async_Request {
 	/**
 	 * Is disk-based lock valid?
 	 *
+	 * @param string $lock_file Location of the process lock file.
 	 * @return bool True if it is valid, false if it is expired.
 	 */
-	protected function is_disk_lock_valid() {
+	protected function is_disk_lock_valid( $lock_file ) {
 		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$lock_duration = \apply_filters( $this->identifier . '_queue_lock_time', $this->queue_lock_time );
-		$lock_file     = $this->process_lock_file();
 		\clearstatcache();
 		if ( \ewwwio_is_file( $lock_file ) && \time() - \filemtime( $lock_file ) < $lock_duration ) {
 			\ewwwio_debug_message( 'process lock file in place' );
@@ -324,8 +333,9 @@ abstract class Background_Process extends Async_Request {
 		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
 		$db_key = false;
 		if ( $this->lock_dir ) {
-			\ewwwio_debug_message( "$this->lock_dir is valid" );
+			\ewwwio_debug_message( "lock dir is $this->lock_dir" );
 			$lock_file = $this->process_lock_file();
+			\ewwwio_debug_message( "checking $lock_file" );
 			if ( $this->is_disk_lock_valid( $lock_file ) ) {
 				$db_key = \trim( \file_get_contents( $lock_file ) );
 				\ewwwio_debug_message( "retrieved lock key: $db_key" );
@@ -371,15 +381,25 @@ abstract class Background_Process extends Async_Request {
 	 * Update the process lock so that other instances do not spawn.
 	 */
 	protected function update_lock() {
+		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
 		if ( ! empty( $this->active_queue ) ) {
 			if ( empty( $this->lock_key ) ) {
 				$this->lock_key = \uniqid( $this->active_queue, true ) . $this->generate_key_suffix();
+				\ewwwio_debug_message( "no key, generated: $this->lock_key" );
+			} else {
+				\ewwwio_debug_message( "using existing key: $this->lock_key" );
 			}
 			if ( $this->lock_dir ) {
-				\file_put_contents( $this->process_lock_file(), $this->lock_key );
+				$written = \file_put_contents( $this->process_lock_file(), $this->lock_key );
+				if ( $written ) {
+					\ewwwio_debug_message( 'saved key to lock file' );
+				} else {
+					\ewwwio_debug_message( 'zero bytes written' );
+				}
 			} else {
 				$lock_duration = \apply_filters( $this->identifier . '_queue_lock_time', $this->queue_lock_time );
 				\set_transient( $this->identifier . '_process_lock', $this->lock_key, $lock_duration );
+				\ewwwio_debug_message( "transient locking, stored $this->lock_key in " . $this->identifier . "_process_lock for $lock_duration" );
 			}
 		}
 	}
@@ -421,12 +441,13 @@ abstract class Background_Process extends Async_Request {
 	 * @return array Return the first batch from the queue
 	 */
 	protected function get_batch() {
+		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
 		global $wpdb;
-		$batch = $wpdb->get_results( $wpdb->prepare( "SELECT attachment_id AS id, scanned AS attempts, new, convert_once, force_reopt, force_smart, webp_only FROM $wpdb->ewwwio_queue WHERE gallery = %s LIMIT %d", $this->active_queue, $this->limit ), ARRAY_A );
+		$batch = $wpdb->get_results( $wpdb->prepare( "SELECT id, attachment_id, scanned AS attempts, new, convert_once, force_reopt, force_smart, webp_only FROM $wpdb->ewwwio_queue WHERE gallery = %s ORDER BY id LIMIT %d", $this->active_queue, $this->limit ), ARRAY_A );
 		if ( empty( $batch ) ) {
 			return array();
 		}
-		\ewwwio_debug_message( 'selected items: ' . count( $batch ) );
+		\ewwwio_debug_message( "selected items for {$this->active_queue}: " . count( $batch ) );
 
 		$this->update_lock();
 		return $batch;
@@ -439,7 +460,8 @@ abstract class Background_Process extends Async_Request {
 	 * within server memory and time limit constraints.
 	 */
 	protected function handle() {
-		$this->start_time = time(); // Set start time of current process.
+		\ewwwio_debug_message( '<b>' . __METHOD__ . '()</b>' );
+		$this->start_time = \time(); // Set start time of current process.
 
 		do {
 			$batch = $this->get_batch();
@@ -571,7 +593,7 @@ abstract class Background_Process extends Async_Request {
 		$schedules[ $this->identifier . '_cron_interval' ] = array(
 			'interval' => MINUTE_IN_SECONDS * $interval,
 			/* translators: %d: number of minutes */
-			'display'  => sprintf( __( 'Every %d Minutes' ), $interval ),
+			'display'  => sprintf( __( 'Every %d Minutes', 'ewww-image-optimizer' ), $interval ),
 		);
 
 		return $schedules;

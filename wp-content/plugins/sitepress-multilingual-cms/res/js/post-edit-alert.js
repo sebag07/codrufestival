@@ -15,9 +15,14 @@
                          closeOnEscape: false,
 			draggable: false,
 			modal: true,
-			minWidth: 520,
+			minWidth: 700,
 			open: function(e) {
 				$(e.target).closest('.otgs-ui-dialog').find('.ui-widget-header').remove();
+        setTimeout(function() {
+          if ($(document.activeElement).is('button, a')) {
+            $(document.activeElement).blur();
+          }
+        }, 0);
 			}
 		});
 

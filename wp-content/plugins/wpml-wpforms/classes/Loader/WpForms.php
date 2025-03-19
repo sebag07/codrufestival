@@ -3,28 +3,38 @@
 namespace WPML\Forms\Loader;
 
 use SitePress;
+use WPML\Forms\Hooks\WpForms\AteLayoutHooks;
 use WPML\Forms\Hooks\WpForms\ConversationalForms;
 use WPML\Forms\Hooks\WpForms\DynamicChoices;
+use WPML\Forms\Hooks\WpForms\EntryEdit;
 use WPML\Forms\Hooks\WpForms\EntryPreviewField;
 use WPML\Forms\Hooks\WpForms\FormPages;
+use WPML\Forms\Hooks\WpForms\Import;
 use WPML\Forms\Hooks\WpForms\Notifications;
 use WPML\Forms\Hooks\WpForms\Package;
 use WPML\Forms\Hooks\WpForms\Strings;
 use WPML\Forms\Addons\WpForms\SaveAndResume;
-use WPML\Forms\Translation\Factory;
+use WPML\Forms\Hooks\WpForms\SubLabels;
+use WPML\Forms\Hooks\WpForms\TranslateEverythingHooks;
+use WPML\Forms\Translation\Factory as FormsFactory;
 use WPML\Forms\Addons\WpForms\SurveyAndPolls;
+use WPML\Forms\Hooks\WpForms\Factory;
 
 
 class WpForms extends Base {
 
+	const SLUG = 'wpforms';
+
+	const TITLE = 'WPForms';
+
 	/** Gets package slug. */
 	protected function getSlug() {
-		return 'wpforms';
+		return self::SLUG;
 	}
 
 	/** Gets package title. */
 	protected function getTitle() {
-		return 'WPForms';
+		return self::TITLE;
 	}
 
 	/** Adds hooks. */
@@ -32,12 +42,12 @@ class WpForms extends Base {
 		/** @var SitePress $sitepress */
 		global $sitepress;
 
-		$factory = new Factory( $this->preferences );
+		$formsFactory = new FormsFactory( $this->preferences );
 
 		$wpforms = new Strings(
 			$this->getSlug(),
 			$this->getTitle(),
-			$factory,
+			$formsFactory,
 			$sitepress
 		);
 		$wpforms->addHooks();
@@ -45,7 +55,7 @@ class WpForms extends Base {
 		$notifications = new Notifications(
 			$this->getSlug(),
 			$this->getTitle(),
-			$factory
+			$formsFactory
 		);
 		$notifications->addHooks();
 
@@ -58,22 +68,42 @@ class WpForms extends Base {
 		$dynamic_choices = new DynamicChoices();
 		$dynamic_choices->addHooks();
 
-		$form_pages = new FormPages( $wpforms );
-		$form_pages->addHooks();
+		if ( defined( 'WPFORMS_FORM_PAGES_VERSION' ) ) {
+			$form_pages = new FormPages( $wpforms );
+			$form_pages->addHooks();
+		}
+
+		if ( is_admin() ) {
+			$entryEdit = new EntryEdit( $wpforms );
+			$entryEdit->addHooks();
+		}
 
 		$entryPreviewField = new EntryPreviewField(
 			$this->getSlug(),
 			$this->getTitle(),
-			$factory,
+			$formsFactory,
 			$sitepress
 		);
 		$entryPreviewField->addHooks();
+
+		$factory   = new Factory();
+		$ateLayout = new AteLayoutHooks( $factory );
+		$ateLayout->addHooks();
+
+		$translateEverything = new TranslateEverythingHooks();
+		$translateEverything->addHooks();
+
+		$import = new Import();
+		$import->addHooks();
+
+		$subLabels = new SubLabels();
+		$subLabels->addHooks();
 
 		if ( defined( 'WPFORMS_SURVEYS_POLLS_VERSION' ) ) {
 			$surveyAndPolls = new SurveyAndPolls(
 				$this->getSlug(),
 				$this->getTitle(),
-				$factory
+				$formsFactory
 			);
 			$surveyAndPolls->addHooks();
 		}
@@ -82,7 +112,7 @@ class WpForms extends Base {
 			$saveAndResume = new SaveAndResume(
 				$this->getSlug(),
 				$this->getTitle(),
-				$factory
+				$formsFactory
 			);
 			$saveAndResume->addHooks();
 		}

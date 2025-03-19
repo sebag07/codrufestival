@@ -1,2 +1,2 @@
 === WPForms Multilingual ===
-Stable tag: 0.3.5
+Stable tag: 0.4.1

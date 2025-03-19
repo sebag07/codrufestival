@@ -75,7 +75,7 @@ class WPML_Config_Update {
 
 				if ( $plugins || $themes ) {
 					update_option( 'wpml_config_index', $arr, false );
-					update_option( 'wpml_config_index_updated', time(), false );
+					update_option( 'wpml_config_index_updated', time() + get_option( 'gmt_offset' ) * HOUR_IN_SECONDS, false );
 
 					$config_files_original = get_option( 'wpml_config_files_arr', null );
 					$config_files          = maybe_unserialize( $config_files_original );

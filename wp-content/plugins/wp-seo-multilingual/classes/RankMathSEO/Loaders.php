@@ -10,6 +10,8 @@ class Loaders {
 	public static function get() {
 		return array_filter( [
 			Sitemap\Hooks::class,
+			Slugs\HooksFactory::class,
+			TranslationJob\Hooks::class,
 			self::getSitemapLangModeHooks(),
 			class_exists( \WooCommerce::class ) ? Compatibility\WooCommerce\Hooks::class : null,
 		] );

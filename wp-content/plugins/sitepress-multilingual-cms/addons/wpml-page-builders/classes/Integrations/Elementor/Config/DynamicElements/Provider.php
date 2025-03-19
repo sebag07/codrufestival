@@ -18,6 +18,11 @@ class Provider {
 			FormPopup::get(),
 			WooProduct::get( 'title' ),
 			WooProduct::get( 'short-description' ),
+			MegaMenu::get(),
+			Button::get(),
+			Lottie::get(),
+			ContainerPopup::get(),
+			ImageBox::get(),
 		];
 	}
 }

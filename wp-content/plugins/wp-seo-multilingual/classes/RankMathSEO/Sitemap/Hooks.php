@@ -7,17 +7,23 @@ use WPML\FP\Fns;
 use WPML\FP\Lst;
 use WPML\FP\Maybe;
 use WPML\FP\Obj;
+use WPML\FP\Relation;
 
 class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
 	/** @var \WPML_URL_Converter $urlConverter */
 	private $urlConverter;
 
+
+	/** @var \SitePress $sitepress */
+	private $sitepress;
+
 	/** @var null|array $secondaryHomeUrls */
 	private $secondaryHomesById;
 
-	public function __construct( \WPML_URL_Converter $urlConverter ) {
+	public function __construct( \WPML_URL_Converter $urlConverter, \SitePress $sitepress ) {
 		$this->urlConverter = $urlConverter;
+		$this->sitepress    = $sitepress;
 	}
 
 	public function add_hooks() {
@@ -47,6 +53,9 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	 */
 	private function replaceHomePageInSecondaryLanguages( $url, $object ) {
 		if ( null === $this->secondaryHomesById ) {
+			/** @var \callable(object):bool $isInDefaultLang */
+			$isInDefaultLang = Relation::propEq( 'language_code', $this->sitepress->get_default_language() );
+
 			// $getIdAndUrl :: \stdClass -> []
 			$getIdAndUrl = function( $translation ) {
 				return [
@@ -57,7 +66,7 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 
 			$this->secondaryHomesById = Maybe::fromNullable( get_option( 'page_on_front' ) )
 			                                 ->map( PostTranslations::get() )
-			                                 ->map( Fns::reject( Obj::prop( 'original' ) ) )
+			                                 ->map( Fns::reject( $isInDefaultLang ) )
 			                                 ->map( Fns::map( $getIdAndUrl ) )
 			                                 ->map( Lst::fromPairs() )
 			                                 ->getOrElse( [] );

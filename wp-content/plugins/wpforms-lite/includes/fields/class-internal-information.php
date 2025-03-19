@@ -49,7 +49,8 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 		add_filter( 'wpforms_field_new_class', [ $this, 'add_css_class_for_field_wrapper' ], 10, 2 );
 		add_filter( "wpforms_pro_admin_entries_edit_is_field_displayable_{$this->type}", '__return_false' );
 		add_filter( 'wpforms_builder_strings', [ $this, 'builder_strings' ], 10, 2 );
-		add_filter( 'wpforms_frontend_form_data', [ $this, 'remove_internal_fields_on_front_end' ], 10, 1 );
+		add_filter( 'wpforms_frontend_form_data', [ $this, 'remove_internal_fields_on_front_end' ] );
+		add_filter( 'wpforms_pro_fields_entry_preview_get_ignored_fields', [ $this, 'ignore_entry_preview' ] );
 		add_filter( 'wpforms_process_before_form_data', [ $this, 'process_before_form_data' ], 10, 2 );
 		add_filter( 'wpforms_field_preview_display_duplicate_button', [ $this, 'display_duplicate_button' ], 10, 3 );
 		add_action( 'wpforms_builder_enqueues', [ $this, 'builder_enqueues' ] );
@@ -57,7 +58,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	}
 
 	/**
-	 * Whether current field can be populated dynamically.
+	 * Whether the current field can be populated dynamically.
 	 *
 	 * @since 1.7.6
 	 *
@@ -66,13 +67,13 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 *
 	 * @return bool
 	 */
-	public function is_dynamic_population_allowed( $properties, $field ) {
+	public function is_dynamic_population_allowed( $properties, $field ): bool {
 
 		return false;
 	}
 
 	/**
-	 * Whether current field can be populated using a fallback.
+	 * Whether the current field can be populated using a fallback.
 	 *
 	 * @since 1.7.6
 	 *
@@ -81,13 +82,13 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 *
 	 * @return bool
 	 */
-	public function is_fallback_population_allowed( $properties, $field ) {
+	public function is_fallback_population_allowed( $properties, $field ): bool {
 
 		return false;
 	}
 
 	/**
-	 * Define field options to display in left panel.
+	 * Define field options to display in the left panel.
 	 *
 	 * @since 1.7.6
 	 *
@@ -142,7 +143,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 
 				if ( $this->is_button_displayable( $field ) ) {
 					echo '<div class="wpforms-field-internal-information-row wpforms-field-internal-information-row-cta-button">';
-					echo $this->render_custom_preview( 'cta-button', $field, [] );
+					echo $this->render_custom_preview( 'cta-button', $field );
 					echo '</div>';
 				}
 
@@ -173,10 +174,10 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 * @since 1.7.6
 	 *
 	 * @param array $field      Field data and settings.
-	 * @param array $field_atts Field attributes.
+	 * @param array $deprecated Field attributes.
 	 * @param array $form_data  Form data.
 	 */
-	public function field_display( $field, $field_atts, $form_data ) {
+	public function field_display( $field, $deprecated, $form_data ) {
 	}
 
 	/**
@@ -377,14 +378,14 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 *
 	 * @since 1.7.6
 	 *
-	 * @param string $option Field option to render.
-	 * @param array  $field  Field data and settings.
-	 * @param array  $args   Field preview arguments.
-	 * @param bool   $echo   Print or return the value. Print by default.
+	 * @param string $option  Field option to render.
+	 * @param array  $field   Field data and settings.
+	 * @param array  $args    Field preview arguments.
+	 * @param bool   $do_echo Print or return the value. Print by default.
 	 *
-	 * @return string
+	 * @return string|null
 	 */
-	public function field_element( $option, $field, $args = [], $echo = true ) {
+	public function field_element( $option, $field, $args = [], $do_echo = true ) {
 
 		if ( ! isset( $args['class'] ) ) {
 			$args['class'] = '';
@@ -394,7 +395,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 			$args['class'] .= ' wpforms-hidden ';
 		}
 
-		return parent::field_element( $option, $field, $args, $echo );
+		return parent::field_element( $option, $field, $args, $do_echo );
 	}
 
 	/**
@@ -407,6 +408,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 * @param array  $args   Field arguments.
 	 *
 	 * @return string
+	 * @noinspection HtmlUnknownTarget
 	 */
 	private function render_custom_preview( $option, $field, $args = [] ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded, Generic.Metrics.CyclomaticComplexity.TooHigh
 
@@ -428,7 +430,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 				);
 
 			case 'description': // phpcs:ignore WPForms.Formatting.Switch.AddEmptyLineBefore
-				$description = isset( $field['description'] ) && ! empty( $field['description'] ) ? wp_kses( $field['description'], $allowed_tags ) : '';
+				$description = ! empty( $field['description'] ) ? wp_kses( $field['description'], $allowed_tags ) : '';
 				$description = wpautop( $this->replace_checkboxes( $description, $field ) );
 				$description = $this->add_link_attributes( $description );
 
@@ -442,9 +444,9 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 				return sprintf( '<div class="expanded-description %s">%s</div>', esc_attr( $class ), wp_kses( $description, $allowed_tags ) );
 
 			case 'cta-button': // phpcs:ignore WPForms.Formatting.Switch.AddEmptyLineBefore
-				$label = isset( $field['cta-label'] ) && ! empty( $field['cta-label'] ) && empty( $field['expanded-description'] ) ? esc_attr( $field['cta-label'] ) : esc_attr__( 'Learn More', 'wpforms-lite' );
+				$label = ! empty( $field['cta-label'] ) && empty( $field['expanded-description'] ) ? esc_attr( $field['cta-label'] ) : esc_attr__( 'Learn More', 'wpforms-lite' );
 
-				if ( isset( $field['expanded-description'] ) && ! empty( $field['expanded-description'] ) ) {
+				if ( ! empty( $field['expanded-description'] ) ) {
 					return sprintf(
 						'<div class="cta-button cta-expand-description not-expanded %s"><a href="#" target="_blank" rel="noopener noreferrer"><span class="button-label">%s</span> %s %s</a></div>',
 						esc_attr( $class ),
@@ -454,7 +456,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 					);
 				}
 
-				if ( isset( $field['cta-link'] ) && ! empty( $field['cta-link'] ) ) {
+				if ( ! empty( $field['cta-link'] ) ) {
 					return sprintf( '<div class="cta-button cta-link-external %s"><a href="%s" target="_blank" rel="noopener noreferrer">%s</a></div>', esc_attr( $class ), esc_url( $this->add_url_utm( $field ) ), esc_html( $label ) );
 				}
 
@@ -465,7 +467,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	}
 
 	/**
-	 * Display field button in left panel only if the field is editable.
+	 * Display field button in the left panel only if the field is editable.
 	 *
 	 * @since 1.7.6
 	 *
@@ -483,7 +485,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	}
 
 	/**
-	 * When the form is going to be displayed on front-end, remove internal information fields.
+	 * When the form is going to be displayed on the front-end, remove internal information fields.
 	 *
 	 * @since 1.7.6
 	 *
@@ -507,6 +509,23 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	}
 
 	/**
+	 * Add internal information field to the list of ignored fields for entry preview.
+	 *
+	 * @since 1.9.1
+	 *
+	 * @param array|mixed $ignored_fields Ignored fields.
+	 *
+	 * @return array
+	 */
+	public function ignore_entry_preview( $ignored_fields ): array {
+
+		$ignored_fields   = (array) $ignored_fields;
+		$ignored_fields[] = $this->type;
+
+		return $ignored_fields;
+	}
+
+	/**
 	 * Remove field from form data before processing the form submit.
 	 *
 	 * @since 1.7.6
@@ -515,6 +534,8 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 * @param array $entry     Form submission raw data ($_POST).
 	 *
 	 * @return array
+	 * @noinspection PhpMissingParamTypeInspection
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function process_before_form_data( $form_data, $entry ) {
 
@@ -531,6 +552,8 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 * @param array $form_data  Form data and settings.
 	 *
 	 * @return bool
+	 * @noinspection PhpMissingParamTypeInspection
+	 * @noinspection PhpUnusedParameterInspection
 	 */
 	public function display_duplicate_button( $is_visible, $field, $form_data ) {
 
@@ -655,14 +678,16 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 			'wpforms-md5-hash',
 			WPFORMS_PLUGIN_URL . 'assets/lib/md5.min.js',
 			[ 'wpforms-builder' ],
-			'2.19.0'
+			'2.19.0',
+			false
 		);
 
 		wp_enqueue_script(
 			'wpforms-internal-information-field',
 			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/fields/internal-information{$min}.js",
 			[ 'wpforms-builder', 'wpforms-md5-hash', 'wpforms-builder-drag-fields' ],
-			WPFORMS_VERSION
+			WPFORMS_VERSION,
+			false
 		);
 	}
 
@@ -702,7 +727,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	/**
 	 * Render result of field_preview_option into custom div.
 	 *
-	 * If field has no value, do not echo anything.
+	 * If the field has no value, do not echo anything.
 	 *
 	 * @since 1.7.6
 	 *
@@ -738,6 +763,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 	 * @param array  $field       Field data and settings.
 	 *
 	 * @return string
+	 * @noinspection HtmlUnknownAttribute
 	 */
 	private function replace_checkboxes( $description, array $field ) { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
@@ -749,7 +775,7 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 		$replaced  = [];
 		$post_meta = get_post_meta( $this->form_id, self::CHECKBOX_META_KEY, true );
 		$post_meta = ! empty( $post_meta ) ? (array) $post_meta : [];
-		$field_id  = isset( $field['id'] ) ? $field['id'] : 0;
+		$field_id  = $field['id'] ?? 0;
 		$needle    = '[] ';
 
 		foreach ( $lines as $line_number => $line ) {
@@ -832,8 +858,8 @@ class WPForms_Field_Internal_Information extends WPForms_Field {
 		}
 
 		$dom           = new DOMDocument();
-		$form_data     = wpforms()->get( 'form' )->get( $this->form_id, [ 'content_only' => true ] );
-		$template_data = ! empty( $form_data['meta'] ) ? wpforms()->get( 'builder_templates' )->get_template( $form_data['meta']['template'] ) : [];
+		$form_data     = wpforms()->obj( 'form' )->get( $this->form_id, [ 'content_only' => true ] );
+		$template_data = ! empty( $form_data['meta'] ) ? wpforms()->obj( 'builder_templates' )->get_template( $form_data['meta']['template'] ) : [];
 		$template_name = ! empty( $template_data ) ? $template_data['name'] : '';
 
 		$dom->loadHTML( htmlspecialchars_decode( htmlentities( $content ) ) );

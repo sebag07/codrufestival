@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfc85d332cbf70b74cecfa55e2252b8ba
+class ComposerStaticInit5ff7b4e557fb66ddf3e914cc74e571b5
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
@@ -14,13 +14,24 @@ class ComposerStaticInitfc85d332cbf70b74cecfa55e2252b8ba
         'OTGS_UI_Loader' => __DIR__ . '/..' . '/otgs/ui/src/php/OTGS_UI_Loader.php',
         'WPML\\Forms\\Addons\\WpForms\\SaveAndResume' => __DIR__ . '/../..' . '/classes/Addons/WpForms/SaveAndResume.php',
         'WPML\\Forms\\Addons\\WpForms\\SurveyAndPolls' => __DIR__ . '/../..' . '/classes/Addons/WpForms/SurveyAndPolls.php',
+        'WPML\\Forms\\Helpers\\WpForms\\DynamicChoices' => __DIR__ . '/../..' . '/classes/Helpers/DynamicChoices.php',
+        'WPML\\Forms\\Helpers\\WpForms\\Entry' => __DIR__ . '/../..' . '/classes/Helpers/Entry.php',
+        'WPML\\Forms\\Helpers\\WpForms\\Field' => __DIR__ . '/../..' . '/classes/Helpers/Field.php',
+        'WPML\\Forms\\Hooks\\WpForms\\AteFieldAdjuster' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/AteFieldAdjuster.php',
+        'WPML\\Forms\\Hooks\\WpForms\\AteFieldReorder' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/AteFieldReorder.php',
+        'WPML\\Forms\\Hooks\\WpForms\\AteLayoutHooks' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/AteLayoutHooks.php',
         'WPML\\Forms\\Hooks\\WpForms\\ConversationalForms' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/ConversationalForms.php',
         'WPML\\Forms\\Hooks\\WpForms\\DynamicChoices' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/DynamicChoices.php',
+        'WPML\\Forms\\Hooks\\WpForms\\EntryEdit' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/EntryEdit.php',
         'WPML\\Forms\\Hooks\\WpForms\\EntryPreviewField' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/EntryPreviewField.php',
+        'WPML\\Forms\\Hooks\\WpForms\\Factory' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/Factory.php',
         'WPML\\Forms\\Hooks\\WpForms\\FormPages' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/FormPages.php',
+        'WPML\\Forms\\Hooks\\WpForms\\Import' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/Import.php',
         'WPML\\Forms\\Hooks\\WpForms\\Notifications' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/Notifications.php',
         'WPML\\Forms\\Hooks\\WpForms\\Package' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/Package.php',
         'WPML\\Forms\\Hooks\\WpForms\\Strings' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/Strings.php',
+        'WPML\\Forms\\Hooks\\WpForms\\SubLabels' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/SubLabels.php',
+        'WPML\\Forms\\Hooks\\WpForms\\TranslateEverythingHooks' => __DIR__ . '/../..' . '/classes/Hooks/WpForms/TranslateEverythingHooks.php',
         'WPML\\Forms\\Loader\\WpForms' => __DIR__ . '/../..' . '/classes/Loader/WpForms.php',
         'WPML\\Forms\\Loader\\WpFormsStatus' => __DIR__ . '/../..' . '/classes/Loader/WpFormsStatus.php',
         'WPML\\Forms\\WpForms\\SmartTag' => __DIR__ . '/../..' . '/classes/WpForms/SmartTag.php',
@@ -32,7 +43,7 @@ class ComposerStaticInitfc85d332cbf70b74cecfa55e2252b8ba
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitfc85d332cbf70b74cecfa55e2252b8ba::$classMap;
+            $loader->classMap = ComposerStaticInit5ff7b4e557fb66ddf3e914cc74e571b5::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -9,9 +9,9 @@ Author URI: https://plugin-planet.com/
 Donate link: https://monzillamedia.com/donate.html
 Contributors: specialk
 Requires at least: 4.6
-Tested up to: 6.6
-Stable tag: 2.6.3
-Version:    2.6.3
+Tested up to: 6.7
+Stable tag: 2.6.4
+Version:    2.6.4
 Requires PHP: 5.6.20
 License: GPL v2 or later
 
@@ -139,9 +139,9 @@ Send any questions or feedback via my [contact form](https://plugin-planet.com/s
 If you like Disable Responsive Images, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/disable-responsive-images-complete/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
 
-**2.6.3 (2024/06/20)**
+**2.6.4 (2024/10/05)**
 
-* Tests on WordPress 6.6 (beta)
+* Tests on WordPress 6.7 (beta)
 
 
 Full changelog @ [https://plugin-planet.com/wp/changelog/disable-responsive-images-complete.txt](https://plugin-planet.com/wp/changelog/disable-responsive-images-complete.txt)

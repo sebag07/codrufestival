@@ -4,7 +4,7 @@ namespace WPML\PB\Elementor\LanguageSwitcher;
 
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Typography;
-use Elementor\Core\Schemes\Color as SchemeColor;
+use Elementor\Core\Kits\Documents\Tabs\Global_Colors;
 
 class WidgetAdaptor {
 
@@ -152,9 +152,8 @@ class WidgetAdaptor {
 			[
 				'label'     => __( 'Text Color', 'sitepress' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => SchemeColor::get_type(),
-					'value' => SchemeColor::COLOR_3,
+				'global' => [
+					'default' => Global_Colors::COLOR_TEXT,
 				],
 				'default'   => '',
 				'selectors' => [
@@ -201,9 +200,8 @@ class WidgetAdaptor {
 			[
 				'label'     => __( 'Text Color', 'sitepress' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => SchemeColor::get_type(),
-					'value' => SchemeColor::COLOR_4,
+				'global' => [
+					'default' => Global_Colors::COLOR_ACCENT,
 				],
 				'selectors' => [
 					'{{WRAPPER}} .wpml-elementor-ls .wpml-ls-legacy-dropdown a:hover,
@@ -272,9 +270,8 @@ class WidgetAdaptor {
 			[
 				'label'     => __( 'Text Color', 'sitepress' ),
 				'type'      => Controls_Manager::COLOR,
-				'scheme'    => [
-					'type'  => SchemeColor::get_type(),
-					'value' => SchemeColor::COLOR_3,
+				'global' => [
+					'default' => Global_Colors::COLOR_TEXT,
 				],
 				'default'   => '',
 				'selectors' => [

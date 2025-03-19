@@ -3,6 +3,7 @@
 namespace WPForms\Integrations\UsageTracking;
 
 use WPForms\Admin\Builder\Templates;
+use WPForms\Integrations\AI\Helpers as AIHelpers;
 use WPForms\Integrations\IntegrationInterface;
 use WPForms\Integrations\LiteConnect\Integration;
 
@@ -187,7 +188,7 @@ class UsageTracking implements IntegrationInterface {
 			'wpforms_lite_installed_date'    => $this->get_installed( $activated_dates, 'lite' ),
 			'wpforms_pro_installed_date'     => $this->get_installed( $activated_dates, 'pro' ),
 			'wpforms_builder_opened_date'    => (int) get_option( 'wpforms_builder_opened_date', 0 ),
-			'wpforms_settings'               => $this->get_settings(),
+			'wpforms_settings'               => $this->get_settings( $forms ),
 			'wpforms_integration_active'     => $this->get_forms_integrations( $forms ),
 			'wpforms_payments_active'        => $this->get_payments_active( $forms ),
 			'wpforms_product_quantities'     => [
@@ -198,8 +199,10 @@ class UsageTracking implements IntegrationInterface {
 			'wpforms_multiple_confirmations' => count( $this->get_forms_with_multiple_confirmations( $forms ) ),
 			'wpforms_multiple_notifications' => count( $this->get_forms_with_multiple_notifications( $forms ) ),
 			'wpforms_ajax_form_submissions'  => count( $this->get_ajax_form_submissions( $forms ) ),
-			'wpforms_notification_count'     => wpforms()->get( 'notifications' )->get_count(),
+			'wpforms_notification_count'     => wpforms()->obj( 'notifications' )->get_count(),
 			'wpforms_stats'                  => $this->get_additional_stats(),
+			'wpforms_ai'                     => AIHelpers::is_used(),
+			'wpforms_ai_killswitch'          => AIHelpers::is_disabled(),
 		];
 
 		if ( ! empty( $first_form_date ) ) {
@@ -271,10 +274,13 @@ class UsageTracking implements IntegrationInterface {
 	 * Get all settings, except those with sensitive data.
 	 *
 	 * @since 1.6.1
+	 * @since 1.9.3 Added $forms parameter.
+	 *
+	 * @param array $forms List of forms.
 	 *
 	 * @return array
 	 */
-	private function get_settings(): array {
+	private function get_settings( array $forms ): array {
 
 		// Remove keys with exact names that we don't need.
 		$settings = array_diff_key(
@@ -305,6 +311,9 @@ class UsageTracking implements IntegrationInterface {
 					'hcaptcha-site-key',
 					'hcaptcha-secret-key',
 					'hcaptcha-fail-msg',
+					'turnstile-site-key',
+					'turnstile-secret-key',
+					'turnstile-fail-msg',
 					'pdf-ninja-api_key',
 				]
 			)
@@ -334,8 +343,44 @@ class UsageTracking implements IntegrationInterface {
 			];
 		}
 
+		// Add Dropbox Delete Local Files setting usage count.
+		$data['dropbox_delete_local_files_setting_count'] = $this->get_dropbox_delete_local_files_setting_count( $forms );
+
 		// Add favorite templates to the settings array.
 		return array_merge( $data, $this->get_favorite_templates() );
+	}
+
+	/**
+	 * Get the count of forms with Delete Local Files active option for Dropbox.
+	 *
+	 * @since 1.9.3
+	 *
+	 * @param array $forms List of forms.
+	 *
+	 * @return int
+	 */
+	private function get_dropbox_delete_local_files_setting_count( array $forms ): int {
+
+		$delete_local_files_count = 0;
+
+		foreach ( $forms as $form ) {
+			// Check if the Dropbox integration is configured in the form.
+			if ( empty( $form->post_content['providers']['dropbox'] ) ) {
+				continue;
+			}
+
+			// Delete Local Files option is applied for all connections if applied,
+			// so it's enough to check the first connection only.
+			$connection = current( $form->post_content['providers']['dropbox'] );
+
+			if ( ! $connection || ! isset( $connection['delete_local_files'] ) ) {
+				continue;
+			}
+
+			++$delete_local_files_count;
+		}
+
+		return $delete_local_files_count;
 	}
 
 	/**
@@ -401,11 +446,19 @@ class UsageTracking implements IntegrationInterface {
 		$integrations = array_map(
 			static function ( $form ) {
 
-				if ( ! empty( $form->post_content['providers'] ) ) {
-					return array_keys( $form->post_content['providers'] );
+				if ( empty( $form->post_content['providers'] ) ) {
+					return false;
 				}
 
-				return false;
+				$active_integrations = [];
+
+				foreach ( $form->post_content['providers'] as $provider_slug => $connections ) {
+					if ( ! empty( $connections ) ) {
+						$active_integrations[] = $provider_slug;
+					}
+				}
+
+				return $active_integrations;
 			},
 			$forms
 		);
@@ -576,7 +629,7 @@ class UsageTracking implements IntegrationInterface {
 				break;
 		}
 
-		$entry_obj = wpforms()->get( 'entry' );
+		$entry_obj = wpforms()->obj( 'entry' );
 
 		return $entry_obj ? $entry_obj->get_entries( $args, true ) : 0;
 	}
@@ -599,7 +652,8 @@ class UsageTracking implements IntegrationInterface {
 
 		global $wpdb;
 
-		$count = $wpdb->get_var( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.NoCaching
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$count = $wpdb->get_var(
 			"SELECT SUM(meta_value)
 				FROM $wpdb->postmeta
 				WHERE meta_key = 'wpforms_entries_count';"
@@ -692,7 +746,7 @@ class UsageTracking implements IntegrationInterface {
 	 */
 	private function get_all_forms( $post_type = 'wpforms' ): array {
 
-		$forms = wpforms()->get( 'form' )->get( '', [ 'post_type' => $post_type ] );
+		$forms = wpforms()->obj( 'form' )->get( '', [ 'post_type' => $post_type ] );
 
 		if ( ! is_array( $forms ) ) {
 			return [];
@@ -886,7 +940,7 @@ class UsageTracking implements IntegrationInterface {
 		}
 
 		// Count the list of keywords for the keyword filter.
-		$keyword_filter   = wpforms()->get( 'antispam_keyword_filter' );
+		$keyword_filter   = wpforms()->obj( 'antispam_keyword_filter' );
 		$keywords         = method_exists( $keyword_filter, 'get_keywords' ) ? $keyword_filter->get_keywords() : [];
 		$stat['keywords'] = count( $keywords );
 

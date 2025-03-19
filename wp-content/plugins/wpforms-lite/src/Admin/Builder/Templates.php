@@ -36,7 +36,7 @@ class Templates {
 	 *
 	 * @var array
 	 */
-	private $api_templates;
+	private $api_templates = [];
 
 	/**
 	 * Template categories data.
@@ -81,7 +81,7 @@ class Templates {
 	 *
 	 * @var array
 	 */
-	private $favorits_list;
+	private $favorites_list;
 
 	/**
 	 * Templates hash.
@@ -142,7 +142,8 @@ class Templates {
 		add_filter( 'wpforms_form_templates_core', [ $this, 'add_templates_to_setup_panel' ], 20 );
 		add_filter( 'wpforms_create_form_args', [ $this, 'apply_to_new_form' ], 10, 2 );
 		add_filter( 'wpforms_save_form_args', [ $this, 'apply_to_existing_form' ], 10, 3 );
-		add_action( 'admin_print_scripts', [ $this, 'upgrade_banner_template' ] );
+        add_action( 'admin_print_scripts', [ $this, 'upgrade_banner_template' ] );
+        add_action( 'admin_print_scripts', [ $this, 'upgrade_lite_banner_template' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueues' ] );
 		add_action( 'wp_ajax_wpforms_templates_favorite', [ $this, 'ajax_save_favorites' ] );
 		add_filter( 'wpforms_form_templates', [ $this, 'add_addons_templates' ] );
@@ -161,13 +162,14 @@ class Templates {
 			'listjs',
 			WPFORMS_PLUGIN_URL . 'assets/lib/list.min.js',
 			[ 'jquery' ],
-			'2.3.0'
+			'2.3.0',
+			false
 		);
 
 		wp_enqueue_script(
 			'wpforms-form-templates',
 			WPFORMS_PLUGIN_URL . "assets/js/admin/builder/form-templates{$min}.js",
-			[ 'listjs' ],
+			[ 'underscore', 'wp-util', 'listjs' ],
 			WPFORMS_VERSION,
 			true
 		);
@@ -226,7 +228,7 @@ class Templates {
 	 */
 	private function get_localized_addons() {
 
-		return wpforms_chain( wpforms()->get( 'addons' )->get_available() )
+		return wpforms_chain( wpforms()->obj( 'addons' )->get_available() )
 			->map(
 				static function( $addon ) {
 
@@ -265,66 +267,18 @@ class Templates {
 	private function init_templates_data() {
 
 		// Get cached templates data.
-		$cache_data          = wpforms()->get( 'builder_templates_cache' )->get();
+		$cache_obj = wpforms()->obj( 'builder_templates_cache' );
+
+		if ( ! $cache_obj ) {
+			return;
+		}
+
+		$cache_data          = $cache_obj->get();
 		$templates_all       = ! empty( $cache_data['templates'] ) ? $this->sort_templates_by_created_at( $cache_data['templates'] ) : [];
 		$this->categories    = ! empty( $cache_data['categories'] ) ? $cache_data['categories'] : [];
 		$this->subcategories = ! empty( $cache_data['subcategories'] ) ? $cache_data['subcategories'] : [];
 
-		// Higher priority templates slugs.
-		// These remote templates are the replication of the default templates,
-		// which were previously included with the WPForms plugin.
-		$higher_templates_slugs = [
-			'simple-contact-form-template',
-			'request-a-quote-form-template',
-			'donation-form-template',
-			'billing-order-form-template',
-			'newsletter-signup-form-template',
-			'suggestion-form-template',
-		];
-
-		$templates_higher = [];
-		$templates_access = [];
-		$templates_denied = [];
-
-		/**
-		 * The form template was moved to wpforms/includes/templates/class-simple-contact-form.php file.
-		 *
-		 * @since 1.7.5.3
-		 */
-		unset( $templates_all['simple-contact-form-template'] );
-
-		foreach ( $templates_all as $i => $template ) {
-			$template['has_access'] = $this->has_access( $template );
-			$template['favorite']   = $this->is_favorite( $i );
-			$template['license']    = $this->get_license_level( $template );
-			$template['source']     = 'wpforms-api';
-			$template['categories'] = ! empty( $template['categories'] ) ? array_keys( $template['categories'] ) : [];
-
-			$is_higher = in_array( $i, $higher_templates_slugs, true );
-
-			if ( $template['has_access'] ) {
-
-				if ( $is_higher ) {
-					$templates_higher[ $i ] = $template;
-				} else {
-					$templates_access[ $i ] = $template;
-				}
-			} else {
-
-				if ( $is_higher ) {
-					$templates_denied = array_merge( [ $i => $template ], $templates_denied );
-				} else {
-					$templates_denied[ $i ] = $template;
-				}
-			}
-		}
-
-		// Sort higher priority templates according to the slugs order.
-		$templates_higher = array_replace( array_flip( $higher_templates_slugs ), $templates_higher );
-		$templates_higher = array_filter( $templates_higher, 'is_array' );
-
-		// Finally, merge templates from API.
-		$this->api_templates = array_merge( $templates_higher, $templates_access, $templates_denied );
+		$this->init_api_templates( $templates_all );
 	}
 
 	/**
@@ -412,7 +366,7 @@ class Templates {
 	 */
 	public function update_favorites_list() {
 
-		$this->favorits_list = $this->get_favorites_list();
+		$this->favorites_list = $this->get_favorites_list();
 	}
 
 	/**
@@ -426,11 +380,11 @@ class Templates {
 	 */
 	public function is_favorite( $template_slug ) {
 
-		if ( ! $this->favorits_list ) {
+		if ( $this->favorites_list === null ) {
 			$this->update_favorites_list();
 		}
 
-		return isset( $this->favorits_list[ $template_slug ] );
+		return isset( $this->favorites_list[ $template_slug ] );
 	}
 
 	/**
@@ -467,7 +421,7 @@ class Templates {
 		update_option( self::FAVORITE_TEMPLATES_OPTION, $favorites );
 
 		// Update and save the template content cache.
-		wpforms()->get( 'builder_templates_cache' )->wipe_content_cache();
+		wpforms()->obj( 'builder_templates_cache' )->wipe_content_cache();
 
 		wp_send_json_success();
 	}
@@ -489,7 +443,7 @@ class Templates {
 			return ! empty( $this->get_template_by_slug( $slug ) );
 		}
 
-		$has_cache = wpforms()->get( 'builder_template_single' )->instance( $template['id'], $this->license )->get();
+		$has_cache = wpforms()->obj( 'builder_template_single' )->instance( $template['id'], $this->license )->get();
 
 		return $this->has_access( $template ) && $has_cache;
 	}
@@ -637,7 +591,7 @@ class Templates {
 
 		// Attempt to get template with form data (if available).
 		$full_template = wpforms()
-			->get( 'builder_template_single' )
+			->obj( 'builder_template_single' )
 			->instance( $template['id'], $this->license )
 			->get();
 
@@ -875,7 +829,7 @@ class Templates {
 			]
 		);
 		$title_exists = $title_query->post_count > 0;
-		$form_id      = wpforms()->get( 'form' )->add(
+		$form_id      = wpforms()->obj( 'form' )->add(
 			$form_title,
 			[],
 			[
@@ -890,7 +844,7 @@ class Templates {
 
 		// Update form title if duplicated.
 		if ( $title_exists ) {
-			wpforms()->get( 'form' )->update(
+			wpforms()->obj( 'form' )->update(
 				$form_id,
 				[
 					'settings' => [
@@ -998,7 +952,7 @@ class Templates {
 			return false;
 		}
 
-		$required_addons = wpforms()->get( 'addons' )->get_by_slugs( $template['addons'] );
+		$required_addons = wpforms()->obj( 'addons' )->get_by_slugs( $template['addons'] );
 
 		foreach ( $required_addons as $i => $addon ) {
 			if ( empty( $addon['action'] ) || ! in_array( $addon['action'], [ 'install', 'activate' ], true ) ) {
@@ -1017,38 +971,82 @@ class Templates {
 	}
 
 	/**
-	 * Template for upgrade banner.
+	 * Render the upgrade banner template.
 	 *
-	 * @since 1.7.7
+	 * This method generates the HTML template for the upgrade banner, which includes
+	 * a title, description, and a button that links to the upgrade page.
+	 *
+	 * @param string $title       The title to be displayed in the banner.
+	 * @param string $description The description to be displayed in the banner.
+	 *
+	 * @since 1.9.4
 	 */
-	public function upgrade_banner_template() {
-
-		if ( in_array( wpforms_get_license_type(), [ 'pro', 'elite', 'agency', 'ultimate' ], true ) ) {
-			return;
-		}
+	private function render_upgrade_banner_template( string $title, string $description ): void {
 
 		$medium = wpforms_is_admin_page( 'templates' ) ? 'Form Templates Subpage' : 'Builder Templates';
+
 		?>
 		<script type="text/html" id="tmpl-wpforms-templates-upgrade-banner">
 			<div class="wpforms-template-upgrade-banner">
 				<div class="wpforms-template-content">
 					<h3>
-						<?php
-						/* translators: %d - templates count. */
-						printf( esc_html__( 'Get Access to Our Library of %d Pre-Made Form Templates', 'wpforms-lite' ), count( $this->get_templates() ) );
-						?>
+						<?php echo esc_html( $title ); ?>
 					</h3>
 
 					<p>
-						<?php esc_html_e( 'Never start from scratch again! While WPForms Lite allows you to create any type of form, you can save even more time with WPForms Pro. Upgrade to access hundreds more form templates and advanced form fields.', 'wpforms-lite' ); ?>
+						<?php echo esc_html( $description ); ?>
 					</p>
 				</div>
 				<div class="wpforms-template-upgrade-button">
-					<a href="<?php echo esc_url( wpforms_admin_upgrade_link( $medium, 'Upgrade to Pro' ) ); ?>" class="wpforms-btn wpforms-btn-orange wpforms-btn-md" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Upgrade to PRO', 'wpforms-lite' ); ?></a>
+					<a href="<?php echo esc_url( wpforms_admin_upgrade_link( $medium, 'Upgrade to Pro' ) ); ?>" class="wpforms-btn wpforms-btn-orange wpforms-btn-md" target="_blank" rel="noopener noreferrer">
+						<?php esc_html_e( 'Upgrade to Pro', 'wpforms-lite' ); ?>
+					</a>
 				</div>
 			</div>
 		</script>
 		<?php
+	}
+
+	/**
+	 * Render upgrade banner for basic and plus versions.
+	 *
+	 * @since 1.7.7
+	 */
+	public function upgrade_banner_template(): void {
+
+		if ( in_array( wpforms_get_license_type(), [ 'pro', 'elite', 'agency', 'ultimate' ], true ) || ! wpforms()->is_pro() ) {
+			return;
+		}
+
+		$title = sprintf(
+			/* translators: %d - templates count. */
+			esc_html__( 'Get Access to Our Complete Library of %d+ Form Templates', 'wpforms-lite' ),
+			esc_html( floor( count( $this->get_templates() ) / 1000 ) * 1000 )
+		);
+		$description = esc_html__( 'Save time and reduce effort with our pre-built form templates covering popular use-cases in business operations, customer service, feedback, marketing, registrations, event planning, non-profit, healthcare, and education.', 'wpforms-lite' );
+
+		$this->render_upgrade_banner_template( $title, $description );
+	}
+
+	/**
+	 * Render upgrade banner for lite version.
+	 *
+	 * @since 1.9.4
+	 */
+	public function upgrade_lite_banner_template(): void {
+
+		if ( wpforms()->is_pro() ) {
+			return;
+		}
+
+		$title = sprintf(
+			/* translators: %d - templates count. */
+			esc_html__( 'Get Access to Our Library of %d+ Pre-Made Form Templates', 'wpforms-lite' ),
+			esc_html( floor( count( $this->get_templates() ) / 1000 ) * 1000 )
+		);
+		$description = esc_html__( 'Never start from scratch again! While WPForms Lite allows you to create any type of form, you can save even more time with WPForms Pro. Upgrade to access hundreds more form templates and advanced form fields.', 'wpforms-lite' );
+
+		$this->render_upgrade_banner_template( $title, $description );
 	}
 
 	/**
@@ -1063,17 +1061,17 @@ class Templates {
 	public function add_addons_templates( array $templates ): array {
 
 		// Add User Registration templates only if the addon is not active.
-		if ( ! wpforms()->get( 'addons' )->is_active( 'user-registration' ) ) {
+		if ( ! wpforms()->obj( 'addons' )->is_active( 'user-registration' ) ) {
 			$templates = $this->add_user_registration_templates( $templates );
 		}
 
 		// Add Post Submissions templates only if the addon is not active.
-		if ( ! wpforms()->get( 'addons' )->is_active( 'post-submissions' ) ) {
+		if ( ! wpforms()->obj( 'addons' )->is_active( 'post-submissions' ) ) {
 			$templates = $this->add_post_submissions_templates( $templates );
 		}
 
 		// Add Survey and Poll templates only if the addon is not active.
-		if ( ! wpforms()->get( 'addons' )->is_active( 'surveys-polls' ) ) {
+		if ( ! wpforms()->obj( 'addons' )->is_active( 'surveys-polls' ) ) {
 			$templates = $this->add_surveys_polls_templates( $templates );
 		}
 
@@ -1201,5 +1199,75 @@ class Templates {
 		];
 
 		return array_merge( $templates, $surveys_polls_templates );
+	}
+
+	/**
+	 * Init API templates.
+	 *
+	 * @since 1.9.1
+	 *
+	 * @param array $templates_all All templates.
+	 *
+	 * @return void
+	 */
+	private function init_api_templates( array $templates_all ) {
+
+		// Higher priority templates slugs.
+		// These remote templates are the replication of the default templates,
+		// which were previously included with the WPForms plugin.
+		$higher_templates_slugs = [
+			'simple-contact-form-template',
+			'request-a-quote-form-template',
+			'donation-form-template',
+			'billing-order-form-template',
+			'newsletter-signup-form-template',
+			'suggestion-form-template',
+		];
+
+		$templates_access_higher = [];
+		$templates_access        = [];
+		$templates_deny_higher   = [];
+		$templates_deny          = [];
+
+		/**
+		 * The form template was moved to wpforms/includes/templates/class-simple-contact-form.php file.
+		 *
+		 * @since 1.7.5.3
+		 */
+		unset( $templates_all['simple-contact-form-template'] );
+
+		foreach ( $templates_all as $i => $template ) {
+			$template['has_access'] = $this->has_access( $template );
+			$template['favorite']   = $this->is_favorite( $i );
+			$template['license']    = $this->get_license_level( $template );
+			$template['source']     = 'wpforms-api';
+			$template['categories'] = ! empty( $template['categories'] ) ? array_keys( $template['categories'] ) : [];
+
+			$is_higher = in_array( $i, $higher_templates_slugs, true );
+
+			if ( $template['has_access'] ) {
+				if ( $is_higher ) {
+					$templates_access_higher[ $i ] = $template;
+				} else {
+					$templates_access[ $i ] = $template;
+				}
+			} elseif ( $is_higher ) {
+				$templates_deny_higher[ $i ] = $template;
+			} else {
+				$templates_deny[ $i ] = $template;
+			}
+		}
+
+		// Sort higher priority templates according to the slug order.
+		$templates_access_higher = array_replace( array_flip( $higher_templates_slugs ), $templates_access_higher );
+		$templates_access_higher = array_filter( $templates_access_higher, 'is_array' );
+
+		// Finally, merge templates from API.
+		$this->api_templates = array_merge(
+			$templates_access_higher,
+			$templates_access,
+			$templates_deny_higher,
+			$templates_deny
+		);
 	}
 }

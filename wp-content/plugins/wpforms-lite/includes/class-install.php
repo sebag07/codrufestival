@@ -117,7 +117,7 @@ class WPForms_Install {
 	public function deactivate() {
 
 		// Unschedule all ActionScheduler actions by group.
-		wpforms()->get( 'tasks' )->cancel_all();
+		wpforms()->obj( 'tasks' )->cancel_all();
 
 		// Remove plugin cron jobs.
 		wp_clear_scheduled_hook( 'wpforms_email_summaries_cron' );
@@ -182,7 +182,7 @@ class WPForms_Install {
 
 		// Store the date when the initial activation was performed.
 		$type      = class_exists( 'WPForms_Lite', false ) ? 'lite' : 'pro';
-		$activated = get_option( 'wpforms_activated', [] );
+		$activated = (array) get_option( 'wpforms_activated', [] );
 
 		if ( empty( $activated[ $type ] ) ) {
 			$activated[ $type ] = time();

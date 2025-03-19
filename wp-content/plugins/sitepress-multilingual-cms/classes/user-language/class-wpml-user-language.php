@@ -275,7 +275,7 @@ class WPML_User_Language {
 		$noticeGroup = self::class;
 
 		if (
-			$pagenow !== 'profile.php'
+			$pagenow === 'index.php'
 			&& ! Option::getOr( WPLoginUrlConverter::SETTINGS_KEY, false )
 		) {
 			$notice = new WPML_Notice(
@@ -286,7 +286,6 @@ class WPML_User_Language {
 			$notice->set_css_class_types( [ 'info' ] );
 			$notice->add_capability_check( [ 'manage_options' ] );
 			$notice->set_dismissible( true );
-			$notice->add_exclude_from_page( UIPage::TM_PAGE );
 			$notice->add_user_restriction( User::getCurrentId() );
 			$adminNotices->add_notice( $notice );
 		} else {

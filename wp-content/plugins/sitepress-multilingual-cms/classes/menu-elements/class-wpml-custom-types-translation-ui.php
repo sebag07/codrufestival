@@ -43,7 +43,7 @@ class WPML_Custom_Types_Translation_UI {
 			$this->unlock_button_ui->render( $disabled, $unlocked, $radio_name, $unlocked_name );
 			echo $content_label;
 			?>
-			(<i><?php echo esc_html( $content_slug ); ?></i>)
+			<i>(<?php echo esc_html( $content_slug ); ?>)</i>
 		</div>
 		<?php
 		foreach ( $this->translation_modes->get_options() as $value => $label ) {

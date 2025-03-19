@@ -4,16 +4,17 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit80cdb48008ca596e10d7fabe003a3268
+class ComposerStaticInit47135da5d93b06e35a1f5b17397bf5fc
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WPML\\CF7\\Constants' => __DIR__ . '/../..' . '/classes/constants.php',
         'WPML\\CF7\\Language_Metabox' => __DIR__ . '/../..' . '/classes/language-metabox.php',
         'WPML\\CF7\\Locale' => __DIR__ . '/../..' . '/classes/Locale.php',
-        'WPML\\CF7\\Placeholders' => __DIR__ . '/../..' . '/classes/Placeholders.php',
         'WPML\\CF7\\Shortcodes' => __DIR__ . '/../..' . '/classes/shortcodes.php',
         'WPML\\CF7\\Templates' => __DIR__ . '/../..' . '/classes/Templates.php',
+        'WPML\\CF7\\TranslationEditor\\JobFilter' => __DIR__ . '/../..' . '/classes/TranslationEditor/JobFilter.php',
+        'WPML\\CF7\\TranslationEditor\\TagTexts' => __DIR__ . '/../..' . '/classes/TranslationEditor/TagTexts.php',
         'WPML\\CF7\\TranslationReview' => __DIR__ . '/../..' . '/classes/TranslationReview.php',
         'WPML\\CF7\\Translations' => __DIR__ . '/../..' . '/classes/translations.php',
         'WPML_Core_Version_Check' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
@@ -24,7 +25,7 @@ class ComposerStaticInit80cdb48008ca596e10d7fabe003a3268
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit80cdb48008ca596e10d7fabe003a3268::$classMap;
+            $loader->classMap = ComposerStaticInit47135da5d93b06e35a1f5b17397bf5fc::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -48,23 +48,7 @@ class Post_SMTP_New_Wizard {
         )
     );
 
-    private $socket_sequence = array(
-        'gmail_api',
-        'sendinblue_api',
-        'sendgrid_api',
-        'mailgun_api',
-        'elasticemail_api',
-        'mandrill_api',
-        'postmark_api',
-        'sparkpost_api',
-        'mailjet_api',
-        'sendpulse_api',
-        'office365_api',
-        'aws_ses_api',
-        'zohomail_api',
-        'smtp',
-        'default'
-    );
+    private $socket_sequence = array();
 
     /**
      * Constructor for the class
@@ -74,6 +58,31 @@ class Post_SMTP_New_Wizard {
      */
     public function __construct() {
 
+        $this->socket_sequence = array(
+            'gmail_api',
+            'sendinblue_api',
+            'sendgrid_api',
+            'mailgun_api',
+            'elasticemail_api',
+            'mandrill_api',
+            'postmark_api',
+            'sparkpost_api',
+            'mailjet_api',
+            'sendpulse_api',
+            'smtp2go_api',
+        );
+        
+        if( !is_plugin_active( 'post-smtp-pro/post-smtp-pro.php' ) ) {
+
+            $this->socket_sequence[] = 'office365_api';
+            $this->socket_sequence[] = 'aws_ses_api';
+            $this->socket_sequence[] = 'zohomail_api';
+
+        }
+
+        $this->socket_sequence[] = 'smtp';
+        $this->socket_sequence[] = 'default';
+        
         add_filter( 'post_smtp_legacy_wizard', '__return_false' );
         add_action( 'post_smtp_new_wizard', array( $this, 'load_wizard' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
@@ -115,15 +124,43 @@ class Post_SMTP_New_Wizard {
                         <span class="dashicons dashicons-no-alt ps-pro-close-popup"></span>
                         <div class="ps-pro-popup-content">
                             <img src="" class="ps-pro-for-img" />
-                            <h1><span class="ps-pro-for"></span> is a Pro feature</h1>
+                            <h1><span class="ps-pro-for"></span> is Pro Feature</h1>
                             <p>
-                                We're sorry, the <span class="ps-pro-for"></span> mailer is not available on your plan. Please upgrade to the PRO plan to unlock all these awesome fetures.
+                                We're sorry, the <span class="ps-pro-for"></span> mailer is not available on your plan.
+                                <br />
+                                Please upgrade to the PRO plan to unlock all these awesome features.
                             </p>
                             <div>
-                                <a href="https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin" target="_blank" class="button button-primary ps-yellow-btn ps-pro-product-url" style="color: #ffffff!important">UPGRADE TO PRO</a>
+                                <a href="<?php echo postman_is_bfcm() ? 'https://postmansmtp.com/cyber-monday-sale?utm_source=plugin&utm_medium=section_name&utm_campaign=BFCM&utm_id=BFCM_2024' : 'https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin'; ?>" target="_blank" class="button button-primary ps-yellow-btn ps-pro-product-url" style="color: #ffffff!important; font-weight: 400; align-content: center;">Upgrade to PRO <span class="dashicons dashicons-arrow-right-alt2"></span></a>
+                            </div>
+                            <div <?php echo postman_is_bfcm() ? 'style="background: url( '.esc_url( POST_SMTP_ASSETS . 'images/bfcm-2024/popup.png' ).' ); background-size: cover; margin: 20px 0 5px 0; padding: 16px 0px; position: relative;"' : 'class="ps-pro-promo-area"'; ?>>   
+                                <?php
+                                if( postman_is_bfcm() ) {
+                                    ?>
+                                    <p style="color: #fff; font-size: 14px; margin: 0 auto;">
+                                        <b style="color: #fbb81f;">24% OFF!</b> BFCM is here - Grab your deal before it's gone!🛍️
+                                    </p>
+                                    <?php
+                                }
+                                else {
+                                    ?>
+                                    <p>
+                                        <b>Bonus:</b> Upgrade now and get <span class="ps-pro-discount">25% off</span> on Post SMTP lifetime plans!
+                                    </p>
+                                    <?php
+                                }
+                                ?>
+                                <div <?php echo postman_is_bfcm() ? 'style="background: #fbb81f";' : '';  ?> class="ps-pro-coupon">
+                                    <b <?php echo postman_is_bfcm() ? 'style="color: #1a3b63";' : '';  ?>>
+                                        Use Coupon: <span class="ps-pro-coupon-code"><?php echo postman_is_bfcm() ? 'BFCM2024' : 'GETSMTPPRO'; ?></span> <span class="dashicons dashicons-admin-page ps-click-to-copy"></span>
+                                    </b>
+                                </div>
+                                <div id="ps-pro-code-copy-notification" style="display: none; position:absolute; color: #b3d5b6; border-radius:3px; right: 0;left: 0; bottom: -12px; margin: auto;width: 95px; font-size: 11px; border: 1px solid #b3d5b6; line-height: 22px; background: #e1fde4;">
+                                    Code Copied<span class="dashicons dashicons-yes"></span>
+                                </div>
                             </div>
                             <div>
-                                <a href="" class="ps-pro-close-popup" style="color: #c2c2c2; font-size: 10px;">Already purchased?</a>
+                                <a href="" class="ps-pro-close-popup" style="color: #6A788B; font-size: 10px; font-size: 12px;">Already purchased?</a>
                             </div>
                         </div>
                     </div>
@@ -133,7 +170,7 @@ class Post_SMTP_New_Wizard {
         <div class="wrap">
             <div class="ps-wizard">
                 <div class="ps-logo">
-                    <img src="https://postmansmtp.com/wp-content/uploads/2022/06/postman-smtp-mailer-1024x163.png" width="250px" />
+                    <img src="<?php echo esc_attr( POST_SMTP_ASSETS ) . '/images/logos/post-smtp-logo-large.svg'; ?>" width="250px" />
                 </div>
                 <div class="ps-wizard-outer <?php echo esc_attr( $socket ); ?>">
                     <div class="ps-wizard-section">
@@ -141,17 +178,17 @@ class Post_SMTP_New_Wizard {
                             <table>
                                 <tr class="<?php echo esc_attr( $in_active ) ?>">
                                     <td class="ps-wizard-circle"><span class="ps-tick dashicons dashicons-yes-alt"></span></td>
-                                    <td class="ps-wizard-text">Choose your SMTP Mailer</td>
+                                    <td class="ps-wizard-text"><?php _e( 'Choose your SMTP Mailer', 'post-smtp' ) ?></td>
                                     <td class="ps-wizard-edit"><span class="dashicons dashicons-edit" data-step="1"></span></td>
                                 </tr>
                                 <tr class="<?php echo esc_attr( $is_active ) ?>">
                                     <td class="ps-wizard-circle"><span class="ps-tick dashicons dashicons-yes-alt"><span class="ps-wizard-line"></span></span></td>
-                                    <td class="ps-wizard-text">Configure Mailer Settings</td>
+                                    <td class="ps-wizard-text"><?php _e( 'Configure Mailer Settings', 'post-smtp' ) ?></td>
                                     <td class="ps-wizard-edit"><span class="dashicons dashicons-edit" data-step="2"></span></td>
                                 </tr>
                                 <tr class="ps-in-active-nav">
                                     <td class="ps-wizard-circle"><span class="ps-tick dashicons dashicons-yes-alt"><span class="ps-wizard-line"></span></span></td>
-                                    <td class="ps-wizard-text">Send Test Email</td>
+                                    <td class="ps-wizard-text"><?php _e( 'Send Test Email', 'post-smtp' ) ?></td>
                                     <td class="ps-wizard-edit"><span class="dashicons dashicons-edit" data-step="3"></span></td>
                                 </tr>
                             </table>
@@ -194,7 +231,8 @@ class Post_SMTP_New_Wizard {
                                                 'sparkpost_api'     =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/sparkpost.png',
                                                 'mailjet_api'       =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/mailjet.png',
                                                 'sendpulse_api'     =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/sendpulse.png',
-                                                'office365_api'     =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/logo.png',
+                                                'smtp2go_api'       =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/smtp2go.png',
+                                                'office365_api'     =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/ms365.png',
                                                 'elasticemail_api'  =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/elasticemail.png',
                                                 'aws_ses_api'       =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/amazon.png',
                                                 'zohomail_api'      =>  POST_SMTP_URL . '/Postman/Wizard/assets/images/zoho.png'
@@ -211,8 +249,18 @@ class Post_SMTP_New_Wizard {
                                                 
                                                 $url = isset( $urls[$transport->getSlug()] ) ? $urls[$transport->getSlug()] : $transport->getLogoURL();
                                                 $this->sockets[$transport->getSlug()] = $transport->getName();
-                                                $checked = $transport->getSlug() == $this->options->getTransportType() ? 'checked' : '';
-                                                $checked = ( isset( $_GET['socket'] ) && !empty( sanitize_text_field( $_GET['socket'] ) ) && $transport->getSlug() == sanitize_text_field( $_GET['socket'] ) ) ? 'checked' : '';
+
+                                                if( isset( $_GET['socket'] ) && !empty( sanitize_text_field( $_GET['socket'] ) ) && $transport->getSlug() == sanitize_text_field( $_GET['socket'] ) ) {
+
+                                                    $checked = 'checked';
+
+                                                }
+                                                elseif( $transport->getSlug() == $this->options->getTransportType() && !is_plugin_active( 'post-smtp-pro/post-smtp-pro.php' ) ) {
+
+                                                    $checked = 'checked';
+
+                                                }
+                                                
                                                 $slug = $transport->getSlug();
                                                 $transport_name = $transport->getName();
 
@@ -227,7 +275,7 @@ class Post_SMTP_New_Wizard {
                                                     $slug = $transport_slug;
                                                     $transport_name = 'Microsoft 365';
                                                     $is_pro = 'ps-pro-extension';
-                                                    $product_url = 'https://postmansmtp.com/extensions/office-365-extension-for-post-smtp/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin';
+                                                    $product_url = postman_is_bfcm() ? 'https://postmansmtp.com/cyber-monday-sale?utm_source=plugin&utm_medium=section_name&utm_campaign=BFCM&utm_id=BFCM_2024' : 'https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard_microsoft&utm_campaign=plugin';
 
                                                 }
                                                 if( $transport_slug == 'zohomail_api' ) {
@@ -236,7 +284,7 @@ class Post_SMTP_New_Wizard {
                                                     $slug = $transport_slug;
                                                     $transport_name = 'Zoho';
                                                     $is_pro = 'ps-pro-extension';
-                                                    $product_url = 'https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin';
+                                                    $product_url = postman_is_bfcm() ? 'https://postmansmtp.com/cyber-monday-sale?utm_source=plugin&utm_medium=section_name&utm_campaign=BFCM&utm_id=BFCM_2024' : 'https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard_zoho&utm_campaign=plugin';
 
                                                 }
                                                 if( !class_exists( 'Post_Smtp_Amazon_Ses' ) && $transport_slug == 'aws_ses_api' ) {
@@ -245,7 +293,7 @@ class Post_SMTP_New_Wizard {
                                                     $slug = $transport_slug;
                                                     $transport_name = 'Amazon SES';
                                                     $is_pro = 'ps-pro-extension';
-                                                    $product_url = 'https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin';
+                                                    $product_url = postman_is_bfcm() ? 'https://postmansmtp.com/cyber-monday-sale?utm_source=plugin&utm_medium=section_name&utm_campaign=BFCM&utm_id=BFCM_2024' : 'https://postmansmtp.com/pricing/?utm_source=plugin&utm_medium=wizard_amazonses&utm_campaign=plugin';
 
                                                 }
 
@@ -323,16 +371,16 @@ class Post_SMTP_New_Wizard {
                                         ?>
                                     </div>
                                     <div class="ps-wizard-step ps-wizard-step-3">
-                                        <a href="" data-step="2" class="ps-wizard-back"><span class="dashicons dashicons-arrow-left-alt"></span>Back</a>
+                                        <a href="" data-step="2" class="ps-wizard-back"><span class="dashicons dashicons-arrow-left-alt"></span><?php _e( 'Back', 'post-smtp' ) ?></a>
                                         <p><?php _e( 'This step allows you to send an email message for testing. If there is a problem, Post SMTP will give up after 60 seconds.', 'post-smtp' ); ?></p>
                                         <div class="ps-form-ui">
                                             <div class="ps-form-control">
-                                                <div><label>Recipient Email Address</label></div>
+                                                <div><label><?php _e( 'Recipient Email Address', 'post-smtp' ) ?></label></div>
                                                 <input type="text" class="ps-test-to" required data-error="Enter Recipient Email Address" name="postman_test_options[test_email]" value="<?php echo esc_attr( wp_get_current_user()->user_email ); ?>" placeholder="Recipient Email Address">
-                                                <span class="ps-form-control-info">Enter the email address where you want to send a test email message.</span>
-                                                <p class="ps-form-control-info">Are your WordPress emails getting broken? Check out our guide on <a href="https://postmansmtp.com/fix-for-broken-emails/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin" target="_blank">how to Fix Broken Emails</a>.</p>
+                                                <span class="ps-form-control-info"><?php _e( 'Enter the email address where you want to send a test email message.', 'post-smtp' ) ?></span>
+                                                <p class="ps-form-control-info"><?php _e( 'Are your WordPress emails getting broken? Check out our guide on', 'post-smtp' ) ?> <a href="https://postmansmtp.com/fix-for-broken-emails/?utm_source=plugin&utm_medium=wizard&utm_campaign=plugin" target="_blank"><?php _e( 'how to Fix Broken Emails', 'post-smtp' ) ?></a>.</p>
                                             </div>
-                                            <button class="button button-primary ps-blue-btn ps-wizard-send-test-email" data-step="3">Send Test Email <span class="dashicons dashicons-email"></span></button>
+                                            <button class="button button-primary ps-blue-btn ps-wizard-send-test-email" data-step="3"><?php _e( 'Send Test Email', 'post-smtp' ) ?> <span class="dashicons dashicons-email"></span></button>
                                             <div>
                                                 <p class="ps-wizard-error"></p>
                                                 <p class="ps-wizard-success"></p>
@@ -347,7 +395,7 @@ class Post_SMTP_New_Wizard {
                                          */
                                         printf(
                                             '%1$s <a href="%2$s" target="_blank">%3$s</a>',
-                                            __( 'We value your opinion on your experience with Post SMTP and would appreciate your feedback. ' ),
+                                            __( 'We value your opinion on your experience with Post SMTP and would appreciate your feedback. ', 'post-smtp' ),
                                             esc_url( 'https://wordpress.org/support/plugin/post-smtp/reviews/#new-post' ),
                                             __( 'Leave a review here.', 'post-smtp' )
                                         ) ?></p>
@@ -357,23 +405,23 @@ class Post_SMTP_New_Wizard {
                                                 <div class="ps-mobile-notice-features">
                                                     <div class="ps-mobile-feature-left">
                                                         <span class="dashicons dashicons-yes-alt"></span>
-                                                        Easy Email Tracking
+                                                        <?php _e( 'Easy Email Tracking', 'post-smtp' ) ?>
                                                         <br>
                                                         <span class="dashicons dashicons-yes-alt"></span>
-                                                        Quickly View Error Details
+                                                        <?php _e( 'Quickly View Error Details', 'post-smtp' ) ?>
                                                         <br>
                                                         <span class="dashicons dashicons-yes-alt"></span>
-                                                        Easy Email Tracking			
+                                                        <?php _e( 'Easy Email Tracking', 'post-smtp' ) ?>                                                   			
                                                     </div>
                                                     <div class="ps-mobile-feature-right">
                                                         <span class="dashicons dashicons-yes-alt"></span>
-                                                        Get Email Preview
+                                                        <?php _e( 'Get Email Preview', 'post-smtp' ) ?>                                               
                                                         <br>
                                                         <span class="dashicons dashicons-yes-alt"></span>
-                                                        Resend Failed Emails
+                                                        <?php _e( 'Resend Failed Emails', 'post-smtp' ) ?>                                                    
                                                         <br>
                                                         <span class="dashicons dashicons-yes-alt"></span>
-                                                        Support multiple sites
+                                                        <?php _e( 'Support multiple sites', 'post-smtp' ) ?>                                                      
                                                     </div>
                                                 </div>
                                                 <div style="display: flex; margin-top: 15px;">
@@ -408,13 +456,13 @@ class Post_SMTP_New_Wizard {
                         <div class="ps-wizard-footer-right">
                             <div class="ps-wizard-step ps-wizard-step-1">
                                 <p class="ps-wizard-error"></p>
-                                <button class="button button-primary ps-blue-btn ps-wizard-next-btn" data-step="1">Continue <span class="dashicons dashicons-arrow-right-alt"></span></button>
+                                <button class="button button-primary ps-blue-btn ps-wizard-next-btn" data-step="1"><?php _e( 'Continue', 'post-smtp' ) ?> <span class="dashicons dashicons-arrow-right-alt"></span></button>
                                 <div style="clear: both"></div>
                             </div>
                             <div class="ps-wizard-step ps-wizard-step-2">
                                 <p class="ps-wizard-success"><?php echo ( isset( $_GET['success'] ) && isset( $_GET['msg'] ) ) ? sanitize_text_field( $_GET['msg'] ) : ''; ?></p>
                                 <p class="ps-wizard-error"><?php echo ( !isset( $_GET['success'] ) && isset( $_GET['msg'] ) ) ? sanitize_text_field( $_GET['msg'] ) : ''; ?></p>
-                                <button class="button button-primary ps-blue-btn ps-wizard-next-btn" data-step="2"></span>Save and Continue <span class="dashicons dashicons-arrow-right-alt"></span></button>
+                                <button class="button button-primary ps-blue-btn ps-wizard-next-btn" data-step="2"></span><?php _e( 'Save and Continue', 'post-smtp' ) ?> <span class="dashicons dashicons-arrow-right-alt"></span></button>
                                 <div style="clear: both"></div>
                             </div>
                             <div class="ps-wizard-step ps-wizard-step-3">
@@ -554,7 +602,7 @@ class Post_SMTP_New_Wizard {
             <div class="ps-form-control">
                 <div><label>From Name</label></div>
                 <input type="text" class="ps-from-name" required data-error="'.__( 'Please enter From Name.', 'post-smtp' ).'" name="postman_options['.esc_attr( PostmanOptions::MESSAGE_SENDER_NAME ).']" value="'.$from_name.'" placeholder="From Name">
-                <span class="ps-form-control-info">The name that emails are sent from.</span>
+                <span class="ps-form-control-info">'.__( 'The name that emails are sent from.', 'post-smtp' ).'</span>
                 <div>
                     <div class="ps-form-switch-control">
                         <label class="ps-switch-1">
@@ -638,7 +686,9 @@ class Post_SMTP_New_Wizard {
             case 'zohomail_api';
                 echo wp_kses( $this->render_zoho_settings(), $this->allowed_tags );
             break;
-
+            case 'smtp2go_api':
+	            echo wp_kses( $this->render_smtp2go_settings(), $this->allowed_tags );
+                break;
         }
 
     }
@@ -855,7 +905,7 @@ class Post_SMTP_New_Wizard {
     public function render_sendgrid_settings() {
 
         $api_key = null !== $this->options->getSendGridApiKey() ? esc_attr ( $this->options->getSendGridApiKey() ) : '';
-
+        $selected_region = $this->options->getSendGridRegion() ? esc_attr( $this->options->getSendGridRegion() ) : 'AG';
         $html = sprintf(
             '<p><a href="%1$s" target="_blank">%2$s</a> %3$s</p><p>%4$s <a href="%5$s" target="_blank">%6$s</a></p>',
             esc_url( 'https://sendgrid.com/' ),
@@ -865,6 +915,8 @@ class Post_SMTP_New_Wizard {
             esc_url( 'https://postmansmtp.com/documentation/sockets-addons/how-to-setup-sendgrid-with-post-smtp/' ),
             __( 'SendGrid Documentation', 'post-smtp' )
         );
+
+
 
         $html .= '
         <div class="ps-form-control">
@@ -884,6 +936,16 @@ class Post_SMTP_New_Wizard {
             ).'
         </div>
         ';
+
+        // Region dropdown.
+        $html .= '<div class="ps-form-control">';
+        $html .= '<div><label>' . __( 'Region', 'post-smtp' ) . '</label></div>';
+        $html .= '<select name="postman_options[' . esc_attr( PostmanOptions::SENDGRID_REGION ) . ']" class="ps-sendgrid-region">';
+        $html .= '<option value="Global" ' . selected( $selected_region, 'Global', false ) . '>' . __( 'Global', 'post-smtp' ) . '</option>';
+        $html .= '<option value="EU" ' . selected( $selected_region, 'EU', false ) . '>' . __( 'Europe (EU)', 'post-smtp' ) . '</option>';
+        $html .= '</select>';
+        $html .= '</div>';
+
 
         return $html;
 
@@ -1342,10 +1404,10 @@ class Post_SMTP_New_Wizard {
 
         $html = sprintf(
             '<p><a href="%1$s" target="_blank">%2$s</a> %3$s </p><a href="%4$s" target="_blank">%5$s</a>',
-            esc_url( 'https://postmansmtp.com/extensions/office-365-extension-for-post-smtp/' ),
+            esc_url( 'https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account?icid=azurefreeaccount' ),
             __( 'Office 365', 'post-smtp' ),
             __( 'is a popular transactional email provider that sends more than 35 billion emails every month. If you\'re just starting out, the free plan allows you to send up to 100 emails each day without entering your credit card details', 'post-smtp' ),
-            esc_url( 'https://postmansmtp.com/documentation/postman-smtp-documentation/pro-extensions/configure-office-365-integration/' ),
+            esc_url( 'https://postmansmtp.com/documentation/sockets-addons/how-to-configure-post-smtp-with-office-365/' ),
             __( 'Read how to setup Office 365', 'post-smtp' )
         );
 
@@ -1359,7 +1421,7 @@ class Post_SMTP_New_Wizard {
              */
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a> %3$s',
-                esc_url( 'https://postmansmtp.com/documentation/postman-smtp-documentation/pro-extensions/configure-office-365-integration/' ),
+                esc_url( 'https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fportal.azure.com%2Fsignin%2Findex%2F&response_type=code%20id_token&scope=https%3A%2F%2Fmanagement.core.windows.net%2F%2Fuser_impersonation%20openid%20email%20profile&state=OpenIdConnect.AuthenticationProperties%3D3ck4pNl3uhpmQz6zVF-QK4L_RKv9glDdJlITzamc-wID4UbZU1Qb1lYDEbqyr7cc4qml3HIpLuGSbrYKEdzvAnslPezoXRu-_TkLEDHNWCPkZE2SqMJPPkcruP29vocPdJeuKpQbUtwtOQkHhU_0dJU_drkiHPqXROXPu9GJQZyJCyQ5rGsQWp0iZFhlRou7VL8PQOzgBoaCvcVH6XzNgZJFgmeYXjmxj7qK_RUQAcm1BkN2p30gkxAiDgtXHUBNFg-qk0aK_n2Nu-eACOL9oW1dZ2PckrjpZNo7SNgCoxG7dzqRAl3nH-hMoqrCq7HyvoA6LQQ9Bx6r071wB-cbwQA6oNP5E4GLAu9WpGs-tsFJvqnq-QR0PM-FZlD1ZupsKIuyNAWm0s4SlLneNh5hi8aMbVo5AJA5G7221N3Vz3zk3jVsD6kq5JZnJZLALPq6BdmTuBvZZfAF6_pSO47bgxdh6hUVNsRSCtGOqTsGcd8&response_mode=form_post&nonce=638717524432120598.YjE5MDc1ZDctYThiZS00NzZhLTgzOGMtZGYwMzMxMTAxNzA3MjFhMWE0OGQtMjIxMS00NDRlLWI5Y2UtODg1YmFjOTNmNTIw&client_id=c44b4083-3bb0-49c1-b47d-974e53cbdf3c&site_id=501430&client-request-id=844ca630-139b-496b-b93c-9a7b66797706&x-client-SKU=ID_NET472&x-client-ver=7.5.0.0' ),
                 __( 'Follow this link', 'post-smtp' ),
                 __( 'to get Application (Client) ID for Office 365', 'post-smtp' )
             )
@@ -1377,7 +1439,7 @@ class Post_SMTP_New_Wizard {
              */
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a> %3$s',
-                esc_url( 'https://postmansmtp.com/documentation/postman-smtp-documentation/pro-extensions/configure-office-365-integration/' ),
+                esc_url( 'https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fportal.azure.com%2Fsignin%2Findex%2F&response_type=code%20id_token&scope=https%3A%2F%2Fmanagement.core.windows.net%2F%2Fuser_impersonation%20openid%20email%20profile&state=OpenIdConnect.AuthenticationProperties%3D3ck4pNl3uhpmQz6zVF-QK4L_RKv9glDdJlITzamc-wID4UbZU1Qb1lYDEbqyr7cc4qml3HIpLuGSbrYKEdzvAnslPezoXRu-_TkLEDHNWCPkZE2SqMJPPkcruP29vocPdJeuKpQbUtwtOQkHhU_0dJU_drkiHPqXROXPu9GJQZyJCyQ5rGsQWp0iZFhlRou7VL8PQOzgBoaCvcVH6XzNgZJFgmeYXjmxj7qK_RUQAcm1BkN2p30gkxAiDgtXHUBNFg-qk0aK_n2Nu-eACOL9oW1dZ2PckrjpZNo7SNgCoxG7dzqRAl3nH-hMoqrCq7HyvoA6LQQ9Bx6r071wB-cbwQA6oNP5E4GLAu9WpGs-tsFJvqnq-QR0PM-FZlD1ZupsKIuyNAWm0s4SlLneNh5hi8aMbVo5AJA5G7221N3Vz3zk3jVsD6kq5JZnJZLALPq6BdmTuBvZZfAF6_pSO47bgxdh6hUVNsRSCtGOqTsGcd8&response_mode=form_post&nonce=638717524432120598.YjE5MDc1ZDctYThiZS00NzZhLTgzOGMtZGYwMzMxMTAxNzA3MjFhMWE0OGQtMjIxMS00NDRlLWI5Y2UtODg1YmFjOTNmNTIw&client_id=c44b4083-3bb0-49c1-b47d-974e53cbdf3c&site_id=501430&client-request-id=844ca630-139b-496b-b93c-9a7b66797706&x-client-SKU=ID_NET472&x-client-ver=7.5.0.0' ),
                 __( 'Follow this link', 'post-smtp' ),
                 __( 'to get Client Secret (Value) for Office 365', 'post-smtp' )
             )
@@ -1396,7 +1458,7 @@ class Post_SMTP_New_Wizard {
              */
             sprintf(
                 '<a href="%1$s" target="_blank">%2$s</a> %3$s',
-                esc_url( 'https://postmansmtp.com/documentation/postman-smtp-documentation/pro-extensions/configure-office-365-integration/' ),
+                esc_url( 'https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize?redirect_uri=https%3A%2F%2Fportal.azure.com%2Fsignin%2Findex%2F&response_type=code%20id_token&scope=https%3A%2F%2Fmanagement.core.windows.net%2F%2Fuser_impersonation%20openid%20email%20profile&state=OpenIdConnect.AuthenticationProperties%3D3ck4pNl3uhpmQz6zVF-QK4L_RKv9glDdJlITzamc-wID4UbZU1Qb1lYDEbqyr7cc4qml3HIpLuGSbrYKEdzvAnslPezoXRu-_TkLEDHNWCPkZE2SqMJPPkcruP29vocPdJeuKpQbUtwtOQkHhU_0dJU_drkiHPqXROXPu9GJQZyJCyQ5rGsQWp0iZFhlRou7VL8PQOzgBoaCvcVH6XzNgZJFgmeYXjmxj7qK_RUQAcm1BkN2p30gkxAiDgtXHUBNFg-qk0aK_n2Nu-eACOL9oW1dZ2PckrjpZNo7SNgCoxG7dzqRAl3nH-hMoqrCq7HyvoA6LQQ9Bx6r071wB-cbwQA6oNP5E4GLAu9WpGs-tsFJvqnq-QR0PM-FZlD1ZupsKIuyNAWm0s4SlLneNh5hi8aMbVo5AJA5G7221N3Vz3zk3jVsD6kq5JZnJZLALPq6BdmTuBvZZfAF6_pSO47bgxdh6hUVNsRSCtGOqTsGcd8&response_mode=form_post&nonce=638717524432120598.YjE5MDc1ZDctYThiZS00NzZhLTgzOGMtZGYwMzMxMTAxNzA3MjFhMWE0OGQtMjIxMS00NDRlLWI5Y2UtODg1YmFjOTNmNTIw&client_id=c44b4083-3bb0-49c1-b47d-974e53cbdf3c&site_id=501430&client-request-id=844ca630-139b-496b-b93c-9a7b66797706&x-client-SKU=ID_NET472&x-client-ver=7.5.0.0' ),
                 __( 'Follow this link', 'post-smtp' ),
                 __( 'to get Redirect URI for Office 365', 'post-smtp' )
             )
@@ -1521,6 +1583,39 @@ class Post_SMTP_New_Wizard {
 
     }
 
+    public function render_smtp2go_settings() {
+	    ob_start();
+
+	    $api_key = null === $this->options->getSmtp2GoApiKey() ? '' : esc_attr( $this->options->getSmtp2GoApiKey() );
+
+	    printf(
+		    '<p><a href="%1$s" target="_blank">%2$s</a> %3$s</p><p>%4$s <a href="%5$s" target="_blank">%6$s</a></p>',
+		    esc_url( 'https://www.smtp2go.com/' ),
+		    __( 'SMTP2Go', 'post-smtp' ),
+		    __( 'is known for its reliable email delivery service, featuring global infrastructure, real-time analytics, and robust security. If you’re just starting out, their free plan allows sending up to 1,000 emails per month.', 'post-smtp' ),
+		    __( 'Let’s get started with our', 'post-smtp' ),
+		    esc_url( 'https://postmansmtp.com/documentation/sockets-addons/how-to-setup-smtp2go-with-post-smtp/' ),
+		    __( 'SMTP2GO Documentation', 'post-smtp' )
+	    );
+
+	    echo '<div class="ps-form-control">
+            <div><label>API Key</label></div>
+            <input type="text" class="ps-smtp2go-api-key" required data-error="'.__( 'Please enter API Key.', 'post-smtp' ).'" name="postman_options['. esc_attr( PostmanOptions::SMTP2GO_API_KEY ) .']" value="'.$api_key.'" placeholder="API Key">';
+	    printf(
+		    '<div class="ps-form-control-info">%1$s <a href="%2$s" target="_blank">%3$s</a></div><div class="ps-form-control-info">%4$s <a href="%5$s" target="_blank">%6$s</a></div>',
+		    __( 'Create an account at', 'post-smtp' ),
+		    esc_url( 'https://www.smtp2go.com/' ),
+		    esc_attr( 'SMTP2GO' ),
+		    __( 'If you are already logged in follow this link to get an', 'post-smtp' ),
+		    esc_url( 'https://app-eu.smtp2go.com/sending/apikeys/' ),
+		    __( 'API Key.', 'post-smtp' )
+	    );
+
+	    echo '</div>';
+
+	    return ob_get_clean();
+    }
+
 
     /**
      * Save Wizard | AJAX Callback
@@ -1564,6 +1659,7 @@ class Post_SMTP_New_Wizard {
                 $sanitized['postmark_api_key'] = isset( $sanitized['postmark_api_key'] ) ? $sanitized['postmark_api_key'] : '';
                 $sanitized['mailgun_api_key'] = isset( $sanitized['mailgun_api_key'] ) ? $sanitized['mailgun_api_key'] : '';
                 $sanitized[PostmanOptions::SENDGRID_API_KEY] = isset( $sanitized[PostmanOptions::SENDGRID_API_KEY] ) ? $sanitized[PostmanOptions::SENDGRID_API_KEY] : '';
+                $sanitized['sendgrid_region']  = isset( $sanitized['sendgrid_region'] ) ? $sanitized['sendgrid_region'] : '';
                 $sanitized['mandrill_api_key'] = isset( $sanitized['mandrill_api_key'] ) ? $sanitized['mandrill_api_key'] : '';
                 $sanitized['elasticemail_api_key'] = isset( $sanitized['elasticemail_api_key'] ) ? $sanitized['elasticemail_api_key'] : '';
                 $sanitized[PostmanOptions::MAILJET_API_KEY] = isset( $sanitized[PostmanOptions::MAILJET_API_KEY] ) ? $sanitized[PostmanOptions::MAILJET_API_KEY] : '';
@@ -1574,7 +1670,7 @@ class Post_SMTP_New_Wizard {
                 $sanitized['ses_region'] = isset( $sanitized['ses_region'] ) ? $sanitized['ses_region'] : '';
                 $sanitized['enc_type'] = 'tls';
                 $sanitized['auth_type'] = 'login';
-                
+   
                 foreach( $sanitized as $key => $value ) {
 
                     $options[$key] = $value;
@@ -1586,9 +1682,7 @@ class Post_SMTP_New_Wizard {
                     $response = true;
 
                 } else {
-
-                    $response = update_option( PostmanOptions::POSTMAN_OPTIONS, $options );
-
+                    $response = update_option( PostmanOptions::POSTMAN_OPTIONS , $options );
                 }
                 
             }

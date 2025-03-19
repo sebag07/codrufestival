@@ -1,2 +1,2 @@
 === Contact Form 7 Multilingual ===
-Stable tag: 1.2.1
+Stable tag: 1.3.2

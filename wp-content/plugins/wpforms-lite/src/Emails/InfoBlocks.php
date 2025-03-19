@@ -13,7 +13,7 @@ class InfoBlocks {
 	 *
 	 * @since 1.5.4
 	 */
-	const SOURCE_URL = 'https://wpforms.com/wp-content/email-summaries.json';
+	const SOURCE_URL = 'https://wpformsapi.com/feeds/v1/email-summaries/';
 
 	/**
 	 * Get info blocks info from the cache file or remote.
@@ -30,6 +30,7 @@ class InfoBlocks {
 			return $this->fetch_all();
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$contents = file_get_contents( $cache_file );
 		$contents = json_decode( $contents, true );
 
@@ -274,6 +275,7 @@ class InfoBlocks {
 
 		$info_blocks = $this->fetch_all();
 
-		file_put_contents( $file_path, wp_json_encode( $info_blocks ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		file_put_contents( $file_path, wp_json_encode( $info_blocks ) );
 	}
 }

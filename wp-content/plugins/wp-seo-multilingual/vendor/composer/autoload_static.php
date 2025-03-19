@@ -4,9 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf4d491a096941134d1aaa451da114adb
+class ComposerStaticInitc0caa55de00093866ef7890d2ac651ee
 {
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'OTGS_Assets_Handles' => __DIR__ . '/..' . '/otgs/ui/src/php/OTGS_Assets_Handles.php',
         'OTGS_Assets_Store' => __DIR__ . '/..' . '/otgs/ui/src/php/OTGS_Assets_Store.php',
         'OTGS_UI_Assets' => __DIR__ . '/..' . '/otgs/ui/src/php/OTGS_UI_Assets.php',
@@ -19,8 +20,13 @@ class ComposerStaticInitf4d491a096941134d1aaa451da114adb
         'WPML\\WPSEO\\RankMathSEO\\Loaders' => __DIR__ . '/../..' . '/classes/RankMathSEO/Loaders.php',
         'WPML\\WPSEO\\RankMathSEO\\Sitemap\\Hooks' => __DIR__ . '/../..' . '/classes/RankMathSEO/Sitemap/Hooks.php',
         'WPML\\WPSEO\\RankMathSEO\\Sitemap\\LangMode\\DirectoryHooks' => __DIR__ . '/../..' . '/classes/RankMathSEO/Sitemap/LangMode/DirectoryHooks.php',
+        'WPML\\WPSEO\\RankMathSEO\\Slugs\\Hooks' => __DIR__ . '/../..' . '/classes/RankMathSEO/Slugs/Hooks.php',
+        'WPML\\WPSEO\\RankMathSEO\\Slugs\\HooksFactory' => __DIR__ . '/../..' . '/classes/RankMathSEO/Slugs/HooksFactory.php',
+        'WPML\\WPSEO\\RankMathSEO\\TranslationJob\\Hooks' => __DIR__ . '/../..' . '/classes/RankMathSEO/TranslationJob/Hooks.php',
+        'WPML\\WPSEO\\Shared\\TranslationJob\\BaseHooks' => __DIR__ . '/../..' . '/classes/Shared/TranslationJob/BaseHooks.php',
         'WPML\\WPSEO\\SlugTranslation\\Hooks' => __DIR__ . '/../..' . '/classes/SlugTranslation/Hooks.php',
         'WPML\\WPSEO\\Terms\\AdminHooks' => __DIR__ . '/../..' . '/classes/Terms/AdminHooks.php',
+        'WPML\\WPSEO\\TranslationJob\\Hooks' => __DIR__ . '/../..' . '/classes/TranslationJob/Hooks.php',
         'WPML\\WPSEO\\Utils' => __DIR__ . '/../..' . '/classes/Utils.php',
         'WPML_Core_Version_Check' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
         'WPML_Dependencies' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-dependencies.php',
@@ -37,7 +43,7 @@ class ComposerStaticInitf4d491a096941134d1aaa451da114adb
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitf4d491a096941134d1aaa451da114adb::$classMap;
+            $loader->classMap = ComposerStaticInitc0caa55de00093866ef7890d2ac651ee::$classMap;
 
         }, null, ClassLoader::class);
     }

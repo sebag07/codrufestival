@@ -33,7 +33,7 @@ class WooCommerce extends Conversion_Events_Provider {
 	 * @return bool True if WooCommerce is active, false otherwise.
 	 */
 	public function is_active() {
-		return did_action( 'woocommerce_loaded' ) > 0;
+		return class_exists( 'WooCommerce' );
 	}
 
 	/**
@@ -94,7 +94,7 @@ class WooCommerce extends Conversion_Events_Provider {
 				$order_key = $input->filter( INPUT_GET, 'key' );
 
 				// Don't output the script tag if the order key is invalid.
-				if ( ! $order->key_is_valid( $order_key ) ) {
+				if ( ! $order->key_is_valid( (string) $order_key ) ) {
 					return;
 				}
 

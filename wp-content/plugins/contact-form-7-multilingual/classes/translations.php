@@ -2,7 +2,7 @@
 
 namespace WPML\CF7;
 
-class Translations implements \IWPML_Backend_Action {
+class Translations implements \IWPML_Backend_Action, \IWPML_Frontend_Action {
 
 	const MESSAGE_PREFIX = 'field-_messages-0-';
 

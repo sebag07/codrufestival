@@ -4,6 +4,20 @@ use WPML\FP\Fns;
 
 class WPML_WPSEO_Categories implements IWPML_Action {
 
+	const CATEGORY_SLUG = 'category';
+
+	/**
+	 * @var WPML_ST_Slug_Translation_Settings_Factory|null $slugTranslationSettingsFactory
+	 */
+	private $slugTranslationSettingsFactory;
+
+	/**
+	 * @param WPML_ST_Slug_Translation_Settings_Factory|null $slugTranslationSettingsFactory
+	 */
+	public function __construct( WPML_ST_Slug_Translation_Settings_Factory $slugTranslationSettingsFactory = null ) {
+		$this->slugTranslationSettingsFactory = $slugTranslationSettingsFactory;
+	}
+
 	/**
 	 * Add hooks.
 	 */
@@ -11,6 +25,7 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 		if ( $this->is_stripping_category_base() ) {
 			add_filter( 'category_rewrite_rules', array( $this, 'append_categories_hook' ), -PHP_INT_MAX );
 			add_filter( 'category_rewrite_rules', array( $this, 'turn_off_get_terms_filter' ), PHP_INT_MAX );
+			add_action( 'admin_init', [ $this, 'ensureCategoryBaseIsNotTranslated' ] );
 		}
 	}
 
@@ -57,7 +72,7 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 	 * @return array
 	 */
 	public function append_categories_translations( $categories, $taxonomy ) {
-		if ( ! in_array( 'category', $taxonomy, true ) || ! $this->is_array_of_wp_term( $categories ) ) {
+		if ( ! in_array( self::CATEGORY_SLUG, $taxonomy, true ) || ! $this->is_array_of_wp_term( $categories ) ) {
 			return $categories;
 		}
 
@@ -66,7 +81,7 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 		$sql = "
 			SELECT t.term_id FROM {$wpdb->terms} t
 			INNER JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = t.term_id
-			WHERE tt.taxonomy = 'category'
+			WHERE tt.taxonomy = '" . self::CATEGORY_SLUG . "'
 		";
 
 		return array_filter( array_map( array( $this, 'map_to_term' ), $wpdb->get_col( $sql ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -90,9 +105,20 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 		$disableAdjustId = [ 'wpml_disable_term_adjust_id', Fns::always( true ) ];
 
 		add_filter( ...$disableAdjustId );
-		$term = get_term( $term_id, 'category' );
+		$term = get_term( $term_id, self::CATEGORY_SLUG );
 		remove_filter( ...$disableAdjustId );
 
 		return $term;
+	}
+
+	public function ensureCategoryBaseIsNotTranslated() {
+		if ( $this->slugTranslationSettingsFactory ) {
+			$taxSettings = $this->slugTranslationSettingsFactory->createTaxSettings();
+
+			if ( $taxSettings->is_translated( self::CATEGORY_SLUG ) ) {
+				$taxSettings->set_type( self::CATEGORY_SLUG, false );
+				$taxSettings->save();
+			}
+		}
 	}
 }

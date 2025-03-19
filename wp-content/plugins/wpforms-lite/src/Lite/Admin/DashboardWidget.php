@@ -145,7 +145,15 @@ class DashboardWidget extends Widget {
 			'wpforms-chart',
 			WPFORMS_PLUGIN_URL . 'assets/lib/chart.min.js',
 			[ 'moment' ],
-			'2.9.4',
+			'4.4.4',
+			true
+		);
+
+		wp_enqueue_script(
+			'wpforms-chart-adapter-moment',
+			WPFORMS_PLUGIN_URL . 'assets/lib/chartjs-adapter-moment.min.js',
+			[ 'moment', 'wpforms-chart' ],
+			'1.0.1',
 			true
 		);
 
@@ -208,7 +216,7 @@ class DashboardWidget extends Widget {
 	 */
 	public function widget_content() {
 
-		$forms          = wpforms()->get( 'form' )->get( '', [ 'fields' => 'ids' ] );
+		$forms          = wpforms()->obj( 'form' )->get( '', [ 'fields' => 'ids' ] );
 		$hide_graph     = (bool) $this->widget_meta( 'get', 'hide_graph' );
 		$no_graph_class = $hide_graph ? 'wpforms-dash-widget-no-graph' : '';
 
@@ -232,7 +240,7 @@ class DashboardWidget extends Widget {
 		}
 
 		$hide_welcome        = $this->widget_meta( 'get', 'hide_welcome_block' );
-		$splash              = wpforms()->get( 'splash_screen' );
+		$splash              = wpforms()->obj( 'splash_screen' );
 		$is_splash_available = $splash && $splash->is_available_for_display();
 		$is_splash_allowed   = $splash && $splash->is_allow_splash();
 
@@ -512,7 +520,7 @@ class DashboardWidget extends Widget {
 			return $cache;
 		}
 
-		$forms = wpforms()->get( 'form' )->get( '', [ 'fields' => 'ids' ] );
+		$forms = wpforms()->obj( 'form' )->get( '', [ 'fields' => 'ids' ] );
 
 		if ( empty( $forms ) || ! is_array( $forms ) ) {
 			return [];

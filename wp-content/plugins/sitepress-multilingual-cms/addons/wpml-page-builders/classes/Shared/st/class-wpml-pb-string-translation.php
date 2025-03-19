@@ -1,17 +1,12 @@
 <?php
 
-use WPML\LIB\WP\Cache;
 class WPML_PB_String_Translation {
 
 	/** @var  wpdb $wpdb */
 	protected $wpdb;
 
-	/** @const string CACHE_GROUP_KEY **/
-	const CACHE_GROUP_KEY = 'wpml-pb-package-strings';
-
 	public function __construct( wpdb $wpdb ) {
 		$this->wpdb = $wpdb;
-		wp_cache_add_non_persistent_groups( self::CACHE_GROUP_KEY );
 	}
 
 	/**
@@ -20,53 +15,29 @@ class WPML_PB_String_Translation {
 	 * @return array
 	 */
 	public function get_package_strings( array $package_data ) {
-		$strings    = array();
+		$strings = array();
 		$package_id = $this->get_package_id( $package_data );
-
 		if ( $package_id ) {
-			$getPackageStrings = Cache::memorize(
-				self::CACHE_GROUP_KEY,
-				HOUR_IN_SECONDS,
-				function( $packageId ) {
-					return $this->getPackageStringsFromDb( $packageId );
-				}
-			);
-
-			$strings = $getPackageStrings( $package_id );
-		}
-
-		return $strings;
-	}
-
-	/**
-	 * @param int $packageId
-	 *
-	 * @return array
-	 */
-	private function getPackageStringsFromDb( $packageId ) {
-		$strings = [];
-		// phpcs:disable WordPress.WP.PreparedSQL.NotPrepared
-		$sql_to_get_strings_with_package_id = $this->wpdb->prepare( "SELECT *
-			FROM {$this->wpdb->prefix}icl_strings s 
+			$sql_to_get_strings_with_package_id = $this->wpdb->prepare( "SELECT *
+			FROM {$this->wpdb->prefix}icl_strings s
 			WHERE s.string_package_id=%d",
-		$packageId );
+			$package_id );
 
-		$packageStrings = $this->wpdb->get_results( $sql_to_get_strings_with_package_id );
-		// phpcs:enable
+			$package_strings = $this->wpdb->get_results( $sql_to_get_strings_with_package_id );
 
-		if ( ! empty( $packageStrings ) ) {
-			foreach ( $packageStrings as $string ) {
-				$strings[ $this->get_string_hash( $string->value ) ] = array(
-					'value'      => $string->value,
-					'context'    => $string->context,
-					'name'       => $string->name,
-					'id'         => $string->id,
-					'package_id' => $packageId,
-					'location'   => $string->location,
-				);
+			if ( ! empty( $package_strings ) ) {
+				foreach ( $package_strings as $string ) {
+					$strings[ $this->get_string_hash( $string->value ) ] = array(
+						'value'      => $string->value,
+						'context'    => $string->context,
+						'name'       => $string->name,
+						'id'         => $string->id,
+						'package_id' => $package_id,
+						'location'   => $string->location,
+					);
+				}
 			}
 		}
-
 		return $strings;
 	}
 
@@ -120,11 +91,13 @@ class WPML_PB_String_Translation {
 	}
 
 	/**
-	 * @param string $string_value
+	 * @param string|null $string_value
 	 *
 	 * @return string
 	 */
 	public function get_string_hash( $string_value ) {
+		$string_value = is_null( $string_value ) ? '' : $string_value;
+
 		return md5( $string_value );
 	}
 }

@@ -93,9 +93,17 @@ class WPML_Sticky_Posts_Sync {
 	 * @param int $post_id
 	 */
 	public function on_post_unstuck( $post_id ) {
-		foreach ( $this->get_post_translations( $post_id ) as $lang => $translated_post_id ) {
-			$this->remove_post_id( 'sticky_posts_' . $lang, (int) $translated_post_id );
-			$this->remove_post_id_from_original_option( (int) $translated_post_id );
+		$translations = $this->get_post_translations( $post_id );
+		if ( $translations ) {
+			foreach ( $translations as $lang => $translated_post_id ) {
+				$this->remove_post_id( 'sticky_posts_' . $lang, (int) $translated_post_id );
+				$this->remove_post_id_from_original_option( (int) $translated_post_id );
+			}
+		} else {
+			// Remove from language-specific option.
+			$this->remove_post_id( 'sticky_posts_' . $this->sitepress->get_current_language(), (int) $post_id );
+			// Also remove from global sticky posts.
+			$this->remove_post_id_from_original_option( (int) $post_id );
 		}
 	}
 

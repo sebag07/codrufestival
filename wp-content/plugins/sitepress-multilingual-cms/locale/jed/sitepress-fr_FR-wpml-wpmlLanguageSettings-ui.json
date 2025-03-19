@@ -18,10 +18,10 @@
             "Enregistrer"
          ],
          "The new format has been saved.": [
-            "Le nouveau format a été sauvegardé."
+            "Le nouveau format a été enregistré."
          ],
          "Failed to save the new format": [
-            "La sauvegarde du nouveau format a échoué."
+            "Échec de l'enregistrement du nouveau format"
          ]
       }
    }

@@ -1,6 +1,5 @@
 <?php
 
-use WPML\Settings\PostType\Automatic;
 use WPML\UrlHandling\WPLoginUrlConverter;
 use WPML\AdminLanguageSwitcher\AdminLanguageSwitcher;
 
@@ -100,7 +99,7 @@ switch ( $request ) {
 		icl_save_settings();
 		break;
 	case 'toggle_show_translations':
-		icl_set_setting( 'show_translations_flag', intval( ! icl_get_setting( 'show_translations_flag', false ) ) );
+		icl_set_setting( 'show_translations_flag', intval( ! wpml_get_setting( 'show_translations_flag', true ) ) );
 		icl_save_settings();
 		break;
 	case 'icl_messages':
@@ -276,11 +275,6 @@ switch ( $request ) {
 		$settings_helper->update_cpt_unlocked_settings( $unlocked_options );
 		$settings_helper->update_cpt_sync_settings( $new_options );
 		$customPostTypes = ( new WPML_Post_Types( $sitepress ) )->get_translatable_and_readonly();
-		foreach ( array_keys( $customPostTypes ) as $postType ) {
-			if ( array_key_exists( $postType, $new_options ) ) {
-				Automatic::set( $postType, isset( $_POST['automatic_post_type'][ $postType ] ) );
-			}
-		}
 		echo '1|';
 		break;
 	case 'copy_from_original':

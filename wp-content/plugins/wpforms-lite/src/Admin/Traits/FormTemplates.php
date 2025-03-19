@@ -55,20 +55,20 @@ trait FormTemplates {
 	 */
 	private function output_templates_content() {
 
-		$templates_hash        = wpforms()->get( 'builder_templates' )->get_hash();
+		$templates_hash        = wpforms()->obj( 'builder_templates' )->get_hash();
 		$templates_hash_option = get_option( Templates::TEMPLATES_HASH_OPTION, '' );
 
-		// Compare the current hash and the previous one to detect changes in the templates list.
+		// Compare the current hash and the previous one to detect changes in the template list.
 		if ( $templates_hash !== $templates_hash_option ) {
 			// Update the hash in the option.
 			update_option( Templates::TEMPLATES_HASH_OPTION, $templates_hash );
 
 			// Wipe both caches - for the admin page and for the Form Builder.
-			wpforms()->get( 'builder_templates_cache' )->wipe_content_cache();
+			wpforms()->obj( 'builder_templates_cache' )->wipe_content_cache();
 		}
 
 		// Attempt to get cached content.
-		$content = wpforms()->get( 'builder_templates_cache' )->get_content_cache();
+		$content = wpforms()->obj( 'builder_templates_cache' )->get_content_cache();
 
 		if ( empty( $content ) ) {
 			$content = $this->generate_templates_content_cache();
@@ -114,7 +114,7 @@ trait FormTemplates {
 				</div>
 				<div class="wpforms-templates-no-results">
 					<p>
-						<?php esc_html_e( 'Sorry, we didn\'t find any templates that match your criteria.', 'wpforms-lite' ); ?>
+						<?php esc_html_e( "Sorry, we didn't find any templates that match your criteria.", 'wpforms-lite' ); ?>
 					</p>
 				</div>
 				<div class="wpforms-user-templates-empty-state wpforms-hidden">
@@ -126,7 +126,7 @@ trait FormTemplates {
 
 		$content = ob_get_clean();
 
-		wpforms()->get( 'builder_templates_cache' )->save_content_cache( $content );
+		wpforms()->obj( 'builder_templates_cache' )->save_content_cache( $content );
 
 		return $content;
 	}
@@ -138,13 +138,13 @@ trait FormTemplates {
 	 */
 	private function prepare_templates_data() {
 
-		$templates = wpforms()->get( 'builder_templates' )->get_templates();
+		$templates = wpforms()->obj( 'builder_templates' )->get_templates();
 
 		if ( empty( $templates ) ) {
 			return;
 		}
 
-		wpforms()->get( 'builder_templates' )->update_favorites_list();
+		wpforms()->obj( 'builder_templates' )->update_favorites_list();
 
 		// Loop through each available template.
 		foreach ( $templates as $id => $template ) {
@@ -190,7 +190,7 @@ trait FormTemplates {
 
 		$categories = array_merge(
 			$common_categories,
-			wpforms()->get( 'builder_templates' )->get_categories()
+			wpforms()->obj( 'builder_templates' )->get_categories()
 		);
 
 		$this->output_categories( $categories, $templates_count );
@@ -203,25 +203,26 @@ trait FormTemplates {
 	 *
 	 * @param array $categories      Categories list.
 	 * @param array $templates_count Templates count by categories.
-	 */
+	 *
+	 * @noinspection HtmlUnknownAttribute*/
 	private function output_categories( $categories, $templates_count ) {
 
-		$all_subcategories = wpforms()->get( 'builder_templates' )->get_subcategories();
+		$all_subcategories = wpforms()->obj( 'builder_templates' )->get_subcategories();
 
 		foreach ( $categories as $slug => $name ) {
 
 			$class = '';
 
 			if ( $slug === 'all' ) {
-				$class = ' class="active"';
+				$class = 'class="active"';
 			} elseif ( empty( $templates_count[ $slug ] ) && $slug !== 'user' ) { // WPForms user templates are always available.
-				$class = ' class="wpforms-hidden"';
+				$class = 'class="wpforms-hidden"';
 			}
 
 			$count = $templates_count[ $slug ] ?? '0';
 
 			printf(
-				'<li data-category="%1$s"%2$s data-count="%4$s"><div>%3$s<span>%4$s</span><i class="fa fa-chevron-down chevron"></i></div>%5$s</li>',
+				'<li data-category="%1$s" %2$s data-count="%4$s"><div>%3$s<span>%4$s</span><i class="fa fa-chevron-down chevron"></i></div>%5$s</li>',
 				esc_attr( $slug ),
 				$class, // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				esc_html( $name ),
@@ -236,8 +237,9 @@ trait FormTemplates {
 	 *
 	 * @since 1.8.4
 	 *
-	 * @param array $all_subcategories Subcategories list.
-	 * @param array $parent_slug       Parent category slug.
+	 * @param array $all_subcategories   Subcategories list.
+	 * @param array $parent_slug         Parent category slug.
+	 * @param array $subcategories_count Subcategories count.
 	 */
 	private function output_subcategories( $all_subcategories, $parent_slug, $subcategories_count ) {
 
@@ -277,8 +279,35 @@ trait FormTemplates {
 	 *
 	 * @param array  $templates Deprecated.
 	 * @param string $slug      Deprecated.
+	 *
+	 * @noinspection PhpMissingParamTypeInspection
+	 * @noinspection PhpUnusedParameterInspection
 	 */
-	public function template_select_options( $templates = [], $slug = '' ) {
+	public function template_select_options( $templates = [], $slug = '' ) { // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+
+		/**
+		 * Action hook before the list of form templates.
+		 *
+		 * @since 1.9.3
+		 *
+		 * @param array $templates List of form templates.
+		 */
+		do_action( 'wpforms_admin_form_templates_list_before', $templates );
+
+		/**
+		 * Filter the number of templates to display.
+		 *
+		 * Useful for speeding up the setup panel loading while debugging.
+		 *
+		 * @since 1.9.2
+		 *
+		 * @param int|bool $limit Number of templates to display.
+		 */
+		$limit = apply_filters( 'wpforms_builder_setup_templates_limit', false );
+
+		if ( $limit ) {
+			$this->prepared_templates = array_slice( $this->prepared_templates, 0, (int) $limit, true );
+		}
 
 		foreach ( $this->prepared_templates as $template ) {
 
@@ -316,7 +345,7 @@ trait FormTemplates {
 		$template['source']     = $this->get_template_source( $template );
 		$template['url']        = ! empty( $template['url'] ) ? $template['url'] : '';
 		$template['has_access'] = ! empty( $template['license'] ) ? $template['has_access'] : true;
-		$template['favorite']   = $template['favorite'] ?? wpforms()->get( 'builder_templates' )->is_favorite( $template['slug'] );
+		$template['favorite']   = $template['favorite'] ?? wpforms()->obj( 'builder_templates' )->is_favorite( $template['slug'] );
 
 		$args = [];
 

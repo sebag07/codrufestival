@@ -35,50 +35,24 @@ function wpforms_save_form() {
 
 	// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
 	$form_post = json_decode( wp_unslash( $_POST['data'] ), false );
-	$data      = [
-		'fields' => [],
-	];
 
-	if ( $form_post ) {
-		foreach ( $form_post as $post_input_data ) {
-			// For input names that are arrays (e.g. `menu-item-db-id[3][4][5]`),
-			// derive the array path keys via regex and set the value in $_POST.
-			preg_match( '#([^\[]*)(\[(.+)\])?#', $post_input_data->name, $matches );
+	$data = wpforms_prepare_form_data( $form_post );
+	$data = wpforms_sanitize_form_data( $data );
 
-			$array_bits = [ $matches[1] ];
-
-			if ( isset( $matches[3] ) ) {
-				$array_bits = array_merge( $array_bits, explode( '][', $matches[3] ) );
-			}
-
-			$new_post_data = [];
-
-			// Build the new array value from leaf to trunk.
-			for ( $i = count( $array_bits ) - 1; $i >= 0; $i-- ) {
-				if ( $i === count( $array_bits ) - 1 ) {
-					$new_post_data[ $array_bits[ $i ] ] = wp_slash( $post_input_data->value );
-				} else {
-					$new_post_data = [
-						$array_bits[ $i ] => $new_post_data,
-					];
-				}
-			}
-
-			$data = array_replace_recursive( $data, $new_post_data );
-		}
-	}
+	// Process fields data.
+	$data['fields'] = wpforms()->obj( 'builder_save_form' )->process_fields( $data['fields'], $data );
 
 	// Get form tags.
 	$form_tags = isset( $data['settings']['form_tags_json'] ) ? json_decode( wp_unslash( $data['settings']['form_tags_json'] ), true ) : [];
 
-	// Clear not needed data.
+	// Clear unnecessary data.
 	unset( $data['settings']['form_tags_json'] );
 
 	// Store tags labels in the form settings.
 	$data['settings']['form_tags'] = wp_list_pluck( $form_tags, 'label' );
 
 	// Update form data.
-	$form_id = wpforms()->get( 'form' )->update( $data['id'], $data, [ 'context' => 'save_form' ] );
+	$form_id = wpforms()->obj( 'form' )->update( $data['id'], $data, [ 'context' => 'save_form' ] );
 
 	/**
 	 * Fires after updating form data.
@@ -97,7 +71,7 @@ function wpforms_save_form() {
 	// Update form tags.
 	wp_set_post_terms(
 		$form_id,
-		wpforms()->get( 'forms_tags_ajax' )->get_processed_tags( $form_tags ),
+		wpforms()->obj( 'forms_tags_ajax' )->get_processed_tags( $form_tags ),
 		WPForms_Form_Handler::TAGS_TAXONOMY
 	);
 
@@ -129,11 +103,67 @@ function wpforms_save_form() {
 add_action( 'wp_ajax_wpforms_save_form', 'wpforms_save_form' );
 
 /**
+ * Prepare form data.
+ *
+ * @since 1.9.4
+ *
+ * @param object $form_post Form data received from $_POST.
+ *
+ * @return array
+ */
+function wpforms_prepare_form_data( $form_post ): array {
+
+	$data = [
+		'fields' => [],
+	];
+
+	if ( ! $form_post ) {
+		return $data;
+	}
+
+	$new_post_data_accum = [];
+
+	foreach ( $form_post as $post_input_data ) {
+		// For input names that are arrays (e.g. `menu-item-db-id[3][4][5]`),
+		// derive the array path keys via regex and set the value in $_POST.
+		preg_match( '#([^\[]*)(\[(.+)])?#', $post_input_data->name, $matches );
+
+		$array_bits = [ $matches[1] ];
+
+		if ( isset( $matches[3] ) ) {
+			/**
+			 * This array_merge is not slow, because it is new for each loop iteration.
+			 *
+			 * @noinspection SlowArrayOperationsInLoopInspection
+			 */
+			$array_bits = array_merge( $array_bits, explode( '][', $matches[3] ) );
+		}
+
+		$new_post_data = [];
+
+		// Build the new array value from leaf to trunk.
+		for ( $i = count( $array_bits ) - 1; $i >= 0; $i-- ) {
+			if ( $i === count( $array_bits ) - 1 ) {
+				$new_post_data[ $array_bits[ $i ] ] = wp_slash( $post_input_data->value );
+			} else {
+				$new_post_data = [
+					$array_bits[ $i ] => $new_post_data,
+				];
+			}
+		}
+
+		$new_post_data_accum[] = $new_post_data;
+	}
+
+	return array_replace_recursive( $data, ...$new_post_data_accum );
+}
+
+/**
  * Create a new form.
  *
  * @since 1.0.0
  */
-function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
+function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
 
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
 
@@ -157,7 +187,7 @@ function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexi
 	$category      = empty( $_POST['category'] ) ? 'all' : sanitize_text_field( wp_unslash( $_POST['category'] ) );
 	$subcategory   = empty( $_POST['subcategory'] ) ? 'all' : sanitize_text_field( wp_unslash( $_POST['subcategory'] ) );
 
-	if ( ! wpforms()->get( 'builder_templates' )->is_valid_template( $form_template ) ) {
+	if ( ! wpforms()->obj( 'builder_templates' )->is_valid_template( $form_template ) ) {
 		wp_send_json_error(
 			[
 				'error_type' => 'invalid_template',
@@ -178,7 +208,7 @@ function wpforms_new_form() { // phpcs:ignore Generic.Metrics.CyclomaticComplexi
 		]
 	);
 	$title_exists = $title_query->post_count > 0;
-	$form_id      = wpforms()->get( 'form' )->add(
+	$form_id      = wpforms()->obj( 'form' )->add(
 		$form_title,
 		[],
 		[
@@ -243,10 +273,20 @@ add_action( 'wp_ajax_wpforms_new_form', 'wpforms_new_form' );
  *
  * @since 1.0.0
  */
-function wpforms_update_form_template() {
+function wpforms_update_form_template() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
 
 	// Run a security check.
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
+
+	// Check for permissions.
+	if ( ! wpforms_current_user_can( 'edit_forms' ) ) {
+		wp_send_json_error(
+			[
+				'error_type' => 'permissions_denied',
+				'message'    => esc_html__( 'You are not allowed to perform this action.', 'wpforms-lite' ),
+			]
+		);
+	}
 
 	// Check for form ID.
 	if ( empty( $_POST['form_id'] ) ) {
@@ -265,7 +305,7 @@ function wpforms_update_form_template() {
 	$subcategory   = empty( $_POST['subcategory'] ) ? 'all' : sanitize_text_field( wp_unslash( $_POST['subcategory'] ) );
 
 	// Check for valid template.
-	if ( ! wpforms()->get( 'builder_templates' )->is_valid_template( $form_template ) ) {
+	if ( ! wpforms()->obj( 'builder_templates' )->is_valid_template( $form_template ) ) {
 		wp_send_json_error(
 			[
 				'error_type' => 'invalid_template',
@@ -275,7 +315,7 @@ function wpforms_update_form_template() {
 	}
 
 	// Get current form data.
-	$data = wpforms()->get( 'form' )->get(
+	$data = wpforms()->obj( 'form' )->get(
 		$form_id,
 		[
 			'content_only' => true,
@@ -283,7 +323,7 @@ function wpforms_update_form_template() {
 	);
 
 	// Get the cached data from the form template JSON.
-	$template_data = wpforms()->get( 'builder_templates' )->get_template( $form_template );
+	$template_data = wpforms()->obj( 'builder_templates' )->get_template( $form_template );
 
 	// If the template title is set, use it. Otherwise, clear the form title.
 	$template_title = ! empty( $template_data['name'] ) ? $template_data['name'] : '';
@@ -294,7 +334,7 @@ function wpforms_update_form_template() {
 	// Check if the current form title is equal to the previous template name.
 	// If so, set the form title equal to the new template name.
 	$prev_template_slug = $data['meta']['template'] ?? '';
-	$prev_template      = wpforms()->get( 'builder_templates' )->get_template( $prev_template_slug );
+	$prev_template      = wpforms()->obj( 'builder_templates' )->get_template( $prev_template_slug );
 	$form_title         = isset( $prev_template['name'] ) && $prev_template['name'] === $form_title ? $template_title : $form_title;
 
 	// If the these template titles are empty, use the form title.
@@ -336,7 +376,7 @@ function wpforms_update_form_template() {
 	$data['settings']['conversational_forms_page_slug'] = sanitize_title( $form_conversational_slug );
 
 	// Try to update the form.
-	$updated = (bool) wpforms()->get( 'form' )->update(
+	$updated = (bool) wpforms()->obj( 'form' )->update(
 		$form_id,
 		$data,
 		[
@@ -401,7 +441,7 @@ function wpforms_builder_increase_next_field_id() {
 		$args['field_id'] = sanitize_text_field( wp_unslash( $_POST['field_id'] ) );
 	}
 
-	wpforms()->get( 'form' )->next_field_id( absint( $_POST['form_id'] ), $args );
+	wpforms()->obj( 'form' )->next_field_id( absint( $_POST['form_id'] ), $args );
 
 	wp_send_json_success();
 }
@@ -457,7 +497,7 @@ add_action( 'wp_ajax_wpforms_builder_dynamic_choices', 'wpforms_builder_dynamic_
  *
  * @since 1.2.8
  */
-function wpforms_builder_dynamic_source() {
+function wpforms_builder_dynamic_source() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.TooHigh
 
 	// Run a security check.
 	check_ajax_referer( 'wpforms-builder', 'nonce' );
@@ -482,28 +522,28 @@ function wpforms_builder_dynamic_source() {
 	$type_name   = '';
 
 	if ( $type === 'post_type' ) {
-
-		$type_name   = esc_html__( 'post type', 'wpforms-lite' );
-		$args        = [
+		$type_name = esc_html__( 'post type', 'wpforms-lite' );
+		$args      = [
 			'post_type'      => $source,
 			'posts_per_page' => 20,
 			'orderby'        => 'title',
 			'order'          => 'ASC',
 		];
-		$posts       = wpforms_get_hierarchical_object(
-			apply_filters(
-				'wpforms_dynamic_choice_post_type_args',
-				$args,
-				[
-					'id' => $id,
-				],
-				$form_id
-			),
-			true
-		);
-		$total       = wp_count_posts( $source );
-		$total       = $total->publish;
-		$pt          = get_post_type_object( $source );
+
+		/**
+		 * Filters the arguments used to query the post type for dynamic choices.
+		 *
+		 * @since 1.4.1
+		 *
+		 * @param array $args    Arguments used to query the post's type for dynamic choices.
+		 * @param array $field   Field.
+		 * @param int   $form_id Form ID.
+		 */
+		$args  = (array) apply_filters( 'wpforms_dynamic_choice_post_type_args', $args, [ 'id' => $id ], $form_id );
+		$posts = wpforms_get_hierarchical_object( $args, true );
+		$total = wp_count_posts( $source );
+		$total = $total->publish;
+		$pt    = get_post_type_object( $source );
 
 		if ( $pt !== null ) {
 			$source_name = $pt->labels->name;
@@ -513,24 +553,24 @@ function wpforms_builder_dynamic_source() {
 			$items[] = esc_html( wpforms_get_post_title( $post ) );
 		}
 	} elseif ( $type === 'taxonomy' ) {
-
-		$type_name   = esc_html__( 'taxonomy', 'wpforms-lite' );
-		$args        = [
+		$type_name = esc_html__( 'taxonomy', 'wpforms-lite' );
+		$args      = [
 			'taxonomy'   => $source,
 			'hide_empty' => false,
 			'number'     => 20,
 		];
-		$terms       = wpforms_get_hierarchical_object(
-			apply_filters(
-				'wpforms_dynamic_choice_taxonomy_args',
-				$args,
-				[
-					'id' => $id,
-				],
-				$form_id
-			),
-			true
-		);
+
+		/**
+		 * Filters the arguments used to query the taxonomy for dynamic choices.
+		 *
+		 * @since 1.4.1
+		 *
+		 * @param array $args    Arguments used to query the post's type for dynamic choices.
+		 * @param array $field   Field.
+		 * @param int   $form_id Form ID.
+		 */
+		$args        = apply_filters( 'wpforms_dynamic_choice_taxonomy_args', $args, [ 'id' => $id ], $form_id );
+		$terms       = wpforms_get_hierarchical_object( $args, true );
 		$total       = wp_count_terms( $source );
 		$tax         = get_taxonomy( $source );
 		$source_name = $tax->labels->name;
@@ -659,6 +699,13 @@ function wpforms_deactivate_addon() {
 
 		deactivate_plugins( $plugin );
 
+		/**
+		 * Fire after plugin deactivating via the WPForms installer.
+		 *
+		 * @since 1.6.3
+		 *
+		 * @param string $plugin Plugin deactivated.
+		 */
 		do_action( 'wpforms_plugin_deactivated', $plugin );
 
 		if ( $type === 'plugin' ) {
@@ -734,7 +781,7 @@ add_action( 'wp_ajax_wpforms_activate_addon', 'wpforms_activate_addon' );
  *
  * @noinspection HtmlUnknownTarget
  */
-function wpforms_install_addon() {
+function wpforms_install_addon() { // phpcs:ignore Generic.Metrics.CyclomaticComplexity.MaxExceeded
 
 	// Run a security check.
 	check_ajax_referer( 'wpforms-admin', 'nonce' );

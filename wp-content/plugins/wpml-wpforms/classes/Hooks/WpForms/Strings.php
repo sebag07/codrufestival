@@ -34,6 +34,7 @@ class Strings extends Registration {
 		add_action( 'wpforms_save_form', [ $this, 'register' ] );
 		add_filter( 'wpforms_process_before_form_data', [ $this, 'applySubmissionTranslations' ] );
 		add_filter( 'wpforms_frontend_form_data', [ $this, 'applyTranslations' ] );
+		add_filter( 'wpforms_entry_preview_form_data', [ $this, 'applyTranslations' ] );
 		add_filter( 'wpforms_process_before_filter', [ $this, 'translateEntry' ], 10, 2 );
 	}
 
@@ -174,6 +175,9 @@ class Strings extends Registration {
 	 * @param array $formData Form data and settings.
 	 *
 	 * @return array
+	 *
+	 * @todo Check if this should affect only 'poll' templates from WPForms Surveys and Polls,
+	 * or also native polls from WPForms.
 	 */
 	public function translateEntry( $entry, $formData ) {
 		$originalForm = wpforms()->get( 'form' )->get(

@@ -270,7 +270,7 @@ $resource( [
 					</div> <!-- wpml-section-content-inner -->
 
 					<?php if ( $inactive_content && $inactive_content->has_entries() ) : ?>
-						<div class="wpml-section-content-inner">
+						<div id="wpml-inactive-language-content-wrapper" class="wpml-section-content-inner">
 							<?php
 							$render_inactive_content = new WPML_Inactive_Content_Render(
 								$inactive_content,
@@ -438,7 +438,7 @@ $resource( [
 										<ul>
 											<li>
                                                 <?php esc_html_e( "Your server settings do not allow for languages in directories.", 'sitepress' ); ?>
-                                                <a href="https://wpml.org/documentation/getting-started-guide/language-setup/cannot-activate-language-directories/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore"><?php esc_html_e( 'Learn more about the required server settings.', 'sitepress'); ?></a>
+                                                <a href="https://wpml.org/documentation/getting-started-guide/language-setup/language-url-options/cannot-activate-language-directories/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore"><?php esc_html_e( 'Learn more about the required server settings.', 'sitepress'); ?></a>
                                             </li>
 											<li><?php esc_html_e( 'URL rewriting is not enabled in your web server.', 'sitepress' ); ?></li>
 											<li><?php esc_html_e( 'The web server cannot write to the .htaccess file', 'sitepress' ); ?></li>
@@ -627,7 +627,7 @@ $resource( [
 						<?php wp_nonce_field( 'icl_hide_languages_nonce', '_icl_nonce' ); ?>
 						<?php foreach ( $active_languages as $l ) : ?>
 							<?php
-							if ( $l['code'] == $default_language_details['code'] ) {
+							if ( isset( $default_language_details['code'] ) && $l['code'] === $default_language_details['code'] ) {
 								continue;}
 							?>
 							<p>

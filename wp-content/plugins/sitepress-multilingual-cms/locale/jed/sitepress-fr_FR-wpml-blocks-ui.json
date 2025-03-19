@@ -23,6 +23,12 @@
          "Color": [
             "Couleur"
          ],
+         "px": [
+            "px"
+         ],
+         "%": [
+            "%"
+         ],
          "Dimensions": [
             "Dimensions"
          ],

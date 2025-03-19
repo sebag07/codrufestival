@@ -28,6 +28,8 @@
 			<property>registration_email_user_after_activation_message</property>
 			<property>user_reset_email_user_subject</property>
 			<property>user_reset_email_user_message</property>
+			<property>form_locker_entry_limit_message</property>
+			<property>form_locker_user_entry_message_limited</property>
 		</settings>
 		<field>
 			<property>label</property>
@@ -38,10 +40,13 @@
 			<property>simple_default</property>
 			<property>first_placeholder</property>
 			<property>first_default</property>
+			<property>first_label</property>
 			<property>middle_placeholder</property>
 			<property>middle_default</property>
+			<property>middle_label</property>
 			<property>last_placeholder</property>
 			<property>last_default</property>
+			<property>last_label</property>
 			<property>confirmation_placeholder</property>
 			<property>default_value</property>
 			<property type="ARRAY" properties="label">choices</property>
@@ -55,6 +60,13 @@
 			<property>next</property>
 			<property>preview-notice</property>
 			<property>code</property>
+			<property>address1_placeholder</property>
+			<property>address2_placeholder</property>
+			<property>city_placeholder</property>
+			<property>postal_placeholder</property>
+			<property>state_placeholder</property>
+			<property>country_placeholder</property>
+			<property>value_display</property>
 		</field>
 	</form>
 </forms>

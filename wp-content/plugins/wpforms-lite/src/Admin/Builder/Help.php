@@ -30,7 +30,7 @@ class Help {
 			return;
 		}
 
-		$builder_help_cache = wpforms()->get( 'builder_help_cache' );
+		$builder_help_cache = wpforms()->obj( 'builder_help_cache' );
 		$this->docs         = $builder_help_cache ? $builder_help_cache->get() : [];
 
 		$this->hooks();
@@ -101,9 +101,9 @@ class Help {
 	 */
 	public function get_docs() {
 
-		_deprecated_function( __METHOD__, '1.8.2 of the WPForms plugin', 'wpforms()->get( \'builder_help_cache\' )->get()' );
+		_deprecated_function( __METHOD__, '1.8.2 of the WPForms plugin', 'wpforms()->obj( \'builder_help_cache\' )->get()' );
 
-		return wpforms()->get( 'builder_help_cache' )->get();
+		return wpforms()->obj( 'builder_help_cache' )->get();
 	}
 
 	/**
@@ -117,9 +117,9 @@ class Help {
 	 */
 	public function update_docs() {
 
-		_deprecated_function( __METHOD__, '1.8.2 of the WPForms plugin', 'wpforms()->get( \'builder_help_cache\' )->get()' );
+		_deprecated_function( __METHOD__, '1.8.2 of the WPForms plugin', 'wpforms()->obj( \'builder_help_cache\' )->get()' );
 
-		return wpforms()->get( 'builder_help_cache' )->get();
+		return wpforms()->obj( 'builder_help_cache' )->get();
 	}
 
 	/**
@@ -232,17 +232,21 @@ class Help {
 			'providers/activecampaign'                => 'activecampaign',
 			'providers/campaign_monitor'              => 'campaign monitor',
 			'providers/constant_contact'              => 'constant contact',
-			'providers/convertkit'                    => 'convertkit',
+			'providers/convertkit'                    => 'kit',
 			'providers/drip'                          => 'drip',
+			'providers/dropbox'                       => 'dropbox',
 			'providers/getresponse'                   => 'getresponse',
 			'providers/getresponse_v3'                => 'getresponse',
 			'providers/mailchimp'                     => 'mailchimp',
 			'providers/mailchimpv3'                   => 'mailchimp',
 			'providers/mailerlite'                    => 'mailerlite',
+			'providers/mailpoet'                      => 'mailpoet',
 			'providers/zapier'                        => 'zapier',
 			'providers/salesforce'                    => 'salesforce',
-			'providers/sendinblue'                    => 'sendinblue',
+			'providers/sendinblue'                    => 'brevo',
+			'providers/slack'                         => 'slack',
 			'providers/hubspot'                       => 'hubspot',
+			'providers/twilio'                        => 'twilio',
 			'payments'                                => '',
 			'payments/paypal_commerce'                => 'paypal commerce',
 			'payments/paypal_standard'                => 'paypal standard',
@@ -267,19 +271,23 @@ class Help {
 				'/docs/creating-first-form/',
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
 				'/docs/how-to-customize-the-submit-button/',
+				'/docs/generating-forms-with-wpforms-ai/',
 			],
 			'new form'                  => [
 				'/docs/creating-first-form/',
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
 				'/docs/how-to-customize-the-submit-button/',
+				'/docs/generating-forms-with-wpforms-ai/',
 			],
 			'create form'               => [
 				'/docs/creating-first-form/',
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
 				'/docs/how-to-customize-the-submit-button/',
+				'/docs/generating-forms-with-wpforms-ai/',
 			],
 			'form template'             => [
 				'/docs/how-to-create-a-custom-form-template/',
+				'/docs/generating-forms-with-wpforms-ai/',
 			],
 			'add fields'                => [
 				'/docs/how-to-choose-the-right-form-field-for-your-forms/',
@@ -366,18 +374,21 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'select'                    => [
 				'/docs/how-to-allow-multiple-selections-to-a-dropdown-field-in-wpforms/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'multiple options'          => [
 				'/docs/how-to-allow-multiple-selections-to-a-dropdown-field-in-wpforms/',
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'bulk add'                  => [
 				'/docs/how-to-bulk-add-choices-for-multiple-choice-checkbox-and-dropdown-fields/',
@@ -408,6 +419,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'radio'                     => [
 				'/docs/how-to-bulk-add-choices-for-multiple-choice-checkbox-and-dropdown-fields/',
@@ -418,6 +430,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'checkboxes'                => [
 				'/docs/how-to-bulk-add-choices-for-multiple-choice-checkbox-and-dropdown-fields/',
@@ -429,6 +442,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'checkbox'                  => [
 				'/docs/how-to-bulk-add-choices-for-multiple-choice-checkbox-and-dropdown-fields/',
@@ -440,6 +454,7 @@ class Help {
 				'/docs/how-to-customize-form-field-options/',
 				'/docs/how-to-use-conditional-logic-with-wpforms/',
 				'/docs/how-to-customize-the-style-of-individual-form-fields/',
+				'/docs/generating-form-choices-with-wpforms-ai/',
 			],
 			'gdpr'                      => [
 				'/docs/how-to-create-gdpr-compliant-forms/',
@@ -1175,6 +1190,9 @@ class Help {
 			'drip'                      => [
 				'/docs/how-to-install-and-use-the-drip-addon-in-wpforms/',
 			],
+			'dropbox'                   => [
+				'/docs/dropbox-addon/',
+			],
 			'getresponse'               => [
 				'/docs/how-to-install-and-use-getresponse-addon-with-wpforms/',
 			],
@@ -1188,6 +1206,9 @@ class Help {
 			'mailerlite'                => [
 				'/docs/install-use-mailerlite-addon-wpforms/',
 			],
+			'mailpoet'                  => [
+				'/docs/mailpoet-addon/',
+			],
 			'zapier'                    => [
 				'/docs/how-to-install-and-use-zapier-addon-with-wpforms/',
 			],
@@ -1197,8 +1218,14 @@ class Help {
 			'sendinblue'                => [
 				'/docs/how-to-install-and-use-the-sendinblue-addon-with-wpforms/',
 			],
+			'slack'                     => [
+				'/docs/slack-addon/',
+			],
 			'hubspot'                   => [
 				'/docs/how-to-install-and-use-the-hubspot-addon-in-wpforms/',
+			],
+			'twilio'                    => [
+				'/docs/twilio-addon/',
 			],
 			'integrate'                 => [
 				'/docs/how-to-install-and-use-zapier-addon-with-wpforms/',
@@ -1245,6 +1272,10 @@ class Help {
 			],
 			'revisions'                 => [
 				'/docs/how-to-use-form-revisions-in-wpforms/',
+			],
+			'ai'                        => [
+				'/docs/generating-form-choices-with-wpforms-ai/',
+				'/docs/generating-forms-with-wpforms-ai/',
 			],
 		];
 	}

@@ -2,6 +2,8 @@
 
 namespace WPML\CF7;
 
+use WPML\FP\Obj;
+
 class Shortcodes implements \IWPML_Frontend_Action {
 
 	/**
@@ -19,19 +21,25 @@ class Shortcodes implements \IWPML_Frontend_Action {
 	 * @return array
 	 */
 	public function translate_shortcode_form_id( $atts ) {
-		$form = null;
+		$form         = null;
+		$formIdOrHash = Obj::prop('id', $atts );;
+		$formTitle    = Obj::prop('title', $atts );
 
-		if ( ! empty( $atts['id'] ) ) {
-			$form = wpcf7_contact_form( (int) $atts['id'] );
+		if ( $formIdOrHash && function_exists( 'wpcf7_get_contact_form_by_hash' ) ) {
+			$form = wpcf7_get_contact_form_by_hash( trim( $formIdOrHash ) );
 		}
 
-		if ( ! $form && ! empty( $atts['title'] ) ) {
+		if ( ! $form && $formIdOrHash ) {
+			$form = wpcf7_contact_form( (int) $formIdOrHash );
+		}
+
+		if ( ! $form && $formTitle ) {
 			$form = wpcf7_get_contact_form_by_title( trim( $atts['title'] ) );
-			unset( $atts['title'] );
 		}
 
 		if ( $form ) {
-			$atts['id'] = apply_filters( 'wpml_object_id', $form->id(), Constants::POST_TYPE, true );
+			$atts['id']    = apply_filters( 'wpml_object_id', $form->id(), Constants::POST_TYPE, true );
+			$atts['title'] = ''; // Reset the title attribute only if we managed to set the id attribute.
 		}
 
 		return $atts;

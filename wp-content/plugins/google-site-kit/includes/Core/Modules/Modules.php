@@ -24,6 +24,7 @@ use Google\Site_Kit\Modules\Analytics_4;
 use Google\Site_Kit\Modules\PageSpeed_Insights;
 use Google\Site_Kit\Modules\Reader_Revenue_Manager;
 use Google\Site_Kit\Modules\Search_Console;
+use Google\Site_Kit\Modules\Sign_In_With_Google;
 use Google\Site_Kit\Modules\Site_Verification;
 use Google\Site_Kit\Modules\Tag_Manager;
 use Exception;
@@ -144,13 +145,14 @@ final class Modules {
 	 * @var string[] Core module class names.
 	 */
 	private $core_modules = array(
-		Site_Verification::MODULE_SLUG  => Site_Verification::class,
-		Search_Console::MODULE_SLUG     => Search_Console::class,
-		Ads::MODULE_SLUG                => Ads::class,
-		Analytics_4::MODULE_SLUG        => Analytics_4::class,
-		Tag_Manager::MODULE_SLUG        => Tag_Manager::class,
-		AdSense::MODULE_SLUG            => AdSense::class,
-		PageSpeed_Insights::MODULE_SLUG => PageSpeed_Insights::class,
+		Site_Verification::MODULE_SLUG   => Site_Verification::class,
+		Search_Console::MODULE_SLUG      => Search_Console::class,
+		Ads::MODULE_SLUG                 => Ads::class,
+		Analytics_4::MODULE_SLUG         => Analytics_4::class,
+		Tag_Manager::MODULE_SLUG         => Tag_Manager::class,
+		AdSense::MODULE_SLUG             => AdSense::class,
+		PageSpeed_Insights::MODULE_SLUG  => PageSpeed_Insights::class,
+		Sign_In_With_Google::MODULE_SLUG => Sign_In_With_Google::class,
 	);
 
 	/**

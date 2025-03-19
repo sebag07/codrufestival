@@ -27,6 +27,26 @@ class Web_Tag extends Module_Web_Tag {
 	use Tag_With_DNS_Prefetch_Trait;
 
 	/**
+	 * Product ID.
+	 *
+	 * @since 1.148.0
+	 *
+	 * @var string
+	 */
+	private $product_id;
+
+	/**
+	 * Sets the product ID.
+	 *
+	 * @since 1.148.0
+	 *
+	 * @param string $product_id Product ID.
+	 */
+	public function set_product_id( $product_id ) {
+		$this->product_id = $product_id;
+	}
+
+	/**
 	 * Registers tag hooks.
 	 *
 	 * @since 1.132.0
@@ -55,14 +75,27 @@ class Web_Tag extends Module_Web_Tag {
 	 * Enqueues the Reader Revenue Manager (SWG) script.
 	 *
 	 * @since 1.132.0
+	 * @since 1.140.0 Updated to enqueue the script only on singular posts.
 	 */
 	protected function enqueue_swg_script() {
 		$locale = str_replace( '_', '-', get_locale() );
 
+		/**
+		 * Filters the Reader Revenue Manager product ID.
+		 *
+		 * @since 1.148.0
+		 *
+		 * @param string $product_id The array of post types.
+		 */
+		$product_id = apply_filters(
+			'googlesitekit_reader_revenue_manager_product_id',
+			$this->product_id
+		);
+
 		$subscription = array(
 			'type'              => 'NewsArticle',
 			'isPartOfType'      => array( 'Product' ),
-			'isPartOfProductId' => $this->tag_id . ':openaccess',
+			'isPartOfProductId' => $this->tag_id . ':' . $product_id,
 			'clientOptions'     => array(
 				'theme' => 'light',
 				'lang'  => $locale,

@@ -26,7 +26,7 @@ class WPML_Elementor_Price_List extends WPML_Elementor_Module_With_Items {
 	 */
 	protected function get_title( $field ) {
 		if ( 'title' === $field ) {
-			return esc_html__( 'Price list: title', 'sitepress' );
+			return esc_html__( 'Pricing list: title', 'sitepress' );
 		}
 
 		if ( 'item_description' === $field ) {

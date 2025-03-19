@@ -75,7 +75,7 @@ abstract class WPML_Element_Translation_Job extends WPML_Translation_Job {
 	 *                       of the target element to complete
 	 */
 	public function save_to_element( $complete = false ) {
-		global $wpdb, $wpml_post_translations, $wpml_term_translations;
+		global $wpdb, $wpml_term_translations, $wpml_post_translations;
 
 		$wpml_tm_records  = new WPML_TM_Records( $wpdb, $wpml_post_translations, $wpml_term_translations );
 		$save_data_action = new WPML_Save_Translation_Data_Action(
@@ -158,10 +158,11 @@ abstract class WPML_Element_Translation_Job extends WPML_Translation_Job {
 	 * @param WPML_TM_CMS_ID           $cms_id_helper
 	 * @param TranslationManagement    $tm_instance
 	 * @param null|string              $note
+	 * @param array<string,string> | null $tp_batch_info
 	 *
 	 * @return array
 	 */
-	function send_to_tp( $project, $translator_id, &$cms_id_helper, &$tm_instance, $note = null ) {
+	function send_to_tp( $project, $translator_id, &$cms_id_helper, &$tm_instance, $note = null, $tp_batch_info = null ) {
 		global $wpdb;
 
 		$this->maybe_load_basic_data();
@@ -177,7 +178,7 @@ abstract class WPML_Element_Translation_Job extends WPML_Translation_Job {
 		$uuid            = $this->get_uuid();
 
 		try {
-			$tp_job_id = $project->send_to_translation_batch_mode( $file, $title, $cms_id, $url, $source_language, $target_language, $word_count, $translator_id, $note, $uuid );
+			$tp_job_id = $project->send_to_translation_batch_mode( $file, $title, $cms_id, $url, $source_language, $target_language, $word_count, $translator_id, $note, $uuid, $tp_batch_info );
 		} catch ( Exception $err ) {
 			// The translation entry will be removed
 			$project->errors[] = $err;

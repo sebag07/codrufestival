@@ -14,6 +14,7 @@ class Loaders {
 			\WPML_WPSEO_Main_Factory::class,
 			\WPML\WPSEO\PrimaryCategory\Hooks::class,
 			\WPML\WPSEO\Terms\AdminHooks::class,
+			\WPML\WPSEO\TranslationJob\Hooks::class,
 		];
 
 		if ( defined( 'WPML_ST_VERSION' ) ) {

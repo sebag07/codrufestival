@@ -382,6 +382,10 @@ class WPML_WPSEO_XML_Sitemaps_Filter implements IWPML_Action {
 	 * @return string
 	 */
 	public function maybe_return_original_url_in_get_home_url_filter( $home_url, $original_url ) {
+		if ( $home_url === $original_url ) {
+			return $home_url;
+		}
+
 		$places = [
 			[ 'WPSEO_Watcher', 'format_redirect_url' ],
 			[ 'WPSEO_Post_Watcher', 'get_target_url' ],

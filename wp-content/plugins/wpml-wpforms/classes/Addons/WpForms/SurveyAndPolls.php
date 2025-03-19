@@ -33,6 +33,11 @@ class SurveyAndPolls extends Base {
 		if ( $this->notEmpty( 'answers', $data ) ) {
 			$i = 0;
 			foreach ( $data['answers'] as &$answer ) {
+				// See \WPFormsSurveys\Reporting\Fields::get_survey_field_data(),
+				// Some answers do not have a choice_id, if they belong to existing entries for options no longer available.
+				if ( ! isset( $answer['choice_id'] ) ) {
+					continue;
+				}
 				$string_name     = $this->getLabelOptionName( $this->getId( $data ) );
 				$answer['value'] = $package->translateString( $answer['value'], strval( $answer['choice_id'] ), $string_name );
 

@@ -59,19 +59,21 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	 * @param int|\WP_Post $post The post ID or an instance of WP_Post.
 	 */
 	public function add_language_meta_box( $post ) {
-
 		$post = get_post( $post );
 		$trid = filter_input( INPUT_GET, 'trid', FILTER_SANITIZE_NUMBER_INT );
 
 		if ( $post ) {
+			$isGT6   = version_compare( constant( 'WPCF7_VERSION' ), '6', '>=' );
+			$rootTag = $isGT6 ? 'section' : 'div';
+
 			add_filter( 'wpml_post_edit_can_translate', '__return_true' );
 			?>
 			</div>
 		</div>
 	</div>
-</div>
+</<?php echo $rootTag; // phpcs:ignore ?>>
 
-<div class="postbox">
+<<?php echo $rootTag; // phpcs:ignore ?> class="postbox">
 	<h3><?php echo esc_html( __( 'Language', 'sitepress' ) ); ?></h3>
 	<div>
 		<div>

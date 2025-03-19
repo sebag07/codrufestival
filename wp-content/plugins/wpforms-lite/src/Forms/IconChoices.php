@@ -222,7 +222,13 @@ class IconChoices {
 	 */
 	public function install() {
 
+		// Run a security check.
 		check_ajax_referer( 'wpforms-builder', 'nonce' );
+
+		// Check for permissions.
+		if ( ! wpforms_current_user_can( 'edit_forms' ) ) {
+			wp_send_json_error();
+		}
 
 		$this->run_install( $this->cache_base_path );
 		$this->is_installed = true;
@@ -557,6 +563,7 @@ class IconChoices {
 			return '';
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$svg = file_get_contents( $filename );
 
 		if ( ! $svg ) {
@@ -582,6 +589,7 @@ class IconChoices {
 			return [];
 		}
 
+		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$icons = file_get_contents( $this->icons_data_file );
 
 		if ( ! $icons ) {

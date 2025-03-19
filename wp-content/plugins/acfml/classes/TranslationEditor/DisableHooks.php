@@ -3,14 +3,12 @@
 namespace ACFML\TranslationEditor;
 
 use ACFML\FieldGroup\Mode;
-use WPML\FP\Fns;
-use WPML\FP\Lst;
 use WPML\FP\Relation;
 use WPML\LIB\WP\Hooks;
 use WPML\FP\Obj;
 use function WPML\FP\spreadArgs;
 
-class DisableHooks implements \IWPML_Backend_Action {
+class DisableHooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action {
 
 	/**
 	 * @return void

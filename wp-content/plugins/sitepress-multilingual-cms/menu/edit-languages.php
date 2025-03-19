@@ -81,7 +81,7 @@ class SitePress_EditLanguages {
 			'edit-languages',
 			ICL_PLUGIN_URL . '/res/js/languages/edit-languages.js',
 			[ 'jquery', 'sitepress-scripts' ],
-			ICL_SITEPRESS_VERSION,
+			ICL_SITEPRESS_SCRIPT_VERSION,
 			true
 		);
 
@@ -793,6 +793,8 @@ class SitePress_EditLanguages {
 		$sitepress->get_language_name_cache()->clear();
 		$sitepress->clear_flags_cache();
 		delete_option( '_icl_cache' );
+
+		do_action( 'wpml_update_active_languages' );
 
 		// Unset ADD fields.
 		if ( $this->is_new_data_and_valid() ) {
