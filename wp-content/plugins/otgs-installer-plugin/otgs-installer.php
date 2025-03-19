@@ -5,7 +5,7 @@
  * Description: Lightweight Installer plugin that allows to install OTGS plugins
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 3.1.0
+ * Version: 3.1.10
  * Plugin Slug: otgs-installer
  *
  * @package WPML\Core
@@ -13,7 +13,7 @@
 
 use OTGS\InstallerPlugin\OtgsInstallerPlugin;
 
-define( 'OTGS_INSTALLER_VERSION', '3.1.0' );
+define( 'OTGS_INSTALLER_VERSION', '3.1.10' );
 
 define( 'OTGS_INSTALLER_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 define( 'OTGS_INSTALLER_PLUGIN_FOLDER', dirname( OTGS_INSTALLER_PLUGIN_BASENAME ) );

@@ -15,6 +15,7 @@ class WP_Installer {
 
 	const TOOLSET_TYPES = 'Toolset Types';
 	const LEGACY_FREE_TYPES_SUBSCRIPTION_ID = 5495;
+    const GRACE_TIME = MONTH_IN_SECONDS;
 
 	protected static $_instance = null;
 
@@ -907,13 +908,6 @@ class WP_Installer {
 	 */
 	public function get_xml_config_file() {
 		$file_name         = 'repositories.xml';
-		$sandbox_file_name = 'repositories.sandbox.xml';
-
-		if ( file_exists( $this->get_config_file_path( $sandbox_file_name ) ) ) {
-			add_filter( 'https_ssl_verify', '__return_false' );
-
-			return $this->get_config_file_path( $sandbox_file_name );
-		}
 
 		if ( file_exists( $this->get_config_file_path( $file_name ) ) ) {
 			return $this->get_config_file_path( $file_name );
@@ -1274,9 +1268,78 @@ class WP_Installer {
 			: null;
 	}
 
-	private function _render_product_packages( $packages, $subscription_type, $expired, $upgrade_options, $repository_id ) {
+	/**
+	 * @param array $products
+	 *
+	 * @return string
+	 */
+	private function getProductPriceCurrencySymbol( $products ) {
+		return ( array_key_exists( 'shop_currency_symbol', $products ) ) ? $products['shop_currency_symbol'] : '&#36;';
+	}
 
-		$data = array();
+	/**
+	 * @param array $products
+	 *
+	 * @return string
+	 */
+	private function getProductPriceCurrency( $products ) {
+		return ( array_key_exists( 'shop_currency', $products ) ) ? $products['shop_currency'] : 'USD';
+	}
+
+	/**
+	 * @param array $products
+	 * @param array $product
+	 *
+	 * @return string
+	 */
+	private function getProductPriceString( $products, $product ) {
+		$currencySymbol = $this->getProductPriceCurrencySymbol( $products );
+		$currency       = $this->getProductPriceCurrency( $products );
+
+		return sprintf( '%s%d (%s)', $currencySymbol, $product['price'], $currency );
+	}
+
+	/**
+	 * @param array $products
+	 * @param array $product
+	 *
+	 * @return string
+	 */
+	public function getProductPriceWithDiscountString( $products, $product ) {
+		$currencySymbol = $this->getProductPriceCurrencySymbol( $products );
+		$currency       = $this->getProductPriceCurrency( $products );
+
+		return sprintf( '%s%s %s%s%d%s (%s)', $currencySymbol, $product['price_disc'], '&nbsp;&nbsp;<del>', $currencySymbol, $product['price'], '</del>', $currency );
+	}
+
+	/**
+	 * @param array           $repository
+	 * @param array           $packages
+	 * @param int|string|null $subscription_type
+	 * @param bool            $expired
+	 * @param array|null      $upgrade_options
+	 * @param string          $repository_id
+	 *
+	 * @return array
+	 */
+	public function getRenderProductPackagesData( $repository, $packages, $subscription_type, $expired, $upgrade_options, $repository_id ) {
+		return $this->_render_product_packages( $repository, $packages, $subscription_type, $expired, $upgrade_options, $repository_id );
+	}
+
+	/**
+	 * @param array           $repository
+	 * @param array           $packages
+	 * @param int|string|null $subscription_type
+	 * @param bool            $expired
+	 * @param array|null      $upgrade_options
+	 * @param string          $repository_id
+	 *
+	 * @return array
+	 */
+	private function _render_product_packages( $repository, $packages, $subscription_type, $expired, $upgrade_options, $repository_id ) {
+
+		$data     = array();
+		$products = ( array_key_exists( 'data', $repository ) ) ? $repository['data'] : $repository;
 
 		foreach ( $packages as $package ) {
 
@@ -1299,9 +1362,9 @@ class WP_Installer {
 					$p['shouldDisplay'] = !(isset($product['deprecated']) ? (bool)$product['deprecated'] : false);
 
 					if ( ! empty( $product['price_disc'] ) ) {
-						$p['label'] = $product['call2action'] . ' - ' . sprintf( '$%s %s$%d%s (USD)', $product['price_disc'], '&nbsp;&nbsp;<del>', $product['price'], '</del>' );
+						$p['label'] = $product['call2action'] . ' - ' . $this->getProductPriceWithDiscountString( $products, $product );
 					} else {
-						$p['label'] = $product['call2action'] . ' - ' . sprintf( '$%d (USD)', $product['price'] );
+						$p['label'] = $product['call2action'] . ' - ' . $this->getProductPriceString( $products, $product );
 					}
 					$row['products'][] = $p;
 
@@ -1311,7 +1374,7 @@ class WP_Installer {
 					if ( $product['renewals'] ) {
 						foreach ( $product['renewals'] as $renewal ) {
 							$p['url']   = $this->append_parameters_to_buy_url( $renewal['url'], $repository_id );
-							$p['label'] = $renewal['call2action'] . ' - ' . sprintf( '$%d (USD)', $renewal['price'] );
+							$p['label'] = $renewal['call2action'] . ' - ' . $this->getProductPriceString( $products, $renewal );
 						}
 
 						$row['products'][] = $p;
@@ -1329,9 +1392,9 @@ class WP_Installer {
 
 						$p['url'] = $this->append_parameters_to_buy_url( $upgrade['url'], $repository_id );
 						if ( ! empty( $upgrade['price_disc'] ) ) {
-							$p['label'] = $upgrade['call2action'] . ' - ' . sprintf( '$%s %s$%d%s (USD)', $upgrade['price_disc'], '&nbsp;&nbsp;<del>', $upgrade['price'], '</del>' );
+							$p['label'] = $upgrade['call2action'] . ' - ' . $this->getProductPriceWithDiscountString( $products, $upgrade );
 						} else {
-							$p['label'] = $upgrade['call2action'] . ' - ' . sprintf( '$%d (USD)', $upgrade['price'] );
+							$p['label'] = $upgrade['call2action'] . ' - ' . $this->getProductPriceString( $products, $upgrade );
 						}
 						$row['products'][] = $p;
 
@@ -1579,6 +1642,8 @@ class WP_Installer {
 	public function remove_site_key( $repository_id, $refresh_repositories_data = true ) {
 		if ( isset( $this->settings['repositories'][ $repository_id ] ) ) {
 			unset( $this->settings['repositories'][ $repository_id ]['subscription'] );
+			unset( $this->settings['repositories'][ $repository_id ]['last_successful_subscription_fetch'] );
+
 			$this->save_settings();
 			$this->clean_plugins_update_cache();
 			if( $refresh_repositories_data ){
@@ -1741,10 +1806,8 @@ class WP_Installer {
 	}
 
 	public function repository_has_in_grace_subscription( $repository_id, $expiredForPeriod = 0 ) {
-		return $this->repository_has_subscription( $repository_id ) &&
-			   $this->repository_has_valid_subscription($repository_id, $expiredForPeriod) &&
-			   $this->repository_is_in_grace_period( $repository_id, $expiredForPeriod ) &&
-			   ! $this->repository_has_refunded_subscription( $repository_id );
+		return $this->repository_has_expired_subscription( $repository_id ) &&
+			    $this->repository_is_in_grace_period( $repository_id, $expiredForPeriod );
 	}
 
 	public function get_generic_product_name( $repository_id ) {
@@ -2016,7 +2079,6 @@ class WP_Installer {
 		$plugins = get_plugins();
 
 		foreach ( $plugins as $plugin_id => $plugin ) {
-
 			$wp_plugin_slug = dirname( $plugin_id );
 
 			// Exception: embedded plugins
@@ -2092,6 +2154,9 @@ class WP_Installer {
 				foreach ( $package['products'] as $product ) {
 
 					foreach ( $product['plugins'] as $plugin_slug ) {
+                        if( ! array_key_exists( $plugin_slug, $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'] ) ) {
+                            continue;
+                        }
 
 						$download = $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ];
 
@@ -2526,7 +2591,13 @@ class WP_Installer {
 									) {
 										$display_subscription_notice = false;
 									} else {
-										if( $this->repository_has_expired_subscription( $repository_id ) ) {
+										if( $this->repository_has_in_grace_subscription( $repository_id, self::GRACE_TIME ) ) {
+											$display_subscription_notice = [
+												'type'    => 'in_grace',
+												'repo'    => $repository_id,
+												'product' => $repository['data']['product-name']
+											];
+										} elseif( $this->repository_has_expired_subscription( $repository_id ) ) {
 											$display_subscription_notice = [
 													'type' => 'expired',
 													'repo' => $repository_id,
@@ -2886,23 +2957,17 @@ class WP_Installer {
 								foreach ( $package['products'] as $product ) {
 
 									foreach ( $product['plugins'] as $plugin_slug ) {
-
-										$download = $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ];
-
-										if ( $download['slug'] == $wp_plugin_slug ) {
+										if ( $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ]['slug'] == $wp_plugin_slug ) {
+											$download = $this->settings['repositories'][ $repository_id ]['data']['downloads']['plugins'][ $plugin_slug ];
 											$plugin_repository = $repository_id;
 											$product_name      = $repository['data']['product-name'];
 											$plugin_name       = $download['name'];
 											$free_on_wporg     = ! empty( $download['free-on-wporg'] ) && $download['channel'] == WP_Installer_Channels::CHANNEL_PRODUCTION;
 											break;
 										}
-
 									}
-
 								}
-
 							}
-
 						}
 
 						if ( $plugin_repository ) {
@@ -3002,7 +3067,7 @@ class WP_Installer {
 
 					if ( ! $site_key ) {
 						list( $plugin_repository, $site_key ) = $this->match_product_in_external_repository( $plugin_repository, $wp_plugin_slug );
-                    }
+					}
 
 					if ( $site_key ) {
 						try {
