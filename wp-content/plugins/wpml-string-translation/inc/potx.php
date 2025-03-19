@@ -402,7 +402,7 @@ function _potx_find_t_calls_with_context(
 ) {
 	global $_potx_tokens, $_potx_lookup;
 
-	$filter_by_domain = isset( $_GET['domain'] ) ? filter_var( $_GET['domain'], FILTER_SANITIZE_STRING ) : null;
+	$filter_by_domain = isset( $_GET['domain'] ) ? (string) \WPML\API\Sanitize::string( $_GET['domain']) : null;
 
 	// Lookup tokens by function name.
 	if ( isset( $_potx_lookup[ $function_name ] ) ) {
@@ -453,9 +453,9 @@ function _potx_find_t_calls_with_context(
 						// exception for gettext calls with contexts
 						if ( false !== $context_offset && isset( $_potx_tokens[ $ti + $context_offset ] ) ) {
 							if ( ! preg_match( '#^(\'|")(.+)#', @$_potx_tokens[ $ti + $context_offset ][ 1 ] ) ) {
-								$constant_val = @constant( $_potx_tokens[ $ti + $context_offset ][ 1 ] );
-								if ( ! is_null( $constant_val ) ) {
-									$context = $constant_val;
+								$constant_name = $_potx_tokens[ $ti + $context_offset ][ 1 ];
+								if ( defined( $constant_name ) ) {
+									$context = constant( $constant_name );
 								} else {
 									if ( function_exists( @$_potx_tokens[ $ti + $context_offset ][ 1 ] ) ) {
 										$context = @$_potx_tokens[ $ti + $context_offset ][ 1 ]();

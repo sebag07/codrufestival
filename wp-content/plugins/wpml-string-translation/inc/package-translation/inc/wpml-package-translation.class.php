@@ -38,7 +38,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 	}
 
 	private function add_admin_hooks() {
-		if ( is_admin() || $this->is_doing_xmlrpc() || wpml_is_rest_request() ) {
+		if ( is_admin() || $this->is_doing_xmlrpc() || wpml_is_rest_request() || ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
 			add_action( 'wp_ajax_wpml_delete_packages', array( $this, 'delete_packages_ajax' ) );
 			add_action( 'wp_ajax_wpml_change_package_lang', array( $this, 'change_package_lang_ajax' ) );
 
@@ -66,6 +66,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 			add_action( 'wpml_show_package_language_admin_bar', array( $this, 'show_admin_bar_language_selector' ), 10, 2 );
 
 			/* WPML hooks */
+			add_filter( 'wpml_active_string_package_kinds', array( $this, 'get_active_string_package_kinds' ) );
 			add_filter( 'wpml_get_translatable_types', array( $this, 'get_translatable_types' ), 10, 1 );
 			add_filter( 'wpml_get_translatable_item', array( $this, 'get_translatable_item' ), 10, 3 );
 			add_filter( 'wpml_external_item_url', array( $this, 'get_package_edit_url' ), 10, 2 );
@@ -761,7 +762,7 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 		?>
 		<div class="message error">
 			<p>
-				<?php printf( __( 'WPML Package Translation is enabled but not effective. It requires <a href="%s">WPML</a>, String Translation and Translation Management in order to work.', 'wpml-string-translation' ), 'http://wpml.org/' ); ?>
+				<?php printf( __( 'WPML Package Translation is active but requires both the <a href="%s">WPML core</a> and WPML String Translation plugins to function properly.', 'wpml-string-translation' ), 'http://wpml.org/' ); ?>
 			</p>
 		</div>
 		<?php
@@ -788,19 +789,33 @@ class WPML_Package_Translation extends WPML_Package_Helper {
 
 	public function save_package_translations( $element_type_prefix, $job, $decoder ) {
 		if ( $element_type_prefix === 'package' ) {
-			$element_type_prefix = $this->get_package_type_prefix( $element_type_prefix, $job->original_doc_id );
+			$element_type_prefix             = $this->get_package_type_prefix( $element_type_prefix, $job->original_doc_id );
+			$needs_process_translation_files = false;
 
 			foreach ( $job->elements as $field ) {
 				if ( $field->field_translate ) {
-					$string_id = icl_st_is_registered_string( $element_type_prefix, $field->field_type );
+					/**
+					 * @param string    $element_type_prefix
+					 * @param \stdClass $field
+					 * @param \stdClass $job
+					 *
+					 * @return string
+					 */
+					$field_context = apply_filters( 'wpml_save_external_package_field_context', $element_type_prefix, $field, $job );
+					$string_id = icl_st_is_registered_string( $field_context, $field->field_type );
 					if ( ! $string_id ) {
-						icl_register_string( $element_type_prefix, $field->field_type, $decoder( $field->field_data, $field->field_format ) );
-						$string_id = icl_st_is_registered_string( $element_type_prefix, $field->field_type );
+						icl_register_string( $field_context, $field->field_type, $decoder( $field->field_data, $field->field_format ) );
+						$string_id = icl_st_is_registered_string( $field_context, $field->field_type );
 					}
 					if ( $string_id ) {
+						$needs_process_translation_files = true;
 						icl_add_string_translation( $string_id, $job->language_code, $decoder( $field->field_data_translated, $field->field_format ), ICL_TM_COMPLETE );
 					}
 				}
+			}
+
+			if ( $needs_process_translation_files ) {
+				do_action( 'wpml_st_translation_files_process_queue' );
 			}
 		}
 	}

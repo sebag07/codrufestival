@@ -69,9 +69,14 @@ class WPML_Admin_Texts extends WPML_Admin_Text_Functionality {
 					foreach ( $opt_keys as $opt ) {
 						$vals = array( $opt => $vals );
 					}
+
+					// As per wpmldev-934 :
+					// Now we use array_replace_recursive instead of array_merge_recursive when updating the _icl_admin_option_names, so this change is useful for the following cases :
+					// 1- array_replace_recursive will preserve the numerical key of the options array when they're added to the already existing _icl_admin_option_names values, so the issue introduced in wpmldev-934 shouldn't happen again
+					// 2- if array key in $vals already exists in _icl_admin_option_names the new value will be used instead of the old one, and this couldn't happen if we're using array_merge_recursive
 					update_option(
 						'_icl_admin_option_names',
-						array_merge_recursive( (array) get_option( '_icl_admin_option_names' ), $vals ),
+						array_replace_recursive( (array) get_option( '_icl_admin_option_names' ), $vals ),
 						'no'
 					);
 					$this->option_names = [];

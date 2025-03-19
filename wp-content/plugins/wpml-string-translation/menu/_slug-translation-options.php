@@ -14,7 +14,7 @@
 			<p>
 				<label>
 					<input type="checkbox" name="icl_slug_translation_on" value="1" <?php checked( 1, $slug_translation_settings->is_enabled(), true ); ?>  />&nbsp;
-					<?php esc_html_e( 'Translate custom post and taxonomy base slugs (via WPML String Translation).', 'wpml-string-translation' ); ?>
+					<?php esc_html_e( 'Translate base slugs of custom post types and taxonomies (via WPML -> Taxonomy translation).', 'wpml-string-translation' ); ?>
 				</label>
 			</p>
 

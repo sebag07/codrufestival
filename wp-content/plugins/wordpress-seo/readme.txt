@@ -4,8 +4,8 @@ Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
-Tested up to: 6.6
-Stable tag: 23.3
+Tested up to: 6.7
+Stable tag: 24.7
 Requires PHP: 7.2.5
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -30,9 +30,9 @@ Empower search engines to fully understand your website using our Schema.org str
 
 Yoast SEO offers comprehensive analysis tools that help elevate your content's SEO and readability. Get powerful insights and actionable recommendations to craft helpful content that resonates with readers and search engines.
 
-**Premium Yoast AI features** Get suggestions for your titles and descriptions at the click of a button. The [Yoast AI features] (https://yoa.st/51c) save you time and optimize for higher click-through-rates.
+**Premium Yoast AI features** Get suggestions for your titles and descriptions at the click of a button. The [Yoast AI features](https://yoa.st/51c) save you time and optimize for higher click-through-rates.
 
-* Yoast AI Generate enables users to generate meta descriptions and titles for your pages, blog posts and social posts. Great! Even better, when you also have [Yoast WooCommerce SEO](https://yoa.st/3rh), you can recieve suggestions for product SEO titles and descriptions too! The best part, if you don't like the 5 suggestions, you can generate five more at a click. 
+* Yoast AI Generate enables users to generate meta descriptions and titles for your pages, blog posts and social posts. Great! Even better, when you also have [Yoast WooCommerce SEO](https://yoa.st/3rh), you can receive suggestions for product SEO titles and descriptions too! The best part, if you don't like the 5 suggestions, you can generate five more at a click.
 * Yoast AI Optimize helps you optimize existing content for search engines. Optimize three of the assessments in the Yoast SEO Analysis; Keyphrase in introduction, Keyphrase distribution and Keyphrase density, with easy dismiss or apply options.
 
 
@@ -132,7 +132,7 @@ If you're looking for a structured learning path, our [Yoast SEO academy](https:
 
 Not only do you get many additional benefits by upgrading to [Yoast SEO Premium](https://yoa.st/1v8), but you'll also get 24/7 personalized support that takes away your worry.
 
-* Unlock our [AI features] (https://yoa.st/51c); Yoast AI Optimize and Yoast AI Generate. Perfect for marketing professionals, freelance writers, and content strategists, Yoast AI features enable customers of all technical levels to apply SEO best practice to their content at the click of a button.
+* Unlock our [AI features](https://yoa.st/51c); Yoast AI Optimize and Yoast AI Generate. Perfect for marketing professionals, freelance writers, and content strategists, Yoast AI features enable customers of all technical levels to apply SEO best practice to their content at the click of a button.
 
 * Optimize for up to five keyword synonyms by adding variants. Add up to four related synonyms of your keyword to expand your possibilities. You get the full SEO analysis for each.
 
@@ -274,33 +274,43 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 23.3 =
+= 24.7 =
 
-Release date: 2024-08-20
+Release date: 2025-03-18
 
-Yoast SEO 23.3 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/release-20-8-24).
-
-#### Other
-
-* This release only contains non-user-facing maintenance changes.
-
-= 23.2 =
-
-Release date: 2024-08-06
-
-Yoast SEO 23.2 brings more enhancements and bugfixes. [Find more information about Yoast SEO 23.2 here](https://yoa.st/release-6-8-24).
+Yoast SEO 24.7 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
 
 #### Enhancements
 
-* Excludes image captions from the _keyphrase in introduction_ assessment: image captions at the beginning of a post will not be treated as an introduction anymore.
+* Improves the accuracy of assessments measuring character count for Japanese texts by removing common punctuation from the count.
 
 #### Bugfixes
 
-* Fixes a bug where the `wpseo_posts_for_related_keywords` filter would not work anymore since it was accidentally renamed.
+* Fixes a bug where the help beacon would be displayed over table pagination on the bulk editor page.
 
 #### Other
 
-* Deprecates the `Ai_Generate_Titles_And_Descriptions_Introduction_Upsell` class.
+* Improves the feedback strings of the _subheading distribution_ assessment for better translatability.
+* Removes extra span tags in the Post/Page overview. Props to [dilipbheda](https://github.com/dilipbheda).
+
+= 24.6 =
+
+Release date: 2025-03-04
+
+Yoast SEO 24.6 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
+
+#### Enhancements
+
+* Provides support for the Optimized Markup feature in Elementor.
+* Removes the breadcrumbs from the Search snippet preview in Mobile mode.
+
+#### Bugfixes
+
+* Fixes a bug where invalid inner blocks would be removed when saving a post in the block editor.
+
+#### Other
+
+* Sets the minimum supported WordPress version to 6.6.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).
