@@ -112,6 +112,13 @@ class GFML_String_Name_Helper {
 		return $this->sanitize_string( 'field-confirmation-message_' . $this->confirmation['name'] );
 	}
 
+	/**
+	 * Object IDs should not be translated with ST or included in a package; TM filters them out anyway.
+	 *
+	 * @return string
+	 *
+	 * @deprecated Only used on Gravity_Forms_Multilingual::get_form_strings_deprecated.
+	 */
 	public function get_form_confirmation_page_id() {
 		return $this->sanitize_string( 'confirmation-page_' . $this->confirmation['name'] );
 	}
@@ -142,6 +149,10 @@ class GFML_String_Name_Helper {
 
 	public function get_form_pagination_last_page_button_text() {
 		return $this->sanitize_string( 'lastPageButton' );
+	}
+
+	public function get_form_pagination_last_page_button_img_url() :string {
+		return $this->sanitize_string( 'lastPageButtonImageUrl' );
 	}
 
 	public function get_form_confirmation_redirect_url() {
@@ -182,6 +193,13 @@ class GFML_String_Name_Helper {
 
 	public function get_form_description() {
 		return $this->sanitize_string( 'form_description' );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFormCustomRequiredIndicator() {
+		return $this->sanitize_string( 'form_custom_required_indicator' );
 	}
 
 	public function get_form_save_and_continue_later_text() {

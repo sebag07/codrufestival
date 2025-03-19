@@ -5,6 +5,7 @@ namespace GFML\Compatibility\UserRegistration;
 use GFSignup;
 use SitePress;
 use WP_User;
+use WPML\FP\Obj;
 
 class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	/** @var SitePress */
@@ -40,19 +41,45 @@ class Hooks implements \IWPML_Backend_Action, \IWPML_Frontend_Action, \IWPML_DIC
 	 * @return array
 	 */
 	public function onActivation( $meta, WP_User $user, $update ) {
-		if ( ! $update && class_exists( 'GFSignup' ) ) {
-			$key    = rgpost( 'key' ); // From ajax.
-			$key    = $key ?: rgpost( 'item' ); // From form submission.
-			$signup = GFSignup::get( $key );
-			if ( $signup instanceof GFSignup && $signup->meta['email'] === $user->user_email ) {
-				$meta['icl_admin_language'] = $signup->meta['icl_admin_language'];
-				$meta['locale']             = $signup->meta['icl_admin_locale'];
+		$getKeys = function() {
+			$key = rgpost( 'key' );
+			if ( $key ) {
+				// From ajax activation.
+				return [ $key ];
 			}
-		}
+			$key = rgpost( 'item' );
+			if ( $key ) {
+				// From form submission activation.
+				return [ $key ];
+			}
+			$key = rgget( 'gfur_activation' );
+			if ( $key ) {
+				// From frontend user self-activation.
+				return [ $key ];
+			}
+			$keys = rgpost( 'items' );
+			if ( $keys ) {
+				// From bulk backend activation.
+				return $keys;
+			}
+			return [];
+		};
 
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		if ( is_admin() && isset( $_POST['action'] ) && 'gf_user_activate' === $_POST['action'] && true === $update ) {
-			do_action( 'wpml_switch_language_for_email', $user->user_email );
+		if ( ! $update && class_exists( 'GFSignup' ) ) {
+			$keys = $getKeys();
+			foreach ( $keys as $key ) {
+				$signup = GFSignup::get( $key );
+				if (
+					$signup instanceof GFSignup
+					&& $signup->meta['email'] === $user->user_email
+					&& Obj::prop( 'icl_admin_language', $signup->meta )
+					&& Obj::prop( 'icl_admin_locale', $signup->meta )
+				) {
+					$meta['icl_admin_language'] = $signup->meta['icl_admin_language'];
+					$meta['locale']             = $signup->meta['icl_admin_locale'];
+					do_action( 'wpml_switch_language_for_email', $user->user_email );
+				}
+			}
 		}
 
 		return $meta;

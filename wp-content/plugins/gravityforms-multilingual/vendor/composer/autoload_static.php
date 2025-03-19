@@ -4,10 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit7ca6208351c22c027ec47e90da84487f
+class ComposerStaticInit6ab037bf3190a8d204aaccc8b9895940
 {
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'GFML\\AddOn\\ConversationalForms' => __DIR__ . '/../..' . '/classes/AddOn/ConversationalForms.php',
+        'GFML\\AddOn\\Survey' => __DIR__ . '/../..' . '/classes/AddOn/Survey.php',
         'GFML\\Compatibility\\FeedAddon\\FeedAddon' => __DIR__ . '/../..' . '/classes/compatibility/feed_addon/FeedAddon.php',
         'GFML\\Compatibility\\FeedAddon\\GravityFlow' => __DIR__ . '/../..' . '/classes/compatibility/feed_addon/GravityFlow.php',
         'GFML\\Compatibility\\FeedAddon\\GravityFlowFactory' => __DIR__ . '/../..' . '/classes/compatibility/feed_addon/GravityFlowFactory.php',
@@ -17,7 +19,17 @@ class ComposerStaticInit7ca6208351c22c027ec47e90da84487f
         'GFML\\Compatibility\\Woocommerce\\Currency' => __DIR__ . '/../..' . '/classes/compatibility/woocommerce/class-gfml-currency.php',
         'GFML\\Confirmation\\SaveAndContinue' => __DIR__ . '/../..' . '/classes/Confirmation/SaveAndContinue.php',
         'GFML\\Container\\Config' => __DIR__ . '/../..' . '/classes/Container/Config.php',
+        'GFML\\Entries\\FieldValuesHooks' => __DIR__ . '/../..' . '/classes/Entries/FieldValuesHooks.php',
+        'GFML\\Entries\\FormConditions' => __DIR__ . '/../..' . '/classes/Entries/FormConditions.php',
+        'GFML\\Fields\\Fileupload' => __DIR__ . '/../..' . '/classes/Fields/Fileupload.php',
         'GFML\\Loader' => __DIR__ . '/../..' . '/classes/Loader.php',
+        'GFML\\Notification\\Language' => __DIR__ . '/../..' . '/classes/Notification/Language.php',
+        'GFML\\Notification\\Routing' => __DIR__ . '/../..' . '/classes/Notification/Routing.php',
+        'GFML\\RequiredFields\\CustomIndicator' => __DIR__ . '/../..' . '/classes/RequiredFields/CustomIndicator.php',
+        'GFML\\TranslationEditor\\FieldsOrder' => __DIR__ . '/../..' . '/classes/TranslationEditor/FieldsOrder.php',
+        'GFML\\TranslationEditor\\GroupsAndLabels' => __DIR__ . '/../..' . '/classes/TranslationEditor/GroupsAndLabels.php',
+        'GFML\\TranslationEditor\\JobTrait' => __DIR__ . '/../..' . '/classes/TranslationEditor/JobTrait.php',
+        'GFML\\TranslationEditor\\TopLevelGroupTrait' => __DIR__ . '/../..' . '/classes/TranslationEditor/TopLevelGroupTrait.php',
         'GFML_Conditional_Logic' => __DIR__ . '/../..' . '/classes/class-gfml-conditional-logic.php',
         'GFML_Form' => __DIR__ . '/../..' . '/classes/class-gfml-form.php',
         'GFML_Hooks' => __DIR__ . '/../..' . '/classes/class-gfml-hooks.php',
@@ -33,14 +45,13 @@ class ComposerStaticInit7ca6208351c22c027ec47e90da84487f
         'WPML_GFML_Plugin_Activation' => __DIR__ . '/../..' . '/classes/class-wpml-gfml-plugin-activation.php',
         'WPML_GFML_Requirements' => __DIR__ . '/../..' . '/classes/class-wpml-gfml-requirements.php',
         'WPML_GF_Quiz' => __DIR__ . '/../..' . '/classes/compatibility/quiz/class-wpml-gf-quiz.php',
-        'WPML_GF_Survey' => __DIR__ . '/../..' . '/classes/compatibility/survey/wpml-gf-survey.php',
         'WPML_PHP_Version_Check' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-php-version-check.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit7ca6208351c22c027ec47e90da84487f::$classMap;
+            $loader->classMap = ComposerStaticInit6ab037bf3190a8d204aaccc8b9895940::$classMap;
 
         }, null, ClassLoader::class);
     }

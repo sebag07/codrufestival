@@ -13,6 +13,13 @@ class Loader {
 				\WPML_GFML_Filter_Field_Meta::class,
 				\WPML_GFML_Filter_Country_Field::class,
 				Confirmation\SaveAndContinue::class,
+				Entries\FieldValuesHooks::class,
+				Entries\FormConditions::class,
+				Fields\Fileupload::class,
+				Notification\Language::class,
+				RequiredFields\CustomIndicator::class,
+				TranslationEditor\FieldsOrder::class,
+				TranslationEditor\GroupsAndLabels::class,
 			]
 		);
 
@@ -26,7 +33,8 @@ class Loader {
 		$filteredHooks = wpml_collect(
 			[
 				\WPML_GF_Quiz::class                      => defined( 'GF_QUIZ_VERSION' ),
-				\WPML_GF_Survey::class                    => defined( 'GF_SURVEY_VERSION' ),
+				AddOn\ConversationalForms::class          => defined( 'GF_CF_VERSION' ),
+				AddOn\Survey::class                       => defined( 'GF_SURVEY_VERSION' ),
 				Compatibility\UserRegistration\Hooks::class => defined( 'GF_USER_REGISTRATION_VERSION' ),
 				Compatibility\FeedAddon\GravityFlowFactory::class => defined( 'GRAVITY_FLOW_VERSION' ),
 				Compatibility\Woocommerce\Currency::class => defined( 'WCML_VERSION' ) && wcml_is_multi_currency_on(),

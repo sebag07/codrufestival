@@ -1,5 +1,8 @@
 <?php
 
+use GFML\RequiredFields\CustomIndicator;
+use WPML\FP\Obj;
+
 class GFML_TM_API extends Gravity_Forms_Multilingual {
 
 	/** @var array */
@@ -17,6 +20,20 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 			}
 			update_option( 'gfml_pt_migr_comp', true );
 		}
+		add_filter( 'wpml_get_automatic_packages', [ $this, 'register_string_package_kind' ] );
+	}
+
+	/**
+	 * @param array $packages
+	 *
+	 * @return array
+	 */
+	public function register_string_package_kind( $packages ) {
+		if ( is_array( $packages ) ) {
+			return array_merge( $packages, [ $this->get_type() ] );
+		}
+
+		return [ $this->get_type() ];
 	}
 
 	public function gform_post_update_form_meta_action() {
@@ -121,6 +138,11 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 			$this->register_gf_string( $form['description'], $snh->get_form_description(), $form_package, $string_title, 'AREA' );
 		}
 
+		if ( CustomIndicator::hasCustomRequiredIndicator( $form ) ) {
+			$string_title = 'Form custom required field indicator';
+			$this->register_gf_string( $form[ CustomIndicator::REQUIRED_INDICATOR_CUSTOM_VALUE ], $snh->getFormCustomRequiredIndicator(), $form_package, $string_title );
+		}
+
 		if ( isset( $form['button']['text'] ) ) {
 			$string_title = 'Form submit button';
 			$this->register_gf_string( $form['button']['text'], $snh->get_form_submit_button(), $form_package, $string_title );
@@ -163,10 +185,6 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 						$this->register_gf_string( $confirmation['url'], $snh->get_form_confirmation_redirect_url(), $form_package, $string_title );
 						$string_data[ $snh->get_form_confirmation_redirect_url() ] = $confirmation['url'];
 						break;
-					case 'page':
-						$this->register_gf_string( $confirmation['pageId'], $snh->get_form_confirmation_page_id(), $form_package, $string_title );
-						$string_data[ $snh->get_form_confirmation_page_id() ] = $confirmation['pageId'];
-						break;
 				}
 			}
 		}
@@ -191,15 +209,15 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 		}
 	}
 
-	protected function register_strings_field_choices( $form_package, $form_field ) {
+	protected function register_strings_field_choices( $form_package, $form_field, $includeValues = true ) {
 		if ( is_array( $form_field->choices ) ) {
 			foreach ( $form_field->choices as $choice_index => $choice ) {
-				$this->register_strings_field_choice( $form_package, $form_field, $choice_index, $choice );
+				$this->register_strings_field_choice( $form_package, $form_field, $choice_index, $choice, $includeValues );
 			}
 		}
 	}
 
-	protected function register_strings_field_choice( $form_package, $form_field, $choice_index, $choice ) {
+	protected function register_strings_field_choice( $form_package, $form_field, $choice_index, $choice, $includeValue = true ) {
 		$snh                     = new GFML_String_Name_Helper();
 		$snh->field              = $form_field;
 		$snh->field_choice       = $choice;
@@ -209,7 +227,7 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 		$string_title = $this->build_string_title( $form_field, $choice_index . ': ' . $form_field['label'], 'label' );
 		$this->register_gf_string( $choice['text'], $string_name, $form_package, $string_title );
 
-		if ( isset( $choice['value'] ) ) {
+		if ( isset( $choice['value'] ) && $includeValue ) {
 			$string_name  = $snh->get_field_multi_input_choice_value();
 			$string_title = $this->build_string_title( $form_field, $choice_index . ': ' . $form_field['label'], 'value' );
 			$this->register_gf_string( $choice['value'], $string_name, $form_package, $string_title );
@@ -253,12 +271,12 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 		}
 	}
 
-	public function register_strings_field_option( $form_package, $form_field ) {
+	public function register_strings_field_option( $form_package, $form_field, $includeValues = true ) {
 		$snh        = new GFML_String_Name_Helper();
 		$snh->field = $form_field;
 
 		if ( isset( $form_field->choices ) && is_array( $form_field->choices ) ) {
-			$this->register_strings_field_choices( $form_package, $form_field );
+			$this->register_strings_field_choices( $form_package, $form_field, $includeValues );
 		}
 	}
 
@@ -384,6 +402,10 @@ class GFML_TM_API extends Gravity_Forms_Multilingual {
 			$value = ! empty( $form['lastPageButton']['text'] ) ? $form['lastPageButton']['text'] : null;
 			if ( null !== $value ) {
 				$this->register_gf_string( $value, $snh->get_form_pagination_last_page_button_text(), $form_package, 'lastPageButton' );
+			}
+			$value = Obj::pathOr( null, [ 'lastPageButton', 'imageUrl' ], $form );
+			if ( ! empty( $value ) ) {
+				$this->register_gf_string( $value, $snh->get_form_pagination_last_page_button_img_url(), $form_package, 'lastPageButtonImageUrl' );
 			}
 		}
 	}

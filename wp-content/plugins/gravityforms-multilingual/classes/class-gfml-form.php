@@ -40,8 +40,12 @@ class GFML_Form {
 				$snh->field_choice_index = $index;
 
 				$choice_id = $choice['value']; // We use the 'text' property in the original language as ID for the translations cluster.
-
-				$translations[ $choice_id ] = icl_t( $st_context, $snh->get_field_multi_input_choice_value(), $choice['value'] );
+				if ( WPML_String_Functions::is_not_translatable( $choice['value'] ) ) {
+					// We should not translate numeric, CSS hex color or length values, on anything else that WPML might filter out.
+					$translations[ $choice_id ] = $choice['value'];
+				} else {
+					$translations[ $choice_id ] = icl_t( $st_context, $snh->get_field_multi_input_choice_value(), $choice['value'] );
+				}
 			}
 
 			$this->multi_input_translations[ $field_id ] = $translations;

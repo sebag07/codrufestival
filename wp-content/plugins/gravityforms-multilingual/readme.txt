@@ -1,2 +1,2 @@
 === Gravity Forms Multilingual ===
-Stable tag: 1.7.2
+Stable tag: 1.8.2

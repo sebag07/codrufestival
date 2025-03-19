@@ -33,7 +33,7 @@ class SaveAndContinue implements \IWPML_Frontend_Action, \IWPML_DIC_Action {
 	public function translate( $text, $form ) {
 		/* phpcs:ignore WordPress.Security.NonceVerification.Missing */
 		$ajax = isset( $_POST['gform_ajax'] );
-		$form = $this->tmApi->gform_pre_render( $form );
+		$form = $this->tmApi->translateConfirmations( $form );
 
 		return GFFormDisplay::handle_save_email_confirmation( $form, $ajax );
 	}
