@@ -107,4 +107,39 @@ class ET_Builder_Value {
 
 		return et_builder_serialize_dynamic_content( $this->dynamic, $this->content, $this->settings );
 	}
+
+	/**
+	 * Get settings value.
+	 *
+	 * @since 4.23.2
+	 *
+	 * @param string $setting_name Setting name.
+	 *
+	 * @return mixed
+	 */
+	public function get_settings( $setting_name ) {
+		if ( ! isset( $this->settings[ $setting_name ] ) ) {
+			return null;
+		}
+
+		return $this->settings[ $setting_name ];
+	}
+
+	/**
+	 * Set settings value.
+	 *
+	 * @since 4.23.2
+	 *
+	 * @param string $setting_name Setting name.
+	 * @param mixed  $setting_value Setting value.
+	 *
+	 * @return void
+	 */
+	public function set_settings( $setting_name, $setting_value ) {
+		if ( is_null( $setting_value ) ) {
+			return;
+		}
+
+		$this->settings[ $setting_name ] = $setting_value;
+	}
 }

@@ -77,14 +77,20 @@ class ET_Core_Portability {
 
 		self::$_doing_import = true;
 
-		$timestamp              = $this->get_timestamp();
-		$filesystem             = $this->set_filesystem();
-		$temp_file_id           = sanitize_file_name( $timestamp );
-		$temp_file              = $this->has_temp_file( $temp_file_id, 'et_core_import' );
-		$include_global_presets = isset( $_POST['include_global_presets'] ) ? wp_validate_boolean( $_POST['include_global_presets'] ) : false;
-		$return_json            = isset( $_POST['et_cloud_return_json'] ) ? wp_validate_boolean( sanitize_text_field( $_POST['et_cloud_return_json'] ) ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verification is handled earlier.
-		$temp_presets           = isset( $_POST['et_cloud_use_temp_presets'] ) ? wp_validate_boolean( sanitize_text_field( $_POST['et_cloud_use_temp_presets'] ) ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verification is handled earlier.
-		$global_presets         = '';
+		$timestamp    = $this->get_timestamp();
+		$filesystem   = $this->set_filesystem();
+		$temp_file_id = sanitize_file_name( $timestamp );
+		$temp_file    = $this->has_temp_file( $temp_file_id, 'et_core_import' );
+
+		// phpcs:disable WordPress.Security.NonceVerification.Missing -- Nonce verification is handled earlier.
+		$include_global_presets = isset( $_POST['include_global_presets'] ) ? wp_validate_boolean( sanitize_text_field( $_POST['include_global_presets'] ) ) : false;
+		$return_json            = isset( $_POST['et_cloud_return_json'] ) ? wp_validate_boolean( sanitize_text_field( $_POST['et_cloud_return_json'] ) ) : false;
+		$temp_presets           = isset( $_POST['et_cloud_use_temp_presets'] ) ? wp_validate_boolean( sanitize_text_field( $_POST['et_cloud_use_temp_presets'] ) ) : false;
+		$is_update_preset_id    = isset( $_POST['onboarding'] ) ? wp_validate_boolean( sanitize_text_field( $_POST['onboarding'] ) ) : false;
+		$preset_prefix          = isset( $_POST['preset_prefix'] ) ? sanitize_text_field( $_POST['preset_prefix'] ) : '';
+		// phpcs:enable WordPress.Security.NonceVerification.Missing
+
+		$global_presets = '';
 
 		if ( $temp_file ) {
 			$import = json_decode( $filesystem->get_contents( $temp_file ), true );
@@ -190,11 +196,22 @@ class ET_Core_Portability {
 			$shortcode_string = is_array( $success['postContent'] ) && ! empty( $success['postContent']['post_content'] ) ? $success['postContent']['post_content'] : $success['postContent'];
 
 			if ( ! empty( $import['presets'] ) ) {
-				$preset_rewrite_map = $this->prepare_to_import_layout_presets( $import['presets'] );
-				$global_presets     = $import['presets'];
+				$preset_rewrite_map = [];
+
+				if ( $include_global_presets && ! $is_update_preset_id ) {
+					$preset_rewrite_map = $this->prepare_to_import_layout_presets( $import['presets'] );
+					$global_presets     = $import['presets'];
+				}
 
 				$shortcode_object = et_fb_process_shortcode( $shortcode_string );
-				$this->rewrite_module_preset_ids( $shortcode_object, $import['presets'], $preset_rewrite_map );
+
+				if ( $is_update_preset_id ) {
+					$global_presets    = $import['presets'];
+					$vb_presets_lookup = $this->_get_importing_presets_id_name_pairs( $global_presets );
+					$this->_update_shortcode_with_onboarding_preset( $shortcode_object, $vb_presets_lookup );
+				} else {
+					$this->rewrite_module_preset_ids( $shortcode_object, $import['presets'], $preset_rewrite_map );
+				}
 
 				$shortcode_string = et_fb_process_to_shortcode( $shortcode_object, array(), '', false );
 			}
@@ -220,7 +237,7 @@ class ET_Core_Portability {
 					if ( $include_global_presets ) {
 						$this->rewrite_module_preset_ids( $shortcode_object, $import['presets'], $preset_rewrite_map );
 					} else {
-						$this->apply_global_presets( $shortcode_object, $import['presets'] );
+						$this->_apply_global_presets( $shortcode_object, $import['presets'] );
 					}
 				}
 
@@ -276,7 +293,7 @@ class ET_Core_Portability {
 		}
 
 		if ( ! empty( $global_presets ) ) {
-			if ( ! $this->import_global_presets( $global_presets, $temp_presets ) ) {
+			if ( ! $this->import_global_presets( $global_presets, $temp_presets, true, $preset_prefix, true ) ) {
 				if ( $error_message = apply_filters( 'et_core_portability_import_error_message', false ) ) {
 					$error_message = array( 'message' => $error_message );
 				}
@@ -287,7 +304,7 @@ class ET_Core_Portability {
 
 		if ( ! empty( $import['global_colors'] ) ) {
 			$this->import_global_colors( $import['global_colors'] );
-			$success['globalColors'] = et_builder_get_all_global_colors();
+			$success['globalColors'] = et_builder_get_all_global_colors( true );
 		}
 
 		return $success;
@@ -749,7 +766,7 @@ class ET_Core_Portability {
 			);
 
 			if ( ! empty( $post_title ) ) {
-				$args['post_title'] = current_user_can( 'unfiltered_html' ) ? $post_title : wp_kses( $post_title );
+				$args['post_title'] = current_user_can( 'unfiltered_html' ) ? $post_title : wp_kses( $post_title, 'entities' );
 			}
 
 			$post_id = et_theme_builder_insert_layout( $args );
@@ -776,6 +793,27 @@ class ET_Core_Portability {
 	}
 
 	/**
+	 * Get importing presets ID and name pairs from presets data.
+	 *
+	 * @since 4.26.1
+	 *
+	 * @param array $presets Presets data.
+	 */
+	protected function _get_importing_presets_id_name_pairs( $presets ) {
+		$presets_lookup = [];
+
+		foreach ( $presets as $module_type => $value ) {
+			$presets_lookup[ $module_type ] = [];
+
+			foreach ( $value['presets'] as $module_preset_id => $preset ) {
+				$presets_lookup[ $module_type ][ $module_preset_id ] = $preset['name'];
+			}
+		}
+
+		return $presets_lookup;
+	}
+
+	/**
 	 * Import Theme Builder templates in chunks.
 	 *
 	 * @since 4.0
@@ -796,12 +834,21 @@ class ET_Core_Portability {
 		$layout_id_map = array();
 		$chunks        = 1;
 
+		if ( ! isset( $step['type'] ) ) {
+			$step['type'] = '';
+		}
+
 		switch ( $step['type'] ) {
 			case 'layout':
-				$presets = et_()->array_get( $step, 'presets', array() );
+				$presets             = et_()->array_get( $step, 'presets', array() );
 				$presets_rewrite_map = et_()->array_get( $step, 'presets_rewrite_map', array() );
-				$import_presets = et_()->array_get( $step, 'import_presets', false );
-				$layouts = et_()->array_get( $step['data'], 'data', array() );
+				$is_update_preset_id = et_()->array_get( $step, 'is_update_preset_id', false );
+				$import_presets      = et_()->array_get( $step, 'import_presets', false );
+				$layouts             = et_()->array_get( $step['data'], 'data', array() );
+
+				if ( $is_update_preset_id ) {
+					$tb_presets_lookup = $this->_get_importing_presets_id_name_pairs( $presets );
+				}
 
 				// Apply any presets to the layouts' shortcodes prior to importing them.
 				if ( ! empty( $presets ) && ! empty( $layouts ) ) {
@@ -809,9 +856,13 @@ class ET_Core_Portability {
 						$shortcode_object = et_fb_process_shortcode( $layout );
 
 						if ( $import_presets ) {
-							$this->rewrite_module_preset_ids( $shortcode_object, $presets, $presets_rewrite_map );
+							if ( $is_update_preset_id ) {
+								$this->_update_shortcode_with_onboarding_preset( $shortcode_object, $tb_presets_lookup );
+							} else {
+								$this->rewrite_module_preset_ids( $shortcode_object, $presets, $presets_rewrite_map );
+							}
 						} else {
-							$this->apply_global_presets( $shortcode_object, $presets );
+							$this->_apply_global_presets( $shortcode_object, $presets );
 						}
 
 						$layouts[ $key ] = et_fb_process_to_shortcode( $shortcode_object, array(), '', false );
@@ -1111,15 +1162,64 @@ class ET_Core_Portability {
 	}
 
 	/**
+	 * Update shortcode with onboarding preset.
+	 *
+	 * @since 4.26.1
+	 *
+	 * @param array $shortcode_object - The shortcode object to be updated.
+	 * @param array $presets_lookup   - The lookup table for presets.
+	 */
+	protected function _update_shortcode_with_onboarding_preset( &$shortcode_object, $presets_lookup ) {
+		$global_presets_manager  = ET_Builder_Global_Presets_Settings::instance();
+		$module_preset_attribute = ET_Builder_Global_Presets_Settings::MODULE_PRESET_ATTRIBUTE;
+		$global_presets          = $global_presets_manager->get_global_presets();
+
+		foreach ( $shortcode_object as &$module ) {
+			$module_type = $global_presets_manager->maybe_convert_module_type( $module['type'], $module['attrs'] );
+
+			if ( isset( $presets_lookup[ $module_type ] ) ) {
+				$module_preset_id = et_()->array_get( $module, "attrs.{$module_preset_attribute}", 'default' );
+
+				if ( 'default' === $module_preset_id ) {
+					continue;
+				}
+
+				$module_preset_name = et_()->array_get( $presets_lookup, "{$module_type}.{$module_preset_id}", '' );
+
+				foreach ( $global_presets->$module_type->presets as $preset_id => $preset ) {
+					if ( $preset->name === $module_preset_name ) {
+						$module['attrs'][ $module_preset_attribute ] = $preset_id;
+						break;
+					}
+				}
+			}
+
+			if ( isset( $module['content'] ) && is_array( $module['content'] ) ) {
+				$this->_update_shortcode_with_onboarding_preset( $module['content'], $presets_lookup );
+			}
+		}
+	}
+
+	/**
 	 * Imports Global Presets
 	 *
 	 * @since 4.0.10 Made public.
 	 *
-	 * @param array $presets - The Global Presets to be imported
+	 * @param array  $presets           - The Global Presets to be imported.
+	 * @param bool   $is_temp_presets   - Whether the presets are temporary or not.
+	 * @param bool   $override_defaults - Whether the default presets should be overridden.
+	 * @param string $preset_prefix     - A prefix to be prepended to preset name of the preset being imported, if override_defaults is true.
+	 * @param bool   $skip_default      - Whether updating the default preset key should be skipped.
 	 *
 	 * @return boolean
 	 */
-	public function import_global_presets( $presets, $is_temp_presets = false ) {
+	public function import_global_presets(
+		$presets,
+		$is_temp_presets   = false,
+		$override_defaults = false,
+		$preset_prefix     = '',
+		$skip_default = false
+	) {
 		if ( ! is_array( $presets ) ) {
 			return false;
 		}
@@ -1141,6 +1241,10 @@ class ET_Core_Portability {
 				$global_presets->$module_type = $initial_preset_structure;
 			}
 
+			if ( $override_defaults && ! $skip_default ) {
+				$global_presets->$module_type->default = $module_presets['default'];
+			}
+
 			$local_presets      = $global_presets->$module_type->presets;
 			$local_preset_names = array();
 
@@ -1152,10 +1256,20 @@ class ET_Core_Portability {
 			}
 
 			foreach ( $module_presets['presets'] as $preset_id => $preset ) {
-				$imported_name = sanitize_text_field( $preset['name'] );
-				$name          = in_array( $imported_name, $local_preset_names )
-					? $imported_name . ' ' . esc_html__( 'imported', 'et-core' )
-					: $imported_name;
+				$name = sanitize_text_field( $preset['name'] );
+
+				if ( $override_defaults && $preset_prefix ) {
+					$name = $preset_prefix . ' ' . $name;
+
+					// No duplicates allowed on override.
+					if ( in_array( $name, $local_preset_names, true ) ) {
+						continue;
+					}
+				} else {
+					if ( in_array( $name, $local_preset_names, true ) ) {
+						$name .= ' ' . esc_html__( 'imported', 'et-core' );
+					}
+				}
 
 				$presets_to_import[ $module_type ]['presets'][ $preset_id ] = array(
 					'name'     => $name,
@@ -1206,6 +1320,37 @@ class ET_Core_Portability {
 	}
 
 	/**
+	 * Prepare to import non-duplicate presets.
+	 *
+	 * @since 4.26.0
+	 *
+	 * @param array $presets Presets to import.
+	 *
+	 * @return array
+	 */
+	public function prepare_to_import_non_duplicate_presets( $presets ) {
+		$global_presets_manager = ET_Builder_Global_Presets_Settings::instance();
+		$existing_presets       = $global_presets_manager->get_global_presets();
+		$existing_names         = [];
+
+		foreach ( $existing_presets as $module_slug => $data ) {
+			foreach ( $data->presets as $preset ) {
+				$existing_names[ $module_slug ][ trim( $preset->name ) ] = true;
+			}
+		}
+
+		foreach ( $presets as $module_slug => $data ) {
+			foreach ( $data['presets'] as $preset_id => $preset ) {
+				if ( isset( $existing_names[ $module_slug ][ trim( $preset['name'] ) ] ) ) {
+					unset( $presets[ $module_slug ]['presets'][ $preset_id ] );
+				}
+			}
+		}
+
+		return $presets;
+	}
+
+	/**
 	 * Import global colors.
 	 *
 	 * @since 4.9.0
@@ -1215,10 +1360,17 @@ class ET_Core_Portability {
 	 * @return void
 	 */
 	public function import_global_colors( $incoming_global_colors ) {
-		$global_colors = array();
+		$excluded_colors = array( 'gcid-primary-color', 'gcid-secondary-color', 'gcid-heading-color', 'gcid-body-color' );
+		$global_colors   = array();
 
 		foreach ( $incoming_global_colors as $incoming_gcolor ) {
 			$key                   = et_()->sanitize_text_fields( $incoming_gcolor[0] );
+
+			// Skip excluded colors.
+			if ( in_array( $key, $excluded_colors, true ) ) {
+				continue;
+			}
+
 			$global_colors[ $key ] = et_()->sanitize_text_fields( $incoming_gcolor[1] );
 		}
 
@@ -1548,7 +1700,7 @@ class ET_Core_Portability {
 	 * @param array $shortcode_object - The multidimensional array representing a page/module structure
 	 * @param array $global_presets   - The Global Presets to be applied
 	 */
-	protected function apply_global_presets( &$shortcode_object, $global_presets ) {
+	protected function _apply_global_presets( &$shortcode_object, $global_presets ) {
 		$global_presets_manager  = ET_Builder_Global_Presets_Settings::instance();
 		$module_preset_attribute = ET_Builder_Global_Presets_Settings::MODULE_PRESET_ATTRIBUTE;
 
@@ -1559,7 +1711,7 @@ class ET_Core_Portability {
 				$default_preset_id = et_()->array_get( $global_presets, "{$module_type}.default", null );
 				$module_preset_id  = et_()->array_get( $module, "attrs.{$module_preset_attribute}", $default_preset_id );
 
-				if ( $module_preset_id === 'default' ) {
+				if ( 'default' === $module_preset_id ) {
 					$module_preset_id = $default_preset_id;
 				}
 
@@ -1613,7 +1765,7 @@ class ET_Core_Portability {
 			}
 
 			if ( isset( $module['content'] ) && is_array( $module['content'] ) ) {
-				$this->apply_global_presets( $module['content'], $global_presets );
+				$this->_apply_global_presets( $module['content'], $global_presets );
 			}
 		}
 	}
@@ -2143,7 +2295,7 @@ class ET_Core_Portability {
 		if ( isset( $image['replacement_id'] ) && isset( $image['id'] ) ) {
 			$search      = $image['id'];
 			$replacement = $image['replacement_id'];
-			$subject     = preg_replace( "/(gallery_ids=.*){$search}(.*\")/", "\${1}{$replacement}\${2}", $subject );
+			$subject     = preg_replace( "/(gallery_ids=.*?){$search}(.*?)/", "\${1}{$replacement}\${2}", $subject );
 		}
 
 		if ( isset( $image['url'] ) && isset( $image['replacement_url'] ) && $image['url'] !== $image['replacement_url'] ) {
@@ -2201,6 +2353,10 @@ class ET_Core_Portability {
 		}
 
 		foreach ( $data as $key => $value ) {
+			if ( empty( $value ) ) {
+				continue;
+			}
+
 			if ( is_array( $value ) ) {
 				$data[$key] = $this->validate( $value, $fields_validation );
 			} else {
@@ -2632,9 +2788,10 @@ class ET_Core_Portability {
 
 		wp_localize_script( 'et-core-portability', 'etCorePortability', array(
 			'nonces'        => array(
-				'import' => wp_create_nonce( 'et_core_portability_import' ),
-				'export' => wp_create_nonce( 'et_core_portability_export' ),
-				'cancel' => wp_create_nonce( 'et_core_portability_cancel' ),
+				'import'  => wp_create_nonce( 'et_core_portability_import' ),
+				'export'  => wp_create_nonce( 'et_core_portability_export' ),
+				'cancel'  => wp_create_nonce( 'et_core_portability_cancel' ),
+				'presets' => wp_create_nonce( 'et_core_portability_import_default_presets' ),
 			),
 			'postMaxSize'   => $this->to_megabytes( @ini_get( 'post_max_size' ) ),
 			'uploadMaxSize' => $this->to_megabytes( @ini_get( 'upload_max_filesize' ) ),
@@ -2742,7 +2899,6 @@ class ET_Core_Portability {
 		// phpcs:enable
 	}
 }
-
 
 if ( ! function_exists( 'et_core_portability_register' ) ) :
 /**
@@ -2978,6 +3134,121 @@ function et_core_portability_ajax_cancel() {
 add_action( 'wp_ajax_et_core_portability_cancel', 'et_core_portability_ajax_cancel' );
 endif;
 
+if ( ! function_exists( 'et_core_upload_and_get_urls_from_presets_images' ) ) :
+	/**
+	 * Upload images and return the new URLs for presets.
+	 *
+	 * @since 4.26.1
+	 * @param array $data Array of images to upload.
+	 * 
+	 * @return array
+	 */
+	function et_core_upload_and_get_urls_from_presets_images( $data ) {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+
+		// Require the file that includes wp_generate_attachment_metadata().
+		require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+		$mime_types    = get_allowed_mime_types();
+		$wp_upload_dir = wp_upload_dir();
+		$uploaded_urls = [];
+
+		foreach ( $data as $imageInfo ) {
+			$image_data = base64_decode( $imageInfo['encoded'] );
+			$temp_file  = tempnam( $wp_upload_dir['path'], 'preset_' );
+			$filetype   = wp_check_filetype( basename( $temp_file ), null );
+
+			if ( ! in_array( $filetype['type'], $mime_types, true ) ) {
+				continue;
+			}
+
+			file_put_contents( $temp_file, $image_data );
+
+			$attachment = [
+				'guid'           => $wp_upload_dir['url'] . '/' . basename( $temp_file ), 
+				'post_mime_type' => $filetype['type'],
+				'post_title'     => preg_replace( '/\.[^.]+$/', '', basename( $temp_file ) ),
+				'post_content'   => '',
+				'post_status'    => 'inherit'
+			];
+		
+			$attach_id   = wp_insert_attachment( $attachment, $temp_file );
+			$attach_data = wp_generate_attachment_metadata( $attach_id, $temp_file );
+
+			wp_update_attachment_metadata( $attach_id, $attach_data );
+		
+			$uploaded_urls[] = [
+				'old_url' => $imageInfo['url'],
+				'new_url' => wp_get_attachment_url( $attach_id ),
+			];
+
+			unlink( $temp_file );
+		}
+		
+		return $uploaded_urls;
+	}
+endif;
+
+if ( ! function_exists( 'et_core_replace_image_urls_in_presets' ) ) :
+	/**
+	 * Replace image URLs in presets JSON string.
+	 */
+	function et_core_replace_image_urls_in_presets( $presets, $uploaded_urls ) {
+		foreach ( $uploaded_urls as $url ) {
+			$presets = str_replace( $url['old_url'], $url['new_url'], $presets );
+		}
+
+		return $presets;
+	}
+endif;
+
+if ( ! function_exists( 'et_core_portability_import_default_presets' ) ) :
+	/**
+	 * Set the default preset for a modules.
+	 *
+	 * @since 4.26.0
+	 */
+	function et_core_portability_import_default_presets() {
+		if ( ! et_core_security_check_passed( 'manage_options', 'et_core_portability_import_default_presets', 'nonce' ) ) {
+			et_core_die();
+		}
+
+		$presets       = isset( $_POST['presets'] ) ? sanitize_text_field( $_POST['presets'] ) : '';
+		$preset_prefix = isset( $_POST['presetPrefix'] ) ? sanitize_text_field( $_POST['presetPrefix'] ) : '';
+		$global_colors = isset( $_POST['globalColors'] ) ? sanitize_text_field( $_POST['globalColors'] ) : '';
+		$images        = isset( $_POST['images'] ) ? sanitize_text_field( $_POST['images'] ) : '';
+		$uploaded_urls = [];
+
+		$portability = et_core_portability_load( 'et_builder' );
+
+		if ( $global_colors ) {
+			$global_colors = json_decode( stripslashes( $global_colors ), true );
+			$portability->import_global_colors( $global_colors );
+		}
+
+		if ( $images ) {
+			$images        = json_decode( stripslashes( $images ), true );
+			$uploaded_urls = et_core_upload_and_get_urls_from_presets_images( $images );
+		}
+
+		if ( $presets ) {
+			if ( ! empty( $uploaded_urls ) ) {
+				$presets = et_core_replace_image_urls_in_presets( $presets, $uploaded_urls );
+			}
+
+			$presets = json_decode( stripslashes( $presets ), true );
+			$portability->import_global_presets( $presets, false, true, $preset_prefix );
+		}
+
+		ET_Core_PageResource::remove_static_resources( 'all', 'all' );
+
+		wp_send_json_success();
+	}
+
+	add_action( 'wp_ajax_et_core_portability_import_default_presets', 'et_core_portability_import_default_presets' );
+endif;
 
 if ( ! function_exists( 'et_core_portability_export' ) ) :
 /**

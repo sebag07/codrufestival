@@ -88,6 +88,11 @@ function et_builder_add_fake_comments() {
 	return array(
 		new WP_Comment(
 			(object) array(
+				// Since WP 6.6, the `get_comment_author` typecast the `$comment_id` fallback
+				// value as `string`. It causes error in TB because we set fake comment that
+				// naturally returns `comment_ID` as `NULL`. To avoid the issue and bypass the
+				// `$comment->comment_ID` not empty check, we set the `comment_ID` as `true`.
+				'comment_ID'       => true,
 				'comment_author'   => 'Jane Doe',
 				'comment_date'     => '2019-01-01 12:00:00',
 				'comment_content'  => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pulvinar nulla eu purus pharetra mollis. Nullam fringilla, ligula sit amet placerat rhoncus, arcu dui hendrerit ligula, ac rutrum mi neque quis orci. Morbi at tortor non eros feugiat commodo.',
@@ -362,11 +367,19 @@ function et_fb_get_dynamic_backend_helpers() {
 		'mediaButtons'                 => et_builder_get_media_buttons(),
 		'shortcode_tags'               => et_fb_shortcode_tags(),
 		'customizer'                   => array(
-			'tablet' => array(
+			'tablet'       => array(
 				'sectionHeight' => et_get_option( 'tablet_section_height' ),
 			),
-			'phone'  => array(
+			'phone'        => array(
 				'sectionHeight' => et_get_option( 'phone_section_height' ),
+			),
+			'fonts'        => array(
+				'heading' => et_get_option( 'heading_font', '' ),
+				'body'    => et_get_option( 'body_font', '' ),
+			),
+			'font_weights' => array(
+				'heading' => et_get_option( 'heading_font_weight', '500' ),
+				'body'    => et_get_option( 'body_font_weight', '500' ),
 			),
 		),
 		'abTesting'                    => is_object( $post ) ? et_builder_ab_options( $post->ID ) : false,
@@ -450,6 +463,14 @@ function et_fb_get_dynamic_backend_helpers() {
 					'et_code_snippets_library_get_items' => wp_create_nonce( 'et_code_snippets_library_get_items' ),
 				],
 			],
+		],
+		'aiLayout'                     => [
+			'headingFont'      => et_get_option( 'et_ai_layout_heading_font', '' ),
+			'bodyFont'         => et_get_option( 'et_ai_layout_body_font', '' ),
+			'primaryColor'     => et_get_option( 'et_ai_layout_primary_color', '' ),
+			'secondaryColor'   => et_get_option( 'et_ai_layout_secondary_color', '' ),
+			'headingFontColor' => et_get_option( 'et_ai_layout_heading_font_color', '' ),
+			'bodyFontColor'    => et_get_option( 'et_ai_layout_body_font_color', '' ),
 		],
 	);
 
@@ -1930,6 +1951,13 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 				'global' => esc_html__( 'Global', 'et_builder' ),
 				'recent' => esc_html__( 'Recent', 'et_builder' ),
 			),
+			'customizerColorLabels' => array(
+				'gcid-primary-color'   => esc_html__( 'Primary Color', 'et_builder' ),
+				'gcid-secondary-color' => esc_html__( 'Secondary Color', 'et_builder' ),
+				'gcid-heading-color'   => esc_html__( 'Heading Text Color', 'et_builder' ),
+				'gcid-body-color'      => esc_html__( 'Body Text Color', 'et_builder' ),
+			),
+			'customizerCannotDelete' => esc_html__( 'cannot be deleted', 'et_builder' ),
 			'uploadGallery'    => array(
 				'uploadButtonText' => esc_html__( 'Update Gallery', 'et_builder' ),
 				'addImages'        => esc_html__( 'Add Gallery Images', 'et_builder' ),
@@ -2089,6 +2117,7 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 				'remove'      => esc_html__( 'Remove Gradient Stop', 'et_builder' ),
 			),
 			'generate_content_with_ai'  => esc_html__( 'Generate Content With AI', 'et_builder' ),
+			'generate_section_with_ai'  => esc_html__( 'Generate Section With AI', 'et_builder' ),
 		),
 		'tooltips'                  => array(
 			'insertModule'         => esc_html__( 'Insert Module', 'et_builder' ),
@@ -2350,12 +2379,24 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 				'part1' => esc_html__( 'Write free-form css using the keyword', 'et_builder' ),
 				'part2' => esc_html__( 'to target this module i.e.', 'et_builder' ),
 			),
+			'insertLayout'          => [
+				'title'             => esc_html__( 'Insert Layout', 'et_builder' ),
+				'Premade Layout'    => esc_html__( 'Premade Layout', 'et_builder' ),
+				'Saved Layout'      => esc_html__( 'Saved Layout', 'et_builder' ),
+				'Build With AI'     => esc_html__( 'Build With AI', 'et_builder' ),
+				'Brand New'         => esc_html__( 'Brand New', 'et_builder' ),
+				'premadeLayoutDesc' => esc_html__( 'Select from thousands of premade layouts designed for every type of site', 'et_builder' ),
+				'savedLayoutDesc'   => esc_html__( 'Start from a layout in your Divi Library or clone an existing page', 'et_builder' ),
+				'buildWithAIDesc'   => esc_html__( 'Simply describe your page, sit back, relax and let Divi AI build it for you', 'et_builder' ),
+			],
 		),
 		'selectControl'             => array(
 			'typeToSearch' => esc_html__( 'Start Typing', 'et_builder' ),
 			'subgroups'    => array(
-				'recent'   => esc_html__( 'Recent', 'et_builder' ),
-				'uploaded' => esc_html__( 'Custom Fonts', 'et_builder' ),
+				'recent'              => esc_html__( 'Recent', 'et_builder' ),
+				'uploaded'            => esc_html__( 'Custom Fonts', 'et_builder' ),
+				'global'              => esc_html__( 'Global Fonts', 'et_builder' ),
+				'global_font_weights' => esc_html__( 'Global Font Weights', 'et_builder' ),
 			),
 			'noResults'    => esc_html__( 'No results found', 'et_builder' ),
 			'noTitle'      => esc_html__( '(no title)', 'et_builder' ),
@@ -2462,31 +2503,37 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			)
 		),
 		'fonts'                     => array(
-			'fontWeight'     => esc_html__( 'Font Weight', 'et_builder' ),
-			'fontStyle'      => esc_html__( 'Font Style', 'et_builder' ),
-			'delete'         => esc_html__( 'Delete', 'et_builder' ),
-			'deleteConfirm'  => esc_html__( 'Are You Sure Want To Delete', 'et_builder' ),
-			'confirmAction'  => esc_html__( 'Are You Sure?', 'et_builder' ),
-			'cancel'         => et_builder_i18n( 'Cancel' ),
-			'upload'         => esc_html__( 'Upload', 'et_builder' ),
-			'font'           => esc_html__( 'Font', 'et_builder' ),
-			'chooseFile'     => esc_html__( 'Choose Font Files', 'et_builder' ),
-			'supportedFiles' => esc_html__( 'Supported File Formats', 'et_builder' ),
-			'fileError'      => esc_html__( 'Unsupported File Format', 'et_builder' ),
-			'noFile'         => esc_html__( 'Drag Files Here', 'et_builder' ),
-			'fontName'       => esc_html__( 'Name Your Font', 'et_builder' ),
-			'fontNameLabel'  => esc_html__( 'Font Name', 'et_builder' ),
-			'selectedFiles'  => esc_html__( 'Selected Font Files', 'et_builder' ),
-			'weightsSupport' => esc_html__( 'Supported Font Weights', 'et_builder' ),
-			'weightsHelp'    => esc_html__( 'Choose the font weights supported by your font. Select "All" if you don\'t know this information or if your font includes all weights.', 'et_builder' ),
-			'noFilesError'   => esc_html__( 'Please Select At Least One File', 'et_builder' ),
-			'searchFonts'    => esc_html__( 'Search Fonts', 'et_builder' ),
-			'underline'      => esc_html__( 'Underline', 'et_builder' ),
-			'strikethrough'  => esc_html__( 'Strikethrough', 'et_builder' ),
-			'color'          => et_builder_i18n( 'Color' ),
-			'style'          => esc_html__( 'Style', 'et_builder' ),
-			'all'            => esc_html__( 'All', 'et_builder' ),
-
+			'fontWeight'        => esc_html__( 'Font Weight', 'et_builder' ),
+			'fontStyle'         => esc_html__( 'Font Style', 'et_builder' ),
+			'delete'            => esc_html__( 'Delete', 'et_builder' ),
+			'deleteConfirm'     => esc_html__( 'Are You Sure Want To Delete', 'et_builder' ),
+			'confirmAction'     => esc_html__( 'Are You Sure?', 'et_builder' ),
+			'cancel'            => et_builder_i18n( 'Cancel' ),
+			'upload'            => esc_html__( 'Upload', 'et_builder' ),
+			'edit_global'       => esc_html__( 'Edit Global Fonts', 'et_builder' ),
+			'font'              => esc_html__( 'Font', 'et_builder' ),
+			'chooseFile'        => esc_html__( 'Choose Font Files', 'et_builder' ),
+			'supportedFiles'    => esc_html__( 'Supported File Formats', 'et_builder' ),
+			'fileError'         => esc_html__( 'Unsupported File Format', 'et_builder' ),
+			'noFile'            => esc_html__( 'Drag Files Here', 'et_builder' ),
+			'fontName'          => esc_html__( 'Name Your Font', 'et_builder' ),
+			'fontNameLabel'     => esc_html__( 'Font Name', 'et_builder' ),
+			'selectedFiles'     => esc_html__( 'Selected Font Files', 'et_builder' ),
+			'weightsSupport'    => esc_html__( 'Supported Font Weights', 'et_builder' ),
+			'weightsHelp'       => esc_html__( 'Choose the font weights supported by your font. Select "All" if you don\'t know this information or if your font includes all weights.', 'et_builder' ),
+			'noFilesError'      => esc_html__( 'Please Select At Least One File', 'et_builder' ),
+			'searchFonts'       => esc_html__( 'Search Fonts', 'et_builder' ),
+			'underline'         => esc_html__( 'Underline', 'et_builder' ),
+			'strikethrough'     => esc_html__( 'Strikethrough', 'et_builder' ),
+			'color'             => et_builder_i18n( 'Color' ),
+			'style'             => esc_html__( 'Style', 'et_builder' ),
+			'all'               => esc_html__( 'All', 'et_builder' ),
+			'Headings'          => esc_html__( 'Headings', 'et_builder' ),
+			'Body'              => esc_html__( 'Body', 'et_builder' ),
+			'Save'              => esc_html__( 'Save', 'et_builder' ),
+			'Edit Global Fonts' => esc_html__( 'Edit Global Fonts', 'et_builder' ),
+			'Headings Font'     => esc_html__( 'Headings Font', 'et_builder' ),
+			'Body Font'         => esc_html__( 'Body Font', 'et_builder' ),
 		),
 
 		// Drag and Droploader
@@ -2650,6 +2697,7 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 					'portability'       => esc_html__( 'Portability', 'et_builder' ),
 					'open'              => esc_html__( 'Expand Settings', 'et_builder' ),
 					'close'             => esc_html__( 'Collapse Settings', 'et_builder' ),
+					'insertLayout'      => esc_html__( 'Insert Layout', 'et_builder' ),
 				),
 				'save'       => array(
 					'saveDraft' => esc_html__( 'Save as Draft', 'et_builder' ),
@@ -2826,8 +2874,24 @@ function et_fb_get_static_backend_helpers( $post_type ) {
 			'tooltips' => array(
 				'divi_ai_options' => esc_html__( 'Divi AI Options', 'et_builder' ),
 			),
-			'title'          => esc_html__( 'Title', 'et_builder' ),
-			'excerpt'        => esc_html__( 'Excerpt', 'et_builder' ),
+			'title'           => esc_html__( 'Title', 'et_builder' ),
+			'excerpt'         => esc_html__( 'Excerpt', 'et_builder' ),
+			'layout_with_ai'  => esc_html__( 'Layout With AI', 'et_builder' ),
+			'section_with_ai' => esc_html__( 'Generate Section With AI', 'et_builder' ),
+			'layout'          => array(
+				'notification' => array(
+					'How Does It Look?'       => esc_html__( 'How Does It Look?', 'et_builder' ),
+					'Would you like to save?' => esc_html__( 'Would you like to save these fonts and colors for future Divi AI layouts?', 'et_builder' ),
+					'No Thanks'               => esc_html__( 'No Thanks', 'et_builder' ),
+					'Yes Please!'             => esc_html__( 'Yes Please!', 'et_builder' ),
+				),
+				'imageAttributions' => array(
+					'%s Images Used From Unsplash' => esc_html( '%s Images Used From Unsplash', 'et_builder' ),
+					'%s Image Used From Unsplash'  => esc_html( '%s Image Used From Unsplash', 'et_builder' ),
+					'by %s'                        => esc_html( 'by %s', 'et_builder' ),
+				),
+			),
+			'image'          => esc_html__( 'Featured Image', 'et_builder' ),
 		),
 	);
 	// phpcs:enable WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned

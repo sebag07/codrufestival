@@ -264,7 +264,7 @@ if ( wp_doing_ajax() && ! is_customize_preview() ) {
 			'update-theme',
 			'et_safe_mode_update',
 			'et_core_portability_export',
-			'et_core_portability_import',
+			'et_core_portability_import_default_presets',
 			'et_builder_migrate_module_customizer_phase_two',
 			'et_builder_save_global_presets_history',
 			'et_builder_retrieve_global_presets_history',
@@ -278,6 +278,8 @@ if ( wp_doing_ajax() && ! is_customize_preview() ) {
 			'et_fb_fetch_before_after_components',
 			'et_code_snippets_library_get_items',
 			'et_builder_global_colors_get',
+			'et_update_customizer_fonts',
+			'et_ai_shortcode_string_to_object',
 		),
 	);
 
@@ -823,8 +825,8 @@ function et_builder_body_classes( $classes ) {
 		$layout_type  = et_fb_get_layout_type( $post_id );
 		$layout_scope = et_fb_get_layout_term_slug( $post_id, 'scope' );
 
-		$classes[] = "et_pb_library_page-${layout_type}";
-		$classes[] = "et_pb_library_page-${layout_scope}";
+		$classes[] = "et_pb_library_page-{$layout_type}";
+		$classes[] = "et_pb_library_page-{$layout_scope}";
 	}
 
 	return $classes;
@@ -1174,6 +1176,10 @@ function et_pb_add_non_builder_comment_class( $classes, $class, $comment_ID, $co
  * @return void
  */
 function et_builder_enqueue_open_sans() {
+	if ( wp_style_is( 'et-core-main-fonts', 'enqueued' ) ) {
+		return;
+	}
+
 	$protocol   = is_ssl() ? 'https' : 'http';
 	$query_args = array(
 		'family' => 'Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800',

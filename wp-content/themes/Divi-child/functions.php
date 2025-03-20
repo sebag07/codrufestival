@@ -241,3 +241,39 @@ function get_language_shortcode() {
     return apply_filters( 'wpml_current_language', null );
 }
 add_shortcode( 'language', 'get_language_shortcode' );
+
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/homepage', [
+        'methods'  => 'GET',
+        'callback' => function () {
+            $front_page_id = get_option('page_on_front');
+            return get_post($front_page_id);
+        },
+    ]);
+});
+
+add_action('rest_api_init', function () {
+    register_rest_route('custom/v1', '/options', [
+        'methods'  => 'GET',
+        'callback' => 'get_filtered_acf_options',
+    ]);
+});
+
+function get_filtered_acf_options( $request ) {
+    // Retrieve all options set in ACF from the options page.
+    $options = get_fields('option');
+
+    // Check for a query parameter, for example, 'group' or 'field'
+    $field = $request->get_param('field');
+    if ($field) {
+        if ( isset($options[$field]) ) {
+            return $options[$field];
+        } else {
+            return new WP_Error('no_field', 'The specified options field was not found.', ['status' => 404]);
+        }
+    }
+
+    // If no specific field is requested, return all options.
+    return $options;
+}
+

@@ -1157,7 +1157,7 @@ class ET_Dynamic_Assets {
 					$assets_data[ $file_type ]['content'][] = $file_content;
 
 					if ( $this->is_rtl ) {
-						$file_rtl = str_replace( ".${file_type}", "-rtl.{$file_type}", $file );
+						$file_rtl = str_replace( ".{$file_type}", "-rtl.{$file_type}", $file );
 
 						if ( file_exists( $file_rtl ) ) {
 							$file_content_rtl = $wp_filesystem->get_contents( $file_rtl );
@@ -1300,7 +1300,7 @@ class ET_Dynamic_Assets {
 		$customizer_gutter      = intval( et_get_option( 'gutter_width', '3' ) );
 		$this->_default_gutters = array_merge( (array) $page_custom_gutter, (array) $customizer_gutter );
 		$no_of_gutters          = substr_count( $this->_all_content, 'use_custom_gutter' );
-		$preset_gutter_val      = ! empty( $this->_presets_attributes['use_custom_gutter'] ) && 'on' === $this->_presets_attributes['use_custom_gutter'] ?
+		$preset_gutter_val      = ! empty( $this->_presets_attributes['use_custom_gutter'] ) && 'on' === $this->_presets_attributes['use_custom_gutter'] && ! empty( $this->_presets_attributes['gutter_width'] ) ?
 			(array) $this->_presets_attributes['gutter_width'] : array();
 
 		if ( $no_of_gutters > count( $matches[0] ) && ! in_array( 'gutter_width="3"', $matches[0], true ) ) {
@@ -2488,6 +2488,12 @@ class ET_Dynamic_Assets {
 			);
 
 			$this->_enqueue_comments = $this->check_for_dependency( $comments_deps, $current_shortcodes );
+
+			// We need to set _enqueue_comments to true if Dynamic CSS is disabled, otherwise
+			// comment-reply would never be enqueued and you will not be able to reply to a comment.
+			if ( ! et_use_dynamic_css() ) {
+				$this->_enqueue_comments = true;
+			}
 
 			if ( $this->_enqueue_comments && comments_open() || et_disable_js_on_demand() ) {
 				wp_enqueue_script( 'comment-reply' );

@@ -37,6 +37,11 @@ function _et_core_find_latest( $return = 'path' ) {
 	$this_core_path = _et_core_normalize_path( dirname( __FILE__ ) );
 	$content_dir    = _et_core_normalize_path( WP_CONTENT_DIR );
 
+	// If this constant is enabled, the core path from this product will be used instead of the latest core from all installed products.
+	if ( defined( 'ET_USE_PRODUCT_CORE_PATHS' ) && ET_USE_PRODUCT_CORE_PATHS ) {
+		return $this_core_path;
+	}
+
 	include $this_core_path . '/_et_core_version.php';
 
 	$latest_core_path    = $this_core_path;
@@ -119,6 +124,10 @@ function _et_core_path_belongs_to_active_product( $path ) {
 		return is_plugin_active( 'monarch/monarch.php' );
 	}
 
+	if ( false !== strpos( $path, '/divi-dash/' ) ) {
+		return is_plugin_active( 'divi-dash/divi-dash.php' );
+	}
+
 	return false;
 }
 endif;
@@ -184,6 +193,10 @@ if ( ! function_exists( 'register_portability_for_code_snippets' ) ) :
 	 * @since 4.19.0
 	 */
 	function register_portability_for_code_snippets() {
+		if ( ! function_exists( 'et_pb_is_allowed' ) ) {
+			return;
+		}
+
 		// No permission, can't load library UI in the first place.
 		if ( et_pb_is_allowed( 'divi_library' ) ) {
 			// Register portability.

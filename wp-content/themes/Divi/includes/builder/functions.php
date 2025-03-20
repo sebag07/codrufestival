@@ -8,7 +8,7 @@
 
 if ( ! defined( 'ET_BUILDER_PRODUCT_VERSION' ) ) {
 	// Note, this will be updated automatically during grunt release task.
-	define( 'ET_BUILDER_PRODUCT_VERSION', '4.23.1' );
+	define( 'ET_BUILDER_PRODUCT_VERSION', '4.27.4' );
 }
 
 if ( ! defined( 'ET_BUILDER_VERSION' ) ) {
@@ -969,7 +969,7 @@ if ( ! function_exists( 'et_builder_page_creation_options' ) ) :
 				'imgSrc'          => 'premade.png',
 				'imgSrcHover'     => 'premade.gif',
 				'titleText'       => esc_html__( 'Choose a premade Layout', 'et_builder' ),
-				'descriptionText' => esc_html__( 'Choose from hundreds of world-class premade layouts or start from any of your existing saved layouts.', 'et_builder' ),
+				'descriptionText' => esc_html__( 'Choose from hundreds of premade layouts, start from any of your saved layouts, or clone an existing page.', 'et_builder' ),
 				'buttonText'      => esc_html__( 'Browse Layouts', 'et_builder' ),
 				'permission'      => array( 'load_layout', 'divi_library' ),
 				'setting'         => array(
@@ -977,14 +977,15 @@ if ( ! function_exists( 'et_builder_page_creation_options' ) ) :
 					'value_index' => 2,
 				),
 			),
-			'clone_existing_page'   => array(
-				'className'       => 'accent-green',
-				'imgSrc'          => 'clone.png',
-				'imgSrcHover'     => 'clone.gif',
-				'titleText'       => esc_html__( 'Clone Existing page', 'et_builder' ),
-				'descriptionText' => esc_html__( 'Jump start your layout design by duplicating another page that you’ve already built.', 'et_builder' ),
-				'buttonText'      => esc_html__( 'Choose Page', 'et_builder' ),
-				'permission'      => array( 'load_layout', 'divi_library', 'edit_module' ),
+			'build_with_ai'         => array(
+				'className'       => 'accent-dark-blue',
+				'imgSrc'          => 'layout-insert-build-with-ai.svg',
+				'imgSrcHover'     => 'layout-insert-build-with-ai.svg',
+				'titleText'       => esc_html__( 'Build With AI', 'et_builder' ),
+				'bannerText'      => esc_html__( 'Brand New', 'et_builder' ),
+				'descriptionText' => esc_html__( 'Simply describe your page content, sit back, relax, and let Divi AI build your page with the click of a button.', 'et_builder' ),
+				'buttonText'      => esc_html__( 'Generate Layout', 'et_builder' ),
+				'permission'      => array( 'divi_ai' ),
 				'setting'         => array(
 					'value_index' => 3,
 				),
@@ -2117,7 +2118,23 @@ function et_fb_process_to_shortcode( $object, $options = array(), $library_item_
 					if ( et_is_builder_plugin_active() && in_array( $type, ET_Builder_Element::get_has_content_modules(), true ) ) {
 						// Wrap content in autop to avoid tagless content on FE due to content is edited on html editor and only
 						// have one-line without newline wrap which prevent `the_content`'s wpautop filter to properly wrap it.
-						$content = wpautop( $content );
+
+						/**
+						 * Filter whether to apply wpautop to content.
+						 *
+						 * This filter allows customization of whether the wpautop filter should be applied to
+						 * the content of a shortcode. It helps in wrapping content in <p> tags automatically when necessary.
+						 *
+						 * @since 4.11.4
+						 *
+						 * @param bool   $should_wpautop Whether to apply wpautop. Default true.
+						 * @param string $type           The shortcode or module type.
+						 * @param string $content        The content to be filtered.
+						 * @param array  $item           The current shortcode being processed.
+						 */
+						$should_wpautop = apply_filters( 'et_fb_should_apply_wpautop', true, $type, $content, $item );
+
+						$content = $should_wpautop ? wpautop( $content ) : $content;
 					}
 
 					$output .= $content;
@@ -2132,7 +2149,23 @@ function et_fb_process_to_shortcode( $object, $options = array(), $library_item_
 						if ( et_is_builder_plugin_active() && in_array( $type, ET_Builder_Element::get_has_content_modules(), true ) ) {
 							// Wrap content in autop to avoid tagless content on FE due to content is edited on html editor and only
 							// have one-line without newline wrap which prevent `the_content`'s wpautop filter to properly wrap it.
-							$_content = wpautop( $_content );
+
+							/**
+							 * Filter whether to apply wpautop to content.
+							 *
+							 * This filter allows customization of whether the wpautop filter should be applied to
+							 * the content of a shortcode. It helps in wrapping content in <p> tags automatically when necessary.
+							 *
+							 * @since 4.11.4
+							 *
+							 * @param bool   $should_wpautop Whether to apply wpautop. Default true.
+							 * @param string $type           The shortcode or module type.
+							 * @param string $content        The content to be filtered.
+							 * @param array  $item           The current shortcode being processed.
+							 */
+							$should_wpautop = apply_filters( 'et_fb_should_apply_wpautop', true, $type, $_content, $item );
+
+							$_content = $should_wpautop ? wpautop( $_content ) : $_content;
 						}
 
 						$output .= $_content;
@@ -3240,6 +3273,10 @@ if ( ! function_exists( 'et_builder_set_element_font' ) ) :
 
 				$style .= "$font_family ";
 			}
+
+			// Parse global font weight value.
+			$is_global_font_weigth = in_array( $font_weight, array( '--et_global_heading_font_weight', '--et_global_body_font_weight' ), true );
+			$font_weight           = $is_global_font_weigth ? '--et_global_heading_font_weight' === $font_weight ? et_get_option( 'heading_font_weight', '' ) : et_get_option( 'body_font_weight', '' ) : $font_weight;
 
 			$style .= et_builder_set_element_font_style( 'font-weight', ( '' !== $font_weight_default && ( '' === $font_weight || $font_weight_default === $font_weight ) ), ( '' !== $font_weight ), 'normal', $font_weight, $use_important );
 
@@ -5771,7 +5808,6 @@ if ( ! function_exists( 'et_pb_postinfo_meta' ) ) :
 		if ( in_array( 'author', $postinfo, true ) ) {
 			$postinfo_meta[] = ' ' . esc_html__( 'by', 'et_builder' ) . ' <span class="author vcard">' . et_pb_get_the_author_posts_link() . '</span>';
 		}
-
 
 		if ( in_array( 'date', $postinfo, true ) ) {
 			$postinfo_meta[] = '<span class="published">' . esc_html( get_the_time( $date_format ) ) . '</span>';
@@ -9545,6 +9581,12 @@ add_action( 'admin_init', 'et_pb_remove_lb_plugin_force_editor_mode' );
  * Generates array of all Role options
  */
 function et_pb_all_role_options() {
+	// get all the roles that can edit theme options.
+	$applicability_roles = et_core_get_roles_by_capabilities( [ 'edit_theme_options' ] );
+
+	// Get all the roles that can edit theme options and edit others posts.
+	$tb_applicability_roles = et_core_get_roles_by_capabilities( [ 'edit_theme_options', 'edit_others_posts' ], true );
+
 	// get all the modules and build array of capabilities for them.
 	$all_modules_array  = ET_Builder_Element::get_modules_array();
 	$custom_user_tabs   = ET_Builder_Element::get_tabs();
@@ -9588,7 +9630,7 @@ function et_pb_all_role_options() {
 		? array(
 			'theme_customizer' => array(
 				'name'          => esc_html__( 'Theme Customizer', 'et_builder' ),
-				'applicability' => array( 'administrator' ),
+				'applicability' => $applicability_roles,
 			),
 			'page_options'     => array(
 				'name' => esc_html__( 'Page Options', 'et_builder' ),
@@ -9600,22 +9642,29 @@ function et_pb_all_role_options() {
 		'general_capabilities'        => array(
 			'section_title' => '',
 			'options'       => array(
-				'theme_options' => array(
+				'theme_options'  => array(
 					'name'          => et_is_builder_plugin_active() ? esc_html__( 'Plugin Options', 'et_builder' ) : esc_html__( 'Theme Options', 'et_builder' ),
-					'applicability' => array( 'administrator' ),
+					'applicability' => $applicability_roles,
 				),
-				'divi_library'  => array(
-					'name' => esc_html__( 'Divi Library', 'et_builder' ),
+				// Added capabilities, so we can control menu role wise effectively.
+				'divi_library'   => array(
+					'name'          => esc_html__( 'Divi Library', 'et_builder' ),
+					'applicability' => $applicability_roles,
+					'capabilities'  => 'export',
 				),
-				'theme_builder' => array(
+				'theme_builder'  => array(
 					'name'          => esc_html__( 'Theme Builder', 'et_builder' ),
-					'applicability' => array( 'administrator', 'editor' ),
+					'applicability' => $tb_applicability_roles,
 				),
-				'divi_ai'       => array(
+				'support_center' => array(
+					'name'          => esc_html__( 'Support Center', 'et_builder' ),
+					'applicability' => $applicability_roles,
+				),
+				'divi_ai'        => array(
 					'name'          => esc_html__( 'Divi AI', 'et_builder' ),
 					'applicability' => array( 'administrator', 'editor' ),
 				),
-				'ab_testing'    => array(
+				'ab_testing'     => array(
 					'name' => esc_html__( 'Split Testing', 'et_builder' ),
 				),
 			),
@@ -9701,9 +9750,15 @@ function et_pb_all_role_options() {
 
 		// Dynamically create an option foreach portability.
 		foreach ( $registered_portabilities as $portability_context => $portability_instance ) {
-			$all_role_options['portability']['options'][ "{$portability_context}_portability" ] = array(
+			$portability_options = array(
 				'name' => esc_html( $portability_instance->name ),
 			);
+
+			if ( isset( $portability_instance->applicability ) ) {
+				$portability_options['applicability'] = $portability_instance->applicability;
+			}
+
+			$all_role_options['portability']['options'][ "{$portability_context}_portability" ] = $portability_options;
 		}
 	}
 
@@ -9773,6 +9828,10 @@ function et_pb_generate_roles_tab( $all_role_options, $role ) {
 	// generate all sections of the form for current role.
 	if ( ! empty( $all_role_options ) ) {
 		foreach ( $all_role_options as $capability_id => $capability_options ) {
+			if ( isset( $capability_options['applicability'] ) && ! in_array( $role, $capability_options['applicability'], true ) ) {
+				continue;
+			}
+
 			$form_sections .= sprintf(
 				'<div class="et_pb_roles_section_container">
 					%1$s
@@ -9816,8 +9875,30 @@ function et_pb_generate_capabilities_output( $cap_array, $role ) {
 	$output = '';
 
 	if ( ! empty( $cap_array ) ) {
+		$user_has_all_capabilities = true;
+		$role_obj                  = get_role( $role );
+
 		foreach ( $cap_array as $capability => $capability_details ) {
 			if ( empty( $capability_details['applicability'] ) || ( ! empty( $capability_details['applicability'] ) && in_array( $role, $capability_details['applicability'], true ) ) ) {
+
+				// $capability_details['capabilities'] is an array of capabilities that are required to see this option.
+				if ( isset( $capability_details['capabilities'] ) ) {
+					if ( is_string( $capability_details['capabilities'] ) && ! $role_obj->has_cap( $capability_details['capabilities'] ) ) {
+						$user_has_all_capabilities = false;
+					} elseif ( is_array( $capability_details['capabilities'] ) ) {
+						foreach ( $capability_details['capabilities'] as $capability ) {
+							if ( ! $role_obj->has_cap( $capability ) ) {
+								$user_has_all_capabilities = false;
+								break;
+							}
+						}
+					}
+
+					if ( ! $user_has_all_capabilities ) {
+						continue;
+					}
+				}
+
 				$output .= sprintf(
 					'<div class="et_pb_capability_option">
 						<span class="et_pb_capability_title">%4$s</span>
@@ -11536,7 +11617,7 @@ function et_fb_add_additional_attrs( $processed_attrs, $output ) {
 			continue;
 		}
 
-		$global_color_info = et_builder_get_all_global_colors();
+		$global_color_info = et_builder_get_all_global_colors( true );
 
 		// If there are no matching Global Colors, return null.
 		if ( ! is_array( $global_color_info ) ) {
@@ -13252,8 +13333,28 @@ if ( ! function_exists( 'et_builder_global_colors_ajax_save_handler' ) ) :
 			wp_send_json_error();
 		}
 
+		/**
+		 * Fires after global colors are processed.
+		 *
+		 * @since 4.25.0
+		 */
+		do_action( 'et_global_colors_saved', $global_colors );
+
+		// Do not save customizer colors into Global Colors setting.
+		$excluded_keys = [
+			'gcid-primary-color',
+			'gcid-secondary-color',
+			'gcid-heading-color',
+			'gcid-body-color',
+		];
+
+		foreach ( $excluded_keys as $excluded_key ) {
+			unset( $global_colors[ $excluded_key ] );
+		}
+
 		// Global Color data has been sanitized above.
 		et_update_option( 'et_global_colors', $global_colors );
+
 		ET_Core_PageResource::remove_static_resources( 'all', 'all' );
 
 		wp_send_json_success();
@@ -13261,17 +13362,6 @@ if ( ! function_exists( 'et_builder_global_colors_ajax_save_handler' ) ) :
 endif;
 
 add_action( 'wp_ajax_et_builder_global_colors_save', 'et_builder_global_colors_ajax_save_handler' );
-
-/**
- * Get all global colors.
- *
- * @since 4.9.0
- *
- * @return array
- */
-function et_builder_get_all_global_colors() {
-	return et_get_option( 'et_global_colors' );
-}
 
 if ( ! function_exists( 'et_builder_global_colors_ajax_get_handler' ) ) :
 	/**
@@ -13282,7 +13372,7 @@ if ( ! function_exists( 'et_builder_global_colors_ajax_get_handler' ) ) :
 	function et_builder_global_colors_ajax_get_handler() {
 		// Get nonce from $_GET.
 		et_core_security_check( 'edit_posts', 'et_builder_global_colors_get', 'et_builder_global_colors_get_nonce', '_GET' );
-		wp_send_json_success( [ 'global_colors' => et_builder_get_all_global_colors() ] );
+		wp_send_json_success( [ 'global_colors' => et_builder_get_all_global_colors( true ) ] );
 	}
 endif;
 
@@ -13298,7 +13388,7 @@ add_action( 'wp_ajax_et_builder_global_colors_get', 'et_builder_global_colors_aj
  * @return array
  */
 function et_builder_get_global_color_info( $color_id ) {
-	$colors = et_builder_get_all_global_colors();
+	$colors = et_builder_get_all_global_colors( true );
 
 	if ( empty( $colors ) || ! array_key_exists( $color_id, $colors ) ) {
 		return null;
@@ -13467,3 +13557,72 @@ if ( ! function_exists( 'et_pb_validate_youtube_url' ) ) :
 	}
 endif;
 
+if ( ! function_exists( 'et_update_customizer_colors' ) ) :
+	/**
+	 * Update customizer colors.
+	 *
+	 * @param array $global_colors Global colors.
+	 *
+	 * @since 4.25.0
+	 *
+	 * @return void
+	 */
+	function et_update_customizer_colors( $global_colors ) {
+		$primary_color   = isset( $global_colors['gcid-primary-color']['color'] )
+			? $global_colors['gcid-primary-color']['color']
+			: '';
+		$secondary_color = isset( $global_colors['gcid-secondary-color']['color'] )
+			? $global_colors['gcid-secondary-color']['color']
+			: '';
+		$heading_color   = isset( $global_colors['gcid-header-color']['color'] )
+			? $global_colors['gcid-header-color']['color']
+			: '';
+		$body_color      = isset( $global_colors['gcid-font-color']['color'] )
+			? $global_colors['gcid-font-color']['color']
+			: '';
+
+		if ( ! empty( $primary_color ) ) {
+			et_update_option( 'accent_color', $primary_color );
+		}
+
+		if ( ! empty( $secondary_color ) ) {
+			et_update_option( 'secondary_accent_color', $secondary_color );
+		}
+
+		if ( ! empty( $heading_color ) ) {
+			et_update_option( 'header_color', $heading_color );
+		}
+
+		if ( ! empty( $body_color ) ) {
+			et_update_option( 'font_color', $body_color );
+		}
+	}
+endif;
+
+add_action( 'et_global_colors_saved', 'et_update_customizer_colors' );
+
+/**
+ * Ajax Callback :: Update cusomizer fonts.
+ */
+function et_update_customizer_fonts() {
+	if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( $_POST['nonce'] ), 'et_pb_save_customizer_fonts_nonce' ) ) {
+		die( -1 );
+	}
+
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		die( -1 );
+	}
+
+	$new_heading_font = isset( $_POST['et_pb_heading_font'] ) ? sanitize_text_field( $_POST['et_pb_heading_font'] ) : '';
+	$new_body_font   = isset( $_POST['et_pb_body_font'] ) ? sanitize_text_field( $_POST['et_pb_body_font'] ) : '';
+
+	if ( $new_heading_font ) {
+		et_update_option( 'heading_font', $new_heading_font );
+	}
+
+	if ( $new_body_font ) {
+		et_update_option( 'body_font', $new_body_font );
+	}
+}
+
+add_action( 'wp_ajax_et_update_customizer_fonts', 'et_update_customizer_fonts' );
