@@ -1352,15 +1352,32 @@ a:hover {
     .heroContainer .heroRightLeaves {
         display: block;
         left: 0;
-        top: 80px;
+        top: 0;
         height: auto;
     }
 
     .heroContainer .heroLeftLeaves {
         display: block;
         left: 0;
-        top: 80px;
+        top: 0;
         height: auto;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .heroContainer .heroRightLeaves {
+        display: block;
+        left: auto;
+        right: 0;
+        top: 0;
+        height: 300px;
+    }
+
+    .heroContainer .heroLeftLeaves {
+        display: block;
+        left: 0;
+        top: 0;
+        height: 300px;
     }
 }
 
@@ -5251,23 +5268,6 @@ a:hover {
 @media (max-width: 991px) {
     .heroContentImage {
         width: 100%;
-    }
-}
-
-
-@media screen and (max-width: 991px) {
-    .heroContainer .heroRightLeaves {
-        display: block;
-        left: 0;
-        top: 80px;
-        height: auto;
-    }
-
-    .heroContainer .heroLeftLeaves {
-        display: block;
-        left: 0;
-        top: 80px;
-        height: auto;
     }
 }
 
@@ -9593,7 +9593,9 @@ a {
   /* aftermovie hero */
 
   .after-movie-container {
-    min-height: 80vh;
+    height: 80vh;
+    min-height: auto;
+    max-height: 1000px;
     width: 100%;
     position: relative;
     padding-top: 80px !important;
@@ -9649,6 +9651,7 @@ a {
   @media (max-width:500px) {
     .after-movie-container {
         min-height: 420px;
+        height: auto;
     }
   }
 
