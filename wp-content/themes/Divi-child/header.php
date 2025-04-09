@@ -42,7 +42,7 @@
     <!-- Adobe Font -->
     <link rel="stylesheet" href="https://use.typekit.net/ufx3ngj.css">
 
-    <title>CODRU Festival - 30 August - 1 Septembrie 2024</title>
+    <title>Codru Festival | 29 - 31 August 2025, Pădurea Verde, Timișoara, Romania</title>
 
     <!-- Meta Pixel Code -->
     <script>
