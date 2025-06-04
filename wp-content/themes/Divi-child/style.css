@@ -48,7 +48,7 @@ html {
 }
 
 body {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
     background-color: var(--secondary-color);
@@ -94,7 +94,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    font-family: "Fira Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
@@ -1754,7 +1754,7 @@ footer .row {
     padding-top: 40px;
     font-weight: 500;
     text-align: center;
-    font-family: "Montserrat";
+    font-family: "Fira Sans";
     margin-bottom: 50px;
 }
 
@@ -2512,6 +2512,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     align-items: center;
     letter-spacing: 1px;
     text-transform: uppercase;
+    font-style: italic;
 }
 
 .artistsLevel1,
@@ -4379,7 +4380,7 @@ a {
 
 .sib-form label, .sib-form p {
     color: #fff !important;
-    font-family: 'Montserrat';
+    font-family: 'Fira Sans';
     font-weight: 500;
 }
 
@@ -4388,7 +4389,7 @@ a {
 }
 
 .sib-form {
-    font-family: 'Montserrat' !important;
+    font-family: 'Fira Sans' !important;
     padding: 0px !important;
 }
 
@@ -5252,7 +5253,7 @@ f.artistInnerContainer {
 
 .sib-form label, .sib-form p {
     color: #fff !important;
-    font-family: 'Montserrat';
+    font-family: 'Fira Sans';
     font-weight: 500;
 }
 
@@ -5261,7 +5262,7 @@ f.artistInnerContainer {
 }
 
 .sib-form {
-    font-family: 'Montserrat' !important;
+    font-family: 'Fira Sans' !important;
     padding: 0px !important;
 }
 
