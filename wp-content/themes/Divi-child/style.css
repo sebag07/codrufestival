@@ -2497,7 +2497,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .artists-bullet span {
-    color: var(--artist-level-color-primary);
+    color: var(--button-color);
     font-weight: 900;
 }
 
@@ -4164,7 +4164,7 @@ a {
 }
 
 #lineup {
-    background: #6cbf02;
+    background: var(--secondary-color);
 }
 
 
@@ -5040,14 +5040,10 @@ a {
     margin: 0 auto 30px auto;
 }
 
-#lineup {
-    background: #6cbf02;
-}
-
 
 /* Artist cards */
 
-.artistInnerContainer {
+f.artistInnerContainer {
     position: relative;
     box-sizing: border-box;
     overflow: hidden;
@@ -5708,6 +5704,12 @@ a {
   }
 
   /* aftermovie hero */
+
+   img.hero-section-title {
+       z-index: 9;
+       max-width: 600px;
+       width: 100%;
+   }
 
   .after-movie-container {
     height: 80vh;

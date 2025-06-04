@@ -9,6 +9,7 @@ $backgroundType = get_field("hero_background_type");
 ?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
+            <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
 <!--            <div class="background-overlay"></div>-->
             <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
             <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
@@ -30,6 +31,41 @@ $backgroundType = get_field("hero_background_type");
             </div>
 </section>
 
+<section id="lineup">
+    <div class="container">
+        <div class="container-fluid sectionPadding">
+            <div class="col-12 text-center">
+                <div class="artistsLevel1 pt-3 pb-3">
+                    <?php display_artists_by_level('level-1', get_the_ID()); ?>
+                </div>
+                <div class="artistsLevel2 pt-3 pb-3">
+                    <?php display_artists_by_level('level-2', get_the_ID(), 'english'); ?>
+                </div>
+                <div class="artistsLevel2 pt-3 pb-3">
+                    <?php display_artists_by_level('level-2', get_the_ID(),'roman', 'special'); ?>
+                </div>
+                <div class="artistsLevel2 pt-3 pb-3">
+                    <?php display_artists_by_level('level-2', get_the_ID(), 'roman'); ?>
+                </div>
+                <div class="artistsLevel3 pt-3 pb-3">
+                    <?php display_artists_by_level('level-3', get_the_ID()); ?>
+                </div>
+                <div class="artistsLevel4 pt-3 pb-3">
+                    <?php display_artists_by_level('level-4', get_the_ID()); ?>
+                </div>
+                <div class="artistsLevel5 pt-3 pb-3">
+                    <?php display_artists_by_level('level-5', get_the_ID()); ?>
+                </div>
+                <div class="artistsLevel6 pt-3 pb-3">
+                    <?php display_artists_by_level('level-6', get_the_ID()); ?>
+                </div>
+            </div>
+<!--            <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">-->
+<!--                <a class="codru-general-button"-->
+<!--                   href="--><?php //echo get_field('see_all_artists_button_link') ?><!--"-->
+<!--                   target="_blank">--><?php //echo get_field('see_all_artists_button') ?><!--</a>-->
+<!--            </div>-->
+</section>
 
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <section id="tickets-sale-section">
