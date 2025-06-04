@@ -398,7 +398,7 @@ a:hover {
     padding: 9px 20px;
     display: block;
     background: var(--button-color);
-    color: #fff;
+    color: #000;
     font-weight: 800;
     border-radius: 20px;
 }
