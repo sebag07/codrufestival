@@ -5707,7 +5707,7 @@ f.artistInnerContainer {
 
    img.hero-section-title {
        z-index: 9;
-       max-width: 600px;
+       max-width: 1000px;
        width: 100%;
    }
 
