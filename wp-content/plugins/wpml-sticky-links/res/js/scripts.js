@@ -2,7 +2,7 @@
 
 var wpml_sticky_links_ajax_loader_img = data.wpml_sticky_links_ajxloaderimg;
 
-jQuery(document).ready(function ($) {
+jQuery(function ($) {
     var saveButton = jQuery('#icl_save_sl_options').find('#save');
     var sticky_links = sticky_links || {};
 

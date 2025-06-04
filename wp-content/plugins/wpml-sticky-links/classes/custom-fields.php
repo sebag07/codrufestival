@@ -74,7 +74,7 @@ class CustomFields implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	/**
 	 * Convert links to default format in the custom fields configured to do so.
 	 *
-	 * @param int    $metaId The primary key (not used here).
+	 * @param null    $metaId The primary key (not used here).
 	 * @param int    $id     The post ID we are updating.
 	 * @param string $key    The custom field we are updating.
 	 * @param string $value  The value of the custom field.

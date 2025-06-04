@@ -27,7 +27,7 @@ class WPML_Compatibility_MailChimp_Widget_Filter {
 			$form_id = array_key_exists( 'form_id', $instance ) ? $instance['form_id'] : (int) get_option( 'mc4wp_default_form_id', 0 );
 
 			if ( $form_id ) {
-				$instance['form_id'] = apply_filters( 'wpml_object_id', $form_id, 'mc4wp-form', true );
+				$instance['form_id'] = apply_filters( 'wpml_object_id', $form_id, WPML_Compatibility_MailChimp::FORM_POST_TYPE, true );
 			}
 		}
 

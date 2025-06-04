@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'WPML_Compatibility_MailChimp' => $baseDir . '/classes/class-wpml-compatibility-mailchimp.php',
     'WPML_Compatibility_MailChimp_Redirection' => $baseDir . '/classes/class-wpml-compatibility-mailchimp-redirection.php',
     'WPML_Compatibility_MailChimp_Shortcode_Attributes_Filter' => $baseDir . '/classes/class-wpml-compatibility-mailchimp-shortcode-attributes-filter.php',

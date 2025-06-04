@@ -35,7 +35,7 @@
 
     jQuery('input[name="show_on_root"]').change(iclToggleShowOnRoot)
     jQuery('#wpml_show_page_on_root_details').find('a').click(function () {
-      if (!jQuery('#wpml_show_on_root_page').hasClass('active')) {
+      if (!jQuery('#wpml_show_on_root_page').is(':checked')) {
         alert(jQuery('#wpml_show_page_on_root_x').html())
         return false
       }
@@ -72,6 +72,9 @@
         height: 'auto'
       })
     })
+
+    checkLanguageDirectorySettings()
+    jQuery('#icl_use_directory_wrap').click(checkLanguageDirectorySettings)
   })
 
   function iclHandleToggle() {
@@ -311,7 +314,7 @@
       rootHtmlFile = form.find('[name=root_html_file_path]').val()
 
       if (useDirectories) {
-        if (showOnRoot === 'html' && !rootHtmlFile) {
+        if (showOnRoot === 'html_file' && !rootHtmlFile) {
           validSettings = false
           useDirectoryWrapper.find('.icl_error_text.icl_error_1').fadeIn()
         }
@@ -459,17 +462,19 @@
             formMessage.fadeIn()
           }
 
-          if (jQuery('input[name=show_on_root]').length) {
+          if (jQuery('input[name=use_directory]').is(':checked') && jQuery('input[name=show_on_root]').length) {
             rootHtmlFile = jQuery('#wpml_show_on_root_html_file')
             rootPage = jQuery('#wpml_show_on_root_page')
             if (rootHtmlFile.prop('checked')) {
               rootHtmlFile.addClass('active')
               rootPage.removeClass('active')
             }
+
             if (rootPage.prop('checked')) {
               rootPage.addClass('active')
               rootHtmlFile.removeClass('active')
             }
+
           }
         } else {
           formErrors = jQuery('form[name="' + formName + '"] .icl_form_errors')
@@ -519,5 +524,74 @@
   function update_seo_head_langs_priority(event) {
     const element = jQuery(this)
     jQuery('#wpml-seo-head-langs-priority').prop('disabled', !element.prop('checked'))
+  }
+
+  function checkLanguageDirectorySettings() {
+    let isShowOnRootChecked
+    let useDirectories
+
+    const form       = jQuery('#icl_save_language_negotiation_type')
+    let submitButton = form.find('input[name=save]')
+
+    useDirectories      = form.find('[name=use_directory]').is(':checked')
+    isShowOnRootChecked = form.find('[name=show_on_root]').is(':checked')
+
+    if (useDirectories && !isShowOnRootChecked) {
+      submitButton.prop('disabled', true)
+      submitButton.addClass('js-wpml-url-format-submit-button-tooltip-open')
+    } else {
+      form.find('input[name=save]').prop('disabled', false)
+      submitButton.removeClass('js-wpml-url-format-submit-button-tooltip-open')
+      jQuery('.js-wpml-url-format-submit-button-tooltip').remove()
+    }
+
+    jQuery( '.js-wpml-url-format-submit-button-tooltip-open, .js-wpml-root-url-tooltip-open' ).hover( function( e ) {
+      e.preventDefault()
+      openTooltip( jQuery( this ) )
+    })
+  }
+
+  openTooltip = function(triggerNode) {
+    var content = triggerNode.data('content')
+    var nodeType = triggerNode.data('type')
+
+    var nodeClass    = 'js-wpml-root-url-active-tooltip'
+    var pointerClass = 'js-wpml-root-url-tooltip'
+    var marginLeft   = '-54px'
+
+    if('submit-btn' === nodeType) {
+      nodeClass    = 'js-wpml-url-format-submit-button-active-tooltip'
+      pointerClass = 'js-wpml-url-format-submit-button-tooltip'
+      marginLeft   = '-25px'
+    }
+
+    jQuery('.' + nodeClass).pointer('close')
+
+    if(triggerNode.length && content) {
+      triggerNode.addClass(nodeClass)
+      triggerNode.pointer({
+        pointerClass: pointerClass + ' wpml-ls-tooltip',
+        content:      content,
+        position: {
+          edge:  'bottom',
+          align: 'left'
+        },
+        show: function(event, t){
+          t.pointer.css('marginLeft', marginLeft)
+        },
+        close: function(event, t){
+          t.pointer.css('marginLeft', '0')
+        },
+        buttons: function( event, t ) {
+          var button = jQuery('<a class="close" href="#">&nbsp;</a>')
+
+          return button.on( 'click.pointer', function(e) {
+            e.preventDefault()
+            t.element.pointer('close')
+          })
+        }
+
+      }).pointer('open')
+    }
   }
 }())

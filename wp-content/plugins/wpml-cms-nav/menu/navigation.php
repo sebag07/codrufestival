@@ -1,4 +1,7 @@
 <?php
+/** @var WPML_CMS_Navigation $wpml_cms_navigation */
+global $wpml_cms_navigation;
+
 $cms_navigation_settings = $wpml_cms_navigation->get_settings();
 ?>
 <script type="text/javascript">
@@ -55,11 +58,7 @@ $cms_navigation_settings = $wpml_cms_navigation->get_settings();
 							style="display:none"<?php endif ?>>
 						<?php if ( 'page' != get_option( 'show_on_front' ) || ! get_option( 'page_for_posts' ) ) : ?>
 							<p>
-								<label for="icl_navigation_cat_menu_title"
-									<?php
-									if ( ! $cms_navigation_settings['show_cat_menu'] ) :
-										?>
-										style="display:none"<?php endif; ?>>
+								<label for="icl_navigation_cat_menu_title">
 									<?php echo __( 'Categories menu title', 'wpml-cms-nav' ); ?>
 									<input type="text" id="icl_navigation_cat_menu_title" name="icl_navigation_cat_menu_title"
 										   value="<?php echo $cms_navigation_settings['cat_menu_title'] ? esc_attr( $cms_navigation_settings['cat_menu_title'] ) : __( 'News', 'wpml-cms-nav' ); ?>"/></label>&nbsp;

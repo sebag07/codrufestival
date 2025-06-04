@@ -17,7 +17,7 @@ class WPML_Compatibility_MailChimp_Shortcode_Attributes_Filter {
 	public function apply_filters( $attributes ) {
 
 		if ( isset( $attributes['id'] ) ) {
-			$attributes['id'] = apply_filters( 'wpml_object_id', $attributes['id'], 'mc4wp-form', true );
+			$attributes['id'] = apply_filters( 'wpml_object_id', $attributes['id'], WPML_Compatibility_MailChimp::FORM_POST_TYPE, true );
 		}
 
 		return $attributes;

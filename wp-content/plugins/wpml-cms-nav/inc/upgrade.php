@@ -1,5 +1,5 @@
 <?php
-if ( ! defined( 'WPML_CMS_NAV_DEV_VERSION' ) && ( version_compare( get_option( 'WPML_CMS_NAV_VERSION' ), WPML_CMS_NAV_VERSION, '=' ) || ( isset( $_REQUEST[ 'action' ] ) && $_REQUEST[ 'action' ] == 'error_scrape' ) || ! isset( $wpdb ) ) ) {
+if ( ! defined( 'WPML_CMS_NAV_DEV_VERSION' ) && ( version_compare( get_option( 'WPML_CMS_NAV_VERSION' ), WPML_CMS_NAV_VERSION, '=' ) || ( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'error_scrape' ) || ! isset( $wpdb ) ) ) {
 	return;
 }
 add_action( 'plugins_loaded', 'wpml_cms_nav_upgrade', 1 );
@@ -7,9 +7,9 @@ add_action( 'plugins_loaded', 'wpml_cms_nav_upgrade', 1 );
 function wpml_cms_nav_upgrade() {
 	$previous_version = get_option( 'WPML_CMS_NAV_VERSION' );
 
-	//Forcing upgrade logic when WPML_CMS_NAV_DEV_VERSION is defined
-	//This allow to run the logic between different alpha/beta/RC versions
-	//since we are now storing only the formal version in the options
+	// Forcing upgrade logic when WPML_CMS_NAV_DEV_VERSION is defined
+	// This allow to run the logic between different alpha/beta/RC versions
+	// since we are now storing only the formal version in the options
 	if ( defined( 'WPML_CMS_NAV_DEV_VERSION' ) ) {
 		wpml_cms_nav_upgrade_version( WPML_CMS_NAV_VERSION, true );
 	}

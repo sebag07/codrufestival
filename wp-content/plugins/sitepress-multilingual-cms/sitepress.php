@@ -2,10 +2,10 @@
 /**
  * Plugin Name: WPML Multilingual CMS
  * Plugin URI: https://wpml.org/
- * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-7-2/">WPML 4.7.2 release notes</a>
+ * Description: WPML Multilingual CMS | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-4-7-6/">WPML 4.7.6 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 4.7.2
+ * Version: 4.7.6
  * Plugin Slug: sitepress-multilingual-cms
  *
  * @package WPML\Core
@@ -30,11 +30,11 @@ if ( ! \WPML\Requirements\WordPress::checkMinimumRequiredVersion() ) {
 	return;
 }
 
-define( 'ICL_SITEPRESS_VERSION', '4.7.2' );
+define( 'ICL_SITEPRESS_VERSION', '4.7.6' );
 
 // Script version, first 3 digits are the same as the plugin version.
 // Increase the last 3 digits by 1 for intermediate packages (i.e. beta, rc, internal).
-define( 'ICL_SITEPRESS_SCRIPT_VERSION', '472900' );
+define( 'ICL_SITEPRESS_SCRIPT_VERSION', '476000' );
 
 // Do not uncomment the following line!
 // If you need to use this constant, use it in the wp-config.php file
@@ -263,6 +263,7 @@ if ( $sitepress->is_setup_complete() ) {
 		\WPML\Utilities\DebugLog::class,
 		\WPML\Utilities\Labels::class,
 		\WPML\Notices\ExportImport\Notice::class,
+		\WPML\XMLConfig\RemoteNotices\Hooks::class,
 	];
 	$action_filter_loader->load( $actions );
 
@@ -477,10 +478,6 @@ function wpml_init_language_cookie_settings() {
 }
 
 add_action( 'admin_init', 'wpml_init_language_cookie_settings' );
-
-$wpml_whip_requirements = new WPML_Whip_Requirements();
-$wpml_whip_requirements->add_hooks();
-
 add_action( 'activated_plugin', [ 'WPML\Plugins', 'loadCoreFirst' ] );
 
 WPML\Plugins::loadEmbeddedTM( $sitepress->is_setup_complete() );

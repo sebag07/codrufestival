@@ -4,9 +4,10 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit9dd16af9b766bd96e1e8f9d74d54dcab
+class ComposerStaticInitcc3b3eb0eea29521974efc0dbb301a0d
 {
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WPML\\SL\\CustomFields' => __DIR__ . '/../..' . '/classes/custom-fields.php',
         'WPML_Core_Version_Check' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
         'WPML_Dependencies' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-dependencies.php',
@@ -17,7 +18,7 @@ class ComposerStaticInit9dd16af9b766bd96e1e8f9d74d54dcab
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit9dd16af9b766bd96e1e8f9d74d54dcab::$classMap;
+            $loader->classMap = ComposerStaticInitcc3b3eb0eea29521974efc0dbb301a0d::$classMap;
 
         }, null, ClassLoader::class);
     }

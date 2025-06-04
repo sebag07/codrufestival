@@ -8,10 +8,10 @@ Author: Jeff Starr
 Author URI: https://plugin-planet.com/
 Donate link: https://monzillamedia.com/donate.html
 Contributors: specialk
-Requires at least: 4.6
-Tested up to: 6.7
-Stable tag: 2.6.4
-Version:    2.6.4
+Requires at least: 4.7
+Tested up to: 6.8
+Stable tag: 2.6.5
+Version:    2.6.5
 Requires PHP: 5.6.20
 License: GPL v2 or later
 
@@ -44,7 +44,7 @@ Check out [Disable WordPress Responsive Images](https://perishablepress.com/disa
 
 This plugin does not collect or store any user data. It does not set any cookies, and it does not connect to any third-party locations. Thus, this plugin does not affect user privacy in any way.
 
-Disable Responsive Images Complete is developed and maintained by [Jeff Starr](https://twitter.com/perishable), 15-year [WordPress developer](https://plugin-planet.com/) and [book author](https://books.perishablepress.com/).
+Disable Responsive Images Complete is developed and maintained by [Jeff Starr](https://x.com/perishable), 15-year [WordPress developer](https://plugin-planet.com/) and [book author](https://books.perishablepress.com/).
 
 
 **Support development**
@@ -63,6 +63,7 @@ And/or purchase one of my premium WordPress plugins:
 * [Blackhole Pro](https://plugin-planet.com/blackhole-pro/) - Automatically block bad bots
 * [Banhammer Pro](https://plugin-planet.com/banhammer-pro/) - Monitor traffic and ban the bad guys
 * [GA Google Analytics Pro](https://plugin-planet.com/ga-google-analytics-pro/) - Connect WordPress to Google Analytics
+* [Head Meta Pro](https://plugin-planet.com/head-meta-pro/) - Ultimate Meta Tags for WordPress
 * [Simple Ajax Chat Pro](https://plugin-planet.com/simple-ajax-chat-pro/) - Unlimited chat rooms
 * [USP Pro](https://plugin-planet.com/usp-pro/) - Unlimited front-end forms
 
@@ -139,9 +140,9 @@ Send any questions or feedback via my [contact form](https://plugin-planet.com/s
 If you like Disable Responsive Images, please take a moment to [give a 5-star rating](https://wordpress.org/support/plugin/disable-responsive-images-complete/reviews/?rate=5#new-post). It helps to keep development and support going strong. Thank you!
 
 
-**2.6.4 (2024/10/05)**
+**2.6.5 (2025/03/20)**
 
-* Tests on WordPress 6.7 (beta)
+* Tests on WordPress 6.8
 
 
 Full changelog @ [https://plugin-planet.com/wp/changelog/disable-responsive-images-complete.txt](https://plugin-planet.com/wp/changelog/disable-responsive-images-complete.txt)

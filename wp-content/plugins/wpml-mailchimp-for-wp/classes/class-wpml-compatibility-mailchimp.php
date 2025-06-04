@@ -4,6 +4,8 @@
  */
 class WPML_Compatibility_MailChimp {
 
+	const FORM_POST_TYPE = 'mc4wp-form';
+
 	/**
 	 * Queues hooks for 'init' action.
 	 */
@@ -19,6 +21,9 @@ class WPML_Compatibility_MailChimp {
 	 * and redirects to correct screen if necessary.
 	 */
 	public function add_init_hooks() {
+
+		add_filter( 'wpml_document_view_item_link', array( $this, 'document_view_item_link' ), 10, 5 );
+
 		if ( defined( 'MC4WP_VERSION' )
 		     && version_compare( MC4WP_VERSION, '4.1.9', '>=' )
 		     && apply_filters( 'wpml_setting', false, 'setup_complete' )
@@ -37,7 +42,7 @@ class WPML_Compatibility_MailChimp {
 					$form_id = (int) get_option( 'mc4wp_default_form_id', 0 );
 					if ( array_key_exists( 'form_id', $_GET ) ) {
 						$requested_form_id = filter_var( $_GET['form_id'], FILTER_VALIDATE_INT );
-						if ( get_post_type( $requested_form_id ) === 'mc4wp-form' ) {
+						if ( get_post_type( $requested_form_id ) === self::FORM_POST_TYPE ) {
 							$form_id = $requested_form_id;
 						}
 					}
@@ -87,5 +92,22 @@ class WPML_Compatibility_MailChimp {
 		$query->query_vars['suppress_filters'] = false;
 
 		return $query;
+	}
+
+	/**
+	 * @param string $link
+	 * @param string $text
+	 * @param object $job
+	 * @param string $prefix
+	 * @param string $type
+	 *
+	 * @return string
+	 */
+	public function document_view_item_link( $link, $text, $job, $prefix, $type ) {
+		if ( self::FORM_POST_TYPE !== $type ) {
+			return $link;
+		}
+
+		return '';
 	}
 }

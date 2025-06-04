@@ -10,8 +10,8 @@
  * @wordpress-plugin
  * Plugin Name: MailChimp for WordPress Multilingual
  * Plugin URI:  https://wpml.org
- * Description: This 'glue' plugin makes it easier to translate with WPML content provided in MailChimp for WordPress plugin.
- * Version:     0.0.3
+ * Description: This 'glue' plugin makes it easier to translate with WPML content provided in MailChimp for WordPress plugin. | <a href="https://wpml.org/documentation/related-projects/mailchimp-for-wordpress-multilingual//?utm_source=plugin&utm_medium=gui&utm_campaign=mcml">Documentation</a>
+ * Version:     0.1.0
  * Author:      OnTheGoSystems
  * Author URI:  https://wpml.org
  * Text Domain: wpml-mailchimp-for-wp

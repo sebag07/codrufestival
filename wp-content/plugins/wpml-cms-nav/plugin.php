@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: WPML CMS Nav
+ * Plugin Name: WPML CMS Navigation
  * Plugin URI: https://wpml.org/
- * Description: Adds CMS navigation elements to sites built with WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/cms-nav-1-5-5/">WPML CMS Nav 1.5.5 release notes</a>
+ * Description: Adds CMS navigation elements to sites built with WPML | <a href="https://wpml.org">Documentation</a> | <a href="https://wpml.org/version/wpml-cms-nav-1-5-6/">WPML CMS Nav 1.5.6 release notes</a>
  * Author: OnTheGoSystems
  * Author URI: http://www.onthegosystems.com/
- * Version: 1.5.5
+ * Version: 1.5.6
  * Plugin Slug: wpml-cms-nav
  *
  * @package WPML\cms-nav
@@ -15,7 +15,7 @@ if ( defined( 'WPML_CMS_NAV_VERSION' ) ) {
 	return;
 }
 
-define( 'WPML_CMS_NAV_VERSION', '1.5.5' );
+define( 'WPML_CMS_NAV_VERSION', '1.5.6' );
 define( 'WPML_CMS_NAV_PLUGIN_PATH', dirname( __FILE__ ) );
 
 require_once WPML_CMS_NAV_PLUGIN_PATH . '/vendor/autoload.php';
@@ -39,3 +39,8 @@ register_activation_hook( WP_PLUGIN_DIR . '/' . WPML_CMS_NAV_PLUGIN_FOLDER . '/p
 register_deactivation_hook( WP_PLUGIN_DIR . '/' . WPML_CMS_NAV_PLUGIN_FOLDER . '/plugin.php', [ $wpml_cms_navigation, 'plugin_deactivate' ] );
 
 add_filter( 'plugin_action_links', [ $wpml_cms_navigation, 'plugin_action_links' ], 10, 2 );
+
+if ( defined( 'ICL_SITEPRESS_VERSION' ) && ( ! defined( 'ICL_PLUGIN_INACTIVE') || ! ICL_PLUGIN_INACTIVE ) ) {
+	$app = new \WPML\Nav\Presentation\App();
+	$app->run();
+}

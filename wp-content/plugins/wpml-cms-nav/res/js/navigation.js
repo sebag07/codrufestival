@@ -1,15 +1,15 @@
 /*globals jQuery, wpml_cms_nav_ajxloaderimg */
 
-jQuery(document).ready(function () {
-	jQuery('#icl_navigation_show_cat_menu').change(function () {
-		if (jQuery(this).prop('checked')) {
-			jQuery('#icl_cat_menu_contents').fadeIn();
-		} else {
-			jQuery('#icl_cat_menu_contents').fadeOut();
-		}
-	});
-	jQuery('#icl_navigation_form').submit(wpmlCMSNavSaveForm);
-	jQuery('#icl_navigation_caching_clear').click(clearNavigationCache);
+jQuery(function () {
+    jQuery('#icl_navigation_show_cat_menu').change(function () {
+        if (jQuery(this).prop('checked')) {
+            jQuery('#icl_cat_menu_contents').fadeIn();
+        } else {
+            jQuery('#icl_cat_menu_contents').fadeOut();
+        }
+    });
+    jQuery('#icl_navigation_form').submit(wpmlCMSNavSaveForm);
+    jQuery('#icl_navigation_caching_clear').click(clearNavigationCache);
 });
 
 function clearNavigationCache() {

@@ -77,7 +77,7 @@ class WPML_Compatibility_MailChimp_Redirection {
 
 		if ( $this->requested_language !== $form_language ) {
 
-			$translated_form_id = apply_filters( 'wpml_object_id', $this->form_id, 'mc4wp-form', false, $this->requested_language );
+			$translated_form_id = apply_filters( 'wpml_object_id', $this->form_id, WPML_Compatibility_MailChimp::FORM_POST_TYPE, false, $this->requested_language );
 
 			if ( $translated_form_id ) {
 
@@ -115,7 +115,7 @@ class WPML_Compatibility_MailChimp_Redirection {
 		                      '',
 		                      array(
 			                      'element_id'   => $form_id,
-			                      'element_type' => 'post_mc4wp-form'
+			                      'element_type' => 'post_' . WPML_Compatibility_MailChimp::FORM_POST_TYPE
 		                      ) );
 	}
 

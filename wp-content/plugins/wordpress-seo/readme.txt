@@ -4,9 +4,9 @@ Donate link: https://yoa.st/1up
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability, Schema
-Tested up to: 6.7
-Stable tag: 24.7
-Requires PHP: 7.2.5
+Tested up to: 6.8
+Stable tag: 25.2
+Requires PHP: 7.4
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
 
@@ -274,43 +274,38 @@ Your question has most likely been answered on our help center: [yoast.com/help/
 
 == Changelog ==
 
-= 24.7 =
+= 25.2 =
 
-Release date: 2025-03-18
+Release date: 2025-05-27
 
-Yoast SEO 24.7 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
-
-#### Enhancements
-
-* Improves the accuracy of assessments measuring character count for Japanese texts by removing common punctuation from the count.
-
-#### Bugfixes
-
-* Fixes a bug where the help beacon would be displayed over table pagination on the bulk editor page.
-
-#### Other
-
-* Improves the feedback strings of the _subheading distribution_ assessment for better translatability.
-* Removes extra span tags in the Post/Page overview. Props to [dilipbheda](https://github.com/dilipbheda).
-
-= 24.6 =
-
-Release date: 2025-03-04
-
-Yoast SEO 24.6 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
+Yoast SEO 25.2 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
 
 #### Enhancements
 
-* Provides support for the Optimized Markup feature in Elementor.
-* Removes the breadcrumbs from the Search snippet preview in Mobile mode.
+* Makes the _keyphrase in image alt attributes_ assessment  available when no content has been added.
+* Renames _image keyphrase_ assessment to _keyphrase in image alt attributes_ assessment.
 
 #### Bugfixes
 
-* Fixes a bug where invalid inner blocks would be removed when saving a post in the block editor.
+* Fixes a bug in the retrieval of post categories titles where a non-existent term might be referenced. Props to [@bor0](https://github.com/bor0).
+* Fixes a bug where the Yoast introduction in the Elementor editor would not be positioned correctly when on Elementor version 3.30.0.
 
 #### Other
 
-* Sets the minimum supported WordPress version to 6.6.
+* Excludes gallery, embed and playlist shortcodes from the _keyphrase in introduction_ analysis in Classic editor.
+
+= 25.1 =
+
+Release date: 2025-05-13
+
+Yoast SEO 25.1 brings more enhancements and bugfixes. [Find more information about our software releases and updates here](https://yoa.st/releases).
+
+#### Enhancements
+
+* Adds more phrases regarding disability to the _inclusive language assessment_.
+* Improves the feedback for \"lame\" in the _inclusive language assessment_.
+* Makes the following SEO assessments available in the analysis by default, even when no content has been added: _keyphrase in introduction_, _keyphrase in meta description_, _keyphrase in SEO title_, _keyphrase in slug_ and _previously used keyphrase_.
+* Optimizes the function used to fetch post IDs which share the same focus keyphrase. Props to [dilipbheda](https://github.com/dilipbheda).
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).
