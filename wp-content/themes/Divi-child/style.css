@@ -22,7 +22,7 @@
     --artist-level-font-size-5: 24px; /* Assuming this is for artistsLevel5 */
     --main-color: #071466;
     --secondary-color: #12139b;
-    --button-color: #6cbf02;
+    --button-color: #67e816;
     --button-color-hover: #fff;
     --button-text-color: #000;
     --button-text-color-hover: #fff;
@@ -1424,6 +1424,8 @@ a:hover {
 
 footer {
     background-color: var(--secondary-color);
+    background-image: url("../Divi-child/images/bgfooter.png");
+    background-size: cover;
     padding-bottom: 50px;
     position: relative;
 }
@@ -4343,10 +4345,6 @@ a {
 }
 
 /* Newsletter */
-
-#newsletter {
-    background-color: var(--secondary-color);
-}
 
 @media screen and (max-width: 767px) {
     #newsletter .container {
