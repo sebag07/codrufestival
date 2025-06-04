@@ -9,7 +9,7 @@ $backgroundType = get_field("hero_background_type");
 ?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
-            <div class="background-overlay"></div>
+<!--            <div class="background-overlay"></div>-->
             <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
             <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
             <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
@@ -26,7 +26,7 @@ $backgroundType = get_field("hero_background_type");
                     </div>          
                 <?php endif; ?>
             <div class="video-background">
-                <img class="hero-image-bg" src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero-banner.png" alt="">
+                <img class="hero-image-bg" src="<?php echo get_stylesheet_directory_uri(); ?>/images/head.png" alt="Hero Banner">
             </div>
 </section>
 
