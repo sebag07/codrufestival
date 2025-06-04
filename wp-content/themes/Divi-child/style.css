@@ -2727,7 +2727,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 /* Brand's Culture */
 
 #brandCultureAnchor {
-    background-color: var(--secondary-color);
+    background-color: var(--main-color);
 }
 
 .brandCultureContainer {
