@@ -20,7 +20,7 @@
             </div>
         </div>
 
-        <section id="newsletter" style="background-color:#076708">
+        <section id="newsletter">
             <div class="sectionPadding container">
                 <!-- Begin Brevo Form -->
                 <!-- START - We recommend to place the below code in head tag of your website html  -->
@@ -43,7 +43,7 @@
 
                     #sib-container a {
                         text-decoration: underline !important;
-                        color: #efaa13;
+                        color: var(--button-color);
                         font-weight:600;
                     }
                 </style>
