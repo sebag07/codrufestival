@@ -5734,7 +5734,7 @@ a {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    padding-top: 80px;
+    object-position: center;
   }
 
   .after-movie-container .video-background {

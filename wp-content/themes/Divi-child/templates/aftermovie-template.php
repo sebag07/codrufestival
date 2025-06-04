@@ -25,7 +25,9 @@ $backgroundType = get_field("hero_background_type");
                         <img class="hero-image-bg" src="<?php echo $image ?>" alt="">
                     </div>          
                 <?php endif; ?>
-
+            <div class="video-background">
+                <img class="hero-image-bg" src="<?php echo get_stylesheet_directory_uri(); ?>/images/hero-banner.png" alt="">
+            </div>
 </section>
 
 
