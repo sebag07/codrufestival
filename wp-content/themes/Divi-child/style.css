@@ -177,7 +177,7 @@ a:hover {
     width: 100%;
     top: 0;
     height: 80px;
-    background-color: var(--main-color);
+    background-color: var(--secondary-color);
 }
 
 .site-logo {
