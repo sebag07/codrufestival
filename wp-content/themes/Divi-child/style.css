@@ -2499,6 +2499,10 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artists-bullet span {
     color: var(--button-color);
     font-weight: 900;
+    display: flex;
+    align-items: center;
+    vertical-align: middle;
+    font-style: italic;
 }
 
 .artistsLevel1 div h4,
@@ -2543,6 +2547,11 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artistsLevel6,
 .artistsLevel6 h4 {
     font-size: var(--artist-level-font-size-5);
+}
+
+.artists-note > p {
+    font-size: 20px;
+    font-weight: 700;
 }
 
 @media screen and (max-width: 991px){
@@ -2618,17 +2627,17 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 @media screen and (max-width: 550px){
     .artistsLevel1,
     .artistsLevel1 h4 {
-        font-size: 32px;
+        font-size: 26px;
     }
 
     .artistsLevel2,
     .artistsLevel2 h4 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .artistsLevel3,
     .artistsLevel3 h4 {
-        font-size: 20px;
+        font-size: 18px;
     }
 
     .artistsLevel4,
@@ -2664,24 +2673,24 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .special-show-tag {
-    display: flex !important;
     text-align: center;
     width: 100%;
-    margin-bottom: 15px;
 }
 
 .special-show-tag h4 {
-    padding: 10px 5px !important;
-    font-size: 24px;
-    margin: 0 auto !important;
-    background-color: var(--artist-level-color-primary);
+    margin: 0;
     border-radius: 8px;
-    color: var(--secondary-color);
+    color: var(--button-color);
+    font-size: 14px;
+    text-align: end;
+    margin-right: 0;
+    float: right;
+    padding: 0;
 }
 
 @media screen and (max-width: 767px) {
     .special-show-tag h4 {
-        font-size: 16px;
+        font-size: 10px;
     }
 }
 

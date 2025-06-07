@@ -31,40 +31,153 @@ $backgroundType = get_field("hero_background_type");
             </div>
 </section>
 
+<?php
+$codru_artists_2025 = [
+    'headliners' => [
+        'Akua Naru',
+        'Trio Mandili',
+        'Goran Bregović & Wedding and Funeral Band',
+    ],
+    'special_closing_show' => [
+        'Subcarpați',
+        'Irina Rimes',
+    ],
+    'main_acts' => [
+        'Lupii lui Calancea & Surorile Osoianu',
+        'Deliric x Silent Strike',
+        'Vița de Vie',
+        'Coma',
+        'Dirty Shirt',
+        'Phoenix',
+        'Implant pentru Refuz',
+        'DJ Mă-ta',
+    ],
+    'supporting_acts' => [
+        'Paraziții',
+        'Oscar',
+        'Rava',
+        'Erika Isac',
+        'Azteca',
+        'Sami G',
+        'IDK',
+        'Albert NBN',
+        'Calinacho',
+        '911',
+    ],
+    'level-4' => [
+        'E-an-na',
+        'Mircea Baniciu',
+        'Emeric Imre',
+        'Radu Guran',
+        'Țapinarii',
+        'Eligraf',
+    ],
+    'note' => '& MANY MORE',
+];
+?>
+
 <section id="lineup">
     <div class="container">
         <div class="container-fluid sectionPadding">
             <div class="col-12 text-center">
                 <div class="artistsLevel1 pt-3 pb-3">
-                    <?php display_artists_by_level('level-1', get_the_ID()); ?>
+                    <?php  $lastKey = array_search(end($codru_artists_2025['headliners']), $codru_artists_2025['headliners']); ?>
+                    <?php foreach ($codru_artists_2025['headliners'] as $key => $artistName) : ?>
+                    <?php if ($key == $lastKey) : ?>
+                        <div class='artists-name'>
+                            <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                        </div>
+                    <?php else : ?>
+                        <div class='artists-name'>
+                            <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName ?></h4>
+                        </div>
+                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="artistsLevel2 pt-3 pb-3">
-                    <?php display_artists_by_level('level-2', get_the_ID(), 'english'); ?>
+                    <?php  $lastKey = array_search(end($codru_artists_2025['special_closing_show']), $codru_artists_2025['special_closing_show']); ?>
+                    <?php foreach ($codru_artists_2025['special_closing_show'] as $key => $artistName) : ?>
+                        <?php if ($key == $lastKey) : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                        <?php else : ?>
+                            <div class='artists-name position-relative'>
+                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>SPECIAL CLOSING SHOW </h4></div>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="artistsLevel2 pt-3 pb-3">
-                    <?php display_artists_by_level('level-2', get_the_ID(),'roman', 'special'); ?>
-                </div>
-                <div class="artistsLevel2 pt-3 pb-3">
-                    <?php display_artists_by_level('level-2', get_the_ID(), 'roman'); ?>
+                    <?php  $lastKey = array_search(end($codru_artists_2025['main_acts']), $codru_artists_2025['main_acts']); ?>
+                    <?php foreach ($codru_artists_2025['main_acts'] as $key => $artistName) : ?>
+                        <?php if ($key == $lastKey) : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                        <?php else : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="artistsLevel3 pt-3 pb-3">
-                    <?php display_artists_by_level('level-3', get_the_ID()); ?>
+                    <?php  $lastKey = array_search(end($codru_artists_2025['supporting_acts']), $codru_artists_2025['supporting_acts']); ?>
+                    <?php foreach ($codru_artists_2025['supporting_acts'] as $key => $artistName) : ?>
+                        <?php if ($key == $lastKey) : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                        <?php else : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
                 <div class="artistsLevel4 pt-3 pb-3">
-                    <?php display_artists_by_level('level-4', get_the_ID()); ?>
+                    <?php  $lastKey = array_search(end($codru_artists_2025['level-4']), $codru_artists_2025['level-4']); ?>
+                    <?php foreach ($codru_artists_2025['level-4'] as $key => $artistName) : ?>
+                        <?php if ($key == $lastKey) : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                        <?php else : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
+                            </div>
+                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
-                <div class="artistsLevel5 pt-3 pb-3">
-                    <?php display_artists_by_level('level-5', get_the_ID()); ?>
-                </div>
-                <div class="artistsLevel6 pt-3 pb-3">
-                    <?php display_artists_by_level('level-6', get_the_ID()); ?>
-                </div>
+<!--                <div class="artistsLevel5 pt-3 pb-3">-->
+<!--                    --><?php //display_artists_by_level('level-5', get_the_ID()); ?>
+<!--                </div>-->
+<!--                <div class="artistsLevel6 pt-3 pb-3">-->
+<!--                    --><?php //display_artists_by_level('level-6', get_the_ID()); ?>
+<!--                </div>-->
             </div>
 <!--            <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">-->
 <!--                <a class="codru-general-button"-->
 <!--                   href="--><?php //echo get_field('see_all_artists_button_link') ?><!--"-->
 <!--                   target="_blank">--><?php //echo get_field('see_all_artists_button') ?><!--</a>-->
 <!--            </div>-->
+
+            <?php
+            // Display the 'note' at the end, if it exists.
+            if (isset($codru_artists_2025['note']) && is_string($codru_artists_2025['note']) && !empty($codru_artists_2025['note'])) {
+                echo "<div class='artists-note pt-3 pb-3 text-center'>";
+                echo "<p class='m-0' style='color: var(--button-color);'>" . htmlspecialchars($codru_artists_2025['note'], ENT_QUOTES, 'UTF-8') . "</p>";
+                echo "</div>";
+            }
+
+            ?>
 </section>
 
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>

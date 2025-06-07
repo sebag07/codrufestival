@@ -27,12 +27,65 @@
         </div>
     </div>
 
+    <?php
+        $codru_artists_2025 = [
+            'headliners' => [
+                'Akua Naru',
+                'Trio Mandili',
+                'Goran Bregović & Wedding and Funeral Band',
+            ],
+            'special_closing_show' => [
+                'Subcarpați',
+                'Irina Rimes',
+            ],
+            'main_acts' => [
+                'Lupii lui Calancea & Surorile Osoianu',
+                'Deliric x Silent Strike',
+                'Vița de Vie',
+                'Coma',
+                'Dirty Shirt',
+                'Phoenix',
+                'Implant pentru Refuz',
+                'DJ Mă-ta',
+            ],
+            'supporting_acts' => [
+                'Paraziții',
+                'Oscar',
+                'Rava',
+                'Erika Isac',
+                'Azteca',
+                'Sami G',
+                'IDK',
+                'Albert NBN',
+                'Calinacho',
+                '911',
+            ],
+            'level-4' => [
+                'E-an-na',
+                'Mircea Baniciu',
+                'Emeric Imre',
+                'Radu Guran',
+                'Țapinarii',
+                'Eligraf',
+            ],
+            'note' => 'and many more...',
+        ];
+?>
+
     <section id="lineup">
         <div class="container">
             <div class="container-fluid sectionPadding">
                 <div class="col-12 text-center">
                     <div class="artistsLevel1 pt-3 pb-3">
-                        <?php display_artists_by_level('level-1', get_the_ID()); ?>
+                        <?php
+                        foreach ($codru_artists_2025['headliners'] as $key => $artistName) : ?>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>$artistName </h4>
+                            </div>
+                            <div class='artists-name'>
+                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>$artistName</h4>
+                            </div><div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>x</span></div>
+                        <? endforeach; ?>
                     </div>
                     <div class="artistsLevel2 pt-3 pb-3">
                         <?php display_artists_by_level('level-2', get_the_ID(), 'english'); ?>
