@@ -3510,13 +3510,22 @@ a {
     font-weight: 400;
 }
 
+.accordion .accordion-body h1,
+.accordion .accordion-body h2,
+.accordion .accordion-body h3,
+.accordion .accordion-body h4,
+.accordion .accordion-body h5,
+.accordion .accordion-body h6 {
+    color: var(--button-color);
+}
+
 .accordion .accordion-body a {
-    color: #0F4615;
+    color: var(--button-color);
 }
 
 .accordion .accordion-body a:hover,
 .accordion .accordion-body a:focus {
-    color: var(--secondary-color);
+    text-decoration: underline;
 }
 
 .accordion .accordion-item h2 {
