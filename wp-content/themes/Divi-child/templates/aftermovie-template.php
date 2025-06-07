@@ -6,12 +6,20 @@ $buttonURL = get_field("button_url");
 $buttonText = get_field("button_text");
 $image = get_field("image");
 $backgroundType = get_field("hero_background_type");
+
+$display_lineup_section = get_field('display_lineup');
+
 ?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <h2 class="sectionTitle"><?php echo get_field('message')?></h2>
             <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
 <!--            <div class="background-overlay"></div>-->
-            <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
+            <div style="display: flex; gap: 10px;">
+                <?php if ($display_lineup_section) : ?>
+                    <a class="homepage-info-button codru-general-button" href="/#lineup">LINEUP</a>
+                <?php endif; ?>
+                <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
+            </div>
             <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
             <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
                 <?php if($backgroundType == "video"): ?>
@@ -76,6 +84,8 @@ $codru_artists_2025 = [
 ];
 ?>
 
+
+<?php if ($display_lineup_section) : ?>
 <section id="lineup">
     <div class="container">
         <div class="container-fluid sectionPadding">
@@ -179,6 +189,7 @@ $codru_artists_2025 = [
 
             ?>
 </section>
+<?php endif; ?>
 
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <section id="tickets-sale-section">
