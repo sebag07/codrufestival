@@ -11,9 +11,7 @@ $display_lineup_section = get_field('display_lineup');
 
 ?>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
-<!--            <h2 class="sectionTitle">--><?php //echo get_field('message')?><!--</h2>-->
             <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
-<!--            <div class="background-overlay"></div>-->
             <div style="display: flex; gap: 10px;">
                 <?php if ($display_lineup_section) : ?>
                     <a class="homepage-info-button codru-general-button" href="/#lineup">LINEUP</a>
@@ -22,18 +20,6 @@ $display_lineup_section = get_field('display_lineup');
             </div>
             <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
             <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
-<!--                --><?php //if($backgroundType == "video"): ?>
-<!--                    <div class="video-background">-->
-<!--                        <video autoplay loop muted playsinline>-->
-<!--                            <source src="--><?php //echo $video_mp4; ?><!--" type="video/mp4">-->
-<!--                        </video>-->
-<!--                    </div>          -->
-<!--                --><?php //endif; ?>
-<!--                --><?php //if($backgroundType == "image"): ?>
-<!--                    <div class="video-background">-->
-<!--                        <img class="hero-image-bg" src="--><?php //echo $image ?><!--" alt="">-->
-<!--                    </div>          -->
-<!--                --><?php //endif; ?>
             <div class="video-background">
                 <img class="hero-image-bg" src="<?php echo get_stylesheet_directory_uri(); ?>/images/head.png" alt="Hero Banner">
             </div>
