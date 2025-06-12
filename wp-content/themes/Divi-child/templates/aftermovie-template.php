@@ -33,44 +33,45 @@ $codru_artists_2025 = [
         'Goran Bregović & Wedding and Funeral Band',
     ],
     'special_closing_show' => [
-        'Subcarpați',
-        'Irina Rimes',
+        'Subcarpați'
     ],
     'main_acts' => [
-        'Tania Turtureanu',
-        'Deliric x Silent Strike',
-        'Vița de Vie',
         'Coma',
+        'Deliric x Silent Strike',
         'Dirty Shirt',
-        'Phoenix',
         'Implant pentru Refuz',
-        'DJ Mă-ta',
+        'Irina Rimes',
+        'Mircea Baniciu',
+        'Paraziții',
+        'Phoenix',
+        'Tania Turtureanu',
+        'Vița de Vie',
     ],
     'supporting_acts' => [
+        'Albert NBN',
+        'Azteca',
+        'Calinacho',
+        'Erika Isac',
+        'IDK',
+        'NOUA UNSPE',
         'Oscar',
         'Rava',
-        'Erika Isac',
-        'Azteca',
         'Sami G',
-        'IDK',
-        'Albert NBN',
-        'Calinacho',
-        '911',
     ],
     'level-4' => [
         'E-an-na',
-        'Mircea Baniciu',
+        'Eligraf',
         'Emeric Imre',
+        'Florin Chilian',
         'Radu Guran',
         'Țapinarii',
-        'Eligraf',
     ],
     'note' => '& MANY MORE',
 ];
 ?>
 
 
-<?php if ($display_lineup_section) : ?>
+<?php //if ($display_lineup_section) : ?>
 <section id="lineup">
     <div class="container">
         <div class="container-fluid sectionPadding">
@@ -95,11 +96,12 @@ $codru_artists_2025 = [
                     <?php foreach ($codru_artists_2025['special_closing_show'] as $key => $artistName) : ?>
                         <?php if ($key == $lastKey) : ?>
                             <div class='artists-name'>
+                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>CODRU AMBASSADORS </h4></div>
                                 <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
                             </div>
                         <?php else : ?>
                             <div class='artists-name position-relative'>
-                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>SPECIAL CLOSING SHOW </h4></div>
+                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>CODRU AMBASSADORS </h4></div>
                                 <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
                             </div>
                             <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
@@ -174,7 +176,7 @@ $codru_artists_2025 = [
 
             ?>
 </section>
-<?php endif; ?>
+<?php //endif; ?>
 
 <?php // if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <!--<section id="tickets-sale-section">-->
