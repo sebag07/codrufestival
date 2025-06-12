@@ -37,7 +37,7 @@ $codru_artists_2025 = [
         'Irina Rimes',
     ],
     'main_acts' => [
-        'Lupii lui Calancea & Surorile Osoianu',
+        'Tania Turtureanu',
         'Deliric x Silent Strike',
         'Vița de Vie',
         'Coma',
