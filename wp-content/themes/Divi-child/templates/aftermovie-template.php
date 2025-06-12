@@ -47,7 +47,6 @@ $codru_artists_2025 = [
         'DJ Mă-ta',
     ],
     'supporting_acts' => [
-        'Paraziții',
         'Oscar',
         'Rava',
         'Erika Isac',
