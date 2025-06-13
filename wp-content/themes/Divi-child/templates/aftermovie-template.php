@@ -10,9 +10,16 @@ $backgroundType = get_field("hero_background_type");
 $display_lineup_section = get_field('display_lineup');
 
 ?>
+<style>
+    @media (max-width: 576px) {
+        .after-movie-container .buttons-container {
+            flex-direction: column;
+        }
+    }
+</style>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
             <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
-            <div style="display: flex; gap: 10px;">
+            <div class="buttons-container" style="display: flex; gap: 10px;">
                 <?php if ($display_lineup_section) : ?>
                     <a class="homepage-info-button codru-general-button" href="/#lineup">LINEUP</a>
                 <?php endif; ?>
@@ -32,9 +39,9 @@ $codru_artists_2025 = [
         'Trio Mandili',
         'Goran Bregović & Wedding and Funeral Band',
     ],
-    'special_closing_show' => [
-        'Subcarpați'
-    ],
+//    'special_closing_show' => [
+//        'Subcarpați'
+//    ],
     'main_acts' => [
         'Coma',
         'Deliric x Silent Strike',
@@ -44,6 +51,7 @@ $codru_artists_2025 = [
         'Mircea Baniciu',
         'Paraziții',
         'Phoenix',
+        'Subcarpați',
         'Tania Turtureanu',
         'Vița de Vie',
     ],
@@ -71,7 +79,7 @@ $codru_artists_2025 = [
 ?>
 
 
-<?php if ($display_lineup_section) : ?>
+<?php //if ($display_lineup_section) : ?>
 <section id="lineup">
     <div class="container">
         <div class="container-fluid sectionPadding">
@@ -91,23 +99,23 @@ $codru_artists_2025 = [
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </div>
-                <div class="artistsLevel2 pt-3 pb-3">
-                    <?php  $lastKey = array_search(end($codru_artists_2025['special_closing_show']), $codru_artists_2025['special_closing_show']); ?>
-                    <?php foreach ($codru_artists_2025['special_closing_show'] as $key => $artistName) : ?>
-                        <?php if ($key == $lastKey) : ?>
-                            <div class='artists-name'>
-                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>CODRU AMBASSADORS </h4></div>
-                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
-                            </div>
-                        <?php else : ?>
-                            <div class='artists-name position-relative'>
-                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>CODRU AMBASSADORS </h4></div>
-                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'><?php echo $artistName; ?></h4>
-                            </div>
-                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
+<!--                <div class="artistsLevel2 pt-3 pb-3">-->
+<!--                    --><?php // $lastKey = array_search(end($codru_artists_2025['special_closing_show']), $codru_artists_2025['special_closing_show']); ?>
+<!--                    --><?php //foreach ($codru_artists_2025['special_closing_show'] as $key => $artistName) : ?>
+<!--                        --><?php //if ($key == $lastKey) : ?>
+<!--                            <div class='artists-name'>-->
+<!--                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>CODRU AMBASSADORS </h4></div>-->
+<!--                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>--><?php //echo $artistName; ?><!--</h4>-->
+<!--                            </div>-->
+<!--                        --><?php //else : ?>
+<!--                            <div class='artists-name position-relative'>-->
+<!--                                <div class='artists-name special-show-tag'><h4 class='m-0 pb-0'>CODRU AMBASSADORS </h4></div>-->
+<!--                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>--><?php //echo $artistName; ?><!--</h4>-->
+<!--                            </div>-->
+<!--                            <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>-->
+<!--                        --><?php //endif; ?>
+<!--                    --><?php //endforeach; ?>
+<!--                </div>-->
                 <div class="artistsLevel2 pt-3 pb-3">
                     <?php  $lastKey = array_search(end($codru_artists_2025['main_acts']), $codru_artists_2025['main_acts']); ?>
                     <?php foreach ($codru_artists_2025['main_acts'] as $key => $artistName) : ?>
@@ -176,7 +184,7 @@ $codru_artists_2025 = [
 
             ?>
 </section>
-<?php endif; ?>
+<?php //endif; ?>
 
 <?php // if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <!--<section id="tickets-sale-section">-->
