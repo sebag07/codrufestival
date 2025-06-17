@@ -68,7 +68,7 @@ $codru_artists_2025 = [
     ],
     'level-4' => [
         'E-an-na',
-        'Eligraf',
+        'Eligarf',
         'Emeric Imre',
         'Florin Chilian',
         'Radu Guran',
@@ -79,7 +79,7 @@ $codru_artists_2025 = [
 ?>
 
 
-<?php //if ($display_lineup_section) : ?>
+<?php if ($display_lineup_section) : ?>
 <section id="lineup">
     <div class="container">
         <div class="container-fluid sectionPadding">
@@ -184,7 +184,7 @@ $codru_artists_2025 = [
 
             ?>
 </section>
-<?php //endif; ?>
+<?php endif; ?>
 
 <?php // if( have_rows('ticket_cards_repeater', 'options') ): ?>
 <!--<section id="tickets-sale-section">-->
