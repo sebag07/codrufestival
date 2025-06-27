@@ -5495,7 +5495,8 @@ f.artistInnerContainer {
   /* Countdown */
 
   .countdown-container {
-    position: relative;
+    position: absolute;
+    display: none;
     top: 0;
     height: auto;
     padding: 20px 0px;
@@ -5567,6 +5568,7 @@ f.artistInnerContainer {
     }
     .countdown-container {
         gap: 20px;
+        position: relative;
     }
   }
 

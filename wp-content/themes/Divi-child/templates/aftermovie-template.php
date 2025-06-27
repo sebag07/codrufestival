@@ -63,6 +63,7 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
                             clearInterval(x);
                             countdownContainer.style.display = "none";
                         } else {
+                            countdownContainer.style.display = "flex";
                             countdownElement.innerHTML = `<span class="countdown-time-text">${days} <?php echo $countdownDaysText; ?></span> ` +
                                 `<span class="countdown-time-text">${hours} <?php echo $countdownHoursText; ?></span> ` +
                                 `<span class="countdown-time-text">${minutes} <?php echo $countdownMinutesText; ?></span> ` +
