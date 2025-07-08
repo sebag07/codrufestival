@@ -109,7 +109,7 @@
                     }
                     $json_socials = json_encode($socials_data);
 
-                    $imageURL = $artistImage ? $artistImage[0] : '/wp-content/themes/Divi-child/images/artist-placeholder.png';
+                    $imageURL = $artistImage ? $artistImage[0] : '/wp-content/uploads/2025/06/1x1-copy.jpg';
                     ?>
 
                     <div class="artistInnerContainer js-artist-popup"
