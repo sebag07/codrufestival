@@ -238,6 +238,16 @@
                 }
             }
             ?>
+                                                <?php
+$languages = apply_filters( 'wpml_active_languages', NULL, array( 'skip_missing' => 0 ) );
+if ( !empty( $languages ) ) {
+    foreach ( $languages as $lang ) {
+        if ( !$lang['active'] ) {
+            echo '<li class="language-switcher-item"><a href="' . esc_url( $lang['url'] ) . '">' . esc_html( strtoupper( $lang['code'] ) ) . '</a></li>';
+        }
+    }
+}
+?>
             <span class="headerSocials">
                     <a href="https://www.facebook.com/codrufestival" target="_blank"><img
                                 src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
@@ -311,6 +321,16 @@
                     }
                 }
                 ?>
+                                    <?php
+$languages = apply_filters( 'wpml_active_languages', NULL, array( 'skip_missing' => 0 ) );
+if ( !empty( $languages ) ) {
+    foreach ( $languages as $lang ) {
+        if ( !$lang['active'] ) {
+            echo '<li class="language-switcher-item"><a href="' . esc_url( $lang['url'] ) . '">' . esc_html( strtoupper( $lang['code'] ) ) . '</a></li>';
+        }
+    }
+}
+?>
                 <span class="headerSocials">
                         <a href="https://www.facebook.com/codrufestival" target="_blank"><img
                                     src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
