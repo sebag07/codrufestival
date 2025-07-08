@@ -38,7 +38,7 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
     <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
     <div class="buttons-container" style="display: flex; gap: 10px;">
         <?php if ($display_lineup_section) : ?>
-            <a class="homepage-info-button codru-general-button" href="/#lineup">LINEUP</a>
+            <a class="homepage-info-button codru-general-button" href="/#lineup">Lineup</a>
         <?php endif; ?>
         <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
     </div>
