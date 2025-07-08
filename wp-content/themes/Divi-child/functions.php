@@ -284,3 +284,17 @@ function get_filtered_acf_options( $request ) {
     return $options;
 }
 
+if (!function_exists('get_current_language_code')) {
+    function get_current_language_code() {
+        // WPML sets this constant
+        if (defined('ICL_LANGUAGE_CODE')) {
+            return ICL_LANGUAGE_CODE;
+        }
+        // Fallback for Polylang or other plugins
+        if (function_exists('pll_current_language')) {
+            return pll_current_language();
+        }
+        // Default to 'en' if not set
+        return 'en';
+    }
+}
