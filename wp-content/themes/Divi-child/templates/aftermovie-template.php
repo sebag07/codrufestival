@@ -146,7 +146,9 @@ foreach ($artists as $artist) {
             <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">
                 <a class="codru-general-button"
                     href="<?php echo esc_url($button_link); ?>"
-                    target="_blank"><?php echo esc_html($button_text); ?></a>
+                    >
+                    <?php echo esc_html($button_text); ?>
+                </a>
             </div>
         </div>
     </section>
