@@ -4,7 +4,7 @@ Contributors:      google
 Requires at least: 5.2
 Tested up to:      6.8
 Requires PHP:      7.4
-Stable tag:        1.154.0
+Stable tag:        1.156.0
 License:           Apache License 2.0
 License URI:       https://www.apache.org/licenses/LICENSE-2.0
 Tags:              google, search-console, analytics, adsense, pagespeed-insights
@@ -109,23 +109,21 @@ Please create a new topic on our [WordPress.org support forum](https://wordpress
 
 == Changelog ==
 
-= 1.154.0 =
+= 1.156.0 =
 
 **Enhanced**
 
-* Add the `purchase` event tracking for the WooCommerce conversion tracking provider on block themes. See [#10747](https://github.com/google/site-kit-wp/issues/10747).
-* Add all WooCommerce conversion events to track when WooCommerce Analytics Addon is available. See [#10691](https://github.com/google/site-kit-wp/issues/10691).
-* Update WooCommerce events tracking to include additional information. See [#10672](https://github.com/google/site-kit-wp/issues/10672).
-* Update success subtle notifications to use the new `<Notice type="success">` component. See [#10432](https://github.com/google/site-kit-wp/issues/10432).
-* Refactor the usage of all “info type notice” components to use the new `<Notice type='info'>` component. See [#10430](https://github.com/google/site-kit-wp/issues/10430).
-* Refactor components used for warnings throughout the plugin. See [#10428](https://github.com/google/site-kit-wp/issues/10428).
-* Reset the dismissal state for the Reader Revenue Manager product ID notifications when the connected publication is changed, ensuring they can be shown again. See [#10311](https://github.com/google/site-kit-wp/issues/10311).
-* Fix tooltip issues on mobile/tablet viewports when user clicked outside of the tooltip area. See [#10101](https://github.com/google/site-kit-wp/issues/10101).
-* Add the accepted language information to the remove notifications requests. See [#8813](https://github.com/google/site-kit-wp/issues/8813).
+* Update the Google tag gateway for advertisers (formerly First-party mode) `measurement.php` proxy script to the latest version. See [#10952](https://github.com/google/site-kit-wp/issues/10952).
+* Correct the casing for the terms "dashboard" and "dashboard sharing" in user-facing copy. See [#10842](https://github.com/google/site-kit-wp/issues/10842).
+* Update the popup maker tracking script to reference `PUM` object from the global scope. See [#10812](https://github.com/google/site-kit-wp/issues/10812).
+* Update Analytics and AdSense notification styles. See [#10392](https://github.com/google/site-kit-wp/issues/10392).
+* Add a new “Info Banner” layout to redesign the GatheringDataNotification banner component. See [#10386](https://github.com/google/site-kit-wp/issues/10386).
+* Add a new “Warning Banner” layout and apply it to redesign the `ZeroDataNotification` component. See [#10385](https://github.com/google/site-kit-wp/issues/10385).
+* Track GA event when the Reader Revenue Manager post-level setting is changed and the post is saved in the block editor. See [#10333](https://github.com/google/site-kit-wp/issues/10333).
 
 **Fixed**
 
-* Fix error preventing the Reader Revenue Manager block editor plugin and Sign in With Google blocks from loading in the block editor. See [#10822](https://github.com/google/site-kit-wp/issues/10822).
-* Fix incorrect step navigation in feature tours. See [#10590](https://github.com/google/site-kit-wp/issues/10590).
+* Fix bug that could cause permission scope errors not to appear. See [#10920](https://github.com/google/site-kit-wp/issues/10920).
+* Update modal dialogs to restore focus to previously clicked elements when the modal dialog is closed. See [#10548](https://github.com/google/site-kit-wp/issues/10548).
 
 [See changelog for all versions](https://raw.githubusercontent.com/google/site-kit-wp/main/changelog.txt).

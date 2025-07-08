@@ -1364,6 +1364,7 @@ class WPForms_About {
 								'Twilio',
 								'Pipedrive',
 								'Make',
+								'Zoho CRM',
 							]
 						),
 						'',
@@ -1398,6 +1399,7 @@ class WPForms_About {
 								'Twilio',
 								'Pipedrive',
 								'Make',
+								'Zoho CRM',
 							]
 						),
 						'',
@@ -1432,6 +1434,7 @@ class WPForms_About {
 								'Twilio',
 								'Pipedrive',
 								'Make',
+								'Zoho CRM',
 							]
 						),
 						'',
@@ -1580,21 +1583,21 @@ class WPForms_About {
 					'status' => 'full',
 					'text'   => [
 						'<strong>' . esc_html__( 'All Addons Included', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Calculations, Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, Coupons, Dropbox, Google Drive, and more (35+ total)', 'wpforms-lite' ),
+						esc_html__( 'Calculations, Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, Coupons, Dropbox, Google Drive, Entry Automation, and more (35+ total)', 'wpforms-lite' ),
 					],
 				],
 				'ultimate' => [
 					'status' => 'full',
 					'text'   => [
 						'<strong>' . esc_html__( 'All Addons Included', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Calculations, Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, Coupons, Dropbox, Google Drive, and more (35+ total)', 'wpforms-lite' ),
+						esc_html__( 'Calculations, Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, Coupons, Dropbox, Google Drive, Entry Automation, and more (35+ total)', 'wpforms-lite' ),
 					],
 				],
 				'agency'   => [
 					'status' => 'full',
 					'text'   => [
 						'<strong>' . esc_html__( 'All Addons Included', 'wpforms-lite' ) . '</strong>',
-						esc_html__( 'Calculations, Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, Coupons, Dropbox, Google Drive, and more (35+ total)', 'wpforms-lite' ),
+						esc_html__( 'Calculations, Form Abandonment, Conversational Forms, Lead Forms, Frontend Post Submission, User Registration, Geolocation, Webhooks, Google Sheets, Coupons, Dropbox, Google Drive, Entry Automation, and more (35+ total)', 'wpforms-lite' ),
 					],
 				],
 			],

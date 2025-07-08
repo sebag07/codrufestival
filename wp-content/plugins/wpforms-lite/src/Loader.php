@@ -586,6 +586,7 @@ class Loader {
 			],
 			[
 				'name' => 'Admin\Entries\Export\Export',
+				'id'   => 'entries_export',
 				'hook' => 'init',
 			],
 			[
@@ -662,6 +663,11 @@ class Loader {
 			[
 				'name' => 'Admin\Builder\Ajax\SaveForm',
 				'id'   => 'builder_save_form',
+			],
+			[
+				'name' => 'Admin\Builder\Payments',
+				'hook' => 'wpforms_builder_init',
+				'id'   => 'builder_payments',
 			]
 		);
 	}

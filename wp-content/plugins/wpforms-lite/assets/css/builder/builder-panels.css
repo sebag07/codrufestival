@@ -742,6 +742,7 @@
 #wpforms-panel-settings .wpforms-builder-settings-block {
   border: 1px solid #cccccc;
   margin: 0 0 20px 0;
+  background-color: #ffffff;
 }
 
 #wpforms-panel-settings .wpforms-builder-settings-block .wpforms-panel-field,
@@ -1164,6 +1165,22 @@
 
 #wpforms-panel-settings .wpforms-panel-content-section-themes-inner .wpforms-panel-content-section-themes-bottom .wpforms-alert.wpforms-alert-info.wpforms-bottom .wpforms-aside-left .wpforms-alert-heading {
   font-size: 14px;
+}
+
+#wpforms-panel-settings .wpforms-builder-provider-connections-error {
+  color: #b32d2e;
+  font-size: 16px;
+  background-color: #fcf0f1;
+  border-radius: 4px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 7px 15px;
+  line-height: 24px;
+  text-align: center;
+}
+
+#wpforms-panel-settings .wpforms-builder-provider-connections-error a {
+  color: inherit;
 }
 
 @media (max-height: 864px) {
@@ -1905,6 +1922,43 @@
 .rtl .wpforms-builder-provider .choices.is-open .choices__inner,
 .rtl .wpforms-builder-provider .choices .choices__inner {
   background-position: left 5px top 55%;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 20px;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) img {
+  position: unset;
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) .wpforms-panel-sidebar-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) .wpforms-panel-sidebar-recommended {
+  margin-top: 5px;
+  margin-inline-end: auto;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) .wpforms-panel-sidebar-controls {
+  margin-inline-start: auto;
+  margin-left: auto;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) .wpforms-panel-sidebar-controls .wpforms-toggle-arrow {
+  margin-inline-start: 10px;
+  margin-left: 10px;
+}
+
+#wpforms-builder #wpforms-panel-payments .wpforms-panel-sidebar-section:not(.wpforms-panel-sidebar-section-default) .wpforms-toggle-arrow {
+  margin-left: auto;
 }
 
 #wpforms-builder #wpforms-panel-payments .wpforms-panel-content-section-title {
