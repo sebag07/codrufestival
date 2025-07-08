@@ -1456,6 +1456,7 @@ footer .row {
 .footerSocials a img {
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(241deg) brightness(103%) contrast(103%);
     max-height: 30px;
+    height: 100%;
 }
 
 .footerSocials a img:hover {
@@ -2974,7 +2975,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 }
 
 .singlePostContainer h1 {
-    color: var(--secondary-color);
+    color: var(--button-color);
     padding-top: 100px;
     padding: 50px 5px;
     text-align: left;
