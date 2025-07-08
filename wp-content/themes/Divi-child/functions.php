@@ -17,9 +17,7 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 function load_child_scripts()
 {
     wp_register_script('main', get_template_directory_uri() . "-child" . '/js/main.js', array('jquery'), '4123312', true);
-    wp_enqueue_script('main');
-    wp_register_script('play-song', get_template_directory_uri() . "-child" . '/js/playsong.js', array('jquery'), true);
-    wp_enqueue_script('play-song');
+    wp_enqueue_script('main');;
     wp_register_script('freewall', get_template_directory_uri() . "-child" . '/js/freewall.min.js', array('jquery'), true);
     wp_enqueue_script('freewall');
     wp_register_script('imagesloaded', get_template_directory_uri() . "-child" . '/js/imagesloaded.pkgd.min.js', array('jquery'), true);
@@ -133,6 +131,15 @@ if (function_exists('acf_add_options_page')) {
         'page_title' => 'FAQ',
         'menu_title' => 'FAQ',
         'menu_slug' => 'faq-options',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+        'parent_slug' => 'general-options',
+    ));
+
+    acf_add_options_sub_page(array(
+        'page_title' => 'Artists',
+        'menu_title' => 'Artists',
+        'menu_slug' => 'artists-options',
         'capability' => 'edit_posts',
         'redirect' => false,
         'parent_slug' => 'general-options',

@@ -200,7 +200,7 @@
                 <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                             src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
                 <a href="https://open.spotify.com/playlist/0vePsGS7Ei7jA5hPUlvbxY?si=a6b26f14a4a94198" target="_blank"><img
-                            src="/wp-content/themes/Divi-child/images/spotify.svg" alt=""></a>
+                            src="/wp-content/themes/Divi-child/images/socials/spotify.svg" alt=""></a>
             </span>
             </div>
             <div class="footerRightLogo col-lg-2 col-md-12 col-12 d-flex">

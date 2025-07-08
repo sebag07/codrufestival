@@ -1387,10 +1387,6 @@ a:hover {
         font-size: 24px;
     }
 
-    iframe {
-        max-height: 300px !important;
-    }
-
     .heroContentImage {
         margin-top: 50px;
     }
@@ -3704,30 +3700,6 @@ a {
     }
 }
 
-.spotifyIframeContainer {
-    left: 0;
-    width: 100%;
-    height: 500px;
-    position: relative;
-}
-
-.spotifyIframeContainer iframe {
-    height: 100%;
-    width: 100%;
-}
-
-@media screen and (max-width: 767px) {
-    .spotifyIframeContainer {
-        height: 400px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .spotifyIframeContainer {
-        height: 180px;
-    }
-}
-
 .singleArtistContainer .singlePostMainImg {
     width: 100%;
     height: 100%;
@@ -4260,7 +4232,7 @@ a {
 }
 
 .artistContentDayStage {
-    color: #efaa13;
+    color: var(--button-color);
     font-weight: 600;
 }
 
@@ -4313,7 +4285,7 @@ a {
 }
 
 .artistContentTop {
-    top: 12px;
+    top: 0;
 }
 
 .contentOverlay {
@@ -4327,13 +4299,18 @@ a {
 }
 
 .borderOnHover {
-    border: 5px solid #efaa13;
+    outline: 5px solid var(--button-color);
 }
 
 .onHoverOverlayOpacity {
     opacity: .4;
 }
 
+@media (max-width: 1200px) {
+    .artistCardContainer {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
 
 @media (max-width: 991px) {
     .artistCardContainer {
@@ -4743,18 +4720,6 @@ a {
     }
 }
 
-.activitiesCheckbox {
-    background-color: transparent;
-    border: 2px solid var(--secondary-color);
-    overflow: hidden;
-    border-radius: 30px;
-    color: #fff;
-    padding: 7px 20px;
-    margin-right: 10px;
-    font-weight: 600;
-    font-size: 18px;
-}
-
 .activitiesBlurb {
     margin-bottom: 30px;
 }
@@ -5114,18 +5079,6 @@ f.artistInnerContainer {
     font-weight: 600;
 }
 
-.artistContentDayStage {
-    color: #efaa13;
-    font-weight: 600;
-}
-
-.artistCardContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px;
-    margin-top: 35px;
-}
-
 .artistCardHoverOverlay {
     position: absolute;
     top: 0;
@@ -5167,10 +5120,6 @@ f.artistInnerContainer {
     opacity: 1;
 }
 
-.artistContentTop {
-    top: 12px;
-}
-
 .contentOverlay {
     position: absolute;
     top: 0;
@@ -5179,10 +5128,6 @@ f.artistInnerContainer {
     height: 100%;
     background-color: #000;
     opacity: .6;
-}
-
-.borderOnHover {
-    border: 5px solid #efaa13;
 }
 
 .onHoverOverlayOpacity {
@@ -5584,7 +5529,7 @@ f.artistInnerContainer {
 
   .activitiesCheckbox {
     background-color: transparent;
-    border: 2px solid var(--secondary-color);
+    border: 2px solid var(--button-color);
     overflow: hidden;
     border-radius: 30px;
     color: #fff;
@@ -5605,13 +5550,13 @@ f.artistInnerContainer {
 
   .activitiesCheckbox:hover {
     cursor: pointer;
-    background-color: var(--secondary-color);
-    color: #fff;
+    background-color: var(--button-color);
+    color: #000;
   }
 
   .activeCategory {
-    background-color: var(--secondary-color);
-    color: #fff;
+    background-color: var(--button-color);
+    color: #000;
   }
 
   .activitiesPost .imageContainer {
