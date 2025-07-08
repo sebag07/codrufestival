@@ -109,8 +109,6 @@
                     }
                     $json_socials = json_encode($socials_data);
 
-                    $spotifyLink = '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/3gqvez1Ri5FrRwqtMDsRQe?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>';
-
                     $imageURL = $artistImage ? $artistImage[0] : '/wp-content/themes/Divi-child/images/artist-placeholder.png';
                     ?>
 
