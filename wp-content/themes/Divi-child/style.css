@@ -6128,3 +6128,14 @@ f.artistInnerContainer {
   .after-movie-container h2 {
     padding: 10px;
   }
+  
+  /* WPForms */
+  div.wpforms-container-full .wpforms-form .wpforms-head-container {
+    padding-bottom: 0px !important;
+  }
+
+  @media (max-width: 767px) {
+    .wpforms-form-page-wrap {
+        padding: 15px 25px !important;
+      }
+    }
