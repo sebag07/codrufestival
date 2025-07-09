@@ -4496,6 +4496,13 @@ a {
     color: #efaa13 !important;
 }
 
+.homepage-info-section h3,
+.homepage-info-section h4,
+.homepage-info-section h5,
+.homepage-info-section h6 {
+    color: #efaa13 !important;
+}
+
 .homepage-info-section p {
     font-size: 18px;
     font-style: normal;
