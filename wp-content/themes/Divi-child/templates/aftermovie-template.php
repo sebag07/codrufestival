@@ -296,8 +296,10 @@ $post_id = get_the_ID(); // Get current post ID
                     <div class="col-md-6 align-items-start <?php echo $col_order ?> justify-content-center d-flex flex-column homepage-info-container">
                         <h2 class="homepage-info-title mb-4"><?php echo $repeaterTitle ?></h2>
                         <span class="homepage-info-content mb-4"><?php echo $repeaterContent ?></span>
-                        <a class="homepage-info-button codru-general-button" href="<?php echo $repeaterButtonURL ?>"
-                            target="_blank"><?php echo $repeaterButtonText ?></a>
+                        <?php if (!empty($repeaterButtonURL)) : ?>
+                            <a class="homepage-info-button codru-general-button" href="<?php echo esc_url($repeaterButtonURL); ?>"
+                                target="_blank"><?php echo esc_html($repeaterButtonText); ?></a>
+                        <?php endif; ?>
                     </div>
                     <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5">
                         <img class="homepage-info-section-image" src="<?php echo $repeaterImage ?>" alt="Lineup">
