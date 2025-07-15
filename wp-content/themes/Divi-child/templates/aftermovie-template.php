@@ -36,6 +36,12 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
 </div>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
     <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
+    <picture class="hero-section-title">
+        <!-- For screens 1200px and above (desktop) -->
+        <source media="(min-width: 1200px)" srcset="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png">
+        <!-- For screens smaller than 1200px (mobile) -->
+        <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title-mobile.png" alt="Hero Title">
+    </picture>
     <div class="buttons-container" style="display: flex; gap: 10px;">
         <?php if ($display_lineup_section) : ?>
             <a class="homepage-info-button codru-general-button" href="/#lineup">Lineup</a>
@@ -374,6 +380,13 @@ $post_id = get_the_ID(); // Get current post ID
         </div>
     </div>
 </section>
+
+<section id="partnersAnchor">
+    <div class="container-fluid sectionPadding">
+        <?php get_template_part('template-parts/components/partners-carousel'); ?>
+    </div>
+</section>
+
 <!---->
 <?php
 //
