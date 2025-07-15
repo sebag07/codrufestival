@@ -35,7 +35,6 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
     <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
 </div>
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
-    <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
     <picture class="hero-section-title">
         <!-- For screens 1200px and above (desktop) -->
         <source media="(min-width: 1200px)" srcset="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png">
