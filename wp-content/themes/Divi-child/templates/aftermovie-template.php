@@ -359,32 +359,6 @@ $post_id = get_the_ID(); // Get current post ID
     </div>
 </section>
 
-
-<section id="noutatiAnchor">
-    <div class="container sectionPadding">
-        <h2 class="sectionTitle"><?php echo get_field('news_title', 'options'); ?></h2>
-        <div class="newsContainer row">
-            <?php
-            $args = array('posts_per_page' => 3, 'orderby' => 'post_date', 'category_name' => 'noutati');
-            $postslist = get_posts($args);
-            foreach ($postslist as $post) : {
-                    $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
-                    $postURL = get_the_permalink($post->ID);
-                    $read_more = get_field('news_read_more', 'options');
-                    echo "<div class='homepageNews col-lg-4 col-md-6 col-sm-6 col-12'>
-            <a href='$postURL' class='homepageNewsLink'>
-            <div class='homepageNewsImage text-center'><img src='$image[0]' alt=''></div>
-            <div class='homepageNewsTitle'><h3>$post->post_title</h3><span><img src='/wp-content/themes/Divi-child/images/right-chevron.png' />$read_more</span></div>
-            </a>
-        </div>";
-                }
-            endforeach;
-            ?>
-
-        </div>
-    </div>
-</section>
-
 <section id="partnersAnchor">
     <div class="container-fluid sectionPadding">
         <?php get_template_part('template-parts/components/partners-carousel'); ?>
