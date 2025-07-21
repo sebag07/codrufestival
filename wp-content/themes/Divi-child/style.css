@@ -6147,6 +6147,6 @@ f.artistInnerContainer {
       }
     }
 
-    .wpforms-error-noscript {
+    #wpforms-error-noscript {
         display: none !important;
     }
