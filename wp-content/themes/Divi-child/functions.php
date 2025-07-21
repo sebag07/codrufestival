@@ -10,6 +10,7 @@ function my_theme_enqueue_styles()
     wp_enqueue_style('activities', get_template_directory_uri() . '-child' . '/assets/css/activities.css');
     wp_enqueue_style('partners', get_template_directory_uri() . '-child' . '/assets/css/partners.css');
     wp_enqueue_style('magnificPopupCss', get_template_directory_uri() . '-child' . '/assets/css/magnific-popup.min.css');
+    wp_enqueue_style('owlCarouselCss', get_template_directory_uri() . '-child' . '/css/owl.carousel.min.css');
 }
 
 add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
@@ -29,6 +30,28 @@ function load_child_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'load_child_scripts');
+
+function load_owl_carousel_assets() {
+    wp_enqueue_script(
+        'owl-carousel',
+        get_stylesheet_directory_uri() . '/js/owl.carousel.min.js',
+        array('jquery'),
+        null,
+        true
+    );
+    wp_enqueue_script(
+        'partners-carousel-init',
+        get_stylesheet_directory_uri() . '/js/partners-carousel-init.js',
+        array('jquery', 'owl-carousel'),
+        null,
+        true
+    );
+    wp_enqueue_style(
+        'owl-carousel-css',
+        get_stylesheet_directory_uri() . '/css/owl.carousel.min.css'
+    );
+}
+add_action('wp_enqueue_scripts', 'load_owl_carousel_assets');
 
 function load_footer_scripts()
 {

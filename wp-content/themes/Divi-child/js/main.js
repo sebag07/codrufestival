@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
     });
 });
 
-jQuery(window).load(function () {
+jQuery(window).on("load", function () {
     var gallery = jQuery(".gallery-masonry");
     var category = ".item";
     console.log(category);
@@ -164,7 +164,7 @@ jQuery(function () {
   }
   
   
-  $(window).load(function () {
+  $(window).on("load", function () {
   
     gallery = $('.artist-gallery');
     lightbox = $('.image-gallery');
