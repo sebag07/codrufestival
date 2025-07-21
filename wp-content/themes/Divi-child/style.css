@@ -6146,3 +6146,7 @@ f.artistInnerContainer {
         padding: 15px 25px !important;
       }
     }
+
+    .wpforms-error-noscript {
+        display: none !important;
+    }
