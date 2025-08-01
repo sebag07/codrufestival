@@ -31,28 +31,6 @@ function load_child_scripts()
 
 add_action('wp_enqueue_scripts', 'load_child_scripts');
 
-function load_owl_carousel_assets() {
-    wp_enqueue_script(
-        'owl-carousel',
-        get_stylesheet_directory_uri() . '/js/owl.carousel.min.js',
-        array('jquery'),
-        null,
-        true
-    );
-    wp_enqueue_script(
-        'partners-carousel-init',
-        get_stylesheet_directory_uri() . '/js/partners-carousel-init.js',
-        array('jquery', 'owl-carousel'),
-        null,
-        true
-    );
-    wp_enqueue_style(
-        'owl-carousel-css',
-        get_stylesheet_directory_uri() . '/css/owl.carousel.min.css'
-    );
-}
-add_action('wp_enqueue_scripts', 'load_owl_carousel_assets');
-
 function load_footer_scripts()
 {
     wp_register_script('util', get_template_directory_uri() . "-child" . '/js/util.js', array('jquery'), true);

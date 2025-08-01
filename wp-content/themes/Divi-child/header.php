@@ -23,6 +23,8 @@
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
     <script src="/wp-content/themes/Divi-child/js/main.js?ver=174"></script>
+    <script src="/wp-content/themes/Divi-child/js/owl.carousel.min.js?ver=174"></script>
+    <script src="/wp-content/themes/Divi-child/js/partners-carousel-init.js?ver=174"></script>
 <!--    <script src="/wp-content/themes/Divi-child/snow3d/build/snow3d.js"></script>-->
 
     <!-- Style -->

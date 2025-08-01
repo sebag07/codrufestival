@@ -169,6 +169,6 @@ $partner_chunks = array_chunk($all_partners, 4);
 }
 
 .owl-dot.active span {
-    background: #333;
+    background: var(--button-color);
 }
 </style>
