@@ -84,8 +84,7 @@ $partner_chunks = array_chunk($all_partners, 4);
 
 <style>
 .owl-carousel {
-    display: flex;
-    justify-content: center;
+    display: block;
 }
 @media (max-width: 991px) {
     .owl-carousel {
