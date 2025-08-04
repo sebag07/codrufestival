@@ -7,7 +7,7 @@
         <div class="container">
             <div class="hero-content text-center">
                 <h1 class="hero-title">The Quintessence</h1>
-                <p class="hero-subtitle festival-subtitle">Four elements, one festival experience</p>
+                <p class="hero-subtitle festival-subtitle">FIVE elements, ONE festival experience</p>
                 <div class="hero-description">
                     <p class="codru-tagline">In our story, CODRU is the 5th element.</p>
                     <p>CODRU is The Quintessence of Life in it's purest form.</p>
@@ -107,7 +107,7 @@
     <section class="quintessence-cta">
         <div class="container text-center">
             <h2>Experience The Quintessence</h2>
-            <p>Join us at CODRU Festival 2025 and experience how these four elements come together to create something truly magical.</p>
+            <p>Join us at CODRU Festival 2025 and experience how these five elements come together to create something truly magical.</p>
             <a href="<?php echo get_field('ticket_button_url', 'options'); ?>" class="codru-general-button">
                 <?php echo get_field('ticket_button_text', 'options'); ?>
             </a>
