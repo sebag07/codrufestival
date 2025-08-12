@@ -31,6 +31,15 @@ function load_child_scripts()
 
 add_action('wp_enqueue_scripts', 'load_child_scripts');
 
+// Enqueue admin CSS for ACF fields
+function enqueue_admin_styles($hook) {
+    // Only load on admin pages
+    if (is_admin()) {
+        wp_enqueue_style('admin-acf-styles', get_template_directory_uri() . '-child' . '/assets/css/admin.css', array(), '1.0.0');
+    }
+}
+add_action('admin_enqueue_scripts', 'enqueue_admin_styles');
+
 function load_footer_scripts()
 {
     wp_register_script('util', get_template_directory_uri() . "-child" . '/js/util.js', array('jquery'), true);
@@ -298,4 +307,77 @@ if (!function_exists('get_current_language_code')) {
         // Default to 'en' if not set
         return 'en';
     }
+}
+
+
+/**
+ * Multilingual Text Function
+ * Returns the appropriate text based on current language
+ * 
+ * @param string $ro_text Romanian text
+ * @param string $en_text English text
+ * @param string $fallback_lang Fallback language if current language is not supported
+ * @return string
+ */
+function get_multilingual_text($ro_text, $en_text, $fallback_lang = 'ro') {
+    // Check if WPML is active
+    if (function_exists('icl_get_current_language')) {
+        $current_lang = icl_get_current_language();
+    } elseif (function_exists('pll_current_language')) {
+        $current_lang = call_user_func('pll_current_language');
+    } else {
+        // Fallback to WordPress locale
+        $current_lang = get_locale();
+        if (strpos($current_lang, 'en') === 0) {
+            $current_lang = 'en';
+        } else {
+            $current_lang = 'ro';
+        }
+    }
+    
+    // Return appropriate text based on language
+    switch ($current_lang) {
+        case 'en':
+        case 'en_US':
+        case 'en_GB':
+            return $en_text;
+        case 'ro':
+        case 'ro_RO':
+        default:
+            return $ro_text;
+    }
+}
+
+/**
+ * Echo version of get_multilingual_text
+ * 
+ * @param string $ro_text Romanian text
+ * @param string $en_text English text
+ * @param string $fallback_lang Fallback language
+ */
+function the_multilingual_text($ro_text, $en_text, $fallback_lang = 'ro') {
+    echo get_multilingual_text($ro_text, $en_text, $fallback_lang);
+}
+
+/**
+ * Get multilingual text with HTML support
+ * 
+ * @param string $ro_text Romanian text (can include HTML)
+ * @param string $en_text English text (can include HTML)
+ * @param string $fallback_lang Fallback language
+ * @return string
+ */
+function get_multilingual_html($ro_text, $en_text, $fallback_lang = 'ro') {
+    return get_multilingual_text($ro_text, $en_text, $fallback_lang);
+}
+
+/**
+ * Echo version of get_multilingual_html
+ * 
+ * @param string $ro_text Romanian text (can include HTML)
+ * @param string $en_text English text (can include HTML)
+ * @param string $fallback_lang Fallback language
+ */
+function the_multilingual_html($ro_text, $en_text, $fallback_lang = 'ro') {
+    echo get_multilingual_html($ro_text, $en_text, $fallback_lang);
 }

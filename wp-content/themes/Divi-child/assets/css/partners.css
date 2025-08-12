@@ -21,39 +21,29 @@
     }
 }
 
-.partnersContainer, .partnersMediaContainer, .partnersCofinanceContainer, .partnersPartofContainer {
+.partnersContainer {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 20px;
 }
 
-.partners .partnersContainer img,
-.partners .partnersMediaContainer img,
-.partners .partnersCofinanceContainer img,
-.partners .partnersPartofContainer img {
+.partners .partnersContainer img {
     border: 1px solid #fff;
     border-radius: 8px;
     margin: 5px;
 }
 
+/* All partner levels base styles */
 .partnersLevel1, 
 .partnersLevel2, 
 .partnersLevel3, 
 .partnersLevel4, 
-.partnersLevel5 {
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-    width: 150px;
-    gap: 15px; */
-    text-align: center;
-}
-
-.partnersMedia,
-.partnersCofinance,
-.partnersPartof {
+.partnersLevel5,
+.partnersLevel6,
+.partnersLevel7,
+.producedBy {
     text-align: center;
 }
 
@@ -61,11 +51,15 @@
 .partnersLevel2 img,
 .partnersLevel3 img,
 .partnersLevel4 img,
-.partnersLevel5 img {
+.partnersLevel5 img,
+.partnersLevel6 img,
+.partnersLevel7 img,
+.producedBy img {
     margin-left: 10px;
     margin-right: 10px;
 }
 
+/* Partner Level 1 - Largest (Main Partners) */
 .partnersLevel1 img {
     height: 400px;
     width: 400px;
@@ -78,6 +72,7 @@
     }
 }
 
+/* Partner Level 2 - Second Largest */
 .partnersLevel2 img {
     height: 300px;
     width: 300px;
@@ -90,11 +85,11 @@
     }
 }
 
+/* Partner Level 3 - Medium Large */
 .partnersLevel3 img {
     height: 225px;
     width: 225px;
 }
-
 
 @media screen and (max-width: 500px){
     .partnersLevel3 img {
@@ -103,6 +98,7 @@
     }
 }
 
+/* Partner Level 4 - Medium */
 .partnersLevel4 img {
     height: 175px;
     width: 175px;
@@ -113,72 +109,62 @@
         height: 125px;
         width: 125px;
     }
-
 }
 
-.horecaPartners {
-    text-align: center;
+/* Partner Level 5 - Medium Small */
+.partnersLevel5 img {
+    height: 150px;
+    width: 150px;
 }
 
-.horecaPartners img {
-    height: 125px;
-    width: 125px;
-}
-
-
-@media screen and (max-width: 500px) {
-    .horecaPartners img {
+@media screen and (max-width: 500px){
+    .partnersLevel5 img {
         height: 100px;
         width: 100px;
     }
 }
 
-.partnersLevel5 img {
-    height: 80px;
-    width: 80px;
+/* Partner Level 6 - Small */
+.partnersLevel6 img {
+    height: 125px;
+    width: 125px;
 }
 
-.partnersMedia img {
-    height: 250px;
-    width: 250px;
+@media screen and (max-width: 500px){
+    .partnersLevel6 img {
+        height: 90px;
+        width: 90px;
+    }
 }
 
-.kissFMPartner {
-    text-align: center;
+/* Partner Level 7 - Smaller */
+.partnersLevel7 img {
+    height: 100px;
+    width: 100px;
 }
 
-.kissFMPartner img {
+@media screen and (max-width: 500px){
+    .partnersLevel7 img {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+/* Produced By - Large and Important */
+.producedBy img {
     height: 300px;
     width: 300px;
 }
 
 @media screen and (max-width: 500px){
-    .kissFMPartner img {
-        height: 250px;
-        width: 250px;
+    .producedBy img {
+        height: 200px;
+        width: 200px;
     }
 }
 
-@media screen and (max-width: 500px){
-    .partnersMedia img {
-        height: 150px;
-        width: 150px;
-    }
-}
-
-.partnersCofinance img {
-    height: 250px;
-    width: 250px;
-}
-
-.partnersPartof img {
-    height: 300px;
-    width: 300px;
-}
-
-@media screen and (max-width: 500px){
-    .partnersPartof img {
-        height: 250px;
-        width: 250px;
-    }
+/* Hover effects for linked producers */
+.producedBy a:hover img {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
 }
