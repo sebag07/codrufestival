@@ -74,8 +74,8 @@
 
 /* Partner Level 2 - Second Largest */
 .partnersLevel2 img {
-    height: 300px;
-    width: 300px;
+    height: 325px;
+    width: 325px;
 }
 
 @media screen and (max-width: 500px){
@@ -87,8 +87,8 @@
 
 /* Partner Level 3 - Medium Large */
 .partnersLevel3 img {
-    height: 225px;
-    width: 225px;
+    height: 275px;
+    width: 275px;
 }
 
 @media screen and (max-width: 500px){
@@ -100,8 +100,8 @@
 
 /* Partner Level 4 - Medium */
 .partnersLevel4 img {
-    height: 175px;
-    width: 175px;
+    height: 200px;
+    width: 200px;
 }
 
 @media screen and (max-width: 500px){
@@ -152,8 +152,8 @@
 
 /* Produced By - Large and Important */
 .producedBy img {
-    height: 300px;
-    width: 300px;
+    height: 350px;
+    width: 350px;
 }
 
 @media screen and (max-width: 500px){
