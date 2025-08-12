@@ -2,44 +2,44 @@
 // Fetch all partners from ACF options fields (as in partners.php)
 $partner_groups = [
     [
-        'acf_key' => 'main_partners',
-        'name_field' => 'main_partner_name',
-        'image_field' => 'main_partner_logo',
+        'acf_key' => 'partners_level_1',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'official_partners',
-        'name_field' => 'official_partner_name',
-        'image_field' => 'official_partner_image',
+        'acf_key' => 'partners_level_2',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'supporters',
-        'name_field' => 'supporter_name',
-        'image_field' => 'supporter_image',
+        'acf_key' => 'partners_level_3',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'hospitality_partners',
-        'name_field' => 'hospitality_partner_name',
-        'image_field' => 'hospitality_partner_image',
+        'acf_key' => 'partners_level_4',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'horeca_partners',
-        'name_field' => 'horeca_partner_name',
-        'image_field' => 'horeca_partner_image',
+        'acf_key' => 'partners_level_5',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'media_partners',
-        'name_field' => 'media_partner_name',
-        'image_field' => 'media_partner_image',
+        'acf_key' => 'partners_level_6',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'co-financed_by',
-        'name_field' => 'co-financed_by_name',
-        'image_field' => 'co-financed_by_image',
+        'acf_key' => 'partners_level_7',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
     ],
     [
         'acf_key' => 'produced_by',
-        'name_field' => 'produced_by_name',
-        'image_field' => 'produced_by_image',
+        'name_field' => 'producer_name',
+        'image_field' => 'producer_image',
     ],
 ];
 
