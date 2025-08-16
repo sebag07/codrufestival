@@ -11,7 +11,7 @@
         $key = '/en/';
         $is_english = strpos($url, $key) !== false;
 
-//        echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="artist-day" value="all" checked><span>' . ($is_english ? 'All' : 'Toate') . '</span></label>';
+       echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="artist-day" value="all" checked><span>' . ($is_english ? 'All' : 'Toate') . '</span></label>';
 
         $days = [
             ['id' => 'day1', 'label' => $is_english ? 'Friday' : 'Vineri'],
@@ -20,21 +20,24 @@
         ];
 
         $scenes = [
-            ['id' => 'scena-1', 'label' => 'SUB SOARE'],
-            ['id' => 'scena-2', 'label' => 'LUMEA NOUĂ'],
-            ['id' => 'scena-3', 'label' => 'SUB NORI'],
-            ['id' => 'scena-4', 'label' => 'SUB CODRU']
+            ['id' => 'stage1', 'label' => 'The 5th Element - Main Stage'],
+            ['id' => 'stage2', 'label' => 'Water by Rave'],
+            ['id' => 'stage3', 'label' => 'Earth by 80\'s'],
+            ['id' => 'stage4', 'label' => 'Air by Cramele Recaș'],
+            ['id' => 'stage5', 'label' => 'Fire by Hell']
         ];
 
-//        foreach ($days as $day) {
-//            echo '<label class="activitiesCheckbox" for="' . $day['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $day['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-day" value="' . $day['id'] . ($is_english ? '-en' : '') . '"><span>' . $day['label'] . '</span></label>';
-//        }
-//
-//        echo '<br>';
-//
-//        foreach ($scenes as $scene) {
-//            echo '<label class="activitiesCheckbox" for="' . $scene['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $scene['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
-//        }
+       foreach ($days as $day) {
+           echo '<label class="activitiesCheckbox" for="' . $day['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $day['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-day" value="' . $day['id'] . ($is_english ? '-en' : '') . '"><span>' . $day['label'] . '</span></label>';
+       }
+
+               echo '<br>';
+
+        echo '<label class="activitiesCheckbox activeCategory" for="all-stages"><input class="allcat" id="all-stages" type="radio" name="artist-scene" value="all" checked><span>' . ($is_english ? 'All Stages' : 'Toate Scenele') . '</span></label>';
+
+        foreach ($scenes as $scene) {
+            echo '<label class="activitiesCheckbox" for="' . $scene['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $scene['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
+        }
         ?>
 
         </span>
@@ -62,31 +65,61 @@
                     $artistBio = get_the_content($post->ID);
                     $spotifyLink = get_field('spotify_iframe', $post->ID);
 
-                    $performance_information = get_field('performance_information', $post->ID);
+                    // Get direct ACF fields
+                    $artist_level = get_field('artist_level', $post->ID);
+                    $stage = get_field('stage', $post->ID);
+                    $start_time = get_field('start_time', $post->ID);
+                    $end_time = get_field('end_time', $post->ID);
+                    $day_keys = get_field('day', $post->ID);
 
                     $artist_stage = '';
                     $intervalOrar = '';
+                    $stage_value = '';
+                    $day_values = [];
 
-                    if (isset($performance_information)) {
-                        $artist_stage = $performance_information['stage']['label'];
-                        $start_time = $performance_information['start_time'];
-                        $end_time = $performance_information['end_time'];
-                        $day_keys = $performance_information['day'];
-                        if (!empty($day_keys)) {
-                            if (is_array($day_keys)) {
-                                $schedule_lines = [];
-                                foreach ($day_keys as $day_key) {
-                                    $translated_day = $days_labels[$day_key['value']] ?? '';
-                                    if ($translated_day) {
+                    // Get stage label and value if stage field exists
+                    if (isset($stage)) {
+                        $artist_stage = is_array($stage) ? $stage['label'] : $stage;
+                        $stage_value = is_array($stage) ? $stage['value'] : $stage;
+                    }
+
+                    // Get day values for filtering
+                    if (!empty($day_keys)) {
+                        if (is_array($day_keys)) {
+                            foreach ($day_keys as $day_key) {
+                                $day_values[] = is_array($day_key) ? $day_key['value'] : $day_key;
+                            }
+                        } else {
+                            $day_values[] = is_array($day_keys) ? $day_keys['value'] : $day_keys;
+                        }
+                    }
+
+                    // Build schedule information
+                    if (!empty($day_keys)) {
+                        if (is_array($day_keys)) {
+                            $schedule_lines = [];
+                            foreach ($day_keys as $day_key) {
+                                $day_value = is_array($day_key) ? $day_key['value'] : $day_key;
+                                $translated_day = $days_labels[$day_value] ?? '';
+                                if ($translated_day) {
+                                    // Build schedule line with or without time
+                                    if (!empty($start_time) && !empty($end_time)) {
                                         $schedule_lines[] = esc_html($translated_day) . ' ' . esc_html($start_time) . ' - ' . esc_html($end_time);
+                                    } else {
+                                        $schedule_lines[] = esc_html($translated_day);
                                     }
                                 }
-                                $intervalOrar = implode('<br>', $schedule_lines);
-                            } else {
-                                $day_key = $day_keys;
-                                $translated_day = $days_labels[$day_key['value']] ?? '';
-                                if ($translated_day) {
+                            }
+                            $intervalOrar = implode('<br>', $schedule_lines);
+                        } else {
+                            $day_value = is_array($day_keys) ? $day_keys['value'] : $day_keys;
+                            $translated_day = $days_labels[$day_value] ?? '';
+                            if ($translated_day) {
+                                // Build schedule line with or without time
+                                if (!empty($start_time) && !empty($end_time)) {
                                     $intervalOrar = esc_html($translated_day) . ' ' . esc_html($start_time) . ' - ' . esc_html($end_time);
+                                } else {
+                                    $intervalOrar = esc_html($translated_day);
                                 }
                             }
                         }
@@ -122,6 +155,8 @@
                          data-interval="<?php echo esc_attr($intervalOrar); ?>"
                          data-socials='<?php echo esc_attr($json_socials); ?>'
                          data-stage="<?php echo esc_attr($artist_stage); ?>"
+                         data-stage-value="<?php echo esc_attr($stage_value); ?>"
+                         data-day-values="<?php echo esc_attr(implode(',', $day_values)); ?>"
                     >
                         <div class="artistImageContainer">
                             <img class="artistImg" loading="lazy" src="<?php echo esc_url($imageURL); ?>"
@@ -283,12 +318,25 @@
                                 return;
                             }
 
-                            const categories = jQuery(this).attr('data-category').split(' ');
+                            const stageValue = jQuery(this).attr('data-stage-value');
+                            const dayValues = jQuery(this).attr('data-day-values');
+                            const artistDays = dayValues ? dayValues.split(',') : [];
 
-                            // If only "all" days checked, filter only by scene
-                            const matchesDay = allDays || selectedDays.length === 0 || selectedDays.some(day => categories.includes(day));
-                            // If only "all" scenes checked, filter only by day
-                            const matchesScene = allScenes || selectedScenes.length === 0 || selectedScenes.some(scene => categories.includes(scene));
+                            // Check if artist matches selected days
+                            const matchesDay = allDays || selectedDays.length === 0 || 
+                                selectedDays.some(selectedDay => {
+                                    // Remove language suffix for comparison (day1-en -> day1)
+                                    const dayId = selectedDay.replace(/-en$/, '');
+                                    return artistDays.includes(dayId);
+                                });
+
+                            // Check if artist matches selected scenes/stages
+                            const matchesScene = allScenes || selectedScenes.length === 0 || 
+                                selectedScenes.some(selectedScene => {
+                                    // Remove language suffix for comparison (stage1-en -> stage1)
+                                    const stageId = selectedScene.replace(/-en$/, '');
+                                    return stageValue === stageId;
+                                });
 
                             if (matchesDay && matchesScene) {
                                 jQuery(this).show();

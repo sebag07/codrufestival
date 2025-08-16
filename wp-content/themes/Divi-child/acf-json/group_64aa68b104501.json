@@ -6,7 +6,7 @@
             "allow_backendsearch": 0,
             "show_column_filter": false,
             "allow_bulkedit": 0,
-            "allow_quickedit": 0,
+            "allow_quickedit": 1,
             "show_column": 0,
             "show_column_weight": 1000,
             "show_column_sortable": false,
@@ -197,10 +197,11 @@
             },
             "wpml_cf_preferences": 1,
             "choices": {
-                "stage1": "SUB SOARE",
-                "stage2": "LUMEA NOUA",
-                "stage3": "STAGE 3",
-                "stage4": "STAGE 4"
+                "stage1": "The 5th Element - Main Stage",
+                "stage2": "Water by Rave",
+                "stage3": "Earth by 80's",
+                "stage4": "Air by Cramele Recaș",
+                "stage5": "Fire by Hell"
             },
             "default_value": false,
             "return_format": "array",
@@ -240,9 +241,9 @@
                 "day2": "Sambata",
                 "day3": "Duminica"
             },
-            "default_value": false,
+            "default_value": [],
             "return_format": "array",
-            "multiple": 0,
+            "multiple": 1,
             "allow_null": 1,
             "allow_in_bindings": 0,
             "ui": 0,
@@ -330,5 +331,5 @@
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
     "qef_simple_location_rules": 0,
-    "modified": 1752005186
+    "modified": 1755330876
 }
