@@ -11,8 +11,6 @@
         $key = '/en/';
         $is_english = strpos($url, $key) !== false;
 
-       echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="artist-day" value="all" checked><span>' . ($is_english ? 'All' : 'Toate') . '</span></label>';
-
         $days = [
             ['id' => 'day1', 'label' => $is_english ? 'Friday' : 'Vineri'],
             ['id' => 'day2', 'label' => $is_english ? 'Saturday' : 'Sâmbătă'],
@@ -26,19 +24,49 @@
             ['id' => 'stage4', 'label' => 'AIR Stage'],
             ['id' => 'stage5', 'label' => 'FIRE Stage']
         ];
-
-       foreach ($days as $day) {
-           echo '<label class="activitiesCheckbox" for="' . $day['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $day['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-day" value="' . $day['id'] . ($is_english ? '-en' : '') . '"><span>' . $day['label'] . '</span></label>';
-       }
-
-               echo '<br>';
-
-        echo '<label class="activitiesCheckbox activeCategory" for="all-stages"><input class="allcat" id="all-stages" type="radio" name="artist-scene" value="all" checked><span>' . ($is_english ? 'All Stages' : 'Toate Scenele') . '</span></label>';
-
-        foreach ($scenes as $scene) {
-            echo '<label class="activitiesCheckbox" for="' . $scene['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $scene['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
-        }
         ?>
+
+        <!-- Desktop Radio Button Filters -->
+        <div class="desktop-filters">
+            <?php
+            echo '<label class="activitiesCheckbox activeCategory" for="all"><input class="allcat" id="all" type="radio" name="artist-day" value="all" checked><span>' . ($is_english ? 'All' : 'Toate') . '</span></label>';
+
+            foreach ($days as $day) {
+                echo '<label class="activitiesCheckbox" for="' . $day['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $day['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-day" value="' . $day['id'] . ($is_english ? '-en' : '') . '"><span>' . $day['label'] . '</span></label>';
+            }
+
+            echo '<br>';
+
+            echo '<label class="activitiesCheckbox activeCategory" for="all-stages"><input class="allcat" id="all-stages" type="radio" name="artist-scene" value="all" checked><span>' . ($is_english ? 'All Stages' : 'Toate Scenele') . '</span></label>';
+
+            foreach ($scenes as $scene) {
+                echo '<label class="activitiesCheckbox" for="' . $scene['id'] . ($is_english ? '-en' : '') . '"><input class="catCheckbox" id="' . $scene['id'] . ($is_english ? '-en' : '') . '" type="radio" name="artist-scene" value="' . $scene['id'] . ($is_english ? '-en' : '') . '"><span>' . $scene['label'] . '</span></label>';
+            }
+            ?>
+        </div>
+
+        <!-- Mobile Dropdown Filters -->
+        <div class="mobile-filters">
+            <div class="filter-group">
+                <label for="mobile-day-select" class="filter-label"><?php echo $is_english ? 'Day:' : 'Ziua:'; ?></label>
+                <select id="mobile-day-select" class="mobile-filter-select">
+                    <option value="all"><?php echo $is_english ? 'All Days' : 'Toate Zilele'; ?></option>
+                    <?php foreach ($days as $day): ?>
+                        <option value="<?php echo $day['id'] . ($is_english ? '-en' : ''); ?>"><?php echo $day['label']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="mobile-stage-select" class="filter-label"><?php echo $is_english ? 'Stage:' : 'Scena:'; ?></label>
+                <select id="mobile-stage-select" class="mobile-filter-select">
+                    <option value="all"><?php echo $is_english ? 'All Stages' : 'Toate Scenele'; ?></option>
+                    <?php foreach ($scenes as $scene): ?>
+                        <option value="<?php echo $scene['id'] . ($is_english ? '-en' : ''); ?>"><?php echo $scene['label']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
 
         </span>
             <div class="artistCardContainer">
@@ -292,24 +320,46 @@
                 );
 
                 jQuery(document).ready(function () {
-                    function filterArtists() {
+                    function getSelectedFilters() {
                         let selectedDays = [];
                         let selectedScenes = [];
-                        let allDays = jQuery("input[name='artist-day'][value='all']").is(":checked");
-                        let allScenes = jQuery("input[name='artist-scene'][value='all']").is(":checked");
+                        let allDays = false;
+                        let allScenes = false;
 
-                        // Only add if not "all"
-                        jQuery("input[name='artist-day']:checked").each(function () {
-                            if (jQuery(this).val() !== 'all') {
-                                selectedDays.push(jQuery(this).val());
-                            }
-                        });
+                        // Check if we're on mobile or desktop
+                        if (jQuery(window).width() <= 767) {
+                            // Mobile - get values from dropdowns
+                            const dayValue = jQuery('#mobile-day-select').val();
+                            const sceneValue = jQuery('#mobile-stage-select').val();
+                            
+                            allDays = dayValue === 'all';
+                            allScenes = sceneValue === 'all';
+                            
+                            if (!allDays) selectedDays.push(dayValue);
+                            if (!allScenes) selectedScenes.push(sceneValue);
+                        } else {
+                            // Desktop - get values from radio buttons
+                            allDays = jQuery("input[name='artist-day'][value='all']").is(":checked");
+                            allScenes = jQuery("input[name='artist-scene'][value='all']").is(":checked");
 
-                        jQuery("input[name='artist-scene']:checked").each(function () {
-                            if (jQuery(this).val() !== 'all') {
-                                selectedScenes.push(jQuery(this).val());
-                            }
-                        });
+                            jQuery("input[name='artist-day']:checked").each(function () {
+                                if (jQuery(this).val() !== 'all') {
+                                    selectedDays.push(jQuery(this).val());
+                                }
+                            });
+
+                            jQuery("input[name='artist-scene']:checked").each(function () {
+                                if (jQuery(this).val() !== 'all') {
+                                    selectedScenes.push(jQuery(this).val());
+                                }
+                            });
+                        }
+
+                        return { selectedDays, selectedScenes, allDays, allScenes };
+                    }
+
+                    function filterArtists() {
+                        const { selectedDays, selectedScenes, allDays, allScenes } = getSelectedFilters();
 
                         jQuery(".artistInnerContainer").each(function () {
                             // If "all" is checked for both filters, show all artists
@@ -358,12 +408,57 @@
                         });
                     }
 
-                    // Attach change event listener to checkboxes
+                    function syncFilters() {
+                        if (jQuery(window).width() <= 767) {
+                            // Mobile - sync dropdowns with radio buttons
+                            const dayValue = jQuery("input[name='artist-day']:checked").val();
+                            const sceneValue = jQuery("input[name='artist-scene']:checked").val();
+                            
+                            if (dayValue) jQuery('#mobile-day-select').val(dayValue);
+                            if (sceneValue) jQuery('#mobile-stage-select').val(sceneValue);
+                        } else {
+                            // Desktop - ensure radio buttons have proper values (don't overwrite with dropdown values on desktop)
+                            setCheckedAttributes();
+                        }
+                    }
+
+                    // Attach change event listeners
                     jQuery("input[name='artist-day'], input[name='artist-scene']").on('change', function () {
+                        setCheckedAttributes();
+                        syncFilters();
+                        filterArtists();
+                    });
+
+                    // Attach change event listeners for mobile dropdowns
+                    jQuery('#mobile-day-select, #mobile-stage-select').on('change', function () {
+                        // When dropdown changes, update corresponding radio button
+                        const dropdownId = jQuery(this).attr('id');
+                        const selectedValue = jQuery(this).val();
+                        
+                        if (dropdownId === 'mobile-day-select') {
+                            // Clear all day radio buttons first
+                            jQuery("input[name='artist-day']").prop('checked', false);
+                            // Set the selected one
+                            jQuery("input[name='artist-day'][value='" + selectedValue + "']").prop('checked', true);
+                        } else if (dropdownId === 'mobile-stage-select') {
+                            // Clear all scene radio buttons first
+                            jQuery("input[name='artist-scene']").prop('checked', false);
+                            // Set the selected one
+                            jQuery("input[name='artist-scene'][value='" + selectedValue + "']").prop('checked', true);
+                        }
+                        
                         setCheckedAttributes();
                         filterArtists();
                     });
 
+                    // Handle window resize to sync filters
+                    jQuery(window).on('resize', function () {
+                        syncFilters();
+                    });
+
+                    // Initialize
+                    setCheckedAttributes();
+                    syncFilters();
                     filterArtists();
                 });
             </script>
@@ -491,6 +586,76 @@
                     width: 30px;
                     height: auto;
                     filter: brightness(0) saturate(100%) invert(95%) sepia(25%) saturate(6752%) hue-rotate(34deg) brightness(91%) contrast(101%);
+                }
+
+                /* Mobile/Desktop Filter Display */
+                .mobile-filters {
+                    display: none;
+                }
+
+                .desktop-filters {
+                    display: block;
+                }
+
+                @media (max-width: 767px) {
+                    .mobile-filters {
+                        display: flex !important;
+                        flex-direction: column;
+                        gap: 15px;
+                        margin-bottom: 20px;
+                    }
+
+                    .desktop-filters {
+                        display: none !important;
+                    }
+                }
+
+                /* Mobile Filter Styling */
+                .filter-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+                }
+
+                .filter-label {
+                    font-weight: 600;
+                    font-size: 18px;
+                    color: #fff;
+                    margin-bottom: 5px;
+                }
+
+                .mobile-filter-select {
+                    background-color: transparent;
+                    border: 2px solid var(--button-color);
+                    border-radius: 30px;
+                    color: #fff;
+                    padding: 10px 40px 10px 20px;
+                    font-weight: 600;
+                    font-size: 16px;
+                    appearance: none;
+                    background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23EFAA13' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+                    background-repeat: no-repeat;
+                    background-position: right 15px center;
+                    background-size: 12px;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                .mobile-filter-select:focus {
+                    outline: none;
+                    background-color: var(--button-color);
+                    color: #000;
+                }
+
+                .mobile-filter-select:hover {
+                    background-color: var(--button-color);
+                    color: #000;
+                }
+
+                .mobile-filter-select option {
+                    background-color: var(--secondary-color, #333);
+                    color: #fff;
+                    padding: 10px;
                 }
 
             </style>
