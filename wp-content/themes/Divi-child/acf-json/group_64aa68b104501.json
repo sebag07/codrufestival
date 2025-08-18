@@ -198,9 +198,9 @@
             "wpml_cf_preferences": 1,
             "choices": {
                 "stage1": "The 5th Element - Main Stage",
-                "stage2": "WATER Stage",
+                "stage2": "AIR Stage",
                 "stage3": "EARTH Stage",
-                "stage4": "AIR Stage",
+                "stage4": "WATER Stage",
                 "stage5": "FIRE Stage"
             },
             "default_value": false,
@@ -331,5 +331,5 @@
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
     "qef_simple_location_rules": 0,
-    "modified": 1755499112
+    "modified": 1755530024
 }
