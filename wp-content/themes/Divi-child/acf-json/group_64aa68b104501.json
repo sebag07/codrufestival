@@ -198,10 +198,10 @@
             "wpml_cf_preferences": 1,
             "choices": {
                 "stage1": "The 5th Element - Main Stage",
-                "stage2": "Water by Rave",
-                "stage3": "Earth by 80's",
-                "stage4": "Air by Cramele Recaș",
-                "stage5": "Fire by Hell"
+                "stage2": "WATER Stage",
+                "stage3": "EARTH Stage",
+                "stage4": "AIR Stage",
+                "stage5": "FIRE Stage"
             },
             "default_value": false,
             "return_format": "array",
@@ -331,5 +331,5 @@
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
     "qef_simple_location_rules": 0,
-    "modified": 1755330876
+    "modified": 1755499112
 }
