@@ -21,10 +21,10 @@
 
         $scenes = [
             ['id' => 'stage1', 'label' => 'The 5th Element - Main Stage'],
-            ['id' => 'stage2', 'label' => 'Water by Rave'],
-            ['id' => 'stage3', 'label' => 'Earth by 80\'s'],
-            ['id' => 'stage4', 'label' => 'Air by Cramele Recaș'],
-            ['id' => 'stage5', 'label' => 'Fire by Hell']
+            ['id' => 'stage2', 'label' => 'WATER Stage'],
+            ['id' => 'stage3', 'label' => 'EARTH Stage'],
+            ['id' => 'stage4', 'label' => 'AIR Stage'],
+            ['id' => 'stage5', 'label' => 'FIRE Stage']
         ];
 
        foreach ($days as $day) {
