@@ -93,6 +93,30 @@
             </div>
         </div>
 
+        <!-- Produced By -->
+        <div class="partnersContainer">
+            <div class="producedBy">
+                <?php
+                if (have_rows('produced_by', 'options')):
+                    while (have_rows('produced_by', 'options')) : the_row();
+                        $partner_name = get_sub_field('producer_name');
+                        $partner_image = get_sub_field('producer_image');
+                        $partner_link = get_sub_field('producer_link');
+                ?>
+                        <?php if ($partner_link): ?>
+                            <a href="<?php echo $partner_link; ?>" target="_blank">
+                                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
+                            </a>
+                        <?php else: ?>
+                            <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
+                        <?php endif; ?>
+                <?php
+                    endwhile;
+                endif;
+                ?>
+            </div>
+        </div>
+
         <!-- Partner Level 6 -->
         <div class="partnersContainer">
             <div class="partnersLevel6">
@@ -120,30 +144,6 @@
                         $partner_image = get_sub_field('partner_image');
                 ?>
                         <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
-                <?php
-                    endwhile;
-                endif;
-                ?>
-            </div>
-        </div>
-
-        <!-- Produced By -->
-        <div class="partnersContainer">
-            <div class="producedBy">
-                <?php
-                if (have_rows('produced_by', 'options')):
-                    while (have_rows('produced_by', 'options')) : the_row();
-                        $partner_name = get_sub_field('producer_name');
-                        $partner_image = get_sub_field('producer_image');
-                        $partner_link = get_sub_field('producer_link');
-                ?>
-                        <?php if ($partner_link): ?>
-                            <a href="<?php echo $partner_link; ?>" target="_blank">
-                                <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
-                            </a>
-                        <?php else: ?>
-                            <img src="<?php echo $partner_image; ?>" alt="<?php echo $partner_name; ?>">
-                        <?php endif; ?>
                 <?php
                     endwhile;
                 endif;
