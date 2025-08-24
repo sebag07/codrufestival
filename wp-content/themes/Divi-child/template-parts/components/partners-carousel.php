@@ -27,16 +27,6 @@ $partner_groups = [
         'image_field' => 'partner_image',
     ],
     [
-        'acf_key' => 'partners_level_6',
-        'name_field' => 'partner_name',
-        'image_field' => 'partner_image',
-    ],
-    [
-        'acf_key' => 'partners_level_7',
-        'name_field' => 'partner_name',
-        'image_field' => 'partner_image',
-    ],
-    [
         'acf_key' => 'produced_by',
         'name_field' => 'producer_name',
         'image_field' => 'producer_image',
