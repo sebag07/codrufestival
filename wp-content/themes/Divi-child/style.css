@@ -5308,6 +5308,12 @@ f.artistInnerContainer {
     color: #efaa13 !important;
 }
 
+@media screen and (max-width: 767px) {
+    .homepage-info-section h2 {
+        font-size: 36px;
+        line-height: 42px;
+    }
+
 .homepage-info-section p {
     font-size: 18px;
     font-style: normal;
