@@ -34,7 +34,7 @@
                     'posts_per_page' => '-1'
                 );
                 $postslist = get_posts($args);
-                foreach ($postslist as $post) : {
+                foreach ($postslist as $post) :
                     $image = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'full');
                     if ($image) {
                         $imageUrl = $image[0];
@@ -53,27 +53,31 @@
                         $activityCategories[] = $cat->slug;
                     }
                     $activityCategoryString = implode(' ', $activityCategories);
-                    echo "  <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='$activityCategoryString all'>
-                                <a href='$postURL' target='_blank'>
+                    ?>
+                    <div class='col-lg-4 col-md-6 col-12 activitiesBlurb' data-category='<?php echo $activityCategoryString; ?> all'>
+                                <a href='<?php echo $postURL; ?>' target='_blank'>
                                     <div class='activitiesPost'>
                                         <div class='imageContainer'>
-                                            <img src='$imageUrl' alt=''>
+                                            <img src='<?php echo $imageUrl; ?>' alt=''>
                                             <div class='details'>
-                                                <span class='type'>$type</span>
-                                                <span class='date'>$date</span>
+                                                <?php if ($type) : ?>
+                                                    <span class='type'><?php echo $type; ?></span>
+                                                <?php endif; ?>
+                                                <?php if ($date) : ?>
+                                                    <span class='date'><?php echo $date; ?></span>
+                                                <?php endif; ?>
                                             </div>
                                         </div>
                                         <div class='postInfo'>
-                                            <h4 class='mb-1'>$title</h4>
-                                            <p >$shortDescription</p>
-                                            <a class='readMore' href='$postURL'><span>Citește mai mult</span></a>
+                                            <h4 class='mb-1'><?php echo $title; ?></h4>
+                                            <p><?php echo $shortDescription; ?></p>
+                                            <a class='readMore' href='<?php echo $postURL; ?>'><span>Citește mai mult</span></a>
                                         </div>
                                     </div>
                                 </a>
-                            </div>";
-                }
-                endforeach;
-                ?>
+                            </div>
+                    <?php
+                endforeach; ?>
             </div>
         </div>
     </div>
