@@ -18,7 +18,8 @@ $display_lineup_section = get_field('display_lineup');
     }
     @media (max-width: 576px){
         .after-movie-container {
-            padding-top: 0 !important;
+            padding-top: 80px !important;
+            padding-bottom: 80px !important;
         }
     }
 </style>
