@@ -6,7 +6,7 @@ require get_template_directory() . '-child/includes/widgets/partners.php';
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('parent-style', get_template_directory_uri() . '/style.css', array(), '150');
+    wp_enqueue_style('parent-style', get_template_directory_uri() . '-child/style.css', array(), '150');
     wp_enqueue_style('activities', get_template_directory_uri() . '-child' . '/assets/css/activities.css');
     wp_enqueue_style('partners', get_template_directory_uri() . '-child' . '/assets/css/partners.css');
     wp_enqueue_style('magnificPopupCss', get_template_directory_uri() . '-child' . '/assets/css/magnific-popup.min.css');
