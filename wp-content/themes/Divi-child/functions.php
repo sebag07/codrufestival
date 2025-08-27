@@ -381,3 +381,394 @@ function get_multilingual_html($ro_text, $en_text, $fallback_lang = 'ro') {
 function the_multilingual_html($ro_text, $en_text, $fallback_lang = 'ro') {
     echo get_multilingual_html($ro_text, $en_text, $fallback_lang);
 }
+
+/**
+ * Admin filtering for Artists post type
+ * Adds dropdown filters for ACF fields in the WordPress admin
+ */
+
+// Add filter dropdowns to the admin Artists page
+function add_artist_admin_filters() {
+    global $typenow;
+    
+    // Only show on artist post type
+    if ($typenow !== 'artist') {
+        return;
+    }
+    
+    // Get current filter values
+    $current_artist_level = isset($_GET['artist_level']) ? $_GET['artist_level'] : '';
+    $current_stage = isset($_GET['stage']) ? $_GET['stage'] : '';
+    $current_day = isset($_GET['day']) ? $_GET['day'] : '';
+    
+    // Artist Level filter
+    $artist_levels = array(
+        'level1' => 'Level 1',
+        'level2' => 'Level 2', 
+        'level3' => 'Level 3',
+        'level4' => 'Level 4',
+        'level5' => 'Level 5',
+        'level6' => 'Level 6'
+    );
+    
+    // Stage filter
+    $stages = array(
+        'stage1' => 'The 5th Element - Main Stage',
+        'stage2' => 'AIR Stage',
+        'stage3' => 'EARTH Stage', 
+        'stage4' => 'WATER Stage',
+        'stage5' => 'FIRE Stage'
+    );
+    
+    // Day filter
+    $days = array(
+        'day1' => 'Vineri',
+        'day2' => 'Sambata',
+        'day3' => 'Duminica'
+    );
+    
+    ?>
+    <select name="artist_level" id="artist_level_filter">
+        <option value=""><?php _e('All Artist Levels', 'divi-child'); ?></option>
+        <?php foreach ($artist_levels as $value => $label) : ?>
+            <option value="<?php echo esc_attr($value); ?>" <?php selected($current_artist_level, $value); ?>>
+                <?php echo esc_html($label); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    
+    <select name="stage" id="stage_filter">
+        <option value=""><?php _e('All Stages', 'divi-child'); ?></option>
+        <?php foreach ($stages as $value => $label) : ?>
+            <option value="<?php echo esc_attr($value); ?>" <?php selected($current_stage, $value); ?>>
+                <?php echo esc_html($label); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    
+    <select name="day" id="day_filter">
+        <option value=""><?php _e('All Days', 'divi-child'); ?></option>
+        <?php foreach ($days as $value => $label) : ?>
+            <option value="<?php echo esc_attr($value); ?>" <?php selected($current_day, $value); ?>>
+                <?php echo esc_html($label); ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    
+    <style>
+        .tablenav-pages .tablenav-pages-navspan {
+            margin-right: 10px;
+        }
+        #artist_level_filter,
+        #stage_filter,
+        #day_filter {
+            margin-right: 10px;
+            min-width: 150px;
+        }
+        .tablenav-pages {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+    </style>
+    <?php
+}
+add_action('restrict_manage_posts', 'add_artist_admin_filters');
+
+// Filter the posts query based on selected filters
+function filter_artists_by_acf_fields($query) {
+    global $pagenow, $typenow;
+    
+    // Only apply on admin artist post type page
+    if (!is_admin() || $pagenow !== 'edit.php' || $typenow !== 'artist') {
+        return;
+    }
+    
+    // Don't apply filters on other queries (like AJAX)
+    if (!$query->is_main_query()) {
+        return;
+    }
+    
+    $meta_query = array();
+    
+    // Filter by artist level
+    if (!empty($_GET['artist_level'])) {
+        $meta_query[] = array(
+            'key' => 'artist_level',
+            'value' => $_GET['artist_level'],
+            'compare' => '='
+        );
+    }
+    
+    // Filter by stage
+    if (!empty($_GET['stage'])) {
+        $meta_query[] = array(
+            'key' => 'stage',
+            'value' => $_GET['stage'],
+            'compare' => '='
+        );
+    }
+    
+    // Filter by day (handles multiple values)
+    if (!empty($_GET['day'])) {
+        $meta_query[] = array(
+            'key' => 'day',
+            'value' => '"' . $_GET['day'] . '"',
+            'compare' => 'LIKE'
+        );
+    }
+    
+    // Apply meta query if we have filters
+    if (!empty($meta_query)) {
+        if (count($meta_query) > 1) {
+            $meta_query['relation'] = 'AND';
+        }
+        $query->set('meta_query', $meta_query);
+    }
+}
+add_action('pre_get_posts', 'filter_artists_by_acf_fields');
+
+// Add custom columns to the Artists admin table
+function add_artist_admin_columns($columns) {
+    $new_columns = array();
+    
+    // Insert new columns after title
+    foreach ($columns as $key => $value) {
+        $new_columns[$key] = $value;
+        if ($key === 'title') {
+            $new_columns['artist_level'] = __('Artist Level', 'divi-child');
+            $new_columns['stage'] = __('Stage', 'divi-child');
+            $new_columns['day'] = __('Day', 'divi-child');
+            $new_columns['start_time'] = __('Start Time', 'divi-child');
+        }
+    }
+    
+    return $new_columns;
+}
+add_filter('manage_artist_posts_columns', 'add_artist_admin_columns');
+
+// Populate the custom columns with data
+function populate_artist_admin_columns($column, $post_id) {
+    switch ($column) {
+        case 'artist_level':
+            $artist_level = get_field('artist_level', $post_id);
+            if ($artist_level && is_array($artist_level)) {
+                echo esc_html($artist_level['label']);
+            } elseif ($artist_level) {
+                echo esc_html($artist_level);
+            } else {
+                echo '<span style="color: #999;">—</span>';
+            }
+            break;
+            
+        case 'stage':
+            $stage = get_field('stage', $post_id);
+            if ($stage && is_array($stage)) {
+                echo esc_html($stage['label']);
+            } elseif ($stage) {
+                echo esc_html($stage);
+            } else {
+                echo '<span style="color: #999;">—</span>';
+            }
+            break;
+            
+        case 'day':
+            $days = get_field('day', $post_id);
+            if ($days && is_array($days)) {
+                $day_labels = array();
+                foreach ($days as $day) {
+                    if (is_array($day)) {
+                        $day_labels[] = $day['label'];
+                    } else {
+                        $day_labels[] = $day;
+                    }
+                }
+                echo esc_html(implode(', ', $day_labels));
+            } elseif ($days) {
+                echo esc_html($days);
+            } else {
+                echo '<span style="color: #999;">—</span>';
+            }
+            break;
+            
+        case 'start_time':
+            $start_time = get_field('start_time', $post_id);
+            if ($start_time) {
+                echo esc_html($start_time);
+            } else {
+                echo '<span style="color: #999;">—</span>';
+            }
+            break;
+    }
+}
+add_action('manage_artist_posts_custom_column', 'populate_artist_admin_columns', 10, 2);
+
+// Make columns sortable
+function make_artist_columns_sortable($columns) {
+    $columns['artist_level'] = 'artist_level';
+    $columns['stage'] = 'stage';
+    $columns['start_time'] = 'start_time';
+    return $columns;
+}
+add_filter('manage_edit-artist_sortable_columns', 'make_artist_columns_sortable');
+
+// Handle sorting for custom columns
+function handle_artist_column_sorting($query) {
+    global $pagenow, $typenow;
+    
+    if (!is_admin() || $pagenow !== 'edit.php' || $typenow !== 'artist') {
+        return;
+    }
+    
+    if (!$query->is_main_query()) {
+        return;
+    }
+    
+    $orderby = $query->get('orderby');
+    
+    switch ($orderby) {
+        case 'artist_level':
+            $query->set('meta_key', 'artist_level');
+            $query->set('orderby', 'meta_value');
+            break;
+            
+        case 'stage':
+            $query->set('meta_key', 'stage');
+            $query->set('orderby', 'meta_value');
+            break;
+            
+        case 'start_time':
+            $query->set('meta_key', 'start_time');
+            $query->set('orderby', 'meta_value');
+            break;
+    }
+}
+add_action('pre_get_posts', 'handle_artist_column_sorting');
+
+// Add bulk actions for quick editing
+function add_artist_bulk_actions($bulk_actions) {
+    global $typenow;
+    
+    if ($typenow === 'artist') {
+        $bulk_actions['update_artist_level'] = __('Update Artist Level', 'divi-child');
+        $bulk_actions['update_stage'] = __('Update Stage', 'divi-child');
+        $bulk_actions['update_day'] = __('Update Day', 'divi-child');
+    }
+    
+    return $bulk_actions;
+}
+add_filter('bulk_actions-edit-artist', 'add_artist_bulk_actions');
+
+// Handle bulk actions
+function handle_artist_bulk_actions($redirect_to, $doaction, $post_ids) {
+    if ($doaction !== 'update_artist_level' && $doaction !== 'update_stage' && $doaction !== 'update_day') {
+        return $redirect_to;
+    }
+    
+    $updated = 0;
+    $field_name = '';
+    
+    switch ($doaction) {
+        case 'update_artist_level':
+            $field_name = 'artist_level';
+            $new_value = isset($_POST['artist_level_value']) ? $_POST['artist_level_value'] : '';
+            break;
+            
+        case 'update_stage':
+            $field_name = 'stage';
+            $new_value = isset($_POST['stage_value']) ? $_POST['stage_value'] : '';
+            break;
+            
+        case 'update_day':
+            $field_name = 'day';
+            $new_value = isset($_POST['day_value']) ? $_POST['day_value'] : '';
+            break;
+    }
+    
+    if (!empty($new_value) && !empty($field_name)) {
+        foreach ($post_ids as $post_id) {
+            update_field($field_name, $new_value, $post_id);
+            $updated++;
+        }
+    }
+    
+    $redirect_to = add_query_arg('bulk_artists_updated', $updated, $redirect_to);
+    return $redirect_to;
+}
+add_filter('handle_bulk_actions-edit-artist', 'handle_artist_bulk_actions', 10, 3);
+
+// Show bulk action messages
+function show_artist_bulk_action_messages() {
+    if (!empty($_REQUEST['bulk_artists_updated'])) {
+        $updated_count = intval($_REQUEST['bulk_artists_updated']);
+        printf(
+            '<div class="updated notice is-dismissible"><p>' .
+            _n(
+                '%s artist updated successfully.',
+                '%s artists updated successfully.',
+                $updated_count,
+                'divi-child'
+            ) . '</p></div>',
+            $updated_count
+        );
+    }
+}
+add_action('admin_notices', 'show_artist_bulk_action_messages');
+
+// Add JavaScript for enhanced filtering
+function add_artist_admin_scripts($hook) {
+    global $typenow;
+    
+    if ($hook !== 'edit.php' || $typenow !== 'artist') {
+        return;
+    }
+    
+    ?>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        // Auto-submit form when filters change
+        $('#artist_level_filter, #stage_filter, #day_filter').on('change', function() {
+            $(this).closest('form').submit();
+        });
+        
+        // Add clear filters button
+        if ($('.tablenav-pages').length) {
+            $('.tablenav-pages').append(
+                '<a href="<?php echo admin_url('edit.php?post_type=artist'); ?>" class="button">' +
+                '<?php _e('Clear Filters', 'divi-child'); ?>' +
+                '</a>'
+            );
+        }
+        
+        // Highlight filtered rows
+        function highlightFilteredRows() {
+            var artistLevel = $('#artist_level_filter').val();
+            var stage = $('#stage_filter').val();
+            var day = $('#day_filter').val();
+            
+            if (artistLevel || stage || day) {
+                $('.wp-list-table tbody tr').addClass('filtered-row');
+            } else {
+                $('.wp-list-table tbody tr').removeClass('filtered-row');
+            }
+        }
+        
+        highlightFilteredRows();
+    });
+    </script>
+    
+    <style>
+    .filtered-row {
+        background-color: #f9f9f9;
+    }
+    .filtered-row:hover {
+        background-color: #f0f0f0;
+    }
+    .tablenav-pages .button {
+        margin-left: 10px;
+    }
+    </style>
+    <?php
+}
+add_action('admin_footer', 'add_artist_admin_scripts');
