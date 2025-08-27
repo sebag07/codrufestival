@@ -5308,12 +5308,6 @@ f.artistInnerContainer {
     color: #efaa13 !important;
 }
 
-@media screen and (max-width: 767px) {
-    .homepage-info-section h2 {
-        font-size: 36px;
-        line-height: 42px;
-    }
-
 .homepage-info-section p {
     font-size: 18px;
     font-style: normal;
@@ -5640,7 +5634,7 @@ f.artistInnerContainer {
   }
 
   .postInfo {
-    background-color: var(--main-color);
+    background-color: var(--secondary-color);
     padding: 15px 2px;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -6157,4 +6151,3 @@ f.artistInnerContainer {
     #wpforms-error-noscript {
         display: none !important;
     }
-}
