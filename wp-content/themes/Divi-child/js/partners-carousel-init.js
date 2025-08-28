@@ -19,15 +19,15 @@ jQuery(document).ready(function($) {
                     margin: 20
                 },
                 600: { 
-                    items: 1,
+                    items: 2,
                     margin: 25
                 },
                 900: { 
-                    items: 2,
+                    items: 3,
                     margin: 30
                 },
                 1200: { 
-                    items: 3,
+                    items: 4,
                     margin: 30
                 },
                 1400: { 

@@ -98,6 +98,13 @@ $partner_chunks = array_chunk($all_partners, 4);
     margin: 0 auto;
 }
 
+@media (max-width: 1200px) {
+    .partners-grid {
+        width: auto;
+        height: auto;
+    }
+}
+
 .partner-item {
     display: flex;
     align-items: center;
