@@ -131,8 +131,8 @@
                                 $translated_day = $days_labels[$day_value] ?? '';
                                 if ($translated_day) {
                                     // Build schedule line with or without time
-                                    if (!empty($start_time) && !empty($end_time)) {
-                                        $schedule_lines[] = esc_html($translated_day) . ' ' . esc_html($start_time) . ' - ' . esc_html($end_time);
+                                    if (!empty($start_time)) {
+                                        $schedule_lines[] = esc_html($translated_day) . ' ' . esc_html($start_time);
                                     } else {
                                         $schedule_lines[] = esc_html($translated_day);
                                     }
@@ -144,8 +144,8 @@
                             $translated_day = $days_labels[$day_value] ?? '';
                             if ($translated_day) {
                                 // Build schedule line with or without time
-                                if (!empty($start_time) && !empty($end_time)) {
-                                    $intervalOrar = esc_html($translated_day) . ' ' . esc_html($start_time) . ' - ' . esc_html($end_time);
+                                if (!empty($start_time)) {
+                                    $intervalOrar = esc_html($translated_day) . ' ' . esc_html($start_time);
                                 } else {
                                     $intervalOrar = esc_html($translated_day);
                                 }
