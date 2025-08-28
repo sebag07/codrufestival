@@ -31,7 +31,7 @@
         
         <div class="info-item">
             <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/schedule/orar 4x5.jpg" alt="Everything you need to know about Top Up/Payment" />
+                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/schedule/orar-updated.jpeg" alt="Everything you need to know about Top Up/Payment" />
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@
         <div class="info-content">
             <h2 class="info-title text-white"><?php echo get_multilingual_text('Transport', 'Transport', 'ro'); ?></h2>
             <h3><?php echo get_multilingual_text('Am pregatit pentru tine orarul autobuzului aici:', 'We have prepared the bus timetable for you here:', 'ro'); ?></h3>
-            <a class="info-cta" target="_blank" href="https://docs.google.com/spreadsheets/d/1A8q-TmBD9n__ZRQZ3czzVE8obhfBfSswXH76ybyLPbc/edit?gid=0#gid=0"><?php echo get_multilingual_text('ORAR', 'TIMETABLE', 'ro'); ?></a>
+            <a class="info-cta" target="_blank" href="/docs/timetable-bus.pdf"><?php echo get_multilingual_text('ORAR', 'TIMETABLE', 'ro'); ?></a>
         </div>
 
         <!-- Item 1 (image left, text right) -->
