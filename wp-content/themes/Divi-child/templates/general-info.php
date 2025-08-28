@@ -231,10 +231,16 @@
         }
 
         function getUrlParameter() {
-            // Get the current URL path
+            // First check for hash in URL (e.g., #transport, #schedule)
+            const hash = window.location.hash.replace('#', '');
+            
+            if (hash && ['transport', 'schedule', 'payment', 'rules'].includes(hash)) {
+                return hash;
+            }
+            
+            // Fallback: check URL path for category keywords
             const path = window.location.pathname;
             
-            // Check if the URL contains any of our category keywords
             if (path.includes('/transport/')) {
                 return 'transport';
             } else if (path.includes('/schedule/')) {
@@ -264,6 +270,20 @@
         jQuery("input[name='activity-type']").on('change', function() {
             setCheckedAttributes();
             filterContent();
+            
+            // Update URL hash
+            const selectedValue = jQuery(this).val();
+            if (selectedValue === 'all') {
+                // Remove hash for 'all' selection
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.pathname);
+                }
+            } else {
+                // Add hash for specific category
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, null, window.location.pathname + '#' + selectedValue);
+                }
+            }
         });
 
         // Attach click event listener to labels for better UX
