@@ -76,6 +76,15 @@
                     $days_labels[$day_info['id']] = $day_info['label'];
                 }
 
+                // Define custom stage order
+                $stage_order = array(
+                    'The 5th Element - Main Stage' => 1,
+                    'AIR Stage' => 2,
+                    'EARTH Stage' => 3,
+                    'WATER Stage' => 4,
+                    'FIRE Stage' => 5
+                );
+
                 $args = array(
                     'posts_per_page' => -1,
                     'orderby' => 'date',
@@ -85,6 +94,32 @@
                 );
 
                 $posts_list = get_posts($args);
+
+                // Custom sort by stage order
+                usort($posts_list, function($a, $b) use ($stage_order) {
+                    $stage_a = get_field('stage', $a->ID);
+                    $stage_b = get_field('stage', $b->ID);
+                    
+                    $stage_label_a = is_array($stage_a) ? $stage_a['label'] : $stage_a;
+                    $stage_label_b = is_array($stage_b) ? $stage_b['label'] : $stage_b;
+                    
+                    $order_a = isset($stage_order[$stage_label_a]) ? $stage_order[$stage_label_a] : 999;
+                    $order_b = isset($stage_order[$stage_label_b]) ? $stage_order[$stage_label_b] : 999;
+                    
+                    if ($order_a !== $order_b) {
+                        return $order_a - $order_b;
+                    }
+                    
+                    // If same stage, sort by start time
+                    $time_a = get_field('start_time', $a->ID);
+                    $time_b = get_field('start_time', $b->ID);
+                    
+                    if ($time_a && $time_b) {
+                        return strtotime($time_a) - strtotime($time_b);
+                    }
+                    
+                    return 0;
+                });
 
                 foreach ($posts_list as $post) :
                     setup_postdata($post);
