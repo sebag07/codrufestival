@@ -22,7 +22,8 @@
             ['id' => 'stage2', 'label' => 'AIR Stage'],
             ['id' => 'stage3', 'label' => 'EARTH Stage'],
             ['id' => 'stage4', 'label' => 'WATER Stage'],
-            ['id' => 'stage5', 'label' => 'FIRE Stage']
+            ['id' => 'stage5', 'label' => 'FIRE Stage'],
+            ['id' => 'stage6', 'label' => 'Music Station Stage']
         ];
         ?>
 
@@ -82,7 +83,8 @@
                     'AIR Stage' => 2,
                     'EARTH Stage' => 3,
                     'WATER Stage' => 4,
-                    'FIRE Stage' => 5
+                    'FIRE Stage' => 5,
+                    'Music Station Stage' => 6
                 );
 
                 $args = array(
@@ -149,13 +151,29 @@
                     if (!empty($day_keys)) {
                         if (is_array($day_keys)) {
                             $schedule_lines = [];
-                            foreach ($day_keys as $day_key) {
+                            $time_slots = [];
+                            
+                            // Split start_time by commas if it contains multiple times
+                            if (!empty($start_time)) {
+                                $time_slots = array_map('trim', explode(',', $start_time));
+                            }
+                            
+                            foreach ($day_keys as $index => $day_key) {
                                 $day_value = is_array($day_key) ? $day_key['value'] : $day_key;
                                 $translated_day = $days_labels[$day_value] ?? '';
                                 if ($translated_day) {
+                                    // Get the corresponding time slot for this day
+                                    $time_for_day = '';
+                                    if (!empty($time_slots) && isset($time_slots[$index])) {
+                                        $time_for_day = $time_slots[$index];
+                                    } elseif (!empty($time_slots) && count($time_slots) === 1) {
+                                        // If only one time is provided, use it for all days
+                                        $time_for_day = $time_slots[0];
+                                    }
+                                    
                                     // Build schedule line with or without time
-                                    if (!empty($start_time)) {
-                                        $schedule_lines[] = esc_html($translated_day) . ' ' . esc_html($start_time);
+                                    if (!empty($time_for_day)) {
+                                        $schedule_lines[] = esc_html($translated_day) . ' ' . esc_html($time_for_day);
                                     } else {
                                         $schedule_lines[] = esc_html($translated_day);
                                     }
@@ -166,9 +184,16 @@
                             $day_value = is_array($day_keys) ? $day_keys['value'] : $day_keys;
                             $translated_day = $days_labels[$day_value] ?? '';
                             if ($translated_day) {
-                                // Build schedule line with or without time
+                                // For single day, use the first time slot if available
+                                $time_for_day = '';
                                 if (!empty($start_time)) {
-                                    $intervalOrar = esc_html($translated_day) . ' ' . esc_html($start_time);
+                                    $time_slots = array_map('trim', explode(',', $start_time));
+                                    $time_for_day = $time_slots[0] ?? '';
+                                }
+                                
+                                // Build schedule line with or without time
+                                if (!empty($time_for_day)) {
+                                    $intervalOrar = esc_html($translated_day) . ' ' . esc_html($time_for_day);
                                 } else {
                                     $intervalOrar = esc_html($translated_day);
                                 }
