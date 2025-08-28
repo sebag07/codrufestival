@@ -6151,3 +6151,11 @@ f.artistInnerContainer {
     #wpforms-error-noscript {
         display: none !important;
     }
+
+    .festivawl-stage-header .stage-name {
+        padding-bottom: 0px !important;
+    }
+
+    .festivawl-day-tab .day-name {
+        padding-bottom: 0px !important;
+    }
