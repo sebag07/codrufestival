@@ -201,7 +201,8 @@
                 "stage2": "AIR Stage",
                 "stage3": "EARTH Stage",
                 "stage4": "WATER Stage",
-                "stage5": "FIRE Stage"
+                "stage5": "FIRE Stage",
+                "stage6": "MUSIC STATION Stage"
             },
             "default_value": false,
             "return_format": "array",
@@ -331,5 +332,5 @@
     "show_in_rest": 0,
     "acfml_field_group_mode": "translation",
     "qef_simple_location_rules": 0,
-    "modified": 1755530024
+    "modified": 1756373519
 }
