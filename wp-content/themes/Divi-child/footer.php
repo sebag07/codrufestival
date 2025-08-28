@@ -199,7 +199,7 @@
                             src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
                 <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                             src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
-                <a href="https://open.spotify.com/playlist/0vePsGS7Ei7jA5hPUlvbxY?si=a6b26f14a4a94198" target="_blank"><img
+                <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
                             src="/wp-content/themes/Divi-child/images/socials/spotify.svg" alt=""></a>
             </span>
             </div>
