@@ -1,0 +1,488 @@
+/**
+ * Festivawl Calendar Admin CSS
+ * Styles for the WordPress admin interface
+ */
+
+/* Festivawl Calendar Admin Styles */
+
+.festivawl-admin-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.festivawl-admin-main {
+    flex: 2;
+}
+
+.festivawl-admin-sidebar {
+    flex: 1;
+    max-width: 300px;
+}
+
+.festivawl-admin-box {
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.festivawl-admin-box h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #1d2327;
+}
+
+.festivawl-shortcode-help {
+    background: #f6f7f7;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.festivawl-shortcode-help code {
+    background: #2271b1;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-family: Consolas, Monaco, monospace;
+}
+
+/* Progressive Stage Colors */
+.progressive-stage-row {
+    position: relative;
+}
+
+.progressive-stage-row.active {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Color Picker Styling */
+.pickr-color-trigger {
+    transition: all 0.2s ease;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pickr-color-trigger:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.color-hex-input {
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+/* Pickr Color Picker Overrides */
+.pcr-app.festivawl-color-picker {
+    width: 250px !important;
+    z-index: 100000 !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+    border-radius: 8px !important;
+    border: 1px solid #ddd !important;
+    margin-top: 5px !important;
+}
+
+.pcr-app.festivawl-color-picker .pcr-selection {
+    border-radius: 6px !important;
+}
+
+.pcr-app.festivawl-color-picker .pcr-palette {
+    border-radius: 6px !important;
+}
+
+.pcr-app.festivawl-color-picker .pcr-interaction input {
+    border-radius: 4px !important;
+    border: 1px solid #ddd !important;
+    font-family: Consolas, Monaco, monospace !important;
+}
+
+/* Force PCR button to use our custom colors */
+.pcr-button {
+    background-color: var(--pcr-color, #6B1954) !important;
+}
+
+.pcr-button::after {
+    background-color: var(--pcr-color, #6B1954) !important;
+}
+
+.pcr-button::before {
+    background-color: var(--pcr-color, #6B1954) !important;
+}
+
+
+
+.pcr-app.festivawl-color-picker .pcr-interaction .pcr-clear {
+    background: #ddd !important;
+    border-color: #ddd !important;
+    color: #333 !important;
+    border-radius: 4px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s ease !important;
+}
+
+.pcr-app.festivawl-color-picker .pcr-interaction .pcr-clear:hover {
+    background: #ccc !important;
+    border-color: #ccc !important;
+}
+
+/* Loading Overlay */
+.festivawl-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100001;
+}
+
+.festivawl-loading-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 300px;
+}
+
+.festivawl-spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #0073aa;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .festivawl-admin-container {
+        flex-direction: column;
+    }
+    
+    .festivawl-admin-sidebar {
+        max-width: none;
+    }
+    
+    .color-input-group > div {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+    }
+    
+    .pickr-color-trigger {
+        width: 60px !important;
+        height: 40px !important;
+    }
+}
+
+/* Form Sections */
+.form-table th {
+    width: 200px;
+    padding: 20px 10px 20px 0;
+    vertical-align: top;
+}
+
+.form-table td {
+    padding: 15px 10px 15px 0;
+}
+
+/* Section Styling */
+h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+h2:first-of-type {
+    margin-top: 0;
+}
+
+/* Stage Colors Section */
+#festivawl_calendar_stage_colors .form-table {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Stage Color Interface */
+#festivawl-stage-colors-container {
+    margin-bottom: 20px;
+    min-height: 50px;
+}
+
+.stage-color-row {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+.stage-color-row:hover {
+    border-color: #007cba;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.stage-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.stage-row-header strong {
+    font-size: 14px;
+    color: #1d2327;
+}
+
+.remove-stage-color {
+    color: #d63638;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.remove-stage-color:hover {
+    background: #d63638;
+    color: white;
+}
+
+.remove-stage-color .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+.stage-color-fields {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+}
+
+.color-field {
+    flex: 1;
+}
+
+.color-field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    font-size: 13px;
+    color: #1d2327;
+}
+
+.festivawl-color-picker {
+    width: 100px !important;
+}
+
+/* Add Stage Button */
+#add-stage-color {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    margin-right: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#add-stage-color:hover {
+    background: #135e96;
+    border-color: #135e96;
+    color: #fff;
+}
+
+#add-stage-color .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+/* Reset Button */
+#reset-all-stage-colors {
+    background: #dba617;
+    border-color: #dba617;
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#reset-all-stage-colors:hover {
+    background: #c19a15;
+    border-color: #c19a15;
+    color: #fff;
+}
+
+#reset-all-stage-colors .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+/* Color Picker Enhancements */
+.wp-picker-container {
+    margin-bottom: 10px;
+}
+
+.wp-picker-container .button {
+    margin-left: 6px;
+}
+
+/* Admin Notices */
+.festivawl-notice {
+    background: #fff;
+    border-left: 4px solid #00a0d2;
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+    margin: 5px 0 15px 0;
+    padding: 12px;
+}
+
+.notice-success {
+    border-left-color: #46b450;
+}
+
+.notice-error {
+    border-left-color: #dc3232;
+}
+
+.notice-warning {
+    border-left-color: #ffb900;
+}
+
+/* Shortcode Help Section */
+.festivawl-shortcode-help {
+    background: #f8f9fa;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.festivawl-shortcode-help h3 {
+    margin-top: 0;
+    color: #1d2327;
+}
+
+.festivawl-shortcode-help ul {
+    margin-left: 20px;
+}
+
+.festivawl-shortcode-help ul li {
+    margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 782px) {
+    .festivawl-admin-container {
+        flex-direction: column;
+    }
+    
+    .festivawl-admin-sidebar {
+        max-width: none;
+    }
+    
+    .stage-color-fields {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .color-field {
+        flex: none;
+    }
+    
+    .festivawl-color-picker {
+        width: 100% !important;
+        max-width: 200px;
+    }
+}
+
+/* Hidden Elements */
+#stage-color-template {
+    display: none !important;
+}
+
+/* Form Improvements */
+.regular-text {
+    width: 25em;
+}
+
+input[type="number"].regular-text {
+    width: 10em;
+}
+
+.description {
+    font-style: italic;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Button Enhancements */
+.button {
+    transition: all 0.2s ease;
+}
+
+.button:hover {
+    transform: translateY(-1px);
+}
+
+.button-primary:hover {
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Checkbox and Radio Styling */
+input[type="checkbox"], 
+input[type="radio"] {
+    margin-right: 8px;
+}
+
+/* Select Styling */
+select.regular-text {
+    width: 25em;
+    height: auto;
+    padding: 5px;
+} 

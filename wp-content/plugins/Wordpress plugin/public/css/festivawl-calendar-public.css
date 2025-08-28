@@ -1,0 +1,603 @@
+/**
+ * Festivawl Calendar WordPress Plugin CSS
+ * Matches the React component design exactly using the design system colors
+ */
+
+/* Import DM Sans font */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+/* Root Variables - From the design system */
+:root {
+  --festivawl-bg-primary: #141414;
+  --festivawl-bg-secondary: #1a1a1a;
+  --festivawl-bg-tertiary: #242424;
+  --festivawl-text-primary: #ffffff;
+  --festivawl-text-secondary: #fafafa;
+  --festivawl-text-muted: #b3b3b3;
+  --festivawl-text-tertiary: #8c8c8c;
+  --festivawl-grid-color: #A68CBB;
+  --festivawl-border: #2e2e2e;
+  
+  /* Stage Colors - Exact from stageColors object */
+  --festivawl-stage-1-bg: #6B1954;
+  --festivawl-stage-1-border: #ED1D1D;
+  --festivawl-stage-2-bg: #46317D;
+  --festivawl-stage-2-border: #6C9FDC;
+  --festivawl-stage-3-bg: #563D69;
+  --festivawl-stage-3-border: #6CDC71;
+  --festivawl-stage-4-bg: #644067;
+  --festivawl-stage-4-border: #DCBD6C;
+  --festivawl-stage-5-bg: #4F1C70;
+  --festivawl-stage-5-border: #DC6CD7;
+  --festivawl-stage-6-bg: #2E134E;
+  --festivawl-stage-6-border: #000000;
+  --festivawl-stage-7-bg: #6E528E;
+  --festivawl-stage-7-border: #FFFFFF;
+  --festivawl-stage-8-bg: #36294B;
+  --festivawl-stage-8-border: #266400;
+  --festivawl-stage-9-bg: #363570;
+  --festivawl-stage-9-border: #1ABC9C;
+  --festivawl-stage-10-bg: #5B1E6F;
+  --festivawl-stage-10-border: #E84393;
+  --festivawl-stage-11-bg: #373566;
+  --festivawl-stage-11-border: #2ECC71;
+  --festivawl-stage-12-bg: #532B7D;
+  --festivawl-stage-12-border: #C792EA;
+  --festivawl-stage-13-bg: #5A3354;
+  --festivawl-stage-13-border: #F1C40F;
+  --festivawl-stage-14-bg: #371C81;
+  --festivawl-stage-14-border: #2D42FF;
+  --festivawl-stage-15-bg: #3E3B81;
+  --festivawl-stage-15-border: #52EAFF;
+  
+  /* Layout constants from React components */
+  --festivawl-stage-width: 220px;
+  --festivawl-time-column-width: 80px;
+  --festivawl-hour-height: 80px;
+  --festivawl-stage-gap: 20px;
+}
+
+/* Container Styles */
+.festivawl-calendar-container {
+  width: 100%;
+  background: #ffffff00 !important;
+  color: var(--festivawl-text-primary);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.festivawl-calendar-container * {
+  box-sizing: border-box;
+}
+
+/* Compact layout for 1-3 stages */
+.festivawl-calendar-container[style*="max-width"] {
+  width: auto;
+  min-width: 320px; /* Prevent collapse on very small screens */
+}
+
+/* Transparent Background Option */
+.festivawl-calendar-container.transparent {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+
+/* Universal DM Sans font for all text elements */
+.festivawl-calendar-container *, 
+.festivawl-calendar-container *::before, 
+.festivawl-calendar-container *::after {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.festivawl-error {
+  background: #c92a2a;
+  color: white;
+  padding: 16px;
+  border-radius: 4px;
+  text-align: center;
+  margin: 16px 0;
+}
+
+/* Day Navigation Tabs */
+
+.festivawl-day-tabs button:focus {
+  outline: none !important;
+}
+
+.festivawl-day-tabs {
+  display: flex;
+  background: #ffffff00 !important;
+  padding: 16px;
+  margin-bottom: 48px !important;
+  gap: 8px;
+  justify-content: center;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--festivawl-text-tertiary) transparent;
+}
+
+.festivawl-day-tabs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.festivawl-day-tabs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.festivawl-day-tabs::-webkit-scrollbar-thumb {
+  background: var(--festivawl-text-tertiary);
+  border-radius: 3px;
+}
+
+.festivawl-day-tab {
+  height: auto !important;
+  padding: 8px 32px !important;
+  border-radius: 8px;
+  border: none;
+  background:#ffffff40 !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--festivawl-text-primary);
+  flex: 0 0 auto;
+}
+
+.festivawl-day-tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.festivawl-day-tab.active {
+  background: rgba(0, 0, 0, 0.4) !important;
+  color: white;
+}
+
+.festivawl-day-tab .day-number {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.festivawl-day-tab .day-date {
+  font-size: 14px;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.festivawl-day-tab .day-name {
+  margin: 0 !important;
+  font-size: 18px !important;
+}
+
+/* Calendar Content */
+.festivawl-calendar-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.festivawl-day-content {
+  display: none;
+  width: 100%;
+}
+
+.festivawl-day-content.active {
+  display: block;
+}
+
+/* Master Scrollable Container */
+.festivawl-scrollable-area {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--festivawl-text-tertiary) transparent;
+  cursor: grab;
+  transition: cursor 0.2s ease;
+}
+
+.festivawl-scrollable-area::-webkit-scrollbar {
+  height: 8px;
+}
+
+.festivawl-scrollable-area::-webkit-scrollbar-track {
+  background: var(--festivawl-bg-secondary);
+}
+
+.festivawl-scrollable-area::-webkit-scrollbar-thumb {
+  background: var(--festivawl-text-tertiary);
+  border-radius: 4px;
+}
+
+/* Drag-to-scroll states */
+.festivawl-scrollable-area.festivawl-dragging {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+.festivawl-scrollable-area.festivawl-dragging * {
+  pointer-events: none;
+}
+
+/* Stage Headers */
+.festivawl-stage-headers {
+  display: flex;
+  background: #ffffff00 !important;
+  margin-bottom: 20px;
+  gap: var(--festivawl-stage-gap);
+  padding: 0 16px;
+  min-width: max-content; /* Ensure headers force scroll when needed */
+}
+
+.festivawl-time-header {
+  width: var(--festivawl-time-column-width);
+  flex-shrink: 0;
+}
+
+.festivawl-stage-header {
+  width: var(--festivawl-stage-width);
+  border-radius: 8px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.festivawl-stage-header .stage-name {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif ;
+  font-weight: 500;
+  color: white;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 20px !important;
+  letter-spacing: -0.5px;
+  margin: 0 !important;
+}
+
+/* Stage Priority Colors */
+.festivawl-stage-header[data-stage-priority="1"] {
+  background: var(--festivawl-stage-1-bg);
+  border-left: 10px solid var(--festivawl-stage-1-border);
+}
+
+.festivawl-stage-header[data-stage-priority="2"] {
+  background: var(--festivawl-stage-2-bg);
+  border-left: 10px solid var(--festivawl-stage-2-border);
+}
+
+.festivawl-stage-header[data-stage-priority="3"] {
+  background: var(--festivawl-stage-3-bg);
+  border-left: 10px solid var(--festivawl-stage-3-border);
+}
+
+.festivawl-stage-header[data-stage-priority="4"] {
+  background: var(--festivawl-stage-4-bg);
+  border-left: 10px solid var(--festivawl-stage-4-border);
+}
+
+.festivawl-stage-header[data-stage-priority="5"] {
+  background: var(--festivawl-stage-5-bg);
+  border-left: 10px solid var(--festivawl-stage-5-border);
+}
+
+.festivawl-stage-header[data-stage-priority="6"] {
+  background: var(--festivawl-stage-6-bg);
+  border-left: 10px solid var(--festivawl-stage-6-border);
+}
+
+.festivawl-stage-header[data-stage-priority="7"] {
+  background: var(--festivawl-stage-7-bg);
+  border-left: 10px solid var(--festivawl-stage-7-border);
+}
+
+.festivawl-stage-header[data-stage-priority="8"] {
+  background: var(--festivawl-stage-8-bg);
+  border-left: 10px solid var(--festivawl-stage-8-border);
+}
+
+.festivawl-stage-header[data-stage-priority="9"] {
+  background: var(--festivawl-stage-9-bg);
+  border-left: 10px solid var(--festivawl-stage-9-border);
+}
+
+.festivawl-stage-header[data-stage-priority="10"] {
+  background: var(--festivawl-stage-10-bg);
+  border-left: 10px solid var(--festivawl-stage-10-border);
+}
+
+.festivawl-stage-header[data-stage-priority="11"] {
+  background: var(--festivawl-stage-11-bg);
+  border-left: 10px solid var(--festivawl-stage-11-border);
+}
+
+.festivawl-stage-header[data-stage-priority="12"] {
+  background: var(--festivawl-stage-12-bg);
+  border-left: 10px solid var(--festivawl-stage-12-border);
+}
+
+.festivawl-stage-header[data-stage-priority="13"] {
+  background: var(--festivawl-stage-13-bg);
+  border-left: 10px solid var(--festivawl-stage-13-border);
+}
+
+.festivawl-stage-header[data-stage-priority="14"] {
+  background: var(--festivawl-stage-14-bg);
+  border-left: 10px solid var(--festivawl-stage-14-border);
+}
+
+.festivawl-stage-header[data-stage-priority="15"] {
+  background: var(--festivawl-stage-15-bg);
+  border-left: 10px solid var(--festivawl-stage-15-border);
+}
+
+/* Calendar Grid */
+.festivawl-calendar-grid {
+  display: flex;
+  position: relative;
+  background: transparent;
+  padding: 0 16px;
+  min-width: max-content; /* Ensure grid forces scroll when needed */
+}
+
+/* Time Column */
+.festivawl-time-column {
+  width: var(--festivawl-time-column-width);
+  flex-shrink: 0;
+  background: transparent;
+  position: relative;
+  z-index: 2;
+  border-right: 1px solid var(--festivawl-grid-color);
+}
+
+.festivawl-time-slot {
+  height: var(--festivawl-hour-height);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 6px;
+  position: relative;
+}
+
+.festivawl-time-slot .time-label {
+  font-size: 14px;
+  color: #ffffffbf;
+  font-weight: 500;
+}
+
+/* Main Grid Area - EXACTLY like React component */
+.festivawl-stages-container {
+  flex: 1;
+  position: relative;
+  background: transparent;
+  /* Height and width set via inline styles to match React component exactly */
+}
+
+/* Horizontal Grid Lines - EXACTLY like React component */
+.festivawl-grid-line {
+  position: absolute;
+  left: 6px; /* Start after time divider with some space */
+  right: 0;
+  height: 1px;
+  background: var(--festivawl-grid-color);
+  z-index: 1;
+  /* Position: top: index * HOUR_HEIGHT + (HOUR_HEIGHT / 2) - set via inline styles */
+}
+
+/* Stage Columns - EXACTLY like React component */
+.festivawl-stage-column {
+  position: absolute;
+  top: 0;
+  width: var(--festivawl-stage-width); /* 220px */
+  z-index: 2;
+  /* Position and height set via inline styles to match React component exactly */
+}
+
+/* Event Blocks - positioning handled via inline styles to match React exactly */
+.festivawl-event-block {
+  border-radius: 4px;
+  padding: 4px 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+  /* Position, dimensions, and z-index set via inline styles to match React component exactly */
+}
+
+.festivawl-event-block:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 4;
+}
+
+/* Event Block Colors by Stage Priority */
+.festivawl-event-block[data-stage-priority="1"] {
+  background: var(--festivawl-stage-1-bg);
+  border-left: 6px solid var(--festivawl-stage-1-border);
+}
+
+.festivawl-event-block[data-stage-priority="2"] {
+  background: var(--festivawl-stage-2-bg);
+  border-left: 6px solid var(--festivawl-stage-2-border);
+}
+
+.festivawl-event-block[data-stage-priority="3"] {
+  background: var(--festivawl-stage-3-bg);
+  border-left: 6px solid var(--festivawl-stage-3-border);
+}
+
+.festivawl-event-block[data-stage-priority="4"] {
+  background: var(--festivawl-stage-4-bg);
+  border-left: 6px solid var(--festivawl-stage-4-border);
+}
+
+.festivawl-event-block[data-stage-priority="5"] {
+  background: var(--festivawl-stage-5-bg);
+  border-left: 6px solid var(--festivawl-stage-5-border);
+}
+
+.festivawl-event-block[data-stage-priority="6"] {
+  background: var(--festivawl-stage-6-bg);
+  border-left: 6px solid var(--festivawl-stage-6-border);
+}
+
+.festivawl-event-block[data-stage-priority="7"] {
+  background: var(--festivawl-stage-7-bg);
+  border-left: 6px solid var(--festivawl-stage-7-border);
+}
+
+.festivawl-event-block[data-stage-priority="8"] {
+  background: var(--festivawl-stage-8-bg);
+  border-left: 6px solid var(--festivawl-stage-8-border);
+}
+
+.festivawl-event-block[data-stage-priority="9"] {
+  background: var(--festivawl-stage-9-bg);
+  border-left: 6px solid var(--festivawl-stage-9-border);
+}
+
+.festivawl-event-block[data-stage-priority="10"] {
+  background: var(--festivawl-stage-10-bg);
+  border-left: 6px solid var(--festivawl-stage-10-border);
+}
+
+.festivawl-event-block[data-stage-priority="11"] {
+  background: var(--festivawl-stage-11-bg);
+  border-left: 6px solid var(--festivawl-stage-11-border);
+}
+
+.festivawl-event-block[data-stage-priority="12"] {
+  background: var(--festivawl-stage-12-bg);
+  border-left: 6px solid var(--festivawl-stage-12-border);
+}
+
+.festivawl-event-block[data-stage-priority="13"] {
+  background: var(--festivawl-stage-13-bg);
+  border-left: 6px solid var(--festivawl-stage-13-border);
+}
+
+.festivawl-event-block[data-stage-priority="14"] {
+  background: var(--festivawl-stage-14-bg);
+  border-left: 6px solid var(--festivawl-stage-14-border);
+}
+
+.festivawl-event-block[data-stage-priority="15"] {
+  background: var(--festivawl-stage-15-bg);
+  border-left: 6px solid var(--festivawl-stage-15-border);
+}
+
+/* Event Content */
+.festivawl-event-block .event-header {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 2px;
+}
+
+.festivawl-event-block .event-stage {
+  font-size: 12px;
+  color: white;
+  opacity: 0.75;
+  line-height: 100% !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+
+.festivawl-event-block .event-time {
+  line-height: 100% !important;
+  font-size: 12px;
+  color: white;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.festivawl-event-block .event-content {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.festivawl-event-block .event-artist {
+  margin: 0 !important;
+  font-size: 14px !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif ;
+  color: white;
+  font-weight: 500!important;
+  line-height: 1.2!important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100% !important;
+}
+
+/* Small Event Blocks (height <= 30px) */
+.festivawl-event-block.short-event .event-stage {
+  display: none;
+}
+
+.festivawl-event-block.short-event .event-content {
+  margin-top: -12px;
+}
+
+.festivawl-event-block.short-event .event-artist {
+  width: 65%;
+}
+
+/* Loading and Error States */
+.festivawl-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  color: var(--festivawl-text-muted);
+}
+
+.festivawl-no-events {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--festivawl-text-muted);
+  font-style: italic;
+}
+
+/* Accessibility */
+
+@media (max-width: 768px) {
+  .festivawl-time-column {
+    width:50px !important;
+  }
+
+  .festivawl-time-header {
+    width: 50px !important;
+  }
+
+  .festivawl-day-tabs {
+    justify-content: flex-start !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .festivawl-calendar-container {
+    background: white !important;
+    color: black !important;
+    box-shadow: none;
+  }
+  
+  .festivawl-day-tabs {
+    display: none;
+  }
+  
+  .festivawl-event-block .event-artist,
+  .festivawl-stage-header .stage-name {
+    color: black !important;
+  }
+} 
