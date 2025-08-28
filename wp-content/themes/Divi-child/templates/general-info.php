@@ -2,7 +2,7 @@
 <?php get_header(); ?>
 
 <section class="info-wrap container-fluid single-page header-padding">
-    <h1 class="info-title pb-4 text-center" style="color: #fff;">Informații</h1>
+    <h1 class="info-title pb-4 text-center" style="color: #fff;"><?php echo get_multilingual_text('Informații', 'Information', 'ro'); ?></h1>
 
 
     <div class="col-lg-12 col-md-12 col-12 categoriesContainer">
