@@ -106,19 +106,7 @@
                     $order_a = isset($stage_order[$stage_label_a]) ? $stage_order[$stage_label_a] : 999;
                     $order_b = isset($stage_order[$stage_label_b]) ? $stage_order[$stage_label_b] : 999;
                     
-                    if ($order_a !== $order_b) {
-                        return $order_a - $order_b;
-                    }
-                    
-                    // If same stage, sort by start time
-                    $time_a = get_field('start_time', $a->ID);
-                    $time_b = get_field('start_time', $b->ID);
-                    
-                    if ($time_a && $time_b) {
-                        return strtotime($time_a) - strtotime($time_b);
-                    }
-                    
-                    return 0;
+                    return $order_a - $order_b;
                 });
 
                 foreach ($posts_list as $post) :
