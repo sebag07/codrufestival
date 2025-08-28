@@ -5740,7 +5740,7 @@ f.artistInnerContainer {
 
   @media (max-width:500px) {
     .after-movie-container {
-        min-height: 420px;
+        min-height: 80vh;
         height: auto;
     }
   }
