@@ -20,6 +20,8 @@ $display_lineup_section = get_field('display_lineup');
         .after-movie-container {
             padding-top: 80px !important;
             padding-bottom: 80px !important;
+            margin-top: 80px !important;
+            min-height: initial;
         }
     }
 </style>
@@ -36,10 +38,12 @@ $countdownExpiredText = get_field('expired_text', 'options');
 $countdown_end_date = get_field('countdown_end_date', 'options');
 
 ?>
+<!-- 
 <div class="countdown-container row">
     <div id="countdown" class="col-xl-5 col-lg-12"></div>
     <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
 </div>
+ -->
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
     <picture class="hero-section-title" style="z-index: 9;">
         <!-- For screens 1200px and above (desktop) -->
