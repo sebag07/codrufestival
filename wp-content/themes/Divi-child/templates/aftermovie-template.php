@@ -52,7 +52,6 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
         <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title-mobile.png" alt="Hero Title">
     </picture>
     <div class="buttons-container" style="display: flex; gap: 10px;">
-        <a class="homepage-info-button codru-general-button" href="https://m.iabilet.ro/bilete-codru-6-115001/">CODRU 2026</a>
         <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
     </div>
 

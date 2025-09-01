@@ -265,10 +265,6 @@ if ( !empty( $languages ) ) {
                 <a class="heroButtonMenu"
                    href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
             </div>
-            <div class="site-mobile-menu-button-container">
-                <a class="heroButtonMenu"
-                   href="https://m.iabilet.ro/bilete-codru-6-115001/">CODRU 2026</a>
-            </div>
         </ul>
     </div>
 </div> <!-- .site-mobile-menu -->
