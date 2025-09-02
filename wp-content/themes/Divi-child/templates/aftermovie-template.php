@@ -124,6 +124,7 @@ foreach ($artists as $artist) {
 
 ?>
 
+<!--
 <?php if ($display_lineup_section) : ?>
     <section id="lineup">
         <div class="container sectionPadding">
@@ -165,6 +166,7 @@ foreach ($artists as $artist) {
         </div>
     </section>
 <?php endif; ?>
+-->
 
 <?php if (have_rows('ticket_cards_repeater', 'options')): ?>
     <section id="tickets-sale-section">
