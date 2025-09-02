@@ -55,7 +55,7 @@ $partner_chunks = array_chunk($all_partners, 4);
 ?>
 
 <div class="partners-carousel-container">
-    <h2 class="sectionTitle">Parteneri</h2>
+    <h2 class="sectionTitle"><?php echo get_multilingual_text('Parteneri', 'Partners', 'en'); ?></h2>
     <!-- Owl Carousel -->
     <div class="owl-carousel partners-owl">
         <?php foreach ($partner_chunks as $chunk): ?>
