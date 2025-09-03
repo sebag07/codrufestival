@@ -208,10 +208,11 @@
 
 <body <?php post_class(); ?>>
 
+<!--
 <div class="headerHalfCircle">
     <div class="text-center"><img src="/wp-content/themes/Divi-child/images/soareclean-blue.png" alt="Soare cu sponsor principal ING"></div>
 </div>
-
+-->
 
 <div class="site-mobile-menu site-navbar-target">
     <div class="site-mobile-menu-header">
@@ -298,7 +299,7 @@ if ( !empty( $languages ) ) {
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
         </div>
 
-        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logo-2025-anniversary.png"
+        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-6-logo.png"
                                                                 alt="CODRU Festival Logo"></a></div>
 
 
