@@ -299,7 +299,7 @@ if ( !empty( $languages ) ) {
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
         </div>
 
-        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-6-logo.png"
+        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-hero-title.png"
                                                                 alt="CODRU Festival Logo"></a></div>
 
 
