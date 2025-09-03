@@ -182,7 +182,7 @@
 
         <div class="row m-auto justify-content-center">
             <div class="footerLeftLogo col-lg-2 col-md-12 col-12 d-flex">
-                <img class="footer-logo footer-logo-codru" src="/wp-content/themes/Divi-child/images/logo-2025-anniversary.png" alt="CODRU Festival Logo">
+                <img class="footer-logo footer-logo-codru" src="/wp-content/themes/Divi-child/images/codru-6-logo.png" alt="CODRU Festival Logo">
             </div>
             <div class="footerItems col-lg-8 col-xl-7 col-md-12 col-12">
                 <a href="mailto:office@codrufestival.ro"><span><img src="/wp-content/themes/Divi-child/images/mail.svg"
@@ -218,7 +218,7 @@
                 ?>
             </div>
             <div class="footerMobileLogo col-md-12 col-12 d-flex">
-                <img class="footer-logo codruLogoFooter" src="/wp-content/themes/Divi-child/images/logo-2025-anniversary.png" alt="CODRU Festival Logo">
+                <img class="footer-logo codruLogoFooter" src="/wp-content/themes/Divi-child/images/codru-6-logo.png" alt="CODRU Festival Logo">
                 <img class="footer-logo" src="/wp-content/themes/Divi-child/images/logoteg.png" alt="">
             </div>
         </div>
