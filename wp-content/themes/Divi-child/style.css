@@ -196,9 +196,9 @@ a:hover {
 }
 
 .site-logo a img {
-    /* max-height: 150px; */
-    /* max-width: 180px; */
-    max-width: 200px;
+    max-height: 150px;
+    max-width: 180px;
+    /* max-width: 200px; */
 }
 
 .icon-menu {
