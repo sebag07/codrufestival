@@ -44,11 +44,12 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
     <div class="countdown-text col-xl-5 col-lg-12"><?php echo $countdownText ?></div>
 </div>
  -->
+
 <section class="after-movie-container heroContainer container-fluid p-0 m-0">
     <picture class="hero-section-title" style="z-index: 9;">
-        <!-- For screens 1200px and above (desktop) -->
-        <!-- <source media="(min-width: 1200px)" srcset="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png"> -->
-        <!-- For screens smaller than 1200px (mobile) -->
+<!--         For screens 1200px and above (desktop)-->
+<!--         <source media="(min-width: 1200px)" srcset="--><?php //echo get_stylesheet_directory_uri(); ?><!--/images/codru-hero-title.png">-->
+<!--         For screens smaller than 1200px (mobile)-->
         <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
     </picture>
     <div class="buttons-container" style="display: flex; gap: 10px;">
