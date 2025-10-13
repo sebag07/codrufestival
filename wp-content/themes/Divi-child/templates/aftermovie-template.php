@@ -53,7 +53,12 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
         <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
     </picture>
     <div class="buttons-container" style="display: flex; gap: 10px;">
-        <a class="homepage-info-button codru-general-button" href="<?php echo $buttonURL ?>"><?php echo $buttonText ?></a>
+        <a class="homepage-info-button codru-general-button" href="https://docs.google.com/forms/d/1Ww-XO3zU29-P3D5Qur3fOzJ64G-QUI9pExww8MWA3Iw/edit">
+            <?php echo get_multilingual_text('ÎNSCRIERE PLANTARE', 'PLANTING REGISTRATION', 'ro'); ?>
+        </a>
+        <a class="homepage-info-button codru-general-button" href="https://bilete.codrufestival.ro/">
+            <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
+        </a>
     </div>
 
     <script>
