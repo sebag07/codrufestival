@@ -161,14 +161,21 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
 <!--         For screens 1200px and above (desktop)-->
 <!--         <source media="(min-width: 1200px)" srcset="--><?php //echo get_stylesheet_directory_uri(); ?><!--/images/codru-hero-title.png">-->
 <!--         For screens smaller than 1200px (mobile)-->
-        <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-title.png" alt="Hero Title">
+        <img class="hero-section-title" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-logo-header.png" alt="Hero Title">
     </picture>
+    <div class="event-meta d-flex flex-column align-items-center justify-content-center" style="z-index: 9;">
+            <div class="event-date" style="background: #61d72f; color: #0b1c25; padding: 8px 14px; border-radius: 8px; font-weight: 800; font-size: 18px; line-height: 1; letter-spacing: 0.5px;">
+                28-30 AUGUST 2026
+            </div>
+            <div class="event-location" style="background: #61d72f; color: #0b1c25; padding: 8px 14px; border-radius: 8px; font-weight: 800; font-size: 18px; line-height: 1; letter-spacing: 0.5px; margin-top: 8px;">
+                PADUREA VERDE, TIMISOARA
+            </div>
+        </div>
     <div class="buttons-container" style="display: flex; gap: 10px;">
         <a class="homepage-info-button codru-general-button" href="https://bilete.codrufestival.ro/">
             <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
         </a>
     </div>
-asdf a
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const countDownDate = new Date("<?php echo date('Y-m-d\TH:i:s', strtotime($countdown_end_date)); ?>").getTime();
@@ -293,7 +300,7 @@ $advent_first_image = get_stylesheet_directory_uri() . '/images/advent-calendar/
 
 <section id="codru-advent-calendar" class="sectionPadding container">
     <h2 class="sectionTitle">Advent Calendar</h2>
-    <p class="text-center mb-4"><?php the_multilingual_text('Artiștii sunt dezvăluiți zilnic în perioada 11-22 decembrie', 'Artists are revealed daily from December 11-22', 'ro'); ?></p>
+    <p class="text-center mb-4" style="color: #fff; font-weight: 500;"><?php the_multilingual_text('Artiștii sunt dezvăluiți zilnic în perioada 11-22 decembrie', 'Artists are revealed daily from December 11-22', 'ro'); ?></p>
     <div class="advent-grid">
         <?php for ($i = 0; $i < $advent_days_total; $i++):
             $current_date = (clone $advent_start_date)->modify("+{$i} day");

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
-    <link rel="icon" type="image/x-icon" href="/wp-content/themes/Divi-child/images/favicon.png">
+    <link rel="icon" type="image/png" href="/wp-content/themes/Divi-child/images/favicon-codru.png">
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/fonts/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -212,7 +212,7 @@
     }
 
     if (empty($yoast_opengraph_image)) {
-        echo '<meta property="og:image" content="https://www.codrufestival.ro/wp-content/uploads/2024/07/codrufestival-facebook-thumbnail.png" />';
+        echo '<meta property="og:image" content="' . get_stylesheet_directory_uri() . '/images/facebook-social-share.png" />';
     }
 
     ?>
@@ -312,7 +312,7 @@ if ( !empty( $languages ) ) {
                         class="icon-menu h3 m-0 p-0 mt-2"></span></a>
         </div>
 
-        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-hero-title.png"
+        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-logo-header.png"
                                                                 alt="CODRU Festival Logo"></a></div>
 
 
