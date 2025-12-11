@@ -135,6 +135,19 @@ $display_lineup_section = get_field('display_lineup');
             grid-template-columns: 1fr;
         }
     }
+    /* Ticket cards: lock icon size */
+    #tickets-sale-section .card-header {
+        gap: 12px;
+    }
+    #tickets-sale-section .card-header svg {
+        width: 40px;
+        height: 40px;
+        flex: 0 0 40px;
+    }
+    #tickets-sale-section .card-header h3 {
+        margin: 0;
+        flex: 1 1 auto;
+    }
 </style>
 <!-- Display the countdown timer in an element -->
 <?php
@@ -205,10 +218,10 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
             }, 1000);
         });
     </script>
-    <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
-    <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt="">
+    <!-- <img class="heroLeftLeaves" src="/wp-content/themes/Divi-child/images/b-left.png" alt="">
+    <img class="heroRightLeaves" src="/wp-content/themes/Divi-child/images/b-right.png" alt=""> -->
     <div class="video-background">
-        <img class="hero-image-bg" src="<?php echo get_stylesheet_directory_uri(); ?>/images/head.png" alt="Hero Banner">
+        <img class="hero-image-bg" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-background.jpg" alt="Hero Banner">
     </div>
 </section>
 
