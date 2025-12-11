@@ -31,10 +31,10 @@
     <!-- <link rel="stylesheet" href="/wp-content/themes/Divi-child/style.css?ver=173"> -->
     <link rel="stylesheet" href="/wp-content/themes/Divi-child/assets/css/schedule-2023.css?ver=174">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
-          integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-          <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        integrity="sha512-WEQNv9d3+sqyHjrqUZobDhFARZDko2wpWdfcpv44lsypsSuMO0kHGd3MQ8rrsBn/Qa39VojphdU6CMkpJUmDVw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 
     <!-- Adobe Font -->
@@ -45,9 +45,11 @@
             --font-heading: "erbaum", sans-serif;
             --font-display: "neonoir", cursive;
         }
+
         .font-erbaum {
             font-family: var(--font-heading);
         }
+
         .font-neonoir {
             font-family: var(--font-display);
         }
@@ -57,9 +59,9 @@
 
     <!-- Meta Pixel Code -->
     <script>
-        !function (f, b, e, v, n, t, s) {
+        ! function(f, b, e, v, n, t, s) {
             if (f.fbq) return;
-            n = f.fbq = function () {
+            n = f.fbq = function() {
                 n.callMethod ?
                     n.callMethod.apply(n, arguments) : n.queue.push(arguments)
             };
@@ -79,24 +81,24 @@
         fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=981718572534052&ev=PageView&noscript=1"/></noscript>
+            src="https://www.facebook.com/tr?id=981718572534052&ev=PageView&noscript=1" /></noscript>
 
     <script>
-        !function (w, d, t) {
+        ! function(w, d, t) {
             w.TiktokAnalyticsObject = t;
             var ttq = w[t] = w[t] || [];
             ttq.methods = ["page", "track", "identify", "instances", "debug", "on", "off", "once", "ready", "alias",
                 "group", "enableCookie", "disableCookie"
-            ], ttq.setAndDefer = function (t, e) {
-                t[e] = function () {
+            ], ttq.setAndDefer = function(t, e) {
+                t[e] = function() {
                     t.push([e].concat(Array.prototype.slice.call(arguments, 0)))
                 }
             };
             for (var i = 0; i < ttq.methods.length; i++) ttq.setAndDefer(ttq, ttq.methods[i]);
-            ttq.instance = function (t) {
+            ttq.instance = function(t) {
                 for (var e = ttq._i[t] || [], n = 0; n < ttq.methods.length; n++) ttq.setAndDefer(e, ttq.methods[n]);
                 return e
-            }, ttq.load = function (e, n) {
+            }, ttq.load = function(e, n) {
                 var i = "https://analytics.tiktok.com/i18n/pixel/events.js";
                 ttq._i = ttq._i || {}, ttq._i[e] = [], ttq._i[e]._u = i, ttq._t = ttq._t || {}, ttq._t[e] = +new Date,
                     ttq._o = ttq._o || {}, ttq._o[e] = n || {};
@@ -113,17 +115,16 @@
     <!-- End Meta Pixel Code -->
 
     <script data-obct type="text/javascript">
-        /** DO NOT MODIFY THIS CODE**/
-        !function (_window, _document) {
+        /** DO NOT MODIFY THIS CODE**/ ! function(_window, _document) {
             var OB_ADV_ID = '00fb65378bb78ab506c0fe412852ba8f80';
             if (_window.obApi) {
-                var toArray = function (object) {
+                var toArray = function(object) {
                     return Object.prototype.toString.call(object) === '[object Array]' ? object : [object];
                 };
                 _window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(toArray(OB_ADV_ID));
                 return;
             }
-            var api = _window.obApi = function () {
+            var api = _window.obApi = function() {
                 api.dispatch ? api.dispatch.apply(api, arguments) : api.queue.push(arguments);
             };
             api.version = '1.1';
@@ -141,13 +142,26 @@
         obApi('track', 'PAGE_VIEW');
     </script>
 
-    <script>!function (C, oo, k, ie, b, o, t) {
-            let a = C.scripts[0], c = "en", d = C.createElement(ie),
+    <script>
+        ! function(C, oo, k, ie, b, o, t) {
+            let a = C.scripts[0],
+                c = "en",
+                d = C.createElement(ie),
                 e = [/^\/([a-z]{2})([_-][a-z]{2})?(\/.*)?/g.exec(k), /^([a-z]{2})\./.exec(oo),
-                    /\.([a-z]{2,})$/.exec(oo)], f = {
-                    at: "de", au: c, ca: c, cz: "cs", dk: "da", ee: "et", no: "nb", se:
-                        "sv", uk: c
-                }, g = 0;
+                    /\.([a-z]{2,})$/.exec(oo)
+                ],
+                f = {
+                    at: "de",
+                    au: c,
+                    ca: c,
+                    cz: "cs",
+                    dk: "da",
+                    ee: "et",
+                    no: "nb",
+                    se: "sv",
+                    uk: c
+                },
+                g = 0;
             for (g of e) {
                 e = g ? g[1] : t;
                 if (g) break
@@ -164,7 +178,7 @@
             location.pathname, "script", "Cookiebot", "3a0946ec-6993-4f13-ade5-9f5617027b2a", "en")
     </script>
     <script>
-        jQuery(document).ready(function () {
+        jQuery(document).ready(function() {
             jQuery(".loading-container").css({
                 "display": "none"
             });
@@ -172,12 +186,12 @@
     </script>
 
     <script>
-        jQuery(function ($) {
-            $(document).ready(function () {
+        jQuery(function($) {
+            $(document).ready(function() {
                 $("body ul.et_mobile_menu li.menu-item-has-children, body ul.et_mobile_menu  li.page_item_has_children")
                     .append('<a href="#" class="mobile-toggle"></a>');
                 $('ul.et_mobile_menu li.menu-item-has-children .mobile-toggle, ul.et_mobile_menu li.page_item_has_children .mobile-toggle')
-                    .click(function (event) {
+                    .click(function(event) {
                         event.preventDefault();
                         $(this).parent('li').toggleClass('dt-open');
                         $(this).parent('li').find('ul.children').first().toggleClass('visible');
@@ -186,9 +200,9 @@
                 iconFINAL = 'P';
                 $('body ul.et_mobile_menu li.menu-item-has-children, body ul.et_mobile_menu li.page_item_has_children')
                     .attr('data-icon', iconFINAL);
-                $('.mobile-toggle').on('mouseover', function () {
+                $('.mobile-toggle').on('mouseover', function() {
                     $(this).parent().addClass('is-hover');
-                }).on('mouseout', function () {
+                }).on('mouseout', function() {
                     $(this).parent().removeClass('is-hover');
                 })
             });
@@ -198,7 +212,7 @@
 
     <!-- FB share -->
     <html xmlns="http://www.w3.org/1999/xhtml"
-          xmlns:og="http://ogp.me/ns#">
+        xmlns:og="http://ogp.me/ns#">
 
     <?php
 
@@ -221,146 +235,152 @@
 
 <body <?php post_class(); ?>>
 
-<!--
+    <!--
 <div class="headerHalfCircle">
     <div class="text-center"><img src="/wp-content/themes/Divi-child/images/soareclean-blue.png" alt="Soare cu sponsor principal ING"></div>
 </div>
 -->
 
-<div class="site-mobile-menu site-navbar-target">
-    <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close">
-            <span class="icon-close2 js-menu-toggle"></span>
-        </div>
-    </div>
-    <div class="site-mobile-menu-body">
-        <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
-            <?php
-
-            $mobile_menu = get_menu_with_children("Codru2023MobileMenu");
-            $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-            foreach ($mobile_menu as $item) {
-                if (isset($item->child_items)) {
-                    echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
-                  <ul class='dropdown arrow-top'>";
-                    foreach ($item->child_items as $child_item) {
-                        echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
-                    }
-                    echo "</ul>
-                  </li>";
-                } else {
-                    echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
-                }
-            }
-            ?>
-                                                <?php
-$languages = apply_filters( 'wpml_active_languages', NULL, array( 'skip_missing' => 0 ) );
-if ( !empty( $languages ) ) {
-    foreach ( $languages as $lang ) {
-        if ( !$lang['active'] ) {
-            echo '<li class="language-switcher-item"><a href="' . esc_url( $lang['url'] ) . '">' . esc_html( strtoupper( $lang['code'] ) ) . '</a></li>';
-        }
-    }
-}
-?>
-            <span class="headerSocials">
-                    <a href="https://www.facebook.com/codrufestival" target="_blank"><img
-                                src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
-                    <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
-                                src="/wp-content/themes/Divi-child/images/instagramcodru.svg" alt=""></a>
-                    <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
-                                src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
-                    <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
-                                src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
-                    <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
-                                src="/wp-content/themes/Divi-child/images/socials/spotify.svg" alt=""></a>
-                </span>
-            <div class="site-mobile-menu-button-container">
-                <a class="heroButtonMenu"
-                   href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+    <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close">
+                <span class="icon-close2 js-menu-toggle"></span>
             </div>
-        </ul>
-    </div>
-</div> <!-- .site-mobile-menu -->
-
-<!-- NAVBAR -->
-<header class="site-navbar">
-    <div class="container-fluid row m-0 justify-content-center">
-        <!-- <div class="site-logo col-lg-5 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logocodru.png" alt=""></a></div> -->
-        <div
-                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center leftMenu justify-content-left col-lg-5 col-2">
-            <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
-                <?php
-                $menu = get_menu_with_children("Codru2023LeftMenu");
-                $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-                foreach ($menu as $item) {
-                    if (isset($item->child_items)) {
-                        echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
-                            <ul class='dropdown arrow-top'>";
-                        foreach ($item->child_items as $child_item) {
-                            echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
-                        }
-                        echo "</ul>
-                            </li>";
-                    } else {
-                        echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
-                    }
-                }
-                ?>
-            </ul>
-            <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3"><span
-                        class="icon-menu h3 m-0 p-0 mt-2"></span></a>
         </div>
-
-        <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-logo-header.png"
-                                                                alt="CODRU Festival Logo"></a></div>
-
-
-        <div
-                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center rightMenu justify-content-right col-lg-6 col-2">
-            <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
+        <div class="site-mobile-menu-body">
+            <ul class="site-menu js-clone-nav d-none d-xl-block ml-0 pl-0">
                 <?php
-                $menu = get_menu_with_children("Codru2023RightMenu");
+
+                $mobile_menu = get_menu_with_children("Codru2023MobileMenu");
                 $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-                foreach ($menu as $item) {
+                foreach ($mobile_menu as $item) {
                     if (isset($item->child_items)) {
                         echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
-                            <ul class='dropdown arrow-top'>";
+                  <ul class='dropdown arrow-top'>";
                         foreach ($item->child_items as $child_item) {
                             echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
                         }
                         echo "</ul>
-                            </li>";
+                  </li>";
                     } else {
                         echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
                     }
                 }
                 ?>
-                                    <?php
-$languages = apply_filters( 'wpml_active_languages', NULL, array( 'skip_missing' => 0 ) );
-if ( !empty( $languages ) ) {
-    foreach ( $languages as $lang ) {
-        if ( !$lang['active'] ) {
-            echo '<li class="language-switcher-item"><a href="' . esc_url( $lang['url'] ) . '">' . esc_html( strtoupper( $lang['code'] ) ) . '</a></li>';
-        }
-    }
-}
-?>
+                <?php
+                $languages = apply_filters('wpml_active_languages', NULL, array('skip_missing' => 0));
+                if (!empty($languages)) {
+                    foreach ($languages as $lang) {
+                        if (!$lang['active']) {
+                            echo '<li class="language-switcher-item"><a href="' . esc_url($lang['url']) . '">' . esc_html(strtoupper($lang['code'])) . '</a></li>';
+                        }
+                    }
+                }
+                ?>
                 <span class="headerSocials">
-                        <a href="https://www.facebook.com/codrufestival" target="_blank"><img
-                                    src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
-                        <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
-                                    src="/wp-content/themes/Divi-child/images/instagramcodru.svg" alt=""></a>
-                        <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
-                                    src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
-                        <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
-                                    src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
-                    </span>
-                <a class="heroButtonMenu"
-                   href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+                    <a href="https://www.facebook.com/codrufestival" target="_blank"><img
+                            src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
+                    <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
+                            src="/wp-content/themes/Divi-child/images/instagramcodru.svg" alt=""></a>
+                    <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
+                            src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
+                    <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
+                            src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
+                    <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
+                            src="/wp-content/themes/Divi-child/images/socials/spotify.svg" alt=""></a>
+                </span>
+                <div class="site-mobile-menu-button-container">
+                    <a class="heroButtonMenu"
+                        href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+                </div>
             </ul>
-            <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3"><span
-                        class="icon-menu h3 m-0 p-0 mt-2"></span></a>
         </div>
+    </div> <!-- .site-mobile-menu -->
 
-</header>
+    <!-- NAVBAR -->
+    <header class="site-navbar">
+        <div class="container-fluid row m-0 justify-content-center">
+            <!-- <div class="site-logo col-lg-5 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/logocodru.png" alt=""></a></div> -->
+            <div
+                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center leftMenu justify-content-left col-lg-5 col-2">
+                <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
+                    <?php
+                    $menu = get_menu_with_children("Codru2023LeftMenu");
+                    $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+                    foreach ($menu as $item) {
+                        if (isset($item->child_items)) {
+                            echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
+                            <ul class='dropdown arrow-top'>";
+                            foreach ($item->child_items as $child_item) {
+                                echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
+                            }
+                            echo "</ul>
+                            </li>";
+                        } else {
+                            echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
+                        }
+                    }
+                    ?>
+                </ul>
+                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3" aria-label="Toggle menu">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-0 p-0 mt-1" style="display:block;">
+                        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/Divi-child/images/codru-logo-header.png"
+                        alt="CODRU Festival Logo"></a></div>
+
+
+            <div
+                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center rightMenu justify-content-right col-lg-6 col-2">
+                <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
+                    <?php
+                    $menu = get_menu_with_children("Codru2023RightMenu");
+                    $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+                    foreach ($menu as $item) {
+                        if (isset($item->child_items)) {
+                            echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
+                            <ul class='dropdown arrow-top'>";
+                            foreach ($item->child_items as $child_item) {
+                                echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
+                            }
+                            echo "</ul>
+                            </li>";
+                        } else {
+                            echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
+                        }
+                    }
+                    ?>
+                    <?php
+                    $languages = apply_filters('wpml_active_languages', NULL, array('skip_missing' => 0));
+                    if (!empty($languages)) {
+                        foreach ($languages as $lang) {
+                            if (!$lang['active']) {
+                                echo '<li class="language-switcher-item"><a href="' . esc_url($lang['url']) . '">' . esc_html(strtoupper($lang['code'])) . '</a></li>';
+                            }
+                        }
+                    }
+                    ?>
+                    <span class="headerSocials">
+                        <a href="https://www.facebook.com/codrufestival" target="_blank"><img
+                                src="/wp-content/themes/Divi-child/images/facebookcodru.svg" alt=""></a>
+                        <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
+                                src="/wp-content/themes/Divi-child/images/instagramcodru.svg" alt=""></a>
+                        <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
+                                src="/wp-content/themes/Divi-child/images/linkedincodru.svg" alt=""></a>
+                        <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
+                                src="/wp-content/themes/Divi-child/images/youtubecodru.svg" alt=""></a>
+                    </span>
+                    <a class="heroButtonMenu"
+                        href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+                </ul>
+                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3" aria-label="Toggle menu">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-0 p-0 mt-1" style="display:block;">
+                        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                    </svg>
+                </a>
+            </div>
+
+    </header>
