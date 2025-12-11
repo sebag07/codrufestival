@@ -24,6 +24,117 @@ $display_lineup_section = get_field('display_lineup');
             min-height: initial;
         }
     }
+    /* Advent calendar grid */
+    #codru-advent-calendar .advent-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+    #codru-advent-calendar .advent-card {
+        position: relative;
+        background: rgba(255,255,255,0.08);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        aspect-ratio: 1 / 1;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        justify-content: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    #codru-advent-calendar .advent-accent {
+        position: absolute;
+        top: 25px;
+        left: 10px;
+        font-size: 48px;
+        z-index: 2;
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+        pointer-events: none;
+    }
+    #codru-advent-calendar .advent-card.is-unlocked {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        transform: translateY(-2px);
+    }
+    #codru-advent-calendar .advent-card.is-locked {
+        position: relative;
+        overflow: hidden;
+        background: #1b4f8f;
+        border-color: rgba(255,255,255,0.22);
+        color: #fff;
+    }
+    #codru-advent-calendar .advent-card.is-locked::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            repeating-linear-gradient(
+                90deg,
+                transparent 0,
+                transparent 12px,
+                rgba(255,255,255,0.2) 12px,
+                rgba(255,255,255,0.2) 13px
+            );
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    #codru-advent-calendar .advent-card.is-locked::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-left: 2px solid rgba(255,255,255,0.35);
+        left: 50%;
+        transform: translateX(-1px);
+        pointer-events: none;
+    }
+    #codru-advent-calendar .advent-card.is-locked .advent-day-number {
+        color: #00e25b;
+    }
+    #codru-advent-calendar .advent-card.is-locked .advent-date,
+    #codru-advent-calendar .advent-card.is-locked .advent-artist {
+        color: #e8f1ff;
+    }
+    #codru-advent-calendar .advent-day-number {
+        position: absolute;
+        right: 14px;
+        bottom: 12px;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 0;
+    }
+    #codru-advent-calendar .advent-date {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        opacity: 0.8;
+    }
+    #codru-advent-calendar .advent-artist a,
+    #codru-advent-calendar .advent-artist span {
+        font-size: 16px;
+        font-weight: 600;
+        color: inherit;
+    }
+    #codru-advent-calendar .advent-placeholder {
+        font-size: 14px;
+        opacity: 0.7;
+    }
+    @media (max-width: 991px) {
+        #codru-advent-calendar .advent-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        #codru-advent-calendar .advent-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 480px) {
+        #codru-advent-calendar .advent-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 <!-- Display the countdown timer in an element -->
 <?php
@@ -57,7 +168,7 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
             <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
         </a>
     </div>
-
+asdf a
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const countDownDate = new Date("<?php echo date('Y-m-d\TH:i:s', strtotime($countdown_end_date)); ?>").getTime();
@@ -170,6 +281,53 @@ foreach ($artists as $artist) {
     </section>
 <?php endif; ?>
 -->
+
+<?php
+$advent_start_year = current_time('Y');
+$advent_start_date = new DateTime("{$advent_start_year}-12-11");
+$advent_days_total = 12;
+$advent_today = new DateTime(current_time('Y-m-d'));
+$advent_artists = get_field('advent_calendar_artists', 'options') ?: [];
+$advent_first_image = get_stylesheet_directory_uri() . '/images/advent-calendar/CODRU%206%20-%20Advent%20Calendar%20-%2011-%20Gipsy%20Kings%201x1-22.png';
+?>
+
+<section id="codru-advent-calendar" class="sectionPadding container">
+    <h2 class="sectionTitle">Advent Calendar</h2>
+    <p class="text-center mb-4"><?php the_multilingual_text('Artiștii sunt dezvăluiți zilnic în perioada 11-22 decembrie', 'Artists are revealed daily from December 11-22', 'ro'); ?></p>
+    <div class="advent-grid">
+        <?php for ($i = 0; $i < $advent_days_total; $i++):
+            $current_date = (clone $advent_start_date)->modify("+{$i} day");
+            $is_unlocked = $advent_today >= $current_date;
+            $artist = $advent_artists[$i] ?? null;
+            $artist_name = $artist['artist_name'] ?? $artist['name'] ?? '';
+            $artist_link = $artist['artist_link'] ?? $artist['link'] ?? '';
+            $has_attached_image = ($i === 0 && $is_unlocked);
+            $card_style = $has_attached_image ? "style=\"background-image: url('{$advent_first_image}'); background-size: cover; background-position: center;\"" : "";
+        ?>
+        <div class="advent-card <?php echo $is_unlocked ? 'is-unlocked' : 'is-locked'; ?>" <?php echo $card_style; ?>>
+            <?php if (!$has_attached_image): ?>
+                <div class="advent-accent" aria-hidden="true">🎄</div>
+                <div class="advent-day-number"><?php echo esc_html($current_date->format('j')); ?></div>
+                <?php if ($is_unlocked && $artist_name): ?>
+                    <div class="advent-artist">
+                        <?php if ($artist_link): ?>
+                            <a href="<?php echo esc_url($artist_link); ?>" target="_blank" rel="noopener">
+                                <?php echo esc_html($artist_name); ?>
+                            </a>
+                        <?php else: ?>
+                            <span><?php echo esc_html($artist_name); ?></span>
+                        <?php endif; ?>
+                    </div>
+                <?php else: ?>
+                    <div class="advent-artist advent-placeholder">
+                        <?php echo $is_unlocked ? 'Artist coming soon' : 'Locked'; ?>
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+        <?php endfor; ?>
+    </div>
+</section>
 
 <?php if (have_rows('ticket_cards_repeater', 'options')): ?>
     <section id="tickets-sale-section">
