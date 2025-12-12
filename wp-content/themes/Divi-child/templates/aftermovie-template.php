@@ -308,7 +308,6 @@ $advent_start_date = new DateTime("{$advent_start_year}-12-11");
 $advent_days_total = 12;
 $advent_today = new DateTime(current_time('Y-m-d'));
 $advent_artists = get_field('advent_calendar_artists', 'options') ?: [];
-$advent_first_image = get_stylesheet_directory_uri() . '/images/advent-calendar/CODRU%206%20-%20Advent%20Calendar%20-%2011-%20Gipsy%20Kings%201x1-22.png';
 ?>
 
 <section id="codru-advent-calendar" class="sectionPadding container">
@@ -321,8 +320,18 @@ $advent_first_image = get_stylesheet_directory_uri() . '/images/advent-calendar/
             $artist = $advent_artists[$i] ?? null;
             $artist_name = $artist['artist_name'] ?? $artist['name'] ?? '';
             $artist_link = $artist['artist_link'] ?? $artist['link'] ?? '';
-            $has_attached_image = ($i === 0 && $is_unlocked);
-            $card_style = $has_attached_image ? "style=\"background-image: url('{$advent_first_image}'); background-size: cover; background-position: center;\"" : "";
+            $day_label = $current_date->format('j'); // 11..22
+            $card_image_url = '';
+            $extensions = ['png', 'jpg', 'jpeg', 'webp'];
+            foreach ($extensions as $ext) {
+                $fs_path = get_stylesheet_directory() . "/images/advent-calendar/{$day_label}.{$ext}";
+                if (file_exists($fs_path)) {
+                    $card_image_url = get_stylesheet_directory_uri() . "/images/advent-calendar/{$day_label}.{$ext}";
+                    break;
+                }
+            }
+            $has_attached_image = $is_unlocked && !empty($card_image_url);
+            $card_style = $has_attached_image ? 'style="background-image: url(\'' . esc_url($card_image_url) . '\'); background-size: cover; background-position: center;"' : '';
         ?>
         <div class="advent-card <?php echo $is_unlocked ? 'is-unlocked' : 'is-locked'; ?>" <?php echo $card_style; ?>>
             <?php if (!$has_attached_image): ?>
