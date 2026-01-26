@@ -311,12 +311,11 @@ $advent_artists = get_field('advent_calendar_artists', 'options') ?: [];
 ?>
 
 <section id="codru-advent-calendar" class="sectionPadding container">
-    <h2 class="sectionTitle">Advent Calendar</h2>
-    <p class="text-center mb-4" style="color: #fff; font-weight: 500;"><?php the_multilingual_text('Artiștii sunt dezvăluiți zilnic în perioada 11-22 decembrie', 'Artists are revealed daily from December 11-22', 'ro'); ?></p>
+    <h2 class="sectionTitle">Artists</h2>
     <div class="advent-grid">
         <?php for ($i = 0; $i < $advent_days_total; $i++):
             $current_date = (clone $advent_start_date)->modify("+{$i} day");
-            $is_unlocked = $advent_today >= $current_date;
+            $is_unlocked = true;
             $artist = $advent_artists[$i] ?? null;
             $artist_name = $artist['artist_name'] ?? $artist['name'] ?? '';
             $artist_link = $artist['artist_link'] ?? $artist['link'] ?? '';
