@@ -55,7 +55,7 @@
         }
     </style>
 
-    <title>CODRU Festival | Pădurea Verde, Timișoara, Romania</title>
+    <title>CODRU Festival | 28 - 30 august 2026, Pădurea Verde, Timișoara, Romania</title>
 
     <!-- Meta Pixel Code -->
     <script>
