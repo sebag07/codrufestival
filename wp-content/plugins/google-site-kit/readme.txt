@@ -2,9 +2,9 @@
 
 Contributors:      google
 Requires at least: 5.2
-Tested up to:      6.8
+Tested up to:      6.9
 Requires PHP:      7.4
-Stable tag:        1.160.1
+Stable tag:        1.171.0
 License:           Apache License 2.0
 License URI:       https://www.apache.org/licenses/LICENSE-2.0
 Tags:              google, search-console, analytics, adsense, pagespeed-insights
@@ -109,33 +109,28 @@ Please create a new topic on our [WordPress.org support forum](https://wordpress
 
 == Changelog ==
 
-= 1.160.1 =
-
-**Fixed**
-
-* Fix bug that could cause errors to appear in the Analytics pie chart when switching to the "Locations" tab. See [#11359](https://github.com/google/site-kit-wp/issues/11359).
-
-= 1.160.0 =
+= 1.171.0 =
 
 **Enhanced**
 
-* Update the Partner Ads Experience script version to `1.1.9`. See [#11283](https://github.com/google/site-kit-wp/issues/11283).
-* Rename the "Enhanced conversion tracking" toggle, the new name is "Plugin conversion tracking". See [#11192](https://github.com/google/site-kit-wp/issues/11192).
-* Add ARIA label to the Recover CTA of the ModuleRecoveryAlert banner. See [#11022](https://github.com/google/site-kit-wp/issues/11022).
-* Track Enhanced Conversions user data for logged in users. See [#11015](https://github.com/google/site-kit-wp/issues/11015).
-* Update paragraph text styling across plugin. See [#10946](https://github.com/google/site-kit-wp/issues/10946).
-* Harmonize heading styles throughout Site Kit. See [#10945](https://github.com/google/site-kit-wp/issues/10945).
-* Add GA event tracking for Reader Revenue Manager block insertion. See [#10334](https://github.com/google/site-kit-wp/issues/10334).
-* Add vertical padding to the **Enable One Tap sign in** toggle, ensuring its interaction states don't overlap adjacent controls. See [#9968](https://github.com/google/site-kit-wp/issues/9968).
-* Remove Ads Conversion ID under Analytics from Site Health information. See [#9960](https://github.com/google/site-kit-wp/issues/9960).
-* Fix the icon, hover and focus styling for the `Checkbox` component. See [#9692](https://github.com/google/site-kit-wp/issues/9692).
-* Scroll down to the "Visitor groups" section when following the Settings links on the Audience Selection Panel and the "no audiences" banner, ensuring the section is visible. See [#8875](https://github.com/google/site-kit-wp/issues/8875).
-* Update styles for survey answers. See [#7591](https://github.com/google/site-kit-wp/issues/7591).
+* Update generated PHP client library for Reader Revenue Manager. See [#12035](https://github.com/google/site-kit-wp/issues/12035).
+* Add Reader Revenue Manager policy violation information to the Site Health screen. See [#12018](https://github.com/google/site-kit-wp/issues/12018).
+* Add support for custom module connection status in the Settings screen. See [#12016](https://github.com/google/site-kit-wp/issues/12016).
+* Add periodic synchronization for Reader Revenue Manager publication content policy status. See [#12004](https://github.com/google/site-kit-wp/issues/12004).
+* Add data store configuration for RRM policy violation status retrieval. See [#12003](https://github.com/google/site-kit-wp/issues/12003).
+* Add necessary module settings for Reader Revenue Manager policy violations. See [#12000](https://github.com/google/site-kit-wp/issues/12000).
+* Migrate to generated Google API client libraries. See [#11983](https://github.com/google/site-kit-wp/issues/11983).
+* Update the user menu component to close the user tooltip when the menu is opened. See [#11956](https://github.com/google/site-kit-wp/issues/11956).
+* Add "Data gathering complete" Welcome modal variant to notify users when Analytics data gathering is finished. See [#11909](https://github.com/google/site-kit-wp/issues/11909).
+* Update tour tooltip styles as part of the new setup flow. See [#11812](https://github.com/google/site-kit-wp/issues/11812).
+* Update the dashboard to display the welcome modal. See [#11809](https://github.com/google/site-kit-wp/issues/11809).
 
 **Fixed**
 
-* Ensure WooCommerce Redirect Modal appears when WooCommerce and Google for WooCommerce plugins are installed. See [#11310](https://github.com/google/site-kit-wp/issues/11310).
-* Fix deprecation errors from appearing when `WP_DEBUG_DISPLAY` is enabled on PHP 8.4+. See [#10883](https://github.com/google/site-kit-wp/issues/10883).
-* Fix bug that allowed buttons to submit multiple times. See [#10837](https://github.com/google/site-kit-wp/issues/10837).
+* Fix issue in Email Reports when reporting on pages with increased page clicks. See [#12033](https://github.com/google/site-kit-wp/issues/12033).
+* Update the Email Reporting logic to avoid sending emails with no data. See [#11964](https://github.com/google/site-kit-wp/issues/11964).
+* Fix FrequencySelector component on small screens and add "Current subscription" badge. See [#11959](https://github.com/google/site-kit-wp/issues/11959).
+* Fix bugs with email reporting panel in various states. See [#11957](https://github.com/google/site-kit-wp/issues/11957).
+* Update Notices and NoticeNotifications components to follow mobile styles in tablet viewport. See [#9215](https://github.com/google/site-kit-wp/issues/9215).
 
 [See changelog for all versions](https://raw.githubusercontent.com/google/site-kit-wp/main/changelog.txt).

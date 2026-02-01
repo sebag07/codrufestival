@@ -9,9 +9,9 @@
 	Donate link: https://monzillamedia.com/donate.html
 	Contributors: specialk
 	Requires at least: 4.7
-	Tested up to: 6.8
-	Stable tag: 2.6.5
-	Version:    2.6.5
+	Tested up to: 6.9
+	Stable tag: 2.6.7
+	Version:    2.6.7
 	Requires PHP: 5.6.20
 	License: GPL v2 or later
 
@@ -28,7 +28,7 @@
 	You should have received a copy of the GNU General Public License
 	with this program. If not, visit: https://www.gnu.org/licenses/
 	
-	Copyright 2025 Monzilla Media. All rights reserved.
+	Copyright 2017-2026 Monzilla Media. All rights reserved.
 	
 */
 

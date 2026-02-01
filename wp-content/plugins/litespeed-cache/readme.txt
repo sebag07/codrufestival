@@ -3,8 +3,8 @@ Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, seo, image optimize, object cache, redis, memcached, database cleaner
 Requires at least: 5.3
 Requires PHP: 7.2
-Tested up to: 6.8
-Stable tag: 7.3.0.1
+Tested up to: 6.9
+Stable tag: 7.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -256,6 +256,77 @@ The vast majority of plugins and themes are compatible with LiteSpeed Cache. The
 You can report security bugs through the Patchstack Vulnerability Disclosure Program. The Patchstack team help validate, triage and handle any security vulnerabilities. [Report a security vulnerability.](https://patchstack.com/database/vdp/litespeed-cache)
 
 == Changelog ==
+
+= 7.7 - Dec 16 2025 =
+* **Task** Increased default cron interval from 1 minute to 15 minutes.
+* **Conf** Enabled `litespeed_conf_load_option_{$option}` to allow modifying configuration values.
+* **Conf** Removed deprecated `O_MEDIA_PRELOAD_FEATURED` option.
+* **GUI** Dark mode toggle now applies instantly without flicker on page reload.
+* **Page Optimize** Improved dummy CSS replacement logic.
+* **Page Optimize** Deferred Instant Click to avoid blocking initial page rendering. (pp01 PR#926)
+* **Cloud** Guest Mode IP/UA lists now sync automatically from the QUIC.cloud API.
+* **Cloud** Guest Mode IP now supports CIDR notation (e.g., 192.168.1.0/24, 2001:db8::/32).
+* **Cloud** Fixed a potential warning caused by variable type casting. (userb52 PR#925)
+* **Cloud** Added null-safe handling for the `allowed_redirect_hosts` filter to prevent unexpected errors. (PR#933 #6972377)
+* **Cloud** Fixed fatal error on PHP 8 when no timestamp is logged due to number casting. (Patryk Chowratowicz #938)
+* **Crawler** Removed redundant functions after reformatting.
+* **Database Optimize** Fixed DB Optimize redirection and transient cleanup issues. (PR#937)
+* **Vary** Fixed issue where users without a group could not log in.
+* **Avatar** Fixed queue warning when the table is missing and resolved HTML escaping warnings. (PR#928)
+* **3rd** Improved WPML image lazy-load detection. (#657426)
+* **3rd** Fixed Elementor Form submission caching issue. (PR#932)
+* **3rd** Fixed cache issue when WCML currency changes. (PR#929)
+
+= 7.6.2 - Oct 17 2025 =
+* 🐞**Cloud** Fixed the PHP 8+ typecast issue in QUIC.cloud signature verification which caused activation failures.
+* **Purge** Restored a delay purge hook while calling purge by CLI. (asafm7)
+* **REST** Dropped legacy code that had been used for development purposes.
+* **GUI** Use a stricter selector for dark mode to prevent side effects.
+
+= 7.6.1 - Oct 15 2025 =
+* **Cloud** Increased POST connection timeout to prevent potential failures.
+* ⚠️🐞**GUI** Fixed a frontend display issue caused by the dark mode CSS file loading on the website frontend. (Peter Wells PR#923)
+* 🐞**Page Optimize** Corrected a typo in the DNS prefetch filter. (Yaroslav Yachmenov PR#922)
+
+= 7.6 - Oct 15 2025 =
+* 🌱**Admin** Dark mode supported.
+* 🌱**Purge** Added `Purge All - VPI` to the Purge menu. (PR#898)
+* ⚠️🐞**Debug** Escaped comments to prevent a CSS vulnerability that could occur when debug is on. (#218778 Trustwave #CWE-79)
+* **Purge** Gravatar purge now also clears the database records. (Serafín Danessa, PR#915)
+* **Conf** Fixed an issue where the `Drop Query String` setting was not saved when in network mode. (Jory Hogeveen PR#910)
+* **VPI** Add fetchpriority and decode attributes to VPI. (Hirak Kalita, serpentdriver, PR#903)
+* **Cloud** Auto sync new Server IP to QUIC.cloud if changed. (cloud86)
+* **GUI** Auto update port value when `Object Cache Method` is changed.
+* **API** Dropped legacy `conf::val()` function.
+* 🐞**Misc** Fixed PHP 7.2 compatibility issue. (Ulrich Viridis, PR#913)
+* **Misc** Added UCSS file path to comment info for easier debug. (PR#914)
+
+= 7.5.0.1 - Sep 11 2025 =
+* 🐞**GUI** Fixed an issue where the network dashboard template was missing. (mcworks)
+
+= 7.5 - Sep 10 2025 =
+* 🌱**Image Optimize** New option `Optimize Image Sizes` to allow user to choose which image sizes to include in optimization request.
+* 🐞**Purge** Purge Time setting will respect WP timezone setting now. (PR#893)
+* 🐞**Conf** Fixed a minor type-casting bug, which could cause unnecessary QUIC.cloud sync configuration when the setting is empty.
+* **Misc** Dropped unused rewrite rule from htaccess.
+
+= 7.4 - Aug 28 2025 =
+* 🌱**Media** Added new Auto Rescale Original Image option.
+* 🌱**Toolbox** Added ability to Disable All for 24 Hours. (PR#886)
+* 🐞**CDN** Fixed a QUIC.cloud sync configuration failure on network child sites.
+* 🐞**Object Cache** Fixed a bug that failed to detect the Redis connection status.
+* **Cache** Better match iPhone browsers for mobile cache detection.
+* **Cache** Dropped use of `advanced-cache.php` support since WP v5.3+ doesn't need it, and LiteSpeed requires WP v5.3+.
+* **Cache** When page is not cacheable, set header to value used by WordPress `Cache-Control` header. (asafm7)
+* **Page Optimize** Better compatibility for dummy CSS removal in cases where other plugins manipulate the quotation marks.
+* **Page Optimize** Dropped v4.2 legacy `LITESPEED_BYPASS_OPTM`.
+* **Crawler** Now use an .html file to test the port, as some security plugins block .txt files and cause port test failure. (#661828)
+* **GUI** Show current live values for options if they are overridden by filters or the server environment. (PR#885)
+* **Data** Dropped legacy code and upgraded data migration support to LSCWP v5.7-.
+* **Misc** Support the `LITESPEED_DEV` constant to allow switching to a development environment.
+* **Misc** Allow leading underscore (`_`) for private functions and variables in format checker.
+* **Misc** Suppress frequent version check when a certain database option is cached.
+* **Misc** Dropped `sanitize_file_name` usage to prevent template failure when 3rd party plugins manipulate that filter.
 
 = 7.3.0.1 - Jul 30 2025 =
 * **Page Optimize** Fixed the page score impact caused by CSS placeholder. (wpconvert, Sean Thompson)
