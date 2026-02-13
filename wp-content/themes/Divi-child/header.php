@@ -26,7 +26,7 @@
     <script src="/wp-content/themes/Divi-child/js/main.js?ver=174"></script>
     <script src="/wp-content/themes/Divi-child/js/owl.carousel.min.js?ver=174"></script>
     <script src="/wp-content/themes/Divi-child/js/partners-carousel-init.js?ver=174"></script>
-    <script src="/wp-content/themes/Divi-child/snow3d/build/snow3d.js"></script>
+    <!-- <script src="/wp-content/themes/Divi-child/snow3d/build/snow3d.js"></script> -->
 
     <!-- Style -->
     <!-- <link rel="stylesheet" href="/wp-content/themes/Divi-child/style.css?ver=173"> -->
