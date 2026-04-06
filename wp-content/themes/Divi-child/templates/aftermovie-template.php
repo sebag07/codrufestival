@@ -188,9 +188,6 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
         <a class="homepage-info-button codru-general-button" href="https://bilete.codrufestival.ro/">
             <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
         </a>
-        <a class="homepage-info-button codru-general-button" href="https://docs.google.com/forms/d/e/1FAIpQLSf2-4RPAwCR_Z8i7n60m8R0ruFxfrHKXIYQJIUahDNLU5Y5cQ/viewform">
-            <?php echo get_multilingual_text('INSCRIERE PLANTARE', 'PLANTATION REGISTRATION', 'ro'); ?>
-        </a>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
