@@ -2350,26 +2350,16 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     font-style: italic;
 }
 
-.artistsLevel1 div h4 a,
-.artistsLevel2 div h4 a,
-.artistsLevel3 div h4 a,
-.artistsLevel4 div h4 a,
-.artistsLevel5 div h4 a,
-.artistsLevel6 div h4 a {
-    line-height: 0.7;
+.artistsLevel1 div h4.has-small-text {
+    align-items: center;
+    flex-direction: column;
 }
 
-.artistsLevel1 div h4 small,
-.artistsLevel2 div h4 small,
-.artistsLevel3 div h4 small,
-.artistsLevel4 div h4 small,
-.artistsLevel5 div h4 small,
-.artistsLevel6 div h4 small,
-.advent-artist small {
+.artistsLevel1 div h4.has-small-text small {
     display: inline-block;
     font-size: 0.55em;
     font-weight: 400;
-    line-height: 1.05;
+    margin-top: -0.1em;
 }
 
 .artistsLevel1,

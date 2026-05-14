@@ -133,17 +133,11 @@ foreach ($artists as $artist) {
                         $lastKey = array_key_last($grouped_artists[$level_key]);
                         foreach ($grouped_artists[$level_key] as $key => $artist):
                             $artist_name = $artist['name'] ?? '';
-                            $artist_url = !empty($artist['spotify_url']) ? $artist['spotify_url'] : (!empty($artist['spotify_id']) ? "https://open.spotify.com/artist/{$artist['spotify_id']}" : '');
+                            $artist_name_class = stripos($artist_name, '<small') !== false ? ' has-small-text' : '';
                         ?>
                             <div class='artists-name'>
-                                <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>
-                                    <?php if ($artist_url): ?>
-                                        <a class="text-inherit" href="<?php echo esc_url($artist_url); ?>" target="_blank" rel="noopener">
-                                            <?php $render_artist_name($artist_name); ?>
-                                        </a>
-                                    <?php else: ?>
-                                        <?php $render_artist_name($artist_name); ?>
-                                    <?php endif; ?>
+                                <h4 class='m-0 pb-0<?php echo esc_attr($artist_name_class); ?>' style='color: var(--artist-level-color-secondary);'>
+                                    <?php $render_artist_name($artist_name); ?>
                                 </h4>
                             </div>
                             <?php if ($key !== $lastKey): ?>
