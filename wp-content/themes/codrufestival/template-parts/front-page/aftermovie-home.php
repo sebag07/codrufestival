@@ -13,6 +13,39 @@ $countdownSecondsText = get_field('seconds_text', 'options');
 $countdownText = get_field('target_text', 'options');
 $countdownExpiredText = get_field('expired_text', 'options');
 $countdown_end_date = get_field('countdown_end_date', 'options');
+
+$normalize_ticket_title = static function ($title) {
+    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?\s*$/i', '', (string) $title);
+    $title = remove_accents(html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+    $title = strtolower($title);
+    $title = preg_replace('/[^a-z0-9]+/', ' ', $title);
+
+    return trim((string) preg_replace('/\s+/', ' ', (string) $title));
+};
+
+$live_ticket_prices = [];
+$live_tickets_json_path = get_stylesheet_directory() . '/data/tickets-live.json';
+
+if (file_exists($live_tickets_json_path)) {
+    $live_tickets_json = file_get_contents($live_tickets_json_path);
+    $live_tickets_payload = json_decode($live_tickets_json, true);
+
+    if (json_last_error() === JSON_ERROR_NONE && !empty($live_tickets_payload['tickets']) && is_array($live_tickets_payload['tickets'])) {
+        foreach ($live_tickets_payload['tickets'] as $live_ticket) {
+            if (empty($live_ticket['display_price'])) {
+                continue;
+            }
+
+            $ticket_key = !empty($live_ticket['match_key'])
+                ? (string) $live_ticket['match_key']
+                : $normalize_ticket_title($live_ticket['title'] ?? $live_ticket['name'] ?? '');
+
+            if ($ticket_key !== '') {
+                $live_ticket_prices[$ticket_key] = (string) $live_ticket['display_price'];
+            }
+        }
+    }
+}
 ?>
 
 <section class="relative mt-20 flex h-auto min-h-0 max-h-[1000px] w-full flex-col items-center justify-center gap-[25px] overflow-x-hidden overflow-y-hidden pt-10 pb-15 sm:h-[80vh] md:pt-25 md:pb-30">
@@ -198,6 +231,8 @@ foreach ($artists as $artist) {
                     $cardButtonURL = get_sub_field('button_url', 'options');
                     $cardButtonText = get_sub_field('button_text', 'options');
                     $cardTitle = get_sub_field('title', 'options');
+                    $liveTicketPrice = $live_ticket_prices[$normalize_ticket_title($cardTitle)] ?? '';
+                    $displayCardPrice = $liveTicketPrice ?: $cardPrice;
                 ?>
                     <div class="col-xl-4 col-lg-4 col-md-6 col-12 ticket-card">
                         <div class="card-inner">
@@ -284,7 +319,7 @@ foreach ($artists as $artist) {
                                     <?php if ($cardReducedPrice): ?>
                                         <p class="stroke-price"><?php echo $cardReducedPrice; ?></p>
                                     <?php endif; ?>
-                                    <p class="card-price"><?php echo $cardPrice; ?></p>
+                                    <p class="card-price"><?php echo esc_html($displayCardPrice); ?></p>
                                 </div>
                                 <div class="card-button">
                                     <a href="<?php echo $cardButtonURL; ?>" target="_blank"><?php echo $cardButtonText; ?></a>
