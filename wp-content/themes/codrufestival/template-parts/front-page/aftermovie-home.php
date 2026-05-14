@@ -171,6 +171,7 @@ foreach ($artists as $artist) {
                 </a>
             </div>
             <?php */ ?>
+            <div class="text-center text-lg text-white">&nbsp;<?php echo get_multilingual_text('and many more', 'and many more', 'ro'); ?></div>
         </div>
     </section>
 <?php endif; ?>

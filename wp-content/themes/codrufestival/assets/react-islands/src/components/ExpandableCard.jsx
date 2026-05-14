@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useId, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 
 const stripNameMarkup = (value) => String(value ?? '').replace(/<br\s*\/?>/gi, ' ').replace(/<\/?small>/gi, '');
 
@@ -37,6 +38,7 @@ export function ExpandableCard({
   const [isExpanded, setIsExpanded] = useState(false);
   const closeButtonRef = useRef(null);
   const titleId = useId();
+  const layoutId = useId();
   const plainTitle = stripNameMarkup(title);
 
   useEffect(() => {
@@ -62,67 +64,88 @@ export function ExpandableCard({
 
   return (
     <article className={`codru-expandable-card ${className}`.trim()}>
-      <button
+      <motion.button
+        layoutId={`card-${layoutId}`}
         type="button"
         className="codru-expandable-card__trigger"
         aria-expanded={isExpanded}
         onClick={() => setIsExpanded(true)}
       >
-        <span className="codru-expandable-card__media" aria-hidden={!src}>
+        <motion.span layoutId={`media-${layoutId}`} className="codru-expandable-card__media" aria-hidden={!src}>
           {src ? (
             <img src={src} alt="" loading="lazy" />
           ) : (
             <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
           )}
-        </span>
+        </motion.span>
         <span className="codru-expandable-card__summary">
           {description ? (
-            <span className="codru-expandable-card__description">{description}</span>
+            <motion.span layoutId={`description-${layoutId}`} className="codru-expandable-card__description">
+              {description}
+            </motion.span>
           ) : null}
-          <span className="codru-expandable-card__title">
+          <motion.span layoutId={`title-${layoutId}`} className="codru-expandable-card__title">
             <TitleText value={title} />
-          </span>
+          </motion.span>
         </span>
-      </button>
+      </motion.button>
 
-      {isExpanded ? (
-        <div className="codru-expandable-card__overlay">
-          <button
-            type="button"
-            className="codru-expandable-card__backdrop"
-            aria-label="Close expanded card"
-            onClick={() => setIsExpanded(false)}
-          />
-          <div
-            className={`codru-expandable-card__panel ${classNameExpanded}`.trim()}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-          >
-            <button
-              ref={closeButtonRef}
+      <AnimatePresence>
+        {isExpanded ? (
+          <motion.div className="codru-expandable-card__overlay">
+            <motion.button
               type="button"
-              className="codru-expandable-card__close"
+              className="codru-expandable-card__backdrop"
               aria-label="Close expanded card"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setIsExpanded(false)}
+            />
+            <motion.div
+              layoutId={`card-${layoutId}`}
+              className={`codru-expandable-card__panel ${classNameExpanded}`.trim()}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+              transition={{ type: 'spring', damping: 26, stiffness: 240 }}
             >
-              &times;
-            </button>
-            <div className="codru-expandable-card__expanded-media">
-              {src ? <img src={src} alt="" /> : <span>{plainTitle?.charAt(0)}</span>}
-            </div>
-            <div className="codru-expandable-card__expanded-content">
-              {description ? (
-                <p className="codru-expandable-card__expanded-description">{description}</p>
-              ) : null}
-              <h3 id={titleId}>
-                <TitleText value={title} />
-              </h3>
-              <div className="codru-expandable-card__body">{children}</div>
-            </div>
-          </div>
-        </div>
-      ) : null}
+              <button
+                ref={closeButtonRef}
+                type="button"
+                className="codru-expandable-card__close"
+                aria-label="Close expanded card"
+                onClick={() => setIsExpanded(false)}
+              >
+                &times;
+              </button>
+              <motion.div layoutId={`media-${layoutId}`} className="codru-expandable-card__expanded-media">
+                {src ? <img src={src} alt="" /> : <span>{plainTitle?.charAt(0)}</span>}
+              </motion.div>
+              <div className="codru-expandable-card__expanded-content">
+                {description ? (
+                  <motion.p layoutId={`description-${layoutId}`} className="codru-expandable-card__expanded-description">
+                    {description}
+                  </motion.p>
+                ) : null}
+                <motion.h3 layoutId={`title-${layoutId}`} id={titleId}>
+                  <TitleText value={title} />
+                </motion.h3>
+                <motion.div
+                  className="codru-expandable-card__body"
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 8 }}
+                  transition={{ duration: 0.18, delay: 0.08 }}
+                >
+                  {children}
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </article>
   );
 }

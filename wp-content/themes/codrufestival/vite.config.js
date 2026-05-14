@@ -5,6 +5,7 @@ export default defineConfig({
   plugins: [react()],
   define: {
     'process.env.NODE_ENV': JSON.stringify('production'),
+    'process.env': JSON.stringify({ NODE_ENV: 'production' }),
   },
   build: {
     emptyOutDir: true,
