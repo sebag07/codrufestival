@@ -1,0 +1,169 @@
+#partners-2 {
+    width: 100%;
+    margin: 0;
+}
+
+.sectionTitle {
+    text-align: center;
+}
+
+.sectionTitle h2 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 45px;
+    font-weight: 700;
+}
+
+@media screen and (max-width: 767px){
+    .sectionTitle h2 {
+        margin-bottom: 0;
+        font-size: 32px;
+    }
+}
+
+.partnersContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.partners .partnersContainer img {
+    border: 1px solid #fff;
+    border-radius: 8px;
+    margin: 5px;
+}
+
+/* All partner levels base styles */
+.partnersLevel1, 
+.partnersLevel2, 
+.partnersLevel3, 
+.partnersLevel4, 
+.partnersLevel5,
+.partnersLevel6,
+.partnersLevel7,
+.producedBy {
+    text-align: center;
+}
+
+.partnersLevel1 img,
+.partnersLevel2 img,
+.partnersLevel3 img,
+.partnersLevel4 img,
+.partnersLevel5 img,
+.partnersLevel6 img,
+.partnersLevel7 img,
+.producedBy img {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* Partner Level 1 - Largest (Main Partners) */
+.partnersLevel1 img {
+    height: 400px;
+    width: 400px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel1 img {
+        height: 300px;
+        width: 300px;
+    }
+}
+
+/* Partner Level 2 - Second Largest */
+.partnersLevel2 img {
+    height: 325px;
+    width: 325px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel2 img {
+        height: 180px;
+        width: 180px;
+    }
+}
+
+/* Partner Level 3 - Medium Large */
+.partnersLevel3 img {
+    height: 275px;
+    width: 275px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel3 img {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+/* Partner Level 4 - Medium */
+.partnersLevel4 img {
+    height: 200px;
+    width: 200px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel4 img {
+        height: 125px;
+        width: 125px;
+    }
+}
+
+/* Partner Level 5 - Medium Small */
+.partnersLevel5 img {
+    height: 150px;
+    width: 150px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel5 img {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+/* Partner Level 6 - Small */
+.partnersLevel6 img {
+    height: 125px;
+    width: 125px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel6 img {
+        height: 90px;
+        width: 90px;
+    }
+}
+
+/* Partner Level 7 - Smaller */
+.partnersLevel7 img {
+    height: 100px;
+    width: 100px;
+}
+
+@media screen and (max-width: 500px){
+    .partnersLevel7 img {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+/* Produced By - Large and Important */
+.producedBy img {
+    height: 350px;
+    width: 350px;
+}
+
+@media screen and (max-width: 500px){
+    .producedBy img {
+        height: 180px;
+        width: 180px;
+    }
+}
+
+/* Hover effects for linked producers */
+.producedBy a:hover img {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}

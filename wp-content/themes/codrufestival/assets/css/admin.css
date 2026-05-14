@@ -1,0 +1,61 @@
+/* WordPress Admin CSS for ACF Fields */
+
+/* Make ACF image preview thumbnails smaller */
+.acf-image-uploader .image-wrap img {
+    max-width: 80px !important;
+    max-height: 80px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* Make ACF gallery thumbnails smaller */
+.acf-gallery .acf-gallery-attachment img {
+    max-width: 60px !important;
+    max-height: 60px !important;
+}
+
+/* Reduce the size of the image upload area */
+.acf-image-uploader .image-wrap {
+    max-width: 100px !important;
+    max-height: 100px !important;
+}
+
+/* Make repeater fields more compact */
+.acf-repeater .acf-row {
+    margin-bottom: 10px !important;
+}
+
+/* Reduce padding in ACF repeater rows */
+.acf-repeater .acf-row > .acf-fields {
+    padding: 10px !important;
+}
+
+/* Make the image upload button smaller */
+.acf-image-uploader .image-wrap .acf-button {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+}
+
+/* Compact the ACF field labels for partner fields */
+.acf-field[data-name*="partners_level"] .acf-label,
+.acf-field[data-name*="produced_by"] .acf-label {
+    margin-bottom: 5px !important;
+}
+
+/* Make partner name fields smaller */
+.acf-field[data-name*="partner_name"] input,
+.acf-field[data-name*="producer_name"] input {
+    max-width: 200px !important;
+}
+
+/* Compact repeater field headers */
+.acf-repeater > table > thead > tr > th {
+    padding: 8px !important;
+    font-size: 12px !important;
+}
+
+/* Make repeater add button smaller */
+.acf-repeater .acf-button {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+} 

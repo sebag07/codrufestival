@@ -1,0 +1,19 @@
+{
+  "name": "codrufestival-theme",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.7.0",
+    "autoprefixer": "10.4.22",
+    "postcss": "8.5.14",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "tailwindcss": "3.4.17",
+    "vite": "6.4.2"
+  }
+}

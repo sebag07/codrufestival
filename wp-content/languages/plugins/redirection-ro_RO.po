@@ -1,0 +1,150 @@
+# Translation of Plugins - Redirection - Stable (latest release) in Romanian
+# This file is distributed under the same license as the Plugins - Redirection - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2026-02-18 15:50:09+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n == 0 || n % 100 >= 2 && n % 100 <= 19) ? 1 : 2);\n"
+"X-Generator: GlotPress/4.0.3\n"
+"Language: ro\n"
+"Project-Id-Version: Plugins - Redirection - Stable (latest release)\n"
+
+#. translators: 1: table name
+#: database/schema/latest.php:124
+msgid "Table \"%s\" is missing"
+msgstr "Lipsește tabelul „%s”"
+
+#. translators: displayed when installing the plugin
+#: database/schema/latest.php:15
+msgid "Create basic data"
+msgstr "Creează datele de bază"
+
+#: redirection-admin.php:721
+msgid "Please enable JavaScript"
+msgstr "Te rog să activezi JavaScript"
+
+#: redirection-admin.php:295
+msgid "Please upgrade your database"
+msgstr "Te rog să actualizezi baza de date"
+
+#: redirection-admin.php:279 build/redirection.js:2
+msgid "Upgrade Database"
+msgstr "Actualizează baza de date"
+
+#: matches/page.php:32 build/redirection.js:2
+msgid "URL and WordPress page type"
+msgstr "URL și tip de pagină WordPress"
+
+#: matches/ip.php:35 build/redirection.js:2
+msgid "URL and IP"
+msgstr "URL și IP"
+
+#: matches/user-role.php:35 build/redirection.js:2
+msgid "URL and role/capability"
+msgstr "URL și rol/capabilitate"
+
+#: matches/server.php:38 build/redirection.js:2
+msgid "URL and server"
+msgstr "URL și server"
+
+#: matches/http-header.php:58 build/redirection.js:2
+msgid "URL and HTTP header"
+msgstr "URL și antet HTTP"
+
+#: matches/custom-filter.php:40 build/redirection.js:2
+msgid "URL and custom filter"
+msgstr "URL și filtru personalizat"
+
+#: matches/cookie.php:10 build/redirection.js:2
+msgid "URL and cookie"
+msgstr "URL și cookie"
+
+#. Plugin URI of the plugin
+#: redirection.php
+msgid "https://redirection.me/"
+msgstr "https://redirection.me/"
+
+#: models/fixer.php:114
+msgid "Valid groups detected"
+msgstr "Am detectat grupuri valide"
+
+#: models/fixer.php:112
+msgid "Valid groups"
+msgstr "Grupuri valide"
+
+#: models/fixer.php:107
+msgid "Database tables"
+msgstr "Tabele în bază de date"
+
+#: models/fixer.php:156
+msgid "The following tables are missing:"
+msgstr "Lipsesc următoarele tabele:"
+
+#: redirection-admin.php:717
+msgid "Loading, please wait..."
+msgstr "Încarc, te rog să aștepți..."
+
+#: redirection-admin.php:282
+msgid "Settings"
+msgstr "Setări"
+
+#. Plugin Name of the plugin
+#: redirection.php build/redirection.js:2 build/redirection.js:4
+msgid "Redirection"
+msgstr "Redirecționare"
+
+#: redirection-admin.php:538
+msgid "Redirection Support"
+msgstr "Suport pentru Redirecționare"
+
+#. Description of the plugin
+#: redirection.php
+msgid "Manage all your 301 redirects and monitor 404 errors"
+msgstr "Administrează-ți toate redirecționările 301 și monitorizează erorile 404"
+
+#: matches/url.php:24 build/redirection.js:2
+msgid "URL only"
+msgstr "Numai URL"
+
+#: matches/login.php:37 build/redirection.js:2
+msgid "URL and login status"
+msgstr "URL și stare autentificare"
+
+#: actions/pass.php:75 build/redirection.js:2
+msgid "Pass-through"
+msgstr "Trece prin"
+
+#: actions/error.php:59 build/redirection.js:2
+msgid "Error (404)"
+msgstr "Eroare (404)"
+
+#. Author of the plugin
+#: redirection.php
+msgid "John Godley"
+msgstr "John Godley"
+
+#: matches/referrer.php:45 build/redirection.js:2
+msgid "URL and referrer"
+msgstr "URL și referent"
+
+#: matches/user-agent.php:45 build/redirection.js:2
+msgid "URL and user agent"
+msgstr "URL și agent utilizator"
+
+#: database/schema/latest.php:167 models/group.php:286 build/redirection.js:4
+msgid "Redirections"
+msgstr "Redirecționări"
+
+#: database/schema/latest.php:172
+msgid "Modified Posts"
+msgstr "Articole modificate"
+
+#: actions/random.php:48 build/redirection.js:2
+msgid "Redirect to random post"
+msgstr "Redirecționează aleatoriu la un articol"
+
+#: actions/url.php:52 build/redirection.js:2
+msgid "Redirect to URL"
+msgstr "Redirecționează la URL"

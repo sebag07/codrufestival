@@ -1,0 +1,29 @@
+# OS/editor noise
+.DS_Store
+.idea/
+.vscode/
+
+# Local WordPress configuration and secrets
+/.htaccess
+wp-config.php
+wp-config-local.php
+.user.ini
+local-xdebuginfo.php
+
+# User uploads and generated media/cache
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+wp-content/backup*/
+wp-content/backups/
+wp-content/ai1wm-backups/
+wp-content/updraft/
+wp-content/wflogs/
+wp-content/debug.log
+
+# Dependency/build output
+node_modules/
+
+# Local backups
+*.bak
+*.bk
