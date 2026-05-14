@@ -15,7 +15,7 @@ $countdownExpiredText = get_field('expired_text', 'options');
 $countdown_end_date = get_field('countdown_end_date', 'options');
 ?>
 
-<section class="relative mt-20 flex h-auto min-h-0 max-h-[1000px] w-full flex-col items-center justify-center gap-[25px] overflow-x-hidden overflow-y-hidden py-5 sm:h-[80vh] md:py-25">
+<section class="relative mt-20 flex h-auto min-h-0 max-h-[1000px] w-full flex-col items-center justify-center gap-[25px] overflow-x-hidden overflow-y-hidden pt-10 pb-15 sm:h-[80vh] md:pt-25 md:pb-30">
     <picture class="z-[9]">
         <img class="z-[9] max-h-[40vh] w-full max-w-[300px] sm:max-w-[600px] xl:max-w-[800px]" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-logo-header.png" alt="Hero Title">
     </picture>
