@@ -88,13 +88,14 @@ body.codru-expandable-card-open {
 }
 
 .codru-expandable-card__trigger {
+  aspect-ratio: 1 / 1;
   background: #050b3f;
   border: 2px solid rgba(255, 255, 255, 0.14);
   border-radius: 26px;
   color: #fff;
   cursor: pointer;
   display: block;
-  min-height: 360px;
+  min-height: 0;
   overflow: hidden;
   padding: 0;
   position: relative;
@@ -175,7 +176,7 @@ body.codru-expandable-card-open {
 
 .codru-expandable-card__title {
   color: #fff;
-  font-size: clamp(22px, 3vw, 36px);
+  font-size: 24px;
   font-style: italic;
   font-weight: 900;
   line-height: 0.95;
@@ -219,7 +220,8 @@ body.codru-expandable-card-open {
   color: var(--main-color, #071466);
   display: flex;
   flex-direction: column;
-  max-height: min(760px, calc(100vh - 48px));
+  height: min(860px, calc(100vh - 48px));
+  max-height: min(860px, calc(100vh - 48px));
   max-width: 640px;
   overflow: hidden;
   position: relative;
@@ -243,7 +245,7 @@ body.codru-expandable-card-open {
   right: 18px;
   top: 18px;
   width: 44px;
-  z-index: 2;
+  z-index: 4;
 }
 
 .codru-expandable-card__close:focus-visible {
@@ -265,11 +267,20 @@ body.codru-expandable-card-open {
 }
 
 .codru-expandable-card__expanded-media::after {
-  background: linear-gradient(180deg, rgba(7, 20, 102, 0) 45%, rgba(7, 20, 102, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(7, 20, 102, 0) 22%, rgba(7, 20, 102, 0.84) 100%);
   content: '';
   inset: 0;
   pointer-events: none;
   position: absolute;
+}
+
+.codru-expandable-card__expanded-heading {
+  bottom: 0;
+  left: 0;
+  padding: 28px 38px 30px;
+  position: absolute;
+  right: 0;
+  z-index: 2;
 }
 
 .codru-expandable-card__expanded-media img {
@@ -300,7 +311,7 @@ body.codru-expandable-card-open {
 }
 
 .codru-expandable-card__expanded-description {
-  color: var(--secondary-color, #12139b);
+  color: var(--button-color, #67e816);
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -308,41 +319,20 @@ body.codru-expandable-card-open {
   text-transform: uppercase;
 }
 
-.codru-expandable-card__expanded-content h3 {
-  color: var(--main-color, #071466);
+.codru-expandable-card__expanded-heading h3 {
+  color: #fff;
   font-size: clamp(30px, 4vw, 48px);
   font-style: italic;
   font-weight: 900;
   line-height: 0.95;
-  margin: 0 0 24px;
-}
-
-.codru-artist-expandable-cards__meta {
-  border-bottom: 1px solid rgba(7, 20, 102, 0.18);
-  border-top: 1px solid rgba(7, 20, 102, 0.18);
-  display: grid;
-  gap: 14px;
-  margin-bottom: 24px;
-  padding: 18px 0;
-}
-
-.codru-artist-expandable-cards__meta-item {
-  display: grid;
-  gap: 4px;
   margin: 0;
 }
 
-.codru-artist-expandable-cards__meta-item span {
-  color: rgba(7, 20, 102, 0.7);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.codru-artist-expandable-cards__meta-item strong {
-  color: var(--main-color, #071466);
-  font-size: 18px;
+.codru-expandable-card__expanded-heading h3 small {
+  display: inline-block;
+  font-size: 0.55em;
+  font-weight: 400;
+  line-height: 1.05;
 }
 
 .codru-artist-expandable-cards__details {
@@ -410,6 +400,7 @@ body.codru-expandable-card-open {
   }
 
   .codru-expandable-card__panel {
+    height: auto;
     max-height: calc(100vh - 48px);
   }
 
@@ -428,11 +419,16 @@ body.codru-expandable-card-open {
   }
 
   .codru-expandable-card__trigger {
-    min-height: 320px;
+    min-height: 0;
   }
 
   .codru-expandable-card__panel {
+    height: auto;
     max-height: calc(100vh - 24px);
+  }
+
+  .codru-expandable-card__expanded-heading {
+    padding: 24px 24px 26px;
   }
 
   .codru-expandable-card__expanded-media {

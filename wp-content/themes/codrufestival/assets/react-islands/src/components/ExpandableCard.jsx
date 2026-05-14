@@ -122,16 +122,18 @@ export function ExpandableCard({
               </button>
               <motion.div layoutId={`media-${layoutId}`} className="codru-expandable-card__expanded-media">
                 {src ? <img src={src} alt="" /> : <span>{plainTitle?.charAt(0)}</span>}
+                <div className="codru-expandable-card__expanded-heading">
+                  {description ? (
+                    <motion.p layoutId={`description-${layoutId}`} className="codru-expandable-card__expanded-description">
+                      {description}
+                    </motion.p>
+                  ) : null}
+                  <motion.h3 layoutId={`title-${layoutId}`} id={titleId}>
+                    <TitleText value={title} />
+                  </motion.h3>
+                </div>
               </motion.div>
               <div className="codru-expandable-card__expanded-content">
-                {description ? (
-                  <motion.p layoutId={`description-${layoutId}`} className="codru-expandable-card__expanded-description">
-                    {description}
-                  </motion.p>
-                ) : null}
-                <motion.h3 layoutId={`title-${layoutId}`} id={titleId}>
-                  <TitleText value={title} />
-                </motion.h3>
                 <motion.div
                   className="codru-expandable-card__body"
                   initial={{ opacity: 0, y: 16 }}

@@ -7,31 +7,11 @@ const compact = (items) => items.filter(Boolean);
 const socialLabels = {
   facebook: 'Facebook',
   youtube: 'YouTube',
+  tiktok: 'TikTok',
   twitter: 'Twitter',
   instagram: 'Instagram',
   spotify: 'Spotify',
 };
-
-const formatNumber = (value) => {
-  if (typeof value !== 'number') {
-    return '';
-  }
-
-  return new Intl.NumberFormat('en-US').format(value);
-};
-
-function ArtistMeta({ label, value }) {
-  if (!value) {
-    return null;
-  }
-
-  return (
-    <p className="codru-artist-expandable-cards__meta-item">
-      <span>{label}</span>
-      <strong>{value}</strong>
-    </p>
-  );
-}
 
 function ArtistSocialLinks({ socials = {} }) {
   const links = Object.entries(socialLabels)
@@ -77,8 +57,6 @@ export function ArtistExpandableCards({
       {artists.map((artist, index) => {
         const performanceDay = artist.day || artist.dayLabel || artist.schedule || 'Day TBA';
         const description = compact([performanceDay, artist.stage]).join(' | ');
-        const genres = Array.isArray(artist.genres) ? artist.genres.join(', ') : '';
-        const spotifyLinkText = artist.spotifyUrl ? 'Open on Spotify' : 'Open artist page';
 
         return (
           <ExpandableCard
@@ -89,14 +67,6 @@ export function ArtistExpandableCards({
             className="codru-artist-expandable-cards__card"
             classNameExpanded="codru-artist-expandable-cards__expanded"
           >
-            <div className="codru-artist-expandable-cards__meta">
-              <ArtistMeta label="Day" value={performanceDay} />
-              <ArtistMeta label="Stage" value={artist.stage} />
-              <ArtistMeta label="Schedule" value={artist.schedule} />
-              <ArtistMeta label="Genres" value={genres} />
-              <ArtistMeta label="Spotify followers" value={formatNumber(artist.followers)} />
-              <ArtistMeta label="Spotify popularity" value={artist.popularity ? `${artist.popularity}/100` : ''} />
-            </div>
             <p className="codru-artist-expandable-cards__details">
               {artist.details || defaultDetails}
             </p>
@@ -109,11 +79,6 @@ export function ArtistExpandableCards({
                 loading="lazy"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               />
-            ) : null}
-            {artist.link ? (
-              <a className="codru-artist-expandable-cards__link" href={artist.link} target="_blank" rel="noreferrer">
-                {spotifyLinkText}
-              </a>
             ) : null}
           </ExpandableCard>
         );

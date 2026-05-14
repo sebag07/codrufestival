@@ -19,6 +19,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
+        banner: 'var process = window.process || { env: { NODE_ENV: "production" } }; window.process = process;',
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') {
             return 'react-islands.css';
