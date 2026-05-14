@@ -1,12 +1,14 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArtistExpandableCards } from './components/ArtistExpandableCards.jsx';
+import { BrandCultureCards } from './components/BrandCultureCards.jsx';
 import { CountdownBadge } from './components/CountdownBadge.jsx';
 import { NewsletterSignupTeaser } from './components/NewsletterSignupTeaser.jsx';
 import './styles.css';
 
 const registry = {
   ArtistExpandableCards,
+  BrandCultureCards,
   CountdownBadge,
   NewsletterSignupTeaser,
 };

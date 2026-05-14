@@ -388,6 +388,105 @@ body.codru-expandable-card-open {
   text-decoration: none;
 }
 
+.codru-brand-culture-cards,
+.codru-brand-culture-cards * {
+  box-sizing: border-box;
+}
+
+.codru-brand-culture-cards {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.codru-brand-culture-cards__empty {
+  color: #fff;
+  text-align: center;
+}
+
+.codru-brand-culture-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(238, 245, 255, 0.94));
+  border: 2px solid rgba(103, 232, 22, 0.24);
+  border-radius: 28px;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.2);
+  color: var(--main-color, #071466);
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.codru-brand-culture-card::before {
+  background: var(--button-color, #67e816);
+  content: '';
+  height: 6px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.codru-brand-culture-card__media {
+  align-items: center;
+  background: radial-gradient(circle at center, rgba(103, 232, 22, 0.22), rgba(7, 20, 102, 0.08));
+  display: flex;
+  justify-content: center;
+  min-height: 180px;
+  padding: 34px 34px 18px;
+}
+
+.codru-brand-culture-card__media img {
+  height: auto;
+  max-height: 128px;
+  max-width: 190px;
+  object-fit: contain;
+  width: auto;
+}
+
+.codru-brand-culture-card__content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  padding: 28px;
+  text-align: center;
+}
+
+.codru-brand-culture-card__keywords {
+  color: #076708;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+}
+
+.codru-brand-culture-card h3 {
+  color: var(--main-color, #071466);
+  font-size: clamp(26px, 3vw, 36px);
+  font-style: italic;
+  font-weight: 900;
+  line-height: 0.95;
+  margin: 0 0 18px;
+}
+
+.codru-brand-culture-card__description {
+  color: rgba(7, 20, 102, 0.82);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.6;
+  margin-top: auto;
+}
+
+.codru-brand-culture-card__description > :first-child {
+  margin-top: 0;
+}
+
+.codru-brand-culture-card__description > :last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 1199px) {
   .codru-artist-expandable-cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -396,6 +495,10 @@ body.codru-expandable-card-open {
 
 @media (max-width: 991px) {
   .codru-artist-expandable-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .codru-brand-culture-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -412,6 +515,19 @@ body.codru-expandable-card-open {
 @media (max-width: 575px) {
   .codru-artist-expandable-cards {
     grid-template-columns: 1fr;
+  }
+
+  .codru-brand-culture-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .codru-brand-culture-card__media {
+    min-height: 150px;
+    padding: 30px 24px 12px;
+  }
+
+  .codru-brand-culture-card__content {
+    padding: 24px;
   }
 
   .codru-expandable-card__overlay {

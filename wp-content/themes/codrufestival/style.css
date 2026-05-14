@@ -1435,7 +1435,7 @@ a:hover {
 
 footer {
     background-color: var(--secondary-color);
-    background-image: url("images/bgfooter.png");
+    /* background-image: url("images/bgfooter.png"); */
     background-size: cover;
     padding-bottom: 50px;
     position: relative;

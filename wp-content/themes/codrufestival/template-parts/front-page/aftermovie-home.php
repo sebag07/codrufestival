@@ -385,33 +385,35 @@ $post_id = get_the_ID(); // Get current post ID
 <section id="brandCultureAnchor">
     <div class="container-fluid sectionPadding">
         <div class="container">
-            <h2 class="sectionTitle"><?php echo get_field('values_section_title', 'options'); ?></h2>
-            <div class="row">
-                <?php
-                $options = get_field("brand_culture", "options");
-                foreach ($options as $option):
-                    $white = $option['black_text'] == '1' ? 'text-black' : 'text-white';
-                ?>
-                    <a class="col-xl-4 col-lg-4 col-md-6 col-sm-6 brandCultureContainer"
-                        data-fslightbox="custom-text"
-                        data-class="d-block" href="#<?php echo $option['title']; ?>" class="col right-col">
-                        <div class=" <?php echo $white; ?>">
-                            <img class="brandCultureImage" src="<?php echo $option['image']; ?>">
-                            <h4 class="brandCultureTitle"><?php echo $option['title']; ?></h4>
-                            <h5 class="brandCultureValues"><?php echo $option['keywords']; ?></h5>
-                        </div>
-                    </a>
-                    <div id="<?php echo $option['title']; ?>" style="display: none;">
-                        <div class="lightboxBrandCultureBox">
-                            <h4 class="csh">
-                                <?php echo $option['title']; ?>
-                            </h4>
-                            <h5 class="brandCultureValues"><?php echo $option['keywords']; ?></h5>
-                            <p><?php echo $option['description']; ?></p>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <h2 class="sectionTitle pb-10"><?php echo get_multilingual_html('Valori', 'Values', 'ro'); ?></h2>
+            <?php
+            $options = get_field("brand_culture", "options");
+            $brand_culture_values = [];
+
+            if (is_array($options)) {
+                foreach ($options as $option) {
+                    $title = $option['title'] ?? '';
+
+                    $brand_culture_values[] = [
+                        'id' => sanitize_title($title),
+                        'title' => wp_strip_all_tags($title),
+                        'keywords' => wp_strip_all_tags($option['keywords'] ?? ''),
+                        'description' => wp_kses_post($option['description'] ?? ''),
+                        'image' => esc_url_raw($option['image'] ?? ''),
+                        'useDarkText' => !empty($option['black_text']) && $option['black_text'] === '1',
+                    ];
+                }
+            }
+
+            if (function_exists('codrufestival_react_island')) {
+                codrufestival_react_island('BrandCultureCards', [
+                    'values' => $brand_culture_values,
+                    'emptyText' => get_multilingual_text('Valorile vor fi adăugate în curând.', 'Values will be added soon.', 'ro'),
+                ], [
+                    'class' => 'codru-brand-culture-cards__island',
+                ]);
+            }
+            ?>
         </div>
     </div>
 </section>
