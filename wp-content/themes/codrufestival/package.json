@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "vite build",
-    "dev": "vite build --watch"
+    "dev": "vite build --watch",
+    "artists:spotify": "node scripts/fetch-spotify-artists.mjs"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.7.0",

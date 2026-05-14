@@ -254,5 +254,6 @@
     <script src="/wp-content/themes/codrufestival/js/schedule.js"></script>
 
 </footer>
+<?php wp_footer(); ?>
 </body>
 </html>

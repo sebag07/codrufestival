@@ -47,43 +47,103 @@ $artist_levels = [
     'level5' => ['label' => 'Level 5',         'class' => 'artistsLevel5'],
     'level6' => ['label' => 'Level 6',         'class' => 'artistsLevel6'],
 ];
-// Query all artists
-$args = [
-    'post_type' => 'artist',
-    'posts_per_page' => -1,
-    'orderby' => 'date',
-    'order' => 'ASC',
-    'suppress_filters' => false,
-];
-$artists = get_posts($args);
+$artists_json_path = get_stylesheet_directory() . '/data/artists.json';
+$artists = [];
+
+if (file_exists($artists_json_path)) {
+    $artists_json = file_get_contents($artists_json_path);
+    $artists_payload = json_decode($artists_json, true);
+
+    if (json_last_error() === JSON_ERROR_NONE && !empty($artists_payload['artists']) && is_array($artists_payload['artists'])) {
+        $artists = $artists_payload['artists'];
+    }
+}
+
+$render_artist_name = static function ($artist_name) {
+    echo wp_kses((string) $artist_name, [
+        'br' => [],
+        'small' => [],
+    ]);
+};
 
 $grouped_artists = [];
 foreach ($artists as $artist) {
-    $level = get_field('artist_level', $artist->ID); // Returns array with 'value' and 'label'
-    if (!$level || empty($level['value'])) continue; // Skip if no level
-    $level_key = $level['value'];
+    if (empty($artist['name'])) {
+        continue;
+    }
+
+    $level_key = $artist['level'] ?? 'level3';
+    if (!isset($artist_levels[$level_key])) {
+        $level_key = 'level3';
+    }
+
     if (!isset($grouped_artists[$level_key])) {
         $grouped_artists[$level_key] = [];
     }
     $grouped_artists[$level_key][] = $artist;
 }
 
+$artist_cards = [];
+$has_artist_card_media = false;
+foreach ($artists as $artist) {
+    if (empty($artist['name'])) {
+        continue;
+    }
+
+    $level_key = $artist['level'] ?? 'level3';
+    $spotify_id = $artist['spotify_id'] ?? '';
+    $spotify_url = !empty($artist['spotify_url']) ? $artist['spotify_url'] : ($spotify_id ? "https://open.spotify.com/artist/{$spotify_id}" : '');
+    $spotify_embed_url = !empty($artist['spotify_embed_url']) ? $artist['spotify_embed_url'] : ($spotify_id ? "https://open.spotify.com/embed/artist/{$spotify_id}?utm_source=generator" : '');
+    $genres = isset($artist['genres']) && is_array($artist['genres']) ? $artist['genres'] : [];
+    $socials = isset($artist['socials']) && is_array($artist['socials']) ? $artist['socials'] : [];
+    if ($spotify_url && empty($socials['spotify'])) {
+        $socials['spotify'] = $spotify_url;
+    }
+
+    $has_artist_card_media = $has_artist_card_media || !empty($artist['image']) || !empty($spotify_embed_url);
+    $artist_cards[] = [
+        'id' => $artist['id'] ?? sanitize_title($artist['name']),
+        'title' => $artist['name'],
+        'image' => $artist['image'] ?? '',
+        'level' => $artist_levels[$level_key]['label'] ?? '',
+        'day' => $artist['day'] ?? $artist['day_label'] ?? 'Day TBA',
+        'stage' => $artist['stage'] ?? '',
+        'schedule' => $artist['schedule'] ?? '',
+        'details' => $artist['description'] ?? $artist['details'] ?? (!empty($genres) ? implode(', ', $genres) : ''),
+        'link' => $spotify_url,
+        'spotifyUrl' => $spotify_url,
+        'spotifyEmbedUrl' => $spotify_embed_url,
+        'socials' => $socials,
+        'genres' => $genres,
+        'followers' => $artist['followers'] ?? null,
+        'popularity' => $artist['popularity'] ?? null,
+    ];
+}
+
 ?>
 
-<!--
+
 <?php if ($display_lineup_section) : ?>
     <section id="lineup">
-        <div class="container sectionPadding">
+        <div class="container sectionPadding text-center">
             <?php foreach ($artist_levels as $level_key => $level_info): ?>
                 <?php if (!empty($grouped_artists[$level_key])): ?>
                     <div class="<?php echo esc_attr($level_info['class']); ?> pt-3 pb-3">
                         <?php
                         $lastKey = array_key_last($grouped_artists[$level_key]);
                         foreach ($grouped_artists[$level_key] as $key => $artist):
+                            $artist_name = $artist['name'] ?? '';
+                            $artist_url = !empty($artist['spotify_url']) ? $artist['spotify_url'] : (!empty($artist['spotify_id']) ? "https://open.spotify.com/artist/{$artist['spotify_id']}" : '');
                         ?>
                             <div class='artists-name'>
                                 <h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>
-                                    <?php echo esc_html(get_the_title($artist->ID)); ?>
+                                    <?php if ($artist_url): ?>
+                                        <a class="text-inherit" href="<?php echo esc_url($artist_url); ?>" target="_blank" rel="noopener">
+                                            <?php $render_artist_name($artist_name); ?>
+                                        </a>
+                                    <?php else: ?>
+                                        <?php $render_artist_name($artist_name); ?>
+                                    <?php endif; ?>
                                 </h4>
                             </div>
                             <?php if ($key !== $lastKey): ?>
@@ -102,6 +162,7 @@ foreach ($artists as $artist) {
                 $button_link = '/en/artists'; // English artists page
             }
             ?>
+            <?php /* ?>
             <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">
                 <a class="codru-general-button"
                     href="<?php echo esc_url($button_link); ?>"
@@ -109,68 +170,24 @@ foreach ($artists as $artist) {
                     <?php echo esc_html($button_text); ?>
                 </a>
             </div>
+            <?php */ ?>
         </div>
     </section>
 <?php endif; ?>
--->
 
-<?php
-$advent_start_year = current_time('Y');
-$advent_start_date = new DateTime("{$advent_start_year}-12-11");
-$advent_days_total = 12;
-$advent_today = new DateTime(current_time('Y-m-d'));
-$advent_artists = get_field('advent_calendar_artists', 'options') ?: [];
-?>
 
 <section id="codru-advent-calendar" class="sectionPadding container">
-    <h2 class="sectionTitle"><?php echo get_multilingual_text('Artiști', 'Artists', 'ro'); ?></h2>
-    <div class="advent-grid grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        <?php for ($i = 0; $i < $advent_days_total; $i++):
-            $current_date = (clone $advent_start_date)->modify("+{$i} day");
-            $is_unlocked = true;
-            $artist = $advent_artists[$i] ?? null;
-            $artist_name = $artist['artist_name'] ?? $artist['name'] ?? '';
-            $artist_link = $artist['artist_link'] ?? $artist['link'] ?? '';
-            $day_label = $current_date->format('j'); // 11..22
-            $card_image_url = '';
-            $extensions = ['png', 'jpg', 'jpeg', 'webp'];
-            foreach ($extensions as $ext) {
-                $fs_path = get_stylesheet_directory() . "/images/advent-calendar/{$day_label}.{$ext}";
-                if (file_exists($fs_path)) {
-                    $card_image_url = get_stylesheet_directory_uri() . "/images/advent-calendar/{$day_label}.{$ext}";
-                    break;
-                }
-            }
-            $has_attached_image = $is_unlocked && !empty($card_image_url);
-            $card_style = $has_attached_image ? 'style="background-image: url(\'' . esc_url($card_image_url) . '\'); background-size: cover; background-position: center;"' : '';
-            $base_card_classes = 'advent-card relative flex aspect-square min-h-[150px] flex-col justify-center gap-2 rounded-xl bg-white/10 p-5 text-center transition-[transform,box-shadow,opacity] duration-200 ease-in-out';
-            $unlocked_card_classes = 'is-unlocked -translate-y-0.5 shadow-[0_8px_24px_rgba(0,0,0,0.15)]';
-            $locked_card_classes = "is-locked relative overflow-hidden border-white/20 bg-[#1b4f8f] text-white before:pointer-events-none before:absolute before:inset-0 before:bg-[repeating-linear-gradient(90deg,transparent_0,transparent_12px,rgba(255,255,255,0.2)_12px,rgba(255,255,255,0.2)_13px)] before:opacity-70 before:content-[''] after:pointer-events-none after:absolute after:inset-0 after:left-1/2 after:-translate-x-px after:border-l-2 after:border-white/35 after:content-['']";
-            $card_classes = $base_card_classes . ' ' . ($is_unlocked ? $unlocked_card_classes : $locked_card_classes);
+    <?php if (!empty($artist_cards) && function_exists('codrufestival_react_island')): ?>
+        <?php
+        codrufestival_react_island('ArtistExpandableCards', [
+            'artists' => $artist_cards,
+            'eyebrow' => 'CODRU Festival',
+            'emptyText' => 'Artists will be announced soon.',
+        ], [
+            'class' => 'codru-advent-calendar__artist-cards',
+        ]);
         ?>
-        <div class="<?php echo esc_attr($card_classes); ?>" <?php echo $card_style; ?>>
-            <?php if (!$has_attached_image): ?>
-                <div class="advent-accent pointer-events-none absolute left-2.5 top-[25px] z-[2] text-5xl drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)]" aria-hidden="true">🎄</div>
-                <div class="advent-day-number absolute bottom-3 right-3.5 m-0 text-[32px] font-bold tracking-[1px] <?php echo $is_unlocked ? '' : 'text-[#00e25b]'; ?>"><?php echo esc_html($current_date->format('j')); ?></div>
-                <?php if ($is_unlocked && $artist_name): ?>
-                    <div class="advent-artist text-base font-semibold text-inherit">
-                        <?php if ($artist_link): ?>
-                            <a class="text-inherit" href="<?php echo esc_url($artist_link); ?>" target="_blank" rel="noopener">
-                                <?php echo esc_html($artist_name); ?>
-                            </a>
-                        <?php else: ?>
-                            <span class="text-inherit"><?php echo esc_html($artist_name); ?></span>
-                        <?php endif; ?>
-                    </div>
-                <?php else: ?>
-                    <div class="advent-artist advent-placeholder text-sm opacity-70">
-                        <?php echo $is_unlocked ? 'Artist coming soon' : 'Locked'; ?>
-                    </div>
-                <?php endif; ?>
-            <?php endif; ?>
-        </div>
-        <?php endfor; ?>
-    </div>
+    <?php endif; ?>
 </section>
 
 <?php if (have_rows('ticket_cards_repeater', 'options')): ?>

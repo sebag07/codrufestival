@@ -1,0 +1,461 @@
+{
+  "updated_at": "2026-05-14T13:35:29.242Z",
+  "artists": [
+    {
+      "id": "gipsy-kings",
+      "name": "Gipsy Kings <br> <small>FEATURIN TONINO BALIARDO</small>",
+      "level": "level1",
+      "spotify_id": "3jc496ljiyrS3ECrD7QiqL",
+      "spotify_url": "https://open.spotify.com/artist/3jc496ljiyrS3ECrD7QiqL",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/3jc496ljiyrS3ECrD7QiqL?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb0021ec9649c85befdf9cc4a9",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/3jc496ljiyrS3ECrD7QiqL"
+      },
+      "spotify_name": "Gipsy Kings",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb0021ec9649c85befdf9cc4a9",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051740021ec9649c85befdf9cc4a9",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1780021ec9649c85befdf9cc4a9",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "puya",
+      "name": "Puya",
+      "level": "level2",
+      "spotify_id": "0Dn3AfYwq9cWRhDqtfelNE",
+      "spotify_url": "https://open.spotify.com/artist/0Dn3AfYwq9cWRhDqtfelNE",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0Dn3AfYwq9cWRhDqtfelNE?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb769faf7c8282fbf5aceacfac",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/0Dn3AfYwq9cWRhDqtfelNE"
+      },
+      "spotify_name": "Puya",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb769faf7c8282fbf5aceacfac",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174769faf7c8282fbf5aceacfac",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178769faf7c8282fbf5aceacfac",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "rava",
+      "name": "Rava",
+      "level": "level3",
+      "spotify_id": "6ocuMBOl5OFS3AViv3DnG6",
+      "spotify_url": "https://open.spotify.com/artist/6ocuMBOl5OFS3AViv3DnG6",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6ocuMBOl5OFS3AViv3DnG6?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebb3191cec6a600aa0f4846211",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/6ocuMBOl5OFS3AViv3DnG6"
+      },
+      "spotify_name": "RAVA",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb3191cec6a600aa0f4846211",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174b3191cec6a600aa0f4846211",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178b3191cec6a600aa0f4846211",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "robin-and-the-backstabbers",
+      "name": "Robin and the Backstabbers",
+      "level": "level2",
+      "spotify_id": "7y2DXdRackYULQq4qsCxpL",
+      "spotify_url": "https://open.spotify.com/artist/7y2DXdRackYULQq4qsCxpL",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/7y2DXdRackYULQq4qsCxpL?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb1e2b93bfe4d4eadcc914e159",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/7y2DXdRackYULQq4qsCxpL"
+      },
+      "spotify_name": "Robin and the Backstabbers",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb1e2b93bfe4d4eadcc914e159",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051741e2b93bfe4d4eadcc914e159",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1781e2b93bfe4d4eadcc914e159",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "alternosfera",
+      "name": "Alternosfera",
+      "level": "level2",
+      "spotify_id": "2Bfpg6VC7SNEQKez2uXyuP",
+      "spotify_url": "https://open.spotify.com/artist/2Bfpg6VC7SNEQKez2uXyuP",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/2Bfpg6VC7SNEQKez2uXyuP?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebeec0da56a7065adf5eaacc86",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/2Bfpg6VC7SNEQKez2uXyuP"
+      },
+      "spotify_name": "Alternosfera",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebeec0da56a7065adf5eaacc86",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174eec0da56a7065adf5eaacc86",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178eec0da56a7065adf5eaacc86",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "albert-nbn",
+      "name": "Albert NBN",
+      "level": "level3",
+      "spotify_id": "33CSqdyro89aOFiZb5fU5U",
+      "spotify_url": "https://open.spotify.com/artist/33CSqdyro89aOFiZb5fU5U",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/33CSqdyro89aOFiZb5fU5U?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb0095ebe227edf64b16b27768",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/33CSqdyro89aOFiZb5fU5U"
+      },
+      "spotify_name": "AlbertNbn",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb0095ebe227edf64b16b27768",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051740095ebe227edf64b16b27768",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1780095ebe227edf64b16b27768",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "mgk",
+      "name": "MGK",
+      "level": "level3",
+      "spotify_id": "6yTJ8tQyoUxgf6aqbpsXhQ",
+      "spotify_url": "https://open.spotify.com/artist/6yTJ8tQyoUxgf6aqbpsXhQ",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6yTJ8tQyoUxgf6aqbpsXhQ?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb22c78cbc4acdbf7809956066",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/6yTJ8tQyoUxgf6aqbpsXhQ"
+      },
+      "spotify_name": "Mgk666",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb22c78cbc4acdbf7809956066",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000517422c78cbc4acdbf7809956066",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f17822c78cbc4acdbf7809956066",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "idk",
+      "name": "IDK",
+      "level": "level3",
+      "spotify_id": "6nyKhzPeKV9pzpYN0malXP",
+      "spotify_url": "https://open.spotify.com/artist/6nyKhzPeKV9pzpYN0malXP",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6nyKhzPeKV9pzpYN0malXP?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebc91df9205a6c7a74c5a3a9e6",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/6nyKhzPeKV9pzpYN0malXP"
+      },
+      "spotify_name": "IDK",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebc91df9205a6c7a74c5a3a9e6",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174c91df9205a6c7a74c5a3a9e6",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178c91df9205a6c7a74c5a3a9e6",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "petre-stefan",
+      "name": "Petre Stefan",
+      "level": "level3",
+      "spotify_id": "0yjc2FN5zju7xyuJsTfGkh",
+      "spotify_url": "https://open.spotify.com/artist/0yjc2FN5zju7xyuJsTfGkh",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0yjc2FN5zju7xyuJsTfGkh?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eba6e075b7b5c24b9a85b44b14",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/0yjc2FN5zju7xyuJsTfGkh"
+      },
+      "spotify_name": "Petre Stefan",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eba6e075b7b5c24b9a85b44b14",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174a6e075b7b5c24b9a85b44b14",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178a6e075b7b5c24b9a85b44b14",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "e-an-na",
+      "name": "E-AN-NA",
+      "level": "level2",
+      "spotify_id": "2hhLQDmEJqObRlCHWbyeQF",
+      "spotify_url": "https://open.spotify.com/artist/2hhLQDmEJqObRlCHWbyeQF",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/2hhLQDmEJqObRlCHWbyeQF?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb6538438fe775cc989d678419",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/2hhLQDmEJqObRlCHWbyeQF"
+      },
+      "spotify_name": "E-An-Na",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb6538438fe775cc989d678419",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051746538438fe775cc989d678419",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1786538438fe775cc989d678419",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "noua-unspe",
+      "name": "NOUA UNSPE",
+      "level": "level3",
+      "spotify_id": "1fYKCWegShlSGe4yATnpdp",
+      "spotify_url": "https://open.spotify.com/artist/1fYKCWegShlSGe4yATnpdp",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/1fYKCWegShlSGe4yATnpdp?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb2bce594ef504c8e545cec63c",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/1fYKCWegShlSGe4yATnpdp"
+      },
+      "spotify_name": "NOUA UNSPE",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb2bce594ef504c8e545cec63c",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051742bce594ef504c8e545cec63c",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1782bce594ef504c8e545cec63c",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "surorile-osoianu-si-lupii-lui-calancea",
+      "name": "Lupii Lui Calancea & Surorile Osoianu",
+      "level": "level2",
+      "spotify_id": "24uAdKaf9xT9Y2Bp8UEN6L",
+      "spotify_url": "https://open.spotify.com/artist/24uAdKaf9xT9Y2Bp8UEN6L",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/24uAdKaf9xT9Y2Bp8UEN6L?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b273576c73b9625a6a78e4dde3e5",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/24uAdKaf9xT9Y2Bp8UEN6L"
+      },
+      "spotify_name": "Surorile Osoianu",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b273576c73b9625a6a78e4dde3e5",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e02576c73b9625a6a78e4dde3e5",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00004851576c73b9625a6a78e4dde3e5",
+          "height": 64,
+          "width": 64
+        }
+      ]
+    }
+  ]
+}

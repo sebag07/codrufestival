@@ -1,4 +1,30 @@
-import React, { useEffect, useId, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useId, useRef, useState } from 'react';
+
+const stripNameMarkup = (value) => String(value ?? '').replace(/<br\s*\/?>/gi, ' ').replace(/<\/?small>/gi, '');
+
+function TitleText({ value }) {
+  const renderBreaks = (text, keyPrefix) =>
+    text
+    .split(/<br\s*\/?>/gi)
+    .map((part, index, parts) => (
+      <Fragment key={`${keyPrefix}-${index}`}>
+        {part}
+        {index < parts.length - 1 ? <br /> : null}
+      </Fragment>
+    ));
+
+  return String(value ?? '')
+    .split(/(<small>[\s\S]*?<\/small>)/gi)
+    .map((part, index) => {
+      const smallMatch = part.match(/^<small>([\s\S]*?)<\/small>$/i);
+
+      if (smallMatch) {
+        return <small key={`small-${index}`}>{renderBreaks(smallMatch[1], `small-${index}`)}</small>;
+      }
+
+      return <Fragment key={`text-${index}`}>{renderBreaks(part, `text-${index}`)}</Fragment>;
+    });
+}
 
 export function ExpandableCard({
   title,
@@ -11,6 +37,7 @@ export function ExpandableCard({
   const [isExpanded, setIsExpanded] = useState(false);
   const closeButtonRef = useRef(null);
   const titleId = useId();
+  const plainTitle = stripNameMarkup(title);
 
   useEffect(() => {
     if (!isExpanded) {
@@ -45,15 +72,16 @@ export function ExpandableCard({
           {src ? (
             <img src={src} alt="" loading="lazy" />
           ) : (
-            <span className="codru-expandable-card__media-fallback">{title?.charAt(0)}</span>
+            <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
           )}
         </span>
         <span className="codru-expandable-card__summary">
           {description ? (
             <span className="codru-expandable-card__description">{description}</span>
           ) : null}
-          <span className="codru-expandable-card__title">{title}</span>
-          <span className="codru-expandable-card__hint">See more</span>
+          <span className="codru-expandable-card__title">
+            <TitleText value={title} />
+          </span>
         </span>
       </button>
 
@@ -81,13 +109,15 @@ export function ExpandableCard({
               &times;
             </button>
             <div className="codru-expandable-card__expanded-media">
-              {src ? <img src={src} alt="" /> : <span>{title?.charAt(0)}</span>}
+              {src ? <img src={src} alt="" /> : <span>{plainTitle?.charAt(0)}</span>}
             </div>
             <div className="codru-expandable-card__expanded-content">
               {description ? (
                 <p className="codru-expandable-card__expanded-description">{description}</p>
               ) : null}
-              <h3 id={titleId}>{title}</h3>
+              <h3 id={titleId}>
+                <TitleText value={title} />
+              </h3>
               <div className="codru-expandable-card__body">{children}</div>
             </div>
           </div>
