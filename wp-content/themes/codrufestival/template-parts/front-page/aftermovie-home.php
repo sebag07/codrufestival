@@ -178,6 +178,7 @@ foreach ($artists as $artist) {
             'artists' => $artist_cards,
             'eyebrow' => 'CODRU Festival',
             'emptyText' => 'Artists will be announced soon.',
+            'showPerformanceMeta' => false,
         ], [
             'class' => 'codru-advent-calendar__artist-cards',
         ]);

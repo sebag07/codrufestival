@@ -315,6 +315,7 @@
                         codrufestival_react_island('ArtistExpandableCards', [
                             'artists' => $codru_homepage_artist_cards,
                             'eyebrow' => 'CODRU Festival',
+                            'showPerformanceMeta' => false,
                         ], [
                             'class' => 'codru-homepage-artist-cards__island',
                         ]);

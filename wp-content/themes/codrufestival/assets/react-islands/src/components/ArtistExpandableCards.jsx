@@ -47,6 +47,7 @@ export function ArtistExpandableCards({
   artists = [],
   eyebrow = 'Lineup',
   emptyText = 'Artists will be announced soon.',
+  showPerformanceMeta = true,
 }) {
   if (!artists.length) {
     return <p className="codru-island codru-artist-expandable-cards__empty">{emptyText}</p>;
@@ -55,15 +56,15 @@ export function ArtistExpandableCards({
   return (
     <div className="codru-island codru-artist-expandable-cards">
       {artists.map((artist, index) => {
-        const performanceDay = artist.day || artist.dayLabel || artist.schedule || 'Day TBA';
-        const description = compact([performanceDay, artist.stage]).join(' | ');
+        const performanceMeta = compact([artist.day || artist.dayLabel || artist.schedule, artist.stage]);
+        const description = showPerformanceMeta ? performanceMeta.join(' | ') : '';
 
         return (
           <ExpandableCard
             key={artist.id || `${artist.title}-${index}`}
             title={artist.title}
             src={artist.image}
-            description={description || eyebrow}
+            description={description}
             className="codru-artist-expandable-cards__card"
             classNameExpanded="codru-artist-expandable-cards__expanded"
           >
