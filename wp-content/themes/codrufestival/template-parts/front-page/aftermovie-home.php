@@ -32,37 +32,6 @@ $countdown_end_date = get_field('countdown_end_date', 'options');
             <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
         </a>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const countDownDate = new Date("<?php echo date('Y-m-d\TH:i:s', strtotime($countdown_end_date)); ?>").getTime();
-
-            const countdownElement = document.getElementById("countdown");
-            const countdownContainer = document.querySelector(".countdown-container");
-
-            const x = setInterval(function() {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                if (distance < 0) {
-                    clearInterval(x);
-                    countdownContainer.style.display = "none";
-                } else {
-                    countdownContainer.style.display = "flex";
-                    countdownElement.innerHTML = `<span class="countdown-time-text">${days} <?php echo $countdownDaysText; ?></span> ` +
-                        `<span class="countdown-time-text">${hours} <?php echo $countdownHoursText; ?></span> ` +
-                        `<span class="countdown-time-text">${minutes} <?php echo $countdownMinutesText; ?></span> ` +
-                        `<span class="countdown-time-text">${seconds} <?php echo $countdownSecondsText; ?></span>`;
-                }
-            }, 1000);
-        });
-    </script>
-    <!-- <img class="heroLeftLeaves" src="/wp-content/themes/codrufestival/images/b-left.png" alt="">
-    <img class="heroRightLeaves" src="/wp-content/themes/codrufestival/images/b-right.png" alt=""> -->
     <div class="absolute left-0 top-0 z-[1] h-full w-full">
         <img class="h-full w-full object-cover object-center" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-background.jpg" alt="Hero Banner">
     </div>
@@ -154,7 +123,7 @@ $advent_artists = get_field('advent_calendar_artists', 'options') ?: [];
 ?>
 
 <section id="codru-advent-calendar" class="sectionPadding container">
-    <h2 class="sectionTitle">Artists</h2>
+    <h2 class="sectionTitle"><?php echo get_multilingual_text('Artiști', 'Artists', 'ro'); ?></h2>
     <div class="advent-grid grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         <?php for ($i = 0; $i < $advent_days_total; $i++):
             $current_date = (clone $advent_start_date)->modify("+{$i} day");
