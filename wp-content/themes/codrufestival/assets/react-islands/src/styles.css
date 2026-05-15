@@ -476,7 +476,7 @@ body.codru-expandable-card-open {
   font-size: 16px;
   font-weight: 600;
   line-height: 1.6;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .codru-brand-culture-card__description > :first-child {
