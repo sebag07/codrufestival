@@ -1,18 +1,46 @@
 <footer>
 
+    <style> 
+        .contactSectionLeftSide .wpforms-field-container,
+        .contactSectionLeftSide .wpforms-submit-container {
+            max-width: 540px;
+        }
+        .contactFormSection .wpforms-field {
+            padding: 0;
+        }
+        .contactFormSection .wpforms-field-container {
+            padding-bottom: 0;
+        }
+
+
+    </style>
+
     <div class="container-fluid">
-<!--        <img class="footerLeftImg" src="/wp-content/themes/codrufestival/images/b-right.png" alt="">-->
-<!--        <img class="footerRightImg" src="/wp-content/themes/codrufestival/images/b-left.png" alt="">-->
+        <!--        <img class="footerLeftImg" src="/wp-content/themes/codrufestival/images/b-right.png" alt="">-->
+        <!--        <img class="footerRightImg" src="/wp-content/themes/codrufestival/images/b-left.png" alt="">-->
 
         <div id="contact" class="container-fluid contactFormSection p-0">
-            <div class="contactSectionLeftSide container">
+            <div class="contactSectionLeftSide container p-0">
                 <?php
                 if (is_page_template('codrufestival-partners-template.php')) {
-                    echo "<p class='pt-5 mt-5 partnersContactText'>Dacă dorești să afli mai multe detalii și să discutăm despre colaborarea noastră, te rugăm să completezi formularul de mai jos și te vom contacta noi.</p>";
+                ?>
+                    <p class="pt-5 mt-5 partnersContactText">
+                        <?php echo esc_html(get_multilingual_text(
+                            'Dacă dorești să afli mai multe detalii și să discutăm despre colaborarea noastră, te rugăm să completezi formularul de mai jos și te vom contacta noi.',
+                            'If you would like to learn more details and discuss our collaboration, please complete the form below and we will contact you.'
+                        )) ?>
+                    </p>
+                <?php
                     echo do_shortcode('[wpforms id="27465" title="false"]');
                 } else {
-                    echo "<h2>" . get_field('contact_title', 'options') . "</h2>";
-                    echo "<p>" . get_field('contact_text', 'options') . "</p>";
+                    echo "<h2>" . esc_html(get_multilingual_text(
+                        'Contactează-ne',
+                        'Contact us'
+                    )) . "</h2>";
+                    echo "<p>" . esc_html(get_multilingual_text(
+                        'Ai întrebări despre festival? Scrie-ne și revenim către tine cât mai curând.',
+                        'Have questions about the festival? Write to us and we will get back to you as soon as possible.'
+                    )) . "</p>";
                     echo do_shortcode('[wpforms id="26912" title="false"]');
                 }
 
@@ -25,7 +53,6 @@
                 <!-- Begin Brevo Form -->
                 <!-- START - We recommend to place the below code in head tag of your website html  -->
                 <style>
-
                     #sib-container input:-ms-input-placeholder {
                         text-align: left;
                         color: #076708;
@@ -44,7 +71,7 @@
                     #sib-container a {
                         text-decoration: underline !important;
                         color: var(--button-color);
-                        font-weight:600;
+                        font-weight: 600;
                     }
                 </style>
                 <!--  END - We recommend to place the above code in head tag of your website html -->
@@ -59,9 +86,12 @@
                                     <path d="M256 40c118.621 0 216 96.075 216 216 0 119.291-96.61 216-216 216-119.244 0-216-96.562-216-216 0-119.203 96.602-216 216-216m0-32C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm-11.49 120h22.979c6.823 0 12.274 5.682 11.99 12.5l-7 168c-.268 6.428-5.556 11.5-11.99 11.5h-8.979c-6.433 0-11.722-5.073-11.99-11.5l-7-168c-.283-6.818 5.167-12.5 11.99-12.5zM256 340c-15.464 0-28 12.536-28 28s12.536 28 28 28 28-12.536 28-28-12.536-28-28-28z" />
                                 </svg>
                                 <span class="sib-form-message-panel__inner-text">
-             <?php echo get_field('nl_after_submit_error_text', 'options') ?>
+                                    <?php echo esc_html(get_multilingual_text(
+                                        'Nu am putut procesa abonarea. Te rugăm să verifici câmpurile și să încerci din nou.',
+                                        'We could not process your subscription. Please check the fields and try again.'
+                                    )) ?>
 
-                      </span>
+                                </span>
                             </div>
                         </div>
                         <div></div>
@@ -71,8 +101,11 @@
                                     <path d="M256 8C119.033 8 8 119.033 8 256s111.033 248 248 248 248-111.033 248-248S392.967 8 256 8zm0 464c-118.664 0-216-96.055-216-216 0-118.663 96.055-216 216-216 118.664 0 216 96.055 216 216 0 118.663-96.055 216-216 216zm141.63-274.961L217.15 376.071c-4.705 4.667-12.303 4.637-16.97-.068l-85.878-86.572c-4.667-4.705-4.637-12.303.068-16.97l8.52-8.451c4.705-4.667 12.303-4.637 16.97.068l68.976 69.533 163.441-162.13c4.705-4.667 12.303-4.637 16.97.068l8.451 8.52c4.668 4.705 4.637 12.303-.068 16.97z" />
                                 </svg>
                                 <span class="sib-form-message-panel__inner-text">
-        <?php echo get_field('nl_after_submit_success_text', 'options') ?>
-                      </span>
+                                    <?php echo esc_html(get_multilingual_text(
+                                        'Te-ai abonat cu succes la newsletterul CODRU Festival.',
+                                        'You have successfully subscribed to the CODRU Festival newsletter.'
+                                    )) ?>
+                                </span>
                             </div>
                         </div>
                         <div></div>
@@ -80,14 +113,20 @@
                             <form id="sib-form" method="POST" action="https://13c8d4bf.sibforms.com/serve/MUIFAOJI5kvwapQlT3UBC1EogCB2Yjyyrob0-A2UyWVTkswuGSo6FqKUklFqV-zM1IGPq9sJd1Toj53fVgy-rTMbPHNEq6Yr-I6zdrCi1KtRcXRWJ5mI20uHIot_EPLvvmkkILWvJtvUjy1mMfOS3u67QM35QcOEWll3S-JPq-RM6sOvSH3_oJst5qbYqlo9aaXGfUFXGcHmapqW" data-type="subscription">
                                 <div style="padding: 8px 0;">
                                     <div class="sib-form-block" style="font-size:32px; text-align:left; font-weight:700;color:#3C4858; background-color:transparent; text-align:left">
-                                        <h2><?php echo get_field('nl_title', 'options') ?></h2>
+                                        <h2><?php echo esc_html(get_multilingual_text(
+                                            'Abonează-te la newsletter',
+                                            'Subscribe to our newsletter'
+                                        )) ?></h2>
                                     </div>
 
                                 </div>
                                 <div style="padding: 8px 0;">
                                     <div class="sib-form-block" style="font-size:16px; text-align:left;color:#3C4858; background-color:transparent; text-align:left">
                                         <div class="sib-text-form-block">
-                                            <p><?php echo get_field('nl_subtitle', 'options') ?></p>
+                                            <p><?php echo esc_html(get_multilingual_text(
+                                                'Află primul noutățile despre artiști, bilete și experiențele CODRU Festival.',
+                                                'Be the first to hear news about artists, tickets, and CODRU Festival experiences.'
+                                            )) ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -95,7 +134,10 @@
                                     <div class="sib-input sib-form-block">
                                         <div class="form__entry entry_block">
                                             <div class="form__label-row ">
-                                                <label class="entry__label" style="font-weight: 700; text-align:left; font-size:16px; text-align:left; font-weight:700;color:#3c4858;" for="EMAIL" data-required="*"><?php echo get_field('nl_label', 'options') ?></label>
+                                                <label class="entry__label" style="font-weight: 700; text-align:left; font-size:16px; text-align:left; font-weight:700;color:#3c4858;" for="EMAIL" data-required="*"><?php echo esc_html(get_multilingual_text(
+                                                    'Adresa ta de email',
+                                                    'Your email address'
+                                                )) ?></label>
 
                                                 <div class="entry__field">
                                                     <input class="input " type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="EMAIL" data-required="true" required />
@@ -105,7 +147,10 @@
                                             <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left;color:red !important;border-radius:3px; border-color:#ff4949;">
                                             </label>
                                             <label class="entry__specification" style="font-size:12px; text-align:left;color:#8390A4; text-align:left">
-                                                <?php echo get_field('email_under_input_info', 'options') ?>
+                                                <?php echo esc_html(get_multilingual_text(
+                                                    'Introdu adresa de email la care vrei să primești noutățile CODRU Festival.',
+                                                    'Enter the email address where you want to receive CODRU Festival updates.'
+                                                )) ?>
                                             </label>
                                         </div>
                                     </div>
@@ -114,18 +159,25 @@
                                     <div class="sib-optin sib-form-block">
                                         <div class="form__entry entry_mcq">
                                             <div class="form__label-row ">
-                                                <div class="entry__choice" style="">
+                                                <div class="entry__choice">
                                                     <label>
                                                         <input type="checkbox" class="input_replaced" value="1" id="OPT_IN" name="OPT_IN" data-required="true" required />
                                                         <span class="checkbox checkbox_tick_positive"
-                                                              style="margin-left:"
-                                                        ></span><span style="font-size:14px; text-align:left;color:#3C4858; background-color:transparent;"><p><?php echo get_field('nl_terms', 'options') ?></p></span> </label>
+                                                            style="margin-left:0;"></span><span style="font-size:14px; text-align:left;color:#3C4858; background-color:transparent;">
+                                                            <p><?php echo wp_kses_post(get_multilingual_html(
+                                                                'Sunt de acord să primesc comunicări prin email de la CODRU Festival.',
+                                                                'I agree to receive email communications from CODRU Festival.'
+                                                            )) ?></p>
+                                                        </span> </label>
                                                 </div>
                                             </div>
                                             <label class="entry__error entry__error--primary" style="font-size:16px; text-align:left;color:#661d1d; background-color:#ffeded; border-radius:3px; border-color:#ff4949;">
                                             </label>
                                             <label class="entry__specification" style="font-size:12px; text-align:left;color:#8390A4; text-align:left">
-                                                <?php echo get_field('nl_terms_info', 'options') ?>
+                                                <?php echo esc_html(get_multilingual_text(
+                                                    'Te poți dezabona oricând folosind linkul din emailurile noastre.',
+                                                    'You can unsubscribe at any time using the link in our emails.'
+                                                )) ?>
                                             </label>
                                         </div>
                                     </div>
@@ -145,7 +197,10 @@
                                             </svg>
                                         </div>
                                         <div style="font-size:14px; text-align:left;color:#687484; background-color:transparent;">
-                                            <p><?php echo get_field('nl_declaration', 'options') ?></p>
+                                            <p><?php echo wp_kses_post(get_multilingual_html(
+                                                'Folosim Brevo ca platformă de marketing. Prin trimiterea formularului, ești de acord ca datele furnizate să fie transferate către Brevo pentru procesare.',
+                                                'We use Brevo as our marketing platform. By submitting this form, you agree that the data you provided will be transferred to Brevo for processing.'
+                                            )) ?></p>
                                         </div>
                                     </div>
                                 </div>
@@ -155,7 +210,10 @@
                                             <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
                                                 <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
                                             </svg>
-                                            <?php echo get_field('nl_button_text', 'options') ?>
+                                            <?php echo esc_html(get_multilingual_text(
+                                                'Abonează-te',
+                                                'Subscribe'
+                                            )) ?>
                                         </button>
                                     </div>
                                 </div>
@@ -186,22 +244,22 @@
             </div>
             <div class="footerItems col-lg-8 col-xl-7 col-md-12 col-12">
                 <a href="mailto:office@codrufestival.ro"><span><img src="/wp-content/themes/codrufestival/images/mail.svg"
-                                                                    alt="office@codrufestival.ro">OFFICE@CODRUFESTIVAL.RO</span></a>
+                            alt="office@codrufestival.ro">OFFICE@CODRUFESTIVAL.RO</span></a>
                 <a href="https://maps.app.goo.gl/Z8uxQmHi1Hsv644V9" target="_blank"><span><img src="/wp-content/themes/codrufestival/images/map-pin.svg" alt="Parcul Central Timișoara">PĂDUREA VERDE, TIMIȘOARA</span></a>
                 <a href="mailto:press@codrufestival.ro"><span><img src="/wp-content/themes/codrufestival/images/camera.svg"
-                                                                   alt="">PRESS@CODRUFESTIVAL.RO</span></a>
+                            alt="">PRESS@CODRUFESTIVAL.RO</span></a>
                 <span class="footerSocials">
-                <a href="https://www.facebook.com/codrufestival" target="_blank"><img
+                    <a href="https://www.facebook.com/codrufestival" target="_blank"><img
                             src="/wp-content/themes/codrufestival/images/facebookcodru.svg" alt=""></a>
-                <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
+                    <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
                             src="/wp-content/themes/codrufestival/images/instagramcodru.svg" alt=""></a>
-                <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
+                    <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
                             src="/wp-content/themes/codrufestival/images/linkedincodru.svg" alt=""></a>
-                <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
+                    <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
                             src="/wp-content/themes/codrufestival/images/youtubecodru.svg" alt=""></a>
-                <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
+                    <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
                             src="/wp-content/themes/codrufestival/images/socials/spotify.svg" alt=""></a>
-            </span>
+                </span>
             </div>
             <div class="footerRightLogo col-lg-2 col-md-12 col-12 d-flex">
                 <img class="footer-logo" src="/wp-content/themes/codrufestival/images/logoteg.png" alt="">
@@ -248,12 +306,13 @@
     <script src="/wp-content/themes/codrufestival/js/fslightbox.js"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
-            integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        integrity="sha512-IsNh5E3eYy3tr/JiX2Yx4vsCujtkhwl7SLqgnwLNgf04Hrt9BT9SXlLlZlWx+OK4ndzAoALhsMNcCmkggjZB1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="/wp-content/themes/codrufestival/js/util.js"></script>
     <script src="/wp-content/themes/codrufestival/js/schedule.js"></script>
 
 </footer>
 <?php wp_footer(); ?>
 </body>
+
 </html>
