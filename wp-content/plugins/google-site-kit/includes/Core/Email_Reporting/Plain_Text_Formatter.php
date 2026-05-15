@@ -41,6 +41,116 @@ class Plain_Text_Formatter {
 	}
 
 	/**
+	 * Formats the full email report as plain text.
+	 *
+	 * @since 1.176.0
+	 *
+	 * @param array $data     Template data.
+	 * @param array $sections Sections map.
+	 * @return string Formatted plain text email report.
+	 */
+	public static function format_report( $data, $sections ) {
+		$output = self::format_header(
+			$data['site']['domain'] ?? '',
+			$data['date_range']['label'] ?? ''
+		);
+
+		foreach ( $sections as $section ) {
+			if ( empty( $section['section_parts'] ) ) {
+				continue;
+			}
+
+			$output .= self::format_section( $section );
+		}
+
+		$output .= self::format_footer(
+			$data['primary_call_to_action'] ?? array(),
+			$data['footer'] ?? array()
+		);
+
+		return $output;
+	}
+
+	/**
+	 * Formats a simple email as plain text.
+	 *
+	 * Simple emails share a common structure with customizable content.
+	 *
+	 * @since 1.173.0
+	 *
+	 * @param array $data The simple email data containing site, title, learn_more_url,
+	 *                    primary_call_to_action, body, and footer.
+	 * @return string Formatted plain text email.
+	 */
+	public static function format_simple_email( $data ) {
+		$site_domain     = $data['site']['domain'] ?? '';
+		$title           = wp_strip_all_tags( $data['title'] ?? '' );
+		$learn_more_url  = $data['learn_more_url'] ?? '';
+		$cta             = $data['primary_call_to_action'] ?? array();
+		$footer_copy     = $data['footer']['copy'] ?? '';
+		$body            = $data['body'] ?? array();
+		$unsubscribe_url = $data['footer']['unsubscribe_url'] ?? '';
+
+		$lines = array(
+			__( 'Site Kit by Google', 'google-site-kit' ),
+			'',
+			$site_domain,
+			'',
+		);
+
+		// Title.
+		if ( ! empty( $title ) ) {
+			$lines[] = $title;
+			$lines[] = '';
+		}
+
+		// Body paragraphs (convert links to text, then strip remaining HTML).
+		foreach ( (array) $body as $paragraph ) {
+			$paragraph = self::convert_links_to_text( $paragraph );
+			$lines[]   = wp_strip_all_tags( $paragraph );
+			$lines[]   = '';
+		}
+
+		// Learn more link (optional).
+		if ( ! empty( $learn_more_url ) ) {
+			$lines[] = self::format_link( __( 'Learn more', 'google-site-kit' ), $learn_more_url );
+			$lines[] = '';
+		}
+
+		$lines[] = str_repeat( '-', 50 );
+		$lines[] = '';
+
+		// Primary CTA.
+		if ( ! empty( $cta['url'] ) ) {
+			$label   = $cta['label'] ?? __( 'Get your report', 'google-site-kit' );
+			$lines[] = self::format_link( $label, $cta['url'] );
+			$lines[] = '';
+		}
+
+		$lines[] = str_repeat( '-', 50 );
+		$lines[] = '';
+
+		// Footer copy.
+		if ( ! empty( $footer_copy ) ) {
+			$lines[] = $footer_copy;
+			$lines[] = '';
+		}
+
+		// Unsubscribe link.
+		if ( ! empty( $unsubscribe_url ) ) {
+			$lines[] = self::format_link( __( 'Unsubscribe', 'google-site-kit' ), $unsubscribe_url );
+			$lines[] = '';
+		}
+
+		// Footer links (hardcoded to match HTML footer template).
+		$lines[] = self::format_link( __( 'Manage subscription', 'google-site-kit' ), $unsubscribe_url );
+		$lines[] = self::format_link( __( 'Privacy Policy', 'google-site-kit' ), 'https://policies.google.com/privacy' );
+		$lines[] = self::format_link( __( 'Help center', 'google-site-kit' ), add_query_arg( 'doc', 'get-support', 'https://sitekit.withgoogle.com/support/' ) );
+
+		return implode( "\n", $lines );
+	}
+
+	/**
 	 * Formats a section based on its template type.
 	 *
 	 * @since 1.170.0
@@ -56,8 +166,6 @@ class Plain_Text_Formatter {
 		$template = $section['section_template'] ?? '';
 
 		switch ( $template ) {
-			case 'section-conversions':
-				return self::format_conversions_section( $section );
 			case 'section-metrics':
 				return self::format_metrics_section( $section );
 			case 'section-page-metrics':
@@ -138,12 +246,39 @@ class Plain_Text_Formatter {
 	}
 
 	/**
+	 * Converts HTML anchor tags to plain text format.
+	 *
+	 * Replaces `<a href="url">text</a>` with `text (url)` so that
+	 * link destinations are preserved in plain text emails. The input
+	 * is controlled (Content_Map strings), not arbitrary user HTML.
+	 *
+	 * @since 1.175.0
+	 *
+	 * @param string $html HTML string that may contain anchor tags.
+	 * @return string String with anchors converted to text format.
+	 */
+	public static function convert_links_to_text( $html ) {
+		// We use a regex here instead of DOMDocument because DOMDocument
+		// is pretty messy to use and shifts fragility to other factors like
+		// Latin-1/UTF-8 encoding issues.
+		//
+		// WP Core uses REGEX heavily internally for clean HTML tag filtering.
+		//
+		// See: https://github.com/google/site-kit-wp/pull/12273#discussion_r2886510325.
+		return preg_replace(
+			'/<a\s+[^>]*href=["\']([^"\']*)["\'][^>]*>(.*?)<\/a>/i',
+			'$2 ($1)',
+			$html
+		);
+	}
+
+	/**
 	 * Formats the email footer with CTA and links.
 	 *
 	 * @since 1.170.0
 	 *
 	 * @param array $cta    Primary CTA configuration with 'url' and 'label'.
-	 * @param array $footer Footer configuration with 'copy', 'unsubscribe_url', and 'links'.
+	 * @param array $footer Footer configuration with 'copy' and 'unsubscribe_url'.
 	 * @return string Formatted footer text.
 	 */
 	public static function format_footer( $cta, $footer ) {
@@ -159,27 +294,24 @@ class Plain_Text_Formatter {
 			$lines[] = '';
 		}
 
-		// Footer copy with unsubscribe link.
+		// Footer copy.
 		if ( ! empty( $footer['copy'] ) ) {
-			$copy = $footer['copy'];
-			if ( ! empty( $footer['unsubscribe_url'] ) ) {
-				$copy .= ' ' . sprintf(
-					/* translators: %s: Unsubscribe URL */
-					__( 'Unsubscribe here: %s', 'google-site-kit' ),
-					$footer['unsubscribe_url']
-				);
-			}
-			$lines[] = $copy;
+			$lines[] = $footer['copy'];
 			$lines[] = '';
 		}
 
-		// Footer links.
-		if ( ! empty( $footer['links'] ) && is_array( $footer['links'] ) ) {
-			foreach ( $footer['links'] as $link ) {
-				if ( ! empty( $link['label'] ) && ! empty( $link['url'] ) ) {
-					$lines[] = self::format_link( $link['label'], $link['url'] );
-				}
-			}
+		// Unsubscribe link.
+		if ( ! empty( $footer['unsubscribe_url'] ) ) {
+			$lines[] = self::format_link( __( 'Unsubscribe', 'google-site-kit' ), $footer['unsubscribe_url'] );
+			$lines[] = '';
+		}
+
+		// Footer links (hardcoded to match HTML footer template).
+		$unsubscribe_url = $footer['unsubscribe_url'] ?? '';
+		if ( ! empty( $unsubscribe_url ) ) {
+			$lines[] = self::format_link( __( 'Manage subscription', 'google-site-kit' ), $unsubscribe_url );
+			$lines[] = self::format_link( __( 'Privacy Policy', 'google-site-kit' ), 'https://policies.google.com/privacy' );
+			$lines[] = self::format_link( __( 'Help center', 'google-site-kit' ), add_query_arg( 'doc', 'get-support', 'https://sitekit.withgoogle.com/support/' ) );
 		}
 
 		return implode( "\n", $lines );
@@ -202,91 +334,6 @@ class Plain_Text_Formatter {
 		$display_value = $prefix . round( $change, 1 ) . '%';
 
 		return '(' . $display_value . ')';
-	}
-
-	/**
-	 * Formats the conversions section.
-	 *
-	 * @since 1.170.0
-	 *
-	 * @param array $section Section configuration.
-	 * @return string Formatted section text.
-	 */
-	protected static function format_conversions_section( $section ) {
-		$output        = self::format_section_heading( $section['title'] );
-		$section_parts = $section['section_parts'];
-
-		// Total conversion events (rendered first/separately).
-		if ( ! empty( $section_parts['total_conversion_events']['data'] ) ) {
-			$data    = $section_parts['total_conversion_events']['data'];
-			$output .= self::format_metric(
-				$data['label'] ?? __( 'Total conversions', 'google-site-kit' ),
-				$data['value'] ?? '',
-				$data['change'] ?? null
-			);
-			$output .= "\n";
-
-			if ( ! empty( $data['change_context'] ) ) {
-				$output .= $data['change_context'] . "\n";
-			}
-			$output .= "\n";
-		}
-
-		// Other conversion metrics.
-		foreach ( $section_parts as $part_key => $part_config ) {
-			if ( 'total_conversion_events' === $part_key || empty( $part_config['data'] ) ) {
-				continue;
-			}
-
-			$data    = $part_config['data'];
-			$output .= self::format_conversion_metric_part( $data );
-		}
-
-		return $output . "\n";
-	}
-
-	/**
-	 * Formats a conversion metric part (e.g., purchases, products added to cart).
-	 *
-	 * @since 1.170.0
-	 *
-	 * @param array $data Conversion metric data.
-	 * @return string Formatted metric part text.
-	 */
-	protected static function format_conversion_metric_part( $data ) {
-		$lines = array();
-
-		// Metric label.
-		if ( ! empty( $data['label'] ) ) {
-			$lines[] = $data['label'];
-		}
-
-		// Event count with change.
-		if ( ! empty( $data['event_name'] ) ) {
-			$event_label = sprintf(
-				/* translators: %s: Event name (e.g., "Purchase") */
-				__( '“%s“ events', 'google-site-kit' ),
-				ucfirst( $data['event_name'] )
-			);
-			$lines[] = self::format_metric(
-				$event_label,
-				$data['value'] ?? '',
-				$data['change'] ?? null
-			);
-		}
-
-		// Top traffic channel.
-		if ( ! empty( $data['dimension'] ) && ! empty( $data['dimension_value'] ) ) {
-			$lines[] = sprintf(
-				'%s: %s',
-				__( 'Top traffic channel driving the most conversions', 'google-site-kit' ),
-				$data['dimension_value']
-			);
-		}
-
-		$lines[] = '';
-
-		return implode( "\n", $lines );
 	}
 
 	/**

@@ -313,6 +313,7 @@ class EWWW_Image {
 		update_attached_file( $this->attachment_id, $meta['file'] );
 		$this->replace_url();
 
+		$mime = '';
 		// If the new image is a JPG.
 		if ( preg_match( '/.jpg$/i', $meta['file'] ) ) {
 			// Set the mimetype to JPG.
@@ -847,16 +848,16 @@ class EWWW_Image {
 						$imagick->setImageCompressionQuality( $quality );
 						$imagick->writeImage( $newfile );
 					} catch ( Exception $imagick_error ) {
-						ewwwio_debug_message( $imagick_error->getMessage() );
+						\ewwwio_debug_message( $imagick_error->getMessage() );
 					}
 					$jpg_size = ewww_image_optimizer_filesize( $newfile );
 				}
 				if ( ! $jpg_size && \ewwwio()->gd_support() ) {
-					ewwwio_debug_message( 'converting with GD' );
+					\ewwwio_debug_message( 'converting with GD' );
 					// Retrieve the data from the PNG.
 					$input = imagecreatefrompng( $file );
 					// Retrieve the dimensions of the PNG.
-					list( $width, $height ) = wp_getimagesize( $file );
+					list( $width, $height ) = \ewwwio()->getimagesize( $file );
 					// Create a new image with those dimensions.
 					$output = imagecreatetruecolor( $width, $height );
 					if ( '' === $r ) {
@@ -1288,7 +1289,6 @@ class EWWW_Image {
 				'path'      => ewww_image_optimizer_relativize_path( $new_path ),
 				'converted' => ewww_image_optimizer_relativize_path( $path ),
 				'updates'   => 0,
-				'trace'     => '',
 			),
 			array(
 				'id' => $record['id'],
@@ -1325,7 +1325,6 @@ class EWWW_Image {
 				'converted'  => '',
 				'image_size' => 0,
 				'updates'    => 0,
-				'trace'      => '',
 				'level'      => null,
 			),
 			array(

@@ -2,9 +2,9 @@
 
 Contributors:      google
 Requires at least: 5.2
-Tested up to:      6.9
+Tested up to:      7.0
 Requires PHP:      7.4
-Stable tag:        1.171.0
+Stable tag:        1.178.0
 License:           Apache License 2.0
 License URI:       https://www.apache.org/licenses/LICENSE-2.0
 Tags:              google, search-console, analytics, adsense, pagespeed-insights
@@ -34,6 +34,9 @@ Site Kit shows key metrics and insights from different Google products:
 * **AdSense:** Keep track of how much your site is earning you.
 * **PageSpeed Insights:** See how your pages perform compared to other real-world sites. Improve performance with actionable tips from PageSpeed Insights.
 * **Tag Manager:** Use Site Kit to easily set up Tag Manager- no code editing required. Then, manage your tags in Tag Manager.
+* **Sign in with Google:** Allows visitors to sign up and log in to your site with their existing Google account.
+* **Reader Revenue Manager:** Helps you grow, retain, and engage your site visitors via subscription, contribution, newsletters, surveys, and custom prompts.
+* **Ads:** Get customers and sell more with targeted traffic from Google Ads.
 
 == Installation ==
 
@@ -109,28 +112,27 @@ Please create a new topic on our [WordPress.org support forum](https://wordpress
 
 == Changelog ==
 
-= 1.171.0 =
+= 1.178.0 =
 
 **Enhanced**
 
-* Update generated PHP client library for Reader Revenue Manager. See [#12035](https://github.com/google/site-kit-wp/issues/12035).
-* Add Reader Revenue Manager policy violation information to the Site Health screen. See [#12018](https://github.com/google/site-kit-wp/issues/12018).
-* Add support for custom module connection status in the Settings screen. See [#12016](https://github.com/google/site-kit-wp/issues/12016).
-* Add periodic synchronization for Reader Revenue Manager publication content policy status. See [#12004](https://github.com/google/site-kit-wp/issues/12004).
-* Add data store configuration for RRM policy violation status retrieval. See [#12003](https://github.com/google/site-kit-wp/issues/12003).
-* Add necessary module settings for Reader Revenue Manager policy violations. See [#12000](https://github.com/google/site-kit-wp/issues/12000).
-* Migrate to generated Google API client libraries. See [#11983](https://github.com/google/site-kit-wp/issues/11983).
-* Update the user menu component to close the user tooltip when the menu is opened. See [#11956](https://github.com/google/site-kit-wp/issues/11956).
-* Add "Data gathering complete" Welcome modal variant to notify users when Analytics data gathering is finished. See [#11909](https://github.com/google/site-kit-wp/issues/11909).
-* Update tour tooltip styles as part of the new setup flow. See [#11812](https://github.com/google/site-kit-wp/issues/11812).
-* Update the dashboard to display the welcome modal. See [#11809](https://github.com/google/site-kit-wp/issues/11809).
+* Improve copy in enhanced conversions notifications for Ads. See [#12535](https://github.com/google/site-kit-wp/issues/12535).
+* Improve copy in enhanced conversions notifications for Analytics. See [#12534](https://github.com/google/site-kit-wp/issues/12534).
+* Add the `pdfGeneration` feature flag for the upcoming feature. See [#12506](https://github.com/google/site-kit-wp/issues/12506).
+* Fix the browser back button on the Key Metrics setup screen, which does not navigate back to the Analytics setup screen. See [#12503](https://github.com/google/site-kit-wp/issues/12503).
+* Update the dashboard's Welcome modal for mobile viewports. See [#12462](https://github.com/google/site-kit-wp/issues/12462).
+* Add the new Site Goals section. See [#12423](https://github.com/google/site-kit-wp/issues/12423).
+* Improve enhanced conversion tracking for Easy Digital Downloads to include additional details. See [#11743](https://github.com/google/site-kit-wp/issues/11743).
+* Update "Customize settings" link after Sign in with Google setup. See [#11666](https://github.com/google/site-kit-wp/issues/11666).
+* Remove Ads Conversion ID entirely from Analytics module. See [#11303](https://github.com/google/site-kit-wp/issues/11303).
+
+**Changed**
+
+* Upgrade WordPress packages and TypeScript versions. See [#12058](https://github.com/google/site-kit-wp/issues/12058).
 
 **Fixed**
 
-* Fix issue in Email Reports when reporting on pages with increased page clicks. See [#12033](https://github.com/google/site-kit-wp/issues/12033).
-* Update the Email Reporting logic to avoid sending emails with no data. See [#11964](https://github.com/google/site-kit-wp/issues/11964).
-* Fix FrequencySelector component on small screens and add "Current subscription" badge. See [#11959](https://github.com/google/site-kit-wp/issues/11959).
-* Fix bugs with email reporting panel in various states. See [#11957](https://github.com/google/site-kit-wp/issues/11957).
-* Update Notices and NoticeNotifications components to follow mobile styles in tablet viewport. See [#9215](https://github.com/google/site-kit-wp/issues/9215).
+* Prevent overlay notifications from appearing when the dashboard tour is active. See [#12478](https://github.com/google/site-kit-wp/issues/12478).
+* Fix Welcome Modal reappearing after dismissing and resubmitting Key Metrics answers. Props anishesg. See [#12477](https://github.com/google/site-kit-wp/issues/12477).
 
 [See changelog for all versions](https://raw.githubusercontent.com/google/site-kit-wp/main/changelog.txt).
