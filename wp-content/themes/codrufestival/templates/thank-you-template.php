@@ -56,6 +56,12 @@ header, .headerHalfCircle {
     padding-bottom: 0px;
 }
 
+@media screen and (max-width: 767px) {
+    .thank-you-hero h1 {
+        font-size: 30px;
+    }
+}
+
 .thank-you-hero h2 {
     font-size: 30px;
     font-weight: normal;
@@ -88,7 +94,7 @@ header, .headerHalfCircle {
 }
 
 #thank-you-socials {
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 #thank-you-socials a {
@@ -98,11 +104,21 @@ header, .headerHalfCircle {
 }
 
 #thank-you-socials a img {
-    max-height: 24px;
+    width: 40px;
+    height: 40px;
+    max-height: unset;
+}
+
+@media screen and (max-width: 767px) {
+    #thank-you-socials a img {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .thank-you-logo {
     max-width: 700px;
+    width: 100%;
 }
 
 </style>
@@ -117,13 +133,10 @@ header, .headerHalfCircle {
             <div class="thank-you-button-container">
                 <a href="/" class="thank-you-button"><?php esc_html_e('Back to Home', 'codrufestival'); ?></a>
             </div>
-            <span id="thank-you-socials" class="footerSocials justify-content-center">
-                <a href="https://www.facebook.com/codrufestival" target="_blank"><img src="/wp-content/themes/codrufestival/images/facebookcodru.svg" alt=""></a>
-                <a href="https://www.instagram.com/codrufestival/" target="_blank"><img src="/wp-content/themes/codrufestival/images/instagramcodru.svg" alt=""></a>
-                <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img src="/wp-content/themes/codrufestival/images/linkedincodru.svg" alt=""></a>
-                <a href="https://www.youtube.com/@codrufestival" target="_blank"><img src="/wp-content/themes/codrufestival/images/youtubecodru.svg" alt=""></a>
-                <a href="https://open.spotify.com/playlist/0vePsGS7Ei7jA5hPUlvbxY?si=a6b26f14a4a94198" target="_blank"><img src="/wp-content/themes/codrufestival/images/socials/spotify.svg" alt=""></a>
-            </span>
+            <?php codrufestival_render_social_links(array(
+                'id' => 'thank-you-socials',
+                'class' => 'footerSocials justify-content-center',
+            )); ?>
         </div>
     </div>
 </div>

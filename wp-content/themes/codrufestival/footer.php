@@ -248,18 +248,7 @@
                 <a href="https://maps.app.goo.gl/Z8uxQmHi1Hsv644V9" target="_blank"><span><img src="/wp-content/themes/codrufestival/images/map-pin.svg" alt="Parcul Central Timișoara">PĂDUREA VERDE, TIMIȘOARA</span></a>
                 <a href="mailto:press@codrufestival.ro"><span><img src="/wp-content/themes/codrufestival/images/camera.svg"
                             alt="">PRESS@CODRUFESTIVAL.RO</span></a>
-                <span class="footerSocials">
-                    <a href="https://www.facebook.com/codrufestival" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/facebookcodru.svg" alt=""></a>
-                    <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/instagramcodru.svg" alt=""></a>
-                    <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/linkedincodru.svg" alt=""></a>
-                    <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/youtubecodru.svg" alt=""></a>
-                    <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/socials/spotify.svg" alt=""></a>
-                </span>
+                <?php codrufestival_render_social_links(array('class' => 'footerSocials')); ?>
             </div>
             <div class="footerRightLogo col-lg-2 col-md-12 col-12 d-flex">
                 <img class="footer-logo" src="/wp-content/themes/codrufestival/images/logoteg.png" alt="">

@@ -1,0 +1,38 @@
+[
+  {
+    "label": "Facebook",
+    "url": "https://www.facebook.com/codrufestival",
+    "icon": "images/socials/facebook.svg",
+    "alt": "CODRU Festival on Facebook"
+  },
+  {
+    "label": "Instagram",
+    "url": "https://www.instagram.com/codrufestival/",
+    "icon": "images/socials/instagram.svg",
+    "alt": "CODRU Festival on Instagram"
+  },
+  {
+    "label": "LinkedIn",
+    "url": "https://www.linkedin.com/company/codrufestival/",
+    "icon": "images/socials/linkedin.svg",
+    "alt": "CODRU Festival on LinkedIn"
+  },
+  {
+    "label": "YouTube",
+    "url": "https://www.youtube.com/@codrufestival",
+    "icon": "images/socials/youtube.svg",
+    "alt": "CODRU Festival on YouTube"
+  },
+  {
+    "label": "TikTok",
+    "url": "https://www.tiktok.com/@codrufestival",
+    "icon": "images/socials/tiktok.svg",
+    "alt": "CODRU Festival on TikTok"
+  },
+  {
+    "label": "Spotify",
+    "url": "https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66",
+    "icon": "images/socials/spotify.svg",
+    "alt": "CODRU Festival on Spotify"
+  }
+]

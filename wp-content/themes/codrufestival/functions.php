@@ -15,7 +15,7 @@ add_action('after_setup_theme', 'codrufestival_theme_setup');
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('codrufestival-style', get_template_directory_uri() . '/style.css', array(), '155');
+    wp_enqueue_style('codrufestival-style', get_template_directory_uri() . '/style.css', array(), '162');
     wp_enqueue_style('activities', get_template_directory_uri() . '/assets/css/activities.css');
     wp_enqueue_style('partners', get_template_directory_uri() . '/assets/css/partners.css');
     wp_enqueue_style('magnificPopupCss', get_template_directory_uri() . '/assets/css/magnific-popup.min.css');
@@ -204,6 +204,79 @@ function get_menu_with_children($menu_name)
     }
 
     return $navbar_items;
+}
+
+function codrufestival_get_social_links()
+{
+    static $social_links = null;
+
+    if ($social_links !== null) {
+        return $social_links;
+    }
+
+    $social_links = array();
+    $social_links_file = get_template_directory() . '/data/social-links.json';
+
+    if (!file_exists($social_links_file)) {
+        return $social_links;
+    }
+
+    $decoded_social_links = json_decode(file_get_contents($social_links_file), true);
+
+    if (!is_array($decoded_social_links)) {
+        return $social_links;
+    }
+
+    foreach ($decoded_social_links as $social_link) {
+        if (empty($social_link['label']) || empty($social_link['url']) || empty($social_link['icon'])) {
+            continue;
+        }
+
+        $icon = $social_link['icon'];
+        $icon_url = preg_match('/^https?:\/\//', $icon)
+            ? $icon
+            : get_stylesheet_directory_uri() . '/' . ltrim($icon, '/');
+
+        $social_links[] = array(
+            'label' => $social_link['label'],
+            'url' => $social_link['url'],
+            'icon_url' => $icon_url,
+            'alt' => $social_link['alt'] ?? $social_link['label'],
+        );
+    }
+
+    return $social_links;
+}
+
+function codrufestival_render_social_links($args = array())
+{
+    $args = wp_parse_args($args, array(
+        'id' => '',
+        'class' => 'footerSocials',
+        'show_labels' => false,
+    ));
+
+    $social_links = codrufestival_get_social_links();
+
+    if (empty($social_links)) {
+        return;
+    }
+
+    $id_attribute = $args['id'] ? ' id="' . esc_attr($args['id']) . '"' : '';
+    echo '<div' . $id_attribute . ' class="' . esc_attr($args['class']) . '">';
+
+    foreach ($social_links as $social_link) {
+        echo '<a href="' . esc_url($social_link['url']) . '" target="_blank" rel="noopener noreferrer" aria-label="' . esc_attr($social_link['label']) . '">';
+        echo '<img src="' . esc_url($social_link['icon_url']) . '" alt="' . esc_attr($social_link['alt']) . '">';
+
+        if ($args['show_labels']) {
+            echo '<span>' . esc_html($social_link['label']) . '</span>';
+        }
+
+        echo '</a>';
+    }
+
+    echo '</div>';
 }
 
 if (function_exists('acf_add_options_page')) {

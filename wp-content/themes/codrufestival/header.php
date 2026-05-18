@@ -220,18 +220,7 @@
                     }
                 }
                 ?>
-                <span class="headerSocials">
-                    <a href="https://www.facebook.com/codrufestival" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/facebookcodru.svg" alt=""></a>
-                    <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/instagramcodru.svg" alt=""></a>
-                    <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/linkedincodru.svg" alt=""></a>
-                    <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/youtubecodru.svg" alt=""></a>
-                    <a href="https://open.spotify.com/playlist/1HVslMMno3lb7HHo04hjMH?si=f603db10b3474c66" target="_blank"><img
-                            src="/wp-content/themes/codrufestival/images/socials/spotify.svg" alt=""></a>
-                </span>
+                <?php codrufestival_render_social_links(array('class' => 'headerSocials')); ?>
                 <div class="site-mobile-menu-button-container">
                     <a class="heroButtonMenu"
                         href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
@@ -267,6 +256,22 @@
                                 echo '<li><a href="' . esc_url($item->url) . '" class="nav-link">' . esc_html($item->title) . '</a></li>';
                             }
                         }
+                    }
+                    ?>
+                    <?php
+                    $social_links = codrufestival_get_social_links();
+                    if (!empty($social_links)) {
+                        echo '<li class="has-children desktop-social-menu"><a href="#" class="nav-link">' . esc_html(get_multilingual_text('SOCIALS', 'SOCIALS')) . '</a>';
+                        echo '<ul class="dropdown arrow-top desktop-social-dropdown">';
+
+                        foreach ($social_links as $social_link) {
+                            echo '<li><a href="' . esc_url($social_link['url']) . '" class="nav-link" target="_blank" rel="noopener noreferrer">';
+                            echo '<img src="' . esc_url($social_link['icon_url']) . '" alt="' . esc_attr($social_link['alt']) . '">';
+                            echo '<span>' . esc_html($social_link['label']) . '</span>';
+                            echo '</a></li>';
+                        }
+
+                        echo '</ul></li>';
                     }
                     ?>
                     <?php
