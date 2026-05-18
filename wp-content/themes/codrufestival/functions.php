@@ -95,6 +95,75 @@ function enqueue_admin_styles($hook) {
 }
 add_action('admin_enqueue_scripts', 'enqueue_admin_styles');
 
+function codrufestival_disable_comments_post_types()
+{
+    foreach (get_post_types() as $post_type) {
+        if (post_type_supports($post_type, 'comments')) {
+            remove_post_type_support($post_type, 'comments');
+        }
+
+        if (post_type_supports($post_type, 'trackbacks')) {
+            remove_post_type_support($post_type, 'trackbacks');
+        }
+    }
+}
+add_action('init', 'codrufestival_disable_comments_post_types');
+
+add_filter('comments_open', '__return_false', 20, 2);
+add_filter('pings_open', '__return_false', 20, 2);
+add_filter('comments_array', '__return_empty_array', 10, 2);
+
+function codrufestival_disable_comments_admin_menu()
+{
+    remove_menu_page('edit-comments.php');
+}
+add_action('admin_menu', 'codrufestival_disable_comments_admin_menu');
+
+function codrufestival_disable_comments_admin_redirect()
+{
+    global $pagenow;
+
+    if ($pagenow === 'edit-comments.php') {
+        wp_safe_redirect(admin_url());
+        exit;
+    }
+
+    remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+}
+add_action('admin_init', 'codrufestival_disable_comments_admin_redirect');
+
+function codrufestival_disable_comments_admin_bar($wp_admin_bar)
+{
+    $wp_admin_bar->remove_node('comments');
+}
+add_action('admin_bar_menu', 'codrufestival_disable_comments_admin_bar', 999);
+
+function codrufestival_disable_comments_columns($columns)
+{
+    unset($columns['comments']);
+    return $columns;
+}
+add_filter('manage_posts_columns', 'codrufestival_disable_comments_columns', 20);
+add_filter('manage_pages_columns', 'codrufestival_disable_comments_columns', 20);
+
+function codrufestival_block_rest_comments($prepared_comment, $request)
+{
+    return new WP_Error(
+        'comments_disabled',
+        __('Comments are disabled on this site.', 'codrufestival'),
+        array('status' => 403)
+    );
+}
+add_filter('rest_pre_insert_comment', 'codrufestival_block_rest_comments', 10, 2);
+
+function codrufestival_disable_comments_rest_endpoints($endpoints)
+{
+    unset($endpoints['/wp/v2/comments']);
+    unset($endpoints['/wp/v2/comments/(?P<id>[\d]+)']);
+    return $endpoints;
+}
+add_filter('rest_endpoints', 'codrufestival_disable_comments_rest_endpoints');
+
 function load_footer_scripts()
 {
     wp_register_script('util', get_template_directory_uri() . '/js/util.js', array('jquery'), true);
@@ -151,15 +220,6 @@ if (function_exists('acf_add_options_page')) {
         'page_title' => 'Partners',
         'menu_title' => 'Partners',
         'menu_slug' => 'partners-options',
-        'capability' => 'edit_posts',
-        'redirect' => false,
-        'parent_slug' => 'general-options',
-    ));
-
-    acf_add_options_sub_page(array(
-        'page_title' => 'Newsletter',
-        'menu_title' => 'Newsletter',
-        'menu_slug' => 'newsletter-options',
         'capability' => 'edit_posts',
         'redirect' => false,
         'parent_slug' => 'general-options',
