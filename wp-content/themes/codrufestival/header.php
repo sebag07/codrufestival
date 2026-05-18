@@ -223,7 +223,7 @@
                 <?php codrufestival_render_social_links(array('class' => 'headerSocials')); ?>
                 <div class="site-mobile-menu-button-container">
                     <a class="heroButtonMenu"
-                        href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+                        href="https://bilete.codrufestival.ro/"><?php echo esc_html(get_multilingual_text('BILETE', 'TICKETS')); ?></a>
                 </div>
             </ul>
         </div>
@@ -286,7 +286,7 @@
                     ?>
                     <li class="desktop-menu-cta">
                         <a class="heroButtonMenu"
-                            href="<?php echo esc_url(get_field('ticket_button_url', 'options')); ?>"><?php echo esc_html(get_field('ticket_button_text', 'options')); ?></a>
+                            href="https://bilete.codrufestival.ro/"><?php echo esc_html(get_multilingual_text('BILETE', 'TICKETS')); ?></a>
                     </li>
                 </ul>
             </nav>
