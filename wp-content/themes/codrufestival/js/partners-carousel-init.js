@@ -1,7 +1,4 @@
 jQuery(document).ready(function($) {
-    console.log('Owl Carousel init script running...');
-    console.log('jQuery version:', $.fn.jquery);
-    console.log('Owl Carousel available:', typeof $.fn.owlCarousel);
     
     if (typeof $.fn.owlCarousel === 'function') {
         $('.partners-owl').owlCarousel({
@@ -40,7 +37,6 @@ jQuery(document).ready(function($) {
                 '<i class="fa fa-chevron-right"></i>'
             ]
         });
-        console.log('Owl Carousel initialized successfully');
     } else {
         console.error('Owl Carousel is not available');
     }
