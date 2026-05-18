@@ -551,3 +551,76 @@ function get_multilingual_html($ro_text, $en_text, $fallback_lang = 'ro') {
 function the_multilingual_html($ro_text, $en_text, $fallback_lang = 'ro') {
     echo get_multilingual_html($ro_text, $en_text, $fallback_lang);
 }
+
+if (defined('WP_CLI') && WP_CLI && class_exists('WP_CLI')) {
+    call_user_func(array('WP_CLI', 'add_command'), 'codru cleanup-unused-acf-groups', function ($args, $assoc_args) {
+        $wp_cli = function ($method) {
+            $params = array_slice(func_get_args(), 1);
+            call_user_func_array(array('WP_CLI', $method), $params);
+        };
+
+        $titles = array(
+            'Ora artist',
+            'Partner Values',
+            'Post Extras',
+            'Newsletter',
+            'Headliners Swiper',
+            'Festival Gallery',
+            'Display Lineup',
+            'Countdown',
+            'Program',
+            'Ticket Button',
+        );
+
+        $delete = isset($assoc_args['delete']);
+        $groups = get_posts(array(
+            'post_type' => 'acf-field-group',
+            'post_status' => array('publish', 'acf-disabled', 'draft', 'private', 'pending', 'trash'),
+            'posts_per_page' => -1,
+            'orderby' => 'title',
+            'order' => 'ASC',
+        ));
+
+        $matches = array();
+        foreach ($groups as $group) {
+            if (in_array($group->post_title, $titles, true)) {
+                $matches[] = $group;
+            }
+        }
+
+        $wp_cli('line', $delete ? 'DELETE MODE' : 'DRY RUN');
+        $wp_cli('line', sprintf('Found %d matching ACF field groups.', count($matches)));
+
+        if (!$matches) {
+            $wp_cli('success', 'No matching ACF field groups found.');
+            return;
+        }
+
+        if ($delete && !function_exists('acf_delete_field_group')) {
+            $wp_cli('error', 'ACF is not loaded, so acf_delete_field_group() is unavailable.');
+        }
+
+        $deleted = 0;
+        foreach ($matches as $group) {
+            $message = sprintf('%d | %s | %s', $group->ID, $group->post_status, $group->post_title);
+
+            if ($delete) {
+                if (acf_delete_field_group($group->ID)) {
+                    $deleted++;
+                    $wp_cli('log', $message . ' | deleted');
+                } else {
+                    $wp_cli('warning', $message . ' | failed');
+                }
+                continue;
+            }
+
+            $wp_cli('line', $message);
+        }
+
+        if ($delete) {
+            $wp_cli('success', sprintf('Deleted %d ACF field groups.', $deleted));
+        } else {
+            $wp_cli('success', 'Dry run complete. Re-run with --delete to delete these groups.');
+        }
+    });
+}
