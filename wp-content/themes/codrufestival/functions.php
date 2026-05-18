@@ -8,7 +8,14 @@ function codrufestival_theme_setup()
 {
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
+    add_theme_support('menus');
     add_theme_support('html5', array('comment-list', 'comment-form', 'search-form', 'gallery', 'caption', 'style', 'script'));
+
+    register_nav_menus(array(
+        'codru_2023_left_menu' => __('Codru 2023 Left Menu', 'codrufestival'),
+        'codru_2023_right_menu' => __('Codru 2023 Right Menu', 'codrufestival'),
+        'codru_2023_mobile_menu' => __('Codru 2023 Mobile Menu', 'codrufestival'),
+    ));
 }
 
 add_action('after_setup_theme', 'codrufestival_theme_setup');
