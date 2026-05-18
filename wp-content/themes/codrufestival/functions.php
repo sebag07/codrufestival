@@ -15,7 +15,7 @@ add_action('after_setup_theme', 'codrufestival_theme_setup');
 
 function my_theme_enqueue_styles()
 {
-    wp_enqueue_style('codrufestival-style', get_template_directory_uri() . '/style.css', array(), '150');
+    wp_enqueue_style('codrufestival-style', get_template_directory_uri() . '/style.css', array(), '155');
     wp_enqueue_style('activities', get_template_directory_uri() . '/assets/css/activities.css');
     wp_enqueue_style('partners', get_template_directory_uri() . '/assets/css/partners.css');
     wp_enqueue_style('magnificPopupCss', get_template_directory_uri() . '/assets/css/magnific-popup.min.css');
@@ -26,7 +26,7 @@ add_action('wp_enqueue_scripts', 'my_theme_enqueue_styles');
 
 function codrufestival_enqueue_scripts()
 {
-    wp_register_script('main', get_template_directory_uri() . '/js/main.js', array('jquery'), '4123312', true);
+    wp_register_script('main', get_template_directory_uri() . '/js/main.js', array('jquery'), '4123315', true);
     wp_enqueue_script('main');;
     wp_register_script('freewall', get_template_directory_uri() . '/js/freewall.min.js', array('jquery'), true);
     wp_enqueue_script('freewall');

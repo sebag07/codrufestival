@@ -875,6 +875,87 @@ a:hover {
     z-index: 2 !important;
 }
 
+.site-navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.site-navbar .header-logo {
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    width: auto;
+}
+
+.site-navbar .desktopMenu {
+    position: relative;
+    right: auto;
+    left: auto;
+    justify-content: flex-end;
+    margin-left: auto;
+    -ms-transform: none;
+    transform: none;
+}
+
+.site-navbar .desktop-site-menu {
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    width: auto;
+}
+
+.site-navbar .desktop-site-menu > li > a {
+    margin-right: 0;
+}
+
+.site-navbar .desktop-site-menu > .desktop-menu-cta {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 12px;
+}
+
+.site-navbar .desktop-site-menu > .desktop-menu-cta > .heroButtonMenu {
+    color: var(--button-text-color);
+    background: var(--button-color);
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 20px !important;
+    margin-right: 0;
+    font-size: 16px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.site-navbar .desktop-site-menu > .desktop-menu-cta > .heroButtonMenu:hover {
+    color: var(--button-text-color);
+    background: var(--button-color-hover);
+}
+
+.site-navbar .desktop-site-menu > .desktop-language-switcher > a {
+    padding: 5px 10px !important;
+    margin-right: 0;
+    white-space: nowrap;
+}
+
+.site-navbar .mobile-menu-toggle-container {
+    position: relative;
+    margin-left: 0;
+    height: 80px;
+    justify-content: flex-end;
+    right: 0;
+    -ms-transform: none;
+    transform: none;
+}
+
+.site-navbar .header-mobile-toggle {
+    z-index: 7;
+    cursor: pointer;
+}
+
 @media (max-width: 1900px) {
     .rightMenu {
         right: 0;
@@ -882,6 +963,13 @@ a:hover {
 
     .leftMenu {
         left: 0;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .site-navbar-container {
+        padding-left: 15px;
+        padding-right: 15px;
     }
 }
 

@@ -23,7 +23,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
     <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.7/plugins/debug.addIndicators.min.js"></script>
-    <script src="/wp-content/themes/codrufestival/js/main.js?ver=174"></script>
     <script src="/wp-content/themes/codrufestival/js/owl.carousel.min.js?ver=174"></script>
     <script src="/wp-content/themes/codrufestival/js/partners-carousel-init.js?ver=174"></script>
     <!-- <script src="/wp-content/themes/codrufestival/snow3d/build/snow3d.js"></script> -->
@@ -243,57 +242,30 @@
 
     <!-- NAVBAR -->
     <header class="site-navbar">
-        <div class="container-fluid row m-0 justify-content-center">
-            <!-- <div class="site-logo col-lg-5 col-10"><a href="/"><img src="/wp-content/themes/codrufestival/images/logocodru.png" alt=""></a></div> -->
-            <div
-                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center leftMenu justify-content-left col-lg-5 col-2">
-                <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
-                    <?php
-                    $menu = get_menu_with_children("Codru2023LeftMenu");
-                    $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-                    foreach ($menu as $item) {
-                        if (isset($item->child_items)) {
-                            echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
-                            <ul class='dropdown arrow-top'>";
-                            foreach ($item->child_items as $child_item) {
-                                echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
-                            }
-                            echo "</ul>
-                            </li>";
-                        } else {
-                            echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
-                        }
-                    }
-                    ?>
-                </ul>
-                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3" aria-label="Toggle menu">
-                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-0 p-0 mt-1" style="display:block;">
-                        <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-                    </svg>
-                </a>
-            </div>
-
-            <div class="site-logo col-lg-2 col-10"><a href="/"><img src="/wp-content/themes/codrufestival/images/codru-logo-header.png"
+        <div class="container-fluid site-navbar-container">
+            <div class="site-logo header-logo"><a href="/"><img src="/wp-content/themes/codrufestival/images/codru-logo-header.png"
                         alt="CODRU Festival Logo"></a></div>
 
-
-            <div
-                class="mx-auto site-navigation right-cta-menu d-flex aligin-items-center rightMenu justify-content-right col-lg-6 col-2">
-                <ul class="site-menu d-none d-xl-block ml-0 pl-0 desktop-only">
+            <nav class="site-navigation right-cta-menu desktopMenu d-none d-lg-flex align-items-center" aria-label="Main navigation">
+                <ul class="site-menu desktop-site-menu d-none d-lg-flex ml-0 pl-0 desktop-only align-items-center">
                     <?php
-                    $menu = get_menu_with_children("Codru2023RightMenu");
-                    $url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-                    foreach ($menu as $item) {
-                        if (isset($item->child_items)) {
-                            echo "<li class='has-children'><a href='$item->url' class='nav-link'>$item->title</a>
-                            <ul class='dropdown arrow-top'>";
-                            foreach ($item->child_items as $child_item) {
-                                echo "<li><a href='$child_item->url' class='nav-link'>$child_item->title</a></li>";
+                    $desktop_menu_names = array("Codru2023LeftMenu", "Codru2023RightMenu");
+
+                    foreach ($desktop_menu_names as $desktop_menu_name) {
+                        $menu = get_menu_with_children($desktop_menu_name);
+
+                        foreach ((array)$menu as $item) {
+                            if (isset($item->child_items)) {
+                                echo '<li class="has-children"><a href="' . esc_url($item->url) . '" class="nav-link">' . esc_html($item->title) . '</a>
+                            <ul class="dropdown arrow-top">';
+                                foreach ($item->child_items as $child_item) {
+                                    echo '<li><a href="' . esc_url($child_item->url) . '" class="nav-link">' . esc_html($child_item->title) . '</a></li>';
+                                }
+                                echo '</ul>
+                            </li>';
+                            } else {
+                                echo '<li><a href="' . esc_url($item->url) . '" class="nav-link">' . esc_html($item->title) . '</a></li>';
                             }
-                            echo "</ul>
-                            </li>";
-                        } else {
-                            echo "<li><a href='$item->url' class='nav-link'>$item->title</a></li>";
                         }
                     }
                     ?>
@@ -302,29 +274,24 @@
                     if (!empty($languages)) {
                         foreach ($languages as $lang) {
                             if (!$lang['active']) {
-                                echo '<li class="language-switcher-item"><a href="' . esc_url($lang['url']) . '">' . esc_html(strtoupper($lang['code'])) . '</a></li>';
+                                echo '<li class="language-switcher-item desktop-language-switcher"><a href="' . esc_url($lang['url']) . '">' . esc_html(strtoupper($lang['code'])) . '</a></li>';
                             }
                         }
                     }
                     ?>
-                    <span class="headerSocials">
-                        <a href="https://www.facebook.com/codrufestival" target="_blank"><img
-                                src="/wp-content/themes/codrufestival/images/facebookcodru.svg" alt=""></a>
-                        <a href="https://www.instagram.com/codrufestival/" target="_blank"><img
-                                src="/wp-content/themes/codrufestival/images/instagramcodru.svg" alt=""></a>
-                        <a href="https://www.linkedin.com/company/codrufestival/" target="_blank"><img
-                                src="/wp-content/themes/codrufestival/images/linkedincodru.svg" alt=""></a>
-                        <a href="https://www.youtube.com/@codrufestival" target="_blank"><img
-                                src="/wp-content/themes/codrufestival/images/youtubecodru.svg" alt=""></a>
-                    </span>
-                    <a class="heroButtonMenu"
-                        href="<?php echo get_field('ticket_button_url', 'options'); ?>"><?php echo get_field('ticket_button_text', 'options'); ?></a>
+                    <li class="desktop-menu-cta">
+                        <a class="heroButtonMenu"
+                            href="<?php echo esc_url(get_field('ticket_button_url', 'options')); ?>"><?php echo esc_html(get_field('ticket_button_text', 'options')); ?></a>
+                    </li>
                 </ul>
-                <a href="#" class="site-menu-toggle js-menu-toggle d-inline-block d-xl-none ml-3" aria-label="Toggle menu">
+            </nav>
+
+            <div class="mobile-menu-toggle-container d-flex d-lg-none align-items-center">
+                <a href="#" class="site-menu-toggle js-menu-toggle header-mobile-toggle d-inline-block ml-3" aria-label="Toggle menu">
                     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="m-0 p-0 mt-1" style="display:block;">
                         <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
                     </svg>
                 </a>
             </div>
-
+        </div>
     </header>
