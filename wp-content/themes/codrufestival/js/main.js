@@ -18,7 +18,6 @@ jQuery(document).ready(function () {
 jQuery(window).on("load", function () {
     var gallery = jQuery(".gallery-masonry");
     var category = ".item";
-    console.log(category);
     function filterIsotope(filter) {
         var filter = filter || "*";
         gallery.isotope({
