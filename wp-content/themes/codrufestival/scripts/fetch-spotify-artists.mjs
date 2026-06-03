@@ -113,6 +113,7 @@ for (const artist of source.artists ?? []) {
     spotify_url: spotifyUrl,
     spotify_embed_url: `https://open.spotify.com/embed/artist/${artist.spotify_id}?utm_source=generator`,
     image: spotifyArtist.images?.[0]?.url ?? '',
+    image_override: artist.image_override ?? '',
     images: spotifyArtist.images ?? [],
     genres: spotifyArtist.genres ?? [],
     followers: spotifyArtist.followers?.total ?? null,

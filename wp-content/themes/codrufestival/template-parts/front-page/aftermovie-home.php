@@ -127,17 +127,18 @@ foreach ($artists as $artist) {
     $spotify_id = $artist['spotify_id'] ?? '';
     $spotify_url = !empty($artist['spotify_url']) ? $artist['spotify_url'] : ($spotify_id ? "https://open.spotify.com/artist/{$spotify_id}" : '');
     $spotify_embed_url = !empty($artist['spotify_embed_url']) ? $artist['spotify_embed_url'] : ($spotify_id ? "https://open.spotify.com/embed/artist/{$spotify_id}?utm_source=generator" : '');
+    $artist_image = function_exists('codrufestival_resolve_artist_image_url') ? codrufestival_resolve_artist_image_url($artist) : ($artist['image'] ?? '');
     $genres = isset($artist['genres']) && is_array($artist['genres']) ? $artist['genres'] : [];
     $socials = isset($artist['socials']) && is_array($artist['socials']) ? $artist['socials'] : [];
     if ($spotify_url && empty($socials['spotify'])) {
         $socials['spotify'] = $spotify_url;
     }
 
-    $has_artist_card_media = $has_artist_card_media || !empty($artist['image']) || !empty($spotify_embed_url);
+    $has_artist_card_media = $has_artist_card_media || !empty($artist_image) || !empty($spotify_embed_url);
     $artist_cards[] = [
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
         'title' => $artist['name'],
-        'image' => $artist['image'] ?? '',
+        'image' => $artist_image,
         'level' => $artist_levels[$level_key]['label'] ?? '',
         'day' => $artist['day'] ?? $artist['day_label'] ?? 'Day TBA',
         'stage' => $artist['stage'] ?? '',

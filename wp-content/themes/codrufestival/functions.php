@@ -447,6 +447,20 @@ function codrufestival_get_artists_grouped_by_level() {
     return $artists_by_level;
 }
 
+function codrufestival_resolve_artist_image_url($artist) {
+    $image = trim((string) (!empty($artist['image_override']) ? $artist['image_override'] : ($artist['image'] ?? '')));
+
+    if ($image === '') {
+        return '';
+    }
+
+    if (preg_match('#^(?:https?:)?//#i', $image) || strpos($image, '/') === 0 || strpos($image, 'data:') === 0) {
+        return $image;
+    }
+
+    return trailingslashit(get_stylesheet_directory_uri()) . ltrim($image, '/');
+}
+
 function codrufestival_build_artist_card_from_json($artist) {
     if (empty($artist['name'])) {
         return null;
@@ -458,6 +472,7 @@ function codrufestival_build_artist_card_from_json($artist) {
         $level_key = 'level3';
     }
 
+    $artist_image = codrufestival_resolve_artist_image_url($artist);
     $spotify_id = $artist['spotify_id'] ?? '';
     $spotify_url = !empty($artist['spotify_url']) ? $artist['spotify_url'] : ($spotify_id ? "https://open.spotify.com/artist/{$spotify_id}" : '');
     $spotify_embed_url = !empty($artist['spotify_embed_url']) ? $artist['spotify_embed_url'] : ($spotify_id ? "https://open.spotify.com/embed/artist/{$spotify_id}?utm_source=generator" : '');
@@ -471,7 +486,7 @@ function codrufestival_build_artist_card_from_json($artist) {
     return array(
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
         'title' => $artist['name'],
-        'image' => $artist['image'] ?? '',
+        'image' => $artist_image,
         'level' => $artist_levels[$level_key] ?? '',
         'details' => $artist['description'] ?? $artist['details'] ?? (!empty($genres) ? implode(', ', $genres) : ''),
         'link' => $spotify_url,
