@@ -335,6 +335,96 @@ foreach ($artists as $artist) {
 
 <?php endif; ?>
 
+<section id="homepage-about-volunteer" style="overflow-x:hidden;" class="dark-background">
+    <div class="sectionPadding container homepage-info-section">
+        <div class="row pt-5 pb-5 even">
+            <div class="col-md-6 align-items-start order-md-0 order-1 justify-content-center d-flex flex-column homepage-info-container">
+                <h2 class="homepage-info-title mb-4">
+                    <?php echo esc_html(get_multilingual_text(
+                        'CODRU, festivalul care plantează în România.',
+                        'CODRU, the festival that plants trees in Romania.',
+                        'ro'
+                    )); ?>
+                </h2>
+                <div class="homepage-info-content mb-4">
+                    <p><?php echo esc_html(get_multilingual_text(
+                        'Fiecare bilet cumpărat înseamnă un copac plantat și un pas înainte pentru un viitor mai verde.',
+                        'Every ticket purchased means a tree planted and a step toward a greener future.',
+                        'ro'
+                    )); ?></p>
+                    <p><?php echo esc_html(get_multilingual_text(
+                        'Prin muzică, artă, proiecte de regenerare urbană și dedicate comunității, transformăm energia unui festival într-o mișcare care crește pe tot parcursul anului.',
+                        'Through music, art, urban regeneration and community projects, we turn festival energy into a movement that grows all year round.',
+                        'ro'
+                    )); ?></p>
+                    <p><?php echo esc_html(get_multilingual_text(
+                        'Suntem oameni care cred în puterea culturii de a inspira și de a construi.',
+                        'We are people who believe in the power of culture to inspire and build.',
+                        'ro'
+                    )); ?></p>
+                </div>
+            </div>
+            <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5">
+                <img
+                    class="homepage-info-section-image w-100"
+                    src="<?php echo esc_url(get_stylesheet_directory_uri() . '/images/homepage/despre-codru-square.jpeg'); ?>"
+                    alt="<?php echo esc_attr(get_multilingual_text('CODRU Festival - plantare de copaci', 'CODRU Festival - tree planting', 'ro')); ?>"
+                >
+                <div class="homepage-info-section-image-underlay" style="background-color:#61d72f"></div>
+            </div>
+        </div>
+
+        <div class="row pt-5 pb-5 odd">
+            <div class="col-md-6 align-items-start order-md-1 order-1 justify-content-center d-flex flex-column homepage-info-container">
+                <h2 class="homepage-info-title mb-4">
+                    <?php echo esc_html(get_multilingual_text(
+                        'Hai în echipa noastră la CODRU6!',
+                        'Join our team at CODRU6!',
+                        'ro'
+                    )); ?>
+                </h2>
+                <div class="homepage-info-content mb-4">
+                    <p><?php echo esc_html(get_multilingual_text(
+                        'Dacă vrei să fii parte din construirea unui festival și să simți emoțiile de a vedea cum lucrurile prind viață, aplică ca voluntar la CODRU Festival.',
+                        'If you want to help build a festival and feel the thrill of seeing things come to life, apply to volunteer at CODRU Festival.',
+                        'ro'
+                    )); ?></p>
+                    <p><?php echo esc_html(get_multilingual_text(
+                        'Este și muncă — nu ascundem asta — dar vei învăța să lucrezi în echipă și vei dezvolta abilități pe care le vei putea folosi în viața de zi cu zi.',
+                        'It is work too — we will not hide that — but you will learn teamwork and develop skills you can use in everyday life.',
+                        'ro'
+                    )); ?></p>
+                    <p><strong><?php echo esc_html(get_multilingual_text('Ce îți oferim:', 'What we offer:', 'ro')); ?></strong></p>
+                    <ul>
+                        <li><?php echo esc_html(get_multilingual_text('Acces gratuit la concerte și activități în timpul festivalului', 'Free access to concerts and activities during the festival', 'ro')); ?></li>
+                        <li><?php echo esc_html(get_multilingual_text('Mâncare și apă', 'Food and water', 'ro')); ?></li>
+                        <li><?php echo esc_html(get_multilingual_text('Acces la training-uri și workshop-uri pre-eveniment', 'Access to pre-event training and workshops', 'ro')); ?></li>
+                    </ul>
+                    <p><?php echo esc_html(get_multilingual_text(
+                        'Festivalul se desfășoară 28–30 august la Pădurea Verde, Timișoara. Transportul și cazarea sunt responsabilitatea voluntarului.',
+                        'The festival takes place 28–30 August at Pădurea Verde, Timișoara. Transport and accommodation are the volunteer\'s responsibility.',
+                        'ro'
+                    )); ?></p>
+                </div>
+                <a
+                    class="homepage-info-button codru-general-button"
+                    href="https://forms.gle/tbHJPymA7wuo1vWX9"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                ><?php echo esc_html(get_multilingual_text('Aplică ca voluntar', 'Apply as volunteer', 'ro')); ?></a>
+            </div>
+            <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5 order-md-0 order-0">
+                <img
+                    class="homepage-info-section-image w-100"
+                    src="<?php echo esc_url(get_stylesheet_directory_uri() . '/images/homepage/cta-voluntar.jpg'); ?>"
+                    alt="<?php echo esc_attr(get_multilingual_text('Voluntari CODRU Festival', 'CODRU Festival volunteers', 'ro')); ?>"
+                >
+                <div class="homepage-info-section-image-underlay" style="background-color:#efaa13"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <?php
 wp_reset_postdata();
 $post_id = get_the_ID(); // Get current post ID

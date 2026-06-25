@@ -4474,6 +4474,38 @@ a {
     color: #fff;
 }
 
+.homepage-info-section ul {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: .18px;
+    color: #fff;
+}
+
+.homepage-info-section ul li {
+    color: #fff;
+}
+
+.homepage-info-section ul li::marker {
+    color: #fff;
+}
+
+.homepage-info-section ul li + li {
+    margin-top: 0.35rem;
+}
+
+.homepage-info-section .homepage-info-content a {
+    color: var(--button-color);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.homepage-info-section .homepage-info-content a:hover,
+.homepage-info-section .homepage-info-content a:focus {
+    color: #fff;
+}
+
 .homepage-info-section-image-container .homepage-info-section-image {
     border-radius: 50px;
     position: relative;
@@ -5276,6 +5308,38 @@ f.artistInnerContainer {
     font-weight: 400;
     line-height: 24px;
     letter-spacing: .18px;
+    color: #fff;
+}
+
+.homepage-info-section ul {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: .18px;
+    color: #fff;
+}
+
+.homepage-info-section ul li {
+    color: #fff;
+}
+
+.homepage-info-section ul li::marker {
+    color: #fff;
+}
+
+.homepage-info-section ul li + li {
+    margin-top: 0.35rem;
+}
+
+.homepage-info-section .homepage-info-content a {
+    color: var(--button-color);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.homepage-info-section .homepage-info-content a:hover,
+.homepage-info-section .homepage-info-content a:focus {
     color: #fff;
 }
 
