@@ -340,6 +340,7 @@ body.codru-expandable-card-open {
   font-size: 17px;
   line-height: 1.65;
   margin: 0;
+  font-weight: 400;
 }
 
 .codru-artist-expandable-cards__socials {

@@ -927,7 +927,7 @@ a:hover {
     padding: 5px 20px !important;
     margin-right: 0;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 900;
     white-space: nowrap;
 }
 
@@ -2474,7 +2474,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artistsLevel1 div h4.has-small-text small {
     display: inline-block;
     font-size: 0.55em;
-    font-weight: 400;
+    font-weight: 500;
     margin-top: -0.1em;
 }
 
@@ -3181,7 +3181,7 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     transition: all 0.5s;
     padding: 10px 25px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .codru-general-button:hover,
@@ -4658,7 +4658,7 @@ a {
 .card-price {
     font-size: 46px;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: 900;
 }
 
 .card-button {
@@ -5469,7 +5469,7 @@ f.artistInnerContainer {
   .card-price {
     font-size: 46px;
     color: var(--secondary-color);
-    font-weight: 600;
+    font-weight: 900;
   }
 
   .card-button {
