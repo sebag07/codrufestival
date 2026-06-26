@@ -42,8 +42,7 @@ module.exports = {
         30: '7.5rem',
       },
       fontFamily: {
-        heading: ['erbaum', 'sans-serif'],
-        display: ['neonoir', 'cursive'],
+        heading: ['"Science Gothic"', 'sans-serif'],
       },
     },
   },
