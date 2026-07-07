@@ -57,7 +57,7 @@ if (file_exists($live_tickets_json_path)) {
                 28-30 AUGUST 2026
             </div>
             <div class="event-location mt-2 rounded-lg bg-[#61d72f] px-3.5 py-2 text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
-                PADUREA VERDE, TIMISOARA
+                PĂDUREA VERDE, TIMIȘOARA
             </div>
         </div>
     <div class="buttons-container z-[4] flex flex-col gap-2.5 sm:flex-row">
@@ -385,7 +385,7 @@ foreach ($artists as $artist) {
                 </h2>
                 <div class="homepage-info-content mb-4">
                     <p><?php echo esc_html(get_multilingual_text(
-                        'Dacă vrei să fii parte din construirea unui festival și să simți emoțiile de a vedea cum lucrurile prind viață, aplică ca voluntar la CODRU Festival.',
+                        'Dacă vrei să fii parte din construirea unui festival și să simți emoțiile de a vedea cum lucrurile prind viață, aplică la CODRU Festival.',
                         'If you want to help build a festival and feel the thrill of seeing things come to life, apply to volunteer at CODRU Festival.',
                         'ro'
                     )); ?></p>
@@ -411,7 +411,7 @@ foreach ($artists as $artist) {
                     href="https://forms.gle/tbHJPymA7wuo1vWX9"
                     target="_blank"
                     rel="noopener noreferrer"
-                ><?php echo esc_html(get_multilingual_text('Aplică ca voluntar', 'Apply as volunteer', 'ro')); ?></a>
+                ><?php echo esc_html(get_multilingual_text('Aplică', 'Apply as volunteer', 'ro')); ?></a>
             </div>
             <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5 order-md-0 order-0">
                 <img
