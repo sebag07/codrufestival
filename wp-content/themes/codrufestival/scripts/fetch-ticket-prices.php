@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require_once dirname(__DIR__) . '/includes/ticket-live-data.php';
+
 $source_url = 'https://bilete.codrufestival.ro/';
 $theme_root = dirname(__DIR__);
 $output_path = $theme_root . '/data/tickets-live.json';
@@ -47,37 +49,6 @@ function codru_fetch_ticket_page(string $url): string
     return $body;
 }
 
-function codru_ticket_title_from_tariff_name(string $name): string
-{
-    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?\s*$/i', '', $name);
-
-    return trim((string) $title);
-}
-
-function codru_ticket_display_price_from_tariff_name(string $name): ?string
-{
-    if (!preg_match('/-\s*(\d+(?:[.,]\d+)?)\s*EUR\b/i', $name, $matches)) {
-        return null;
-    }
-
-    $price = str_replace(',', '.', $matches[1]);
-    $price = rtrim(rtrim($price, '0'), '.');
-
-    return $price . ' €';
-}
-
-function codru_normalize_ticket_title(string $title): string
-{
-    $title = codru_ticket_title_from_tariff_name($title);
-    $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $transliterated_title = function_exists('iconv') ? iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $title) : false;
-    $title = $transliterated_title !== false ? $transliterated_title : $title;
-    $title = function_exists('mb_strtolower') ? mb_strtolower($title, 'UTF-8') : strtolower($title);
-    $title = preg_replace('/[^a-z0-9]+/u', ' ', $title);
-
-    return trim((string) preg_replace('/\s+/', ' ', (string) $title));
-}
-
 function codru_parse_tickets(string $html): array
 {
     $document = new DOMDocument();
@@ -103,12 +74,14 @@ function codru_parse_tickets(string $html): array
         }
 
         $title = codru_ticket_title_from_tariff_name($name);
+        $category_key = codru_ticket_category_key($title);
 
         $tickets[] = [
             'id' => $node->getAttribute('data-tariff-id'),
             'name' => $name,
             'title' => $title,
-            'match_key' => codru_normalize_ticket_title($title),
+            'category_key' => $category_key,
+            'match_key' => codru_normalize_ticket_text($title),
             'display_price' => $display_price,
             'sell_price' => $node->getAttribute('data-tariff-sell-price'),
             'sell_currency' => $node->getAttribute('data-tariff-sell-currency'),
@@ -116,28 +89,6 @@ function codru_parse_tickets(string $html): array
     }
 
     return $tickets;
-}
-
-function codru_ticket_price_map(array $tickets): array
-{
-    $prices = [];
-
-    foreach ($tickets as $ticket) {
-        if (empty($ticket['match_key']) || empty($ticket['display_price'])) {
-            continue;
-        }
-
-        $prices[(string) $ticket['match_key']] = (string) $ticket['display_price'];
-    }
-
-    ksort($prices);
-
-    return $prices;
-}
-
-function codru_ticket_prices_changed(array $previous_tickets, array $new_tickets): bool
-{
-    return codru_ticket_price_map($previous_tickets) !== codru_ticket_price_map($new_tickets);
 }
 
 function codru_load_wordpress(): void
@@ -220,14 +171,14 @@ try {
 
     printf("Wrote %d ticket(s) to %s\n", count($tickets), $output_path);
 
-    if (codru_ticket_prices_changed($previous_tickets, $tickets)) {
+    if (codru_tickets_display_changed($previous_tickets, $tickets)) {
         try {
             codru_purge_litespeed_cache();
         } catch (Throwable $purge_exception) {
             fwrite(STDERR, 'LiteSpeed cache purge failed: ' . $purge_exception->getMessage() . PHP_EOL);
         }
     } else {
-        printf("Ticket prices unchanged; skipped LiteSpeed cache purge.\n");
+        printf("Ticket display data unchanged; skipped LiteSpeed cache purge.\n");
     }
 } catch (Throwable $exception) {
     fwrite(STDERR, 'Ticket scrape failed: ' . $exception->getMessage() . PHP_EOL);
