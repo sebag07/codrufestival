@@ -13,6 +13,13 @@ local-xdebuginfo.php
 # User uploads and generated media/cache
 wp-content/uploads/
 wp-content/cache/
+
+# Runtime-generated data and platform-specific plugin binaries
+wp-content/themes/codrufestival/data/tickets-live.json
+wp-content/ewww/gifsicle
+wp-content/ewww/jpegtran
+wp-content/ewww/optipng
+wp-content/ewww/pngquant
 wp-content/upgrade/
 wp-content/backup*/
 wp-content/backups/
