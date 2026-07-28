@@ -1,23 +1,23 @@
 {
-    "updated_at": "2026-05-14T16:20:05+00:00",
+    "updated_at": "2026-07-28T06:04:02+00:00",
     "source": "https://bilete.codrufestival.ro/",
     "tickets": [
         {
-            "id": "293065",
-            "name": "Under 25 - Early Bird - 39 EUR + taxes",
-            "title": "Under 25 - Early Bird",
-            "match_key": "under 25 early bird",
-            "display_price": "39 €",
-            "sell_price": "270.43",
+            "id": "343031",
+            "name": "Under 25 - Pre-sale - 49 EUR + taxes",
+            "title": "Under 25 - Pre-sale",
+            "match_key": "under 25 pre sale",
+            "display_price": "49 €",
+            "sell_price": "349.97",
             "sell_currency": "RON"
         },
         {
-            "id": "293062",
-            "name": "General Access - Early Bird - 59 EUR + taxes",
-            "title": "General Access - Early Bird",
-            "match_key": "general access early bird",
-            "display_price": "59 €",
-            "sell_price": "408.29",
+            "id": "343030",
+            "name": "General Access - Pre-sale - 69 EUR + taxes",
+            "title": "General Access - Pre-sale",
+            "match_key": "general access pre sale",
+            "display_price": "69 €",
+            "sell_price": "493.13",
             "sell_currency": "RON"
         }
     ]

@@ -118,7 +118,76 @@ function codru_parse_tickets(string $html): array
     return $tickets;
 }
 
+function codru_ticket_price_map(array $tickets): array
+{
+    $prices = [];
+
+    foreach ($tickets as $ticket) {
+        if (empty($ticket['match_key']) || empty($ticket['display_price'])) {
+            continue;
+        }
+
+        $prices[(string) $ticket['match_key']] = (string) $ticket['display_price'];
+    }
+
+    ksort($prices);
+
+    return $prices;
+}
+
+function codru_ticket_prices_changed(array $previous_tickets, array $new_tickets): bool
+{
+    return codru_ticket_price_map($previous_tickets) !== codru_ticket_price_map($new_tickets);
+}
+
+function codru_load_wordpress(): void
+{
+    static $loaded = false;
+
+    if ($loaded) {
+        return;
+    }
+
+    $wp_load = realpath(dirname(__DIR__) . '/../../../wp-load.php');
+
+    if ($wp_load === false || !is_readable($wp_load)) {
+        throw new RuntimeException('Could not locate wp-load.php for cache purge.');
+    }
+
+    require_once $wp_load;
+    $loaded = true;
+}
+
+function codru_purge_litespeed_cache(): void
+{
+    codru_load_wordpress();
+
+    if (!defined('LITESPEED_PURGE_SILENT')) {
+        define('LITESPEED_PURGE_SILENT', true);
+    }
+
+    if (!class_exists('\LiteSpeed\Purge')) {
+        fwrite(STDERR, "LiteSpeed Cache is not active; skipped cache purge.\n");
+
+        return;
+    }
+
+    \LiteSpeed\Purge::purge_all_lscache('CODRU ticket price sync');
+
+    printf("Queued LiteSpeed page cache purge.\n");
+}
+
 try {
+    $previous_tickets = [];
+
+    if (file_exists($output_path)) {
+        $previous_payload = json_decode((string) file_get_contents($output_path), true);
+
+        if (json_last_error() === JSON_ERROR_NONE && is_array($previous_payload['tickets'] ?? null)) {
+            $previous_tickets = $previous_payload['tickets'];
+        }
+    }
+
     $html = codru_fetch_ticket_page($source_url);
     $tickets = codru_parse_tickets($html);
 
@@ -150,6 +219,16 @@ try {
     }
 
     printf("Wrote %d ticket(s) to %s\n", count($tickets), $output_path);
+
+    if (codru_ticket_prices_changed($previous_tickets, $tickets)) {
+        try {
+            codru_purge_litespeed_cache();
+        } catch (Throwable $purge_exception) {
+            fwrite(STDERR, 'LiteSpeed cache purge failed: ' . $purge_exception->getMessage() . PHP_EOL);
+        }
+    } else {
+        printf("Ticket prices unchanged; skipped LiteSpeed cache purge.\n");
+    }
 } catch (Throwable $exception) {
     fwrite(STDERR, 'Ticket scrape failed: ' . $exception->getMessage() . PHP_EOL);
     exit(1);

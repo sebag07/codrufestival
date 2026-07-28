@@ -123,6 +123,8 @@
                     
                     $options = TTO_functions::get_settings();
                     
+                    $ignore_term_order = $args['ignore_term_order'] ?? false;
+                    
                     //if admin make sure use the admin setting
                     if (is_admin())
                         {
@@ -132,7 +134,7 @@
                             if (isset($_GET['orderby']) && sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) !==  'term_order')
                                 return $clauses;
                             
-                            if ( $options['adminsort'] == "1" &&  (!isset($args['ignore_term_order']) ||  (isset($args['ignore_term_order'])  &&  $args['ignore_term_order']  !== TRUE) ) )
+                            if ($options['adminsort'] === "1" && $ignore_term_order !== true)
                                 {
                                     if ( $clauses['orderby']    ==  'ORDER BY t.name' )
                                         $clauses['orderby'] =   'ORDER BY t.term_order '. $clauses['order'] .', t.name';
@@ -145,9 +147,11 @@
                         }
                     
                     //if autosort, then force the menu_order
-                    if ($options['autosort'] === "1"   &&  (!isset($args['ignore_term_order']) ||  (isset($args['ignore_term_order'])  &&  $args['ignore_term_order']  !== TRUE) ) )
+                    if ($options['autosort'] === "1" && $ignore_term_order !== true ) 
                         {
                             $clauses['orderby'] =   'ORDER BY t.term_order';
+                            
+                            return $clauses;
                         }
                     
                     $rest_route = $GLOBALS['wp']->query_vars['rest_route'] ?? '';
@@ -160,7 +164,9 @@
                         
                     if ( $is_admin_rest &&  $options['adminsort'] === "1"   &&  defined( 'REST_REQUEST' ) && REST_REQUEST )
                         {
-                            $clauses['orderby'] =   'ORDER BY t.term_order'; 
+                            $clauses['orderby'] =   'ORDER BY t.term_order';
+                            
+                            return $clauses; 
                         } 
                         
                     return $clauses; 
