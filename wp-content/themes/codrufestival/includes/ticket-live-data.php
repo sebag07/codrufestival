@@ -73,6 +73,92 @@ function codru_read_live_tickets_payload(string $json_path): array
     return $payload['tickets'];
 }
 
+function codru_get_live_display_tickets(string $json_path): array
+{
+    $tickets = codru_read_live_tickets_payload($json_path);
+    $display_tickets = [];
+
+    foreach ($tickets as $ticket) {
+        if (empty($ticket['display_price'])) {
+            continue;
+        }
+
+        $title = (string) ($ticket['title'] ?? codru_ticket_title_from_tariff_name((string) ($ticket['name'] ?? '')));
+
+        if ($title === '') {
+            continue;
+        }
+
+        $display_tickets[] = [
+            'id' => (string) ($ticket['id'] ?? ''),
+            'title' => $title,
+            'display_price' => (string) $ticket['display_price'],
+            'category_key' => codru_ticket_category_key($title),
+        ];
+    }
+
+    usort($display_tickets, static function (array $left, array $right): int {
+        $order = [
+            'general_access' => 0,
+            'under_25' => 1,
+        ];
+
+        $left_order = $order[$left['category_key'] ?? ''] ?? 99;
+        $right_order = $order[$right['category_key'] ?? ''] ?? 99;
+
+        if ($left_order !== $right_order) {
+            return $left_order <=> $right_order;
+        }
+
+        return strcasecmp($left['title'], $right['title']);
+    });
+
+    return $display_tickets;
+}
+
+function codru_get_ticket_card_defaults(): array
+{
+    $defaults = [
+        'description' => function_exists('get_multilingual_text')
+            ? get_multilingual_text(
+                '*prețul afișat nu include taxele și comisionul de ticketing.',
+                '*The displayed price does not include taxes and the ticketing fee.',
+                'ro'
+            )
+            : '*prețul afișat nu include taxele și comisionul de ticketing.',
+        'button_url' => 'https://bilete.codrufestival.ro/',
+        'button_text' => function_exists('get_multilingual_text')
+            ? get_multilingual_text('Cumpără', 'Buy', 'ro')
+            : 'Cumpără',
+    ];
+
+    $ticket_button_url = function_exists('get_field') ? get_field('ticket_button_url', 'options') : null;
+
+    if (!empty($ticket_button_url)) {
+        $defaults['button_url'] = (string) $ticket_button_url;
+    }
+
+    $acf_rows = function_exists('get_field') ? get_field('ticket_cards_repeater', 'options') : null;
+
+    if (is_array($acf_rows) && !empty($acf_rows[0]) && is_array($acf_rows[0])) {
+        $first_row = $acf_rows[0];
+
+        if (!empty($first_row['description'])) {
+            $defaults['description'] = (string) $first_row['description'];
+        }
+
+        if (!empty($first_row['button_url'])) {
+            $defaults['button_url'] = (string) $first_row['button_url'];
+        }
+
+        if (!empty($first_row['button_text'])) {
+            $defaults['button_text'] = (string) $first_row['button_text'];
+        }
+    }
+
+    return $defaults;
+}
+
 function codru_get_live_tickets_by_category(array $tickets): array
 {
     $lookup = [];
@@ -127,16 +213,20 @@ function codru_ticket_display_snapshot(array $tickets): array
     $snapshot = [];
 
     foreach ($tickets as $ticket) {
-        $category_key = !empty($ticket['category_key'])
-            ? (string) $ticket['category_key']
-            : codru_ticket_category_key((string) ($ticket['title'] ?? $ticket['name'] ?? ''));
-
-        if ($category_key === null || $category_key === '' || empty($ticket['display_price'])) {
+        if (empty($ticket['display_price'])) {
             continue;
         }
 
-        $snapshot[$category_key] = [
-            'title' => (string) ($ticket['title'] ?? ''),
+        $title = (string) ($ticket['title'] ?? codru_ticket_title_from_tariff_name((string) ($ticket['name'] ?? '')));
+        $id = (string) ($ticket['id'] ?? '');
+        $snapshot_key = $id !== '' ? $id : codru_normalize_ticket_text($title);
+
+        if ($snapshot_key === '' || $title === '') {
+            continue;
+        }
+
+        $snapshot[$snapshot_key] = [
+            'title' => $title,
             'display_price' => (string) $ticket['display_price'],
         ];
     }
