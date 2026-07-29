@@ -2426,7 +2426,16 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 .artistsLevel3,
 .artistsLevel4,
 .artistsLevel5,
-.artistsLevel6,
+.artistsLevel6 {
+    display: block;
+    text-align: center;
+    color: var(--artist-level-color-secondary);
+}
+
+.artistsLevel1 + .artistsLevel2 {
+    padding-top: 0;
+}
+
 .artistsLevel1 div,
 .artistsLevel2 div,
 .artistsLevel3 div,

@@ -115,6 +115,21 @@ body.codru-expandable-card-open {
   transform: translateY(-3px);
 }
 
+.codru-expandable-card--static .codru-expandable-card__trigger {
+  cursor: default;
+  pointer-events: none;
+}
+
+.codru-expandable-card--static .codru-expandable-card__trigger:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: none;
+  transform: none;
+}
+
+.codru-expandable-card--static .codru-expandable-card__trigger:hover .codru-expandable-card__media img {
+  transform: none;
+}
+
 .codru-expandable-card__media {
   background: rgba(255, 255, 255, 0.08);
   display: block;

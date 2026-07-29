@@ -6,7 +6,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
-    "artists:spotify": "node scripts/fetch-spotify-artists.mjs"
+    "artists:spotify": "node scripts/fetch-spotify-artists.mjs",
+    "artists:sync-poster": "node scripts/sync-poster-artists.mjs"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "4.7.0",

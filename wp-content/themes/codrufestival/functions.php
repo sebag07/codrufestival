@@ -484,6 +484,8 @@ function codrufestival_build_artist_card_from_json($artist) {
         $socials['spotify'] = $spotify_url;
     }
 
+    $expandable = !empty($spotify_url) || !empty($socials['spotify']);
+
     return array(
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
         'title' => $artist['name'],
@@ -497,6 +499,7 @@ function codrufestival_build_artist_card_from_json($artist) {
         'genres' => $genres,
         'followers' => $artist['followers'] ?? null,
         'popularity' => $artist['popularity'] ?? null,
+        'expandable' => $expandable,
     );
 }
 

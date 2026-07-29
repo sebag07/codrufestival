@@ -106,6 +106,8 @@ foreach ($artists as $artist) {
         $socials['spotify'] = $spotify_url;
     }
 
+    $expandable = !empty($spotify_url) || !empty($socials['spotify']);
+
     $has_artist_card_media = $has_artist_card_media || !empty($artist_image) || !empty($spotify_embed_url);
     $artist_cards[] = [
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
@@ -123,6 +125,7 @@ foreach ($artists as $artist) {
         'genres' => $genres,
         'followers' => $artist['followers'] ?? null,
         'popularity' => $artist['popularity'] ?? null,
+        'expandable' => $expandable,
     ];
 }
 

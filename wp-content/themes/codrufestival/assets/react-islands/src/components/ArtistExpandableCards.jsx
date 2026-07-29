@@ -59,12 +59,16 @@ export function ArtistExpandableCards({
         const performanceMeta = compact([artist.day || artist.dayLabel || artist.schedule, artist.stage]);
         const description = showPerformanceMeta ? performanceMeta.join(' | ') : '';
 
+        const hasSpotifyLink = Boolean(artist.spotifyUrl || artist.socials?.spotify);
+        const expandable = artist.expandable ?? hasSpotifyLink;
+
         return (
           <ExpandableCard
             key={artist.id || `${artist.title}-${index}`}
             title={artist.title}
             src={artist.image}
             description={description}
+            expandable={expandable}
             className="codru-artist-expandable-cards__card"
             classNameExpanded="codru-artist-expandable-cards__expanded"
           >

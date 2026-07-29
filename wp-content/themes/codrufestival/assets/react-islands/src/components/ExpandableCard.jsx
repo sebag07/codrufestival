@@ -34,6 +34,7 @@ export function ExpandableCard({
   children,
   className = '',
   classNameExpanded = '',
+  expandable = true,
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const closeButtonRef = useRef(null);
@@ -62,8 +63,32 @@ export function ExpandableCard({
     };
   }, [isExpanded]);
 
+  const cardClassName = `codru-expandable-card ${expandable ? '' : 'codru-expandable-card--static'} ${className}`.trim();
+
+  if (!expandable) {
+    return (
+      <article className={cardClassName}>
+        <div className="codru-expandable-card__trigger">
+          <span className="codru-expandable-card__media" aria-hidden={!src}>
+            {src ? (
+              <img src={src} alt="" loading="lazy" />
+            ) : (
+              <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
+            )}
+          </span>
+          <span className="codru-expandable-card__summary">
+            {description ? <span className="codru-expandable-card__description">{description}</span> : null}
+            <span className="codru-expandable-card__title">
+              <TitleText value={title} />
+            </span>
+          </span>
+        </div>
+      </article>
+    );
+  }
+
   return (
-    <article className={`codru-expandable-card ${className}`.trim()}>
+    <article className={cardClassName}>
       <motion.button
         layoutId={`card-${layoutId}`}
         type="button"

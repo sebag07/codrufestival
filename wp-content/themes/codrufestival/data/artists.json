@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-05-14T14:13:18Z",
+  "updated_at": "2026-07-29T14:08:05.583Z",
   "artists": [
     {
       "id": "gipsy-kings",
@@ -42,129 +42,89 @@
       ]
     },
     {
-      "id": "puya",
-      "name": "Puya",
+      "id": "sars",
+      "name": "S.A.R.S.",
       "level": "level2",
-      "spotify_id": "0Dn3AfYwq9cWRhDqtfelNE",
-      "spotify_url": "https://open.spotify.com/artist/0Dn3AfYwq9cWRhDqtfelNE",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/0Dn3AfYwq9cWRhDqtfelNE?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb769faf7c8282fbf5aceacfac",
+      "spotify_id": "5EAksdVB25PQAbZTl9GmFV",
+      "spotify_url": "https://open.spotify.com/artist/5EAksdVB25PQAbZTl9GmFV",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/5EAksdVB25PQAbZTl9GmFV?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb8c3ea78626c309fd51caee6d",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "Puya este una dintre vocile definitorii ale hip-hopului românesc, cunoscut atât pentru activitatea solo, cât și pentru La Familia. Piesele lui combină observația socială, limbajul direct și refrene memorabile care au rămas în cultura urbană locală.",
+      "description": "S.A.R.S. (Sveže Amputirana Ruka Satrijanija) este o trupă de alternative rock din Belgrad, activă din 2006. Soundul lor amestecă pop rock, reggae, blues, jazz și hip-hop cu muzica etnică sârbă, devenind una dintre cele mai influente formații ale noii scene serbe.",
       "socials": {
-        "facebook": "https://www.facebook.com/puyaoficial/",
-        "youtube": "https://www.youtube.com/channel/UC-vb-BSn9CUgoDS8mav1b-Q",
+        "facebook": "https://www.facebook.com/sarsbend/",
+        "youtube": "https://www.youtube.com/user/sarsupload",
         "tiktok": "",
         "twitter": "",
-        "instagram": "https://www.instagram.com/puya_dragos/",
-        "spotify": "https://open.spotify.com/artist/0Dn3AfYwq9cWRhDqtfelNE"
+        "instagram": "https://www.instagram.com/sarsbend/",
+        "spotify": "https://open.spotify.com/artist/5EAksdVB25PQAbZTl9GmFV"
       },
-      "spotify_name": "Puya",
+      "spotify_name": "S.A.R.S.",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb769faf7c8282fbf5aceacfac",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb8c3ea78626c309fd51caee6d",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab67616100005174769faf7c8282fbf5aceacfac",
+          "url": "https://i.scdn.co/image/ab676161000051748c3ea78626c309fd51caee6d",
           "height": 320,
           "width": 320
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000f178769faf7c8282fbf5aceacfac",
+          "url": "https://i.scdn.co/image/ab6761610000f1788c3ea78626c309fd51caee6d",
           "height": 160,
           "width": 160
         }
       ]
     },
     {
-      "id": "rava",
-      "name": "Rava",
-      "level": "level3",
-      "spotify_id": "6ocuMBOl5OFS3AViv3DnG6",
-      "spotify_url": "https://open.spotify.com/artist/6ocuMBOl5OFS3AViv3DnG6",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/6ocuMBOl5OFS3AViv3DnG6?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5ebb3191cec6a600aa0f4846211",
+      "id": "ternipe",
+      "name": "Ternipe",
+      "level": "level2",
+      "spotify_id": "4EWrlaVQyHuZnYcf1PYVnk",
+      "spotify_url": "https://open.spotify.com/artist/4EWrlaVQyHuZnYcf1PYVnk",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/4EWrlaVQyHuZnYcf1PYVnk?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b273c012932175d2315131317012",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "RAVA este un artist român de trap și hip-hop, asociat cu noul val urban și cu un sound întunecat, energic. A crescut prin albume precum TRAUME & COȘMARURI, CO$ANO$TRA și LUCIFER, plus colaborări frecvente cu artiști din scena locală.",
+      "description": "Ternipe este un grup maghiar de muzică romani format în 1989, dedicat colectării și reinventării tradițiilor muzicale rome. Repertoriul lor combină folclor instrumental și vocal cu armonii specifice culturii balcanice, păstrând vie moștenirea culturală romani.",
       "socials": {
         "facebook": "",
         "youtube": "",
         "tiktok": "",
         "twitter": "",
-        "instagram": "https://www.instagram.com/rava.rva/",
-        "spotify": "https://open.spotify.com/artist/6ocuMBOl5OFS3AViv3DnG6"
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/4EWrlaVQyHuZnYcf1PYVnk"
       },
-      "spotify_name": "RAVA",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab6761610000e5ebb3191cec6a600aa0f4846211",
+          "url": "https://i.scdn.co/image/ab67616d0000b273c012932175d2315131317012",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab67616100005174b3191cec6a600aa0f4846211",
-          "height": 320,
-          "width": 320
+          "url": "https://i.scdn.co/image/ab67616d00001e02c012932175d2315131317012",
+          "height": 300,
+          "width": 300
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000f178b3191cec6a600aa0f4846211",
-          "height": 160,
-          "width": 160
+          "url": "https://i.scdn.co/image/ab67616d00004851c012932175d2315131317012",
+          "height": 64,
+          "width": 64
         }
-      ]
-    },
-    {
-      "id": "robin-and-the-backstabbers",
-      "name": "Robin and the Backstabbers",
-      "level": "level2",
-      "spotify_id": "7y2DXdRackYULQq4qsCxpL",
-      "spotify_url": "https://open.spotify.com/artist/7y2DXdRackYULQq4qsCxpL",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/7y2DXdRackYULQq4qsCxpL?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb1e2b93bfe4d4eadcc914e159",
-      "image_override": "",
-      "genres": [],
-      "followers": null,
-      "popularity": null,
-      "description": "Robin and the Backstabbers este o trupă indie rock din București, cu un univers liric distinct și o estetică melodramatic-pop. Discografia lor, de la Stalingrad la Vladivostok, combină poezie urbană, alternative rock și refrene cu identitate proprie.",
-      "socials": {
-        "facebook": "https://www.facebook.com/RobinandtheBackstabbers/",
-        "youtube": "https://www.youtube.com/@RatBackstabbers",
-        "tiktok": "",
-        "twitter": "https://twitter.com/RatBackstabbers",
-        "instagram": "https://www.instagram.com/robinandthebackstabbers/",
-        "spotify": "https://open.spotify.com/artist/7y2DXdRackYULQq4qsCxpL"
-      },
-      "spotify_name": "Robin and the Backstabbers",
-      "images": [
-        {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb1e2b93bfe4d4eadcc914e159",
-          "height": 640,
-          "width": 640
-        },
-        {
-          "url": "https://i.scdn.co/image/ab676161000051741e2b93bfe4d4eadcc914e159",
-          "height": 320,
-          "width": 320
-        },
-        {
-          "url": "https://i.scdn.co/image/ab6761610000f1781e2b93bfe4d4eadcc914e159",
-          "height": 160,
-          "width": 160
-        }
-      ]
+      ],
+      "spotify_name": "Ternipe"
     },
     {
       "id": "alternosfera",
       "name": "Alternosfera",
-      "level": "level2",
+      "level": "level3",
       "spotify_id": "2Bfpg6VC7SNEQKez2uXyuP",
       "spotify_url": "https://open.spotify.com/artist/2Bfpg6VC7SNEQKez2uXyuP",
       "spotify_embed_url": "https://open.spotify.com/embed/artist/2Bfpg6VC7SNEQKez2uXyuP?utm_source=generator",
@@ -202,160 +162,160 @@
       ]
     },
     {
-      "id": "albert-nbn",
-      "name": "Albert NBN",
+      "id": "subcarpati",
+      "name": "Subcarpați",
       "level": "level3",
-      "spotify_id": "33CSqdyro89aOFiZb5fU5U",
-      "spotify_url": "https://open.spotify.com/artist/33CSqdyro89aOFiZb5fU5U",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/33CSqdyro89aOFiZb5fU5U?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb0095ebe227edf64b16b27768",
+      "spotify_id": "0i0rwrrIFDx2i2bI23GwVG",
+      "spotify_url": "https://open.spotify.com/artist/0i0rwrrIFDx2i2bI23GwVG",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0i0rwrrIFDx2i2bI23GwVG?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb35f6a99239da5ac01fcab573",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "Albert NBN este un rapper român din noua generație, cunoscut pentru energia trap și pentru colaborări cu artiști precum MGK666, RAVA și Petre Ștefan. A atras atenția prin piese cu sound direct, orientat spre cluburi și scena urbană tânără.",
+      "description": "Subcarpați este un proiect românesc lansat în 2010 de MC Bean (Alexe Marius Andrei), solistul trupei Șuie Paparude. Muzica lor îmbină hip-hop și electronic cu folclor românesc, într-un stil descris ca „folclor contemporan”, cu piese precum Pankareala și Balada Românului reinterpretate pe ritmuri moderne.",
       "socials": {
-        "facebook": "",
-        "youtube": "https://www.youtube.com/channel/UC7PnD6AsoWiahw4bV0bPS7A",
+        "facebook": "https://www.facebook.com/subcarpati",
+        "youtube": "https://www.youtube.com/@SubcarpatiRO",
         "tiktok": "",
         "twitter": "",
-        "instagram": "https://www.instagram.com/itsbetobih/",
-        "spotify": "https://open.spotify.com/artist/33CSqdyro89aOFiZb5fU5U"
+        "instagram": "https://www.instagram.com/subcarpati_oficial",
+        "spotify": "https://open.spotify.com/artist/0i0rwrrIFDx2i2bI23GwVG"
       },
-      "spotify_name": "AlbertNbn",
+      "spotify_name": "Subcarpaţi",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb0095ebe227edf64b16b27768",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb35f6a99239da5ac01fcab573",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab676161000051740095ebe227edf64b16b27768",
+          "url": "https://i.scdn.co/image/ab6761610000517435f6a99239da5ac01fcab573",
           "height": 320,
           "width": 320
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000f1780095ebe227edf64b16b27768",
+          "url": "https://i.scdn.co/image/ab6761610000f17835f6a99239da5ac01fcab573",
           "height": 160,
           "width": 160
         }
       ]
     },
     {
-      "id": "mgk",
-      "name": "MGK",
+      "id": "puya",
+      "name": "Puya",
       "level": "level3",
-      "spotify_id": "6yTJ8tQyoUxgf6aqbpsXhQ",
-      "spotify_url": "https://open.spotify.com/artist/6yTJ8tQyoUxgf6aqbpsXhQ",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/6yTJ8tQyoUxgf6aqbpsXhQ?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb22c78cbc4acdbf7809956066",
+      "spotify_id": "0Dn3AfYwq9cWRhDqtfelNE",
+      "spotify_url": "https://open.spotify.com/artist/0Dn3AfYwq9cWRhDqtfelNE",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0Dn3AfYwq9cWRhDqtfelNE?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb769faf7c8282fbf5aceacfac",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "MGK666 este un trapper român din București, asociat cu zona Militari și cu un stil dur, stradal. A devenit cunoscut prin piese precum M6, alături de Albert NBN, și continuă să fie o prezență puternică în trapul românesc.",
+      "description": "Puya este una dintre vocile definitorii ale hip-hopului românesc, cunoscut atât pentru activitatea solo, cât și pentru La Familia. Piesele lui combină observația socială, limbajul direct și refrene memorabile care au rămas în cultura urbană locală.",
       "socials": {
-        "facebook": "",
-        "youtube": "https://www.youtube.com/@mgk666",
+        "facebook": "https://www.facebook.com/puyaoficial/",
+        "youtube": "https://www.youtube.com/channel/UC-vb-BSn9CUgoDS8mav1b-Q",
         "tiktok": "",
         "twitter": "",
-        "instagram": "https://www.instagram.com/mgk666bigboss/",
-        "spotify": "https://open.spotify.com/artist/6yTJ8tQyoUxgf6aqbpsXhQ"
+        "instagram": "https://www.instagram.com/puya_dragos/",
+        "spotify": "https://open.spotify.com/artist/0Dn3AfYwq9cWRhDqtfelNE"
       },
-      "spotify_name": "Mgk666",
+      "spotify_name": "Puya",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb22c78cbc4acdbf7809956066",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb769faf7c8282fbf5aceacfac",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000517422c78cbc4acdbf7809956066",
+          "url": "https://i.scdn.co/image/ab67616100005174769faf7c8282fbf5aceacfac",
           "height": 320,
           "width": 320
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000f17822c78cbc4acdbf7809956066",
+          "url": "https://i.scdn.co/image/ab6761610000f178769faf7c8282fbf5aceacfac",
           "height": 160,
           "width": 160
         }
       ]
     },
     {
-      "id": "idk",
-      "name": "IDK",
+      "id": "surorile-osoianu-si-lupii-lui-calancea",
+      "name": "Lupii Lui Calancea & Surorile Osoianu",
       "level": "level3",
-      "spotify_id": "6nyKhzPeKV9pzpYN0malXP",
-      "spotify_url": "https://open.spotify.com/artist/6nyKhzPeKV9pzpYN0malXP",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/6nyKhzPeKV9pzpYN0malXP?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5ebc91df9205a6c7a74c5a3a9e6",
+      "spotify_id": "24uAdKaf9xT9Y2Bp8UEN6L",
+      "spotify_url": "https://open.spotify.com/artist/24uAdKaf9xT9Y2Bp8UEN6L",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/24uAdKaf9xT9Y2Bp8UEN6L?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b273576c73b9625a6a78e4dde3e5",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "IDK este un rapper român din Buzău, parte din noua generație urbană și semnat la Def Jam Recordings Romania. Albumele NONCHALANT și CARTEA JUNGLEI l-au impus prin trap melodic, energie tânără și colaborări relevante pe scena locală.",
+      "description": "Lupii lui Calancea și Surorile Osoianu aduc împreună folclorul moldovenesc, energia rock și aranjamente contemporane. Colaborarea lor transformă cântece tradiționale în spectacole ample, cu voci autentice, ritmuri puternice și o legătură vie cu rădăcinile.",
       "socials": {
         "facebook": "",
         "youtube": "",
         "tiktok": "",
         "twitter": "",
-        "instagram": "https://www.instagram.com/idkxsh/",
-        "spotify": "https://open.spotify.com/artist/6nyKhzPeKV9pzpYN0malXP"
+        "instagram": "",
+        "spotify": "https://open.spotify.com/artist/24uAdKaf9xT9Y2Bp8UEN6L"
       },
-      "spotify_name": "IDK",
+      "spotify_name": "Surorile Osoianu",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab6761610000e5ebc91df9205a6c7a74c5a3a9e6",
+          "url": "https://i.scdn.co/image/ab67616d0000b273576c73b9625a6a78e4dde3e5",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab67616100005174c91df9205a6c7a74c5a3a9e6",
-          "height": 320,
-          "width": 320
+          "url": "https://i.scdn.co/image/ab67616d00001e02576c73b9625a6a78e4dde3e5",
+          "height": 300,
+          "width": 300
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000f178c91df9205a6c7a74c5a3a9e6",
-          "height": 160,
-          "width": 160
+          "url": "https://i.scdn.co/image/ab67616d00004851576c73b9625a6a78e4dde3e5",
+          "height": 64,
+          "width": 64
         }
       ]
     },
     {
-      "id": "petre-stefan",
-      "name": "Petre Stefan",
+      "id": "damian-and-brothers",
+      "name": "Damian & Brothers",
       "level": "level3",
-      "spotify_id": "0yjc2FN5zju7xyuJsTfGkh",
-      "spotify_url": "https://open.spotify.com/artist/0yjc2FN5zju7xyuJsTfGkh",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/0yjc2FN5zju7xyuJsTfGkh?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eba6e075b7b5c24b9a85b44b14",
+      "spotify_id": "36ddmqY1toa8sWvyYDBqFn",
+      "spotify_url": "https://open.spotify.com/artist/36ddmqY1toa8sWvyYDBqFn",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/36ddmqY1toa8sWvyYDBqFn?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb9bb1627c2a9b76ab4100fff6",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "Petre Ștefan este un artist urban român semnat la Def Jam Recordings Romania, cunoscut pentru rap melodic și colaborări cu artiști majori din noul val. Proiecte precum CENTAUR și Direct din Tei i-au consolidat poziția în scena hip-hop locală.",
+      "description": "Damian & Brothers este proiectul lui Damian Drăghici, virtuoz al naiului și câștigător al unui Grammy, alături de o orchestră de lăutari. Din 2001, formația aduce muzica romă în mainstream, combinând tradiția lăutărească cu jazz, rock și pop, pe scene din România și din lume.",
       "socials": {
-        "facebook": "",
-        "youtube": "https://www.youtube.com/channel/UCSZuxIzKqO-InKQRCXzyXvQ",
-        "tiktok": "https://www.tiktok.com/@petrestefan_11",
+        "facebook": "https://www.facebook.com/damiandraghici.unomsiatat",
+        "youtube": "https://www.youtube.com/@DamianDraghici",
+        "tiktok": "",
         "twitter": "",
-        "instagram": "https://www.instagram.com/petrestefan_11/",
-        "spotify": "https://open.spotify.com/artist/0yjc2FN5zju7xyuJsTfGkh"
+        "instagram": "https://www.instagram.com/damiandraghiciandbrothers",
+        "spotify": "https://open.spotify.com/artist/36ddmqY1toa8sWvyYDBqFn"
       },
-      "spotify_name": "Petre Stefan",
+      "spotify_name": "Damian & Brothers",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab6761610000e5eba6e075b7b5c24b9a85b44b14",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb9bb1627c2a9b76ab4100fff6",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab67616100005174a6e075b7b5c24b9a85b44b14",
+          "url": "https://i.scdn.co/image/ab676161000051749bb1627c2a9b76ab4100fff6",
           "height": 320,
           "width": 320
         },
         {
-          "url": "https://i.scdn.co/image/ab6761610000f178a6e075b7b5c24b9a85b44b14",
+          "url": "https://i.scdn.co/image/ab6761610000f1789bb1627c2a9b76ab4100fff6",
           "height": 160,
           "width": 160
         }
@@ -364,7 +324,7 @@
     {
       "id": "e-an-na",
       "name": "E-AN-NA",
-      "level": "level2",
+      "level": "level3",
       "spotify_id": "2hhLQDmEJqObRlCHWbyeQF",
       "spotify_url": "https://open.spotify.com/artist/2hhLQDmEJqObRlCHWbyeQF",
       "spotify_embed_url": "https://open.spotify.com/embed/artist/2hhLQDmEJqObRlCHWbyeQF?utm_source=generator",
@@ -402,9 +362,413 @@
       ]
     },
     {
+      "id": "hvnds",
+      "name": "HVNDS",
+      "level": "level3",
+      "spotify_id": "46N42YdqniE8UPy3fODQRt",
+      "spotify_url": "https://open.spotify.com/artist/46N42YdqniE8UPy3fODQRt",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/46N42YdqniE8UPy3fODQRt?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb0f57ce5c8f0158304a0c6783",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "HVNDS este o trupă românească de metal modern, fondată în 2016, cu un sound care îmbină agresivitatea cu emoția. Albume precum Animal și Sintetic, precum și piese ca Vin viu plec mort sau DOR, i-au adus sold-out-uri, festivaluri majore și o prezență tot mai puternică în scena rock și trap-metal locală.",
+      "socials": {
+        "facebook": "https://www.facebook.com/hvnds",
+        "youtube": "https://www.youtube.com/@HVNDSOfficial",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/hvndsofficial/",
+        "spotify": "https://open.spotify.com/artist/46N42YdqniE8UPy3fODQRt"
+      },
+      "spotify_name": "HVNDS",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb0f57ce5c8f0158304a0c6783",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051740f57ce5c8f0158304a0c6783",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1780f57ce5c8f0158304a0c6783",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "robin-and-the-backstabbers",
+      "name": "Robin and the Backstabbers",
+      "level": "level3",
+      "spotify_id": "7y2DXdRackYULQq4qsCxpL",
+      "spotify_url": "https://open.spotify.com/artist/7y2DXdRackYULQq4qsCxpL",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/7y2DXdRackYULQq4qsCxpL?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb1e2b93bfe4d4eadcc914e159",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Robin and the Backstabbers este o trupă indie rock din București, cu un univers liric distinct și o estetică melodramatic-pop. Discografia lor, de la Stalingrad la Vladivostok, combină poezie urbană, alternative rock și refrene cu identitate proprie.",
+      "socials": {
+        "facebook": "https://www.facebook.com/RobinandtheBackstabbers/",
+        "youtube": "https://www.youtube.com/@RatBackstabbers",
+        "tiktok": "",
+        "twitter": "https://twitter.com/RatBackstabbers",
+        "instagram": "https://www.instagram.com/robinandthebackstabbers/",
+        "spotify": "https://open.spotify.com/artist/7y2DXdRackYULQq4qsCxpL"
+      },
+      "spotify_name": "Robin and the Backstabbers",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb1e2b93bfe4d4eadcc914e159",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051741e2b93bfe4d4eadcc914e159",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1781e2b93bfe4d4eadcc914e159",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "dj-ma-ta",
+      "name": "DJ MĂ-TA <br> <small>PRESENTS: RUP TAKEOVER</small>",
+      "level": "level3",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "images/artists/dj-ma-ta.jpg",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "DJ MĂ-TA este o DJ și producătoare din România, cunoscută pentru mixurile care combină techno cu manele și sunete balcanice. De la experimente făcute acasă pentru prieteni a ajuns pe scene precum Untold, Electric Castle și Neversea, cu un stil provocator, energic și imposibil de ignorat.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/djmata/",
+        "spotify": "https://open.spotify.com/user/224ofqzqpfxqorwzrorol63uy?si=JJTJAcv4iSUCQ_VuU4DqRjw&utm_sourcecopy-link"
+      }
+    },
+    {
+      "id": "balkandreea-and-the-balkan-sisters",
+      "name": "Balkandreea & The Balkan Sisters",
+      "level": "level3",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/balkandreea/?hl=en",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "adelin-mm",
+      "name": "Adelin mm",
+      "level": "level4",
+      "spotify_id": "6QAHe9M8Tp7mSnS9tupSHU",
+      "spotify_url": "https://open.spotify.com/artist/6QAHe9M8Tp7mSnS9tupSHU",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6QAHe9M8Tp7mSnS9tupSHU?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebdecf4c1833c77b200e954a0c",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Adelin mm este un artist hip-hop român din noua generație, remarcat prin energia trap și flow-ul direct. Hitul viral OVO, alături de proiecte precum MONEYMAKER și SKINNY LEGEND, l-au poziționat rapid printre numele în ascensiune ale scenei urbană locale.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/adelinmoneymaker/",
+        "spotify": "https://open.spotify.com/artist/6QAHe9M8Tp7mSnS9tupSHU"
+      },
+      "spotify_name": "AdelinMM",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebdecf4c1833c77b200e954a0c",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174decf4c1833c77b200e954a0c",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178decf4c1833c77b200e954a0c",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "albert-nbn",
+      "name": "Albert NBN",
+      "level": "level4",
+      "spotify_id": "33CSqdyro89aOFiZb5fU5U",
+      "spotify_url": "https://open.spotify.com/artist/33CSqdyro89aOFiZb5fU5U",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/33CSqdyro89aOFiZb5fU5U?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb0095ebe227edf64b16b27768",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Albert NBN este un rapper român din noua generație, cunoscut pentru energia trap și pentru colaborări cu artiști precum MGK666, RAVA și Petre Ștefan. A atras atenția prin piese cu sound direct, orientat spre cluburi și scena urbană tânără.",
+      "socials": {
+        "facebook": "",
+        "youtube": "https://www.youtube.com/channel/UC7PnD6AsoWiahw4bV0bPS7A",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/itsbetobih/",
+        "spotify": "https://open.spotify.com/artist/33CSqdyro89aOFiZb5fU5U"
+      },
+      "spotify_name": "AlbertNbn",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb0095ebe227edf64b16b27768",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051740095ebe227edf64b16b27768",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1780095ebe227edf64b16b27768",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "calinacho",
+      "name": "Calinacho",
+      "level": "level4",
+      "spotify_id": "050D4ZE1dXVfLSrQADtEu3",
+      "spotify_url": "https://open.spotify.com/artist/050D4ZE1dXVfLSrQADtEu3",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/050D4ZE1dXVfLSrQADtEu3?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebdc0cbcaf6936ad03f7bc8998",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Calinacho",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebdc0cbcaf6936ad03f7bc8998",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174dc0cbcaf6936ad03f7bc8998",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178dc0cbcaf6936ad03f7bc8998",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "ian",
+      "name": "Ian",
+      "level": "level4",
+      "spotify_id": "0GoJXmDr5UBG8ValCZe4om",
+      "spotify_url": "https://open.spotify.com/artist/0GoJXmDr5UBG8ValCZe4om",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0GoJXmDr5UBG8ValCZe4om?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb47492162d7134b06f2ec57b1",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Ian",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb47492162d7134b06f2ec57b1",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000517447492162d7134b06f2ec57b1",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f17847492162d7134b06f2ec57b1",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "idk",
+      "name": "IDK",
+      "level": "level4",
+      "spotify_id": "6nyKhzPeKV9pzpYN0malXP",
+      "spotify_url": "https://open.spotify.com/artist/6nyKhzPeKV9pzpYN0malXP",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6nyKhzPeKV9pzpYN0malXP?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebc91df9205a6c7a74c5a3a9e6",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "IDK este un rapper român din Buzău, parte din noua generație urbană și semnat la Def Jam Recordings Romania. Albumele NONCHALANT și CARTEA JUNGLEI l-au impus prin trap melodic, energie tânără și colaborări relevante pe scena locală.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/idkxsh/",
+        "spotify": "https://open.spotify.com/artist/6nyKhzPeKV9pzpYN0malXP"
+      },
+      "spotify_name": "IDK",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebc91df9205a6c7a74c5a3a9e6",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174c91df9205a6c7a74c5a3a9e6",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178c91df9205a6c7a74c5a3a9e6",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "lucawts",
+      "name": "LUCAWTS",
+      "level": "level4",
+      "spotify_id": "6JPKvFBScSGXNr7D3B6fou",
+      "spotify_url": "https://open.spotify.com/artist/6JPKvFBScSGXNr7D3B6fou",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6JPKvFBScSGXNr7D3B6fou?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb0d4eacd195cf08e679ecc1e5",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "LUCAWTS este numele de scenă al lui Luca Ștefan, rapper și producător din București. Cu un trap modern, flow-uri ascuțite și colaborări din scena locală, proiecte precum albumul LUCHIAN îi consolidează poziția în hip-hop-ul românesc contemporan.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/lucaawts/",
+        "spotify": "https://open.spotify.com/artist/6JPKvFBScSGXNr7D3B6fou"
+      },
+      "spotify_name": "lucawts",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb0d4eacd195cf08e679ecc1e5",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051740d4eacd195cf08e679ecc1e5",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1780d4eacd195cf08e679ecc1e5",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "mgk",
+      "name": "MGK",
+      "level": "level4",
+      "spotify_id": "6yTJ8tQyoUxgf6aqbpsXhQ",
+      "spotify_url": "https://open.spotify.com/artist/6yTJ8tQyoUxgf6aqbpsXhQ",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6yTJ8tQyoUxgf6aqbpsXhQ?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb22c78cbc4acdbf7809956066",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "MGK666 este un trapper român din București, asociat cu zona Militari și cu un stil dur, stradal. A devenit cunoscut prin piese precum M6, alături de Albert NBN, și continuă să fie o prezență puternică în trapul românesc.",
+      "socials": {
+        "facebook": "",
+        "youtube": "https://www.youtube.com/@mgk666",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/mgk666bigboss/",
+        "spotify": "https://open.spotify.com/artist/6yTJ8tQyoUxgf6aqbpsXhQ"
+      },
+      "spotify_name": "Mgk666",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb22c78cbc4acdbf7809956066",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000517422c78cbc4acdbf7809956066",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f17822c78cbc4acdbf7809956066",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
       "id": "noua-unspe",
       "name": "NOUA UNSPE",
-      "level": "level3",
+      "level": "level4",
       "spotify_id": "1fYKCWegShlSGe4yATnpdp",
       "spotify_url": "https://open.spotify.com/artist/1fYKCWegShlSGe4yATnpdp",
       "spotify_embed_url": "https://open.spotify.com/embed/artist/1fYKCWegShlSGe4yATnpdp?utm_source=generator",
@@ -442,40 +806,1234 @@
       ]
     },
     {
-      "id": "surorile-osoianu-si-lupii-lui-calancea",
-      "name": "Lupii Lui Calancea & Surorile Osoianu",
-      "level": "level2",
-      "spotify_id": "24uAdKaf9xT9Y2Bp8UEN6L",
-      "spotify_url": "https://open.spotify.com/artist/24uAdKaf9xT9Y2Bp8UEN6L",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/24uAdKaf9xT9Y2Bp8UEN6L?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab67616d0000b273576c73b9625a6a78e4dde3e5",
+      "id": "oscar",
+      "name": "OSCAR",
+      "level": "level4",
+      "spotify_id": "6dKPNkSEQOrRRvZz63Y47F",
+      "spotify_url": "https://open.spotify.com/artist/6dKPNkSEQOrRRvZz63Y47F",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6dKPNkSEQOrRRvZz63Y47F?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb2e02ff69613849e075494d35",
       "image_override": "",
       "genres": [],
       "followers": null,
       "popularity": null,
-      "description": "Lupii lui Calancea și Surorile Osoianu aduc împreună folclorul moldovenesc, energia rock și aranjamente contemporane. Colaborarea lor transformă cântece tradiționale în spectacole ample, cu voci autentice, ritmuri puternice și o legătură vie cu rădăcinile.",
+      "description": "OSCAR (Ștefan Căpraru) este un rapper și compozitor din București, activ din adolescență. De la freestyle-ul de la Next Star și primele piese până la albume ca Apă și Înapoi La Viață, a evoluat spre trap și pop-rap, cu o identitate sonoră tot mai matură și recunoscută.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "https://www.tiktok.com/@oscarfaceit",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/oscarfaceit/",
+        "spotify": "https://open.spotify.com/artist/6dKPNkSEQOrRRvZz63Y47F"
+      },
+      "spotify_name": "Oscar",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb2e02ff69613849e075494d35",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051742e02ff69613849e075494d35",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1782e02ff69613849e075494d35",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "petre-stefan",
+      "name": "Petre Stefan",
+      "level": "level4",
+      "spotify_id": "0yjc2FN5zju7xyuJsTfGkh",
+      "spotify_url": "https://open.spotify.com/artist/0yjc2FN5zju7xyuJsTfGkh",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0yjc2FN5zju7xyuJsTfGkh?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eba6e075b7b5c24b9a85b44b14",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Petre Ștefan este un artist urban român semnat la Def Jam Recordings Romania, cunoscut pentru rap melodic și colaborări cu artiști majori din noul val. Proiecte precum CENTAUR și Direct din Tei i-au consolidat poziția în scena hip-hop locală.",
+      "socials": {
+        "facebook": "",
+        "youtube": "https://www.youtube.com/channel/UCSZuxIzKqO-InKQRCXzyXvQ",
+        "tiktok": "https://www.tiktok.com/@petrestefan_11",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/petrestefan_11/",
+        "spotify": "https://open.spotify.com/artist/0yjc2FN5zju7xyuJsTfGkh"
+      },
+      "spotify_name": "Petre Stefan",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eba6e075b7b5c24b9a85b44b14",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174a6e075b7b5c24b9a85b44b14",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178a6e075b7b5c24b9a85b44b14",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "rava",
+      "name": "Rava",
+      "level": "level4",
+      "spotify_id": "6ocuMBOl5OFS3AViv3DnG6",
+      "spotify_url": "https://open.spotify.com/artist/6ocuMBOl5OFS3AViv3DnG6",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6ocuMBOl5OFS3AViv3DnG6?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebb3191cec6a600aa0f4846211",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "RAVA este un artist român de trap și hip-hop, asociat cu noul val urban și cu un sound întunecat, energic. A crescut prin albume precum TRAUME & COȘMARURI, CO$ANO$TRA și LUCIFER, plus colaborări frecvente cu artiști din scena locală.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/rava.rva/",
+        "spotify": "https://open.spotify.com/artist/6ocuMBOl5OFS3AViv3DnG6"
+      },
+      "spotify_name": "RAVA",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebb3191cec6a600aa0f4846211",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174b3191cec6a600aa0f4846211",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178b3191cec6a600aa0f4846211",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "vanilla",
+      "name": "VANILLA",
+      "level": "level4",
+      "spotify_id": "1fofiypUoSWqYH2i4frmHn",
+      "spotify_url": "https://open.spotify.com/artist/1fofiypUoSWqYH2i4frmHn",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/1fofiypUoSWqYH2i4frmHn?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb3692bc1c9ffd11d4f2c42a89",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "VANILLA este un artist urban român cu un sound centrat pe trap modern, energie virală și refrene memorabile. Piese precum DEUCESS, TRECI PESTE și PRIETENA TA l-au plasat constant în topurile din România, iar live aduce flow, atitudine și o conexiune directă cu publicul tânăr.",
+      "socials": {
+        "facebook": "",
+        "youtube": "https://www.youtube.com/@vanilllasefu",
+        "tiktok": "https://www.tiktok.com/@vanillasefu",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/vanillasefu/",
+        "spotify": "https://open.spotify.com/artist/1fofiypUoSWqYH2i4frmHn"
+      },
+      "spotify_name": "VANILLA",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb3692bc1c9ffd11d4f2c42a89",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051743692bc1c9ffd11d4f2c42a89",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1783692bc1c9ffd11d4f2c42a89",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "el-cartel-reggaeton-afterparty",
+      "name": "El Cartel Reggaeton Afterparty",
+      "level": "level4",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
       "socials": {
         "facebook": "",
         "youtube": "",
         "tiktok": "",
         "twitter": "",
         "instagram": "",
-        "spotify": "https://open.spotify.com/artist/24uAdKaf9xT9Y2Bp8UEN6L"
+        "spotify": ""
+      }
+    },
+    {
+      "id": "4awl",
+      "name": "4AWL",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "acoustic-boyz",
+      "name": "Acoustic Boyz",
+      "level": "level5",
+      "spotify_id": "1hgRAL5aWgNM6xutE503xU",
+      "spotify_url": "https://open.spotify.com/artist/1hgRAL5aWgNM6xutE503xU",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/1hgRAL5aWgNM6xutE503xU?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb220c9a575cbf4ece011d8ecf",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
       },
-      "spotify_name": "Surorile Osoianu",
+      "spotify_name": "Acoustic Boyz",
       "images": [
         {
-          "url": "https://i.scdn.co/image/ab67616d0000b273576c73b9625a6a78e4dde3e5",
+          "url": "https://i.scdn.co/image/ab6761610000e5eb220c9a575cbf4ece011d8ecf",
           "height": 640,
           "width": 640
         },
         {
-          "url": "https://i.scdn.co/image/ab67616d00001e02576c73b9625a6a78e4dde3e5",
+          "url": "https://i.scdn.co/image/ab67616100005174220c9a575cbf4ece011d8ecf",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178220c9a575cbf4ece011d8ecf",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "adrian-despot-and-cezar-popescu",
+      "name": "Adrian Despot & Cezar Popescu",
+      "level": "level5",
+      "spotify_id": "1IYl7TlgZV3jgeSHJnwL6i",
+      "spotify_url": "https://open.spotify.com/artist/1IYl7TlgZV3jgeSHJnwL6i",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/1IYl7TlgZV3jgeSHJnwL6i?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5ebdd2aca33a7cce5fd6fd460ab",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Adrian Despot",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5ebdd2aca33a7cce5fd6fd460ab",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174dd2aca33a7cce5fd6fd460ab",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178dd2aca33a7cce5fd6fd460ab",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "asaway",
+      "name": "Asaway",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "bia",
+      "name": "BIA",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "bob-ramanka",
+      "name": "Bob Ramanka",
+      "level": "level5",
+      "spotify_id": "5nidlwCOFD0dJUe8pTMNvs",
+      "spotify_url": "https://open.spotify.com/artist/5nidlwCOFD0dJUe8pTMNvs",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/5nidlwCOFD0dJUe8pTMNvs?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb107149f0efe34dd0cb90ead9",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Bob Ramanka",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb107149f0efe34dd0cb90ead9",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174107149f0efe34dd0cb90ead9",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178107149f0efe34dd0cb90ead9",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "ciresan",
+      "name": "Cireșan",
+      "level": "level5",
+      "spotify_id": "0Mj28B7EnKRpq7SzirqvNy",
+      "spotify_url": "https://open.spotify.com/artist/0Mj28B7EnKRpq7SzirqvNy",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0Mj28B7EnKRpq7SzirqvNy?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb042725ae0e72517678dab78a",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Ciresan",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb042725ae0e72517678dab78a",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174042725ae0e72517678dab78a",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178042725ae0e72517678dab78a",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "claudia-serdan-and-jimi-el-laco",
+      "name": "Claudia Șerdan & Jimi El Laco",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "cypher",
+      "name": "Cypher",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "damage-ctrl",
+      "name": "DAMAGE:CTRL",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "drew",
+      "name": "Drew",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "emu",
+      "name": "Emu",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "exob",
+      "name": "Exob",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "kayf",
+      "name": "Kayf",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "leanu",
+      "name": "Leanu",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "mandu",
+      "name": "Mandu",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "narciss",
+      "name": "Narciss",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "noid-b2b-oigan",
+      "name": "NO/ID B2B OIGĂN",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "paulvlj",
+      "name": "Paulvlj",
+      "level": "level5",
+      "spotify_id": "2YVV8vsjWOIkh6JIEhH9tO",
+      "spotify_url": "https://open.spotify.com/artist/2YVV8vsjWOIkh6JIEhH9tO",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/2YVV8vsjWOIkh6JIEhH9tO?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb2503bbfef243d89da41e4a20",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Paul Ananie",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb2503bbfef243d89da41e4a20",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051742503bbfef243d89da41e4a20",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1782503bbfef243d89da41e4a20",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "raul-prodan",
+      "name": "Raul Prodan",
+      "level": "level5",
+      "spotify_id": "0jd4rNLzxZYyxEcvOGRtO4",
+      "spotify_url": "https://open.spotify.com/artist/0jd4rNLzxZYyxEcvOGRtO4",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/0jd4rNLzxZYyxEcvOGRtO4?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb3c166b651f773b9444f810ed",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Raul Ws",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb3c166b651f773b9444f810ed",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051743c166b651f773b9444f810ed",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1783c166b651f773b9444f810ed",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "razy",
+      "name": "Razy",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "revan",
+      "name": "Revan",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "sar-casm",
+      "name": "SAR.CASM",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "soulmaze",
+      "name": "Soulmaze",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "tano",
+      "name": "Tano",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "tulvan",
+      "name": "Tulvan",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "ufo",
+      "name": "UFO",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "yoshuu",
+      "name": "Yoshuu",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "zo",
+      "name": "ZO",
+      "level": "level5",
+      "spotify_id": "6gOAgpuNfz5XqkzwdtkoOZ",
+      "spotify_url": "https://open.spotify.com/artist/6gOAgpuNfz5XqkzwdtkoOZ",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6gOAgpuNfz5XqkzwdtkoOZ?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb903a587a20418e2308135b29",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Z.O.B.",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb903a587a20418e2308135b29",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174903a587a20418e2308135b29",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178903a587a20418e2308135b29",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "zoleevee",
+      "name": "Zoleevee",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "blutrina",
+      "name": "Blutrină",
+      "level": "level6",
+      "spotify_id": "4lN4TMRgzYgmhlrvMYvp8B",
+      "spotify_url": "https://open.spotify.com/artist/4lN4TMRgzYgmhlrvMYvp8B",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/4lN4TMRgzYgmhlrvMYvp8B?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b2736f4aab9399453a6132068f33",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Blutrină",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b2736f4aab9399453a6132068f33",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e026f4aab9399453a6132068f33",
           "height": 300,
           "width": 300
         },
         {
-          "url": "https://i.scdn.co/image/ab67616d00004851576c73b9625a6a78e4dde3e5",
+          "url": "https://i.scdn.co/image/ab67616d000048516f4aab9399453a6132068f33",
+          "height": 64,
+          "width": 64
+        }
+      ]
+    },
+    {
+      "id": "disko-anksyete",
+      "name": "Disko Anksyete",
+      "level": "level6",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "doomnezeu",
+      "name": "Doomnezeu",
+      "level": "level6",
+      "spotify_id": "5hpGBeQ30Vhr9a8mUkRFtz",
+      "spotify_url": "https://open.spotify.com/artist/5hpGBeQ30Vhr9a8mUkRFtz",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/5hpGBeQ30Vhr9a8mUkRFtz?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb5cc819aaffbeeaff30a8fca3",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Doomnezeu",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb5cc819aaffbeeaff30a8fca3",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051745cc819aaffbeeaff30a8fca3",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1785cc819aaffbeeaff30a8fca3",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "dordeduh",
+      "name": "Dordeduh",
+      "level": "level6",
+      "spotify_id": "052X0cOZM6KscHPcJwsPh0",
+      "spotify_url": "https://open.spotify.com/artist/052X0cOZM6KscHPcJwsPh0",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/052X0cOZM6KscHPcJwsPh0?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b273346c9f722f2a5818084e0079",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Dordeduh",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b273346c9f722f2a5818084e0079",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e02346c9f722f2a5818084e0079",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00004851346c9f722f2a5818084e0079",
+          "height": 64,
+          "width": 64
+        }
+      ]
+    },
+    {
+      "id": "emo-reunion",
+      "name": "Emo Reunion",
+      "level": "level6",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "nocturn",
+      "name": "Nocturn",
+      "level": "level6",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "ordinul-negru",
+      "name": "Ordinul Negru",
+      "level": "level6",
+      "spotify_id": "5ZXKCnx6tV6Z3iGeKQihPI",
+      "spotify_url": "https://open.spotify.com/artist/5ZXKCnx6tV6Z3iGeKQihPI",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/5ZXKCnx6tV6Z3iGeKQihPI?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b2738b3a1cd2a428f075616fe40e",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Ordinul Negru",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b2738b3a1cd2a428f075616fe40e",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e028b3a1cd2a428f075616fe40e",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d000048518b3a1cd2a428f075616fe40e",
+          "height": 64,
+          "width": 64
+        }
+      ]
+    },
+    {
+      "id": "sur-austru",
+      "name": "Sur Austru",
+      "level": "level6",
+      "spotify_id": "029YQisxpHZN8R3CxONBZ7",
+      "spotify_url": "https://open.spotify.com/artist/029YQisxpHZN8R3CxONBZ7",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/029YQisxpHZN8R3CxONBZ7?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b27342a19474267c5e185150c423",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Sur Austru",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b27342a19474267c5e185150c423",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e0242a19474267c5e185150c423",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000485142a19474267c5e185150c423",
           "height": 64,
           "width": 64
         }
