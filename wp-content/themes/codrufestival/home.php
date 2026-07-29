@@ -32,6 +32,10 @@
         $codru_homepage_artist_cards = [];
 
         foreach (codrufestival_get_artists_from_json() as $artist) {
+            if (!codrufestival_should_show_homepage_artist_card($artist)) {
+                continue;
+            }
+
             $artist_card = codrufestival_build_artist_card_from_json($artist);
 
             if ($artist_card) {
@@ -44,12 +48,17 @@
         <div class="container">
             <div class="container-fluid sectionPadding">
                 <div class="col-12 text-center">
-                    <?php foreach ($codru_artists_by_level as $level_key => $artists) : ?>
-                        <?php if (empty($artists)) { continue; } ?>
-                        <div class="artistsLevel<?php echo esc_attr(str_replace('level', '', $level_key)); ?> pt-3 pb-3">
-                            <?php display_artists_by_level($level_key); ?>
-                        </div>
-                    <?php endforeach; ?>
+                    <?php
+                    $codru_artist_levels = array(
+                        'level1' => array('class' => 'artistsLevel1'),
+                        'level2' => array('class' => 'artistsLevel2'),
+                        'level3' => array('class' => 'artistsLevel3'),
+                        'level4' => array('class' => 'artistsLevel4'),
+                        'level5' => array('class' => 'artistsLevel5'),
+                        'level6' => array('class' => 'artistsLevel6'),
+                    );
+                    codrufestival_render_lineup_levels($codru_artists_by_level, $codru_artist_levels);
+                    ?>
                 </div>
                 <?php if (!empty($codru_homepage_artist_cards)) : ?>
                     <div class="codru-homepage-artist-cards pt-5">

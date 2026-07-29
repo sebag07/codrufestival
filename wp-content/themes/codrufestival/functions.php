@@ -404,6 +404,34 @@ function codrufestival_normalize_artist_level_key($level_key) {
     return $level_key;
 }
 
+function codrufestival_get_homepage_artist_card_max_level() {
+    return 4;
+}
+
+function codrufestival_get_artist_level_number($level_key) {
+    $level_key = codrufestival_normalize_artist_level_key($level_key);
+
+    if (!preg_match('/^level(\d+)$/', $level_key, $matches)) {
+        return 3;
+    }
+
+    return (int) $matches[1];
+}
+
+function codrufestival_should_show_homepage_artist_card($artist) {
+    $level_key = $artist['level'] ?? 'level3';
+
+    return codrufestival_get_artist_level_number($level_key) <= codrufestival_get_homepage_artist_card_max_level();
+}
+
+function codrufestival_get_artists_page_url() {
+    if (function_exists('get_current_language_code') && get_current_language_code() === 'ro') {
+        return home_url('/artisti/');
+    }
+
+    return home_url('/en/artists/');
+}
+
 function codrufestival_get_artists_from_json() {
     static $artists = null;
 
@@ -503,23 +531,88 @@ function codrufestival_build_artist_card_from_json($artist) {
     );
 }
 
-function display_artists_by_level($level_key, $exclude_post_id = null, $language_category = '', $special_category = '') {
-    $level_key = codrufestival_normalize_artist_level_key($level_key);
-    $artists_by_level = codrufestival_get_artists_grouped_by_level();
-    $artists = $artists_by_level[$level_key] ?? array();
+function codrufestival_get_lineup_headliner_level_keys() {
+    return array('level1', 'level2');
+}
+
+function codrufestival_render_lineup_artists_row($artists, $level_class, $wrapper_class = '') {
+    if (empty($artists)) {
+        return;
+    }
+
     $allowed_name_html = array(
         'br' => array(),
         'small' => array(),
     );
+    $last_key = array_key_last($artists);
+    $class_names = trim($level_class . ' ' . $wrapper_class);
+
+    echo '<div class="' . esc_attr($class_names) . '">';
 
     foreach ($artists as $key => $artist) {
-        $artist_name = wp_kses($artist['name'], $allowed_name_html);
-        echo "<div class='artists-name'><h4 class='m-0 pb-0' style='color: var(--artist-level-color-secondary);'>{$artist_name}</h4></div>";
+        $artist_name = $artist['name'] ?? '';
+        $artist_name_class = stripos($artist_name, '<small') !== false ? ' has-small-text' : '';
 
-        if ($key !== array_key_last($artists)) {
-            echo "<div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>";
+        echo '<div class="artists-name">';
+        echo '<h4 class="m-0 pb-0' . esc_attr($artist_name_class) . '" style="color: var(--artist-level-color-secondary);">';
+        echo wp_kses($artist_name, $allowed_name_html);
+        echo '</h4>';
+        echo '</div>';
+
+        if ($key !== $last_key) {
+            echo '<div class="artists-bullet"><span style="margin-left: 5px; margin-right: 5px;">&bull;</span></div>';
         }
     }
+
+    echo '</div>';
+}
+
+function codrufestival_render_lineup_levels($grouped_artists, $artist_levels) {
+    $headliner_level_keys = codrufestival_get_lineup_headliner_level_keys();
+    $has_headliners = false;
+
+    foreach ($headliner_level_keys as $headliner_level_key) {
+        if (!empty($grouped_artists[$headliner_level_key])) {
+            $has_headliners = true;
+            break;
+        }
+    }
+
+    if ($has_headliners) {
+        echo '<div class="artists-headliners pt-3 pb-3">';
+
+        foreach ($headliner_level_keys as $headliner_level_key) {
+            if (empty($grouped_artists[$headliner_level_key])) {
+                continue;
+            }
+
+            $level_class = $artist_levels[$headliner_level_key]['class'] ?? 'artistsLevel3';
+            codrufestival_render_lineup_artists_row($grouped_artists[$headliner_level_key], $level_class, 'artists-headliners__row');
+        }
+
+        echo '</div>';
+    }
+
+    foreach ($artist_levels as $level_key => $level_info) {
+        if (in_array($level_key, $headliner_level_keys, true)) {
+            continue;
+        }
+
+        if (empty($grouped_artists[$level_key])) {
+            continue;
+        }
+
+        codrufestival_render_lineup_artists_row($grouped_artists[$level_key], $level_info['class'], 'pt-3 pb-3');
+    }
+}
+
+function display_artists_by_level($level_key, $exclude_post_id = null, $language_category = '', $special_category = '') {
+    $level_key = codrufestival_normalize_artist_level_key($level_key);
+    $artists_by_level = codrufestival_get_artists_grouped_by_level();
+    $artists = $artists_by_level[$level_key] ?? array();
+    $level_class = 'artistsLevel' . preg_replace('/^level/', '', $level_key);
+
+    codrufestival_render_lineup_artists_row($artists, $level_class);
 }
 
 

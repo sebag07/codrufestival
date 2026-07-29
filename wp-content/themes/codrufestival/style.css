@@ -2421,6 +2421,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     padding-top: 0;
 }
 
+.artists-headliners {
+    display: block;
+    text-align: center;
+}
+
+.artists-headliners__row {
+    display: block;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.artists-headliners .artistsLevel1.artists-headliners__row {
+    margin-bottom: 0.15em;
+}
+
 .artistsLevel1,
 .artistsLevel2,
 .artistsLevel3,
@@ -2430,10 +2445,6 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     display: block;
     text-align: center;
     color: var(--artist-level-color-secondary);
-}
-
-.artistsLevel1 + .artistsLevel2 {
-    padding-top: 0;
 }
 
 .artistsLevel1 div,

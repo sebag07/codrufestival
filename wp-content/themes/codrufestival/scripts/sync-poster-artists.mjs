@@ -69,7 +69,7 @@ const posterLineup = [
   { id: 'robin-and-the-backstabbers', name: 'Robin and the Backstabbers', level: 'level3' },
   {
     id: 'dj-ma-ta',
-    name: 'DJ MĂ-TA <br> <small>PRESENTS: RUP TAKEOVER</small>',
+    name: 'DJ MĂ-TA',
     level: 'level3',
     skipSpotifySearch: true,
   },

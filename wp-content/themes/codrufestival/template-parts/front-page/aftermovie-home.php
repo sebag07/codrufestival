@@ -28,7 +28,7 @@ $has_ticket_cards = !empty($live_display_tickets) || have_rows('ticket_cards_rep
             <div class="event-date rounded-lg bg-[#61d72f] px-3.5 py-2 text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
                 28-30 AUGUST 2026
             </div>
-            <div class="event-location mt-2 rounded-lg bg-[#61d72f] px-3.5 py-2 text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
+            <div class="event-location mt-2 rounded-lg bg-[#61d72f] px-3.5 py-2 text-base md:text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
                 PĂDUREA VERDE, TIMIȘOARA
             </div>
         </div>
@@ -64,13 +64,6 @@ if (file_exists($artists_json_path)) {
     }
 }
 
-$render_artist_name = static function ($artist_name) {
-    echo wp_kses((string) $artist_name, [
-        'br' => [],
-        'small' => [],
-    ]);
-};
-
 $grouped_artists = [];
 foreach ($artists as $artist) {
     if (empty($artist['name'])) {
@@ -91,7 +84,7 @@ foreach ($artists as $artist) {
 $artist_cards = [];
 $has_artist_card_media = false;
 foreach ($artists as $artist) {
-    if (empty($artist['name'])) {
+    if (empty($artist['name']) || !codrufestival_should_show_homepage_artist_card($artist)) {
         continue;
     }
 
@@ -135,27 +128,7 @@ foreach ($artists as $artist) {
 <?php if ($display_lineup_section) : ?>
     <section id="lineup">
         <div class="container sectionPadding text-center">
-            <?php foreach ($artist_levels as $level_key => $level_info): ?>
-                <?php if (!empty($grouped_artists[$level_key])): ?>
-                    <div class="<?php echo esc_attr($level_info['class']); ?> pt-3 pb-3">
-                        <?php
-                        $lastKey = array_key_last($grouped_artists[$level_key]);
-                        foreach ($grouped_artists[$level_key] as $key => $artist):
-                            $artist_name = $artist['name'] ?? '';
-                            $artist_name_class = stripos($artist_name, '<small') !== false ? ' has-small-text' : '';
-                        ?>
-                            <div class='artists-name'>
-                                <h4 class='m-0 pb-0<?php echo esc_attr($artist_name_class); ?>' style='color: var(--artist-level-color-secondary);'>
-                                    <?php $render_artist_name($artist_name); ?>
-                                </h4>
-                            </div>
-                            <?php if ($key !== $lastKey): ?>
-                                <div class='artists-bullet'><span style='margin-left: 5px; margin-right: 5px;'>&bull;</span></div>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            <?php endforeach; ?>
+            <?php codrufestival_render_lineup_levels($grouped_artists, $artist_levels); ?>
             <?php
             if (get_current_language_code() === 'ro') {
                 $button_text = 'Vezi toți artiștii';
@@ -193,6 +166,11 @@ foreach ($artists as $artist) {
         ]);
         ?>
     <?php endif; ?>
+    <div class="col-lg-12 col-md-12 col-sm-12 pt-5 text-align-center general-button-container">
+        <a class="codru-general-button" href="<?php echo esc_url(codrufestival_get_artists_page_url()); ?>">
+            <?php echo esc_html(get_multilingual_text('Vezi toți artiștii', 'Show all artists', 'ro')); ?>
+        </a>
+    </div>
 </section>
 
 <?php if ($has_ticket_cards && $ticket_section_title): ?>
