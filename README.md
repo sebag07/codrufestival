@@ -61,6 +61,18 @@ wp-content/themes/codrufestival/assets/react-islands/dist/react-islands.css
 
 Keep `node_modules/` uncommitted.
 
+## Git Hooks
+
+After cloning this repository, install the shared git hooks once:
+
+```bash
+./scripts/install-git-hooks.sh
+```
+
+The pre-commit hook rebuilds React Islands / Tailwind assets when staged theme source changes would affect the compiled CSS or JS. It then stages the updated `dist` files into the commit automatically.
+
+The hook runs when staged files include theme PHP templates, React island source, or frontend build config under `wp-content/themes/codrufestival`.
+
 ## Updating An Island
 
 1. Create or update a component in `wp-content/themes/codrufestival/assets/react-islands/src/components`.

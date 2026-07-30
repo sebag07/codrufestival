@@ -1,0 +1,69 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+THEME_DIR="$REPO_ROOT/wp-content/themes/codrufestival"
+DIST_DIR="$THEME_DIR/assets/react-islands/dist"
+
+should_rebuild=false
+
+while IFS= read -r file; do
+  [[ -z "$file" ]] && continue
+
+  case "$file" in
+    wp-content/themes/codrufestival/assets/react-islands/src/*|\
+    wp-content/themes/codrufestival/tailwind.config.cjs|\
+    wp-content/themes/codrufestival/postcss.config.cjs|\
+    wp-content/themes/codrufestival/vite.config.js|\
+    wp-content/themes/codrufestival/package.json|\
+    wp-content/themes/codrufestival/package-lock.json)
+      should_rebuild=true
+      break
+      ;;
+    wp-content/themes/codrufestival/*.php|\
+    wp-content/themes/codrufestival/template-parts/*|\
+    wp-content/themes/codrufestival/templates/*|\
+    wp-content/themes/codrufestival/page-templates/*|\
+    wp-content/themes/codrufestival/includes/*)
+      should_rebuild=true
+      break
+      ;;
+  esac
+done < <(git diff --cached --name-only --diff-filter=ACMR)
+
+if [[ "$should_rebuild" != true ]]; then
+  exit 0
+fi
+
+if ! command -v npm >/dev/null 2>&1; then
+  echo "pre-commit: npm is required to rebuild React Islands assets." >&2
+  echo "Install Node.js, then run: npm install --prefix wp-content/themes/codrufestival" >&2
+  exit 1
+fi
+
+if [[ ! -d "$THEME_DIR/node_modules" ]]; then
+  echo "pre-commit: theme dependencies are missing." >&2
+  echo "Run: npm install --prefix wp-content/themes/codrufestival" >&2
+  exit 1
+fi
+
+echo "pre-commit: rebuilding React Islands / Tailwind assets..."
+(
+  cd "$THEME_DIR"
+  npm run build
+)
+
+if [[ ! -f "$DIST_DIR/react-islands.css" || ! -f "$DIST_DIR/react-islands.js" ]]; then
+  echo "pre-commit: build did not produce expected dist files." >&2
+  exit 1
+fi
+
+git add "$DIST_DIR/react-islands.css" "$DIST_DIR/react-islands.js"
+
+if ! git diff --quiet -- "$DIST_DIR"; then
+  echo "pre-commit: dist/ still has unstaged changes after build." >&2
+  echo "Review and stage them before committing." >&2
+  exit 1
+fi
+
+echo "pre-commit: React Islands build complete."
