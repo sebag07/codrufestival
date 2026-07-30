@@ -2,9 +2,18 @@
 
 declare(strict_types=1);
 
+function codru_strip_ticket_price_segment(string $name): string
+{
+    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?/i', '', $name);
+    $title = preg_replace('/\s*-\s*$/', '', (string) $title);
+    $title = preg_replace('/\s+/', ' ', (string) $title);
+
+    return trim((string) $title);
+}
+
 function codru_normalize_ticket_text(string $title): string
 {
-    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?\s*$/i', '', $title);
+    $title = codru_strip_ticket_price_segment($title);
     $title = html_entity_decode($title, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
     if (function_exists('remove_accents')) {
@@ -41,9 +50,7 @@ function codru_ticket_category_key(string $title): ?string
 
 function codru_ticket_title_from_tariff_name(string $name): string
 {
-    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?\s*$/i', '', $name);
-
-    return trim((string) $title);
+    return codru_strip_ticket_price_segment($name);
 }
 
 function codru_ticket_display_price_from_tariff_name(string $name): ?string
