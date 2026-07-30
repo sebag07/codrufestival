@@ -22,7 +22,7 @@ $has_ticket_cards = !empty($live_display_tickets) || have_rows('ticket_cards_rep
 
 <section class="relative mt-20 flex h-auto min-h-0 max-h-[1000px] w-full flex-col items-center justify-center gap-[25px] overflow-x-hidden overflow-y-hidden pt-10 pb-15 sm:h-[80vh] md:pt-25 md:pb-30">
     <picture class="z-[9]">
-        <img class="z-[9] max-h-[40vh] w-full max-w-[300px] sm:max-w-[600px] xl:max-w-[800px]" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-logo-header.png" alt="Hero Title">
+        <img class="z-[9] max-h-[40vh] w-full max-w-[300px] sm:max-w-[400px] xl:max-w-[500px]" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-logo-header.png" alt="Hero Title">
     </picture>
     <div class="event-meta z-[9] flex flex-col items-center justify-center">
             <div class="event-date rounded-lg bg-[#61d72f] px-3.5 py-2 text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
