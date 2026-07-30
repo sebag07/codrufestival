@@ -11,16 +11,37 @@ const explicitSpotifyIds = {
   calinacho: '050D4ZE1dXVfLSrQADtEu3',
   'acoustic-boyz': '1hgRAL5aWgNM6xutE503xU',
   'adrian-despot-and-cezar-popescu': '1IYl7TlgZV3jgeSHJnwL6i',
+  asaway: '1oStBLD61F5umNc3uVRlvJ',
   'bob-ramanka': '5nidlwCOFD0dJUe8pTMNvs',
   ciresan: '0Mj28B7EnKRpq7SzirqvNy',
-  paulvlj: '2YVV8vsjWOIkh6JIEhH9tO',
-  'raul-prodan': '0jd4rNLzxZYyxEcvOGRtO4',
+  exob: '5W4O4cLR1eyo99R0em8Bl6',
+  kayf: '3zXRgHHOZxIDLwKLFyDuj5',
+  'noid-b2b-oigan': '6Ai2uEv68QVApaz7hfR2k6',
+  tano: '1c2gYyQ4nnSEAEo2rLlFHE',
+  tulvan: '2EVfpug360UAZHRgOKBdNg',
   zo: '6gOAgpuNfz5XqkzwdtkoOZ',
   blutrina: '4lN4TMRgzYgmhlrvMYvp8B',
   doomnezeu: '5hpGBeQ30Vhr9a8mUkRFtz',
   dordeduh: '052X0cOZM6KscHPcJwsPh0',
   'ordinul-negru': '5ZXKCnx6tV6Z3iGeKQihPI',
+  'sear-bliss': '5h1vktUNKEYPDaQUUaOKAA',
   'sur-austru': '029YQisxpHZN8R3CxONBZ7',
+};
+
+const pressKitUrls = {
+  'adrian-despot-and-cezar-popescu':
+    'https://drive.google.com/file/d/1ArvCcd42-Pdq0CJsiEBqEqIRgne7Gas0/view?usp=drivesdk',
+  paulvlj:
+    'https://www.dropbox.com/scl/fo/srlfqlkdixrzfwpipd2bb/AH0ExZ9aXHxJZbBrxxhYy48?rlkey=kskofgd6fpc8bgqkn3hnm2lyd&st=pac3robt&dl=0',
+  'sar-casm': 'https://drive.google.com/drive/folders/1HLr1WzTFne5NuSGpoHkRb-H_hUra3v6y',
+};
+
+const imageOverrides = {
+  'adrian-despot-and-cezar-popescu': 'images/artists/adi-despot.jpg',
+  'dj-ma-ta': 'images/artists/dj-ma-ta.jpg',
+  'gipsy-kings': 'images/artists/gipsy-kings.jpeg',
+  paulvlj: 'images/artists/paulvjj.png',
+  'sar-casm': 'images/artists/sar-casm.jpg',
 };
 
 const skipSpotifySearchIds = new Set([
@@ -28,25 +49,23 @@ const skipSpotifySearchIds = new Set([
   'balkandreea-and-the-balkan-sisters',
   'el-cartel-reggaeton-afterparty',
   '4awl',
-  'asaway',
+  'adrian-despot-and-cezar-popescu',
   'bia',
   'claudia-serdan-and-jimi-el-laco',
   'cypher',
   'damage-ctrl',
   'drew',
   'emu',
-  'exob',
-  'kayf',
   'leanu',
   'mandu',
+  'mini-zuchini',
   'narciss',
-  'noid-b2b-oigan',
+  'paulvlj',
+  'raul-prodan',
   'razy',
   'revan',
   'sar-casm',
   'soulmaze',
-  'tano',
-  'tulvan',
   'ufo',
   'yoshuu',
   'zoleevee',
@@ -91,21 +110,22 @@ const posterLineup = [
   { id: 'acoustic-boyz', name: 'Acoustic Boyz', level: 'level5' },
   { id: 'adrian-despot-and-cezar-popescu', name: 'Adrian Despot & Cezar Popescu', level: 'level5' },
   { id: 'asaway', name: 'Asaway', level: 'level5' },
-  { id: 'bia', name: 'BIA', level: 'level5' },
+  { id: 'bia', name: 'Bia & Mc Geeza', level: 'level5' },
   { id: 'bob-ramanka', name: 'Bob Ramanka', level: 'level5' },
   { id: 'ciresan', name: 'Cireșan', level: 'level5' },
-  { id: 'claudia-serdan-and-jimi-el-laco', name: 'Claudia Șerdan & Jimi El Laco', level: 'level5' },
+  { id: 'claudia-serdan-and-jimi-el-laco', name: 'Claudia Șerdan & Jimmi El Laco', level: 'level5' },
   { id: 'cypher', name: 'Cypher', level: 'level5' },
   { id: 'damage-ctrl', name: 'DAMAGE:CTRL', level: 'level5' },
   { id: 'drew', name: 'Drew', level: 'level5' },
   { id: 'emu', name: 'Emu', level: 'level5' },
-  { id: 'exob', name: 'Exob', level: 'level5' },
+  { id: 'exob', name: 'EXOB', level: 'level5' },
   { id: 'kayf', name: 'Kayf', level: 'level5' },
   { id: 'leanu', name: 'Leanu', level: 'level5' },
   { id: 'mandu', name: 'Mandu', level: 'level5' },
+  { id: 'mini-zuchini', name: 'Mini Zuchini', level: 'level5' },
   { id: 'narciss', name: 'Narciss', level: 'level5' },
   { id: 'noid-b2b-oigan', name: 'NO/ID B2B OIGĂN', level: 'level5' },
-  { id: 'paulvlj', name: 'Paulvlj', level: 'level5' },
+  { id: 'paulvlj', name: 'PaulVLJ', level: 'level5' },
   { id: 'raul-prodan', name: 'Raul Prodan', level: 'level5' },
   { id: 'razy', name: 'Razy', level: 'level5' },
   { id: 'revan', name: 'Revan', level: 'level5' },
@@ -124,6 +144,7 @@ const posterLineup = [
   { id: 'emo-reunion', name: 'Emo Reunion', level: 'level6' },
   { id: 'nocturn', name: 'Nocturn', level: 'level6' },
   { id: 'ordinul-negru', name: 'Ordinul Negru', level: 'level6' },
+  { id: 'sear-bliss', name: 'Sear Bliss', level: 'level6' },
   { id: 'sur-austru', name: 'Sur Austru', level: 'level6' },
 ];
 
@@ -213,6 +234,7 @@ function createEmptyArtist(entry) {
     followers: null,
     popularity: null,
     description: '',
+    press_kit_url: '',
     socials: {
       facebook: '',
       youtube: '',
@@ -295,6 +317,14 @@ for (const entry of posterLineup) {
 
   if (explicitSpotifyIds[entry.id]) {
     artist.spotify_id = explicitSpotifyIds[entry.id];
+  }
+
+  if (pressKitUrls[entry.id]) {
+    artist.press_kit_url = pressKitUrls[entry.id];
+  }
+
+  if (imageOverrides[entry.id]) {
+    artist.image_override = imageOverrides[entry.id];
   }
 
   if (entry.skipSpotifySearch) {

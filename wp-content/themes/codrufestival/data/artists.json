@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-29T14:08:05.583Z",
+  "updated_at": "2026-07-30T06:51:52.470Z",
   "artists": [
     {
       "id": "gipsy-kings",
@@ -460,7 +460,7 @@
         "tiktok": "",
         "twitter": "",
         "instagram": "https://www.instagram.com/djmata/",
-        "spotify": "https://open.spotify.com/user/224ofqzqpfxqorwzrorol63uy?si=JJTJAcv4iSUCQ_VuU4DqRjw&utm_sourcecopy-link"
+        "spotify": ""
       }
     },
     {
@@ -1057,7 +1057,7 @@
       "spotify_url": "https://open.spotify.com/artist/1IYl7TlgZV3jgeSHJnwL6i",
       "spotify_embed_url": "https://open.spotify.com/embed/artist/1IYl7TlgZV3jgeSHJnwL6i?utm_source=generator",
       "image": "https://i.scdn.co/image/ab6761610000e5ebdd2aca33a7cce5fd6fd460ab",
-      "image_override": "",
+      "image_override": "images/artists/adi-despot.jpg",
       "genres": [],
       "followers": null,
       "popularity": null,
@@ -1070,6 +1070,7 @@
         "instagram": "",
         "spotify": ""
       },
+      "press_kit_url": "https://drive.google.com/file/d/1ArvCcd42-Pdq0CJsiEBqEqIRgne7Gas0/view?usp=drivesdk",
       "spotify_name": "Adrian Despot",
       "images": [
         {
@@ -1093,10 +1094,10 @@
       "id": "asaway",
       "name": "Asaway",
       "level": "level5",
-      "spotify_id": "",
-      "spotify_url": "",
-      "spotify_embed_url": "",
-      "image": "",
+      "spotify_id": "1oStBLD61F5umNc3uVRlvJ",
+      "spotify_url": "https://open.spotify.com/artist/1oStBLD61F5umNc3uVRlvJ",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/1oStBLD61F5umNc3uVRlvJ?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb7d0951fd40fff288a69bbdf3",
       "image_override": "",
       "genres": [],
       "followers": null,
@@ -1109,11 +1110,29 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "spotify_name": "asaway",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb7d0951fd40fff288a69bbdf3",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab676161000051747d0951fd40fff288a69bbdf3",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f1787d0951fd40fff288a69bbdf3",
+          "height": 160,
+          "width": 160
+        }
+      ]
     },
     {
       "id": "bia",
-      "name": "BIA",
+      "name": "Bia & Mc Geeza",
       "level": "level5",
       "spotify_id": "",
       "spotify_url": "",
@@ -1215,7 +1234,7 @@
     },
     {
       "id": "claudia-serdan-and-jimi-el-laco",
-      "name": "Claudia Șerdan & Jimi El Laco",
+      "name": "Claudia Șerdan & Jimmi El Laco",
       "level": "level5",
       "spotify_id": "",
       "spotify_url": "",
@@ -1325,12 +1344,12 @@
     },
     {
       "id": "exob",
-      "name": "Exob",
+      "name": "EXOB",
       "level": "level5",
-      "spotify_id": "",
-      "spotify_url": "",
-      "spotify_embed_url": "",
-      "image": "",
+      "spotify_id": "5W4O4cLR1eyo99R0em8Bl6",
+      "spotify_url": "https://open.spotify.com/artist/5W4O4cLR1eyo99R0em8Bl6",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/5W4O4cLR1eyo99R0em8Bl6?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb253ea0bfdf776d049032665e",
       "image_override": "",
       "genres": [],
       "followers": null,
@@ -1343,16 +1362,34 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "spotify_name": "EXOB",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb253ea0bfdf776d049032665e",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616100005174253ea0bfdf776d049032665e",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f178253ea0bfdf776d049032665e",
+          "height": 160,
+          "width": 160
+        }
+      ]
     },
     {
       "id": "kayf",
       "name": "Kayf",
       "level": "level5",
-      "spotify_id": "",
-      "spotify_url": "",
-      "spotify_embed_url": "",
-      "image": "",
+      "spotify_id": "3zXRgHHOZxIDLwKLFyDuj5",
+      "spotify_url": "https://open.spotify.com/artist/3zXRgHHOZxIDLwKLFyDuj5",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/3zXRgHHOZxIDLwKLFyDuj5?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b273e0095e4b013d0ee37b2af6ec",
       "image_override": "",
       "genres": [],
       "followers": null,
@@ -1365,7 +1402,25 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "spotify_name": "Kayf",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b273e0095e4b013d0ee37b2af6ec",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e02e0095e4b013d0ee37b2af6ec",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00004851e0095e4b013d0ee37b2af6ec",
+          "height": 64,
+          "width": 64
+        }
+      ]
     },
     {
       "id": "leanu",
@@ -1412,6 +1467,29 @@
       }
     },
     {
+      "id": "mini-zuchini",
+      "name": "Mini Zuchini",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "press_kit_url": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
       "id": "narciss",
       "name": "Narciss",
       "level": "level5",
@@ -1437,6 +1515,69 @@
       "id": "noid-b2b-oigan",
       "name": "NO/ID B2B OIGĂN",
       "level": "level5",
+      "spotify_id": "6Ai2uEv68QVApaz7hfR2k6",
+      "spotify_url": "https://open.spotify.com/artist/6Ai2uEv68QVApaz7hfR2k6",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6Ai2uEv68QVApaz7hfR2k6?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb09c7609d39078c74d922800b",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Oigăn",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb09c7609d39078c74d922800b",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000517409c7609d39078c74d922800b",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f17809c7609d39078c74d922800b",
+          "height": 160,
+          "width": 160
+        }
+      ]
+    },
+    {
+      "id": "paulvlj",
+      "name": "PaulVLJ",
+      "level": "level5",
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "images/artists/paulvjj.png",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "press_kit_url": "https://www.dropbox.com/scl/fo/srlfqlkdixrzfwpipd2bb/AH0ExZ9aXHxJZbBrxxhYy48?rlkey=kskofgd6fpc8bgqkn3hnm2lyd&st=pac3robt&dl=0"
+    },
+    {
+      "id": "raul-prodan",
+      "name": "Raul Prodan",
+      "level": "level5",
       "spotify_id": "",
       "spotify_url": "",
       "spotify_embed_url": "",
@@ -1454,86 +1595,6 @@
         "instagram": "",
         "spotify": ""
       }
-    },
-    {
-      "id": "paulvlj",
-      "name": "Paulvlj",
-      "level": "level5",
-      "spotify_id": "2YVV8vsjWOIkh6JIEhH9tO",
-      "spotify_url": "https://open.spotify.com/artist/2YVV8vsjWOIkh6JIEhH9tO",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/2YVV8vsjWOIkh6JIEhH9tO?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb2503bbfef243d89da41e4a20",
-      "image_override": "",
-      "genres": [],
-      "followers": null,
-      "popularity": null,
-      "description": "",
-      "socials": {
-        "facebook": "",
-        "youtube": "",
-        "tiktok": "",
-        "twitter": "",
-        "instagram": "",
-        "spotify": ""
-      },
-      "spotify_name": "Paul Ananie",
-      "images": [
-        {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb2503bbfef243d89da41e4a20",
-          "height": 640,
-          "width": 640
-        },
-        {
-          "url": "https://i.scdn.co/image/ab676161000051742503bbfef243d89da41e4a20",
-          "height": 320,
-          "width": 320
-        },
-        {
-          "url": "https://i.scdn.co/image/ab6761610000f1782503bbfef243d89da41e4a20",
-          "height": 160,
-          "width": 160
-        }
-      ]
-    },
-    {
-      "id": "raul-prodan",
-      "name": "Raul Prodan",
-      "level": "level5",
-      "spotify_id": "0jd4rNLzxZYyxEcvOGRtO4",
-      "spotify_url": "https://open.spotify.com/artist/0jd4rNLzxZYyxEcvOGRtO4",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/0jd4rNLzxZYyxEcvOGRtO4?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb3c166b651f773b9444f810ed",
-      "image_override": "",
-      "genres": [],
-      "followers": null,
-      "popularity": null,
-      "description": "",
-      "socials": {
-        "facebook": "",
-        "youtube": "",
-        "tiktok": "",
-        "twitter": "",
-        "instagram": "",
-        "spotify": ""
-      },
-      "spotify_name": "Raul Ws",
-      "images": [
-        {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb3c166b651f773b9444f810ed",
-          "height": 640,
-          "width": 640
-        },
-        {
-          "url": "https://i.scdn.co/image/ab676161000051743c166b651f773b9444f810ed",
-          "height": 320,
-          "width": 320
-        },
-        {
-          "url": "https://i.scdn.co/image/ab6761610000f1783c166b651f773b9444f810ed",
-          "height": 160,
-          "width": 160
-        }
-      ]
     },
     {
       "id": "razy",
@@ -1587,7 +1648,7 @@
       "spotify_url": "",
       "spotify_embed_url": "",
       "image": "",
-      "image_override": "",
+      "image_override": "images/artists/sar-casm.jpg",
       "genres": [],
       "followers": null,
       "popularity": null,
@@ -1599,7 +1660,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "press_kit_url": "https://drive.google.com/drive/folders/1HLr1WzTFne5NuSGpoHkRb-H_hUra3v6y"
     },
     {
       "id": "soulmaze",
@@ -1627,10 +1689,10 @@
       "id": "tano",
       "name": "Tano",
       "level": "level5",
-      "spotify_id": "",
-      "spotify_url": "",
-      "spotify_embed_url": "",
-      "image": "",
+      "spotify_id": "1c2gYyQ4nnSEAEo2rLlFHE",
+      "spotify_url": "https://open.spotify.com/artist/1c2gYyQ4nnSEAEo2rLlFHE",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/1c2gYyQ4nnSEAEo2rLlFHE?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b273e66b4b1fc3f259b3ba841184",
       "image_override": "",
       "genres": [],
       "followers": null,
@@ -1643,16 +1705,34 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "spotify_name": "Tano",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b273e66b4b1fc3f259b3ba841184",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e02e66b4b1fc3f259b3ba841184",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00004851e66b4b1fc3f259b3ba841184",
+          "height": 64,
+          "width": 64
+        }
+      ]
     },
     {
       "id": "tulvan",
       "name": "Tulvan",
       "level": "level5",
-      "spotify_id": "",
-      "spotify_url": "",
-      "spotify_embed_url": "",
-      "image": "",
+      "spotify_id": "2EVfpug360UAZHRgOKBdNg",
+      "spotify_url": "https://open.spotify.com/artist/2EVfpug360UAZHRgOKBdNg",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/2EVfpug360UAZHRgOKBdNg?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb04fcec88514e237c8a4e93ac",
       "image_override": "",
       "genres": [],
       "followers": null,
@@ -1665,7 +1745,25 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "spotify_name": "TULVAN",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb04fcec88514e237c8a4e93ac",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000517404fcec88514e237c8a4e93ac",
+          "height": 320,
+          "width": 320
+        },
+        {
+          "url": "https://i.scdn.co/image/ab6761610000f17804fcec88514e237c8a4e93ac",
+          "height": 160,
+          "width": 160
+        }
+      ]
     },
     {
       "id": "ufo",
@@ -1994,6 +2092,47 @@
         },
         {
           "url": "https://i.scdn.co/image/ab67616d000048518b3a1cd2a428f075616fe40e",
+          "height": 64,
+          "width": 64
+        }
+      ]
+    },
+    {
+      "id": "sear-bliss",
+      "name": "Sear Bliss",
+      "level": "level6",
+      "spotify_id": "5h1vktUNKEYPDaQUUaOKAA",
+      "spotify_url": "https://open.spotify.com/artist/5h1vktUNKEYPDaQUUaOKAA",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/5h1vktUNKEYPDaQUUaOKAA?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab67616d0000b2739dd57e3abc336100ce3023a7",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "",
+      "press_kit_url": "",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      },
+      "spotify_name": "Sear Bliss",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab67616d0000b2739dd57e3abc336100ce3023a7",
+          "height": 640,
+          "width": 640
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d00001e029dd57e3abc336100ce3023a7",
+          "height": 300,
+          "width": 300
+        },
+        {
+          "url": "https://i.scdn.co/image/ab67616d000048519dd57e3abc336100ce3023a7",
           "height": 64,
           "width": 64
         }
