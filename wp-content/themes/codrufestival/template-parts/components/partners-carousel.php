@@ -21,12 +21,11 @@ $partner_groups = [
         'name_field' => 'partner_name',
         'image_field' => 'partner_image',
     ],
-    // TEMPORARY: partners_level_5 hidden — uncomment to show again
-    // [
-    //     'acf_key' => 'partners_level_5',
-    //     'name_field' => 'partner_name',
-    //     'image_field' => 'partner_image',
-    // ],
+    [
+        'acf_key' => 'partners_level_5',
+        'name_field' => 'partner_name',
+        'image_field' => 'partner_image',
+    ],
     [
         'acf_key' => 'produced_by',
         'name_field' => 'producer_name',

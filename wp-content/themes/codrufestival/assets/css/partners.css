@@ -168,8 +168,7 @@
     transition: opacity 0.3s ease;
 }
 
-/* TEMPORARY: hide partner levels 5, 6, 7 — remove this block to show them again */
-.partnersContainer:has(.partnersLevel5),
+/* TEMPORARY: hide partner levels 6, 7 — remove this block to show them again */
 .partnersContainer:has(.partnersLevel6),
 .partnersContainer:has(.partnersLevel7) {
     display: none;
