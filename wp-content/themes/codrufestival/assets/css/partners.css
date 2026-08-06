@@ -110,14 +110,16 @@
     }
 }
 
-/* Partner Level 5 - Medium Small */
-.partnersLevel5 img {
+/* Partner Level 5 & Produced By - Medium Small */
+.partnersLevel5 img,
+.producedBy img {
     height: 150px;
     width: 150px;
 }
 
 @media screen and (max-width: 500px){
-    .partnersLevel5 img {
+    .partnersLevel5 img,
+    .producedBy img {
         height: 100px;
         width: 100px;
     }
@@ -149,18 +151,6 @@
     }
 }
 
-/* Produced By - Large and Important */
-.producedBy img {
-    height: 350px;
-    width: 350px;
-}
-
-@media screen and (max-width: 500px){
-    .producedBy img {
-        height: 180px;
-        width: 180px;
-    }
-}
 
 /* Hover effects for linked producers */
 .producedBy a:hover img {
