@@ -4601,7 +4601,7 @@ a {
 .ticket-card .card-header h3 {
     padding-bottom: 0;
     color: #fff;
-    font-size: 30px;
+    font-size: 24px;
     font-weight: 800;
 }
 
@@ -4676,7 +4676,7 @@ a {
 }
 
 .card-price {
-    font-size: 46px;
+    font-size: 36px;
     color: var(--secondary-color);
     font-weight: 700;
 }
@@ -5438,7 +5438,7 @@ f.artistInnerContainer {
     .ticket-card .card-header h3 {
         padding-bottom: 0;
         color: #fff;
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 800;
     }
 
@@ -5487,7 +5487,7 @@ f.artistInnerContainer {
   }
 
   .card-price {
-    font-size: 46px;
+    font-size: 36px;
     color: var(--secondary-color);
     font-weight: 700;
   }
