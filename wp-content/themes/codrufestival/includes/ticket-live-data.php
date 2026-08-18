@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 function codru_strip_ticket_price_segment(string $name): string
 {
-    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?/i', '', $name);
+    $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?(?:\/ticket)?/i', '', $name);
+    $title = preg_replace('#/ticket#i', '', (string) $title);
     $title = preg_replace('/\s*-\s*$/', '', (string) $title);
     $title = preg_replace('/\s+/', ' ', (string) $title);
 
@@ -37,7 +38,7 @@ function codru_ticket_category_key(string $title): ?string
         return null;
     }
 
-    if (preg_match('/\bunder\s*25\b/', $normalized)) {
+    if (preg_match('/\b(?:under\s*25|u25)\b/', $normalized)) {
         return 'under_25';
     }
 
@@ -53,16 +54,57 @@ function codru_ticket_title_from_tariff_name(string $name): string
     return codru_strip_ticket_price_segment($name);
 }
 
+function codru_format_ticket_price_amount(string $raw_price): string
+{
+    $price = str_replace(',', '.', trim($raw_price));
+
+    if ($price === '') {
+        return '';
+    }
+
+    if (str_contains($price, '.')) {
+        $price = rtrim(rtrim($price, '0'), '.');
+    }
+
+    return $price;
+}
+
 function codru_ticket_display_price_from_tariff_name(string $name): ?string
 {
     if (!preg_match('/-\s*(\d+(?:[.,]\d+)?)\s*EUR\b/i', $name, $matches)) {
         return null;
     }
 
-    $price = str_replace(',', '.', $matches[1]);
-    $price = rtrim(rtrim($price, '0'), '.');
+    $price = codru_format_ticket_price_amount($matches[1]);
 
-    return $price . ' €';
+    return $price !== '' ? $price . ' €' : null;
+}
+
+function codru_ticket_display_price_from_sell_data(string $sell_price, string $sell_currency): ?string
+{
+    $price = codru_format_ticket_price_amount($sell_price);
+    $currency = strtoupper(trim($sell_currency));
+
+    if ($price === '' || $currency === '') {
+        return null;
+    }
+
+    if ($currency === 'RON') {
+        return $price . ' RON';
+    }
+
+    return $price . ' ' . $currency;
+}
+
+function codru_ticket_display_price(string $name, string $sell_price = '', string $sell_currency = ''): ?string
+{
+    $display_price = codru_ticket_display_price_from_tariff_name($name);
+
+    if ($display_price !== null) {
+        return $display_price;
+    }
+
+    return codru_ticket_display_price_from_sell_data($sell_price, $sell_currency);
 }
 
 function codru_read_live_tickets_payload(string $json_path): array

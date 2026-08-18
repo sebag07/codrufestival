@@ -67,7 +67,11 @@ function codru_parse_tickets(string $html): array
         }
 
         $name = trim($node->getAttribute('data-tariff-name'));
-        $display_price = codru_ticket_display_price_from_tariff_name($name);
+        $display_price = codru_ticket_display_price(
+            $name,
+            $node->getAttribute('data-tariff-sell-price'),
+            $node->getAttribute('data-tariff-sell-currency')
+        );
 
         if ($name === '' || $display_price === null) {
             continue;
