@@ -180,38 +180,10 @@ body.codru-expandable-card-open {
 }
 
 .codru-expandable-card__media::after {
-  background: linear-gradient(180deg, rgba(7, 20, 102, 0.72) 0%, rgba(7, 20, 102, 0) 28%, rgba(7, 20, 102, 0) 25%, rgba(7, 20, 102, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(7, 20, 102, 0) 12%, rgba(7, 20, 102, 0.92) 100%);
   content: '';
   inset: 0;
   position: absolute;
-}
-
-.codru-expandable-card__top-label,
-.codru-expandable-card__expanded-top-label {
-  color: var(--button-color, #67e816);
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  line-height: 1.35;
-  text-transform: uppercase;
-  z-index: 2;
-}
-
-.codru-expandable-card__top-label {
-  left: 0;
-  padding: 20px 24px;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
-.codru-expandable-card__expanded-top-label {
-  left: 0;
-  margin: 0;
-  padding: 28px 38px 0;
-  position: absolute;
-  right: 0;
-  top: 0;
 }
 
 .codru-expandable-card__media img {
@@ -254,6 +226,7 @@ body.codru-expandable-card-open {
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.08em;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
@@ -398,6 +371,7 @@ body.codru-expandable-card-open {
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 0.08em;
+  line-height: 1.35;
   margin: 0 0 12px;
   text-transform: uppercase;
 }

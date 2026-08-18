@@ -104,12 +104,16 @@ export function ArtistExpandableCards({
       ) : (
         <div className="codru-artist-expandable-cards">
           {visibleArtists.map((artist, index) => {
-            const topLabel = showDayLabels ? artist.dayLabel || artist.day || '' : '';
+            const dayLabel = showDayLabels ? artist.dayLabel || artist.day || '' : '';
             const performanceMeta = compact([
               showPerformanceMeta ? artist.schedule : null,
               showPerformanceMeta ? artist.stage : null,
             ]);
-            const description = showPerformanceMeta ? performanceMeta.join(' | ') : '';
+            const description = showDayLabels
+              ? dayLabel
+              : showPerformanceMeta
+                ? performanceMeta.join(' | ')
+                : '';
 
             const hasSpotifyLink = Boolean(artist.spotifyUrl || artist.socials?.spotify);
             const expandable = artist.expandable ?? hasSpotifyLink;
@@ -119,7 +123,6 @@ export function ArtistExpandableCards({
                 key={artist.id || `${artist.title}-${index}`}
                 title={artist.title}
                 src={artist.image}
-                topLabel={topLabel}
                 description={description}
                 expandable={expandable}
                 className="codru-artist-expandable-cards__card"

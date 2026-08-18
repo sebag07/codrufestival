@@ -48,7 +48,6 @@ export function ExpandableCard({
   title,
   src,
   description,
-  topLabel = '',
   children,
   className = '',
   classNameExpanded = '',
@@ -94,13 +93,12 @@ export function ExpandableCard({
               <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
             )}
           </span>
-          {topLabel ? (
-            <span className="codru-expandable-card__top-label">
-              <MultilineLabel value={topLabel} />
-            </span>
-          ) : null}
           <span className="codru-expandable-card__summary">
-            {description ? <span className="codru-expandable-card__description">{description}</span> : null}
+            {description ? (
+              <span className="codru-expandable-card__description">
+                <MultilineLabel value={description} />
+              </span>
+            ) : null}
             <span className="codru-expandable-card__title">
               <TitleText value={title} />
             </span>
@@ -126,15 +124,10 @@ export function ExpandableCard({
             <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
           )}
         </motion.span>
-        {topLabel ? (
-          <motion.span layoutId={`top-label-${layoutId}`} className="codru-expandable-card__top-label">
-            <MultilineLabel value={topLabel} />
-          </motion.span>
-        ) : null}
         <span className="codru-expandable-card__summary">
           {description ? (
             <motion.span layoutId={`description-${layoutId}`} className="codru-expandable-card__description">
-              {description}
+              <MultilineLabel value={description} />
             </motion.span>
           ) : null}
           <motion.span layoutId={`title-${layoutId}`} className="codru-expandable-card__title">
@@ -175,15 +168,10 @@ export function ExpandableCard({
               </button>
               <motion.div layoutId={`media-${layoutId}`} className="codru-expandable-card__expanded-media">
                 {src ? <img src={src} alt="" /> : <span>{plainTitle?.charAt(0)}</span>}
-                {topLabel ? (
-                  <motion.p layoutId={`top-label-${layoutId}`} className="codru-expandable-card__expanded-top-label">
-                    <MultilineLabel value={topLabel} />
-                  </motion.p>
-                ) : null}
                 <div className="codru-expandable-card__expanded-heading">
                   {description ? (
                     <motion.p layoutId={`description-${layoutId}`} className="codru-expandable-card__expanded-description">
-                      {description}
+                      <MultilineLabel value={description} />
                     </motion.p>
                   ) : null}
                   <motion.h3 layoutId={`title-${layoutId}`} id={titleId}>
