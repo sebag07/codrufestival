@@ -21,8 +21,16 @@ foreach (codrufestival_get_artists_from_json() as $artist) {
                 <?php
                 codrufestival_react_island('ArtistExpandableCards', [
                     'artists' => $artist_cards,
+                    'filters' => codrufestival_get_artist_performance_day_filters(),
+                    'showFilters' => true,
                     'eyebrow' => 'CODRU Festival',
                     'emptyText' => 'Artists will be announced soon.',
+                    'filteredEmptyText' => get_multilingual_text(
+                        'Nu există artiști programați pentru această zi.',
+                        'No artists scheduled for this day yet.',
+                        'ro'
+                    ),
+                    'showDayLabels' => true,
                     'showPerformanceMeta' => false,
                 ], [
                     'class' => 'codru-artists-page__artist-cards',

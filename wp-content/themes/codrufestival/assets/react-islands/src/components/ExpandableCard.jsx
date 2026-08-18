@@ -3,6 +3,23 @@ import { AnimatePresence, motion } from 'motion/react';
 
 const stripNameMarkup = (value) => String(value ?? '').replace(/<br\s*\/?>/gi, ' ').replace(/<\/?small>/gi, '');
 
+function MultilineLabel({ value }) {
+  const parts = String(value ?? '')
+    .split(/<br\s*\/?>/gi)
+    .filter(Boolean);
+
+  if (!parts.length) {
+    return null;
+  }
+
+  return parts.map((part, index) => (
+    <Fragment key={`${part}-${index}`}>
+      {part}
+      {index < parts.length - 1 ? <br /> : null}
+    </Fragment>
+  ));
+}
+
 function TitleText({ value }) {
   const renderBreaks = (text, keyPrefix) =>
     text
@@ -31,6 +48,7 @@ export function ExpandableCard({
   title,
   src,
   description,
+  topLabel = '',
   children,
   className = '',
   classNameExpanded = '',
@@ -76,6 +94,11 @@ export function ExpandableCard({
               <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
             )}
           </span>
+          {topLabel ? (
+            <span className="codru-expandable-card__top-label">
+              <MultilineLabel value={topLabel} />
+            </span>
+          ) : null}
           <span className="codru-expandable-card__summary">
             {description ? <span className="codru-expandable-card__description">{description}</span> : null}
             <span className="codru-expandable-card__title">
@@ -103,6 +126,11 @@ export function ExpandableCard({
             <span className="codru-expandable-card__media-fallback">{plainTitle?.charAt(0)}</span>
           )}
         </motion.span>
+        {topLabel ? (
+          <motion.span layoutId={`top-label-${layoutId}`} className="codru-expandable-card__top-label">
+            <MultilineLabel value={topLabel} />
+          </motion.span>
+        ) : null}
         <span className="codru-expandable-card__summary">
           {description ? (
             <motion.span layoutId={`description-${layoutId}`} className="codru-expandable-card__description">
@@ -147,6 +175,11 @@ export function ExpandableCard({
               </button>
               <motion.div layoutId={`media-${layoutId}`} className="codru-expandable-card__expanded-media">
                 {src ? <img src={src} alt="" /> : <span>{plainTitle?.charAt(0)}</span>}
+                {topLabel ? (
+                  <motion.p layoutId={`top-label-${layoutId}`} className="codru-expandable-card__expanded-top-label">
+                    <MultilineLabel value={topLabel} />
+                  </motion.p>
+                ) : null}
                 <div className="codru-expandable-card__expanded-heading">
                   {description ? (
                     <motion.p layoutId={`description-${layoutId}`} className="codru-expandable-card__expanded-description">

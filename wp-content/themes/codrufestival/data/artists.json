@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-30T07:59:39.401Z",
+  "updated_at": "2026-08-18T16:58:29.707Z",
   "artists": [
     {
       "id": "gipsy-kings",
@@ -39,6 +39,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -79,6 +82,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -119,7 +125,10 @@
           "width": 64
         }
       ],
-      "spotify_name": "Ternipe"
+      "spotify_name": "Ternipe",
+      "days": [
+        "sunday"
+      ]
     },
     {
       "id": "alternosfera",
@@ -159,6 +168,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -199,6 +211,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -239,6 +254,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -279,6 +297,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -319,6 +340,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -359,6 +383,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -399,6 +426,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -439,6 +469,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -461,7 +494,12 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/djmata/",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday",
+        "saturday",
+        "sunday"
+      ]
     },
     {
       "id": "balkandreea-and-the-balkan-sisters",
@@ -483,7 +521,10 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/balkandreea",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "adelin-mm",
@@ -523,6 +564,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -563,6 +607,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -603,6 +650,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -643,6 +693,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -683,6 +736,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -723,6 +779,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -763,6 +822,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -803,6 +865,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -843,6 +908,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -883,6 +951,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -923,6 +994,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -963,6 +1037,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -985,7 +1062,12 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/elcartel.ro",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday",
+        "saturday",
+        "sunday"
+      ]
     },
     {
       "id": "4awl",
@@ -1007,7 +1089,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "acoustic-boyz",
@@ -1047,6 +1132,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -1088,6 +1176,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -1128,6 +1219,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1150,7 +1244,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "sunday"
+      ]
     },
     {
       "id": "bob-ramanka",
@@ -1190,6 +1287,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1230,6 +1330,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -1252,7 +1355,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "cypher",
@@ -1274,7 +1380,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "damage-ctrl",
@@ -1296,7 +1405,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "drew",
@@ -1318,7 +1430,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "emu",
@@ -1340,7 +1455,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "exob",
@@ -1380,6 +1498,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1420,6 +1541,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1442,7 +1566,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "mandu",
@@ -1464,7 +1591,12 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday",
+        "saturday",
+        "sunday"
+      ]
     },
     {
       "id": "mini-zuchini",
@@ -1487,7 +1619,10 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/minizucchini/",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "narciss",
@@ -1509,7 +1644,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "noid-b2b-oigan",
@@ -1572,7 +1710,10 @@
         "instagram": "https://www.instagram.com/paulvlj/",
         "spotify": ""
       },
-      "press_kit_url": "https://www.dropbox.com/scl/fo/srlfqlkdixrzfwpipd2bb/AH0ExZ9aXHxJZbBrxxhYy48?rlkey=kskofgd6fpc8bgqkn3hnm2lyd&st=pac3robt&dl=0"
+      "press_kit_url": "https://www.dropbox.com/scl/fo/srlfqlkdixrzfwpipd2bb/AH0ExZ9aXHxJZbBrxxhYy48?rlkey=kskofgd6fpc8bgqkn3hnm2lyd&st=pac3robt&dl=0",
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "raul-prodan",
@@ -1594,7 +1735,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "razy",
@@ -1616,7 +1760,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "revan",
@@ -1638,7 +1785,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "sar-casm",
@@ -1661,7 +1811,10 @@
         "instagram": "https://www.instagram.com/sar.casm/",
         "spotify": ""
       },
-      "press_kit_url": "https://drive.google.com/drive/folders/1HLr1WzTFne5NuSGpoHkRb-H_hUra3v6y"
+      "press_kit_url": "https://drive.google.com/drive/folders/1HLr1WzTFne5NuSGpoHkRb-H_hUra3v6y",
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "soulmaze",
@@ -1683,7 +1836,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "sunday"
+      ]
     },
     {
       "id": "tano",
@@ -1723,6 +1879,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1763,6 +1922,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1785,7 +1947,10 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/florin_ufo/",
         "spotify": ""
-      }
+      },
+      "days": [
+        "sunday"
+      ]
     },
     {
       "id": "yoshuu",
@@ -1807,7 +1972,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "zo",
@@ -1869,7 +2037,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "sunday"
+      ]
     },
     {
       "id": "blutrina",
@@ -1909,6 +2080,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -1931,7 +2105,10 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/corinasucarov/",
         "spotify": ""
-      }
+      },
+      "days": [
+        "friday"
+      ]
     },
     {
       "id": "doomnezeu",
@@ -1971,6 +2148,9 @@
           "height": 160,
           "width": 160
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -2011,6 +2191,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "saturday"
       ]
     },
     {
@@ -2033,7 +2216,10 @@
         "twitter": "",
         "instagram": "https://www.instagram.com/emoreunion/",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "nocturn",
@@ -2055,7 +2241,10 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "days": [
+        "saturday"
+      ]
     },
     {
       "id": "ordinul-negru",
@@ -2095,6 +2284,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "sunday"
       ]
     },
     {
@@ -2136,6 +2328,9 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "friday"
       ]
     },
     {
@@ -2176,7 +2371,219 @@
           "height": 64,
           "width": 64
         }
+      ],
+      "days": [
+        "friday"
       ]
+    },
+    {
+      "id": "romeo-fantastick",
+      "name": "Romeo Fantastick",
+      "level": "level3",
+      "days": [
+        "friday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Romeo Fantastick este un artist special al lineup-ului Codru Festival. Detalii suplimentare despre programul live vor fi anunțate.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "oigan",
+      "name": "Oigăn",
+      "level": "level5",
+      "days": [
+        "friday"
+      ],
+      "spotify_id": "6Ai2uEv68QVApaz7hfR2k6",
+      "spotify_url": "https://open.spotify.com/artist/6Ai2uEv68QVApaz7hfR2k6",
+      "spotify_embed_url": "https://open.spotify.com/embed/artist/6Ai2uEv68QVApaz7hfR2k6?utm_source=generator",
+      "image": "https://i.scdn.co/image/ab6761610000e5eb09c7609d39078c74d922800b",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Oigăn (Eugen Nuțescu) este cantautor român, cofondator Kumm și membru Robin and the Backstabbers, cu un univers sonor ce combină indie, pop și experiment.",
+      "socials": {
+        "facebook": "https://www.facebook.com/oigansongs",
+        "youtube": "https://www.youtube.com/@oigan",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "https://www.instagram.com/oigansongs/",
+        "spotify": "https://open.spotify.com/artist/6Ai2uEv68QVApaz7hfR2k6"
+      },
+      "spotify_name": "Oigăn",
+      "images": [
+        {
+          "url": "https://i.scdn.co/image/ab6761610000e5eb09c7609d39078c74d922800b",
+          "height": 640,
+          "width": 640
+        }
+      ]
+    },
+    {
+      "id": "she",
+      "name": "SHE",
+      "level": "level6",
+      "days": [
+        "friday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "SHE este parte din lineup-ul Codru Festival. Detalii despre proiect vor fi anunțate.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "amalia-gaita",
+      "name": "Amalia Gaiță",
+      "level": "level5",
+      "days": [
+        "saturday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Amalia Gaiță este parte din lineup-ul Codru Festival. Detalii despre programul live vor fi anunțate.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "rave-with-your-kids-donisan-sabincp",
+      "name": "Rave With Your Kid[s] – Donisan / SabinCP",
+      "level": "level5",
+      "days": [
+        "saturday",
+        "sunday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Rave With Your Kid[s] este un concept de petrecere care aduce Donisan și SabinCP pe scenă, într-un set dedicat energiei de club și publicului divers.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "zabranena-muzika",
+      "name": "Zabranena Muzika (Goro + Bat Simo)",
+      "level": "level3",
+      "days": [
+        "sunday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Zabranena Muzika este proiectul lui Goro și Bat Simo, parte din RUP Takeover alături de DJ MĂ-TA în programul de duminică al Codru Festival.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "beatheice",
+      "name": "Beatheice",
+      "level": "level5",
+      "days": [
+        "sunday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Beatheice este parte din lineup-ul Codru Festival. Detalii despre programul live vor fi anunțate.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
+    },
+    {
+      "id": "prapad",
+      "name": "Prăpăd",
+      "level": "level6",
+      "days": [
+        "sunday"
+      ],
+      "spotify_id": "",
+      "spotify_url": "",
+      "spotify_embed_url": "",
+      "image": "",
+      "image_override": "",
+      "genres": [],
+      "followers": null,
+      "popularity": null,
+      "description": "Prăpăd este parte din lineup-ul Codru Festival. Detalii despre proiect vor fi anunțate.",
+      "socials": {
+        "facebook": "",
+        "youtube": "",
+        "tiktok": "",
+        "twitter": "",
+        "instagram": "",
+        "spotify": ""
+      }
     }
   ]
 }

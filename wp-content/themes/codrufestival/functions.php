@@ -452,6 +452,111 @@ function codrufestival_get_artists_page_url() {
     return home_url('/en/artists/');
 }
 
+function codrufestival_normalize_artist_performance_days($days) {
+    if (!is_array($days)) {
+        return array();
+    }
+
+    $normalized_days = array();
+
+    foreach ($days as $day) {
+        $day = sanitize_key((string) $day);
+
+        if ($day !== '') {
+            $normalized_days[] = $day;
+        }
+    }
+
+    return array_values(array_unique($normalized_days));
+}
+
+function codrufestival_get_artist_performance_day_labels() {
+    return array(
+        'friday' => array(
+            'ro' => 'Vineri 28.08',
+            'en' => 'Friday 28.08',
+        ),
+        'saturday' => array(
+            'ro' => 'Sâmbătă 29.08',
+            'en' => 'Saturday 29.08',
+        ),
+        'sunday' => array(
+            'ro' => 'Duminică 30.08',
+            'en' => 'Sunday 30.08',
+        ),
+    );
+}
+
+function codrufestival_get_artist_performance_day_filters() {
+    $language = function_exists('get_current_language_code') ? get_current_language_code() : 'ro';
+    if ($language !== 'en') {
+        $language = 'ro';
+    }
+
+    $day_labels = codrufestival_get_artist_performance_day_labels();
+    $filters = array(
+        array(
+            'id' => 'all',
+            'label' => function_exists('get_multilingual_text')
+                ? get_multilingual_text('Toți artiștii', 'All artists', 'ro')
+                : ($language === 'en' ? 'All artists' : 'Toți artiștii'),
+        ),
+    );
+
+    foreach (array('friday', 'saturday', 'sunday') as $day_key) {
+        $filters[] = array(
+            'id' => $day_key,
+            'label' => $day_labels[$day_key][$language] ?? $day_labels[$day_key]['ro'],
+        );
+    }
+
+    return $filters;
+}
+
+function codrufestival_get_artist_performance_day_label_map() {
+    $label_map = array();
+
+    foreach (codrufestival_get_artist_performance_day_filters() as $filter) {
+        if (($filter['id'] ?? '') === 'all') {
+            continue;
+        }
+
+        $label_map[$filter['id']] = $filter['label'];
+    }
+
+    return $label_map;
+}
+
+function codrufestival_format_artist_performance_day_label($days) {
+    $days = codrufestival_normalize_artist_performance_days($days);
+
+    if (empty($days)) {
+        return '';
+    }
+
+    $label_map = codrufestival_get_artist_performance_day_label_map();
+    $day_order = array('friday', 'saturday', 'sunday');
+    $labels = array();
+
+    foreach ($day_order as $day_key) {
+        if (in_array($day_key, $days, true) && !empty($label_map[$day_key])) {
+            $labels[] = $label_map[$day_key];
+        }
+    }
+
+    foreach ($days as $day_key) {
+        if (in_array($day_key, $day_order, true)) {
+            continue;
+        }
+
+        if (!empty($label_map[$day_key])) {
+            $labels[] = $label_map[$day_key];
+        }
+    }
+
+    return implode('<br>', $labels);
+}
+
 function codrufestival_get_artists_from_json() {
     static $artists = null;
 
@@ -533,12 +638,23 @@ function codrufestival_build_artist_card_from_json($artist) {
     }
 
     $expandable = !empty($spotify_url) || !empty($socials['spotify']);
+    $days = codrufestival_normalize_artist_performance_days($artist['days'] ?? array());
+    $day_label = $artist['day_label'] ?? $artist['dayLabel'] ?? $artist['day'] ?? '';
+
+    if ($day_label === '' && !empty($days)) {
+        $day_label = codrufestival_format_artist_performance_day_label($days);
+    }
 
     return array(
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
         'title' => $artist['name'],
         'image' => $artist_image,
         'level' => $artist_levels[$level_key] ?? '',
+        'days' => $days,
+        'day' => $day_label,
+        'dayLabel' => $day_label,
+        'stage' => $artist['stage'] ?? '',
+        'schedule' => $artist['schedule'] ?? '',
         'details' => $artist['description'] ?? $artist['details'] ?? (!empty($genres) ? implode(', ', $genres) : ''),
         'link' => $spotify_url,
         'spotifyUrl' => $spotify_url,
