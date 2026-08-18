@@ -12,7 +12,6 @@ const fridayArtistIds = new Set([
   'robin-and-the-backstabbers',
   'dj-ma-ta',
   'sar-casm',
-  'romeo-fantastick',
   'calinacho',
   'idk',
   'lucawts',
@@ -36,30 +35,6 @@ const fridayArtistIds = new Set([
 ]);
 
 const newArtists = [
-  {
-    id: 'romeo-fantastick',
-    name: 'Romeo Fantastick',
-    level: 'level3',
-    days: ['friday'],
-    spotify_id: '',
-    spotify_url: '',
-    spotify_embed_url: '',
-    image: '',
-    image_override: '',
-    genres: [],
-    followers: null,
-    popularity: null,
-    description:
-      'Romeo Fantastick este un artist special al lineup-ului Codru Festival. Detalii suplimentare despre programul live vor fi anunțate.',
-    socials: {
-      facebook: '',
-      youtube: '',
-      tiktok: '',
-      twitter: '',
-      instagram: '',
-      spotify: '',
-    },
-  },
   {
     id: 'oigan',
     name: 'Oigăn',

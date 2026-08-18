@@ -34,8 +34,8 @@ const sundayArtistIds = new Set([
 const newArtists = [
   {
     id: 'zabranena-muzika',
-    name: 'Zabranena Muzika (Goro + Bat Simo)',
-    level: 'level3',
+    name: 'Zabranena Muzika <br> <small>GORO + BAT SIMO</small>',
+    level: 'level5',
     days: ['sunday'],
     spotify_id: '',
     spotify_url: '',

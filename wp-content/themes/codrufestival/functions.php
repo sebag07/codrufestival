@@ -557,6 +557,47 @@ function codrufestival_format_artist_performance_day_label($days) {
     return implode('<br>', $labels);
 }
 
+function codrufestival_strip_artist_name_subtitle($name) {
+    $name = preg_replace('/\s*<br\s*\/?>\s*<small>[\s\S]*?<\/small>/i', '', (string) $name);
+
+    return trim($name);
+}
+
+function codrufestival_get_artist_day_labels_by_day($days) {
+    $days = codrufestival_normalize_artist_performance_days($days);
+    $label_map = codrufestival_get_artist_performance_day_label_map();
+    $labels_by_day = array();
+
+    foreach ($days as $day_key) {
+        if (!empty($label_map[$day_key])) {
+            $labels_by_day[$day_key] = $label_map[$day_key];
+        }
+    }
+
+    return $labels_by_day;
+}
+
+function codrufestival_normalize_artist_day_guests($day_guests) {
+    if (!is_array($day_guests)) {
+        return array();
+    }
+
+    $normalized = array();
+
+    foreach ($day_guests as $day_key => $guest_label) {
+        $day_key = strtolower(trim((string) $day_key));
+        $guest_label = trim((string) $guest_label);
+
+        if ($day_key === '' || $guest_label === '') {
+            continue;
+        }
+
+        $normalized[$day_key] = $guest_label;
+    }
+
+    return $normalized;
+}
+
 function codrufestival_get_artists_from_json() {
     static $artists = null;
 
@@ -645,14 +686,20 @@ function codrufestival_build_artist_card_from_json($artist) {
         $day_label = codrufestival_format_artist_performance_day_label($days);
     }
 
+    $base_title = codrufestival_strip_artist_name_subtitle($artist['name']);
+    $day_guests = codrufestival_normalize_artist_day_guests($artist['day_guests'] ?? array());
+
     return array(
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
-        'title' => $artist['name'],
+        'title' => $base_title,
+        'baseTitle' => $base_title,
         'image' => $artist_image,
         'level' => $artist_levels[$level_key] ?? '',
         'days' => $days,
         'day' => $day_label,
         'dayLabel' => $day_label,
+        'dayLabelByDay' => codrufestival_get_artist_day_labels_by_day($days),
+        'dayGuests' => $day_guests,
         'stage' => $artist['stage'] ?? '',
         'schedule' => $artist['schedule'] ?? '',
         'details' => $artist['description'] ?? $artist['details'] ?? (!empty($genres) ? implode(', ', $genres) : ''),

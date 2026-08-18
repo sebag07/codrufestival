@@ -15,10 +15,11 @@
     --artist-level-color-primary: #fbd233;
     --artist-level-color-secondary: #fff;
     --artist-level-font-size-1: 60px;
-    --artist-level-font-size-2: 48px;
-    --artist-level-font-size-3: 40px;
-    --artist-level-font-size-4: 32px;
-    --artist-level-font-size-5: 24px; /* Assuming this is for artistsLevel5 */
+    --artist-level-font-size-2: 44px;
+    --artist-level-font-size-3: 36px;
+    --artist-level-font-size-4: 26px;
+    --artist-level-font-size-5: 19px;
+    --artist-level-font-size-6: 16px;
     --main-color: #071466;
     --secondary-color: #12139b;
     --button-color: #67e816;
@@ -2486,15 +2487,35 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     font-style: italic;
 }
 
-.artistsLevel1 div h4.has-small-text {
+.artistsLevel1 div h4.has-small-text,
+.artistsLevel2 div h4.has-small-text,
+.artistsLevel3 div h4.has-small-text,
+.artistsLevel4 div h4.has-small-text,
+.artistsLevel5 div h4.has-small-text,
+.artistsLevel6 div h4.has-small-text {
     align-items: center;
     flex-direction: column;
 }
 
-.artistsLevel1 div h4.has-small-text small {
-    display: inline-block;
+.artistsLevel1 div h4.has-small-text br,
+.artistsLevel2 div h4.has-small-text br,
+.artistsLevel3 div h4.has-small-text br,
+.artistsLevel4 div h4.has-small-text br,
+.artistsLevel5 div h4.has-small-text br,
+.artistsLevel6 div h4.has-small-text br {
+    display: none;
+}
+
+.artistsLevel1 div h4.has-small-text small,
+.artistsLevel2 div h4.has-small-text small,
+.artistsLevel3 div h4.has-small-text small,
+.artistsLevel4 div h4.has-small-text small,
+.artistsLevel5 div h4.has-small-text small,
+.artistsLevel6 div h4.has-small-text small {
+    display: block;
     font-size: 0.55em;
     font-weight: 500;
+    line-height: 1.1;
     margin-top: -0.1em;
 }
 
@@ -2525,7 +2546,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
 .artistsLevel6,
 .artistsLevel6 h4 {
-    font-size: var(--artist-level-font-size-5);
+    font-size: var(--artist-level-font-size-6);
+}
+
+.artistsLevel4.pt-3,
+.artistsLevel5.pt-3,
+.artistsLevel6.pt-3 {
+    padding-bottom: 0.35rem !important;
+    padding-top: 0.35rem !important;
+}
+
+.artistsLevel4 div h4,
+.artistsLevel5 div h4,
+.artistsLevel6 div h4 {
+    letter-spacing: 0.5px;
+    line-height: 1.05;
 }
 
 .artists-note > p {
@@ -2541,27 +2576,27 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
     .artistsLevel2,
     .artistsLevel2 h4 {
-        font-size: 32px;
+        font-size: 30px;
     }
 
     .artistsLevel3,
     .artistsLevel3 h4 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .artistsLevel4,
     .artistsLevel4 h4 {
-        font-size: 20px;
+        font-size: 17px;
     }
 
     .artistsLevel5,
     .artistsLevel5 h4 {
-        font-size: 18px;
+        font-size: 15px;
     }
 
     .artistsLevel6,
     .artistsLevel6 h4 {
-        font-size: 18px;
+        font-size: 13px;
     }
 }
 
@@ -2579,27 +2614,27 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
     .artistsLevel2,
     .artistsLevel2 h4 {
-        font-size: 30px;
+        font-size: 28px;
     }
 
     .artistsLevel3,
     .artistsLevel3 h4 {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .artistsLevel4,
     .artistsLevel4 h4 {
-        font-size: 20px;
+        font-size: 17px;
     }
 
     .artistsLevel5,
     .artistsLevel5 h4 {
-        font-size: 18px;
+        font-size: 15px;
     }
 
     .artistsLevel6,
     .artistsLevel6 h4 {
-        font-size: 18px;
+        font-size: 13px;
     }
 }
 
@@ -2611,27 +2646,27 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
 
     .artistsLevel2,
     .artistsLevel2 h4 {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .artistsLevel3,
     .artistsLevel3 h4 {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .artistsLevel4,
     .artistsLevel4 h4 {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .artistsLevel5,
     .artistsLevel5 h4 {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .artistsLevel6,
     .artistsLevel6 h4 {
-        font-size: 14px;
+        font-size: 11px;
     }
 
     .artists-bullet {

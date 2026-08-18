@@ -487,6 +487,11 @@
       "followers": null,
       "popularity": null,
       "description": "DJ MĂ-TA este o DJ și producătoare din România, cunoscută pentru mixurile care combină techno cu manele și sunete balcanice. De la experimente făcute acasă pentru prieteni a ajuns pe scene precum Untold, Electric Castle și Neversea, cu un stil provocator, energic și imposibil de ignorat.",
+      "day_guests": {
+        "friday": "INVITAT SPECIAL ROMEO FANTASTICK",
+        "saturday": "BALKANDREEA & E-AN-NA<br>B2B PAULVLJ",
+        "sunday": "INVITAT SPECIAL ZABRANENA MUZIKA<br>GORO + BAT SIMO"
+      },
       "socials": {
         "facebook": "",
         "youtube": "",
@@ -2377,31 +2382,6 @@
       ]
     },
     {
-      "id": "romeo-fantastick",
-      "name": "Romeo Fantastick",
-      "level": "level3",
-      "days": [
-        "friday"
-      ],
-      "spotify_id": "",
-      "spotify_url": "",
-      "spotify_embed_url": "",
-      "image": "",
-      "image_override": "",
-      "genres": [],
-      "followers": null,
-      "popularity": null,
-      "description": "Romeo Fantastick este un artist special al lineup-ului Codru Festival. Detalii suplimentare despre programul live vor fi anunțate.",
-      "socials": {
-        "facebook": "",
-        "youtube": "",
-        "tiktok": "",
-        "twitter": "",
-        "instagram": "",
-        "spotify": ""
-      }
-    },
-    {
       "id": "oigan",
       "name": "Oigăn",
       "level": "level5",
@@ -2512,8 +2492,8 @@
     },
     {
       "id": "zabranena-muzika",
-      "name": "Zabranena Muzika (Goro + Bat Simo)",
-      "level": "level3",
+      "name": "Zabranena Muzika <br> <small>GORO + BAT SIMO</small>",
+      "level": "level5",
       "days": [
         "sunday"
       ],

@@ -22,6 +22,35 @@ function artistMatchesDay(artist, activeFilter) {
   return days.includes(activeFilter);
 }
 
+function buildArtistTitle(artist, activeFilter) {
+  const baseTitle = artist.baseTitle || artist.title || '';
+  const dayGuests = artist.dayGuests && typeof artist.dayGuests === 'object' ? artist.dayGuests : null;
+
+  if (activeFilter === 'all' || !dayGuests) {
+    return baseTitle;
+  }
+
+  const guestLabel = dayGuests[activeFilter];
+  if (!guestLabel) {
+    return baseTitle;
+  }
+
+  return `${baseTitle} <br> <small>${guestLabel}</small>`;
+}
+
+function buildDayLabel(artist, activeFilter, showDayLabels) {
+  if (!showDayLabels) {
+    return '';
+  }
+
+  if (activeFilter !== 'all') {
+    const dayLabelByDay = artist.dayLabelByDay && typeof artist.dayLabelByDay === 'object' ? artist.dayLabelByDay : null;
+    return dayLabelByDay?.[activeFilter] || '';
+  }
+
+  return artist.dayLabel || artist.day || '';
+}
+
 function ArtistSocialLinks({ socials = {} }) {
   const links = Object.entries(socialLabels)
     .map(([platform, label]) => ({
@@ -104,7 +133,8 @@ export function ArtistExpandableCards({
       ) : (
         <div className="codru-artist-expandable-cards">
           {visibleArtists.map((artist, index) => {
-            const dayLabel = showDayLabels ? artist.dayLabel || artist.day || '' : '';
+            const cardTitle = buildArtistTitle(artist, activeFilter);
+            const dayLabel = buildDayLabel(artist, activeFilter, showDayLabels);
             const performanceMeta = compact([
               showPerformanceMeta ? artist.schedule : null,
               showPerformanceMeta ? artist.stage : null,
@@ -121,7 +151,7 @@ export function ArtistExpandableCards({
             return (
               <ExpandableCard
                 key={artist.id || `${artist.title}-${index}`}
-                title={artist.title}
+                title={cardTitle}
                 src={artist.image}
                 description={description}
                 expandable={expandable}
