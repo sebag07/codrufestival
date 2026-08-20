@@ -69,6 +69,53 @@ function codru_format_ticket_price_amount(string $raw_price): string
     return $price;
 }
 
+function codru_get_hardcoded_daily_ticket_eur_map(): array
+{
+    return [
+        'general_access' => [
+            28 => '28',
+            29 => '32',
+            30 => '32',
+        ],
+        'under_25' => [
+            28 => '20',
+            29 => '24',
+            30 => '24',
+        ],
+    ];
+}
+
+function codru_ticket_daily_day_from_title(string $title): ?int
+{
+    $normalized = codru_normalize_ticket_text($title);
+
+    if (!preg_match('/\b(28|29|30)\s+august\b/', $normalized, $matches)) {
+        return null;
+    }
+
+    return (int) $matches[1];
+}
+
+function codru_ticket_display_price_from_hardcoded_daily(string $name): ?string
+{
+    $title = codru_ticket_title_from_tariff_name($name);
+    $day = codru_ticket_daily_day_from_title($title);
+
+    if ($day === null) {
+        return null;
+    }
+
+    $category_key = codru_ticket_category_key($title);
+
+    if ($category_key !== 'general_access' && $category_key !== 'under_25') {
+        return null;
+    }
+
+    $eur = codru_get_hardcoded_daily_ticket_eur_map()[$category_key][$day] ?? null;
+
+    return $eur !== null ? $eur . ' €' : null;
+}
+
 function codru_ticket_display_price_from_tariff_name(string $name): ?string
 {
     if (!preg_match('/-\s*(\d+(?:[.,]\d+)?)\s*EUR\b/i', $name, $matches)) {
@@ -104,6 +151,12 @@ function codru_ticket_display_price(string $name, string $sell_price = '', strin
         return $display_price;
     }
 
+    $display_price = codru_ticket_display_price_from_hardcoded_daily($name);
+
+    if ($display_price !== null) {
+        return $display_price;
+    }
+
     return codru_ticket_display_price_from_sell_data($sell_price, $sell_currency);
 }
 
@@ -128,20 +181,26 @@ function codru_get_live_display_tickets(string $json_path): array
     $display_tickets = [];
 
     foreach ($tickets as $ticket) {
-        if (empty($ticket['display_price'])) {
-            continue;
-        }
-
         $title = (string) ($ticket['title'] ?? codru_ticket_title_from_tariff_name((string) ($ticket['name'] ?? '')));
 
         if ($title === '') {
             continue;
         }
 
+        $display_price = codru_ticket_display_price(
+            (string) ($ticket['name'] ?? $title),
+            (string) ($ticket['sell_price'] ?? ''),
+            (string) ($ticket['sell_currency'] ?? '')
+        );
+
+        if ($display_price === null || $display_price === '') {
+            continue;
+        }
+
         $display_tickets[] = [
             'id' => (string) ($ticket['id'] ?? ''),
             'title' => $title,
-            'display_price' => (string) $ticket['display_price'],
+            'display_price' => $display_price,
             'category_key' => codru_ticket_category_key($title),
         ];
     }
