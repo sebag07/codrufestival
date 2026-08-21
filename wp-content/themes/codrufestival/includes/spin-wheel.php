@@ -17,12 +17,12 @@ const CODRUFESTIVAL_SPIN_WHEEL_ROUTE = '/spin-wheel';
 function codrufestival_spin_wheel_prizes(): array
 {
     return array(
-        array('id' => 0, 'pct' => 10, 'code' => 'CDR-X7K4P9', 'weight' => 1, 'hex' => '#2ecc5a'),
-        array('id' => 1, 'pct' => 15, 'code' => 'CDR-M2Q8VN', 'weight' => 3, 'hex' => '#28e069'),
-        array('id' => 2, 'pct' => 20, 'code' => 'CDR-F8L3QX', 'weight' => 9, 'hex' => '#1ff97a'),
-        array('id' => 3, 'pct' => 25, 'code' => 'CDR-R9W3KL', 'weight' => 35, 'hex' => '#12ff6e'),
-        array('id' => 4, 'pct' => 30, 'code' => 'CDR-Y4N8ZT', 'weight' => 45, 'hex' => '#22ff5c'),
-        array('id' => 5, 'pct' => 50, 'code' => 'CDR-Q5T9WM', 'weight' => 7, 'hex' => '#00ff41'),
+        array('id' => 0, 'pct' => 10, 'code' => 'CDRX7K4P9', 'weight' => 1, 'hex' => '#2ecc5a'),
+        array('id' => 1, 'pct' => 15, 'code' => 'CDRM2Q8VN', 'weight' => 3, 'hex' => '#28e069'),
+        array('id' => 2, 'pct' => 20, 'code' => 'CDRF8L3QX', 'weight' => 9, 'hex' => '#1ff97a'),
+        array('id' => 3, 'pct' => 25, 'code' => 'CDRR9W3KL', 'weight' => 35, 'hex' => '#12ff6e'),
+        array('id' => 4, 'pct' => 30, 'code' => 'CDRY4N8ZT', 'weight' => 45, 'hex' => '#22ff5c'),
+        array('id' => 5, 'pct' => 50, 'code' => 'CDRQ5T9WM', 'weight' => 7, 'hex' => '#00ff41'),
     );
 }
 
