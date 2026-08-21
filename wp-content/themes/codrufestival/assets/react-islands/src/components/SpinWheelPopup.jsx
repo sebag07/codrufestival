@@ -18,22 +18,20 @@ const DEFAULT_SEGMENTS = [
 ];
 
 const DEFAULT_COPY = {
-  dates: '28–30 AUGUST · PĂDUREA VERDE, TIMIȘOARA',
+  dates: '28–30 AUGUST',
+  location: 'PĂDUREA VERDE, TIMIȘOARA',
   eyebrow: 'Feeling lucky?',
   titleBefore: 'Spin the ',
   titleAccent: 'CODRU Wheel',
   lede: 'Win up to 50% off your CODRU Festival ticket.',
   spinLabel: 'SPIN & WIN →',
   spinningLabel: 'SPINNING…',
-  spinNote: '🛡️ 1 spin per person',
   underWheel: "ONE SPIN. ONE DISCOUNT. DON'T WASTE IT.",
   resultBadge: 'YOU GOT',
-  resultTitle: '🎉 Nice spin!',
   codeLabel: 'YOUR CODRU DISCOUNT CODE',
   copyLabel: 'COPY CODE',
   copiedLabel: 'COPIED ✓',
   copyFailedLabel: 'COPY FAILED',
-  fomo: 'USE IT BEFORE THE WHEEL DISAPPEARS',
   ctaLabel: 'GET YOUR TICKET',
   validity: 'Enter it in the voucher field at checkout.',
   closeLabel: 'Close',
@@ -452,7 +450,10 @@ export function SpinWheelPopup({
 
         <div className="codru-spin-wheel__wrap">
           <img className="codru-spin-wheel__wordmark" src={wordmark} alt="CODRU Festival" />
-          <p className="codru-spin-wheel__dates">{labels.dates}</p>
+          <div className="codru-spin-wheel__meta">
+            {labels.dates ? <p className="codru-spin-wheel__badge">{labels.dates}</p> : null}
+            {labels.location ? <p className="codru-spin-wheel__badge">{labels.location}</p> : null}
+          </div>
           <p className="codru-spin-wheel__eyebrow">{labels.eyebrow}</p>
           <h2 className="codru-spin-wheel__title" id={titleId}>
             {labels.titleBefore}
@@ -490,7 +491,7 @@ export function SpinWheelPopup({
                         dominantBaseline="middle"
                         fontSize="9"
                         fontWeight="700"
-                        fill="#03170a"
+                        fill="#071466"
                         opacity="0.75"
                         transform={`rotate(${segment.midAngle}, ${segment.labelX}, ${segment.labelY})`}
                       >
@@ -515,7 +516,6 @@ export function SpinWheelPopup({
           >
             {spinLabel}
           </button>
-          <p className="codru-spin-wheel__note">{labels.spinNote}</p>
           {error ? (
             <p className="codru-spin-wheel__error" id={errorId} role="alert">
               {error}
@@ -531,7 +531,6 @@ export function SpinWheelPopup({
               <p className="codru-spin-wheel__result-pct">
                 {result.pct}% {labels.offLabel}
               </p>
-              <p className="codru-spin-wheel__result-title">{labels.resultTitle}</p>
               <div className="codru-spin-wheel__code-box">
                 <p className="codru-spin-wheel__code-label">{labels.codeLabel}</p>
                 <p className="codru-spin-wheel__code-value">{result.code}</p>
@@ -543,11 +542,10 @@ export function SpinWheelPopup({
                   {copyButtonLabel}
                 </button>
               </div>
-              <p className="codru-spin-wheel__fomo">{labels.fomo}</p>
+              <p className="codru-spin-wheel__validity">{labels.validity}</p>
               <a className="codru-spin-wheel__cta" href={ticketUrl} target="_blank" rel="noopener noreferrer">
                 {labels.ctaLabel}
               </a>
-              <p className="codru-spin-wheel__validity">{labels.validity}</p>
             </div>
           </div>
         ) : null}
