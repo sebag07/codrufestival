@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 const CODRUFESTIVAL_SPIN_WHEEL_CAMPAIGN = 'v1';
+const CODRUFESTIVAL_SPIN_WHEEL_ENABLED = false;
 const CODRUFESTIVAL_SPIN_WHEEL_COOKIE = 'codrufestival_spin_v1';
 const CODRUFESTIVAL_SPIN_WHEEL_RESULT_KEY = 'codru_spin_result';
 const CODRUFESTIVAL_SPIN_WHEEL_DISMISSED_KEY = 'codrufestival_spin_wheel_dismissed_v1';
@@ -210,6 +211,14 @@ function codrufestival_spin_wheel_public_result(array $prize): array
 
 function codrufestival_spin_wheel_handle_request(WP_REST_Request $request)
 {
+    if (!CODRUFESTIVAL_SPIN_WHEEL_ENABLED) {
+        return new WP_Error(
+            'codrufestival_spin_wheel_disabled',
+            'The spin wheel is currently unavailable.',
+            array('status' => 403)
+        );
+    }
+
     if (!codrufestival_spin_wheel_is_same_origin($request)) {
         return new WP_Error(
             'codrufestival_spin_wheel_forbidden',
@@ -253,6 +262,10 @@ add_action('rest_api_init', 'codrufestival_spin_wheel_register_rest_route');
 
 function codrufestival_spin_wheel_should_render(): bool
 {
+    if (!CODRUFESTIVAL_SPIN_WHEEL_ENABLED) {
+        return false;
+    }
+
     if (is_admin() || wp_doing_ajax() || wp_is_json_request()) {
         return false;
     }

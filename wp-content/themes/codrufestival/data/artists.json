@@ -1983,46 +1983,6 @@
       ]
     },
     {
-      "id": "zo",
-      "name": "ZO",
-      "level": "level5",
-      "spotify_id": "6gOAgpuNfz5XqkzwdtkoOZ",
-      "spotify_url": "https://open.spotify.com/artist/6gOAgpuNfz5XqkzwdtkoOZ",
-      "spotify_embed_url": "https://open.spotify.com/embed/artist/6gOAgpuNfz5XqkzwdtkoOZ?utm_source=generator",
-      "image": "https://i.scdn.co/image/ab6761610000e5eb903a587a20418e2308135b29",
-      "image_override": "",
-      "genres": [],
-      "followers": null,
-      "popularity": null,
-      "description": "Z.O.B. este o formație de punk rock și rock alternativ din București, activă din 1993, cunoscută pentru albume precum „Telenovelas”, „III” și „Deviant”. Lineup-ul Codru folosește numele scurt ZO.",
-      "socials": {
-        "facebook": "https://www.facebook.com/ZobOfficial",
-        "youtube": "https://www.youtube.com/@trupaZOB",
-        "tiktok": "",
-        "twitter": "",
-        "instagram": "https://www.instagram.com/trupazob/",
-        "spotify": "https://open.spotify.com/artist/6gOAgpuNfz5XqkzwdtkoOZ"
-      },
-      "spotify_name": "Z.O.B.",
-      "images": [
-        {
-          "url": "https://i.scdn.co/image/ab6761610000e5eb903a587a20418e2308135b29",
-          "height": 640,
-          "width": 640
-        },
-        {
-          "url": "https://i.scdn.co/image/ab67616100005174903a587a20418e2308135b29",
-          "height": 320,
-          "width": 320
-        },
-        {
-          "url": "https://i.scdn.co/image/ab6761610000f178903a587a20418e2308135b29",
-          "height": 160,
-          "width": 160
-        }
-      ]
-    },
-    {
       "id": "zoleevee",
       "name": "Zoleevee",
       "level": "level5",
