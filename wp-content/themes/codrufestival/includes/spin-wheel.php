@@ -3,12 +3,25 @@
 declare(strict_types=1);
 
 const CODRUFESTIVAL_SPIN_WHEEL_CAMPAIGN = 'v1';
-const CODRUFESTIVAL_SPIN_WHEEL_ENABLED = false;
+const CODRUFESTIVAL_SPIN_WHEEL_ENABLED_DEFAULT = false;
 const CODRUFESTIVAL_SPIN_WHEEL_COOKIE = 'codrufestival_spin_v1';
 const CODRUFESTIVAL_SPIN_WHEEL_RESULT_KEY = 'codru_spin_result';
 const CODRUFESTIVAL_SPIN_WHEEL_DISMISSED_KEY = 'codrufestival_spin_wheel_dismissed_v1';
 const CODRUFESTIVAL_SPIN_WHEEL_NAMESPACE = 'codrufestival/v1';
 const CODRUFESTIVAL_SPIN_WHEEL_ROUTE = '/spin-wheel';
+
+function codrufestival_spin_wheel_is_enabled(): bool
+{
+    if (function_exists('get_field')) {
+        $enabled = get_field('spin_wheel_enabled', 'options');
+
+        if ($enabled !== null && $enabled !== '') {
+            return (bool) $enabled;
+        }
+    }
+
+    return CODRUFESTIVAL_SPIN_WHEEL_ENABLED_DEFAULT;
+}
 
 /**
  * Campaign prizes stay on the server. Weights and codes must not be sent to the browser.
@@ -211,7 +224,7 @@ function codrufestival_spin_wheel_public_result(array $prize): array
 
 function codrufestival_spin_wheel_handle_request(WP_REST_Request $request)
 {
-    if (!CODRUFESTIVAL_SPIN_WHEEL_ENABLED) {
+    if (!codrufestival_spin_wheel_is_enabled()) {
         return new WP_Error(
             'codrufestival_spin_wheel_disabled',
             'The spin wheel is currently unavailable.',
@@ -262,7 +275,7 @@ add_action('rest_api_init', 'codrufestival_spin_wheel_register_rest_route');
 
 function codrufestival_spin_wheel_should_render(): bool
 {
-    if (!CODRUFESTIVAL_SPIN_WHEEL_ENABLED) {
+    if (!codrufestival_spin_wheel_is_enabled()) {
         return false;
     }
 

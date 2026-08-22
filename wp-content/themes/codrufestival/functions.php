@@ -363,6 +363,15 @@ if (function_exists('acf_add_options_page')) {
         'parent_slug' => 'general-options',
     ));
 
+    acf_add_options_sub_page(array(
+        'page_title' => 'Spin Wheel',
+        'menu_title' => 'Spin Wheel',
+        'menu_slug' => 'spin-wheel-options',
+        'capability' => 'edit_posts',
+        'redirect' => false,
+        'parent_slug' => 'general-options',
+    ));
+
 }
 
 add_filter('the_content', 'wpautop');
