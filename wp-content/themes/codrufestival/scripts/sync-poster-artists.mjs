@@ -122,7 +122,7 @@ const posterLineup = [
   { id: 'kayf', name: 'Kayf', level: 'level5' },
   { id: 'leanu', name: 'Leanu', level: 'level5' },
   { id: 'mandu', name: 'Mandu', level: 'level5' },
-  { id: 'mini-zuchini', name: 'Mini Zuchini', level: 'level5' },
+  { id: 'mini-zucchini', name: 'Mini Zucchini', level: 'level5' },
   { id: 'narciss', name: 'Narciss', level: 'level5' },
   { id: 'noid-b2b-oigan', name: 'NO/ID B2B OIGĂN', level: 'level5' },
   { id: 'paulvlj', name: 'PaulVLJ', level: 'level5' },

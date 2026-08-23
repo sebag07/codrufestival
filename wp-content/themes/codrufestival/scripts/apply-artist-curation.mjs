@@ -142,7 +142,7 @@ const curated = {
   },
   'mini-zuchini': {
     description:
-      'Mini Zuchini este un DJ din Timișoara, proiect solo de new beat, electro și italo-disco. Co-fondatoare a seriei Launmomentdat/Sabotage; gazda emisiunii Ferment Station la Black Rhino Radio.',
+      'Mini Zucchini este un DJ din Timișoara, proiect solo de new beat, electro și italo-disco. Co-fondatoare a seriei Launmomentdat/Sabotage; gazda emisiunii Ferment Station la Black Rhino Radio.',
     socials: {
       instagram: 'https://www.instagram.com/minizucchini/',
     },
