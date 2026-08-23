@@ -73,12 +73,19 @@ body.codru-expandable-card-open {
   max-width: 1280px;
 }
 
+.codru-artist-expandable-cards__filter-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 auto 24px;
+}
+
 .codru-artist-expandable-cards__filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  margin: 0 auto 24px;
+  margin: 0;
 }
 
 .codru-artist-expandable-cards__filter {

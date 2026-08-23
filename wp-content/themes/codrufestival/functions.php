@@ -567,6 +567,82 @@ function codrufestival_format_artist_performance_day_label($days) {
     return implode('<br>', $labels);
 }
 
+function codrufestival_get_artist_stage_labels() {
+    return array(
+        'main' => array(
+            'ro' => 'Main Stage',
+            'en' => 'Main Stage',
+        ),
+        'air' => array(
+            'ro' => 'Air Stage',
+            'en' => 'Air Stage',
+        ),
+        'water' => array(
+            'ro' => 'Water Stage',
+            'en' => 'Water Stage',
+        ),
+    );
+}
+
+function codrufestival_normalize_artist_stage($stage) {
+    $stage = sanitize_key((string) $stage);
+
+    if ($stage === '') {
+        return '';
+    }
+
+    $allowed_stages = array_keys(codrufestival_get_artist_stage_labels());
+
+    if (!in_array($stage, $allowed_stages, true)) {
+        return '';
+    }
+
+    return $stage;
+}
+
+function codrufestival_get_artist_stage_label($stage) {
+    $stage = codrufestival_normalize_artist_stage($stage);
+
+    if ($stage === '') {
+        return '';
+    }
+
+    $language = function_exists('get_current_language_code') ? get_current_language_code() : 'ro';
+    if ($language !== 'en') {
+        $language = 'ro';
+    }
+
+    $stage_labels = codrufestival_get_artist_stage_labels();
+
+    return $stage_labels[$stage][$language] ?? $stage_labels[$stage]['ro'] ?? '';
+}
+
+function codrufestival_get_artist_stage_filters() {
+    $language = function_exists('get_current_language_code') ? get_current_language_code() : 'ro';
+    if ($language !== 'en') {
+        $language = 'ro';
+    }
+
+    $stage_labels = codrufestival_get_artist_stage_labels();
+    $filters = array(
+        array(
+            'id' => 'all',
+            'label' => function_exists('get_multilingual_text')
+                ? get_multilingual_text('Toate scenele', 'All stages', 'ro')
+                : ($language === 'en' ? 'All stages' : 'Toate scenele'),
+        ),
+    );
+
+    foreach (array('main', 'air', 'water') as $stage_key) {
+        $filters[] = array(
+            'id' => $stage_key,
+            'label' => $stage_labels[$stage_key][$language] ?? $stage_labels[$stage_key]['ro'],
+        );
+    }
+
+    return $filters;
+}
+
 function codrufestival_strip_artist_name_subtitle($name) {
     $name = preg_replace('/\s*<br\s*\/?>\s*<small>[\s\S]*?<\/small>/i', '', (string) $name);
 
@@ -698,6 +774,7 @@ function codrufestival_build_artist_card_from_json($artist) {
 
     $base_title = codrufestival_strip_artist_name_subtitle($artist['name']);
     $day_guests = codrufestival_normalize_artist_day_guests($artist['day_guests'] ?? array());
+    $stage_key = codrufestival_normalize_artist_stage($artist['stage'] ?? '');
 
     return array(
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
@@ -710,7 +787,8 @@ function codrufestival_build_artist_card_from_json($artist) {
         'dayLabel' => $day_label,
         'dayLabelByDay' => codrufestival_get_artist_day_labels_by_day($days),
         'dayGuests' => $day_guests,
-        'stage' => $artist['stage'] ?? '',
+        'stage' => $stage_key,
+        'stageLabel' => codrufestival_get_artist_stage_label($stage_key),
         'schedule' => $artist['schedule'] ?? '',
         'details' => $artist['description'] ?? $artist['details'] ?? (!empty($genres) ? implode(', ', $genres) : ''),
         'link' => $spotify_url,

@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-18T16:58:29.707Z",
+  "updated_at": "2026-08-23T20:46:46.817Z",
   "artists": [
     {
       "id": "gipsy-kings",
@@ -42,7 +42,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "sars",
@@ -85,7 +86,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "ternipe",
@@ -128,7 +130,8 @@
       "spotify_name": "Ternipe",
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "alternosfera",
@@ -171,7 +174,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "subcarpati",
@@ -214,7 +218,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "puya",
@@ -257,7 +262,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "surorile-osoianu-si-lupii-lui-calancea",
@@ -300,7 +306,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "damian-and-brothers",
@@ -343,7 +350,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "e-an-na",
@@ -386,7 +394,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "hvnds",
@@ -429,7 +438,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "robin-and-the-backstabbers",
@@ -472,7 +482,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "dj-ma-ta",
@@ -504,7 +515,8 @@
         "friday",
         "saturday",
         "sunday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "balkandreea-and-the-balkan-sisters",
@@ -529,7 +541,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "main"
     },
     {
       "id": "adelin-mm",
@@ -572,7 +585,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "albert-nbn",
@@ -615,7 +629,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "calinacho",
@@ -658,7 +673,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "ian",
@@ -701,7 +717,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "idk",
@@ -744,7 +761,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "lucawts",
@@ -787,7 +805,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "mgk",
@@ -830,7 +849,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "noua-unspe",
@@ -873,7 +893,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "oscar",
@@ -916,7 +937,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "petre-stefan",
@@ -959,7 +981,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "rava",
@@ -1002,7 +1025,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "vanilla",
@@ -1045,7 +1069,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "el-cartel-reggaeton-afterparty",
@@ -1072,7 +1097,8 @@
         "friday",
         "saturday",
         "sunday"
-      ]
+      ],
+      "stage": "air"
     },
     {
       "id": "4awl",
@@ -1097,7 +1123,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "acoustic-boyz",
@@ -1140,7 +1167,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "adrian-despot-and-cezar-popescu",
@@ -1184,7 +1212,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "asaway",
@@ -1227,7 +1256,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "bia",
@@ -1252,7 +1282,8 @@
       },
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "bob-ramanka",
@@ -1295,7 +1326,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "ciresan",
@@ -1338,7 +1370,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "claudia-serdan-and-jimi-el-laco",
@@ -1363,7 +1396,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "cypher",
@@ -1388,7 +1422,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "damage-ctrl",
@@ -1413,7 +1448,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "drew",
@@ -1438,7 +1474,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "emu",
@@ -1463,7 +1500,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "exob",
@@ -1506,7 +1544,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "kayf",
@@ -1549,7 +1588,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "leanu",
@@ -1574,7 +1614,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "mandu",
@@ -1627,7 +1668,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "narciss",
@@ -1652,7 +1694,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "noid-b2b-oigan",
@@ -1692,7 +1735,8 @@
           "height": 160,
           "width": 160
         }
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "paulvlj",
@@ -1718,7 +1762,8 @@
       "press_kit_url": "https://www.dropbox.com/scl/fo/srlfqlkdixrzfwpipd2bb/AH0ExZ9aXHxJZbBrxxhYy48?rlkey=kskofgd6fpc8bgqkn3hnm2lyd&st=pac3robt&dl=0",
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "raul-prodan",
@@ -1743,7 +1788,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "razy",
@@ -1768,7 +1814,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "revan",
@@ -1793,7 +1840,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "sar-casm",
@@ -1819,7 +1867,8 @@
       "press_kit_url": "https://drive.google.com/drive/folders/1HLr1WzTFne5NuSGpoHkRb-H_hUra3v6y",
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "soulmaze",
@@ -1844,7 +1893,8 @@
       },
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "tano",
@@ -1887,7 +1937,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "tulvan",
@@ -1930,7 +1981,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "ufo",
@@ -1955,7 +2007,8 @@
       },
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "yoshuu",
@@ -1980,7 +2033,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "zoleevee",
@@ -2005,7 +2059,8 @@
       },
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "blutrina",
@@ -2372,7 +2427,8 @@
           "height": 640,
           "width": 640
         }
-      ]
+      ],
+      "stage": "water"
     },
     {
       "id": "she",
@@ -2422,7 +2478,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "stage": "water"
     },
     {
       "id": "rave-with-your-kids-donisan-sabincp",
