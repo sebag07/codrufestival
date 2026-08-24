@@ -110,6 +110,32 @@ function codrufestival_spin_wheel_acf_default_rows(): array
 }
 
 /**
+ * @param mixed $post_id
+ */
+function codrufestival_spin_wheel_is_options_post_id($post_id): bool
+{
+    return $post_id === 'options' || $post_id === 'option';
+}
+
+/**
+ * @return mixed
+ */
+function codrufestival_spin_wheel_get_raw_acf_prize_rows()
+{
+    if (!function_exists('acf_get_field') || !function_exists('acf_get_metadata_by_field')) {
+        return null;
+    }
+
+    $field = acf_get_field('spin_wheel_prizes');
+
+    if (!is_array($field)) {
+        return null;
+    }
+
+    return acf_get_metadata_by_field('options', $field);
+}
+
+/**
  * @param mixed $rows
  */
 function codrufestival_spin_wheel_acf_rows_total_chance($rows): float
@@ -136,11 +162,27 @@ function codrufestival_spin_wheel_acf_rows_total_chance($rows): float
  */
 function codrufestival_spin_wheel_acf_should_use_defaults($rows): bool
 {
-    if (!is_array($rows) || $rows === array()) {
+    if (!is_array($rows) || $rows === array() || !isset($rows[0])) {
         return true;
     }
 
-    return codrufestival_spin_wheel_acf_rows_total_chance($rows) <= 0;
+    $complete = 0;
+
+    foreach ($rows as $row) {
+        if (!is_array($row)) {
+            continue;
+        }
+
+        $pct = (int) ($row['discount_pct'] ?? 0);
+        $code = trim((string) ($row['discount_code'] ?? ''));
+        $chance = (float) ($row['win_chance_pct'] ?? 0);
+
+        if ($pct > 0 && $code !== '' && $chance > 0) {
+            $complete++;
+        }
+    }
+
+    return $complete === 0;
 }
 
 /**
@@ -149,9 +191,9 @@ function codrufestival_spin_wheel_acf_should_use_defaults($rows): bool
  * @param array<string,mixed> $field
  * @return mixed
  */
-function codrufestival_spin_wheel_acf_load_prizes($value, $post_id, array $field)
+function codrufestival_spin_wheel_acf_load_prizes($value, $post_id, $field)
 {
-    if ($post_id !== 'options') {
+    if (!codrufestival_spin_wheel_is_options_post_id($post_id)) {
         return $value;
     }
 
@@ -162,7 +204,28 @@ function codrufestival_spin_wheel_acf_load_prizes($value, $post_id, array $field
     return $value;
 }
 
+function codrufestival_spin_wheel_seed_acf_prizes_if_needed(): void
+{
+    if (!is_admin() || !function_exists('update_field')) {
+        return;
+    }
+
+    if (!isset($_GET['page']) || $_GET['page'] !== 'spin-wheel-options') {
+        return;
+    }
+
+    $raw = codrufestival_spin_wheel_get_raw_acf_prize_rows();
+
+    if (!codrufestival_spin_wheel_acf_should_use_defaults($raw)) {
+        return;
+    }
+
+    update_field('spin_wheel_prizes', codrufestival_spin_wheel_acf_default_rows(), 'options');
+}
+
 add_filter('acf/load_value/name=spin_wheel_prizes', 'codrufestival_spin_wheel_acf_load_prizes', 10, 3);
+add_filter('acf/load_value/key=field_codru_spin_wheel_prizes', 'codrufestival_spin_wheel_acf_load_prizes', 10, 3);
+add_action('acf/input/admin_head', 'codrufestival_spin_wheel_seed_acf_prizes_if_needed', 1);
 
 /**
  * @param list<array<string,mixed>> $rows

@@ -113,9 +113,9 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 1,
-                    "default_value": "",
-                    "maxlength": 32,
-                    "placeholder": "CDR3K7XCG",
+            "default_value": "",
+            "maxlength": 32,
+            "placeholder": "",
                     "prepend": "",
                     "append": "",
                     "parent_repeater": "field_codru_spin_wheel_prizes"
