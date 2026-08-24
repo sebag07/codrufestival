@@ -77,9 +77,11 @@ function codrufestival_spin_wheel_normalize_prizes(array $rows): array
 }
 
 /**
+ * Campaign prizes stay on the server. Weights and codes must not be sent to the browser.
+ *
  * @return list<array{pct:int,code:string,weight:int}>
  */
-function codrufestival_spin_wheel_default_prize_rows(): array
+function codrufestival_spin_wheel_prize_rows(): array
 {
     return array(
         array('pct' => 20, 'code' => 'CDR3K7XCG', 'weight' => 49),
@@ -92,167 +94,6 @@ function codrufestival_spin_wheel_default_prize_rows(): array
 }
 
 /**
- * @return list<array{discount_pct:int,discount_code:string,win_chance_pct:int}>
- */
-function codrufestival_spin_wheel_acf_default_rows(): array
-{
-    $rows = array();
-
-    foreach (codrufestival_spin_wheel_default_prize_rows() as $row) {
-        $rows[] = array(
-            'discount_pct' => $row['pct'],
-            'discount_code' => $row['code'],
-            'win_chance_pct' => $row['weight'],
-        );
-    }
-
-    return $rows;
-}
-
-/**
- * @param mixed $post_id
- */
-function codrufestival_spin_wheel_is_options_post_id($post_id): bool
-{
-    return $post_id === 'options' || $post_id === 'option';
-}
-
-/**
- * @return mixed
- */
-function codrufestival_spin_wheel_get_raw_acf_prize_rows()
-{
-    if (!function_exists('acf_get_field') || !function_exists('acf_get_metadata_by_field')) {
-        return null;
-    }
-
-    $field = acf_get_field('spin_wheel_prizes');
-
-    if (!is_array($field)) {
-        return null;
-    }
-
-    return acf_get_metadata_by_field('options', $field);
-}
-
-/**
- * @param mixed $rows
- */
-function codrufestival_spin_wheel_acf_rows_total_chance($rows): float
-{
-    if (!is_array($rows)) {
-        return 0.0;
-    }
-
-    $total = 0.0;
-
-    foreach ($rows as $row) {
-        if (!is_array($row)) {
-            continue;
-        }
-
-        $total += (float) ($row['win_chance_pct'] ?? 0);
-    }
-
-    return $total;
-}
-
-/**
- * @param mixed $rows
- */
-function codrufestival_spin_wheel_acf_should_use_defaults($rows): bool
-{
-    if (!is_array($rows) || $rows === array() || !isset($rows[0])) {
-        return true;
-    }
-
-    $complete = 0;
-
-    foreach ($rows as $row) {
-        if (!is_array($row)) {
-            continue;
-        }
-
-        $pct = (int) ($row['discount_pct'] ?? 0);
-        $code = trim((string) ($row['discount_code'] ?? ''));
-        $chance = (float) ($row['win_chance_pct'] ?? 0);
-
-        if ($pct > 0 && $code !== '' && $chance > 0) {
-            $complete++;
-        }
-    }
-
-    return $complete === 0;
-}
-
-/**
- * @param mixed $value
- * @param int|string $post_id
- * @param array<string,mixed> $field
- * @return mixed
- */
-function codrufestival_spin_wheel_acf_load_prizes($value, $post_id, $field)
-{
-    if (!codrufestival_spin_wheel_is_options_post_id($post_id)) {
-        return $value;
-    }
-
-    if (codrufestival_spin_wheel_acf_should_use_defaults($value)) {
-        return codrufestival_spin_wheel_acf_default_rows();
-    }
-
-    return $value;
-}
-
-function codrufestival_spin_wheel_seed_acf_prizes_if_needed(): void
-{
-    if (!is_admin() || !function_exists('update_field')) {
-        return;
-    }
-
-    if (!isset($_GET['page']) || $_GET['page'] !== 'spin-wheel-options') {
-        return;
-    }
-
-    $raw = codrufestival_spin_wheel_get_raw_acf_prize_rows();
-
-    if (!codrufestival_spin_wheel_acf_should_use_defaults($raw)) {
-        return;
-    }
-
-    update_field('spin_wheel_prizes', codrufestival_spin_wheel_acf_default_rows(), 'options');
-}
-
-add_filter('acf/load_value/name=spin_wheel_prizes', 'codrufestival_spin_wheel_acf_load_prizes', 10, 3);
-add_filter('acf/load_value/key=field_codru_spin_wheel_prizes', 'codrufestival_spin_wheel_acf_load_prizes', 10, 3);
-add_action('acf/input/admin_head', 'codrufestival_spin_wheel_seed_acf_prizes_if_needed', 1);
-
-/**
- * @param list<array<string,mixed>> $rows
- * @return list<array{id:int,pct:int,code:string,weight:int,hex:string}>
- */
-function codrufestival_spin_wheel_prizes_from_acf(array $rows): array
-{
-    $input = array();
-
-    foreach ($rows as $row) {
-        if (!is_array($row)) {
-            continue;
-        }
-
-        $input[] = array(
-            'pct' => isset($row['discount_pct']) ? (int) $row['discount_pct'] : 0,
-            'code' => isset($row['discount_code']) ? sanitize_text_field((string) $row['discount_code']) : '',
-            'weight' => isset($row['win_chance_pct']) ? (float) $row['win_chance_pct'] : 0,
-        );
-    }
-
-    return codrufestival_spin_wheel_normalize_prizes($input);
-}
-
-/**
- * Campaign prizes stay on the server. Weights and codes must not be sent to the browser.
- *
  * @return list<array{id:int,pct:int,code:string,weight:int,hex:string}>
  */
 function codrufestival_spin_wheel_prizes(): array
@@ -263,21 +104,7 @@ function codrufestival_spin_wheel_prizes(): array
         return $cached;
     }
 
-    if (function_exists('get_field')) {
-        $rows = get_field('spin_wheel_prizes', 'options');
-
-        if (is_array($rows) && $rows !== array()) {
-            $prizes = codrufestival_spin_wheel_prizes_from_acf($rows);
-
-            if ($prizes !== array()) {
-                $cached = $prizes;
-
-                return $cached;
-            }
-        }
-    }
-
-    $cached = codrufestival_spin_wheel_normalize_prizes(codrufestival_spin_wheel_default_prize_rows());
+    $cached = codrufestival_spin_wheel_normalize_prizes(codrufestival_spin_wheel_prize_rows());
 
     return $cached;
 }
