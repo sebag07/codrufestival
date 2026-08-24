@@ -92,6 +92,79 @@ function codrufestival_spin_wheel_default_prize_rows(): array
 }
 
 /**
+ * @return list<array{discount_pct:int,discount_code:string,win_chance_pct:int}>
+ */
+function codrufestival_spin_wheel_acf_default_rows(): array
+{
+    $rows = array();
+
+    foreach (codrufestival_spin_wheel_default_prize_rows() as $row) {
+        $rows[] = array(
+            'discount_pct' => $row['pct'],
+            'discount_code' => $row['code'],
+            'win_chance_pct' => $row['weight'],
+        );
+    }
+
+    return $rows;
+}
+
+/**
+ * @param mixed $rows
+ */
+function codrufestival_spin_wheel_acf_rows_total_chance($rows): float
+{
+    if (!is_array($rows)) {
+        return 0.0;
+    }
+
+    $total = 0.0;
+
+    foreach ($rows as $row) {
+        if (!is_array($row)) {
+            continue;
+        }
+
+        $total += (float) ($row['win_chance_pct'] ?? 0);
+    }
+
+    return $total;
+}
+
+/**
+ * @param mixed $rows
+ */
+function codrufestival_spin_wheel_acf_should_use_defaults($rows): bool
+{
+    if (!is_array($rows) || $rows === array()) {
+        return true;
+    }
+
+    return codrufestival_spin_wheel_acf_rows_total_chance($rows) <= 0;
+}
+
+/**
+ * @param mixed $value
+ * @param int|string $post_id
+ * @param array<string,mixed> $field
+ * @return mixed
+ */
+function codrufestival_spin_wheel_acf_load_prizes($value, $post_id, array $field)
+{
+    if ($post_id !== 'options') {
+        return $value;
+    }
+
+    if (codrufestival_spin_wheel_acf_should_use_defaults($value)) {
+        return codrufestival_spin_wheel_acf_default_rows();
+    }
+
+    return $value;
+}
+
+add_filter('acf/load_value/name=spin_wheel_prizes', 'codrufestival_spin_wheel_acf_load_prizes', 10, 3);
+
+/**
  * @param list<array<string,mixed>> $rows
  * @return list<array{id:int,pct:int,code:string,weight:int,hex:string}>
  */

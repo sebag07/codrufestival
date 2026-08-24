@@ -43,7 +43,7 @@
             "name": "spin_wheel_prizes",
             "aria-label": "",
             "type": "repeater",
-            "instructions": "Discount codes and win odds stay on the server. Row order matches the wheel segments. Win chances are relative weights and should total 100%.",
+            "instructions": "Discount codes and win odds stay on the server. Row order matches the wheel segments. Win chances should total 100%. Defaults are pre-filled until you save your own values.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
