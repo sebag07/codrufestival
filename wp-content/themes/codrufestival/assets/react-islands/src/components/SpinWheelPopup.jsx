@@ -9,12 +9,12 @@ const SPIN_TURNS = 6;
 const SPIN_DURATION_MS = 4400;
 
 const DEFAULT_SEGMENTS = [
-  { pct: 10, hex: '#2ecc5a' },
-  { pct: 15, hex: '#28e069' },
-  { pct: 20, hex: '#1ff97a' },
-  { pct: 25, hex: '#12ff6e' },
-  { pct: 30, hex: '#22ff5c' },
-  { pct: 50, hex: '#00ff41' },
+  { pct: 20, hex: '#2ecc5a' },
+  { pct: 25, hex: '#28e069' },
+  { pct: 30, hex: '#1ff97a' },
+  { pct: 15, hex: '#12ff6e' },
+  { pct: 50, hex: '#22ff5c' },
+  { pct: 10, hex: '#00ff41' },
 ];
 
 const DEFAULT_COPY = {

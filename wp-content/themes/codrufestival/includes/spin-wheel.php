@@ -24,20 +24,126 @@ function codrufestival_spin_wheel_is_enabled(): bool
 }
 
 /**
+ * @return list<string>
+ */
+function codrufestival_spin_wheel_hex_palette(): array
+{
+    return array(
+        '#2ecc5a',
+        '#28e069',
+        '#1ff97a',
+        '#12ff6e',
+        '#22ff5c',
+        '#00ff41',
+        '#18d964',
+        '#0ef07a',
+        '#39ff7a',
+        '#5dff90',
+        '#7cffaa',
+        '#9dffc4',
+    );
+}
+
+/**
+ * @param list<array{pct:int,code:string,weight:int}> $rows
+ * @return list<array{id:int,pct:int,code:string,weight:int,hex:string}>
+ */
+function codrufestival_spin_wheel_normalize_prizes(array $rows): array
+{
+    $palette = codrufestival_spin_wheel_hex_palette();
+    $prizes = array();
+    $id = 0;
+
+    foreach ($rows as $row) {
+        $pct = isset($row['pct']) ? (int) $row['pct'] : 0;
+        $code = isset($row['code']) ? strtoupper(preg_replace('/[^A-Za-z0-9]/', '', (string) $row['code'])) : '';
+        $weight = isset($row['weight']) ? (int) round((float) $row['weight']) : 0;
+
+        if ($pct <= 0 || $code === '' || $weight <= 0) {
+            continue;
+        }
+
+        $prizes[] = array(
+            'id' => $id,
+            'pct' => $pct,
+            'code' => $code,
+            'weight' => $weight,
+            'hex' => $palette[$id % count($palette)],
+        );
+        $id++;
+    }
+
+    return $prizes;
+}
+
+/**
+ * @return list<array{pct:int,code:string,weight:int}>
+ */
+function codrufestival_spin_wheel_default_prize_rows(): array
+{
+    return array(
+        array('pct' => 20, 'code' => 'CDR3K7XCG', 'weight' => 49),
+        array('pct' => 25, 'code' => 'CDR0D5B2A', 'weight' => 30),
+        array('pct' => 30, 'code' => 'CDR41TLST', 'weight' => 10),
+        array('pct' => 15, 'code' => 'CDRL3CEM1', 'weight' => 9),
+        array('pct' => 50, 'code' => 'CDRJGLP2A', 'weight' => 1),
+        array('pct' => 10, 'code' => 'CDRQMAVWW', 'weight' => 1),
+    );
+}
+
+/**
+ * @param list<array<string,mixed>> $rows
+ * @return list<array{id:int,pct:int,code:string,weight:int,hex:string}>
+ */
+function codrufestival_spin_wheel_prizes_from_acf(array $rows): array
+{
+    $input = array();
+
+    foreach ($rows as $row) {
+        if (!is_array($row)) {
+            continue;
+        }
+
+        $input[] = array(
+            'pct' => isset($row['discount_pct']) ? (int) $row['discount_pct'] : 0,
+            'code' => isset($row['discount_code']) ? sanitize_text_field((string) $row['discount_code']) : '',
+            'weight' => isset($row['win_chance_pct']) ? (float) $row['win_chance_pct'] : 0,
+        );
+    }
+
+    return codrufestival_spin_wheel_normalize_prizes($input);
+}
+
+/**
  * Campaign prizes stay on the server. Weights and codes must not be sent to the browser.
  *
  * @return list<array{id:int,pct:int,code:string,weight:int,hex:string}>
  */
 function codrufestival_spin_wheel_prizes(): array
 {
-    return array(
-        array('id' => 0, 'pct' => 10, 'code' => 'CDRX7K4P9', 'weight' => 1, 'hex' => '#2ecc5a'),
-        array('id' => 1, 'pct' => 15, 'code' => 'CDRM2Q8VN', 'weight' => 3, 'hex' => '#28e069'),
-        array('id' => 2, 'pct' => 20, 'code' => 'CDRF8L3QX', 'weight' => 9, 'hex' => '#1ff97a'),
-        array('id' => 3, 'pct' => 25, 'code' => 'CDRR9W3KL', 'weight' => 35, 'hex' => '#12ff6e'),
-        array('id' => 4, 'pct' => 30, 'code' => 'CDRY4N8ZT', 'weight' => 45, 'hex' => '#22ff5c'),
-        array('id' => 5, 'pct' => 50, 'code' => 'CDRQ5T9WM', 'weight' => 7, 'hex' => '#00ff41'),
-    );
+    static $cached = null;
+
+    if ($cached !== null) {
+        return $cached;
+    }
+
+    if (function_exists('get_field')) {
+        $rows = get_field('spin_wheel_prizes', 'options');
+
+        if (is_array($rows) && $rows !== array()) {
+            $prizes = codrufestival_spin_wheel_prizes_from_acf($rows);
+
+            if ($prizes !== array()) {
+                $cached = $prizes;
+
+                return $cached;
+            }
+        }
+    }
+
+    $cached = codrufestival_spin_wheel_normalize_prizes(codrufestival_spin_wheel_default_prize_rows());
+
+    return $cached;
 }
 
 /**
