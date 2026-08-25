@@ -569,6 +569,10 @@ function codrufestival_get_artist_stage_labels() {
             'ro' => 'Fire Stage',
             'en' => 'Fire Stage',
         ),
+        'art-bus' => array(
+            'ro' => 'Codru Art Bus',
+            'en' => 'Codru Art Bus',
+        ),
     );
 }
 
@@ -621,7 +625,7 @@ function codrufestival_get_artist_stage_filters() {
         ),
     );
 
-    foreach (array('main', 'air', 'water', 'earth', 'fire') as $stage_key) {
+    foreach (array('main', 'air', 'water', 'earth', 'fire', 'art-bus') as $stage_key) {
         $filters[] = array(
             'id' => $stage_key,
             'label' => $stage_labels[$stage_key][$language] ?? $stage_labels[$stage_key]['ro'],
@@ -629,6 +633,88 @@ function codrufestival_get_artist_stage_filters() {
     }
 
     return $filters;
+}
+
+function codrufestival_normalize_artist_stages($stages, $fallback_stage = '') {
+    if (!is_array($stages)) {
+        $stages = array();
+    }
+
+    $normalized_stages = array();
+
+    foreach ($stages as $stage) {
+        $stage = codrufestival_normalize_artist_stage($stage);
+
+        if ($stage !== '') {
+            $normalized_stages[] = $stage;
+        }
+    }
+
+    if (empty($normalized_stages)) {
+        $fallback_stage = codrufestival_normalize_artist_stage($fallback_stage);
+
+        if ($fallback_stage !== '') {
+            $normalized_stages[] = $fallback_stage;
+        }
+    }
+
+    return array_values(array_unique($normalized_stages));
+}
+
+function codrufestival_normalize_artist_schedule_by_day($schedule_by_day) {
+    if (!is_array($schedule_by_day)) {
+        return array();
+    }
+
+    $normalized = array();
+
+    foreach ($schedule_by_day as $day_key => $schedule) {
+        $day_key = sanitize_key((string) $day_key);
+        $schedule = trim((string) $schedule);
+
+        if ($day_key === '' || $schedule === '') {
+            continue;
+        }
+
+        $normalized[$day_key] = $schedule;
+    }
+
+    return $normalized;
+}
+
+function codrufestival_normalize_artist_stage_by_day($stage_by_day) {
+    if (!is_array($stage_by_day)) {
+        return array();
+    }
+
+    $normalized = array();
+
+    foreach ($stage_by_day as $day_key => $stage) {
+        $day_key = sanitize_key((string) $day_key);
+        $stage = codrufestival_normalize_artist_stage($stage);
+
+        if ($day_key === '' || $stage === '') {
+            continue;
+        }
+
+        $normalized[$day_key] = $stage;
+    }
+
+    return $normalized;
+}
+
+function codrufestival_get_artist_stage_labels_by_day($stage_by_day) {
+    $labels_by_day = array();
+
+    foreach (codrufestival_normalize_artist_stage_by_day($stage_by_day) as $day_key => $stage) {
+        $label = codrufestival_get_artist_stage_label($stage);
+
+        if ($label !== '') {
+            $labels_by_day[$day_key] = $label;
+        }
+    }
+
+    return $labels_by_day;
 }
 
 function codrufestival_strip_artist_name_subtitle($name) {
@@ -763,6 +849,10 @@ function codrufestival_build_artist_card_from_json($artist) {
     $base_title = codrufestival_strip_artist_name_subtitle($artist['name']);
     $day_guests = codrufestival_normalize_artist_day_guests($artist['day_guests'] ?? array());
     $stage_key = codrufestival_normalize_artist_stage($artist['stage'] ?? '');
+    $stages = codrufestival_normalize_artist_stages($artist['stages'] ?? array(), $stage_key);
+    $schedule_by_day = codrufestival_normalize_artist_schedule_by_day($artist['schedule_by_day'] ?? array());
+    $stage_by_day = codrufestival_normalize_artist_stage_by_day($artist['stage_by_day'] ?? array());
+    $stage_labels_by_day = codrufestival_get_artist_stage_labels_by_day($stage_by_day);
 
     return array(
         'id' => $artist['id'] ?? sanitize_title($artist['name']),
@@ -776,8 +866,12 @@ function codrufestival_build_artist_card_from_json($artist) {
         'dayLabelByDay' => codrufestival_get_artist_day_labels_by_day($days),
         'dayGuests' => $day_guests,
         'stage' => $stage_key,
+        'stages' => $stages,
         'stageLabel' => codrufestival_get_artist_stage_label($stage_key),
+        'stageByDay' => $stage_by_day,
+        'stageLabelByDay' => $stage_labels_by_day,
         'schedule' => $artist['schedule'] ?? '',
+        'scheduleByDay' => $schedule_by_day,
         'details' => $artist['description'] ?? $artist['details'] ?? (!empty($genres) ? implode(', ', $genres) : ''),
         'link' => $spotify_url,
         'spotifyUrl' => $spotify_url,

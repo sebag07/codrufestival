@@ -55,7 +55,6 @@ const stageAssignments = {
     'leanu',
     'mini-zucchini',
     'narciss',
-    'noid-b2b-oigan',
     'oigan',
     'paulvlj',
     'raul-prodan',

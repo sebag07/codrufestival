@@ -27,7 +27,39 @@ function artistMatchesStage(artist, activeFilter) {
     return true;
   }
 
-  return artist.stage === activeFilter;
+  const stages = Array.isArray(artist.stages) && artist.stages.length
+    ? artist.stages
+    : artist.stage
+      ? [artist.stage]
+      : [];
+
+  return stages.includes(activeFilter);
+}
+
+function resolveArtistSchedule(artist, activeDayFilter) {
+  if (activeDayFilter !== 'all') {
+    const scheduleByDay =
+      artist.scheduleByDay && typeof artist.scheduleByDay === 'object' ? artist.scheduleByDay : null;
+
+    if (scheduleByDay?.[activeDayFilter]) {
+      return scheduleByDay[activeDayFilter];
+    }
+  }
+
+  return artist.schedule || '';
+}
+
+function resolveArtistStageLabel(artist, activeDayFilter) {
+  if (activeDayFilter !== 'all') {
+    const stageLabelByDay =
+      artist.stageLabelByDay && typeof artist.stageLabelByDay === 'object' ? artist.stageLabelByDay : null;
+
+    if (stageLabelByDay?.[activeDayFilter]) {
+      return stageLabelByDay[activeDayFilter];
+    }
+  }
+
+  return artist.stageLabel || artist.stage || '';
 }
 
 function buildArtistTitle(artist, activeDayFilter) {
@@ -59,10 +91,47 @@ function buildDayLabel(artist, activeDayFilter, showDayLabels) {
   return artist.dayLabel || artist.day || '';
 }
 
-function buildCardDescription(artist, activeDayFilter, showDayLabels, showStageLabels) {
+function resolveArtistScheduleDisplay(artist, activeDayFilter) {
+  if (activeDayFilter !== 'all') {
+    return resolveArtistSchedule(artist, activeDayFilter);
+  }
+
+  const scheduleByDay =
+    artist.scheduleByDay && typeof artist.scheduleByDay === 'object' ? artist.scheduleByDay : null;
+  const dayLabelByDay =
+    artist.dayLabelByDay && typeof artist.dayLabelByDay === 'object' ? artist.dayLabelByDay : null;
+
+  if (scheduleByDay) {
+    const dayKeys = Object.keys(scheduleByDay);
+
+    if (dayKeys.length === 1) {
+      return scheduleByDay[dayKeys[0]] || artist.schedule || '';
+    }
+
+    if (dayKeys.length > 1) {
+      return dayKeys
+        .map((dayKey) => {
+          const schedule = scheduleByDay[dayKey];
+          if (!schedule) {
+            return '';
+          }
+
+          const dayLabel = dayLabelByDay?.[dayKey];
+          return dayLabel ? `${dayLabel}: ${schedule}` : schedule;
+        })
+        .filter(Boolean)
+        .join('<br>');
+    }
+  }
+
+  return artist.schedule || '';
+}
+
+function buildCardDescription(artist, activeDayFilter, showDayLabels, showStageLabels, showPerformanceMeta) {
   const parts = compact([
     buildDayLabel(artist, activeDayFilter, showDayLabels),
-    showStageLabels ? artist.stageLabel || '' : '',
+    showPerformanceMeta ? resolveArtistScheduleDisplay(artist, activeDayFilter) : null,
+    showStageLabels ? resolveArtistStageLabel(artist, activeDayFilter) : '',
   ]);
 
   return parts.join('<br>');
@@ -199,16 +268,16 @@ export function ArtistExpandableCards({
         <div className="codru-artist-expandable-cards">
           {visibleArtists.map((artist, index) => {
             const cardTitle = buildArtistTitle(artist, activeDayFilter);
-            const performanceMeta = compact([
-              showPerformanceMeta ? artist.schedule : null,
-              showPerformanceMeta ? artist.stageLabel || artist.stage : null,
-            ]);
             const description =
-              showDayLabels || showStageLabels
-                ? buildCardDescription(artist, activeDayFilter, showDayLabels, showStageLabels)
-                : showPerformanceMeta
-                  ? performanceMeta.join(' | ')
-                  : '';
+              showDayLabels || showStageLabels || showPerformanceMeta
+                ? buildCardDescription(
+                    artist,
+                    activeDayFilter,
+                    showDayLabels,
+                    showStageLabels,
+                    showPerformanceMeta,
+                  )
+                : '';
 
             const hasSpotifyLink = Boolean(artist.spotifyUrl || artist.socials?.spotify);
             const expandable = artist.expandable ?? hasSpotifyLink;
