@@ -68,6 +68,23 @@ const stageAssignments = {
     'ufo',
     'yoshuu',
     'zoleevee',
+    'beatheice',
+    'rave-with-your-kids-donisan-sabincp',
+    'zabranena-muzika',
+  ],
+  earth: ['mandu'],
+  fire: [
+    'blutrina',
+    'prapad',
+    'dordeduh',
+    'doomnezeu',
+    'sur-austru',
+    'she',
+    'sear-bliss',
+    'ordinul-negru',
+    'nocturn',
+    'disko-anksyete',
+    'emo-reunion',
   ],
 };
 

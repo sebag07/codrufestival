@@ -68,29 +68,45 @@ function buildCardDescription(artist, activeDayFilter, showDayLabels, showStageL
   return parts.join('<br>');
 }
 
-function FilterGroup({ filters, activeFilter, onChange, ariaLabel }) {
+function FilterControl({ filters, activeFilter, onChange, ariaLabel }) {
   if (!filters.length) {
     return null;
   }
 
   return (
-    <div className="codru-artist-expandable-cards__filters" role="tablist" aria-label={ariaLabel}>
-      {filters.map((filter) => {
-        const isActive = activeFilter === filter.id;
+    <div className="codru-artist-expandable-cards__filter-control">
+      <div
+        className="codru-artist-expandable-cards__filters codru-artist-expandable-cards__filters--desktop"
+        role="tablist"
+        aria-label={ariaLabel}
+      >
+        {filters.map((filter) => {
+          const isActive = activeFilter === filter.id;
 
-        return (
-          <button
-            key={filter.id}
-            type="button"
-            role="tab"
-            aria-selected={isActive}
-            className={`codru-artist-expandable-cards__filter${isActive ? ' is-active' : ''}`}
-            onClick={() => onChange(filter.id)}
-          >
-            {filter.label}
-          </button>
-        );
-      })}
+          return (
+            <button
+              key={filter.id}
+              type="button"
+              role="tab"
+              aria-selected={isActive}
+              className={`codru-artist-expandable-cards__filter${isActive ? ' is-active' : ''}`}
+              onClick={() => onChange(filter.id)}
+            >
+              {filter.label}
+            </button>
+          );
+        })}
+      </div>
+      <label className="codru-artist-expandable-cards__filter-select">
+        <span className="codru-artist-expandable-cards__filter-select-label">{ariaLabel}</span>
+        <select value={activeFilter} aria-label={ariaLabel} onChange={(event) => onChange(event.target.value)}>
+          {filters.map((filter) => (
+            <option key={filter.id} value={filter.id}>
+              {filter.label}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   );
 }
@@ -137,6 +153,8 @@ export function ArtistExpandableCards({
   showDayLabels = false,
   showStageLabels = false,
   showPerformanceMeta = true,
+  dayFilterLabel = 'Filter artists by day',
+  stageFilterLabel = 'Filter artists by stage',
 }) {
   const [activeDayFilter, setActiveDayFilter] = useState('all');
   const [activeStageFilter, setActiveStageFilter] = useState('all');
@@ -157,19 +175,19 @@ export function ArtistExpandableCards({
       {showFilters || showStageFilters ? (
         <div className="codru-artist-expandable-cards__filter-groups">
           {showFilters ? (
-            <FilterGroup
+            <FilterControl
               filters={filters}
               activeFilter={activeDayFilter}
               onChange={setActiveDayFilter}
-              ariaLabel="Filter artists by day"
+              ariaLabel={dayFilterLabel}
             />
           ) : null}
           {showStageFilters ? (
-            <FilterGroup
+            <FilterControl
               filters={stageFilters}
               activeFilter={activeStageFilter}
               onChange={setActiveStageFilter}
-              ariaLabel="Filter artists by stage"
+              ariaLabel={stageFilterLabel}
             />
           ) : null}
         </div>

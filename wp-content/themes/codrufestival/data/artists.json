@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-23T20:46:46.817Z",
+  "updated_at": "2026-08-25T10:28:07.163Z",
   "artists": [
     {
       "id": "gipsy-kings",
@@ -1642,7 +1642,8 @@
         "friday",
         "saturday",
         "sunday"
-      ]
+      ],
+      "stage": "earth"
     },
     {
       "id": "mini-zucchini",
@@ -2103,7 +2104,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "disko-anksyete",
@@ -2128,7 +2130,8 @@
       },
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "doomnezeu",
@@ -2171,7 +2174,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "dordeduh",
@@ -2214,7 +2218,8 @@
       ],
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "emo-reunion",
@@ -2239,7 +2244,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "nocturn",
@@ -2264,7 +2270,8 @@
       },
       "days": [
         "saturday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "ordinul-negru",
@@ -2307,7 +2314,8 @@
       ],
       "days": [
         "sunday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "sear-bliss",
@@ -2351,7 +2359,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "sur-austru",
@@ -2394,7 +2403,8 @@
       ],
       "days": [
         "friday"
-      ]
+      ],
+      "stage": "fire"
     },
     {
       "id": "oigan",
@@ -2453,7 +2463,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "stage": "fire"
     },
     {
       "id": "amalia-gaita",
@@ -2505,7 +2516,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "stage": "water"
     },
     {
       "id": "zabranena-muzika",
@@ -2530,7 +2542,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "stage": "water"
     },
     {
       "id": "beatheice",
@@ -2555,7 +2568,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "stage": "water"
     },
     {
       "id": "prapad",
@@ -2580,7 +2594,8 @@
         "twitter": "",
         "instagram": "",
         "spotify": ""
-      }
+      },
+      "stage": "fire"
     }
   ]
 }

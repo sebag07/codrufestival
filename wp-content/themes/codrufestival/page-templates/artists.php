@@ -35,6 +35,8 @@ foreach (codrufestival_get_artists_from_json() as $artist) {
                     'showDayLabels' => true,
                     'showStageLabels' => true,
                     'showPerformanceMeta' => false,
+                    'dayFilterLabel' => get_multilingual_text('Filtrează după zi', 'Filter by day', 'ro'),
+                    'stageFilterLabel' => get_multilingual_text('Filtrează după scenă', 'Filter by stage', 'ro'),
                 ], [
                     'class' => 'codru-artists-page__artist-cards',
                 ]);

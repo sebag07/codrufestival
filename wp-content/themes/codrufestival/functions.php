@@ -581,6 +581,14 @@ function codrufestival_get_artist_stage_labels() {
             'ro' => 'Water Stage',
             'en' => 'Water Stage',
         ),
+        'earth' => array(
+            'ro' => 'Earth Stage',
+            'en' => 'Earth Stage',
+        ),
+        'fire' => array(
+            'ro' => 'Fire Stage',
+            'en' => 'Fire Stage',
+        ),
     );
 }
 
@@ -633,7 +641,7 @@ function codrufestival_get_artist_stage_filters() {
         ),
     );
 
-    foreach (array('main', 'air', 'water') as $stage_key) {
+    foreach (array('main', 'air', 'water', 'earth', 'fire') as $stage_key) {
         $filters[] = array(
             'id' => $stage_key,
             'label' => $stage_labels[$stage_key][$language] ?? $stage_labels[$stage_key]['ro'],
