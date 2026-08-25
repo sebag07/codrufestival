@@ -36,19 +36,6 @@ function artistMatchesStage(artist, activeFilter) {
   return stages.includes(activeFilter);
 }
 
-function resolveArtistSchedule(artist, activeDayFilter) {
-  if (activeDayFilter !== 'all') {
-    const scheduleByDay =
-      artist.scheduleByDay && typeof artist.scheduleByDay === 'object' ? artist.scheduleByDay : null;
-
-    if (scheduleByDay?.[activeDayFilter]) {
-      return scheduleByDay[activeDayFilter];
-    }
-  }
-
-  return artist.schedule || '';
-}
-
 function resolveArtistStageLabel(artist, activeDayFilter) {
   if (activeDayFilter !== 'all') {
     const stageLabelByDay =
@@ -91,50 +78,76 @@ function buildDayLabel(artist, activeDayFilter, showDayLabels) {
   return artist.dayLabel || artist.day || '';
 }
 
-function resolveArtistScheduleDisplay(artist, activeDayFilter) {
-  if (activeDayFilter !== 'all') {
-    return resolveArtistSchedule(artist, activeDayFilter);
-  }
+const DAY_ORDER = ['friday', 'saturday', 'sunday'];
 
+function getOrderedScheduleDays(scheduleByDay) {
+  return DAY_ORDER.filter((dayKey) => scheduleByDay[dayKey]);
+}
+
+function buildPerformanceScheduleLines(artist, activeDayFilter, showDayLabels) {
   const scheduleByDay =
     artist.scheduleByDay && typeof artist.scheduleByDay === 'object' ? artist.scheduleByDay : null;
   const dayLabelByDay =
     artist.dayLabelByDay && typeof artist.dayLabelByDay === 'object' ? artist.dayLabelByDay : null;
 
-  if (scheduleByDay) {
-    const dayKeys = Object.keys(scheduleByDay);
-
-    if (dayKeys.length === 1) {
-      return scheduleByDay[dayKeys[0]] || artist.schedule || '';
+  const appendDayBlock = (lines, dayKey, schedule) => {
+    if (showDayLabels && dayLabelByDay?.[dayKey]) {
+      lines.push(dayLabelByDay[dayKey]);
     }
 
-    if (dayKeys.length > 1) {
-      return dayKeys
-        .map((dayKey) => {
-          const schedule = scheduleByDay[dayKey];
-          if (!schedule) {
-            return '';
-          }
+    if (schedule) {
+      lines.push(schedule);
+    }
+  };
 
-          const dayLabel = dayLabelByDay?.[dayKey];
-          return dayLabel ? `${dayLabel}: ${schedule}` : schedule;
-        })
-        .filter(Boolean)
-        .join('<br>');
+  if (activeDayFilter !== 'all') {
+    const lines = [];
+    appendDayBlock(lines, activeDayFilter, scheduleByDay?.[activeDayFilter] || artist.schedule || '');
+    return lines;
+  }
+
+  if (scheduleByDay) {
+    const dayKeys = getOrderedScheduleDays(scheduleByDay);
+
+    if (dayKeys.length) {
+      return dayKeys.flatMap((dayKey) => {
+        const lines = [];
+        appendDayBlock(lines, dayKey, scheduleByDay[dayKey]);
+        return lines;
+      });
     }
   }
 
-  return artist.schedule || '';
+  const lines = [];
+
+  if (showDayLabels) {
+    const dayLabel = buildDayLabel(artist, activeDayFilter, true);
+    if (dayLabel) {
+      lines.push(dayLabel);
+    }
+  }
+
+  if (artist.schedule) {
+    lines.push(artist.schedule);
+  }
+
+  return lines;
 }
 
 function buildCardDescription(artist, activeDayFilter, showDayLabels, showStageLabels, showPerformanceMeta) {
-  const parts = compact([
-    buildDayLabel(artist, activeDayFilter, showDayLabels),
-    showPerformanceMeta ? resolveArtistScheduleDisplay(artist, activeDayFilter) : null,
-    showStageLabels ? resolveArtistStageLabel(artist, activeDayFilter) : '',
-  ]);
+  const parts = showPerformanceMeta
+    ? buildPerformanceScheduleLines(artist, activeDayFilter, showDayLabels)
+    : showDayLabels
+      ? compact([buildDayLabel(artist, activeDayFilter, true)])
+      : [];
 
-  return parts.join('<br>');
+  const stageLabel = showStageLabels ? resolveArtistStageLabel(artist, activeDayFilter) : '';
+
+  if (stageLabel) {
+    parts.push(stageLabel);
+  }
+
+  return compact(parts).join('<br>');
 }
 
 function FilterControl({ filters, activeFilter, onChange, ariaLabel }) {
