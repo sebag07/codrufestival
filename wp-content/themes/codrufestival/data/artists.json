@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-08-25T18:49:54.237Z",
+  "updated_at": "2026-08-25T19:27:58.963Z",
   "artists": [
     {
       "id": "gipsy-kings",
@@ -47,9 +47,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "19:00 - 20:30",
+      "schedule": "22:00 - 23:30",
       "schedule_by_day": {
-        "sunday": "19:00 - 20:30"
+        "sunday": "22:00 - 23:30"
       },
       "stage_by_day": {
         "sunday": "main"
@@ -101,9 +101,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "19:00 - 20:00",
+      "schedule": "22:00 - 23:00",
       "schedule_by_day": {
-        "friday": "19:00 - 20:00"
+        "friday": "22:00 - 23:00"
       },
       "stage_by_day": {
         "friday": "main"
@@ -155,9 +155,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "16:00 - 17:00",
+      "schedule": "19:00 - 20:00",
       "schedule_by_day": {
-        "sunday": "16:00 - 17:00"
+        "sunday": "19:00 - 20:00"
       },
       "stage_by_day": {
         "sunday": "main"
@@ -209,9 +209,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "20:30 - 21:30",
+      "schedule": "23:30 - 00:30",
       "schedule_by_day": {
-        "friday": "20:30 - 21:30"
+        "friday": "23:30 - 00:30"
       },
       "stage_by_day": {
         "friday": "main"
@@ -263,9 +263,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "20:30 - 21:30",
+      "schedule": "23:30 - 00:30",
       "schedule_by_day": {
-        "saturday": "20:30 - 21:30"
+        "saturday": "23:30 - 00:30"
       },
       "stage_by_day": {
         "saturday": "main"
@@ -317,9 +317,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "19:00 - 20:00",
+      "schedule": "22:00 - 23:00",
       "schedule_by_day": {
-        "saturday": "19:00 - 20:00"
+        "saturday": "22:00 - 23:00"
       },
       "stage_by_day": {
         "saturday": "main"
@@ -371,9 +371,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "17:30 - 18:30",
+      "schedule": "20:30 - 21:30",
       "schedule_by_day": {
-        "sunday": "17:30 - 18:30"
+        "sunday": "20:30 - 21:30"
       },
       "stage_by_day": {
         "sunday": "main"
@@ -425,9 +425,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "17:30 - 18:30",
+      "schedule": "20:30 - 21:30",
       "schedule_by_day": {
-        "friday": "17:30 - 18:30"
+        "friday": "20:30 - 21:30"
       },
       "stage_by_day": {
         "friday": "main"
@@ -479,9 +479,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "17:30 - 18:30",
+      "schedule": "20:30 - 21:30",
       "schedule_by_day": {
-        "saturday": "17:30 - 18:30"
+        "saturday": "20:30 - 21:30"
       },
       "stage_by_day": {
         "saturday": "main"
@@ -533,9 +533,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "21:00 - 22:00",
+      "schedule": "00:00 - 01:00",
       "schedule_by_day": {
-        "sunday": "21:00 - 22:00"
+        "sunday": "00:00 - 01:00"
       },
       "stage_by_day": {
         "sunday": "main"
@@ -587,9 +587,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "16:00 - 17:00",
+      "schedule": "19:00 - 20:00",
       "schedule_by_day": {
-        "friday": "16:00 - 17:00"
+        "friday": "19:00 - 20:00"
       },
       "stage_by_day": {
         "friday": "main"
@@ -632,9 +632,9 @@
       ],
       "schedule": "",
       "schedule_by_day": {
-        "friday": "21:30 - 23:30",
-        "saturday": "21:30 - 23:30",
-        "sunday": "22:00 - 00:00"
+        "friday": "00:30 - 02:30",
+        "saturday": "00:30 - 02:30",
+        "sunday": "01:00 - 03:00"
       },
       "stage_by_day": {
         "friday": "main",
@@ -670,9 +670,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "16:00 - 17:00",
+      "schedule": "19:00 - 20:00",
       "schedule_by_day": {
-        "saturday": "16:00 - 17:00"
+        "saturday": "19:00 - 20:00"
       },
       "stage_by_day": {
         "saturday": "main"
@@ -724,9 +724,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "15:30 - 16:15",
+      "schedule": "18:30 - 19:15",
       "schedule_by_day": {
-        "sunday": "15:30 - 16:15"
+        "sunday": "18:30 - 19:15"
       },
       "stage_by_day": {
         "sunday": "air"
@@ -778,9 +778,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "17:30 - 18:10",
+      "schedule": "20:30 - 21:10",
       "schedule_by_day": {
-        "saturday": "17:30 - 18:10"
+        "saturday": "20:30 - 21:10"
       },
       "stage_by_day": {
         "saturday": "air"
@@ -832,9 +832,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "16:45 - 17:35",
+      "schedule": "19:45 - 20:35",
       "schedule_by_day": {
-        "friday": "16:45 - 17:35"
+        "friday": "19:45 - 20:35"
       },
       "stage_by_day": {
         "friday": "air"
@@ -886,9 +886,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "18:30 - 19:30",
+      "schedule": "21:30 - 22:30",
       "schedule_by_day": {
-        "saturday": "18:30 - 19:30"
+        "saturday": "21:30 - 22:30"
       },
       "stage_by_day": {
         "saturday": "air"
@@ -940,9 +940,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "18:00 - 18:40",
+      "schedule": "21:00 - 21:40",
       "schedule_by_day": {
-        "friday": "18:00 - 18:40"
+        "friday": "21:00 - 21:40"
       },
       "stage_by_day": {
         "friday": "air"
@@ -994,9 +994,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "15:30 - 16:15",
+      "schedule": "18:30 - 19:15",
       "schedule_by_day": {
-        "friday": "15:30 - 16:15"
+        "friday": "18:30 - 19:15"
       },
       "stage_by_day": {
         "friday": "air"
@@ -1048,9 +1048,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "16:30 - 17:10",
+      "schedule": "19:30 - 20:10",
       "schedule_by_day": {
-        "saturday": "16:30 - 17:10"
+        "saturday": "19:30 - 20:10"
       },
       "stage_by_day": {
         "saturday": "air"
@@ -1102,9 +1102,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "15:30 - 16:10",
+      "schedule": "18:30 - 19:10",
       "schedule_by_day": {
-        "saturday": "15:30 - 16:10"
+        "saturday": "18:30 - 19:10"
       },
       "stage_by_day": {
         "saturday": "air"
@@ -1156,9 +1156,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "19:00 - 19:35",
+      "schedule": "22:00 - 22:35",
       "schedule_by_day": {
-        "friday": "19:00 - 19:35"
+        "friday": "22:00 - 22:35"
       },
       "stage_by_day": {
         "friday": "air"
@@ -1210,9 +1210,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "16:30 - 17:10",
+      "schedule": "19:30 - 20:10",
       "schedule_by_day": {
-        "sunday": "16:30 - 17:10"
+        "sunday": "19:30 - 20:10"
       },
       "stage_by_day": {
         "sunday": "air"
@@ -1264,9 +1264,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "18:30 - 19:15",
+      "schedule": "21:30 - 22:15",
       "schedule_by_day": {
-        "sunday": "18:30 - 19:15"
+        "sunday": "21:30 - 22:15"
       },
       "stage_by_day": {
         "sunday": "air"
@@ -1318,9 +1318,9 @@
       "stages": [
         "air"
       ],
-      "schedule": "17:30 - 18:15",
+      "schedule": "20:30 - 21:15",
       "schedule_by_day": {
-        "sunday": "17:30 - 18:15"
+        "sunday": "20:30 - 21:15"
       },
       "stage_by_day": {
         "sunday": "air"
@@ -1358,9 +1358,9 @@
       ],
       "schedule": "",
       "schedule_by_day": {
-        "friday": "20:00 - 01:00",
-        "saturday": "19:30 - 01:00",
-        "sunday": "19:30 - 01:00"
+        "friday": "23:00 - 04:00",
+        "saturday": "22:30 - 04:00",
+        "sunday": "22:30 - 04:00"
       },
       "stage_by_day": {
         "friday": "air",
@@ -1396,9 +1396,9 @@
       "stages": [
         "art-bus"
       ],
-      "schedule": "20:00 - 20:30",
+      "schedule": "23:00 - 23:30",
       "schedule_by_day": {
-        "saturday": "20:00 - 20:30"
+        "saturday": "23:00 - 23:30"
       },
       "stage_by_day": {
         "saturday": "art-bus"
@@ -1450,9 +1450,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "17:00 - 18:00",
+      "schedule": "20:00 - 21:00",
       "schedule_by_day": {
-        "sunday": "17:00 - 18:00"
+        "sunday": "20:00 - 21:00"
       },
       "stage_by_day": {
         "sunday": "water"
@@ -1505,9 +1505,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "16:45 - 17:45",
+      "schedule": "19:45 - 20:45",
       "schedule_by_day": {
-        "friday": "16:45 - 17:45"
+        "friday": "19:45 - 20:45"
       },
       "stage_by_day": {
         "friday": "water"
@@ -1563,9 +1563,9 @@
       ],
       "schedule": "",
       "schedule_by_day": {
-        "friday": "20:00 - 20:30",
-        "saturday": "21:30 - 22:30",
-        "sunday": "20:30 - 21:00"
+        "friday": "23:00 - 23:30",
+        "saturday": "00:30 - 01:30",
+        "sunday": "23:30 - 00:00"
       },
       "stage_by_day": {
         "friday": "art-bus",
@@ -1601,9 +1601,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "22:00 - 00:00",
+      "schedule": "01:00 - 03:00",
       "schedule_by_day": {
-        "sunday": "22:00 - 00:00"
+        "sunday": "01:00 - 03:00"
       },
       "stage_by_day": {
         "sunday": "water"
@@ -1655,9 +1655,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "17:00 - 18:00",
+      "schedule": "20:00 - 21:00",
       "schedule_by_day": {
-        "saturday": "17:00 - 18:00"
+        "saturday": "20:00 - 21:00"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -1709,9 +1709,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "15:30 - 16:30",
+      "schedule": "18:30 - 19:30",
       "schedule_by_day": {
-        "sunday": "15:30 - 16:30"
+        "sunday": "18:30 - 19:30"
       },
       "stage_by_day": {
         "sunday": "water"
@@ -1745,9 +1745,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "15:15 - 16:15",
+      "schedule": "18:15 - 19:15",
       "schedule_by_day": {
-        "friday": "15:15 - 16:15"
+        "friday": "18:15 - 19:15"
       },
       "stage_by_day": {
         "friday": "water"
@@ -1781,9 +1781,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "22:30 - 00:00",
+      "schedule": "01:30 - 03:00",
       "schedule_by_day": {
-        "friday": "22:30 - 00:00"
+        "friday": "01:30 - 03:00"
       },
       "stage_by_day": {
         "friday": "water"
@@ -1817,9 +1817,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "18:30 - 19:30",
+      "schedule": "21:30 - 22:30",
       "schedule_by_day": {
-        "friday": "18:30 - 19:30"
+        "friday": "21:30 - 22:30"
       },
       "stage_by_day": {
         "friday": "water"
@@ -1847,18 +1847,18 @@
         "spotify": ""
       },
       "days": [
-        "saturday"
+        "friday"
       ],
       "stage": "water",
       "stages": [
         "water"
       ],
-      "schedule": "00:00 - 01:00",
+      "schedule": "03:00 - 04:00",
       "schedule_by_day": {
-        "saturday": "00:00 - 01:00"
+        "friday": "03:00 - 04:00"
       },
       "stage_by_day": {
-        "saturday": "water"
+        "friday": "water"
       }
     },
     {
@@ -1889,9 +1889,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "19:30 - 20:30",
+      "schedule": "22:30 - 23:30",
       "schedule_by_day": {
-        "friday": "19:30 - 20:30"
+        "friday": "22:30 - 23:30"
       },
       "stage_by_day": {
         "friday": "water"
@@ -1943,9 +1943,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "22:30 - 23:45",
+      "schedule": "01:30 - 02:45",
       "schedule_by_day": {
-        "saturday": "22:30 - 23:45"
+        "saturday": "01:30 - 02:45"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -1997,9 +1997,9 @@
       "stages": [
         "art-bus"
       ],
-      "schedule": "21:30 - 22:30",
+      "schedule": "00:30 - 01:30",
       "schedule_by_day": {
-        "friday": "21:30 - 22:30"
+        "friday": "00:30 - 01:30"
       },
       "stage_by_day": {
         "friday": "art-bus"
@@ -2033,9 +2033,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "23:45 - 01:00",
+      "schedule": "02:45 - 04:00",
       "schedule_by_day": {
-        "saturday": "23:45 - 01:00"
+        "saturday": "02:45 - 04:00"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -2073,9 +2073,9 @@
       ],
       "schedule": "",
       "schedule_by_day": {
-        "friday": "16:00 - 01:00",
-        "saturday": "16:00 - 01:00",
-        "sunday": "16:00 - 01:00"
+        "friday": "19:00 - 04:00",
+        "saturday": "19:00 - 04:00",
+        "sunday": "19:00 - 04:00"
       },
       "stage_by_day": {
         "friday": "earth",
@@ -2112,9 +2112,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "21:00 - 22:30",
+      "schedule": "00:00 - 01:30",
       "schedule_by_day": {
-        "saturday": "21:00 - 22:30"
+        "saturday": "00:00 - 01:30"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -2148,9 +2148,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "19:30 - 21:00",
+      "schedule": "22:30 - 00:00",
       "schedule_by_day": {
-        "saturday": "19:30 - 21:00"
+        "saturday": "22:30 - 00:00"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -2185,9 +2185,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "21:30 - 23:30",
+      "schedule": "00:30 - 02:30",
       "schedule_by_day": {
-        "saturday": "21:30 - 23:30"
+        "saturday": "00:30 - 02:30"
       },
       "stage_by_day": {
         "saturday": "main"
@@ -2221,9 +2221,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "18:00 - 19:30",
+      "schedule": "21:00 - 22:30",
       "schedule_by_day": {
-        "saturday": "18:00 - 19:30"
+        "saturday": "21:00 - 22:30"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -2257,9 +2257,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "20:30 - 21:30",
+      "schedule": "23:30 - 00:30",
       "schedule_by_day": {
-        "friday": "20:30 - 21:30"
+        "friday": "23:30 - 00:30"
       },
       "stage_by_day": {
         "friday": "water"
@@ -2293,9 +2293,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "22:30 - 00:00",
+      "schedule": "01:30 - 03:00",
       "schedule_by_day": {
-        "friday": "22:30 - 00:00"
+        "friday": "01:30 - 03:00"
       },
       "stage_by_day": {
         "friday": "water"
@@ -2330,9 +2330,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "21:30 - 23:30",
+      "schedule": "00:30 - 02:30",
       "schedule_by_day": {
-        "friday": "21:30 - 23:30"
+        "friday": "00:30 - 02:30"
       },
       "stage_by_day": {
         "friday": "main"
@@ -2410,9 +2410,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "23:45 - 01:00",
+      "schedule": "02:45 - 04:00",
       "schedule_by_day": {
-        "saturday": "23:45 - 01:00"
+        "saturday": "02:45 - 04:00"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -2464,9 +2464,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "22:30 - 23:45",
+      "schedule": "01:30 - 02:45",
       "schedule_by_day": {
-        "saturday": "22:30 - 23:45"
+        "saturday": "01:30 - 02:45"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -2500,9 +2500,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "18:00 - 20:00",
+      "schedule": "21:00 - 23:00",
       "schedule_by_day": {
-        "sunday": "18:00 - 20:00"
+        "sunday": "21:00 - 23:00"
       },
       "stage_by_day": {
         "sunday": "water"
@@ -2536,9 +2536,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "21:30 - 22:30",
+      "schedule": "00:30 - 01:30",
       "schedule_by_day": {
-        "friday": "21:30 - 22:30"
+        "friday": "00:30 - 01:30"
       },
       "stage_by_day": {
         "friday": "water"
@@ -2572,9 +2572,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "20:00 - 22:00",
+      "schedule": "23:00 - 01:00",
       "schedule_by_day": {
-        "sunday": "20:00 - 22:00"
+        "sunday": "23:00 - 01:00"
       },
       "stage_by_day": {
         "sunday": "water"
@@ -2626,9 +2626,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "16:30 - 17:30",
+      "schedule": "19:30 - 20:30",
       "schedule_by_day": {
-        "saturday": "16:30 - 17:30"
+        "saturday": "19:30 - 20:30"
       },
       "stage_by_day": {
         "saturday": "fire"
@@ -2662,9 +2662,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "19:00 - 01:00",
+      "schedule": "22:00 - 04:00",
       "schedule_by_day": {
-        "friday": "19:00 - 01:00"
+        "friday": "22:00 - 04:00"
       },
       "stage_by_day": {
         "friday": "fire"
@@ -2716,9 +2716,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "18:00 - 19:00",
+      "schedule": "21:00 - 22:00",
       "schedule_by_day": {
-        "sunday": "18:00 - 19:00"
+        "sunday": "21:00 - 22:00"
       },
       "stage_by_day": {
         "sunday": "fire"
@@ -2770,9 +2770,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "18:00 - 19:00",
+      "schedule": "21:00 - 22:00",
       "schedule_by_day": {
-        "saturday": "18:00 - 19:00"
+        "saturday": "21:00 - 22:00"
       },
       "stage_by_day": {
         "saturday": "fire"
@@ -2806,9 +2806,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "19:00 - 01:00",
+      "schedule": "22:00 - 04:00",
       "schedule_by_day": {
-        "saturday": "19:00 - 01:00"
+        "saturday": "22:00 - 04:00"
       },
       "stage_by_day": {
         "saturday": "fire"
@@ -2842,9 +2842,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "15:00 - 16:00",
+      "schedule": "18:00 - 19:00",
       "schedule_by_day": {
-        "saturday": "15:00 - 16:00"
+        "saturday": "18:00 - 19:00"
       },
       "stage_by_day": {
         "saturday": "fire"
@@ -2896,9 +2896,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "15:00 - 16:00",
+      "schedule": "18:00 - 19:00",
       "schedule_by_day": {
-        "sunday": "15:00 - 16:00"
+        "sunday": "18:00 - 19:00"
       },
       "stage_by_day": {
         "sunday": "fire"
@@ -2951,9 +2951,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "18:00 - 19:00",
+      "schedule": "21:00 - 22:00",
       "schedule_by_day": {
-        "friday": "18:00 - 19:00"
+        "friday": "21:00 - 22:00"
       },
       "stage_by_day": {
         "friday": "fire"
@@ -3005,9 +3005,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "16:30 - 17:30",
+      "schedule": "19:30 - 20:30",
       "schedule_by_day": {
-        "friday": "16:30 - 17:30"
+        "friday": "19:30 - 20:30"
       },
       "stage_by_day": {
         "friday": "fire"
@@ -3049,9 +3049,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "14:00 - 14:45",
+      "schedule": "17:00 - 17:45",
       "schedule_by_day": {
-        "friday": "14:00 - 14:45"
+        "friday": "17:00 - 17:45"
       },
       "stage_by_day": {
         "friday": "water"
@@ -3085,9 +3085,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "15:00 - 16:00",
+      "schedule": "18:00 - 19:00",
       "schedule_by_day": {
-        "friday": "15:00 - 16:00"
+        "friday": "18:00 - 19:00"
       },
       "stage_by_day": {
         "friday": "fire"
@@ -3121,9 +3121,9 @@
       "stages": [
         "water"
       ],
-      "schedule": "15:30 - 16:30",
+      "schedule": "18:30 - 19:30",
       "schedule_by_day": {
-        "saturday": "15:30 - 16:30"
+        "saturday": "18:30 - 19:30"
       },
       "stage_by_day": {
         "saturday": "water"
@@ -3160,8 +3160,8 @@
       ],
       "schedule": "",
       "schedule_by_day": {
-        "saturday": "14:00 - 15:00",
-        "sunday": "14:00 - 15:00"
+        "saturday": "17:00 - 18:00",
+        "sunday": "17:00 - 18:00"
       },
       "stage_by_day": {
         "saturday": "water",
@@ -3196,9 +3196,9 @@
       "stages": [
         "main"
       ],
-      "schedule": "22:00 - 00:00",
+      "schedule": "01:00 - 03:00",
       "schedule_by_day": {
-        "sunday": "22:00 - 00:00"
+        "sunday": "01:00 - 03:00"
       },
       "stage_by_day": {
         "sunday": "main"
@@ -3232,9 +3232,9 @@
       "stages": [
         "art-bus"
       ],
-      "schedule": "22:00 - 23:00",
+      "schedule": "01:00 - 02:00",
       "schedule_by_day": {
-        "sunday": "22:00 - 23:00"
+        "sunday": "01:00 - 02:00"
       },
       "stage_by_day": {
         "sunday": "art-bus"
@@ -3268,9 +3268,9 @@
       "stages": [
         "fire"
       ],
-      "schedule": "16:30 - 17:30",
+      "schedule": "19:30 - 20:30",
       "schedule_by_day": {
-        "sunday": "16:30 - 17:30"
+        "sunday": "19:30 - 20:30"
       },
       "stage_by_day": {
         "sunday": "fire"
@@ -3280,10 +3280,11 @@
   "festivawl_schedule_sync": {
     "festival_id": 569,
     "festival_name": "CODRU Festival",
-    "synced_at": "2026-08-25T18:44:02.434Z",
+    "timezone": "Europe/Bucharest",
+    "synced_at": "2026-08-25T19:27:58.963Z",
     "matched_artists": 70,
     "unmatched_events": 1,
     "skipped_pre_festival_events": 0,
-    "unmatched_local_artists": 2
+    "unmatched_local_artists": 1
   }
 }

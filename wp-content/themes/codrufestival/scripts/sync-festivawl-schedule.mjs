@@ -17,6 +17,14 @@ const FESTIVAL_DAY_DATES = {
   '2026-08-30': 'sunday',
 };
 
+const FESTIVAL_DAY_INDEX = {
+  0: 'friday',
+  1: 'saturday',
+  2: 'sunday',
+};
+
+const DEFAULT_TIMEZONE = 'Europe/Bucharest';
+
 const STAGE_MAP = {
   MAINSTAGE: 'main',
   'QUINTESSENCE MAIN': 'main',
@@ -134,15 +142,35 @@ function normalizeForMatch(value) {
     .replace(/\s+/g, ' ');
 }
 
-function formatSchedule(startTime, endTime) {
-  const start = startTime?.slice(11, 16) ?? '';
-  const end = endTime?.slice(11, 16) ?? '';
+function parseApiDate(value) {
+  if (!value) {
+    return null;
+  }
 
-  if (!start || !end) {
+  const normalized = /(?:Z|[+-]\d{2}:?\d{2})$/.test(value) ? value : `${value}Z`;
+  const date = new Date(normalized);
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function formatTimeInZone(date, timeZone) {
+  return new Intl.DateTimeFormat('en-GB', {
+    timeZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
+  }).format(date);
+}
+
+function formatSchedule(startTime, endTime, timeZone = DEFAULT_TIMEZONE) {
+  const startDate = parseApiDate(startTime);
+  const endDate = parseApiDate(endTime);
+
+  if (!startDate || !endDate) {
     return '';
   }
 
-  return `${start} - ${end}`;
+  return `${formatTimeInZone(startDate, timeZone)} - ${formatTimeInZone(endDate, timeZone)}`;
 }
 
 function mapStage(sceneName) {
@@ -150,18 +178,13 @@ function mapStage(sceneName) {
   return STAGE_MAP[normalized] ?? normalized.toLowerCase().replace(/\s+/g, '-');
 }
 
-function mapDayFromStartTime(startTime, festivalStartDate) {
+function mapDayFromSchedule(dayIndex, startTime) {
+  if (FESTIVAL_DAY_INDEX[dayIndex]) {
+    return FESTIVAL_DAY_INDEX[dayIndex];
+  }
+
   const date = String(startTime ?? '').slice(0, 10);
-
-  if (FESTIVAL_DAY_DATES[date]) {
-    return FESTIVAL_DAY_DATES[date];
-  }
-
-  if (festivalStartDate && date < festivalStartDate) {
-    return null;
-  }
-
-  return null;
+  return FESTIVAL_DAY_DATES[date] ?? null;
 }
 
 function buildArtistLookup(artists) {
@@ -395,7 +418,8 @@ for (const [dayIndex, dayEvents] of Object.entries(performanceData.completeEvent
       typeof eventObject === 'object' && eventObject !== null
         ? eventObject.eventName
         : String(eventObject);
-    const day = mapDayFromStartTime(event.startTime, festivalData.startDate);
+    const numericDayIndex = Number(dayIndex);
+    const day = mapDayFromSchedule(numericDayIndex, event.startTime);
 
     if (!day) {
       skippedPreFestivalEvents.push({
@@ -418,11 +442,12 @@ for (const [dayIndex, dayEvents] of Object.entries(performanceData.completeEvent
       continue;
     }
 
+    const timeZone = festivalData.timezone || DEFAULT_TIMEZONE;
     const performance = {
       day,
-      dayIndex: Number(dayIndex),
+      dayIndex: numericDayIndex,
       stage: mapStage(event.stage?.sceneName),
-      schedule: formatSchedule(event.startTime, event.endTime),
+      schedule: formatSchedule(event.startTime, event.endTime, timeZone),
       startTime: event.startTime,
       endTime: event.endTime,
       eventName,
@@ -469,6 +494,7 @@ const output = {
   festivawl_schedule_sync: {
     festival_id: Number(args.festivalId),
     festival_name: festivalData.name ?? '',
+    timezone: festivalData.timezone || DEFAULT_TIMEZONE,
     synced_at: new Date().toISOString(),
     matched_artists: matchedArtistIds.length,
     unmatched_events: unmatchedEvents.length,
