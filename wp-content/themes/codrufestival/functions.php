@@ -141,26 +141,6 @@ function codrufestival_disable_comments_admin_redirect()
 }
 add_action('admin_init', 'codrufestival_disable_comments_admin_redirect');
 
-/**
- * TEMPORARY: redirect schedule/program pages to the homepage.
- * Remove this hook when the program is ready to publish again.
- */
-function codrufestival_redirect_program_page_temporarily()
-{
-    if (is_admin() || wp_doing_ajax() || !is_page()) {
-        return;
-    }
-
-    $program_page_slugs = array('program', 'schedule');
-    $uses_program_template = get_page_template_slug() === 'templates/program.php';
-
-    if ($uses_program_template || is_page($program_page_slugs)) {
-        wp_safe_redirect(home_url('/'), 302);
-        exit;
-    }
-}
-add_action('template_redirect', 'codrufestival_redirect_program_page_temporarily');
-
 function codrufestival_disable_comments_admin_bar($wp_admin_bar)
 {
     $wp_admin_bar->remove_node('comments');
