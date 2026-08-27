@@ -29,53 +29,26 @@ $orar_xlsx = home_url('/docs/linia-46-orar-zl-zn.xlsx');
     <div data-category="transport">
         <div class="info-content">
             <h2 class="info-title text-white"><?php echo get_multilingual_text('Transport', 'Transport', 'ro'); ?></h2>
-            <h3><?php echo get_multilingual_text('Linia 46 – orar special CODRU', 'Line 46 – special CODRU timetable', 'ro'); ?></h3>
+
+            <h3><?php echo get_multilingual_text('Plecări Linia 46', 'Line 46 departures', 'ro'); ?></h3>
             <p><?php echo get_multilingual_text(
-                'Am pregătit orarul de plecare și programul complet al liniei 46. Poți vizualiza PDF-ul mai jos sau descărca fișierele.',
-                'We prepared the departure times and the full Line 46 timetable. You can view the PDF below or download the files.',
+                'Plecări de la stațiile Bastion și Denya Forest, 28–30 august 2026.',
+                'Departures from Bastion and Denya Forest, 28–30 August 2026.',
                 'ro'
             ); ?></p>
-        </div>
+            <a class="info-cta" target="_blank" rel="noopener" href="<?php echo esc_url($plecari_pdf); ?>">
+                <?php echo get_multilingual_text('Vezi PDF', 'View PDF', 'ro'); ?>
+            </a>
 
-        <div class="info-docs">
-            <article class="info-doc">
-                <h3><?php echo get_multilingual_text('Plecări Linia 46', 'Line 46 departures', 'ro'); ?></h3>
-                <p><?php echo get_multilingual_text(
-                    'Plecări de la stațiile Bastion și Denya Forest, 28–30 august 2026.',
-                    'Departures from Bastion and Denya Forest, 28–30 August 2026.',
-                    'ro'
-                ); ?></p>
-                <div class="info-doc-actions">
-                    <a class="info-cta" target="_blank" rel="noopener" href="<?php echo esc_url($plecari_pdf); ?>">
-                        <?php echo get_multilingual_text('Vezi PDF', 'View PDF', 'ro'); ?>
-                    </a>
-                    <a class="info-cta info-cta--ghost" download href="<?php echo esc_url($plecari_pdf); ?>">
-                        <?php echo get_multilingual_text('Descarcă PDF', 'Download PDF', 'ro'); ?>
-                    </a>
-                </div>
-            </article>
-
-            <article class="info-doc">
-                <h3><?php echo get_multilingual_text('Program complet Linia 46', 'Full Line 46 timetable', 'ro'); ?></h3>
-                <p><?php echo get_multilingual_text(
-                    'Program zile lucrătoare și nelucrătoare (Excel).',
-                    'Weekday and weekend timetable (Excel).',
-                    'ro'
-                ); ?></p>
-                <div class="info-doc-actions">
-                    <a class="info-cta" download href="<?php echo esc_url($orar_xlsx); ?>">
-                        <?php echo get_multilingual_text('Descarcă Excel', 'Download Excel', 'ro'); ?>
-                    </a>
-                </div>
-            </article>
-        </div>
-
-        <div class="info-pdf-wrap">
-            <iframe
-                class="info-pdf"
-                src="<?php echo esc_url($plecari_pdf); ?>"
-                title="<?php echo esc_attr(get_multilingual_text('Orar plecări Linia 46 CODRU', 'Line 46 CODRU departure timetable', 'ro')); ?>"
-            ></iframe>
+            <h3><?php echo get_multilingual_text('Program complet Linia 46', 'Full Line 46 timetable', 'ro'); ?></h3>
+            <p><?php echo get_multilingual_text(
+                'Program zile lucrătoare și nelucrătoare (Excel).',
+                'Weekday and weekend timetable (Excel).',
+                'ro'
+            ); ?></p>
+            <a class="info-cta" download href="<?php echo esc_url($orar_xlsx); ?>">
+                <?php echo get_multilingual_text('Descarcă Excel', 'Download Excel', 'ro'); ?>
+            </a>
         </div>
     </div>
 </section>
@@ -85,19 +58,6 @@ $orar_xlsx = home_url('/docs/linia-46-orar-zl-zn.xlsx');
     .info-wrap {
         max-width: 1100px;
         margin: 0 auto;
-    }
-
-    .info-item {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin: 1rem 0;
-    }
-
-    .info-media img {
-        width: 100%;
-        object-fit: cover;
-        border-radius: 14px;
     }
 
     .info-content {
@@ -118,53 +78,8 @@ $orar_xlsx = home_url('/docs/linia-46-orar-zl-zn.xlsx');
         font-weight: 500;
     }
 
-    .info-docs {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1.25rem;
-        margin: 1.5rem 0;
-    }
-
-    .info-doc {
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 14px;
-        padding: 1.25rem 1.4rem;
-        color: #fff;
-    }
-
-    .info-doc h3 {
-        font-size: 1.35rem;
-        margin: 0 0 .4rem;
-        color: #fff;
-    }
-
-    .info-doc p {
-        margin: 0 0 1rem;
-        font-weight: 500;
-    }
-
-    .info-doc-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: .75rem;
-    }
-
-    .info-pdf-wrap {
-        margin: 1.5rem 0 2.5rem;
-        border-radius: 14px;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.08);
-        min-height: 70vh;
-    }
-
-    .info-pdf {
-        width: 100%;
-        height: 80vh;
-        min-height: 560px;
-        border: 0;
-        display: block;
-        background: #fff;
+    .info-content .info-cta {
+        margin-bottom: 2rem;
     }
 
     .info-cta {
@@ -175,12 +90,6 @@ $orar_xlsx = home_url('/docs/linia-46-orar-zl-zn.xlsx');
         color: #0a1a8a;
         text-decoration: none;
         font-weight: 700;
-        border: 2px solid #fff;
-    }
-
-    .info-cta--ghost {
-        background: transparent;
-        color: #fff;
     }
 
     .info-cta:hover,
@@ -190,23 +99,6 @@ $orar_xlsx = home_url('/docs/linia-46-orar-zl-zn.xlsx');
         opacity: .9;
     }
 
-    .info-cta--ghost:hover,
-    .info-cta--ghost:focus {
-        color: #fff;
-        background: rgba(255, 255, 255, 0.12);
-    }
-
-    @media (min-width: 576px) {
-        .info-item {
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-        }
-
-        .info-docs {
-            grid-template-columns: 1fr 1fr;
-            align-items: stretch;
-        }
-    }
 </style>
 
 <script>
