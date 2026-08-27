@@ -1,6 +1,11 @@
 <?php /*  Template Name: General Info  */ ?>
 <?php get_header(); ?>
 
+<?php
+$plecari_pdf = home_url('/docs/linia-46-plecari-codru.pdf');
+$orar_xlsx = home_url('/docs/linia-46-orar-zl-zn.xlsx');
+?>
+
 <section class="info-wrap container-fluid single-page header-padding">
     <h1 class="info-title pb-4 text-center" style="color: #fff;"><?php echo get_multilingual_text('Informații', 'Information', 'ro'); ?></h1>
 
@@ -11,10 +16,7 @@
             <?php
 
             $activities = [
-                ['id' => 'schedule', 'label' => get_multilingual_text('Orar Festival', 'Festival Schedule', 'ro')],
                 ['id' => 'transport', 'label' => get_multilingual_text('Transport', 'Transport', 'ro')],
-                ['id' => 'payment', 'label' => get_multilingual_text('Top Up/Payment', 'Top Up/Payment', 'ro')],
-                ['id' => 'rules', 'label' => get_multilingual_text('Reguli Festival', 'Festival Rules', 'ro')],
             ];
 
             foreach ($activities as $activity) {
@@ -24,103 +26,58 @@
         </span>
     </div>
 
-    <div data-category="schedule">
-        <div class="info-content">
-            <h2 class="info-title text-white"><?php echo get_multilingual_text('Orar Festival', 'Festival Schedule', 'ro'); ?></h2>
-        </div>
-        
-        <div class="info-item">
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/schedule/orar-updated.jpeg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-        </div>
-    </div>
-
     <div data-category="transport">
         <div class="info-content">
             <h2 class="info-title text-white"><?php echo get_multilingual_text('Transport', 'Transport', 'ro'); ?></h2>
-            <h3><?php echo get_multilingual_text('Am pregatit pentru tine orarul autobuzului aici:', 'We have prepared the bus timetable for you here:', 'ro'); ?></h3>
-            <a class="info-cta" target="_blank" href="/docs/timetable-bus.pdf"><?php echo get_multilingual_text('ORAR', 'TIMETABLE', 'ro'); ?></a>
+            <h3><?php echo get_multilingual_text('Linia 46 – orar special CODRU', 'Line 46 – special CODRU timetable', 'ro'); ?></h3>
+            <p><?php echo get_multilingual_text(
+                'Am pregătit orarul de plecare și programul complet al liniei 46. Poți vizualiza PDF-ul mai jos sau descărca fișierele.',
+                'We prepared the departure times and the full Line 46 timetable. You can view the PDF below or download the files.',
+                'ro'
+            ); ?></p>
         </div>
 
-        <!-- Item 1 (image left, text right) -->
-        <div class="info-item">
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/transport/1.jpg" alt="Transport Bicicleta" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/transport/2.jpg" alt="Stație de autobuz pentru linia 46" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/transport/3.jpg" alt="Transport Uber Taxi Bolt" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/transport/5.jpg" alt="Transport Masina" />
-            </div>
+        <div class="info-docs">
+            <article class="info-doc">
+                <h3><?php echo get_multilingual_text('Plecări Linia 46', 'Line 46 departures', 'ro'); ?></h3>
+                <p><?php echo get_multilingual_text(
+                    'Plecări de la stațiile Bastion și Denya Forest, 28–30 august 2026.',
+                    'Departures from Bastion and Denya Forest, 28–30 August 2026.',
+                    'ro'
+                ); ?></p>
+                <div class="info-doc-actions">
+                    <a class="info-cta" target="_blank" rel="noopener" href="<?php echo esc_url($plecari_pdf); ?>">
+                        <?php echo get_multilingual_text('Vezi PDF', 'View PDF', 'ro'); ?>
+                    </a>
+                    <a class="info-cta info-cta--ghost" download href="<?php echo esc_url($plecari_pdf); ?>">
+                        <?php echo get_multilingual_text('Descarcă PDF', 'Download PDF', 'ro'); ?>
+                    </a>
+                </div>
+            </article>
+
+            <article class="info-doc">
+                <h3><?php echo get_multilingual_text('Program complet Linia 46', 'Full Line 46 timetable', 'ro'); ?></h3>
+                <p><?php echo get_multilingual_text(
+                    'Program zile lucrătoare și nelucrătoare (Excel).',
+                    'Weekday and weekend timetable (Excel).',
+                    'ro'
+                ); ?></p>
+                <div class="info-doc-actions">
+                    <a class="info-cta" download href="<?php echo esc_url($orar_xlsx); ?>">
+                        <?php echo get_multilingual_text('Descarcă Excel', 'Download Excel', 'ro'); ?>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <div class="info-pdf-wrap">
+            <iframe
+                class="info-pdf"
+                src="<?php echo esc_url($plecari_pdf); ?>"
+                title="<?php echo esc_attr(get_multilingual_text('Orar plecări Linia 46 CODRU', 'Line 46 CODRU departure timetable', 'ro')); ?>"
+            ></iframe>
         </div>
     </div>
-
-    <div data-category="payment">
-        <div class="info-content">
-            <h2 class="info-title text-white"><?php echo get_multilingual_text('Top Up/Payment', 'Top Up/Payment', 'ro'); ?></h2>
-        </div>
-        
-        <div class="info-item">
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/payment/1 ing.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/payment/2 ing.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/payment/3 ing.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/payment/4 ing.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/payment/5 ing.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-        </div>
-    </div>
-
-    <div data-category="rules">
-        <div class="info-content">
-            <h2 class="info-title text-white"><?php echo get_multilingual_text('Reguli Festival', 'Festival Rules', 'ro'); ?></h2>
-        </div>
-        
-        <div class="info-item">
-            <div class="info-media">
-                <img 
-                src="<?php echo get_stylesheet_directory_uri() . get_multilingual_text('/images/info/rules/permis-ro.jpg', '/images/info/rules/permis-en.jpg', 'ro'); ?>" 
-                alt="<?php echo get_multilingual_text('Obiecte permise', 'Permitted objects', 'ro'); ?>" 
-                />
-            </div>
-            <div class="info-media">
-            <img 
-                src="<?php echo get_stylesheet_directory_uri() . get_multilingual_text('/images/info/rules/interzis-ro.jpg', '/images/info/rules/interzis-en.jpg', 'ro'); ?>" 
-                alt="<?php echo get_multilingual_text('Obiecte interzise', 'Prohibited objects', 'ro'); ?>" 
-                />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/rules/reguli-01.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/rules/reguli-02.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/rules/reguli-03.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                    <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/rules/reguli-10.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-            <div class="info-media">
-                <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/info/rules/reguli-13.jpg" alt="Everything you need to know about Top Up/Payment" />
-            </div>
-        </div>
-    </div>
-
-    <!-- Add more items; alternate by toggling the .info-item--reverse class -->
 </section>
 
 <style>
@@ -156,13 +113,58 @@
 
     .info-content p {
         padding: 0;
-        margin: 0;
+        margin: 0 0 1rem;
         color: #fff;
         font-weight: 500;
     }
 
-    .info-bullets {
-        margin: 0 0 .75rem 1.1rem;
+    .info-docs {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+    }
+
+    .info-doc {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 14px;
+        padding: 1.25rem 1.4rem;
+        color: #fff;
+    }
+
+    .info-doc h3 {
+        font-size: 1.35rem;
+        margin: 0 0 .4rem;
+        color: #fff;
+    }
+
+    .info-doc p {
+        margin: 0 0 1rem;
+        font-weight: 500;
+    }
+
+    .info-doc-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .75rem;
+    }
+
+    .info-pdf-wrap {
+        margin: 1.5rem 0 2.5rem;
+        border-radius: 14px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.08);
+        min-height: 70vh;
+    }
+
+    .info-pdf {
+        width: 100%;
+        height: 80vh;
+        min-height: 560px;
+        border: 0;
+        display: block;
+        background: #fff;
     }
 
     .info-cta {
@@ -171,32 +173,38 @@
         border-radius: 999px;
         background: #fff;
         color: #0a1a8a;
-        /* brand blue text */
         text-decoration: none;
         font-weight: 700;
+        border: 2px solid #fff;
     }
 
-    /* Desktop: split 50/50, alternate by reversing order */
+    .info-cta--ghost {
+        background: transparent;
+        color: #fff;
+    }
+
+    .info-cta:hover,
+    .info-cta:focus {
+        color: #0a1a8a;
+        text-decoration: none;
+        opacity: .9;
+    }
+
+    .info-cta--ghost:hover,
+    .info-cta--ghost:focus {
+        color: #fff;
+        background: rgba(255, 255, 255, 0.12);
+    }
+
     @media (min-width: 576px) {
         .info-item {
             grid-template-columns: 1fr 1fr;
             align-items: center;
         }
 
-        .info-item--reverse .info-media {
-            order: 2;
-        }
-
-        .info-item--reverse .info-content {
-            order: 1;
-        }
-    }
-
-    /* Optional: sticky left nav on wide screens */
-    @media (min-width: 1100px) {
-        .left-nav {
-            position: sticky;
-            top: 1.5rem;
+        .info-docs {
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
         }
     }
 </style>
@@ -231,10 +239,10 @@
         }
 
         function getUrlParameter() {
-            // First check for hash in URL (e.g., #transport, #schedule)
+            // First check for hash in URL (e.g., #transport)
             const hash = window.location.hash.replace('#', '');
             
-            if (hash && ['transport', 'schedule', 'payment', 'rules'].includes(hash)) {
+            if (hash && ['transport'].includes(hash)) {
                 return hash;
             }
             
@@ -243,12 +251,6 @@
             
             if (path.includes('/transport/')) {
                 return 'transport';
-            } else if (path.includes('/schedule/')) {
-                return 'schedule';
-            } else if (path.includes('/payment/')) {
-                return 'payment';
-            } else if (path.includes('/rules/')) {
-                return 'rules';
             }
             
             return 'all'; // Default to 'all' if no specific category found
