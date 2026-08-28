@@ -6168,3 +6168,31 @@ f.artistInnerContainer {
     .festivawl-day-tab .day-name {
         padding-bottom: 0px !important;
     }
+
+/* Festival map */
+
+.festival-map-viewport {
+    width: 100%;
+    overflow: hidden;
+    touch-action: none;
+    cursor: grab;
+    border-radius: 8px;
+}
+
+.festival-map-viewport:active {
+    cursor: grabbing;
+}
+
+#map {
+    width: 100%;
+    line-height: 0;
+}
+
+#map img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-width: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
