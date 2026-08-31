@@ -18,7 +18,7 @@ const DEFAULT_SEGMENTS = [
 ];
 
 const DEFAULT_COPY = {
-  dates: '28–30 AUGUST',
+  dates: '27–29 AUGUST 2027',
   location: 'PĂDUREA VERDE, TIMIȘOARA',
   eyebrow: 'Feeling lucky?',
   titleBefore: 'Spin the ',

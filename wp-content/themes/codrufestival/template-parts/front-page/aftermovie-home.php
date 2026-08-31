@@ -26,7 +26,7 @@ $has_ticket_cards = !empty($live_display_tickets) || have_rows('ticket_cards_rep
     </picture>
     <div class="event-meta z-[9] flex flex-col items-center justify-center">
             <div class="event-date rounded-lg bg-[#61d72f] px-3.5 py-2 text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
-                28-30 AUGUST 2026
+                27-29 AUGUST 2027
             </div>
             <div class="event-location mt-2 rounded-lg bg-[#61d72f] px-3.5 py-2 text-base md:text-lg font-extrabold leading-none tracking-[0.5px] text-[#0b1c25]">
                 PĂDUREA VERDE, TIMIȘOARA

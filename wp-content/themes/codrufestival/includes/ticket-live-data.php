@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+if (!function_exists('codru_strip_ticket_price_segment')) {
+
 function codru_strip_ticket_price_segment(string $name): string
 {
     $title = preg_replace('/\s*-\s*\d+(?:[.,]\d+)?\s*EUR(?:\s*\+\s*taxes)?(?:\/ticket)?/i', '', $name);
@@ -347,4 +349,6 @@ function codru_ticket_display_snapshot(array $tickets): array
 function codru_tickets_display_changed(array $previous_tickets, array $new_tickets): bool
 {
     return codru_ticket_display_snapshot($previous_tickets) !== codru_ticket_display_snapshot($new_tickets);
+}
+
 }

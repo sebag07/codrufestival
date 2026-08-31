@@ -3,7 +3,7 @@
 require get_template_directory() . '/includes/widgets/activities.php';
 require get_template_directory() . '/includes/widgets/schedule.php';
 require get_template_directory() . '/includes/widgets/partners.php';
-require get_template_directory() . '/includes/ticket-live-data.php';
+require_once get_template_directory() . '/includes/ticket-live-data.php';
 require get_template_directory() . '/includes/spin-wheel.php';
 
 function codrufestival_theme_setup()

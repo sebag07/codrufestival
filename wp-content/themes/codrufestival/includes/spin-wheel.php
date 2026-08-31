@@ -391,7 +391,7 @@ function codrufestival_get_spin_wheel_props(): array
             'dismissed' => CODRUFESTIVAL_SPIN_WHEEL_DISMISSED_KEY,
         ),
         'copy' => array(
-            'dates' => $text('28–30 AUGUST', '28–30 AUGUST'),
+            'dates' => $text('27–29 AUGUST 2027', '27–29 AUGUST 2027'),
             'location' => $text('PĂDUREA VERDE, TIMIȘOARA', 'PĂDUREA VERDE, TIMIȘOARA'),
             'eyebrow' => $text('Te simți norocos?', 'Feeling lucky?'),
             'titleBefore' => $text('Învârte ', 'Spin the '),
