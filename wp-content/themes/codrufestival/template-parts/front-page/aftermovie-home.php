@@ -5,7 +5,7 @@ $buttonText = get_field("button_text");
 $image = get_field("image");
 $backgroundType = get_field("hero_background_type");
 
-$display_lineup_section = get_field('display_lineup');
+$display_lineup_section = codrufestival_is_lineup_visible();
 $countdownDaysText = get_field('days_text', 'options');
 $countdownHoursText = get_field('hours_text', 'options');
 $countdownMinutesText = get_field('minutes_text', 'options');
@@ -43,58 +43,59 @@ $has_ticket_cards = !empty($live_display_tickets) || have_rows('ticket_cards_rep
 </section>
 
 <?php
-// Define the order and labels for levels
-$artist_levels = [
-    'level1' => ['label' => 'Headliners',      'class' => 'artistsLevel1'],
-    'level2' => ['label' => 'Main Acts',       'class' => 'artistsLevel2'],
-    'level3' => ['label' => 'Supporting Acts', 'class' => 'artistsLevel3'],
-    'level4' => ['label' => 'Level 4',         'class' => 'artistsLevel4'],
-    'level5' => ['label' => 'Level 5',         'class' => 'artistsLevel5'],
-    'level6' => ['label' => 'Level 6',         'class' => 'artistsLevel6'],
-];
-$artists_json_path = get_stylesheet_directory() . '/data/artists.json';
-$artists = [];
-
-if (file_exists($artists_json_path)) {
-    $artists_json = file_get_contents($artists_json_path);
-    $artists_payload = json_decode($artists_json, true);
-
-    if (json_last_error() === JSON_ERROR_NONE && !empty($artists_payload['artists']) && is_array($artists_payload['artists'])) {
-        $artists = $artists_payload['artists'];
-    }
-}
-
+$artist_levels = [];
 $grouped_artists = [];
-foreach ($artists as $artist) {
-    if (empty($artist['name'])) {
-        continue;
-    }
-
-    $level_key = $artist['level'] ?? 'level3';
-    if (!isset($artist_levels[$level_key])) {
-        $level_key = 'level3';
-    }
-
-    if (!isset($grouped_artists[$level_key])) {
-        $grouped_artists[$level_key] = [];
-    }
-    $grouped_artists[$level_key][] = $artist;
-}
-
 $artist_cards = [];
-$has_artist_card_media = false;
-foreach ($artists as $artist) {
-    if (empty($artist['name']) || !codrufestival_should_show_homepage_artist_card($artist)) {
-        continue;
+
+if ($display_lineup_section) {
+    $artist_levels = [
+        'level1' => ['label' => 'Headliners',      'class' => 'artistsLevel1'],
+        'level2' => ['label' => 'Main Acts',       'class' => 'artistsLevel2'],
+        'level3' => ['label' => 'Supporting Acts', 'class' => 'artistsLevel3'],
+        'level4' => ['label' => 'Level 4',         'class' => 'artistsLevel4'],
+        'level5' => ['label' => 'Level 5',         'class' => 'artistsLevel5'],
+        'level6' => ['label' => 'Level 6',         'class' => 'artistsLevel6'],
+    ];
+    $artists_json_path = get_stylesheet_directory() . '/data/artists.json';
+    $artists = [];
+
+    if (file_exists($artists_json_path)) {
+        $artists_json = file_get_contents($artists_json_path);
+        $artists_payload = json_decode($artists_json, true);
+
+        if (json_last_error() === JSON_ERROR_NONE && !empty($artists_payload['artists']) && is_array($artists_payload['artists'])) {
+            $artists = $artists_payload['artists'];
+        }
     }
 
-    $artist_card = codrufestival_build_artist_card_from_json($artist);
-    if (!$artist_card) {
-        continue;
+    foreach ($artists as $artist) {
+        if (empty($artist['name'])) {
+            continue;
+        }
+
+        $level_key = $artist['level'] ?? 'level3';
+        if (!isset($artist_levels[$level_key])) {
+            $level_key = 'level3';
+        }
+
+        if (!isset($grouped_artists[$level_key])) {
+            $grouped_artists[$level_key] = [];
+        }
+        $grouped_artists[$level_key][] = $artist;
     }
 
-    $has_artist_card_media = $has_artist_card_media || !empty($artist_card['image']) || !empty($artist_card['spotifyEmbedUrl']);
-    $artist_cards[] = $artist_card;
+    foreach ($artists as $artist) {
+        if (empty($artist['name']) || !codrufestival_should_show_homepage_artist_card($artist)) {
+            continue;
+        }
+
+        $artist_card = codrufestival_build_artist_card_from_json($artist);
+        if (!$artist_card) {
+            continue;
+        }
+
+        $artist_cards[] = $artist_card;
+    }
 }
 
 ?>
@@ -128,6 +129,7 @@ foreach ($artists as $artist) {
 <?php endif; ?>
 
 
+<?php if ($display_lineup_section) : ?>
 <section id="codru-advent-calendar" class="sectionPadding container">
     <?php if (!empty($artist_cards) && function_exists('codrufestival_react_island')): ?>
         <?php
@@ -149,6 +151,7 @@ foreach ($artists as $artist) {
         </a>
     </div>
 </section>
+<?php endif; ?>
 
 <?php if ($has_ticket_cards && $ticket_section_title): ?>
     <section id="tickets-sale-section">

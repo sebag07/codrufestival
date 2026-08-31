@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 require_once dirname(__DIR__) . '/includes/ticket-live-data.php';
 
-$source_url = 'https://bilete.codrufestival.ro/';
+// Temporary 2027 shop URL until tariffs return to https://bilete.codrufestival.ro/
+$source_url = 'https://bilete.codrufestival.ro/bilete-codru-festival-2027-130642/?ica_source=HPWhitelabel&ica_medium=whitelabel&ica_campaign=&ica_term=';
 $theme_root = dirname(__DIR__);
 $output_path = $theme_root . '/data/tickets-live.json';
 

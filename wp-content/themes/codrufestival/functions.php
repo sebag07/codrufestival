@@ -187,7 +187,6 @@ add_action('wp_footer', 'load_footer_scripts');
 function get_menu_with_children($menu_name)
 {
     $navbar_items = wp_get_nav_menu_items($menu_name);
-    $menu_with_children = array();
     $child_items = [];
 
     // pull all child menu items into separate object
@@ -212,7 +211,41 @@ function get_menu_with_children($menu_name)
         }
     }
 
+    if (!codrufestival_is_lineup_visible()) {
+        $navbar_items = array_values(array_filter((array) $navbar_items, 'codrufestival_keep_visible_menu_item'));
+    }
+
     return $navbar_items;
+}
+
+function codrufestival_is_lineup_menu_item($item)
+{
+    if (!is_object($item) || empty($item->url)) {
+        return false;
+    }
+
+    $url = strtolower((string) $item->url);
+
+    if (strpos($url, '#lineup') !== false) {
+        return true;
+    }
+
+    return strpos($url, '/artisti') !== false || strpos($url, '/en/artists') !== false;
+}
+
+function codrufestival_keep_visible_menu_item($item)
+{
+    if (codrufestival_is_lineup_menu_item($item)) {
+        return false;
+    }
+
+    if (!empty($item->child_items) && is_array($item->child_items)) {
+        $item->child_items = array_values(array_filter($item->child_items, function ($child) {
+            return !codrufestival_is_lineup_menu_item($child);
+        }));
+    }
+
+    return true;
 }
 
 function codrufestival_get_social_links()
@@ -433,6 +466,23 @@ function codrufestival_should_show_homepage_artist_card($artist) {
 
     return codrufestival_get_artist_level_number($level_key) <= codrufestival_get_homepage_artist_card_max_level();
 }
+
+function codrufestival_is_lineup_visible() {
+    return false; // 2026 lineup archived
+}
+
+function codrufestival_redirect_archived_lineup_pages() {
+    if (codrufestival_is_lineup_visible()) {
+        return;
+    }
+
+    if (is_page_template('page-templates/artists.php')) {
+        wp_safe_redirect(home_url('/'), 302);
+        exit;
+    }
+}
+
+add_action('template_redirect', 'codrufestival_redirect_archived_lineup_pages');
 
 function codrufestival_get_artists_page_url() {
     if (function_exists('get_current_language_code') && get_current_language_code() === 'ro') {

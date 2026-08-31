@@ -3,12 +3,15 @@
 
 <?php
 $artist_cards = [];
+$display_lineup = codrufestival_is_lineup_visible();
 
-foreach (codrufestival_get_artists_from_json() as $artist) {
-    $artist_card = codrufestival_build_artist_card_from_json($artist);
+if ($display_lineup) {
+    foreach (codrufestival_get_artists_from_json() as $artist) {
+        $artist_card = codrufestival_build_artist_card_from_json($artist);
 
-    if ($artist_card) {
-        $artist_cards[] = $artist_card;
+        if ($artist_card) {
+            $artist_cards[] = $artist_card;
+        }
     }
 }
 ?>
@@ -17,7 +20,7 @@ foreach (codrufestival_get_artists_from_json() as $artist) {
     <h1 class="text-center sectionTitle" style="font-weight: 600;"><?php echo esc_html(get_the_title()); ?></h1>
     <section>
         <div class="sectionPadding container">
-            <?php if (function_exists('codrufestival_react_island')): ?>
+            <?php if ($display_lineup && function_exists('codrufestival_react_island')): ?>
                 <?php
                 codrufestival_react_island('ArtistExpandableCards', [
                     'artists' => $artist_cards,

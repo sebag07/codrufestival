@@ -27,6 +27,7 @@
         </div>
     </div>
 
+    <?php if (codrufestival_is_lineup_visible()) : ?>
     <?php
         $codru_artists_by_level = codrufestival_get_artists_grouped_by_level();
         $codru_homepage_artist_cards = [];
@@ -81,6 +82,7 @@
                        target="_blank"><?php echo get_field('see_all_artists_button') ?></a>
                 </div>
     </section>
+    <?php endif; ?>
 
 
 <?php  if( have_rows('ticket_cards_repeater', 'options') ): ?>
