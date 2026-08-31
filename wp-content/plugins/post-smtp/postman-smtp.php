@@ -5,8 +5,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 /*
  * Plugin Name: Post SMTP
  * Plugin URI: https://postmansmtp.com/
- * Description: Email not reliable? Post SMTP is the first and only WordPress SMTP plugin to implement OAuth 2.0 for Gmail, Hotmail and Yahoo Mail. Setup is a breeze with the Configuration Wizard and integrated Port Tester. Enjoy worry-free delivery even if your password changes!
- * Version: 3.9.5
+ * Description: Email delivery issues? Post SMTP is a powerful WordPress SMTP plugin for reliable email delivery with Gmail, Outlook, Microsoft 365, Brevo, and more. Set up easily with the Configuration Wizard, Email Logs, test emails, and delivery troubleshooting. Enjoy secure, reliable WordPress email delivery even when passwords change!
+ * Version: 4.0.1
  * Author: Post SMTP
  * Text Domain: post-smtp
  * Author URI: https://profiles.wordpress.org/saadiqbal/
@@ -102,7 +102,7 @@ ps_fs()->add_filter( 'plugin_icon' , 'ps_fs_custom_icon' );
 define( 'POST_SMTP_BASE', __FILE__ );
 define( 'POST_SMTP_PATH', __DIR__ );
 define( 'POST_SMTP_URL', plugins_url('', POST_SMTP_BASE ) );
-define( 'POST_SMTP_VER', '3.9.5' );
+define( 'POST_SMTP_VER', '4.0.1' );
 define( 'POST_SMTP_DB_VERSION', '1.0.1' );
 define( 'POST_SMTP_ASSETS', plugin_dir_url( __FILE__ ) . 'assets/' );
 
@@ -253,6 +253,7 @@ function ps_fs_redirect_on_activation_if_capable( $do_redirect ) {
 		return $do_redirect;
 	}
 
-	return current_user_can( Postman::MANAGE_POSTMAN_CAPABILITY_NAME );
+	return current_user_can( Postman::MANAGE_POSTMAN_CAPABILITY_NAME )
+		|| current_user_can( 'manage_options' );
 }
 ps_fs()->add_filter( 'redirect_on_activation', 'ps_fs_redirect_on_activation_if_capable', 10, 1 );

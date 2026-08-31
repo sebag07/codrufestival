@@ -4,8 +4,8 @@ Contributors: wpexpertsio
 Tags: smtp, gmail smtp, email,  email logs, office 365
 Requires at least: 5.6.0
 Tested up to: 7.0
-Stable tag: 3.9.5
-Requires PHP: 7.0
+Stable tag: 4.0.1
+Requires PHP: 7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -93,6 +93,10 @@ Preview Any Email: You can preview your emails and see how it looks.
 
 == SMTP Mailer Options for Post SMTP ==
 With Post SMTP, you get many SMTP mailer options, such as:
+
+* [SMTP.com SMTP](https://www.smtp.com/resources/api-documentation/) - **Newly Added**
+
+* [CloudFlare SMTP](https://developers.cloudflare.com/email-service/api/send-emails/smtp/) - **Newly Added**
 
 * [Sweego SMTP](https://postmansmtp.com/docs/mailers/how-to-setup-sweego-with-post-smtp/?utm_source=wp_org&utm_medium=read_me) - **Newly Added**
 
@@ -323,6 +327,25 @@ You can report security bugs through the Patchstack Vulnerability Disclosure Pro
 Important: If you are using version 2.8.7 or lower of our plugin, please update to the latest version as soon as possible. This update contains an urgent security fix that prevents potential vulnerabilities and attacks. We apologize for any inconvenience this may cause you and we appreciate your cooperation. Thank you for using our plugin.
 
 == Changelog ==
+
+= 4.0.1 - Aug 25, 2026 =
+* Rolled back from 4.0.0-beta.1
+
+= 3.10.0 - Aug 24, 2026 =
+* NEW - Added [SMTP.com](https://www.smtp.com/) as an email service provider.
+* NEW - Added [CloudFlare](https://developers.cloudflare.com/email-service/api/send-emails/smtp/) as an email service provider.
+* IMPROVEMENT - Updated Sweego API.
+* IMPROVEMENT - Verified compatibility with WordPress v 7.1.
+* FIX - Resolved issue where newsletter emails were rendered incorrectly via Microsoft 365 API.
+* FIX - Fixed critical error when sending Wordfence Admin Authentication emails.
+* FIX - Resolved PHP 8.3 depreciation warnings.
+* FIX - Fixed fatal error occurring on the configuration page for version 3.7.0.
+* FIX - Fixed issue where the Resend feature sent raw HTML instead of rendered emails.
+* FIX - Corrected delivery time in logs to match WordPress timezone settings.
+* FIX - Added missing angle brackets in Message-ID header to prevent Google Workspace bounces.
+* FIX - Resolved issue where Reply-to settings were not being honored.
+* FIX - Fixed Cyrillic domain support issues.
+* FIX - Addressed various PHP warnings and minor UI/UX improvements.
 
 = 3.9.5 – June 24, 2026 =
 * TWEAK – Updated dashboard banners and removed the Extensions screen from the plugin menu.

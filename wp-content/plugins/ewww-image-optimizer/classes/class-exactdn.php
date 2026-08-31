@@ -3345,38 +3345,40 @@ class ExactDN extends Page_Parser {
 		if ( \is_string( $route ) ) {
 			$this->debug_message( "current REST route is $route" );
 		}
-		if ( \is_string( $route ) && false !== \strpos( $route, 'wp/v2/media' ) && 'edit' === $request->get_param( 'context' ) ) {
+		if ( \is_string( $route ) && \str_contains( $route, 'wp/v2/media' ) && 'edit' === $request->get_param( 'context' ) ) {
 			$this->debug_message( 'REST API media endpoint from post editor' );
-			// We don't want ExactDN urls anywhere near the editor, so disable everything we can.
-			\add_filter( 'exactdn_override_image_downsize', '__return_true', PHP_INT_MAX );
-			\add_filter( 'exactdn_skip_image', '__return_true', PHP_INT_MAX ); // This skips existing srcset indices.
-			\add_filter( 'exactdn_srcset_multipliers', '__return_false', PHP_INT_MAX ); // This one skips the additional multipliers.
-		} elseif ( \is_string( $route ) && false !== \strpos( $route, 'wp/v2/media' ) && 'view' === $request->get_param( 'context' ) ) {
+			$this->disable_exactdn();
+		} elseif ( \is_string( $route ) && \str_contains( $route, 'wp/v2/media' ) && 'view' === $request->get_param( 'context' ) ) {
 			$this->debug_message( 'REST API media endpoint, could be editor, we may never know...' );
-			// We don't want ExactDN urls anywhere near the editor, so disable everything we can.
-			\add_filter( 'exactdn_override_image_downsize', '__return_true', PHP_INT_MAX );
-			\add_filter( 'exactdn_skip_image', '__return_true', PHP_INT_MAX ); // This skips existing srcset indices.
-			\add_filter( 'exactdn_srcset_multipliers', '__return_false', PHP_INT_MAX ); // This one skips the additional multipliers.
-		} elseif ( \is_string( $route ) && false !== \strpos( $route, 'wp/v2/media' ) && ! empty( $request['post'] ) && ! empty( $request->get_file_params() ) ) {
+			$this->disable_exactdn();
+		} elseif ( \is_string( $route ) && \str_contains( $route, 'wp/v2/media' ) && ! empty( $request['post'] ) && ! empty( $request->get_file_params() ) ) {
 			$this->debug_message( 'REST API media endpoint (new upload)' );
-			// We don't want ExactDN urls anywhere near the editor, so disable everything we can.
-			\add_filter( 'exactdn_override_image_downsize', '__return_true', PHP_INT_MAX );
-			\add_filter( 'exactdn_skip_image', '__return_true', PHP_INT_MAX ); // This skips existing srcset indices.
-			\add_filter( 'exactdn_srcset_multipliers', '__return_false', PHP_INT_MAX ); // This one skips the additional multipliers.
-		} elseif ( \is_string( $route ) && false !== \strpos( $route, '/ToolsetBlocks/' ) ) {
+			$this->disable_exactdn();
+		} elseif ( \is_string( $route ) && \str_contains( $route, 'wp/v2/media' ) && \str_contains( $route, '/finalize' ) ) {
+			$this->debug_message( 'REST API media endpoint (finalize)' );
+			$this->disable_exactdn();
+		} elseif ( \is_string( $route ) && \str_contains( $route, 'wp/v2/media' ) && \str_contains( $route, '/sideload' ) ) {
+			$this->debug_message( 'REST API media endpoint (sideload)' );
+			$this->disable_exactdn();
+		} elseif ( \is_string( $route ) && \str_contains( $route, '/ToolsetBlocks/' ) ) {
 			$this->debug_message( 'REST API media endpoint (ToolsetBlocks)' );
-			// We don't want ExactDN urls anywhere near the editor, so disable everything we can.
-			add_filter( 'exactdn_override_image_downsize', '__return_true', PHP_INT_MAX );
-			add_filter( 'exactdn_skip_image', '__return_true', PHP_INT_MAX ); // This skips existing srcset indices.
-			add_filter( 'exactdn_srcset_multipliers', '__return_false', PHP_INT_MAX ); // This one skips the additional multipliers.
-		} elseif ( \is_string( $route ) && false !== \strpos( $route, '/toolset-dynamic-sources/' ) ) {
+			$this->disable_exactdn();
+		} elseif ( \is_string( $route ) && \str_contains( $route, '/toolset-dynamic-sources/' ) ) {
 			$this->debug_message( 'REST API media endpoint (toolset-dynamic-sources)' );
-			// We don't want ExactDN urls anywhere near the editor, so disable everything we can.
-			\add_filter( 'exactdn_override_image_downsize', '__return_true', PHP_INT_MAX );
-			\add_filter( 'exactdn_skip_image', '__return_true', PHP_INT_MAX ); // This skips existing srcset indices.
-			\add_filter( 'exactdn_srcset_multipliers', '__return_false', PHP_INT_MAX ); // This one skips the additional multipliers.
+			$this->disable_exactdn();
 		}
 		return $response;
+	}
+
+	/**
+	 * Disable ExactDN for the current request, if needed.
+	 *
+	 * We don't want ExactDN urls anywhere near the editor, so disable everything we can.
+	 */
+	public function disable_exactdn() {
+		\add_filter( 'exactdn_override_image_downsize', '__return_true', PHP_INT_MAX );
+		\add_filter( 'exactdn_skip_image', '__return_true', PHP_INT_MAX );
+		\add_filter( 'exactdn_srcset_multipliers', '__return_false', PHP_INT_MAX );
 	}
 
 	/**
@@ -3761,7 +3763,7 @@ class ExactDN extends Page_Parser {
 		if ( $media_id && ! $symlink ) {
 			$media    = new \BP_Media( $media_id );
 			$metadata = \wp_get_attachment_metadata( $media->attachment_id );
-			if ( $size && ! empty( $metadata ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
+			if ( $size && ! empty( $metadata ) && isset( $metadata['sizes'] ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
 				$attachment_url = \wp_get_attachment_image_url( $media->attachment_id, $size );
 			} else {
 				$attachment_url = \wp_get_attachment_url( $media->attachment_id );
@@ -3787,7 +3789,7 @@ class ExactDN extends Page_Parser {
 		$this->debug_message( '<b>' . __METHOD__ . '()</b>' );
 		if ( $attachment_id && ! $symlink ) {
 			$metadata = \wp_get_attachment_metadata( $attachment_id );
-			if ( $size && ! empty( $metadata ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
+			if ( $size && ! empty( $metadata ) && isset( $metadata['sizes'] ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
 				$attachment_url = \wp_get_attachment_image_url( $attachment_id, $size );
 			} else {
 				$attachment_url = \wp_get_attachment_url( $attachment_id );
@@ -3818,7 +3820,7 @@ class ExactDN extends Page_Parser {
 		) {
 			$this->debug_message( "$extension is allowed for $document_id" );
 			$metadata = \wp_get_attachment_metadata( $attachment_id );
-			if ( $size && ! empty( $metadata ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
+			if ( $size && ! empty( $metadata ) && isset( $metadata['sizes'] ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
 				$attachment_url = \wp_get_attachment_image_url( $attachment_id, $size );
 			} else {
 				$attachment_url = \wp_get_attachment_image_url( $attachment_id, 'full' );
@@ -3831,7 +3833,7 @@ class ExactDN extends Page_Parser {
 					\bb_document_regenerate_attachment_thumbnails( $attachment_id );
 				}
 				$metadata = \wp_get_attachment_metadata( $attachment_id );
-				if ( $size && ! empty( $metadata ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
+				if ( $size && ! empty( $metadata ) && isset( $metadata['sizes'] ) && $this->is_iterable( $metadata['sizes'] ) && isset( $metadata['sizes'][ $size ] ) ) {
 					$attachment_url = \wp_get_attachment_image_url( $attachment_id, $size );
 				} else {
 					$attachment_url = \wp_get_attachment_image_url( $attachment_id, 'full' );

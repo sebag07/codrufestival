@@ -63,18 +63,8 @@
                     add_options_page('Taxonomy Terms Order', '<img class="menu_tto" src="'. TOURL .'/images/menu-icon.png" alt="" />' . __('Taxonomy Terms Order', 'taxonomy-terms-order'), 'manage_options', 'to-options', array ( $TTO_plugin_options, 'plugin_options' ) );
                             
                     $options = TTO_functions::get_settings();
-                    
-                    if(isset($options['capability']) && !empty($options['capability']))
-                        $capability = $options['capability'];
-                    else if (is_numeric($options['level']))
-                        {
-                            //maintain the old user level compatibility
-                            $capability = TTO_functions::userdata_get_user_level();
-                        }
-                        else
-                            {
-                                $capability = 'manage_options';  
-                            } 
+                                      
+                    $capability = $this->get_interface_capability() ;
                             
                      //put a menu within all custom types if apply
                     $post_types = get_post_types();
@@ -106,6 +96,22 @@
                                 else
                                 add_submenu_page('edit.php?post_type='.$post_type, __('Taxonomy Order', 'taxonomy-terms-order'), __('Taxonomy Order', 'taxonomy-terms-order'), $capability, 'to-interface-'.$post_type, array ( $TTO_Interface, 'Interface' ) );
                         }
+                }
+                
+                
+            function get_interface_capability() 
+                {
+                    $options = TTO_functions::get_settings();
+
+                    if ( ! empty( $options['capability'] ) ) {
+                        return $options['capability'];
+                    }
+
+                    if ( isset( $options['level'] ) && is_numeric( $options['level'] ) ) {
+                        return TTO_functions::userdata_get_user_level();
+                    }
+
+                    return 'manage_options';
                 }
                 
             
@@ -198,15 +204,20 @@
             */
             function saveAjaxOrder()
                 {
-                    global $wpdb;
+                    global $wpdb; 
                     
                     if  ( ! isset ( $_POST['nonce'] ) ||  ! wp_verify_nonce( sanitize_text_field ( wp_unslash ( $_POST['nonce'] ) ), 'update-taxonomy-order' ) )
-                        die();
+                        wp_send_json_error( array( 'message' => __( 'You are not allowed to access this area.', 'taxonomy-terms-order' ) ), 403 );
+                        
+                    if ( ! current_user_can( $this->get_interface_capability() ) )
+                        wp_send_json_error( array( 'message' => __( 'You are not allowed to reorder these terms.', 'taxonomy-terms-order' ) ), 403 );
                      
                     $data               = isset ( $_POST['order'] )  ?   stripslashes( sanitize_text_field ( wp_unslash ( $_POST['order'] ) ) )   :   "";
                     $unserialised_data  = json_decode($data, TRUE);
+                    
+                    if ( ! is_array( $unserialised_data ) )
+                        wp_send_json_error( array( 'message' => __( 'Invalid order data.', 'taxonomy-terms-order' ) ), 400 );
                             
-                    if (is_array($unserialised_data))
                     foreach($unserialised_data as $key => $values ) 
                         {
                             //$key_parent = str_replace("item_", "", $key);
@@ -232,7 +243,7 @@
                     
                     wp_cache_flush();
                         
-                    die();
+                    wp_send_json_success( array( 'message' => __( 'Items Order Updated', 'taxonomy-terms-order' ) ) );
                 }
                 
                 
