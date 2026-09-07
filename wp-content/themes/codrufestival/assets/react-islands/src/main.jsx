@@ -5,6 +5,7 @@ import { BrandCultureCards } from './components/BrandCultureCards.jsx';
 import { CountdownBadge } from './components/CountdownBadge.jsx';
 import { NewsletterSignupTeaser } from './components/NewsletterSignupTeaser.jsx';
 import { SpinWheelPopup } from './components/SpinWheelPopup.jsx';
+import { YouthInstallations } from './components/YouthInstallations.jsx';
 import './styles.css';
 
 const registry = {
@@ -13,6 +14,7 @@ const registry = {
   CountdownBadge,
   NewsletterSignupTeaser,
   SpinWheelPopup,
+  YouthInstallations,
 };
 
 const mountedRoots = new WeakMap();
