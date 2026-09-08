@@ -1378,11 +1378,26 @@ body.codru-spin-wheel-open {
 }
 
 .codru-youth-page__funding {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
+  gap: 16px;
   line-height: 1.6;
   margin: 48px auto 0;
   max-width: 1080px;
   text-align: center;
+}
+
+.codru-youth-page__funding img {
+  display: block;
+  height: auto;
+  max-width: min(420px, 100%);
+  width: 100%;
+}
+
+.codru-youth-page__funding p {
+  margin: 0;
 }
 
 .codru-youth {

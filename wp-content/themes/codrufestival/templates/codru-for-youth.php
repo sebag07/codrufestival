@@ -46,6 +46,8 @@ $youth_intro = array(
         'lector univ. dr. Mihai Zgondoiu',
     ),
     'funding' => 'CODRU for YOUth este un proiect finanțat de Municipiul Timișoara, prin Centrul de Proiecte, în cadrul programului „Tineret în acțiune 2026”.',
+    'funding_logo' => $youth_dir . '/logo-centru-de-proiecte.png',
+    'funding_logo_alt' => 'Finanțat de Municipiul Timișoara prin Centrul de Proiecte',
 );
 
 $youth_installations = array(
@@ -144,8 +146,15 @@ get_header();
         ));
         ?>
 
-        <?php if (!empty($youth_intro['funding'])) : ?>
-            <p class="codru-youth-page__funding"><?php echo esc_html($youth_intro['funding']); ?></p>
+        <?php if (!empty($youth_intro['funding']) || !empty($youth_intro['funding_logo'])) : ?>
+            <div class="codru-youth-page__funding">
+                <?php if (!empty($youth_intro['funding_logo'])) : ?>
+                    <img src="<?php echo esc_url($youth_intro['funding_logo']); ?>" alt="<?php echo esc_attr($youth_intro['funding_logo_alt'] ?? ''); ?>">
+                <?php endif; ?>
+                <?php if (!empty($youth_intro['funding'])) : ?>
+                    <p><?php echo esc_html($youth_intro['funding']); ?></p>
+                <?php endif; ?>
+            </div>
         <?php endif; ?>
     </div>
 </div>
