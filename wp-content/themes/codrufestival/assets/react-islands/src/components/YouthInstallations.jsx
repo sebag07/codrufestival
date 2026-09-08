@@ -112,6 +112,20 @@ export function YouthInstallations({ installations = [], defaultId = '' }) {
           <div className="codru-youth__description" dangerouslySetInnerHTML={{ __html: active.description }} />
         ) : null}
 
+        {active.video?.src ? (
+          <div className="codru-youth__video">
+            <video
+              controls
+              playsInline
+              preload="metadata"
+              poster={active.video.poster || undefined}
+              aria-label={active.video.label || active.title}
+            >
+              <source src={active.video.src} />
+            </video>
+          </div>
+        ) : null}
+
         {images.length ? (
           <div className="codru-youth__gallery">
             {images.map((image, index) => (
@@ -136,30 +150,36 @@ export function YouthInstallations({ installations = [], defaultId = '' }) {
             aria-label="Închide imaginea"
             onClick={() => setLightboxIndex(-1)}
           />
-          <figure className="codru-youth__lightbox-figure">
-            <img src={lightboxImage.src} alt={lightboxImage.alt || active.title} />
-            {lightboxImage.alt ? <figcaption>{lightboxImage.alt}</figcaption> : null}
-          </figure>
-          {images.length > 1 ? (
-            <>
+          <div className="codru-youth__lightbox-stage">
+            {images.length > 1 ? (
               <button
                 type="button"
                 className="codru-youth__lightbox-nav is-prev"
                 aria-label="Imaginea anterioară"
                 onClick={() => setLightboxIndex((current) => (current - 1 + images.length) % images.length)}
               >
-                ‹
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
+            ) : null}
+            <figure className="codru-youth__lightbox-figure">
+              <img src={lightboxImage.src} alt={lightboxImage.alt || active.title} />
+              {lightboxImage.alt ? <figcaption>{lightboxImage.alt}</figcaption> : null}
+            </figure>
+            {images.length > 1 ? (
               <button
                 type="button"
                 className="codru-youth__lightbox-nav is-next"
                 aria-label="Imaginea următoare"
                 onClick={() => setLightboxIndex((current) => (current + 1) % images.length)}
               >
-                ›
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 5 16 12 9 19" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
-            </>
-          ) : null}
+            ) : null}
+          </div>
           <button
             type="button"
             className="codru-youth__lightbox-close"

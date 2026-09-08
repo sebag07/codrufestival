@@ -1245,15 +1245,97 @@ body.codru-spin-wheel-open {
   }
 }
 
-.codru-youth-page {
+.codru-youth-page,
+.codru-youth-page p,
+.codru-youth-page li,
+.codru-youth-page h1,
+.codru-youth-page h2 {
   color: #fff;
+}
+
+.codru-youth-page {
   padding: 140px 0 80px;
 }
 
+.codru-youth-page__wrap {
+  margin: 0 auto;
+  max-width: 1480px;
+  padding: 0 32px;
+  width: 100%;
+}
+
 .codru-youth-page__intro {
-  margin: 0 auto 40px;
-  max-width: 820px;
+  margin: 0 auto 56px;
+  max-width: 1080px;
   text-align: center;
+}
+
+.codru-youth-page__banner {
+  margin: 28px auto 0;
+  max-width: 720px;
+}
+
+.codru-youth-page__banner img {
+  border-radius: 16px;
+  display: block;
+  height: auto;
+  max-height: 380px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.codru-youth-page__body,
+.codru-youth-page__coordinators {
+  color: #fff;
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 22px auto 0;
+  max-width: 1080px;
+  text-align: left;
+}
+
+.codru-youth-page__body p {
+  margin: 0 0 16px;
+}
+
+.codru-youth-page__body p:last-child {
+  margin-bottom: 0;
+}
+
+.codru-youth-page p.codru-youth-page__coordinators-label {
+  color: var(--button-color, #67e816);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin: 0 0 10px;
+  text-transform: uppercase;
+}
+
+.codru-youth-page__coordinators ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.codru-youth-page__coordinators li {
+  margin: 0 0 4px;
+}
+
+.codru-youth__video {
+  aspect-ratio: 16 / 9;
+  background: #050b3f;
+  border-radius: 16px;
+  margin: 0 auto 32px;
+  max-width: 860px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.codru-youth__video video {
+  display: block;
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
 }
 
 .codru-youth-page__kicker,
@@ -1282,28 +1364,30 @@ body.codru-spin-wheel-open {
 .codru-youth-page__lede,
 .codru-youth-page__funding,
 .codru-youth__subtitle,
-.codru-youth__description {
-  color: rgba(255, 255, 255, 0.82);
+.codru-youth__description,
+.codru-youth__description p {
+  color: #fff;
 }
 
 .codru-youth-page__lede {
   font-size: 18px;
-  line-height: 1.6;
+  line-height: 1.7;
   margin: 22px auto 0;
-  max-width: 640px;
+  max-width: 1080px;
+  text-align: left;
 }
 
 .codru-youth-page__funding {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
   margin: 48px auto 0;
-  max-width: 640px;
+  max-width: 1080px;
   text-align: center;
 }
 
 .codru-youth {
   margin: 0 auto;
-  max-width: 1100px;
+  max-width: none;
 }
 
 .codru-youth__tabs {
@@ -1315,7 +1399,7 @@ body.codru-spin-wheel-open {
 }
 
 .codru-youth__tab {
-  background: rgba(255, 255, 255, 0.08);
+  background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 999px;
   color: #fff;
@@ -1329,8 +1413,8 @@ body.codru-spin-wheel-open {
 
 .codru-youth__tab:hover,
 .codru-youth__tab:focus-visible {
-  background: rgba(255, 255, 255, 0.14);
-  border-color: rgba(255, 255, 255, 0.32);
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
   outline: none;
 }
 
@@ -1342,7 +1426,7 @@ body.codru-spin-wheel-open {
 
 .codru-youth__header {
   margin: 0 auto 28px;
-  max-width: 760px;
+  max-width: 1080px;
   text-align: center;
 }
 
@@ -1380,7 +1464,7 @@ body.codru-spin-wheel-open {
   font-size: 17px;
   line-height: 1.7;
   margin: 0 auto 32px;
-  max-width: 760px;
+  max-width: 1080px;
 }
 
 .codru-youth__description p {
@@ -1439,26 +1523,33 @@ body.codru-youth-lightbox-open {
   position: absolute;
 }
 
-.codru-youth__lightbox-figure {
-  left: 50%;
-  margin: 0;
-  max-height: calc(100vh - 80px);
-  max-width: min(1100px, calc(100vw - 48px));
+.codru-youth__lightbox-stage {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  inset: 0;
+  justify-content: center;
+  padding: 72px 20px 28px;
+  pointer-events: none;
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: auto;
+}
+
+.codru-youth__lightbox-figure {
+  margin: 0;
+  max-width: min(820px, calc(100vw - 160px));
+  pointer-events: auto;
 }
 
 .codru-youth__lightbox-figure img {
-  border-radius: 16px;
+  border-radius: 12px;
   display: block;
-  max-height: calc(100vh - 120px);
+  max-height: min(68vh, 640px);
   max-width: 100%;
+  object-fit: contain;
 }
 
 .codru-youth__lightbox-figure figcaption {
-  color: rgba(255, 255, 255, 0.78);
+  color: #fff;
   font-size: 14px;
   margin-top: 12px;
   text-align: center;
@@ -1466,37 +1557,38 @@ body.codru-youth-lightbox-open {
 
 .codru-youth__lightbox-close,
 .codru-youth__lightbox-nav {
+  align-items: center;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   color: #fff;
   cursor: pointer;
-  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  line-height: 0;
+  padding: 0;
 }
 
 .codru-youth__lightbox-close {
   font-size: 28px;
   height: 44px;
-  line-height: 1;
+  position: absolute;
   right: 20px;
   top: 20px;
   width: 44px;
 }
 
 .codru-youth__lightbox-nav {
-  font-size: 36px;
+  flex: 0 0 52px;
   height: 52px;
-  top: 50%;
-  transform: translateY(-50%);
+  pointer-events: auto;
   width: 52px;
 }
 
-.codru-youth__lightbox-nav.is-prev {
-  left: 16px;
-}
-
-.codru-youth__lightbox-nav.is-next {
-  right: 16px;
+.codru-youth__lightbox-nav svg {
+  display: block;
+  height: 22px;
+  width: 22px;
 }
 
 @media (min-width: 720px) {
@@ -1505,12 +1597,26 @@ body.codru-youth-lightbox-open {
   }
 }
 
+@media (min-width: 1100px) {
+  .codru-youth__gallery {
+    columns: 3;
+  }
+}
+
 @media (max-width: 767px) {
   .codru-youth-page {
     padding: 120px 0 56px;
   }
 
+  .codru-youth-page__wrap {
+    padding: 0 16px;
+  }
+
   .codru-youth__lightbox-nav {
     display: none;
+  }
+
+  .codru-youth__lightbox-figure {
+    max-width: calc(100vw - 32px);
   }
 }
