@@ -5,6 +5,7 @@ import { BrandCultureCards } from './components/BrandCultureCards.jsx';
 import { CountdownBadge } from './components/CountdownBadge.jsx';
 import { NewsletterSignupTeaser } from './components/NewsletterSignupTeaser.jsx';
 import { SpinWheelPopup } from './components/SpinWheelPopup.jsx';
+import { FestivalGallery } from './components/FestivalGallery.jsx';
 import { YouthInstallations } from './components/YouthInstallations.jsx';
 import './styles.css';
 
@@ -12,6 +13,7 @@ const registry = {
   ArtistExpandableCards,
   BrandCultureCards,
   CountdownBadge,
+  FestivalGallery,
   NewsletterSignupTeaser,
   SpinWheelPopup,
   YouthInstallations,

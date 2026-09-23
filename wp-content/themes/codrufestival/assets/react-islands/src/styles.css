@@ -1635,3 +1635,182 @@ body.codru-youth-lightbox-open {
     max-width: calc(100vw - 32px);
   }
 }
+
+.codru-gallery-page,
+.codru-gallery-page p,
+.codru-gallery-page h1 {
+  color: #fff;
+}
+
+.codru-gallery-page {
+  padding: 140px 0 80px;
+}
+
+.codru-gallery-page__wrap {
+  margin: 0 auto;
+  max-width: 1480px;
+  padding: 0 32px;
+  width: 100%;
+}
+
+.codru-gallery-page__intro {
+  margin: 0 auto 40px;
+  max-width: 1080px;
+  text-align: center;
+}
+
+.codru-gallery-page__title {
+  color: #fff;
+  font-size: clamp(42px, 7vw, 84px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.codru-gallery-page__empty {
+  font-size: 18px;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 640px;
+  text-align: center;
+}
+
+.codru-festival-gallery__grid {
+  column-gap: 14px;
+  columns: 1;
+}
+
+.codru-festival-gallery__shot {
+  background: transparent;
+  border: 0;
+  break-inside: avoid;
+  cursor: zoom-in;
+  display: block;
+  margin: 0 0 14px;
+  padding: 0;
+  width: 100%;
+}
+
+.codru-festival-gallery__shot img {
+  border-radius: 18px;
+  display: block;
+  height: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  width: 100%;
+}
+
+.codru-festival-gallery__shot:hover img,
+.codru-festival-gallery__shot:focus-visible img {
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+body.codru-gallery-lightbox-open {
+  overflow: hidden;
+}
+
+.codru-festival-gallery__lightbox {
+  inset: 0;
+  position: fixed;
+  z-index: 1200;
+}
+
+.codru-festival-gallery__lightbox-backdrop {
+  background: rgba(4, 10, 40, 0.88);
+  border: 0;
+  inset: 0;
+  position: absolute;
+}
+
+.codru-festival-gallery__lightbox-stage {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  inset: 0;
+  justify-content: center;
+  padding: 72px 20px 28px;
+  pointer-events: none;
+  position: absolute;
+}
+
+.codru-festival-gallery__lightbox-figure {
+  margin: 0;
+  max-width: min(1100px, calc(100vw - 160px));
+  pointer-events: auto;
+}
+
+.codru-festival-gallery__lightbox-figure img {
+  border-radius: 12px;
+  display: block;
+  max-height: min(82vh, 900px);
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.codru-festival-gallery__lightbox-close,
+.codru-festival-gallery__lightbox-nav {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  line-height: 0;
+  padding: 0;
+}
+
+.codru-festival-gallery__lightbox-close {
+  font-size: 28px;
+  height: 44px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 44px;
+}
+
+.codru-festival-gallery__lightbox-nav {
+  flex: 0 0 52px;
+  height: 52px;
+  pointer-events: auto;
+  width: 52px;
+}
+
+.codru-festival-gallery__lightbox-nav svg {
+  display: block;
+  height: 22px;
+  width: 22px;
+}
+
+@media (min-width: 720px) {
+  .codru-festival-gallery__grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1100px) {
+  .codru-festival-gallery__grid {
+    columns: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .codru-gallery-page {
+    padding: 120px 0 56px;
+  }
+
+  .codru-gallery-page__wrap {
+    padding: 0 16px;
+  }
+
+  .codru-festival-gallery__lightbox-nav {
+    display: none;
+  }
+
+  .codru-festival-gallery__lightbox-figure {
+    max-width: calc(100vw - 32px);
+  }
+}
