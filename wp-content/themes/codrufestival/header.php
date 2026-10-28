@@ -217,6 +217,11 @@
                 }
                 ?>
                 <?php codrufestival_render_social_links(array('class' => 'headerSocials')); ?>
+                <?php if (codrufestival_is_efa_voting_open()) : ?>
+                    <div class="site-mobile-menu-button-container">
+                        <a class="heroButtonMenu" href="<?php echo esc_url(CODRUFESTIVAL_EFA_VOTING_URL); ?>" target="_blank" rel="noopener"><?php echo esc_html(get_multilingual_text('VOTEAZĂ CODRU', 'VOTE FOR CODRU')); ?></a>
+                    </div>
+                <?php endif; ?>
                 <div class="site-mobile-menu-button-container">
                     <a class="heroButtonMenu"
                         href="https://bilete.codrufestival.ro/"><?php echo esc_html(get_multilingual_text('BILETE', 'TICKETS')); ?></a>
@@ -264,6 +269,11 @@
                         }
                     }
                     ?>
+                    <?php if (codrufestival_is_efa_voting_open()) : ?>
+                        <li class="desktop-menu-cta">
+                            <a class="heroButtonMenu" href="<?php echo esc_url(CODRUFESTIVAL_EFA_VOTING_URL); ?>" target="_blank" rel="noopener"><?php echo esc_html(get_multilingual_text('VOTEAZĂ', 'VOTE')); ?></a>
+                        </li>
+                    <?php endif; ?>
                     <li class="desktop-menu-cta">
                         <a class="heroButtonMenu"
                             href="https://bilete.codrufestival.ro/"><?php echo esc_html(get_multilingual_text('BILETE', 'TICKETS')); ?></a>

@@ -471,6 +471,12 @@ function codrufestival_is_lineup_visible() {
     return false; // 2026 lineup archived
 }
 
+define('CODRUFESTIVAL_EFA_VOTING_URL', 'https://www.europeanfestivalawards.org/public-voting/');
+
+function codrufestival_is_efa_voting_open() {
+    return current_time('Y-m-d') <= '2026-11-20'; // EFA 2026 public voting closes 20 November
+}
+
 function codrufestival_redirect_archived_lineup_pages() {
     if (codrufestival_is_lineup_visible()) {
         return;

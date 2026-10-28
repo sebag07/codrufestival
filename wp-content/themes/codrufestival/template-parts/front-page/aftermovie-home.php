@@ -32,10 +32,24 @@ $has_ticket_cards = !empty($live_display_tickets) || have_rows('ticket_cards_rep
                 PĂDUREA VERDE, TIMIȘOARA
             </div>
         </div>
+    <?php if (codrufestival_is_efa_voting_open()) : ?>
+        <p class="z-[4] mx-5 mb-0 mt-0 max-w-[760px] text-center text-lg font-extrabold uppercase leading-snug tracking-[0.5px] text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.6)] md:text-2xl">
+            <?php echo esc_html(get_multilingual_text(
+                'Votează CODRU la European Festival Awards 2026',
+                'Vote for CODRU at the European Festival Awards 2026',
+                'ro'
+            )); ?>
+        </p>
+    <?php endif; ?>
     <div class="buttons-container z-[4] flex flex-col gap-2.5 sm:flex-row">
         <a class="homepage-info-button codru-general-button z-[4]" href="https://bilete.codrufestival.ro/">
             <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
         </a>
+        <?php if (codrufestival_is_efa_voting_open()) : ?>
+            <a class="codru-general-button z-[4]" href="<?php echo esc_url(CODRUFESTIVAL_EFA_VOTING_URL); ?>" target="_blank" rel="noopener">
+                <?php echo esc_html(get_multilingual_text('VOTEAZĂ CODRU', 'VOTE FOR CODRU', 'ro')); ?>
+            </a>
+        <?php endif; ?>
     </div>
     <div class="absolute left-0 top-0 z-[1] h-full w-full">
         <img class="h-full w-full object-cover object-center" src="<?php echo get_stylesheet_directory_uri(); ?>/images/codru-hero-background.jpg" alt="Hero Banner">
