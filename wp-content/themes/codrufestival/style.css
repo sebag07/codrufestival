@@ -3246,6 +3246,21 @@ div.wpforms-container-full .wpforms-form .wpforms-field-label-inline {
     color: var(--button-text-color);
 }
 
+.codru-vote-button,
+.site-navbar .desktop-site-menu > .desktop-menu-cta > .codru-vote-button,
+.site-mobile-menu .site-nav-wrap .codru-vote-button {
+    background: #ff8a1f;
+    color: var(--button-text-color);
+}
+
+.codru-vote-button:hover,
+.codru-vote-button:active,
+.codru-vote-button:focus,
+.site-navbar .desktop-site-menu > .desktop-menu-cta > .codru-vote-button:hover {
+    background: #fff;
+    color: var(--button-text-color);
+}
+
 .general-button-container {
     min-height: 50px;
 }

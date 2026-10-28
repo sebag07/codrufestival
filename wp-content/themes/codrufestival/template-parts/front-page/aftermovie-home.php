@@ -46,7 +46,7 @@ $has_ticket_cards = !empty($live_display_tickets) || have_rows('ticket_cards_rep
             <?php echo get_multilingual_text('BILETE CODRU', 'CODRU TICKETS', 'ro'); ?>
         </a>
         <?php if (codrufestival_is_efa_voting_open()) : ?>
-            <a class="codru-general-button z-[4]" href="<?php echo esc_url(CODRUFESTIVAL_EFA_VOTING_URL); ?>" target="_blank" rel="noopener">
+            <a class="codru-general-button codru-vote-button z-[4]" href="<?php echo esc_url(CODRUFESTIVAL_EFA_VOTING_URL); ?>" target="_blank" rel="noopener">
                 <?php echo esc_html(get_multilingual_text('VOTEAZĂ CODRU', 'VOTE FOR CODRU', 'ro')); ?>
             </a>
         <?php endif; ?>
