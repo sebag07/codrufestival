@@ -17,7 +17,11 @@ $latest_content = $latest ? apply_filters('the_content', (string) get_post_field
             <article class="codru-plantations-latest">
                 <div class="codru-plantations-latest__media">
                     <a class="codru-plantations-latest__cover" href="<?php echo esc_url($latest['url']); ?>">
-                        <img src="<?php echo esc_url($latest['image']); ?>" alt="<?php echo esc_attr($latest['image_alt']); ?>" loading="lazy">
+                        <?php if ($latest['image']) : ?>
+                            <img src="<?php echo esc_url($latest['image']); ?>" alt="<?php echo esc_attr($latest['image_alt']); ?>" loading="lazy">
+                        <?php else : ?>
+                            <?php echo codrufestival_plantation_image_placeholder(); ?>
+                        <?php endif; ?>
                     </a>
                     <?php if (count($latest_photos) > 1) : ?>
                         <div class="codru-plantations-latest__thumbs">

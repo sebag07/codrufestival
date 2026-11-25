@@ -157,16 +157,12 @@
     $queried_object_id = get_queried_object_id();
     $yoast_description = $queried_object_id ? get_post_meta($queried_object_id, '_yoast_wpseo_metadesc', true) : '';
 
-    $yoast_opengraph_image = $queried_object_id ? get_post_meta($queried_object_id, '_yoast_wpseo_opengraph-image', true) : '';
-
     // Determine if the description and images are present.
     if (empty($yoast_description)) {
         echo '<meta property="og:description" content="CODRU, festivalul care plantează, îmbină muzica și artele cu un angajament profund față de mediu. Alătură-te misiunii noastre de a planta un copac pentru fiecare bilet vândut!"/>';
     }
 
-    if (empty($yoast_opengraph_image)) {
-        echo '<meta property="og:image" content="' . get_stylesheet_directory_uri() . '/images/facebook-social-share.png" />';
-    }
+    // The share image comes from Yoast, with codrufestival_default_share_image() as the fallback.
 
     ?>
 

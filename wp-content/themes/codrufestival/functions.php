@@ -1226,3 +1226,18 @@ if (defined('WP_CLI') && WP_CLI && class_exists('WP_CLI')) {
         }
     });
 }
+
+/**
+ * Pages without a share image of their own (Yoast setting, featured image, …) fall back to the CODRU logo.
+ * Runs after Yoast and any page-specific images, so it never adds a second image.
+ */
+function codrufestival_default_share_image($images)
+{
+    if (is_object($images) && method_exists($images, 'has_images') && !$images->has_images()) {
+        $images->add_image_by_url(get_template_directory_uri() . '/images/facebook-social-share.png');
+    }
+
+    return $images;
+}
+
+add_filter('wpseo_add_opengraph_additional_images', 'codrufestival_default_share_image', 20);

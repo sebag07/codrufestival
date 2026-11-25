@@ -17,7 +17,11 @@ if (!$plantation) {
 <article class="codru-plantation-card">
     <a class="codru-plantation-card__link" href="<?php echo esc_url($plantation['url']); ?>">
         <figure class="codru-plantation-card__media">
-            <img src="<?php echo esc_url($plantation['image']); ?>" alt="<?php echo esc_attr($plantation['image_alt']); ?>" loading="lazy">
+            <?php if ($plantation['image']) : ?>
+                <img src="<?php echo esc_url($plantation['image']); ?>" alt="<?php echo esc_attr($plantation['image_alt']); ?>" loading="lazy">
+            <?php else : ?>
+                <?php echo codrufestival_plantation_image_placeholder(); ?>
+            <?php endif; ?>
             <?php if ($plantation['location'] || $plantation['period']) : ?>
                 <figcaption class="codru-plantation-card__badges">
                     <?php if ($plantation['location']) : ?>

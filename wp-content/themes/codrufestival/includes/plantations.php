@@ -82,6 +82,44 @@ function codrufestival_plantations_archive_query(WP_Query $query): void
 
 add_action('pre_get_posts', 'codrufestival_plantations_archive_query');
 
+/**
+ * /plantari/ shares the latest edition's photo; the theme's logo fallback (priority 20) covers the rest.
+ */
+function codrufestival_plantations_share_image($images)
+{
+    if (!is_post_type_archive(CODRUFESTIVAL_PLANTATION_POST_TYPE) || !is_object($images) || !method_exists($images, 'has_images') || $images->has_images()) {
+        return $images;
+    }
+
+    foreach (codrufestival_plantations('past') as $edition) {
+        $thumbnail_id = (int) get_post_thumbnail_id($edition['id']);
+        if ($thumbnail_id) {
+            $images->add_image_by_id($thumbnail_id);
+            break;
+        }
+    }
+
+    return $images;
+}
+
+add_filter('wpseo_add_opengraph_additional_images', 'codrufestival_plantations_share_image', 10);
+
+/**
+ * Yoast titles a post type archive "Arhivă Plantări"; the page is called Plantare CODRU.
+ */
+function codrufestival_plantations_archive_title($title)
+{
+    if (!is_post_type_archive(CODRUFESTIVAL_PLANTATION_POST_TYPE)) {
+        return $title;
+    }
+
+    return 'Plantare CODRU - ' . get_bloginfo('name');
+}
+
+add_filter('wpseo_title', 'codrufestival_plantations_archive_title', 99);
+// WPML's SEO add-on re-translates the share title at priority 10, so this runs after it.
+add_filter('wpseo_opengraph_title', 'codrufestival_plantations_archive_title', 99);
+
 function codrufestival_plantations_archive_url(): string
 {
     $url = get_post_type_archive_link(CODRUFESTIVAL_PLANTATION_POST_TYPE);
@@ -161,11 +199,14 @@ function codrufestival_plantation_thumbnail_id(int $post_id): int
 }
 
 /**
- * Stands in for the thumbnail of an edition that has no photos yet: the CODRU logo on the hero artwork.
+ * Stands in for the thumbnail of an edition that has no photos yet: the plain CODRU logo on a solid site colour.
+ * The colour comes from CSS, so it can contrast with whichever card it sits in.
  */
-function codrufestival_plantation_placeholder_image(): string
+function codrufestival_plantation_image_placeholder(): string
 {
-    return get_template_directory_uri() . '/images/plantari/placeholder.jpg';
+    return '<span class="codru-plantation-placeholder">'
+        . '<img src="' . esc_url(get_template_directory_uri() . '/images/codru-logo-header.png') . '" alt="" loading="lazy">'
+        . '</span>';
 }
 
 /**
@@ -193,7 +234,7 @@ function codrufestival_plantation_data(int $post_id): array
         'participants' => $participants,
         'signup_url' => (string) codrufestival_plantation_meta($post_id, 'plantation_signup_url'),
         'is_upcoming' => $date !== '' && $date >= current_time('Ymd'),
-        'image' => $image ? (string) $image : codrufestival_plantation_placeholder_image(),
+        'image' => $image ? (string) $image : '',
         'image_alt' => get_the_title($post_id),
     );
 }

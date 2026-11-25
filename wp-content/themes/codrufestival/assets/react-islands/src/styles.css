@@ -2017,6 +2017,28 @@ body.codru-gallery-lightbox-open {
   background-color: var(--secondary-color, #12139b);
 }
 
+/* Photo-less editions: the plain logo on the card's own colour, so the card stays one solid panel. */
+.codru-plantation-placeholder {
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Outside a card (the homepage feature) it needs a colour of its own. */
+.codru-plantations-latest__cover .codru-plantation-placeholder {
+  background-color: var(--secondary-color, #12139b);
+}
+
+.codru-plantations .codru-plantation-placeholder img {
+  aspect-ratio: auto;
+  height: auto;
+  max-width: 52%;
+  object-fit: contain;
+  width: 52%;
+}
+
 /* Latest edition (homepage) */
 
 .codru-plantations-latest {
