@@ -228,6 +228,10 @@ if ($display_lineup_section) {
                         'ro'
                     )); ?></p>
                 </div>
+                <?php get_template_part('template-parts/plantations/stats', null, array('compact' => true)); ?>
+                <a class="homepage-info-button codru-general-button" href="<?php echo esc_url(codrufestival_plantations_archive_url()); ?>">
+                    <?php echo esc_html(get_multilingual_text('Vezi edițiile de plantare', 'See all planting editions', 'ro')); ?>
+                </a>
             </div>
             <div class="homepage-info-section-image-container col-md-6 my-md-auto p-relative z-1 mb-5">
                 <img
@@ -240,6 +244,8 @@ if ($display_lineup_section) {
         </div>
     </div>
 </section>
+
+<?php get_template_part('template-parts/front-page/plantare-codru'); ?>
 
 <?php
 wp_reset_postdata();

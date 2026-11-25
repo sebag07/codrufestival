@@ -1,0 +1,200 @@
+{
+    "key": "group_codru_plantation",
+    "title": "Plantare CODRU",
+    "fields": [
+        {
+            "key": "field_codru_plantation_date",
+            "label": "Data plantării",
+            "name": "plantation_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "Prima zi a plantării. Ordonează edițiile, iar o dată din viitor afișează ediția ca „Următoarea sesiune de plantare”.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "display_format": "d/m/Y",
+            "return_format": "Ymd",
+            "first_day": 1
+        },
+        {
+            "key": "field_codru_plantation_period",
+            "label": "Perioada afișată",
+            "name": "plantation_period",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Ex.: „28–29 martie 2026” sau „Octombrie 2025”. Gol = luna și anul din data plantării.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_codru_plantation_location",
+            "label": "Locație",
+            "name": "plantation_location",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Numele scurt al locului, ex.: „Ianova”. Apare și în butonul „Vezi fotografiile de la …”.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_codru_plantation_headline",
+            "label": "Subtitlu",
+            "name": "plantation_headline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "O frază sub titlu, ex.: „Două zile la Ianova, 10.000 de puieți plantați”.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_codru_plantation_trees",
+            "label": "Arbori plantați",
+            "name": "plantation_trees",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Gol dacă nu se cunoaște.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_codru_plantation_participants",
+            "label": "Participanți",
+            "name": "plantation_participants",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "Gol dacă nu se cunoaște. Se afișează ca „peste N”.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "min": 0,
+            "max": "",
+            "placeholder": "",
+            "step": 1,
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_codru_plantation_signup_url",
+            "label": "Link înscriere",
+            "name": "plantation_signup_url",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "Pentru o sesiune viitoare: formularul de înscriere. Butonul apare doar cât timp data plantării nu a trecut.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_codru_plantation_photos",
+            "label": "Fotografii",
+            "name": "plantation_photos",
+            "aria-label": "",
+            "type": "gallery",
+            "instructions": "Galeria de pe pagina ediției. Imaginea reprezentativă (Featured image) este folosită ca thumbnail; dacă lipsește, se folosește prima fotografie.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "return_format": "array",
+            "library": "all",
+            "min": 0,
+            "max": 0,
+            "min_width": 0,
+            "min_height": 0,
+            "min_size": 0,
+            "max_width": 0,
+            "max_height": 0,
+            "max_size": 0,
+            "mime_types": "jpg,jpeg,png,webp",
+            "insert": "append",
+            "preview_size": "medium"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "plantare"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "acf_after_title",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1795600001
+}

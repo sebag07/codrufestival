@@ -5,6 +5,7 @@ require get_template_directory() . '/includes/widgets/schedule.php';
 require get_template_directory() . '/includes/widgets/partners.php';
 require_once get_template_directory() . '/includes/ticket-live-data.php';
 require get_template_directory() . '/includes/spin-wheel.php';
+require get_template_directory() . '/includes/plantations.php';
 
 function codrufestival_theme_setup()
 {
